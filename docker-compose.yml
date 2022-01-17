@@ -10,11 +10,11 @@ services:
      - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
      - ./server/apache2.conf:/etc/apache2/apache2.conf
      - ./server/php.ini:/usr/local/etc/php/php.ini
+     - ./server/security.conf:/etc/apache2/conf-available/security.conf
     depends_on:
      - database
 
   database:
-    #platform: linux/x86_64
     image: mysql:5.7
     container_name: mysql-mvc
     ports :
@@ -37,6 +37,14 @@ services:
       - 8888:80
     environment:
         - PMA_ARBITRARY=1
+
+  composer:
+      image: composer
+      container_name: composer-cms
+      command: composer require phpmailer/phpmailer
+      volumes: 
+        - ./www:/var/www/html/composer/
+      working_dir: /var/www/html/composer/
 
       
       
