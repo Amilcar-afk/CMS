@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `esgi_user`
+-- Structure de la table `pa_user`
 --
 
-CREATE TABLE `esgi_user` (
+CREATE TABLE `pa_user` (
   `id` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(100) NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE `esgi_user` (
 --
 
 --
--- Index pour la table `esgi_user`
+-- Index pour la table `pa_user`
 --
-ALTER TABLE `esgi_user`
+ALTER TABLE `pa_user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -55,9 +55,9 @@ ALTER TABLE `esgi_user`
 --
 
 --
--- AUTO_INCREMENT pour la table `esgi_user`
+-- AUTO_INCREMENT pour la table `pa_user`
 --
-ALTER TABLE `esgi_user`
+ALTER TABLE `pa_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
