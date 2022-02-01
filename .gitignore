@@ -1,6 +1,6 @@
 db_data
 www/.env*
-www/idea/
+www/.idea/
 www/vendor/
 www/composer.lock
 www/composer.json
