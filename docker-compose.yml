@@ -18,7 +18,7 @@ services:
     image: mysql:5.7
     container_name: mysql-cms
     ports :
-      - "3306:3306"
+      - "3308:3308"
     environment:
       MYSQL_DATABASE: cmsDataBase
       MYSQL_ROOT_PASSWORD: password
