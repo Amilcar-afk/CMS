@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: site
-    container_name: apache-3IW
+    container_name: apache-cms
     ports :
      - "80:80"
     volumes:
@@ -10,17 +10,17 @@ services:
      - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
      - ./server/apache2.conf:/etc/apache2/apache2.conf
      - ./server/php.ini:/usr/local/etc/php/php.ini
+     - ./server/security.conf:/etc/apache2/conf-available/security.conf
     depends_on:
-     - database
+     - databaseCms
 
-  database:
-    #platform: linux/x86_64
+  databaseCms:
     image: mysql:5.7
-    container_name: mysql-mvc
+    container_name: mysql-cms
     ports :
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: mvcdocker2
+      MYSQL_DATABASE: cmsDataBase
       MYSQL_ROOT_PASSWORD: password
       #MYSQL_USER: root
       MYSQL_PASSWORD: password
@@ -30,9 +30,9 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin-mvc
+    container_name: phpmyadmin-cms
     depends_on:
-      - database
+      - databaseCms
     ports:
       - 8888:80
     environment:
