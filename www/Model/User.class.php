@@ -281,7 +281,6 @@ class User extends BaseSQL
                 "action"=>"",
                 "submit"=>"S'inscrire",
                 "selectename"=>"pays"
-
             ],
             "inputs"=>[
                     "email"=>[
@@ -339,7 +338,6 @@ class User extends BaseSQL
                         "error"=>"Votre nom n'est pas correct",
                     ],
                 ],
-
             "select"=>[
                 "option"=>[
                     "value"=>"france",
@@ -360,10 +358,7 @@ class User extends BaseSQL
                     "id"=>"optionRegister",
                     "class"=>"optionRegister",
                 ],
- 
             ],
-
-
         ];
     }
 
@@ -392,7 +387,6 @@ class User extends BaseSQL
                     "required"=>true,
                 ]
             ]
-
         ];
     }
     public function getFormTp(): array
@@ -403,8 +397,6 @@ class User extends BaseSQL
                 "action"=>"",
                 "submit"=>"Se connecter"
             ],
-
-
         ];
     }
 }

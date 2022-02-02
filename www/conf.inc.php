@@ -2,7 +2,7 @@
 
 
 define("DBNAME","cmsDataBase");
-define("DBUSER","usr");
+define("DBUSER","root");
 define("DBPWD","password");
 define("DBDRIVER","mysql");
 define("DBPORT","3306");

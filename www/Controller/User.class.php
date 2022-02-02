@@ -11,8 +11,24 @@ class User{
 
     public function login()
     {
-        $view = new View("Login");
-        $view->assign("titleSeo","Se connecter au site");
+
+        // if( !empty($_POST)){
+        //     $result = Validator::run($user->getFormLogin(), $_POST);
+        //     print_r($result);
+        // }
+        // $view = new View("login");
+        // $view->assign("titleSeo","Se connecter au site");
+
+        $user = new UserModel();
+        // var_dump($_POST);
+        if( !empty($_POST)){
+            $result = Validator::run($user->getFormRegister(), $_POST);
+            print_r($result);
+        }
+        $view = new View("login");
+        // $view->assign("user",$user);
+        $view->assign("user",$user);
+
     }
 
     public function logout()
