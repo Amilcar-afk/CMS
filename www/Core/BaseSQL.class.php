@@ -14,7 +14,9 @@ abstract class BaseSQL
         //Faudra intégrer le singleton
         try{
             //Connexion à la base de données
-            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER , DBPWD );
+            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
+            // $this->pdo = new \PDO('mysql:host=databaseCms; dbname=cmsDataBase','usr','password');
+
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }catch(\Exception $e){
             die("Erreur SQL".$e->getMessage());
