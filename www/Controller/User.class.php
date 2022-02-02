@@ -9,10 +9,22 @@ use App\Model\User as UserModel;
 
 class User{
 
+    public $user;
+    
+    public function __construct()
+    {
+        $this->user = new UserModel();
+    }
+
     public function login()
     {
-        $view = new View("Login");
-        $view->assign("titleSeo","Se connecter au site");
+        // $user = new UserModel();
+        if( !empty($_POST)){
+            $result = Validator::run($this->user->getFormLogin(), $_POST);
+            print_r($result);
+        }
+        $view = new View("login");
+        $view->assign("user",$this->user);
     }
 
     public function logout()
@@ -22,14 +34,14 @@ class User{
 
     public function register()
     {
-        $user = new UserModel();
+        // $user = new UserModel();
         // var_dump($_POST);
         if( !empty($_POST)){
-            $result = Validator::run($user->getFormRegister(), $_POST);
+            $result = Validator::run($this->user->getFormRegister(), $_POST);
             print_r($result);
         }
         $view = new View("register");
-        $view->assign("user",$user);
+        $view->assign("user",$this->user);
     }
 
 }

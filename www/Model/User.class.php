@@ -329,39 +329,39 @@ class User extends BaseSQL
                         "max"=>100,
                         "error"=>"Votre nom n'est pas correct",
                     ],
-                    "uploader"=>[
-                        "type"=>"file",
-                        "placeholder"=>"chiosir un fichier ...",
-                        "id"=>"lastnameRegister",
-                        "class"=>"inputRegister",
-                        "name"=>"upload",
-                        "accept"=>"image/png, image/jpeg",
-                        "error"=>"Votre nom n'est pas correct",
-                    ],
+                    // "uploader"=>[
+                    //     "type"=>"file",
+                    //     "placeholder"=>"chiosir un fichier ...",
+                    //     "id"=>"lastnameRegister",
+                    //     "class"=>"inputRegister",
+                    //     "name"=>"upload",
+                    //     "accept"=>"image/png, image/jpeg",
+                    //     "error"=>"Votre nom n'est pas correct",
+                    // ],
                 ],
 
-            "select"=>[
-                "option"=>[
-                    "value"=>"france",
-                    "name"=>"France",
-                    "id"=>"optionRegister",
-                    "class"=>"inputRegister",
-                    "selected"=>"selected"
-                ],
-                "option1"=>[
-                    "value"=>"espagne",
-                    "name"=>"Espagne",
-                    "id"=>"optionRegister",
-                    "class"=>"optionRegister",
-                ],
-                "option2"=>[
-                    "value"=>"italy",
-                    "name"=>"Italy",
-                    "id"=>"optionRegister",
-                    "class"=>"optionRegister",
-                ],
+            // "select"=>[
+            //     "option"=>[
+            //         "value"=>"france",
+            //         "name"=>"France",
+            //         "id"=>"optionRegister",
+            //         "class"=>"inputRegister",
+            //         "selected"=>"selected"
+            //     ],
+            //     "option1"=>[
+            //         "value"=>"espagne",
+            //         "name"=>"Espagne",
+            //         "id"=>"optionRegister",
+            //         "class"=>"optionRegister",
+            //     ],
+            //     "option2"=>[
+            //         "value"=>"italy",
+            //         "name"=>"Italy",
+            //         "id"=>"optionRegister",
+            //         "class"=>"optionRegister",
+            //     ],
  
-            ],
+            // ],
 
 
         ];
