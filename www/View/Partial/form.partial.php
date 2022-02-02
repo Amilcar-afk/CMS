@@ -13,17 +13,6 @@ Création du formulaire
         <br>
         <?php endforeach;?>
         <input type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>"> 
-
     </br>
-    </br>
-        <select name="<?= $config["config"]["selectename"] ?>" >
-            <?php foreach ($config["select"] as $name=>$option):?>
-                <option  value="<?= $option['value'] ?>" 
-                        id="<?= $option['id'] ?>" 
-                        class="<?= $option['class'] ?>">
-                        <?= $option['name'] ?>
-                    </option>
-            <?php endforeach;?>
-        </select>
 </form>
 

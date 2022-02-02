@@ -7,12 +7,18 @@ class User extends BaseSQL
 {
 
     protected $id = null;
-    protected $email;
-    protected $password;
     protected $firstname;
     protected $lastname;
-    protected $status = null;
-    protected $token = null;
+    protected $email;
+    protected $password;
+    protected $passwordOldFirst;
+    protected $passwordOldSecond;
+    protected $creationDate;
+    protected $updateDate;
+    protected $token;
+    protected $rank;
+    protected $try;
+    protected $confirmKey;
 
     public function __construct()
     {
@@ -104,22 +110,6 @@ class User extends BaseSQL
     /**
      * @return null
      */
-    public function getStatus(): ? int
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param null $status
-     */
-    public function setStatus($status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return null
-     */
     public function getToken(): ?string
     {
         return $this->token;
@@ -140,10 +130,149 @@ class User extends BaseSQL
         parent::save();
     }
 
-    public function __set($key, $value) {
-        $this->$key = $value;
+
+ 
+
+
+    /**
+     * Get the value of passwordOldFirst
+     */ 
+    public function getPasswordOldFirst()
+    {
+        return $this->passwordOldFirst;
     }
 
+    /**
+     * Set the value of passwordOldFirst
+     *
+     * @return  self
+     */ 
+    public function setPasswordOldFirst($passwordOldFirst)
+    {
+        $this->passwordOldFirst = $passwordOldFirst;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of passwordOldSecond
+     */ 
+    public function getPasswordOldSecond()
+    {
+        return $this->passwordOldSecond;
+    }
+
+    /**
+     * Set the value of passwordOldSecond
+     *
+     * @return  self
+     */ 
+    public function setPasswordOldSecond($passwordOldSecond)
+    {
+        $this->passwordOldSecond = $passwordOldSecond;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of creationDate
+     */ 
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Set the value of creationDate
+     *
+     * @return  self
+     */ 
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updateDate
+     */ 
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * Set the value of updateDate
+     *
+     * @return  self
+     */ 
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rank
+     */ 
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * Set the value of rank
+     *
+     * @return  self
+     */ 
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of try
+     */ 
+    public function getTry()
+    {
+        return $this->try;
+    }
+
+    /**
+     * Set the value of try
+     *
+     * @return  self
+     */ 
+    public function setTry($try)
+    {
+        $this->try = $try;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of confirmKey
+     */ 
+    public function getConfirmKey()
+    {
+        return $this->confirmKey;
+    }
+
+    /**
+     * Set the value of confirmKey
+     *
+     * @return  self
+     */ 
+    public function setConfirmKey($confirmKey)
+    {
+        $this->confirmKey = $confirmKey;
+
+        return $this;
+    }
     public function getFormRegister(): array
     {
         return [
@@ -278,5 +407,5 @@ class User extends BaseSQL
 
         ];
     }
-
 }
+
