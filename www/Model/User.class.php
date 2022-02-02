@@ -281,7 +281,6 @@ class User extends BaseSQL
                 "action"=>"",
                 "submit"=>"S'inscrire",
                 "selectename"=>"pays"
-
             ],
             "inputs"=>[
                     "email"=>[
@@ -340,28 +339,7 @@ class User extends BaseSQL
                     // ],
                 ],
 
-            // "select"=>[
-            //     "option"=>[
-            //         "value"=>"france",
-            //         "name"=>"France",
-            //         "id"=>"optionRegister",
-            //         "class"=>"inputRegister",
-            //         "selected"=>"selected"
-            //     ],
-            //     "option1"=>[
-            //         "value"=>"espagne",
-            //         "name"=>"Espagne",
-            //         "id"=>"optionRegister",
-            //         "class"=>"optionRegister",
-            //     ],
-            //     "option2"=>[
-            //         "value"=>"italy",
-            //         "name"=>"Italy",
-            //         "id"=>"optionRegister",
-            //         "class"=>"optionRegister",
-            //     ],
- 
-            // ],
+
 
 
         ];
@@ -392,7 +370,6 @@ class User extends BaseSQL
                     "required"=>true,
                 ]
             ]
-
         ];
     }
     public function getFormTp(): array
@@ -403,8 +380,6 @@ class User extends BaseSQL
                 "action"=>"",
                 "submit"=>"Se connecter"
             ],
-
-
         ];
     }
 }
