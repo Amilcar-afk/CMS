@@ -19,7 +19,6 @@ abstract class BaseSQL
         }
         $classExploded = explode("\\",get_called_class());
         $this->table = DBPREFIXE.strtolower(end($classExploded));
-        echo $this->table;
     }
 
     protected function save()
@@ -29,7 +28,6 @@ abstract class BaseSQL
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
         $columns = array_filter($columns);
-        var_dump($columns);
 
        if( !is_null($this->getId()) ){
            foreach ($columns as $key=>$value){
@@ -43,7 +41,6 @@ abstract class BaseSQL
        }
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
-
     }
 
 

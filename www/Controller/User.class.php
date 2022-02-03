@@ -35,11 +35,15 @@ class User{
     {
         if( !empty($_POST)){
             $result = Validator::run($this->user->getFormRegister(), $_POST);
-            $this->user->setFirstname($_POST['firstname']);
-            $this->user->setLastname($_POST['lastname']);
-            $this->user->setPassword($_POST['password']);
-            $this->user->setEmail($_POST['email']);
-            $this->user->save();
+            if(empty($result)){
+                $this->user->setFirstname($_POST['firstname']);
+                $this->user->setLastname($_POST['lastname']);
+                $this->user->setPassword($_POST['password']);
+                $this->user->setEmail($_POST['email']);
+                $this->user->save();
+            }else{
+                print_r($result);
+            }
         }
         $view = new View("register");
         $view->assign("user",$this->user);
