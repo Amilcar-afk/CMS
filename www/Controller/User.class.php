@@ -18,7 +18,6 @@ class User{
 
     public function login()
     {
-        // $user = new UserModel();
         if( !empty($_POST)){
             $result = Validator::run($this->user->getFormLogin(), $_POST);
             print_r($result);
@@ -34,11 +33,17 @@ class User{
 
     public function register()
     {
-        // $user = new UserModel();
-        // var_dump($_POST);
         if( !empty($_POST)){
             $result = Validator::run($this->user->getFormRegister(), $_POST);
-            print_r($result);
+            if(empty($result)){
+                $this->user->setFirstname($_POST['firstname']);
+                $this->user->setLastname($_POST['lastname']);
+                $this->user->setPassword($_POST['password']);
+                $this->user->setEmail($_POST['email']);
+                $this->user->save();
+            }else{
+                print_r($result);
+            }
         }
         $view = new View("register");
         $view->assign("user",$this->user);
