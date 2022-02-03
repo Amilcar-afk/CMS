@@ -25,12 +25,13 @@ class CheckInputs
      */
     public static function checkPassword($value)
     {
+
         //mdp = 8 char dont 1 lettre maj, 1 lettre min et 1 chiffre
         if (strlen($value) < 10
-            || !preg_match('#[a-z]#', $value)
-            || !preg_match('#[A-Z]#', $value)
-            || !preg_match('#[0-9]#', $value)
-            || !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value)
+        || !preg_match('#[a-z]#', $value)
+        || !preg_match('#[A-Z]#', $value)
+        || !preg_match('#[0-9]#', $value)
+        || !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value)
         ) {
             return true;
         }
