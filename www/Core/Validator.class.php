@@ -1,5 +1,7 @@
 <?php
 namespace App\Core;
+use App\Core\CheckInputs;
+
 
 class Validator
 {
@@ -19,35 +21,35 @@ class Validator
             if(!empty($input["required"]) && empty($data[$name])){
                 $result[]="Vous avez supprimé l'attribut required";
             }
-            if($input["type"]=="password" && !self::checkPassword($data[$name])){
+            if($input["type"]=="password" && !CheckInputs::checkPassword($data[$name])){
                 $result[]="Password incorrect";
             }else if($input["type"]=="email"  && !self::checkEmail($data[$name])){
                 $result[]="Email incorrect";
             }
 
         }
-        foreach ($config["select"] as $name=>$option){
-            if( in_array($data['pays'] ,$option['value'])){
-
-                $result[]="option innexistante ";
-            
-            }
-        }
 
         return $result;
     }
 
-    public static function checkSelectInput()
-    {
+    // public static function checkSelectInput()
+    // {
+        // foreach ($config["select"] as $name=>$option){
+        //     if( in_array($data['pays'] ,$option['value'])){
 
-    }
+        //         $result[]="option innexistante ";
+            
+        //     }
+        // }
 
-    public static function checkPassword($pwd): bool
-    {
-        return strlen($pwd)>=8 && strlen($pwd)<=16
-            && preg_match("/[a-z]/i", $pwd, $result)
-            && preg_match("/[0-9]/", $pwd, $result);
-    }
+    // }
+
+    // public static function checkPassword($pwd): bool
+    // {
+    //     return strlen($pwd)>=8 && strlen($pwd)<=16
+    //         && preg_match("/[a-z]/i", $pwd, $result)
+    //         && preg_match("/[0-9]/", $pwd, $result);
+    // }
 
     public static function checkEmail($email): bool
     {

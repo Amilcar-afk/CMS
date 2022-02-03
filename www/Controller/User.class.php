@@ -25,9 +25,6 @@ class User{
         }
         $view = new View("login");
         $view->assign("user",$this->user);
-
-
-
     }
 
     public function logout()
@@ -46,5 +43,6 @@ class User{
         $view = new View("register");
         $view->assign("user",$this->user);
     }
+
 
 }

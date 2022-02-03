@@ -23,7 +23,7 @@ class CheckInputs
      * @param $value
      * @return bool
      */
-    public static function password($value)
+    public static function checkPassword($value)
     {
         //mdp = 8 char dont 1 lettre maj, 1 lettre min et 1 chiffre
         if (strlen($value) < 10
