@@ -1,0 +1,18 @@
+$columnNb: 12;
+$gutter: 30px;
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@for $i from 1 through $columnNb {
+	.col-#{$i} {
+	//   flex-basis: (100 / ($grid__cols / $i) ) * 1%;
+	flex: 0 0 100% / $columnNb * $i;
+	}
+	.col-offset-#{$i}{
+		margin-left: 100% / $columnNb * $i;
+	}
+  }
+
