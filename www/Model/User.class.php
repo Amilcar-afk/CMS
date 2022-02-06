@@ -130,9 +130,9 @@ class User extends BaseSQL
         parent::save();
     }
 
-
- 
-
+    public function select($sql, $param){
+        parent::findOneData($sql, $param);
+    }
 
     /**
      * Get the value of passwordOldFirst
@@ -328,15 +328,7 @@ class User extends BaseSQL
                         "max"=>100,
                         "error"=>"Votre nom n'est pas correct",
                     ],
-                    // "uploader"=>[
-                    //     "type"=>"file",
-                    //     "placeholder"=>"chiosir un fichier ...",
-                    //     "id"=>"lastnameRegister",
-                    //     "class"=>"inputRegister",
-                    //     "name"=>"upload",
-                    //     "accept"=>"image/png, image/jpeg",
-                    //     "error"=>"Votre nom n'est pas correct",
-                    // ],
+                
                 ],
 
 

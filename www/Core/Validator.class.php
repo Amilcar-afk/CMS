@@ -29,28 +29,8 @@ class Validator
                 $result[]="Password ne correspond pas au la confirmation";
             }
         }
-
         return $result;
     }
-
-    // public static function checkSelectInput()
-    // {
-        // foreach ($config["select"] as $name=>$option){
-        //     if( in_array($data['pays'] ,$option['value'])){
-
-        //         $result[]="option innexistante ";
-            
-        //     }
-        // }
-
-    // }
-
-    // public static function checkPassword($pwd): bool
-    // {
-    //     return strlen($pwd)>=8 && strlen($pwd)<=16
-    //         && preg_match("/[a-z]/i", $pwd, $result)
-    //         && preg_match("/[0-9]/", $pwd, $result);
-    // }
 
     public static function checkEmail($email): bool
     {

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
+use App\Core\CheckInputs;
+
 use App\Model\User as UserModel;
 
 class User{
@@ -18,10 +20,16 @@ class User{
 
     public function login()
     {
+
+        // APPEL LES VERIFS
         if( !empty($_POST)){
-            $result = Validator::run($this->user->getFormLogin(), $_POST);
-            print_r($result);
+            $result = CheckInputs::checkEmail($_POST['email']);
+            $sql ="SELECT try FROM cmsp_user WHERE email =:email";
+            $res = $this->user->select($sql,$_POST['email']);
+            print_r($res);
         }
+
+        // CREER LA NOUVELLE VIEW
         $view = new View("login");
         $view->assign("user",$this->user);
     }
@@ -48,6 +56,4 @@ class User{
         $view = new View("register");
         $view->assign("user",$this->user);
     }
-
-
 }

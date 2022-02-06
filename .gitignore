@@ -5,3 +5,4 @@ www/vendor/
 www/composer.lock
 www/composer.json
 .idea/
+www/webpack/

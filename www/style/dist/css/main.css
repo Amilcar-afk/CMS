@@ -1,0 +1,292 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap);
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #F2F2F2;
+}
+
+h1 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-1 {
+  flex: 0 0 8.3333333333%;
+}
+
+.col-offset-1 {
+  margin-left: 8.3333333333%;
+}
+
+.col-h-1 {
+  height: 8.3333333333%;
+}
+
+.col-2 {
+  flex: 0 0 16.6666666667%;
+}
+
+.col-offset-2 {
+  margin-left: 16.6666666667%;
+}
+
+.col-h-2 {
+  height: 16.6666666667%;
+}
+
+.col-3 {
+  flex: 0 0 25%;
+}
+
+.col-offset-3 {
+  margin-left: 25%;
+}
+
+.col-h-3 {
+  height: 25%;
+}
+
+.col-4 {
+  flex: 0 0 33.3333333333%;
+}
+
+.col-offset-4 {
+  margin-left: 33.3333333333%;
+}
+
+.col-h-4 {
+  height: 33.3333333333%;
+}
+
+.col-5 {
+  flex: 0 0 41.6666666667%;
+}
+
+.col-offset-5 {
+  margin-left: 41.6666666667%;
+}
+
+.col-h-5 {
+  height: 41.6666666667%;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+}
+
+.col-offset-6 {
+  margin-left: 50%;
+}
+
+.col-h-6 {
+  height: 50%;
+}
+
+.col-7 {
+  flex: 0 0 58.3333333333%;
+}
+
+.col-offset-7 {
+  margin-left: 58.3333333333%;
+}
+
+.col-h-7 {
+  height: 58.3333333333%;
+}
+
+.col-8 {
+  flex: 0 0 66.6666666667%;
+}
+
+.col-offset-8 {
+  margin-left: 66.6666666667%;
+}
+
+.col-h-8 {
+  height: 66.6666666667%;
+}
+
+.col-9 {
+  flex: 0 0 75%;
+}
+
+.col-offset-9 {
+  margin-left: 75%;
+}
+
+.col-h-9 {
+  height: 75%;
+}
+
+.col-10 {
+  flex: 0 0 83.3333333333%;
+}
+
+.col-offset-10 {
+  margin-left: 83.3333333333%;
+}
+
+.col-h-10 {
+  height: 83.3333333333%;
+}
+
+.col-11 {
+  flex: 0 0 91.6666666667%;
+}
+
+.col-offset-11 {
+  margin-left: 91.6666666667%;
+}
+
+.col-h-11 {
+  height: 91.6666666667%;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+}
+
+.col-offset-12 {
+  margin-left: 100%;
+}
+
+.col-h-12 {
+  height: 100%;
+}
+
+.button {
+  display: inline-block;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  color: #FFF;
+  background-color: #AAA;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.button:hover {
+  background-color: #c4c4c4;
+}
+.button--success {
+  background-color: #31aa66;
+}
+.button--success:hover {
+  background-color: #45c97f;
+}
+.button--alert {
+  background-color: #ce0a0a;
+}
+.button--alert:hover {
+  background-color: #f41717;
+}
+
+.banner {
+  display: block;
+  width: 100%;
+  padding-top: 42%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.banner--text {
+  position: relative;
+}
+.banner--text > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+}
+.banner--text > div p {
+  margin: auto;
+  color: #FFF;
+  font-weight: 700;
+  font-size: 3rem;
+  max-width: 75%;
+  text-align: center;
+}
+
+.slider {
+  width: 576px;
+  height: 384px;
+  overflow: hidden;
+  position: relative;
+}
+.slider .slides-container {
+  display: flex;
+  position: relative;
+  transition: left 1s;
+  left: 0;
+}
+.slider .slide {
+  width: 576px;
+  height: 384px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  flex-shrink: 0;
+}
+.slider nav {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 1;
+}
+.slider nav button::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+}
+.slider nav button.prev::before {
+  transform: rotate(180deg);
+}
+
+.wrapper {
+  background-color:rgb(238, 185, 185);
+  height: 600px;
+}
+.one {
+  background-color:rgb(43, 255, 0);
+}
+.two {
+  background-color:rgb(66, 40, 40);
+}
+.three {
+  background-color:rgb(0, 255, 213);
+}
+.four {
+  background-color:rgb(195, 0, 255);
+}
+.five {
+  background-color:rgb(255, 0, 76);
+}
+.six {
+  background-color:rgb(255, 136, 0);
+}
