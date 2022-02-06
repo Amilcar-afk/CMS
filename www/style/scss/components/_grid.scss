@@ -14,5 +14,8 @@ $gutter: 30px;
 	.col-offset-#{$i}{
 		margin-left: 100% / $columnNb * $i;
 	}
+    .col-h-#{$i}{
+		height: 100% / $columnNb * $i;
+	}
   }
 

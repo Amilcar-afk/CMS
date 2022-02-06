@@ -33,12 +33,20 @@ h2 {
   margin-left: 8.3333333333%;
 }
 
+.col-h-1 {
+  height: 8.3333333333%;
+}
+
 .col-2 {
   flex: 0 0 16.6666666667%;
 }
 
 .col-offset-2 {
   margin-left: 16.6666666667%;
+}
+
+.col-h-2 {
+  height: 16.6666666667%;
 }
 
 .col-3 {
@@ -49,12 +57,20 @@ h2 {
   margin-left: 25%;
 }
 
+.col-h-3 {
+  height: 25%;
+}
+
 .col-4 {
   flex: 0 0 33.3333333333%;
 }
 
 .col-offset-4 {
   margin-left: 33.3333333333%;
+}
+
+.col-h-4 {
+  height: 33.3333333333%;
 }
 
 .col-5 {
@@ -65,12 +81,20 @@ h2 {
   margin-left: 41.6666666667%;
 }
 
+.col-h-5 {
+  height: 41.6666666667%;
+}
+
 .col-6 {
   flex: 0 0 50%;
 }
 
 .col-offset-6 {
   margin-left: 50%;
+}
+
+.col-h-6 {
+  height: 50%;
 }
 
 .col-7 {
@@ -81,12 +105,20 @@ h2 {
   margin-left: 58.3333333333%;
 }
 
+.col-h-7 {
+  height: 58.3333333333%;
+}
+
 .col-8 {
   flex: 0 0 66.6666666667%;
 }
 
 .col-offset-8 {
   margin-left: 66.6666666667%;
+}
+
+.col-h-8 {
+  height: 66.6666666667%;
 }
 
 .col-9 {
@@ -97,12 +129,20 @@ h2 {
   margin-left: 75%;
 }
 
+.col-h-9 {
+  height: 75%;
+}
+
 .col-10 {
   flex: 0 0 83.3333333333%;
 }
 
 .col-offset-10 {
   margin-left: 83.3333333333%;
+}
+
+.col-h-10 {
+  height: 83.3333333333%;
 }
 
 .col-11 {
@@ -113,12 +153,20 @@ h2 {
   margin-left: 91.6666666667%;
 }
 
+.col-h-11 {
+  height: 91.6666666667%;
+}
+
 .col-12 {
   flex: 0 0 100%;
 }
 
 .col-offset-12 {
   margin-left: 100%;
+}
+
+.col-h-12 {
+  height: 100%;
 }
 
 .button {
@@ -218,4 +266,27 @@ h2 {
 }
 .slider nav button.prev::before {
   transform: rotate(180deg);
+}
+
+.wrapper {
+  background-color:rgb(238, 185, 185);
+  height: 600px;
+}
+.one {
+  background-color:rgb(43, 255, 0);
+}
+.two {
+  background-color:rgb(66, 40, 40);
+}
+.three {
+  background-color:rgb(0, 255, 213);
+}
+.four {
+  background-color:rgb(195, 0, 255);
+}
+.five {
+  background-color:rgb(255, 0, 76);
+}
+.six {
+  background-color:rgb(255, 136, 0);
 }
