@@ -6,6 +6,27 @@ $gutter: 30px;
 	flex-wrap: wrap;
 }
 
+.center{
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+  }
+
+  .wrapper {
+	height: 600px;
+  }
+  .gris{
+	background-color:rgb(180, 180, 180);
+  }
+  .gris-fonce {
+	background-color:rgb(87, 82, 82);
+  }
+  .bleu-claire {
+	background-color:rgb(0, 195, 255);
+  }
+  .bleu-fonce {
+	background-color:rgb(32, 62, 100);
+  }
 @for $i from 1 through $columnNb {
 	.col-#{$i} {
 	//   flex-basis: (100 / ($grid__cols / $i) ) * 1%;
@@ -16,6 +37,9 @@ $gutter: 30px;
 	}
     .col-h-#{$i}{
 		height: 100% / $columnNb * $i;
+	}
+	.col-t-#{$i}{
+		margin-top: 10% / $columnNb * $i;
 	}
   }
 
