@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <link href="../dist/css/main.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+
+        <section class="card">
+            
+            <button>
+                <i class="material-icons">
+                    more_vert
+                </i>
+            </button>
+            <footer>
+                <h4>6</h4>
+                <p>New users</p>
+            </footer>
+
+        </section>
+        <section class="card">
+            <button>
+                <i class="material-icons">
+                    more_vert
+                </i>
+            </button>
+            <div id="chartdiv">
+
+            </div>
+            <footer>
+                <p>Sessions per country</p>
+            </footer>
+        </section>
+
+        <section class="card">
+
+            <footer>
+                <h4>2</h4>
+                <p>Message</p>
+            </footer>
+
+        </section>
+
+        <section class="card">
+
+            <i class="material-icons">
+                edit
+            </i>
+
+            <footer>
+                <p>Newsletter</p>
+            </footer>
+
+        </section>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+am5.ready(function() {
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("chartdiv");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+var myTheme = am5.Theme.new(root);
+myTheme.rule("background").setAll({
+  background: am5.color(0xffffff),
+  fontSize: "1.5em"
+});
+root.setThemes([
+  am5themes_Animated.new(root),
+  myTheme
+]);
+
+
+// Create the map chart
+// https://www.amcharts.com/docs/v5/charts/map-chart/
+var chart = root.container.children.push(am5map.MapChart.new(root, {
+  panX: "translateX",
+  panY: "translateY",
+  projection: am5map.geoMercator()
+}));
+
+
+// Create main polygon series for countries
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+  geoJSON: am5geodata_worldLow,
+  exclude: ["AQ"]
+}));
+
+polygonSeries.mapPolygons.template.setAll({
+  tooltipText: "{name}",
+  toggleKey: "active",
+  interactive: true
+});
+
+polygonSeries.mapPolygons.template.states.create("hover", {
+  fill: root.interfaceColors.get("primaryButtonHover")
+});
+
+polygonSeries.mapPolygons.template.states.create("active", {
+  fill: root.interfaceColors.get("primaryButtonHover")
+});
+
+var previousPolygon;
+
+polygonSeries.mapPolygons.template.on("active", function (active, target) {
+  if (previousPolygon && previousPolygon != target) {
+    previousPolygon.set("active", false);
+  }
+  if (target.get("active")) {
+    polygonSeries.zoomToDataItem(target.dataItem );
+  }
+  else {
+    chart.goHome();
+  }
+  previousPolygon = target;
+});
+
+
+// Add zoom control
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Zoom_control
+chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+
+
+// Set clicking on "water" to zoom out
+chart.chartContainer.get("background").events.on("click", function () {
+  chart.goHome();
+})
+
+
+// Make stuff animate on load
+chart.appear(1000, 100);
+
+}); // end am5.ready()
+</script>
