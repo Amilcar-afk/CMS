@@ -6,4 +6,5 @@ www/composer.lock
 www/composer.json
 .idea/
 www/webpack/
-www/dist/css/main.css
+www/style/dist/css/main.css
+

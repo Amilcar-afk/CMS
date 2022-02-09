@@ -44,21 +44,116 @@ abstract class BaseSQL
     }
 
 
-    // public function SelectMethode(){
-    //     $sql = "SELECT * FROM  ".$this->table;
-    //     $stmt = $this->prepare($sql);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll();
-    //     foreach ($result as $row) {
-    //         $tabMs[] = array(
-    //             "id_res" => $row['id_res'],
-    //             "id_match" => $row['id_match'],
-    //             "id_client" => $row['id_client'],
-    //             "start" => $row['start'],
-    //             "end" => $row['end'],
-    //             );
-    //         }
-    //         echo json_encode($tabMs);
-    // }
 
+/**
+ * @param PDO $db
+ * @param string $sql
+ * @param array $params
+ * @return array|null
+ */
+function findOneData( string $sql, $params): ?array  {
+
+    $statement = $this->pdo->prepare($sql);
+
+    if($statement) {
+        $success = $statement->execute([$params])or die(print_r($statement->errorInfo(), TRUE));
+        if($success) {
+            $res = $statement->fetch(\PDO::FETCH_ASSOC);
+            if($res) {
+                return $res;
+            }
+        }
+    }
+    return null;
+}
+
+
+
+/**
+ * @param PDO $db
+ * @param string $sql
+ * @param array $params
+ * @return array|null
+ */
+    function findAllData(string $sql, array $params): ?array  {
+
+        $statement = $this->pdo->prepare($sql);
+
+        if($statement) {
+            $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
+            if($success) {
+                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                if($res) {
+                    return $res;
+                }
+            }
+        }
+        return null;
+    }
+
+/**
+ * @param PDO $db
+ * @param string $sql
+ * @param array $params
+ * @return string|null
+ */
+    public function insertData( string $sql, array $params): ?string {
+
+        $statement = $this->pdo->prepare($sql);
+        if($statement) {
+            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
+            if($success) {
+                // createLog($sql, $params);
+                return $this->pdo->lastInsertId();
+            }
+        }
+        return null;
+    }
+
+
+
+
+/**
+ * @param string $sql
+ * @param array $params
+ */
+    // function createLog(string $sql, array $params){
+    //     $actionLog = strtoupper(substr($sql, 0, strpos($sql, " ")));
+    //     if ($actionLog != "SELECT") {
+
+    //         switch ($actionLog) {
+    //             case "DELETE":
+    //                 $sql = substr($sql, strlen("DELETE FROM "));
+    //                 $tableName = substr($sql, 0, strpos($sql, " "));
+    //                 $action = "DELETED FROM ";
+    //                 break;
+    //             case "INSERT":
+    //                 $sql = substr($sql, strlen("INSERT INTO "));
+    //                 $tableName = substr($sql, 0, strpos($sql, " "));
+    //                 $action = "INSERTED INTO ";
+    //                 break;
+    //             case "UPDATE":
+    //                 $sql = substr($sql, strlen("UPDATE "));
+    //                 $tableName = substr($sql, 0, strpos($sql, " "));
+    //                 $action = "UPDATED ";
+    //                 break;
+    //             default:
+    //                 $tableName = "database";
+    //                 $action = "OPERATION IN ";
+    //         }
+
+    //         $keys = array_keys($params);
+    //         $messageElements = "";
+    //         $keyLog = 0;
+    //         foreach ($params as $param) {
+    //             $messageElements .= $keys[$keyLog] . " = " . $param . ((($keyLog == 0  count($keys) - 1 == $keyLog)  count($keys) == 1) ? " " : ", ");
+    //             ++$keyLog;
+    //         }
+
+    //         $logUser = (isset($_SESSION["idUser"]) ? "USER#".$_SESSION["idUser"] : "ANONYM");
+
+    //         error_log("[" . date('Y-m-d H:i:s (e)') . "][" . $_SERVER["REMOTE_ADDR"] . "][" . $actionLog . "] " . $logUser . " | ". $action . $tableName ." ". $messageElements . "\n", 3, '../logs/' . date('Y-m') . "-reports.log");
+
+    //     }
+    // }
 }
