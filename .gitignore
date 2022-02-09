@@ -8,3 +8,4 @@ www/composer.json
 www/webpack/
 www/style/dist/css/main.css
 
+www/webpack/package-lock.json

@@ -1,15 +1,21 @@
 @import "../fonts";
 
+// modificateurs
+.card--message-only {
+    justify-content: flex-end !important;
+}
+
+
+// composants
 .card {
-    width: 527px;
     height: 307px;
     background-color: var(--main-color, #396075);
     border-radius: var(--radius, 20px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // margin bottom pour a enlever
-    margin-bottom: 35px;
+    padding: 25px;
+
 
     & > button {
         border: none;
@@ -18,7 +24,6 @@
         background: transparent;
         align-self: flex-end;
         padding: 0;
-        margin: 25px 25px 0 0;
         cursor: pointer;
 
         & > i {
@@ -26,12 +31,15 @@
             font-size: 35px;
         }
     }
+
+
     & > #chartdiv {
         width: 100%;
         height: 213px;
     }
+
+
     & > footer {
-        padding: 0 19px 24px 19px;
 
         & > h4 {
             margin: 0;
@@ -46,6 +54,7 @@
             color: #FFFFFF;
         }
         
+
         & > p {
             margin: 0;
             font-family: $font3;
@@ -56,9 +65,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.05em;
-
             color: #FFFFFF;
         }
-        
     }
 }
