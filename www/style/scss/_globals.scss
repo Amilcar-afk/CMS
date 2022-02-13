@@ -1,6 +1,6 @@
 body{
 	font-family: $font1;
-	background-color: $light-grey;
+	background-color: lightgray;
 }
 
 h1{
@@ -25,6 +25,6 @@ p{
 	padding: 10px;
 }
 .container{
-	max-width: $container-width;
-	margin: auto;
+	max-width: var(--bessels);
+    margin: auto;
 }
