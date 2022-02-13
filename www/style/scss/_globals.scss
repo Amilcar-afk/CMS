@@ -6,13 +6,24 @@ body{
 h1{
 	font-family: $font2;
 	font-size: rem(24);
+	margin: 0;
+	display: inline;
+	padding: 10px;
+
 }
 
 h2{
 	font-family: $font2;
 	font-size: rem(16);
-}
+	margin: 0;
+	display: inline;
+	padding: 10px;
 
+}
+p{
+	font-family: $font2 ;
+	padding: 10px;
+}
 .container{
 	max-width: $container-width;
 	margin: auto;

@@ -7,26 +7,65 @@ $gutter: 30px;
 }
 
 .center{
+	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
   }
+  .column-center{
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+  }
+  .column-left{
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+  }
+  .center-left{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+  }
 
   .wrapper {
-	height: 600px;
+	height: 1400px;
   }
-  .gris{
-	background-color:rgb(180, 180, 180);
+
+  .gris-background{
+	background-color:#DFDFDF;
   }
-  .gris-fonce {
-	background-color:rgb(87, 82, 82);
+  .gris-claire-background{
+	background-color:#ECECEC;
+	color: #fff;
+
   }
-  .bleu-claire {
-	background-color:rgb(0, 195, 255);
+  .bleu-claire-background {
+	background-color:#55A6D3;
+	color: #fff;
+
   }
   .bleu-fonce {
-	background-color:rgb(32, 62, 100);
+	color:#396075;
   }
+  .bleu-fonce-background {
+	background-color: #396075;
+	color: #fff;
+  }
+  .blanc-claire-background {
+	background-color: #fff;
+	color: #55A6D3;
+  }
+
+  .blanc-fonce-background {
+	background-color: #fff;
+	color: #396075;
+  }
+.article-border{
+	border-radius:5px;
+}
 @for $i from 1 through $columnNb {
 	.col-#{$i} {
 	//   flex-basis: (100 / ($grid__cols / $i) ) * 1%;
@@ -38,8 +77,48 @@ $gutter: 30px;
     .col-h-#{$i}{
 		height: 100% / $columnNb * $i;
 	}
-	.col-t-#{$i}{
-		margin-top: 10% / $columnNb * $i;
+  }
+
+
+
+  @mixin generate($prefix, $property) {
+	$sizes: (0, .25, .5, 1, 1.5, 3);
+	$spacing: 1rem;
+	
+	@for $i from 1 through length($sizes) {
+	  $size: nth($sizes, $i);
+
+	  .#{$prefix}-#{$i - 1} {
+		#{$property}: $spacing * $size;
+	  }
 	}
   }
 
+  @include generate(m, margin);
+  @include generate(ml, margin-left);
+  @include generate(mr, margin-right);
+  @include generate(mt, margin-top);
+  @include generate(mb, margin-bottom);
+
+  @include generate(p, padding);
+  @include generate(pl, padding-left);
+  @include generate(pr, padding-right);
+  @include generate(pt, padding-top);
+  @include generate(pb, padding-bottom);
+
+  @function pxToRem($pxSize) {
+	@return $pxSize / 16 + rem;
+  }
+
+  @mixin font-size() {
+
+	$font-size-list: 14 16 20 24 28 32;
+  
+	@each $value in $font-size-list {
+	  .fs-#{$value} {
+		font-size: pxToRem($value);
+	  }
+	}
+  }
+  
+  @include font-size()
