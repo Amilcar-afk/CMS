@@ -14,9 +14,7 @@ h1 {
 h2 {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
-  margin: 0;
-  display: inline;
-  padding: 10px;
+  margin: 0
 }
 
 p {
