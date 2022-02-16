@@ -1,73 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <!-- MaterialIcons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- ChartJs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Resources -->
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
+    <!-- Styles -->
     <link href="../style/dist/css/main.css" rel="stylesheet" />
+
     <title>Document</title>
 </head>
+
 <body>
     <div class="row">
+
+
       <div class="col-4">
         <section class="card">
           <button>
-              <i class="material-icons">
-                  more_vert
-              </i>
+            <i class="material-icons">more_vert</i>
           </button>
           <footer>
-              <h4>6</h4>
-              <p>New users</p>
+            <h4>6</h4>
+            <p>New users</p>
           </footer>
        </section>
       </div>
+
       <div class="col-4">
         <section class="card">
           <button>
-              <i class="material-icons">
-                  more_vert
-              </i>
+            <i class="material-icons">more_vert</i>
           </button>
-          <div id="chartdiv">
-
-          </div>
+          <div id="chartdiv"></div>
           <footer>
-              <p>Sessions per country</p>
+            <p>Sessions per country</p>
           </footer>
         </section>
       </div>
+
       <div class="col-2">
         <section class="card card--message-only">
           <footer>
-              <h4>2</h4>
-              <p>Messages</p>
-          </footer>
-        </section>
-      </div>
-      <div class="col-2">
-        <section class="card">
-          <i class="material-icons">
-              edit
-          </i>
-          <footer>
-              <p>Newsletter</p>
+            <h4>2</h4>
+            <p>Messages</p>
           </footer>
         </section>
       </div>
 
+      <div class="col-2 col-h4">
+        <section class="card card--newslatter-only">
+          <button  class="button--newslatter-only">
+            <i class="material-icons material-icons--newslatter-only">edit</i>
+          </button>
+          <footer>
+            <p>Newsletter</p>
+          </footer>
+        </section>
+      </div>
+
+      <div class="col-4 card card--bigcard">
+        <footer>
+          <p>Page ranking</p>
+          <button>
+            <i class="material-icons">more_vert</i>
+          </button>
+        </footer>
+        <div>
+
+        </div>
+      </div>
+
+      <div class="col-4 card card--bigcard">
+        <footer>
+          <p>Session per device</p>
+        </footer>
+        <canvas id="chartDonut"></canvas>
+      </div>
       
     </div>
+
 </body>
 </html>
 
@@ -97,8 +118,52 @@
 
 
 
+<!-- CHARTJS Donut-->
+<script>
+  const data = {
+  labels: [
+    'Mobile',
+    'Desktop',
+    'Other'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(57, 96, 117)',
+      'rgb(57, 96, 117, 0.5)',
+      'rgb(57, 96, 117, 0.2)'
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+  options: {
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          boxHeight: 40,
+          boxWidth: 130,
+          padding: 30
+        },
+      }
+    }
+  }
+};
+</script>
+<script>
+  const myChart = new Chart(
+    document.getElementById('chartDonut'),
+    config
+  );
+</script>
 
 
+
+<!-- CHARTJS Map-->
 <script>
 am5.ready(function() {
 
