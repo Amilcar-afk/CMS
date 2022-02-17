@@ -5,67 +5,91 @@ $gutter: 30px;
 	display: flex;
 	flex-wrap: wrap;
 }
-
+.light{
+	font-weight: 300;
+}
+.medium{
+	font-weight: 500;
+}
+.bold{
+	font-weight: bold;
+}
 .center{
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
-  }
-  .column-center{
+}
+
+.left-text{
+	text-align: left
+}
+.center-text{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+.center-left{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.column-left{
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
-  }
-  .column-left{
+}
+.column-center{
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
-  }
-  .center-left{
-	display: flex;
-	justify-content: start;
-	align-items: center;
-  }
+}
+.justify-text{
+	text-align: justify;
+	word-spacing: -2px;
+}
 
-  .wrapper {
-	height: 1400px;
-  }
 
-  .gris-background{
+.gris-background{
 	background-color:#DFDFDF;
-  }
-  .gris-claire-background{
+}
+.gris-claire-background{
 	background-color:#ECECEC;
 	color: #fff;
-
-  }
-  .bleu-claire-background {
+}
+.bleu-claire-background {
 	background-color:#55A6D3;
 	color: #fff;
-
-  }
-  .bleu-fonce {
+}
+.bleu-fonce {
 	color:#396075;
-  }
-  .bleu-fonce-background {
+}
+.bleu-fonce-background {
 	background-color: #396075;
 	color: #fff;
-  }
-  .blanc-claire-background {
+}
+.blanc-claire-background {
 	background-color: #fff;
 	color: #55A6D3;
-  }
+}
 
-  .blanc-fonce-background {
+.blanc-fonce-background {
 	background-color: #fff;
 	color: #396075;
-  }
+}
+
+
+.left-border{
+	border-left: 5px solid  
+}
+
 .article-border{
 	border-radius:5px;
 }
+
+
 @for $i from 1 through $columnNb {
 	.col-#{$i} {
 	//   flex-basis: (100 / ($grid__cols / $i) ) * 1%;
@@ -78,7 +102,6 @@ $gutter: 30px;
 		height: 100% / $columnNb * $i;
 	}
   }
-
 
 
   @mixin generate($prefix, $property) {
@@ -107,12 +130,12 @@ $gutter: 30px;
   @include generate(pb, padding-bottom);
 
   @function pxToRem($pxSize) {
-	@return $pxSize / 16 + rem;
+	@return $pxSize+px;
   }
 
   @mixin font-size() {
 
-	$font-size-list: 14 16 20 24 28 32;
+	$font-size-list: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 20 22 24 26 28 32 34 36 38 40 42 44 46 48 50 64;
   
 	@each $value in $font-size-list {
 	  .fs-#{$value} {
