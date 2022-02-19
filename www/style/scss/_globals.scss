@@ -34,3 +34,16 @@ p{
 	max-width: var(--bessels);
     margin: auto;
 }
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.light{
+	font-weight: 300;
+}
+.medium{
+	font-weight: 500;
+}
+.bold{
+	font-weight: bold;
+}
