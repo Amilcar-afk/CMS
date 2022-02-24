@@ -1,8 +1,6 @@
 // modificateurs
-.card--message-only {
-    justify-content: flex-end !important;
-}
-.card--newslatter-only {
+
+.card--bottom {
     justify-content: flex-end !important;
     gap: 110px !important;
 }
@@ -15,11 +13,11 @@
 .card--bigcard {
     height: 614px !important; // temporaire
     background-color: var(--main-color, #D8D8D8) !important;
-    align-items: center;
+    justify-content: space-between !important;
     footer {
-        display: flex;
-        align-self: flex-start;
-        justify-content: space-between;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-self: stretch !important;
         & > p, i {
             color: #396075 !important;
         }
@@ -32,9 +30,11 @@
     background-color: var(--main-color, #396075);
     border-radius: var(--radius, 20px);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     padding: 25px;
+    overflow: hidden;
 
     button {
         border: none;
@@ -51,6 +51,9 @@
         font-size: 35px;
     }
     footer {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
         & > h4 {
             margin: 0;
             font-family: $font3;

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- MaterialIcons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- ChartJs -->
@@ -14,6 +16,9 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
     <!-- Styles -->
     <link href="../style/dist/css/main.css" rel="stylesheet" />
 
@@ -25,10 +30,7 @@
 
 
       <div class="col-4">
-        <section class="card">
-          <button>
-            <i class="material-icons">more_vert</i>
-          </button>
+        <section class="card card--bottom">
           <footer>
             <h4>6</h4>
             <p>New users</p>
@@ -49,7 +51,7 @@
       </div>
 
       <div class="col-2">
-        <section class="card card--message-only">
+        <section class="card card--bottom">
           <footer>
             <h4>2</h4>
             <p>Messages</p>
@@ -58,7 +60,7 @@
       </div>
 
       <div class="col-2 col-h4">
-        <section class="card card--newslatter-only">
+        <section class="card card--bottom">
           <button  class="button--newslatter-only">
             <i class="material-icons material-icons--newslatter-only">edit</i>
           </button>
@@ -75,9 +77,88 @@
             <i class="material-icons">more_vert</i>
           </button>
         </footer>
-        <div>
-
-        </div>
+          <table id="example" class="row-border">
+            <tbody>
+              <tr>
+                  <td>home</td>
+                  <td>vue 24</td>
+              </tr>
+              <tr>
+                <td>contact</td>
+                <td>vue 21</td>
+              </tr>
+              <tr>
+                <td>projet</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>avis</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>logout</td>
+                <td>vue 12</td>
+              </tr>
+              <tr>
+                <td>login</td>
+                <td>vue 24</td>
+              </tr>
+              <tr>
+                <td>avis</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>logout</td>
+                <td>vue 12</td>
+              </tr>
+              <tr>
+                <td>login</td>
+                <td>vue 24</td>
+              </tr>
+              <tr>
+                <td>avis</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>logout</td>
+                <td>vue 12</td>
+              </tr>
+              <tr>
+                <td>login</td>
+                <td>vue 24</td>
+              </tr>
+              <tr>
+                <td>avis</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>logout</td>
+                <td>vue 12</td>
+              </tr>
+              <tr>
+                <td>login</td>
+                <td>vue 24</td>
+              </tr>
+              <tr>
+                <td>avis</td>
+                <td>vue 17</td>
+              </tr>
+              <tr>
+                <td>logout</td>
+                <td>vue 12</td>
+              </tr>
+              <tr>
+                <td>login</td>
+                <td>vue 24</td>
+              </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Pages</td>
+              <td>Vues</td>
+            </tr>
+          </tfoot>
+          </table>
       </div>
 
       <div class="col-4 card card--bigcard">
@@ -85,6 +166,17 @@
           <p>Session per device</p>
         </footer>
         <canvas id="chartDonut"></canvas>
+      </div>
+
+      <div class="col-4 card card--bigcard">
+        <footer>
+          <p>Session week</p>
+          <button>
+            <i class="material-icons">chevron_left</i>
+            <i class="material-icons">chevron_right</i>
+          </button>
+        </footer>
+        <canvas id="chartBar"></canvas>
       </div>
       
     </div>
@@ -111,8 +203,29 @@
 
 
 
-
-
+<!-- dataTable -->
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":        "600px",
+        "scrollCollapse": true,
+        "paging":         false,
+        searching: false, 
+        paging: false, 
+        info: false,
+        "columnDefs": [
+        {
+          "className": "dt-left dataTablesCol1", 
+          "targets": 0
+        },
+        {
+          "className": "dt-right dataTablesCol2", 
+          "targets": 1
+        }
+      ],
+    } );
+} );
+</script>
 
 
 
@@ -142,12 +255,20 @@ const config = {
   data: data,
   options: {
     plugins: {
+      beforeInit: function(chart, legend, options) {
+      const fitValue = chart.legend.fit;
+      chart.legend.fit = function fit() {
+        fitValue.bind(chart.legend)();
+        return this.height += 50;
+      }
+    },
       legend: {
         position: 'bottom',
         labels: {
-          boxHeight: 40,
-          boxWidth: 130,
-          padding: 30
+          boxHeight: 35,
+          boxWidth: 120,
+          padding: 30,
+          borderRadius: 20
         },
       }
     }
@@ -155,7 +276,7 @@ const config = {
 };
 </script>
 <script>
-  const myChart = new Chart(
+  const myChartDonut = new Chart(
     document.getElementById('chartDonut'),
     config
   );
