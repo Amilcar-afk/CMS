@@ -1445,11 +1445,7 @@ p {
     font-size: 64px;
   }
 }
-.card--message-only {
-  justify-content: flex-end !important;
-}
-
-.card--newslatter-only {
+.card--bottom {
   justify-content: flex-end !important;
   gap: 110px !important;
 }
@@ -1465,12 +1461,12 @@ p {
 .card--bigcard {
   height: 614px !important;
   background-color: var(--main-color, #D8D8D8) !important;
-  align-items: center;
+  justify-content: space-between !important;
 }
 .card--bigcard footer {
-  display: flex;
-  align-self: flex-start;
-  justify-content: space-between;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-self: stretch !important;
 }
 .card--bigcard footer > p, .card--bigcard footer i {
   color: #396075 !important;
@@ -1481,9 +1477,11 @@ p {
   background-color: var(--main-color, #396075);
   border-radius: var(--radius, 20px);
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   padding: 25px;
+  overflow: hidden;
 }
 .card button {
   border: none;
@@ -1497,6 +1495,11 @@ p {
 .card i {
   color: #FFFFFF;
   font-size: 35px;
+}
+.card footer {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
 }
 .card footer > h4 {
   margin: 0;
@@ -1612,4 +1615,34 @@ p {
 
 .article-border {
   border-radius: 5px;
+}
+
+.dataTables_wrapper {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+}
+.dataTables_wrapper > .dataTables_scroll {
+  height: 100%;
+}
+.dataTables_wrapper > .dataTables_scroll > .dataTables_scrollBody {
+  height: 100%;
+  border-radius: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+thead, tfoot {
+  display: none;
+}
+
+.dataTablesCol1 {
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.dataTablesCol2 {
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.05em;
 }
