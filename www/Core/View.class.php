@@ -44,8 +44,7 @@ class View
 
     public function __destruct()
     {
-        //Array ( [firstname] => Yves )
-        extract($this->data);
+        extract($this->data);//array(2) { ["firstname"]=> string(8) "Marouane" ["lastname"]=> string(5) "Talbi" } 
         include "View/".$this->template.".tpl.php";
     }
 

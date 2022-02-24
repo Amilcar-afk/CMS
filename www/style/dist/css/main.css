@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);:root {
-  --second-color: #777777;
-  --third-color: #B6B6B6;
+  --main-color: #396075;
+  --second-color: #55A6D3;
+  --third-color: #9BBCFF;
   --background-color: white;
   --bessels: 1200px;
   --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78);
@@ -522,12 +523,12 @@ p {
     font-size: 49.2307692308px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 992px) {
   .col-md-1 {
     flex: 0 0 8.3333333333%;
   }
 
-  .col-sm-offset-1 {
+  .col-md-offset-1 {
     margin-left: 8.3333333333%;
   }
 
@@ -535,7 +536,7 @@ p {
     flex: 0 0 16.6666666667%;
   }
 
-  .col-sm-offset-2 {
+  .col-md-offset-2 {
     margin-left: 16.6666666667%;
   }
 
@@ -543,7 +544,7 @@ p {
     flex: 0 0 25%;
   }
 
-  .col-sm-offset-3 {
+  .col-md-offset-3 {
     margin-left: 25%;
   }
 
@@ -551,7 +552,7 @@ p {
     flex: 0 0 33.3333333333%;
   }
 
-  .col-sm-offset-4 {
+  .col-md-offset-4 {
     margin-left: 33.3333333333%;
   }
 
@@ -559,7 +560,7 @@ p {
     flex: 0 0 41.6666666667%;
   }
 
-  .col-sm-offset-5 {
+  .col-md-offset-5 {
     margin-left: 41.6666666667%;
   }
 
@@ -567,7 +568,7 @@ p {
     flex: 0 0 50%;
   }
 
-  .col-sm-offset-6 {
+  .col-md-offset-6 {
     margin-left: 50%;
   }
 
@@ -575,7 +576,7 @@ p {
     flex: 0 0 58.3333333333%;
   }
 
-  .col-sm-offset-7 {
+  .col-md-offset-7 {
     margin-left: 58.3333333333%;
   }
 
@@ -583,7 +584,7 @@ p {
     flex: 0 0 66.6666666667%;
   }
 
-  .col-sm-offset-8 {
+  .col-md-offset-8 {
     margin-left: 66.6666666667%;
   }
 
@@ -591,7 +592,7 @@ p {
     flex: 0 0 75%;
   }
 
-  .col-sm-offset-9 {
+  .col-md-offset-9 {
     margin-left: 75%;
   }
 
@@ -599,7 +600,7 @@ p {
     flex: 0 0 83.3333333333%;
   }
 
-  .col-sm-offset-10 {
+  .col-md-offset-10 {
     margin-left: 83.3333333333%;
   }
 
@@ -607,7 +608,7 @@ p {
     flex: 0 0 91.6666666667%;
   }
 
-  .col-sm-offset-11 {
+  .col-md-offset-11 {
     margin-left: 91.6666666667%;
   }
 
@@ -615,7 +616,7 @@ p {
     flex: 0 0 100%;
   }
 
-  .col-sm-offset-12 {
+  .col-md-offset-12 {
     margin-left: 100%;
   }
 
@@ -1536,31 +1537,31 @@ p {
 
 .gris-claire-background {
   background-color: #ECECEC;
-  color: #fff;
+  color: var(--background-color);
 }
 
 .bleu-claire-background {
-  background-color: #55A6D3;
-  color: #fff;
+  background-color: var(--second-color);
+  color: var(--background-color);
 }
 
 .bleu-fonce {
-  color: #396075;
+  color: var(--main-color);
 }
 
 .bleu-fonce-background {
-  background-color: #396075;
-  color: #fff;
+  background-color: var(--main-color);
+  color: var(--background-color);
 }
 
 .blanc-claire-background {
-  background-color: #fff;
-  color: #55A6D3;
+  background-color: var(--background-color);
+  color: var(--second-color);
 }
 
 .blanc-fonce-background {
-  background-color: #fff;
-  color: #396075;
+  background-color: var(--background-color);
+  color: var(--main-color);
 }
 
 .center {

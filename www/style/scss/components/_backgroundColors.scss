@@ -1,30 +1,27 @@
-
-
-
 .gris-background{
 	background-color:#DFDFDF;
 }
 .gris-claire-background{
-	background-color:#ECECEC;
-	color: #fff;
+	background-color:$grey-light;
+	color: var(--background-color);
 }
 .bleu-claire-background {
-	background-color:#55A6D3;
-	color: #fff;
+	background-color: var(--second-color);
+	color: var(--background-color);
 }
 .bleu-fonce {
-	color:#396075;
+	color:var(--main-color);
 }
 .bleu-fonce-background {
-	background-color: #396075;
-	color: #fff;
+	background-color: var(--main-color);
+	color: var(--background-color);
 }
 .blanc-claire-background {
-	background-color: #fff;
-	color: #55A6D3;
+	background-color: var(--background-color);
+	color: var(--second-color);
 }
 
 .blanc-fonce-background {
-	background-color: #fff;
-	color: #396075;
+	background-color: var(--background-color);
+	color: var(--main-color);
 }
