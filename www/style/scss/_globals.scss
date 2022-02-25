@@ -1,6 +1,11 @@
+*{
+	box-sizing: border-box;
+}
+
 body{
 	font-family: $font1;
 	background-color: white;
+	margin: 0;
 }
 
 h1{
@@ -11,6 +16,15 @@ h1{
 	padding: 10px;
 
 }
+
+figure{
+	margin: 0;
+}
+
+a:not([href]){
+	pointer-events: none;
+}
+
 span, small{
 	font-family: $font3;
 	font-size: rem(24);
@@ -30,20 +44,36 @@ p{
 	font-family: $font2 ;
 	padding: 5px;
 }
+
 .container{
 	max-width: var(--bessels);
     margin: auto;
 }
+
+.body-back-office{
+	padding: 30px;
+	display: flex;
+	height: 100vh;
+	max-height: 100vh;
+
+	& main{
+		flex-grow: 1;
+	}
+}
+
 .row{
 	display: flex;
 	flex-wrap: wrap;
 }
+
 .light{
 	font-weight: 300;
 }
+
 .medium{
 	font-weight: 500;
 }
+
 .bold{
 	font-weight: bold;
 }
