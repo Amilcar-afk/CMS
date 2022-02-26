@@ -21,6 +21,10 @@ figure{
 	margin: 0;
 }
 
+a{
+	text-decoration:none;
+}
+
 a:not([href]){
 	pointer-events: none;
 }

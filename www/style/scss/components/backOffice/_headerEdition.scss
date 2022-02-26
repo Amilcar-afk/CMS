@@ -9,8 +9,54 @@
   margin-bottom: 30px;
   padding: 15px;
 
-
   & .material-icons-round{
     font-size: rem(30);
   }
+
+  & nav{
+    display: flex;
+    width: 400px;
+
+    & .cta-button {
+      padding: 0 10px;
+    }
+  }
+
+  & :nth-child(1){
+     justify-content: flex-start;
+
+     & .cta-button {
+       margin-right: 15px;
+     }
+
+   }
+
+  & :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--main-color);
+
+    .material-icons-round{
+      font-size: rem(14);
+    }
+    label{
+      font-size: rem(14);
+      font-weight: 500;
+    }
+    footer{
+      font-size: rem(12);
+    }
+  }
+
+  & :nth-child(3){
+    justify-content: flex-end;
+
+    & .cta-button {
+      margin-left: 15px;
+    }
+
+  }
+
 }
