@@ -88,3 +88,18 @@ p{
 .bold{
 	font-weight: bold;
 }
+
+
+//reponsive tablet
+@media (min-width: 768px) and (max-width: 992px){
+
+	.body-back-office{
+		position: relative;
+		padding: 0;
+	}
+}
+
+//responsive mobile
+@media (max-width:768px) {
+
+}

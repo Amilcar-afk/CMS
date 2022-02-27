@@ -17,6 +17,7 @@
 		background-color: $green;
 		background: rgba(255, 255, 255, 0.3);
 		font-size: rem(16);
+
 		&:hover{
 			background: rgba(255, 255, 255, 0.6);
 		}
@@ -26,6 +27,10 @@
 		background-color: unset;
 		&:hover{
 			background: rgba(255, 255, 255, 0.6);
+		}
+
+		& .material-icons-round{
+			margin-right: 0px;
 		}
 	}
 }
