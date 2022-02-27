@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 :root {
-  --main-color: #396075;
   --second-color: #55A6D3;
   --third-color: #9BBCFF;
   --background-color: white;
@@ -771,27 +770,6 @@ p {
   .fs-64 {
     font-size: 64px; } }
 
-.card--bottom {
-  justify-content: flex-end !important;
-  gap: 110px !important; }
-
-.button--newslatter-only {
-  align-self: center !important; }
-
-.material-icons--newslatter-only {
-  font-size: 65px !important; }
-
-.card--bigcard {
-  height: 614px !important;
-  background-color: var(--main-color, #D8D8D8) !important;
-  justify-content: space-between !important; }
-  .card--bigcard footer {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-self: stretch !important; }
-    .card--bigcard footer > p, .card--bigcard footer i {
-      color: #396075 !important; }
-
 .card {
   height: 307px;
   background-color: var(--main-color, #396075);
@@ -801,7 +779,8 @@ p {
   flex-direction: column;
   align-items: center;
   padding: 25px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 19px; }
   .card button {
     border: none;
     outline: none;
@@ -817,7 +796,7 @@ p {
     display: flex;
     flex-direction: column;
     align-self: flex-start; }
-    .card footer > h4 {
+    .card footer h4 {
       margin: 0;
       font-family: "Montserrat", sans-serif;
       font-style: normal;
@@ -828,7 +807,7 @@ p {
       align-items: center;
       letter-spacing: 0.05em;
       color: #FFFFFF; }
-    .card footer > p {
+    .card footer p {
       margin: 0;
       font-family: "Montserrat", sans-serif;
       font-style: normal;
@@ -839,12 +818,59 @@ p {
       align-items: center;
       letter-spacing: 0.05em;
       color: #FFFFFF; }
-  .card > #chartdiv {
-    width: 100%;
-    height: 213px; }
-  .card > #chartDonut {
-    height: 450px !important;
-    width: 450px !important; }
+  .card .edge-container {
+    width: 75px;
+    height: 97px;
+    background: rgba(57, 96, 117, 0.5);
+    border-radius: 20px; }
+    .card .edge-container p {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      color: white;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px; }
+  .card .edge {
+    width: 75px;
+    height: 75px;
+    background-color: var(--main-color, #396075);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .card .edge i {
+      font-size: 60px; }
+  .card--bottom {
+    justify-content: flex-end !important;
+    gap: 80px !important; }
+  .card--background-color {
+    background-color: var(--main-color, #D8D8D8) !important; }
+  .card--bigcard {
+    height: 528px !important;
+    justify-content: space-between !important; }
+    .card--bigcard footer {
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-self: stretch !important; }
+      .card--bigcard footer p, .card--bigcard footer i {
+        color: #396075 !important; }
+  .card--smallcard {
+    height: 152px !important;
+    background: rgba(57, 96, 117, 0.5) !important;
+    flex-direction: row;
+    align-items: flex-start; }
+  .card--sessionweek-only {
+    height: 350px !important; }
+  .card .material-icons--big-icon {
+    font-size: 65px !important; }
+  .card .button--newslatter-only {
+    align-self: center !important; }
+  .card #chartDonut {
+    width: 370px !important;
+    height: 370px !important;
+    margin-bottom: 30px; }
 
 .gris-background {
   background-color: #DFDFDF; }
