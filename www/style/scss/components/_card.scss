@@ -1,29 +1,3 @@
-// modificateurs
-
-.card--bottom {
-    justify-content: flex-end !important;
-    gap: 110px !important;
-}
-.button--newslatter-only {
-    align-self: center !important;
-}
-.material-icons--newslatter-only {
-    font-size: 65px !important;
-}
-.card--bigcard {
-    height: 614px !important; // temporaire
-    background-color: var(--main-color, #D8D8D8) !important;
-    justify-content: space-between !important;
-    footer {
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-self: stretch !important;
-        & > p, i {
-            color: #396075 !important;
-        }
-    }
-}
-
 // composants
 .card {
     height: 307px;
@@ -35,8 +9,10 @@
     align-items: center;
     padding: 25px;
     overflow: hidden;
-
-    button {
+    margin: 19px;
+    
+    
+    & button {
         border: none;
         outline: none;
         display: flex;
@@ -44,17 +20,17 @@
         align-self: flex-end;
         padding: 0;
         cursor: pointer;
-
     }
-    i {
+    & i {
         color: #FFFFFF;
         font-size: 35px;
     }
-    footer {
+
+    & footer {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-        & > h4 {
+        &  h4 {
             margin: 0;
             font-family: $font3;
             font-style: normal;
@@ -66,7 +42,7 @@
             letter-spacing: 0.05em;
             color: #FFFFFF;
         }
-        & > p {
+        & p {
             margin: 0;
             font-family: $font3;
             font-style: normal;
@@ -79,16 +55,80 @@
             color: #FFFFFF;
         }
     }
-
-
-
-    & > #chartdiv {
-        width: 100%;
-        height: 213px;
+    & .edge-container {
+        width: 75px;
+        height: 97px;
+        background: rgba(57, 96, 117, 0.5);
+        border-radius: 20px;
+        & p {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: $font3;
+            color: white;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+    & .edge {
+        width: 75px;
+        height: 75px;
+        background-color: var(--main-color, #396075);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & i {
+            font-size: 60px;
+        }
     }
 
-    & > #chartDonut {
-        height: 450px !important;
-        width: 450px !important;
+    // modificateurs
+    &--bottom {
+        justify-content: flex-end !important;
+        gap: 80px !important;
+    }
+    &--background-color {
+        background-color: var(--main-color, #D8D8D8) !important;
+    }
+    &--bigcard {
+        height: 528px !important; // temporaire
+        justify-content: space-between !important;
+        & footer {
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-self: stretch !important;
+            & p, i {
+                color: #396075 !important;
+            }
+        }
+    }
+    &--smallcard {
+        height: 152px !important;
+        background: rgba(57, 96, 117, 0.5) !important;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    &--sessionweek-only {
+        height: 350px !important;
+    }
+    // a changer
+    & .material-icons--big-icon {
+        font-size: 65px !important;
+    }
+    //a changer
+    & .button--newslatter-only {
+        align-self: center !important;
+    }
+
+
+
+    // charts
+
+    & #chartDonut {
+        width: 370px !important;
+        height: 370px!important;
+        margin-bottom: 30px;
     }
 }
