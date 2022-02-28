@@ -55,3 +55,31 @@
 		}
 	}
 }
+
+//reponsive tablet
+@media (min-width: 768px) and (max-width: 992px){
+	.cta-button{
+
+		&--menu{
+			width: 305px;
+			flex-grow: 1;
+
+			margin-top: 15px;
+			background-color: rgba(129, 129, 129, 0.3);
+
+			&.selected{
+				background-color: var(--main-color);
+				color: #AFBCC3;
+
+				&:hover{
+					background-color: var(--main-color);
+				}
+			}
+
+			&:hover{
+				background: rgba(255, 255, 255, 0.6);
+			}
+		}
+
+	}
+}

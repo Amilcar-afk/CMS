@@ -1,7 +1,7 @@
 // composants
 .card {
     height: 307px;
-    background-color: var(--main-color, #396075);
+    background-color: rgba(216,216,216, 0.5);
     border-radius: var(--radius, 20px);
     display: flex;
     justify-content: space-between;
@@ -89,9 +89,10 @@
         justify-content: flex-end !important;
         gap: 80px !important;
     }
-    &--background-color {
-        background-color: var(--main-color, #D8D8D8) !important;
+    &--background-main-color {
+        background-color: var(--main-color, #D8D8D8);
     }
+
     &--bigcard {
         height: 528px !important; // temporaire
         justify-content: space-between !important;

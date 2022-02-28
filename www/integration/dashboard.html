@@ -1,10 +1,17 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Meta -->
+  <head>
+    <title>Index</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="../style/dist/css/main.css" rel="stylesheet" />
+
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- MaterialIcons -->
@@ -17,207 +24,201 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <!-- DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
     <!-- Styles -->
-    <link href="../style/dist/css/main.css" rel="stylesheet" />
 
-    <title>Document</title>
-</head>
+    <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
 
-<body>
-    <div class="row">
+  </head>
+  <body style="background: url(https://images.frandroid.com/wp-content/uploads/2021/06/windows-11-wallpaper-fond-ecran-1.jpg) 0 / cover fixed; background-position: center" class="body-back-office">
+    <header>
+
+      <nav>
+        <ul>
+          <li><a id="back-office-logo" href="#"><img src="/style/images/logo_myfolio.png" alt="logo"></a></li>
+          <li><a class="button-menu" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">storage</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Add code"><span class="material-icons-round">code</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
+        </ul>
+      </nav>
+
+    </header>
+    <main>
+      <section id="back-office-container">
+
+        <header class="edition-header">
+          <h1 class="title title--main-color">DASHBOARD</h1>
+        </header>
+
+        <section class="container-main-content container-main-content--padding" >
+          <div class="row">
 
 
-      <div class="col-4">
-        <section class="card card--bottom">
-          <footer>
-            <h4>6</h4>
-            <p>New users</p>
-          </footer>
-       </section>
-      </div>
+            <div class="col-4">
+              <section class="card card--bottom  card--background-main-color">
+                <footer>
+                  <h4>6</h4>
+                  <p>New users</p>
+                </footer>
+              </section>
+            </div>
 
-      <div class="col-4">
-        <section class="card">
-          <button>
-            <i class="material-icons-round">more_vert</i>
-          </button>
-          <div id="chartdiv"></div>
-          <footer>
-            <p>Sessions per country</p>
-          </footer>
-        </section>
-      </div>
+            <div class="col-4">
+              <section class="card card--background-main-color">
+                <button>
+                  <i class="material-icons-round">more_vert</i>
+                </button>
+                <div id="chartdiv"></div>
+                <footer>
+                  <p>Sessions per country</p>
+                </footer>
+              </section>
+            </div>
 
-      <div class="col-2">
-        <section class="card card--bottom">
-          <footer>
-            <h4>2</h4>
-            <p>Messages</p>
-          </footer>
-        </section>
-      </div>
+            <div class="col-2">
+              <section class="card card--bottom card--background-main-color">
+                <footer>
+                  <h4>2</h4>
+                  <p>Messages</p>
+                </footer>
+              </section>
+            </div>
 
-      <div class="col-2">
-        <section class="card card--bottom">
-          <button class="button--newslatter-only">
-            <i class="material-icons-round material-icons--big-icon">edit</i>
-          </button>
-          <footer>
-            <p>Newsletter</p>
-          </footer>
-        </section>
-      </div>
+            <div class="col-2">
+              <section class="card card--bottom card--background-main-color">
+                <button class="button--newslatter-only">
+                  <i class="material-icons-round material-icons--big-icon">edit</i>
+                </button>
+                <footer>
+                  <p>Newsletter</p>
+                </footer>
+              </section>
+            </div>
 
-      <div class="col-4 ">
-        <section class="card card--bigcard card--background-color">
-          <footer>
-            <p>Page ranking</p>
-            <button>
-              <i class="material-icons-round">more_vert</i>
-            </button>
-          </footer>
-            <table id="example" class="row-border">
-              <tbody>
-                <tr>
+            <div class="col-4 ">
+              <section class="card card--bigcard card--background-color">
+                <footer>
+                  <p>Page ranking</p>
+                  <button>
+                    <i class="material-icons-round">more_vert</i>
+                  </button>
+                </footer>
+                <table>
+                  <tbody>
+                  <tr>
                     <td>home</td>
                     <td>vue 24</td>
-                </tr>
-                <tr>
-                  <td>contact</td>
-                  <td>vue 21</td>
-                </tr>
-                <tr>
-                  <td>projet</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>avis</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>logout</td>
-                  <td>vue 12</td>
-                </tr>
-                <tr>
-                  <td>login</td>
-                  <td>vue 24</td>
-                </tr>
-                <tr>
-                  <td>avis</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>logout</td>
-                  <td>vue 12</td>
-                </tr>
-                <tr>
-                  <td>login</td>
-                  <td>vue 24</td>
-                </tr>
-                <tr>
-                  <td>avis</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>logout</td>
-                  <td>vue 12</td>
-                </tr>
-                <tr>
-                  <td>login</td>
-                  <td>vue 24</td>
-                </tr>
-                <tr>
-                  <td>avis</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>logout</td>
-                  <td>vue 12</td>
-                </tr>
-                <tr>
-                  <td>login</td>
-                  <td>vue 24</td>
-                </tr>
-                <tr>
-                  <td>avis</td>
-                  <td>vue 17</td>
-                </tr>
-                <tr>
-                  <td>logout</td>
-                  <td>vue 12</td>
-                </tr>
-                <tr>
-                  <td>login</td>
-                  <td>vue 24</td>
-                </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Pages</td>
-                <td>Vues</td>
-              </tr>
-            </tfoot>
-            </table>
-        </section>
-      </div>
+                  </tr>
+                  <tr>
+                    <td>contact</td>
+                    <td>vue 21</td>
+                  </tr>
+                  <tr>
+                    <td>projet</td>
+                    <td>vue 17</td>
+                  </tr>
+                  <tr>
+                    <td>avis</td>
+                    <td>vue 17</td>
+                  </tr>
+                  <tr>
+                    <td>logout</td>
+                    <td>vue 12</td>
+                  </tr>
+                  <tr>
+                    <td>login</td>
+                    <td>vue 24</td>
+                  </tr>
+                  <tr>
+                    <td>avis</td>
+                    <td>vue 17</td>
+                  </tr>
+                  <tr>
+                    <td>logout</td>
+                    <td>vue 12</td>
+                  </tr>
+                  <tr>
+                    <td>login</td>
+                    <td>vue 24</td>
+                  </tr>
+                  <tr>
+                    <td>avis</td>
+                    <td>vue 17</td>
+                  </tr>
+                  <tr>
+                    <td>logout</td>
+                    <td>vue 12</td>
+                  </tr>
+                  <tr>
+                    <td>login</td>
+                    <td>vue 24</td>
+                  </tr>
+                  <tr>
+                    <td>avis</td>
+                    <td>vue 17</td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <td>Pages</td>
+                    <td>Vues</td>
+                  </tr>
+                  </tfoot>
+                </table>
+              </section>
+            </div>
 
-      <div class="col-4">
-        <section class="card card--bigcard card--background-color">
-          <footer>
-            <p>Session per device</p>
-          </footer>
-          <canvas id="chartDonut"></canvas>
-        </section>
-      </div>
+            <div class="col-4">
+              <section class="card card--bigcard card--background-color">
+                <footer>
+                  <p>Session per device</p>
+                </footer>
+                <canvas id="chartDonut"></canvas>
+              </section>
+            </div>
 
-      <div class="col-4">
-        <section class="card card--bigcard card--sessionweek-only card--background-color">
-          <footer>
-            <p>Session week</p>
-            <button>
-              <i class="material-icons-round">chevron_left</i>
-              <i class="material-icons-round">chevron_right</i>
-            </button>
-          </footer>
-          <canvas id="chartBar"></canvas>
-        </section>
-      </div>
+            <div class="col-4">
+              <section class="card card--bigcard card--sessionweek-only card--background-color">
+                <footer>
+                  <p>Session week</p>
+                  <button>
+                    <i class="material-icons-round">chevron_left</i>
+                    <i class="material-icons-round">chevron_right</i>
+                  </button>
+                </footer>
+                <canvas id="chartBar"></canvas>
+              </section>
+            </div>
 
-      <div class="col-4">
-        <section class="card card--smallcard card--background-color">
-          <div class="edge"><i class="material-icons-round">add</i></div>
-          <div class="edge-container">
-            <div class="edge"></div>
-            <p>1</p>
-          </div>
-          <div class="edge-container">
-            <div class="edge"></div>
-            <p>0</p>
-          </div>
-          <div class="edge-container">
-            <div class="edge"></div>
-            <p>2</p>
-          </div>
-          <div class="edge-container">
-            <div class="edge"></div>
-            <p>23</p>
+            <div class="col-4">
+              <section class="card card--smallcard card--background-color">
+                <div class="edge"><i class="material-icons-round">add</i></div>
+                <div class="edge-container">
+                  <div class="edge"></div>
+                  <p>1</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"></div>
+                  <p>0</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"></div>
+                  <p>2</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"></div>
+                  <p>23</p>
+                </div>
+              </section>
+            </div>
+
           </div>
         </section>
-      </div>
-      
-    </div>
 
-</body>
-
-<script>
-
-</script>
+      </section>
+    </main>
+  </body>
 </html>
-
-
 
 
 
