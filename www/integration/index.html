@@ -8,6 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <link href="../style/dist/css/main.css" rel="stylesheet" />
+        <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
 
     </head>
     <body style="background: url(https://images.frandroid.com/wp-content/uploads/2021/06/windows-11-wallpaper-fond-ecran-1.jpg) 0 / cover fixed; background-position: center" class="body-back-office">
@@ -16,10 +17,10 @@
             <nav>
                 <ul>
                     <li><a id="back-office-logo" href="#"><img src="/style/images/logo_myfolio.png" alt="logo"></a></li>
-                    <li><a href=""><span class="material-icons-round" alt="Dashboard">leaderboard</span></a></li>
-                    <li><a href=""><span class="material-icons-round" alt="Site map">storage</span></a></li>
-                    <li><a href=""><span class="material-icons-round" alt="Add code">code</span></a></li>
-                    <li><a href=""><span class="material-icons-round" alt="Settings">settings</span></a></li>
+                    <li><a class="button-menu" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
+                    <li><a class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">storage</span></a></li>
+                    <li><a class="button-menu" href="" data-alt="Add code"><span class="material-icons-round">code</span></a></li>
+                    <li><a class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
                 </ul>
             </nav>
 
@@ -41,14 +42,29 @@
                         </footer>
                     </div>
                     <nav>
-                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span> Preview</a>
-                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">save</span> Save</a>
-                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span> Published</a>
+                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
+                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">save</span>Save</a>
+                        <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span>Published</a>
                     </nav>
                 </header>
 
-                <section id="container-edition">
+                <section class="container-main-content container-main-content--menu" >
 
+                    <div class="menu-container">
+                        <h4 class="title title--big title--main-color title--black-weight">Style</h4>
+                        <nav>
+                            <button class="cta-button cta-button--menu selected"><span class="material-icons-round">color_lens</span>Color</button>
+                            <button class="cta-button cta-button--menu"><span class="material-icons-round">image</span>Main Images</button>
+                            <button class="cta-button cta-button--menu"><span class="material-icons-round">font_download</span>Fonts</button>
+                            <button class="cta-button cta-button--menu"><span class="material-icons-round">format_paint</span>Design</button>
+                        </nav>
+                    </div>
+                    <section>
+                        <header>
+                            <h4 class="title title--big title--black-weight">Colors</h4>
+                            <button class="cta-button cta-button--icon"><span class="material-icons-round">close</span></button>
+                        </header>
+                    </section>
                 </section>
             </section>
         </main>

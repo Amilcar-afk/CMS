@@ -1,0 +1,39 @@
+.container-main-content{
+  border-radius: 20px;
+  width: 100%;
+
+  &--padding{
+    padding: 19px;
+  }
+
+  &--menu{
+    position: absolute;
+    top: 0;
+    let: 0;
+    display: flex;
+
+    & .menu-container{
+      backdrop-filter: blur(60px);
+      background-color: rgba(129, 129, 129, 0.3);
+      padding: 30px 50px;
+      border-radius: 20px 0px 0px 20px;
+    }
+
+    & > section{
+      background-color: var(--background-color);
+      padding: 30px 50px;
+      flex-grow: 1;
+      border-radius: 0px 20px 20px 0px;
+
+      & > header{
+        display: flex;
+        justify-content: space-between;
+
+        & button .material-icons-round{
+          font-size: rem(30);
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}

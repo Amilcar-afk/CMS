@@ -7,16 +7,37 @@
 	display: flex;
 	align-items: center;
 	padding: 10px;
+	background-color: unset;
 
 	& .material-icons-round{
-		margin-right: 5px;
+		margin-right: 8px;
 		font-size: rem(20);
 	}
 
 	&--text-icon{
-		background-color: $green;
 		background: rgba(255, 255, 255, 0.3);
 		font-size: rem(16);
+
+		&:hover{
+			background: rgba(255, 255, 255, 0.6);
+		}
+	}
+
+	&--menu{
+		font-size: rem(14);
+		font-weight: 500;
+		border-radius: 60px;
+		width: 275px;
+		padding: 10px;
+		margin-top: 50px;
+
+		&.selected{
+			background-color: rgba(129, 129, 129, 0.3);
+
+			&:hover{
+				background: rgba(129, 129, 129, 0.3);
+			}
+		}
 
 		&:hover{
 			background: rgba(255, 255, 255, 0.6);

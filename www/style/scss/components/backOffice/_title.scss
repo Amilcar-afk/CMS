@@ -1,0 +1,43 @@
+.title{
+
+	display: block;
+	margin-block-start: unset;
+	margin-block-end: unset;
+	margin-inline-start: unset;
+	margin-inline-end:unset;
+	font-weight: unset;
+	margin: 0;
+
+	&--blod{
+		font-weight: 600;
+	}
+
+	&--black-weight{
+		font-weight:800;
+	}
+
+	&--big{
+		font-size: rem(24);
+	}
+
+	&--medium{
+		font-size: rem(18);
+	}
+
+	&--main-color{
+		color: var(--main-color);
+	}
+
+	&--second-color{
+		color: var(--second-color);
+	}
+
+	&--black{
+		color: $black;
+	}
+
+	&--white{
+		color: $white;
+	}
+
+}
