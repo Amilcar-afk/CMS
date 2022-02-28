@@ -10,14 +10,15 @@
 @import "components/flex";
 @import "components/border";
 @import "components/responsive";
-@import "components/dataTable";
-@import "components/dataTable";
 
 
 //pour back office
 @import "components/backOffice/header";
 @import "components/backOffice/headerEdition";
 @import "components/backOffice/button";
+@import "components/backOffice/container";
+@import "components/backOffice/title";
+@import "components/backOffice/background";
 
 // @import "components/back";
 // @import "components/slider";
