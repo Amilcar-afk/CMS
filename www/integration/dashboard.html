@@ -25,7 +25,7 @@
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <!-- Styles -->
-
+    <script type="text/javascript" src="../style/js/dashboardChart.js"></script>
     <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
 
   </head>
@@ -191,19 +191,19 @@
               <section class="card card--smallcard card--background-color">
                 <div class="edge"><i class="material-icons-round">add</i></div>
                 <div class="edge-container">
-                  <div class="edge"></div>
+                  <div class="edge"><img src='../style/images/linkedin.png' /></div>
                   <p>1</p>
                 </div>
                 <div class="edge-container">
-                  <div class="edge"></div>
+                  <div class="edge"><img src='../style/images/twitter.png' /></div>
                   <p>0</p>
                 </div>
                 <div class="edge-container">
-                  <div class="edge"></div>
+                  <div class="edge"><img src='../style/images/youtube.png' /></div>
                   <p>2</p>
                 </div>
                 <div class="edge-container">
-                  <div class="edge"></div>
+                  <div class="edge"><img src='../style/images/tiktok.png' /></div>
                   <p>23</p>
                 </div>
               </section>
@@ -226,159 +226,13 @@
 
 <!-- CHARTJS Bar -->
 <script>
-  chart1([])
-  function chart1 (colors) {
-
-  
-    const ctx = document.getElementById('chartBar');
-    const chartBar = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Mon', 'Thu', 'Wen', 'Thi', 'Fri', 'Sat', 'Sun'],  
-        datasets: [{
-            borderRadius: 20,
-            borderSkipped: false,
-            label: '',
-            data: [12, 19, 3, 5, 2, 3, 9],
-            backgroundColor: [
-              'rgb(57, 96, 117)',
-              'rgb(57, 96, 117, 0.5)',
-              'rgb(57, 96, 117, 0.2)'
-            ],
-        }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false
-        },
-        datalabels: {
-          anchor: 'start',
-          align: 'end',
-          offset: 3,
-          color: 'white',
-          font: {
-            weight: 'bold',
-            size: 15
-          }
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false
-          }
-        },
-        y: {
-          display: false,
-          grid: {
-            display: false
-          }
-        }
-      }
-    },
-    plugins: [ChartDataLabels],
-});
-  }
+  chartBar1()
 </script>
-
-
-
-
-
-
-
-
-
-
-<!-- dataTable -->
-<script>
-  $(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":        "600px",
-        "scrollCollapse": true,
-        "paging":         false,
-        searching: false, 
-        paging: false, 
-        info: false,
-        "columnDefs": [
-        {
-          "className": "dt-left dataTablesCol1", 
-          "targets": 0
-        },
-        {
-          "className": "dt-right dataTablesCol2", 
-          "targets": 1
-        }
-      ],
-    } );
-} );
-</script>
-
-
-
 
 
 <!-- CHARTJS Donut-->
 <script>
-  const data = {
-  labels: [
-    'Mobile',
-    'Desktop',
-    'Other'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(57, 96, 117)',
-      'rgb(57, 96, 117, 0.5)',
-      'rgb(57, 96, 117, 0.2)'
-    ],
-    hoverOffset: 4
-  }]
-};
-// margin
-const legendMargin = {
-  id: 'legendMargin',
-  beforeInit(chart, legend, options) {
-    const fitValue = chart.legend.fit;
-
-    chart.legend.fit = function fit() {
-      fitValue.bind(chart.legend)();
-      return this.height += 80;
-    }
-  }
-}
-const config = {
-  type: 'doughnut',
-  data: data,
-  options: {
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          align: 'center',
-          boxHeight: 35,
-          boxWidth: 90,
-          padding: 5,
-          borderRadius: 20,
-          font: {
-            size: 20,
-            weight: 'bold',
-          }
-        },
-      },
-    }
-  },
-  plugins: [legendMargin]
-};
-</script>
-<script>
-  const myChartDonut = new Chart(
-    document.getElementById('chartDonut'),
-    config
-  );
+  chartDonut1()
 </script>
 
 

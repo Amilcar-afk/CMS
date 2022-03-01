@@ -772,7 +772,6 @@ p {
     font-size: 64px; } }
 
 .card {
-  height: 250px;
   background-color: rgba(216, 216, 216, 0.5);
   border-radius: var(--radius, 20px);
   display: flex;
@@ -793,13 +792,12 @@ p {
   .card i {
     color: #FFFFFF;
     font-size: 2.1875rem; }
-  .card footer {
+  .card header {
     display: flex;
     flex-direction: column;
     align-self: flex-start; }
-    .card footer h4 {
+    .card header h4 {
       margin: 0;
-      font-family: "Montserrat", sans-serif;
       font-style: normal;
       font-weight: bold;
       font-size: 3rem;
@@ -808,9 +806,8 @@ p {
       align-items: center;
       letter-spacing: 0.05em;
       color: #FFFFFF; }
-    .card footer p {
+    .card header h3 {
       margin: 0;
-      font-family: "Montserrat", sans-serif;
       font-style: normal;
       font-weight: 900;
       font-size: 1.5rem;
@@ -828,7 +825,6 @@ p {
       margin: 0;
       padding: 0;
       text-align: center;
-      font-family: "Montserrat", sans-serif;
       color: white;
       font-style: normal;
       font-weight: bold;
@@ -843,34 +839,34 @@ p {
     justify-content: center; }
     .card .edge i {
       font-size: 3.75rem; }
+    .card .edge img {
+      width: 45px;
+      height: 45px; }
   .card--bottom {
     justify-content: flex-end !important;
     gap: 55px; }
   .card--background-main-color {
     background-color: var(--main-color, #D8D8D8); }
   .card--bigcard {
-    height: 450px !important;
     justify-content: space-between !important; }
-    .card--bigcard footer {
+    .card--bigcard header {
       flex-direction: row !important;
       justify-content: space-between !important;
       align-self: stretch !important; }
-      .card--bigcard footer p, .card--bigcard footer i {
+      .card--bigcard header h3, .card--bigcard header i {
         color: #396075 !important; }
   .card--smallcard {
-    height: 152px !important;
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row;
     align-items: flex-start; }
-  .card--sessionweek-only {
-    height: 350px !important; }
   .card .material-icons--big-icon {
     font-size: 4.0625rem !important; }
   .card .button--newslatter-only {
     align-self: center !important; }
+  .card #chartBar {
+    max-width: 100%; }
   .card #chartDonut {
-    width: 370px !important;
-    height: 370px !important;
+    width: 100% !important;
     margin-bottom: 30px; }
 
 .gris-background {
@@ -1230,14 +1226,18 @@ p {
       height: calc(100% - 38px); }
     .container-main-content--dashboard .row .col-4 {
       height: 60%; }
-    .container-main-content--dashboard .row :nth-child(1) {
+    .container-main-content--dashboard .row > :nth-child(1) {
       height: 40%; }
-    .container-main-content--dashboard .row :nth-child(2) {
+    .container-main-content--dashboard .row > :nth-child(2) {
       height: 40%; }
-    .container-main-content--dashboard .row :nth-child(3) {
+    .container-main-content--dashboard .row > :nth-child(3) {
       height: 40%; }
-    .container-main-content--dashboard .row :nth-child(4) {
+    .container-main-content--dashboard .row > :nth-child(4) {
       height: 40%; }
+    .container-main-content--dashboard .row > :nth-child(7) > :nth-child(1) {
+      height: calc(60%); }
+    .container-main-content--dashboard .row > :nth-child(7) > :nth-child(2) {
+      height: calc(40% - 57px); }
   .container-main-content--menu {
     position: absolute;
     top: 0;
