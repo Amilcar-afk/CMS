@@ -1,6 +1,5 @@
 // composants
 .card {
-    height: 250px;
     background-color: rgba(216,216,216, 0.5);
     border-radius: var(--radius, 20px);
     display: flex;
@@ -25,13 +24,12 @@
         font-size: rem(35);
     }
 
-    & footer {
+    & header {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
         &  h4 {
             margin: 0;
-            font-family: $font3;
             font-style: normal;
             font-weight: bold;
             font-size: rem(48);
@@ -41,9 +39,8 @@
             letter-spacing: 0.05em;
             color: #FFFFFF;
         }
-        & p {
+        & h3 {
             margin: 0;
-            font-family: $font3;
             font-style: normal;
             font-weight: 900;
             font-size: rem(24);
@@ -63,7 +60,6 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            font-family: $font3;
             color: white;
             font-style: normal;
             font-weight: bold;
@@ -93,25 +89,21 @@
     }
 
     &--bigcard {
-        height: 450px !important; // temporaire
         justify-content: space-between !important;
-        & footer {
+        & header {
             flex-direction: row !important;
             justify-content: space-between !important;
             align-self: stretch !important;
-            & p, i {
+            & h3, i {
                 color: #396075 !important;
             }
         }
     }
     &--smallcard {
-        height: 152px !important;
+        //height: 152px !important;
         background: rgba(57, 96, 117, 0.5) !important;
         flex-direction: row;
         align-items: flex-start;
-    }
-    &--sessionweek-only {
-        height: 350px !important;
     }
     // a changer
     & .material-icons--big-icon {
@@ -122,13 +114,15 @@
         align-self: center !important;
     }
 
-
+    #chartBar{
+        max-width: 100%;
+    }
 
     // charts
 
     & #chartDonut {
-        width: 370px !important;
-        height: 370px!important;
+        width: 100% !important;
+
         margin-bottom: 30px;
     }
 }
