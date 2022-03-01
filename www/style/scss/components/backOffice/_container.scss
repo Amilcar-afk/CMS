@@ -81,7 +81,7 @@
     border-radius: 0px;
 
     &--padding{
-      padding: 0px;
+      padding: 5px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
     }
@@ -115,6 +115,41 @@
         padding: 27px 40px;
         border-radius: 0px;
 
+      }
+    }
+
+    &--dashboard {
+      & .row {
+        height: unset;
+        & .card {
+          height: unset;
+        }
+        & .col-4 {
+          height: unset;
+        }
+        & > :nth-child(1) {
+          height: unset;
+          flex-grow: 4;
+        }
+        & > :nth-child(2) {
+          height: unset;
+          flex-grow: 4;
+        }
+        & > :nth-child(3) {
+          height: unset;
+          flex-grow: 4;
+        }
+        & > :nth-child(4) {
+          height: unset;
+          hflex-grow: 4;
+        }
+
+        & > :nth-child(7) {
+          & > div{
+            height: unset!important;
+            flex-grow: 1!important;
+          }
+        }
       }
     }
   }
