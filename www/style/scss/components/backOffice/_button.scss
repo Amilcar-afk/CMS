@@ -54,8 +54,26 @@
 			margin-right: 0px;
 		}
 	}
+	&--text-no-background{
+		font-size: rem(18);
+		font-weight: 500;
+		align-self: unset !important;
+
+		&:hover{
+			color: var(--second-color);
+		}
+	}
 }
 
+//.show-table-button {
+	//font-family: $font3;
+	//font-style: normal;
+	//font-weight: bold;
+	//font-size: rem(18);
+	//line-height: rem(21);
+	//letter-spacing: 0.05em;
+	//color: var(--main-color);
+//}
 //reponsive tablet & mobile
 @media (max-width: 992px){
 	.cta-button{

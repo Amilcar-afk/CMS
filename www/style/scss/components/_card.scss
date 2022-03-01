@@ -1,16 +1,15 @@
 // composants
 .card {
-    height: 307px;
+    height: 250px;
     background-color: rgba(216,216,216, 0.5);
     border-radius: var(--radius, 20px);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    padding: 25px;
+    padding: 20px;
     overflow: hidden;
     margin: 19px;
-    
     
     & button {
         border: none;
@@ -23,7 +22,7 @@
     }
     & i {
         color: #FFFFFF;
-        font-size: 35px;
+        font-size: rem(35);
     }
 
     & footer {
@@ -35,8 +34,8 @@
             font-family: $font3;
             font-style: normal;
             font-weight: bold;
-            font-size: 48px;
-            line-height: 56px;
+            font-size: rem(48);
+            line-height: rem(56);
             display: flex;
             align-items: center;
             letter-spacing: 0.05em;
@@ -47,8 +46,8 @@
             font-family: $font3;
             font-style: normal;
             font-weight: 900;
-            font-size: 24px;
-            line-height: 28px;
+            font-size: rem(24);
+            line-height: rem(28);
             display: flex;
             align-items: center;
             letter-spacing: 0.05em;
@@ -68,7 +67,7 @@
             color: white;
             font-style: normal;
             font-weight: bold;
-            font-size: 14px;
+            font-size: rem(14);
         }
     }
     & .edge {
@@ -80,21 +79,21 @@
         align-items: center;
         justify-content: center;
         & i {
-            font-size: 60px;
+            font-size: rem(60);
         }
     }
 
     // modificateurs
     &--bottom {
         justify-content: flex-end !important;
-        gap: 80px !important;
+        gap: 55px;
     }
     &--background-main-color {
         background-color: var(--main-color, #D8D8D8);
     }
 
     &--bigcard {
-        height: 528px !important; // temporaire
+        height: 450px !important; // temporaire
         justify-content: space-between !important;
         & footer {
             flex-direction: row !important;
@@ -116,7 +115,7 @@
     }
     // a changer
     & .material-icons--big-icon {
-        font-size: 65px !important;
+        font-size: rem(65) !important;
     }
     //a changer
     & .button--newslatter-only {

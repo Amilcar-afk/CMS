@@ -8,10 +8,34 @@
     height: calc(100% - 73px - 1.25rem);
   }
 
+  &--dashboard {
+    & .row {
+      height: 100%;
+      & .card {
+        height: calc(100% - 38px) ;
+      }
+      & .col-4 {
+        height: 60%;
+      }
+      & :nth-child(1) {
+        height: 40%;
+      }
+      & :nth-child(2) {
+        height: 40%;
+      }
+      & :nth-child(3) {
+        height: 40%;
+      }
+      & :nth-child(4) {
+        height: 40%;
+      }
+    }
+  }
+
   &--menu{
     position: absolute;
     top: 0;
-    let: 0;
+    left: 0;
     display: flex;
     height: 100%;
 

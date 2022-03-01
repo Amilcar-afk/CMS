@@ -772,14 +772,14 @@ p {
     font-size: 64px; } }
 
 .card {
-  height: 307px;
+  height: 250px;
   background-color: rgba(216, 216, 216, 0.5);
   border-radius: var(--radius, 20px);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  padding: 25px;
+  padding: 20px;
   overflow: hidden;
   margin: 19px; }
   .card button {
@@ -792,7 +792,7 @@ p {
     cursor: pointer; }
   .card i {
     color: #FFFFFF;
-    font-size: 35px; }
+    font-size: 2.1875rem; }
   .card footer {
     display: flex;
     flex-direction: column;
@@ -802,8 +802,8 @@ p {
       font-family: "Montserrat", sans-serif;
       font-style: normal;
       font-weight: bold;
-      font-size: 48px;
-      line-height: 56px;
+      font-size: 3rem;
+      line-height: 3.5rem;
       display: flex;
       align-items: center;
       letter-spacing: 0.05em;
@@ -813,8 +813,8 @@ p {
       font-family: "Montserrat", sans-serif;
       font-style: normal;
       font-weight: 900;
-      font-size: 24px;
-      line-height: 28px;
+      font-size: 1.5rem;
+      line-height: 1.75rem;
       display: flex;
       align-items: center;
       letter-spacing: 0.05em;
@@ -832,7 +832,7 @@ p {
       color: white;
       font-style: normal;
       font-weight: bold;
-      font-size: 14px; }
+      font-size: 0.875rem; }
   .card .edge {
     width: 75px;
     height: 75px;
@@ -842,14 +842,14 @@ p {
     align-items: center;
     justify-content: center; }
     .card .edge i {
-      font-size: 60px; }
+      font-size: 3.75rem; }
   .card--bottom {
     justify-content: flex-end !important;
-    gap: 80px !important; }
+    gap: 55px; }
   .card--background-main-color {
     background-color: var(--main-color, #D8D8D8); }
   .card--bigcard {
-    height: 528px !important;
+    height: 450px !important;
     justify-content: space-between !important; }
     .card--bigcard footer {
       flex-direction: row !important;
@@ -865,7 +865,7 @@ p {
   .card--sessionweek-only {
     height: 350px !important; }
   .card .material-icons--big-icon {
-    font-size: 65px !important; }
+    font-size: 4.0625rem !important; }
   .card .button--newslatter-only {
     align-self: center !important; }
   .card #chartDonut {
@@ -947,6 +947,33 @@ p {
 
 .article-border {
   border-radius: 5px; }
+
+.table-container {
+  width: 100%;
+  height: 86%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px 5px 0px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; }
+  .table-container table {
+    width: 100%; }
+    .table-container table tr {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 22px;
+      border-bottom: 1px solid #9E9E9E; }
+      .table-container table tr td {
+        font-family: "Montserrat", sans-serif;
+        color: black;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        letter-spacing: 0.05em; }
 
 .body-back-office > header {
   background-color: var(--background-color);
@@ -1168,6 +1195,12 @@ p {
       background: rgba(255, 255, 255, 0.6); }
     .cta-button--icon .material-icons-round {
       margin-right: 0px; }
+  .cta-button--text-no-background {
+    font-size: 1.125rem;
+    font-weight: 500;
+    align-self: unset !important; }
+    .cta-button--text-no-background:hover {
+      color: var(--second-color); }
 
 @media (max-width: 992px) {
   .cta-button--menu {
@@ -1191,10 +1224,24 @@ p {
     padding: 19px;
     background-color: var(--background-color);
     height: calc(100% - 73px - 1.25rem); }
+  .container-main-content--dashboard .row {
+    height: 100%; }
+    .container-main-content--dashboard .row .card {
+      height: calc(100% - 38px); }
+    .container-main-content--dashboard .row .col-4 {
+      height: 60%; }
+    .container-main-content--dashboard .row :nth-child(1) {
+      height: 40%; }
+    .container-main-content--dashboard .row :nth-child(2) {
+      height: 40%; }
+    .container-main-content--dashboard .row :nth-child(3) {
+      height: 40%; }
+    .container-main-content--dashboard .row :nth-child(4) {
+      height: 40%; }
   .container-main-content--menu {
     position: absolute;
     top: 0;
-    let: 0;
+    left: 0;
     display: flex;
     height: 100%; }
     .container-main-content--menu .menu-container {
