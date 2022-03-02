@@ -1,0 +1,27 @@
+.input-container{
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+
+	& label{
+		color: $black;
+		font-weight: 600;
+		font-size: rem(14);
+		margin: 0;
+		margin-bottom: 5px;
+	}
+	& .input{
+		width: 100%;
+		background-color: $lighter-grey!important;
+		color: $black;
+		transition: all 0.3s;
+		border-radius: 5px;
+		border: none;
+		padding: 10px;
+		font-size: rem(14);
+		font-weight: 400;
+		&::placeholder{
+			color: var(--main-color)!important;
+		}
+	}
+}

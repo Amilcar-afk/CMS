@@ -63,6 +63,21 @@
 			color: var(--second-color);
 		}
 	}
+
+	&--submit{
+		font-size: rem(18);
+		font-weight: 500;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		border-radius: 10px;
+		background-color: var(--main-color);
+		color: white;
+
+		&:hover{
+			background-color: var(--second-color);
+		}
+	}
 }
 
 //.show-table-button {

@@ -52,6 +52,15 @@ p {
   .body-back-office main {
     flex-grow: 1; }
 
+.body-setup {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center; }
+  .body-setup main {
+    z-index: 1; }
+
 #back-office-container {
   z-index: 2;
   position: relative;
@@ -796,7 +805,7 @@ p {
     display: flex;
     flex-direction: column;
     align-self: flex-start; }
-    .card header h4 {
+    .card header h4, .card header i {
       margin: 0;
       font-style: normal;
       font-weight: bold;
@@ -842,9 +851,6 @@ p {
     .card .edge img {
       width: 45px;
       height: 45px; }
-  .card--bottom {
-    justify-content: flex-end !important;
-    gap: 55px; }
   .card--background-main-color {
     background-color: var(--main-color, #D8D8D8); }
   .card--bigcard {
@@ -859,21 +865,49 @@ p {
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row;
     align-items: flex-start; }
-  .card .material-icons--big-icon {
-    font-size: 4.0625rem !important; }
-  .card .button--newslatter-only {
-    align-self: center !important; }
   .card #chartBar {
     max-width: 100%; }
   .card #chartDonut {
     width: 100% !important;
     margin-bottom: 30px; }
 
+@media (max-width: 992px) {
+  .card {
+    margin: 9px;
+    padding: 15px; }
+    .card i {
+      color: #FFFFFF;
+      font-size: 2rem; }
+    .card header {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start; }
+      .card header h4, .card header i {
+        margin: 0;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 2.25rem;
+        line-height: 2.375rem;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.05em;
+        color: #FFFFFF; }
+      .card header h3 {
+        margin: 0;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.125rem;
+        line-height: 1.125rem;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.05em;
+        color: #FFFFFF; } }
+
 .gris-background {
   background-color: #DFDFDF; }
 
 .gris-claire-background {
-  background-color: #ECECEC;
+  background-color: #EBEBEB;
   color: var(--background-color); }
 
 .bleu-claire-background {
@@ -1197,6 +1231,17 @@ p {
     align-self: unset !important; }
     .cta-button--text-no-background:hover {
       color: var(--second-color); }
+  .cta-button--submit {
+    font-size: 1.125rem;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: var(--main-color);
+    color: white; }
+    .cta-button--submit:hover {
+      background-color: var(--second-color); }
 
 @media (max-width: 992px) {
   .cta-button--menu {
@@ -1260,12 +1305,42 @@ p {
         .container-main-content--menu > section > header button .material-icons-round {
           font-size: 1.875rem;
           font-weight: bolder; }
+  .container-main-content--setup {
+    width: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .container-main-content--setup > header {
+      backdrop-filter: blur(60px);
+      background-color: rgba(129, 129, 129, 0.3);
+      border-radius: 20px 20px 0px 0px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 50px;
+      padding-bottom: 15px; }
+      .container-main-content--setup > header #back-office-logo img {
+        border-radius: 300px;
+        width: 75px;
+        box-shadow: 0px -200px 4px 0px var(--main-color) inset;
+        margin-bottom: 25px; }
+    .container-main-content--setup > form {
+      background-color: var(--background-color);
+      padding: 40px;
+      border-radius: 0px  0px 20px 20px; }
+      .container-main-content--setup > form a {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--main-color);
+        margin-bottom: 25px; }
 
 @media (max-width: 992px) {
   .container-main-content {
     border-radius: 0px; }
     .container-main-content--padding {
-      padding: 0px;
+      padding: 5px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem); }
     .container-main-content--menu {
@@ -1287,7 +1362,32 @@ p {
             margin-right: 25px; }
       .container-main-content--menu > section {
         padding: 27px 40px;
-        border-radius: 0px; } }
+        border-radius: 0px; }
+    .container-main-content--dashboard .row {
+      height: unset; }
+      .container-main-content--dashboard .row .card {
+        height: unset; }
+      .container-main-content--dashboard .row .col-4 {
+        height: unset; }
+      .container-main-content--dashboard .row > :nth-child(1) {
+        height: unset;
+        flex-grow: 4; }
+      .container-main-content--dashboard .row > :nth-child(2) {
+        height: unset;
+        flex-grow: 4; }
+      .container-main-content--dashboard .row > :nth-child(3) {
+        height: unset;
+        flex-grow: 4; }
+      .container-main-content--dashboard .row > :nth-child(4) {
+        height: unset;
+        hflex-grow: 4; }
+      .container-main-content--dashboard .row > :nth-child(7) > div {
+        height: unset !important;
+        flex-grow: 1 !important; }
+    .container-main-content--setup > header {
+      border-radius: 0px; }
+    .container-main-content--setup > form {
+      border-radius: 0px; } }
 
 .title {
   display: block;
@@ -1355,3 +1455,26 @@ h2 {
     background: rgba(135, 116, 116, 0.2);
     box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(60px); }
+
+.input-container {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column; }
+  .input-container label {
+    color: #000;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin: 0;
+    margin-bottom: 5px; }
+  .input-container .input {
+    width: 100%;
+    background-color: #EBEBEB !important;
+    color: #000;
+    transition: all 0.3s;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    font-size: 0.875rem;
+    font-weight: 400; }
+    .input-container .input::placeholder {
+      color: var(--main-color) !important; }
