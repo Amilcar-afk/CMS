@@ -1,14 +1,20 @@
+/*
+:root {
+    // colors
+    --main-color: #396075;
+    --second-color: #55A6D3;
+    --third-color: #9BBCFF;
+    --background-color: white;
+
+    // others
+    --bessels: 1200px;
+    --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78);
+    //--radius: 0px;
+}
+*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-:root {
-  --main-color: #396075;
-  --second-color: #55A6D3;
-  --third-color: #9BBCFF;
-  --background-color: white;
-  --bessels: 1200px;
-  --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78); }
-
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif; }
@@ -1265,6 +1271,10 @@ p {
     padding: 19px;
     background-color: var(--background-color);
     height: calc(100% - 73px - 1.25rem); }
+  .container-main-content--list {
+    margin: 0px -20px; }
+    .container-main-content--list .col-6 > * {
+      margin: 0px 20px; }
   .container-main-content--dashboard .row {
     height: 100%; }
     .container-main-content--dashboard .row .card {
@@ -1295,16 +1305,22 @@ p {
       padding: 30px 50px;
       border-radius: 20px 0px 0px 20px; }
     .container-main-content--menu > section {
+      position: relative;
       background-color: var(--background-color);
       padding: 30px 50px;
       flex-grow: 1;
-      border-radius: 0px 20px 20px 0px; }
+      border-radius: 0px 20px 20px 0px;
+      overflow-y: scroll; }
       .container-main-content--menu > section > header {
         display: flex;
         justify-content: space-between; }
-        .container-main-content--menu > section > header button .material-icons-round {
-          font-size: 1.875rem;
-          font-weight: bolder; }
+    .container-main-content--menu > button {
+      position: absolute;
+      top: 30px;
+      right: 50px; }
+      .container-main-content--menu > button .material-icons-round {
+        font-size: 1.875rem;
+        font-weight: bolder; }
   .container-main-content--setup {
     width: unset;
     display: flex;
@@ -1360,6 +1376,10 @@ p {
           flex-wrap: wrap; }
           .container-main-content--menu .menu-container nav button:nth-child(odd) {
             margin-right: 25px; }
+      .container-main-content--menu > button {
+        position: absolute;
+        top: 27px;
+        right: 40px; }
       .container-main-content--menu > section {
         padding: 27px 40px;
         border-radius: 0px; }
@@ -1478,3 +1498,13 @@ h2 {
     font-weight: 400; }
     .input-container .input::placeholder {
       color: var(--main-color) !important; }
+
+.collapse {
+  transition: all 0.5s ease;
+  display: none;
+  position: absolute;
+  top: -50%;
+  opacity: 0; }
+
+.collapse-parent {
+  position: relative; }

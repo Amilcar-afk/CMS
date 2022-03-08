@@ -18,7 +18,16 @@ $(document).ready(function(){
         $(this).append(alt);
 
     })
-});
 
+    $(".main-nav-choice[data-wc-target]").click(function (){
+        $(this).toggleClass("selected");
+        $("#" + $(this).data('wc-target')).animate({
+            display: 'block',
+            opacity: '1',
+            top: '0'
+        });
+        $("#" + $(this).data('wc-target')).toggleClass("collapse--open");
+    })
+});
 
 
