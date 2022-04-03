@@ -29,10 +29,11 @@ class Admin
     public function userManagement(){
 
         $sql ="SELECT * FROM cmsp_user";
-        $res = $this->tableUsers->selectAllUsers($sql, array());
-        print_r($res);
-
+        $params = [];
+        $res = $this->tableUsers->selectAllUsers($sql, $params);
+        
         $view = new View("userManagement");
         $view->assign("tableUsers",$this->tableUsers);
+        $view->assign("users", $res);
     }
 }

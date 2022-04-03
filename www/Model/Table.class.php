@@ -12,7 +12,7 @@ class Table extends BaseSQL
     }
 
     public function selectAllUsers($sql, $param){
-        parent::findAllData($sql, $param);
+        return parent::findAllData($sql, $param);
     }
 
     public function getTableUsers(): array 
@@ -20,8 +20,8 @@ class Table extends BaseSQL
         return [
 
             "table" => [
-                "class" => "table-element",
-                "id" => "UsersTab"
+                "class" => "display",
+                "id" => "usersTab"
             ],
 
             "title" => "Utilisateurs",
