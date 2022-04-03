@@ -20,8 +20,8 @@ class Table extends BaseSQL
         return [
 
             "table" => [
-                "class" => "table-element",
-                "id" => "UsersTab"
+                "class" => "display",
+                "id" => "usersTab"
             ],
 
             "title" => "Utilisateurs",

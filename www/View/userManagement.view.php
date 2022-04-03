@@ -12,3 +12,4 @@
         $('#usersTab').DataTable();
     });
 </script>
+
