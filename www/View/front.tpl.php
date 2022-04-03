@@ -12,7 +12,6 @@
     <link href="../style/dist/css/main.css" rel="stylesheet" />
     <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
     <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css'   />
-
     <!-- Scripts and styles for datatables -->
     <script type="text/javascript" src='../DataTables/media/js/jquery.js'></script>
     <script type="text/javascript" src="../DataTables/media/js/jquery.dataTables.min.js"></script>
