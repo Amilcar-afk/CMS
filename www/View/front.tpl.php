@@ -11,17 +11,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link href="../style/dist/css/main.css" rel="stylesheet" />
     <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
-
-
     <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css'   />
+    <!-- Scripts and styles for datatables -->
+    <script type="text/javascript" src='../DataTables/media/js/jquery.js'></script>
+    <script type="text/javascript" src="../DataTables/media/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../DataTables/media/css/jquery.dataTables.min.css">
+
 </head>
 <body>
 
     <?php 
         include $this->view.".view.php";
-
-
-        
     ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
     <script async src="../style/js/calendar.js"></script>
