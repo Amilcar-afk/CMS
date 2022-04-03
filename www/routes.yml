@@ -22,6 +22,10 @@
   controller: admin
   action: dashboard
 
+/dashboard/userManagement:
+  controller: admin
+  action: userManagement
+
 /integration:
   controller: general
   action: integration
