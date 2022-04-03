@@ -11,31 +11,31 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($config[1] as $key=>$user):?>
+        <?php foreach($config[1] as $key=>$infos):?>
             <tr>
                 <td>
-                    <?=$user["id"]?>
+                    <?=$infos["id"]?>
                 </td>
                 <td>
-                    <?=$user["lastname"]?>
+                    <?=$infos["lastname"]?>
                 </td>
                 <td>
-                    <?=$user["firstname"]?>
+                    <?=$infos["firstname"]?>
                 </td>
                 <td>
-                    <?=$user["email"]?>
+                    <?=$infos["email"]?>
                 </td>
                 <td>
-                    <?=$user["creationDate"]?>
+                    <?=$infos["creationDate"]?>
                 </td>
                 <td>
-                    <?=$user["updateDate"]?>
+                    <?=$infos["updateDate"]?>
                 </td>
                 <td>
                     <?="Validé"?>
                 </td>
                 <td>
-                    <?=$user["rank"]?>
+                    <?=$infos["rank"]?>
                 </td>
             </tr>
         <?php endforeach;?>
