@@ -1,5 +1,4 @@
 <h1>Gestion utilisateurs</h1>
-
 <?php
     $data = [
         $tableUsers->getTableUsers(),
