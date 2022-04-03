@@ -50,320 +50,473 @@
                     <div class="menu-container">
                         <h1 class="title title--main-color">ADD ELEMENTS</h1>
                         <nav>
-                            <button class="cta-button cta-button--menu selected main-nav-choice" data-wc-target="text-elements-container"><span class="material-icons-round">text_fields</span>Text elements</button>
+                            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="text-elements-container"><span class="material-icons-round">text_fields</span>Text elements</button>
                             <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-elements-container"><span class="material-icons-round">play_circle_filled</span>Medias</button>
-                            <button class="cta-button cta-button--menu"><span class="material-icons-round">assignment</span>Forms</button>
-                            <button class="cta-button cta-button--menu"><span class="material-icons-round">format_shapes</span>More</button>
+                            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="form-elements-container"><span class="material-icons-round">assignment</span>Forms</button>
+                            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="form-elements-container"><span class="material-icons-round">format_shapes</span>More</button>
                         </nav>
                     </div>
                     <section class="collapse-parent">
-                        <div id="text-elements-container" class="collapse collapse--open">
+                        <div id="text-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
                             <header>
-                                <h1 class="title title--black">Colors</h1>
+                                <h1 class="title title--black">TEXT ELEMENTS</h1>
                             </header>
+
+                            <!--Titles-->
                             <article>
-                                <h2>Main colors</h2>
-                                <div class="container-main-content container-main-content--list">
-                                    <div class="row center-text">
-                                        <section class="gris-claire-background col-6  p-4 p-md-4 p-sm-4  article-border" >
-                                            <span class="bleu-claire-background fs-36 medium">Lorem ipsum dolor sit </span>
-                                            <span class="bleu-claire-background mt-2 fs-36 medium ">amet consectetur.</span>
-                                        </section>
+                                <header class="main-nav-choice" data-wc-target="title-list-elements">
+                                    <h2>Title</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="title-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="text-elements-container">
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="module">
+                                            <h3 class="highlight background-second-color color-white text-center fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                                        </article>
+                                        <article class="module">
+                                            <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                        </article>
                                     </div>
-                                        <section class="bleu-fonce-background center-left col-6  p-3 p-md-3 article-border " style="text-align: left;">
-                                            <h1 class="fs-48 bold">Lorem ipsum ibra  <br> ipsum dolor..</h1>
-                                        </section>
-                                    <div class="row center-text">
-                                        <section class="gris-background col-6 mt-3 mt-md-3 mt-sm-3 p-3 p-md-3 p-md-3  center article-border">
-                                            <h1 class="bleu-fonce fs-26 bold" >Lorem ipsum dolor sit amet consectetur.</h1>
-                                        </section>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="module background-main-color">
+                                            <h2 class="color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
+                                        </article>
                                     </div>
+
                                 </div>
                             </article>
+
+                            <!--Paragraphes-->
                             <article>
-                                <h2>Main colors</h2>
-                                <div class="container-main-content container-main-content--list">
-                                    <div class="col-12 row center-text">
-                                        <div class="col-6 mt-5 mt-md-4 mt-sm-4">
-                                            <article class="gris-background  col-6 p-1 p-md-1 p-sm-1 article-border" >
-                                                <p class="bleu-fonce center-left fs-24 justify-text medium">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Tempora, similique sapiente. Hic nulla eum aspernatur
-                                                    repudiandae natus doloribus doloremque
-                                                    laudantium totam libero architecto nostrum aliquam inventore iusto
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    consequatur eligendi at? Ipsum velit voluptates maiores explicabo, voluptatem
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    accusantium delectus
-                                                    <br><br>
+                                <header class="main-nav-choice" data-wc-target="paragraphe-list-elements">
+                                    <h2>Paragrahe</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="paragraphe-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="text-elements-container">
 
-                                                    necessitatibus quisquam maiores nihil corporis repellendus
-                                                    sint eligendi commodi quibusdam, quae natus totam aut exercitationem
-                                                    obcaecati omnis dolor accusamus blanditiis ad! Sed maxime voluptatem molestiae unde
-                                                    voluptate dignissimos exercitationem aperiam. Hic, eaque repellat.
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="module">
+                                            <p class="color-main-color text-justify fs-22 medium">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                <br>
+                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </p>
+                                        </article>
+                                        <article class="module background-main-color">
+                                            <p class="text-center color-white fs-28 bold">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                            </p>
+                                        </article>
+                                        <article class="module background-second-color row">
+                                            <div class="col-6 left-border color-white">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
                                                 </p>
-                                            </article>
-                                            <article class="bleu-fonce-background col-5 p-1 p-md-1 mt-md-3 p-sm-1 mt-sm-3 mt-4 center-text article-border">
-                                                <p class="fs-28 medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Dignissimos quis vitae blanditiis pariatur libero molestiae qui
-                                                    Magnam, est! Lorem ipsum dolor, sit amet consectetur adipisicing
-                                                    elit. Iste, quae! Tempore expedita eaque et quos quo officia ut nost
-                                                    rum ab necessitatibus. Doloribus, excepturi quibusdam! Necessitatib
-                                                    us Lorem ipsum dolor sit amet consectetur. Lorem, ipsum.
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                                 </p>
-                                            </article>
-                                            <article class="bleu-claire-background  col-6 row mt-3 mt-md-3 p-md-2 mt-sm-3 p-sm-2 p-2 article-border" >
-                                                <div class=" left-border row">
-                                                    <div class="col-6 ">
-                                                        <p class="fs-14 justify-text medium  p-2">
-                                                            Lorem ipsum dolor sit amet, consectetur
-                                                            adipiscing elit, sed do eiusmod tempor
-                                                            incididunt ut labore et dolore magna aliqua.
-                                                            Ut enim ad minim veniam, quis nostrud exercitation
-                                                            ullamco laboris nisi ut aliquip ex ea commodo consequat. D
-                                                            uis aute irure dolor in reprehenderit in volupt
-                                                            ate velit esse cillum dolore eu fugiat nulla par
-                                                            iatur. Excepteur sint occaecat cupidatat non proi
-                                                            dent, sunt in culpa qui officia deserunt mollit
-                                                            anim id est laborum.Lorem ipsum dolor sit amet, c
-                                                            onsectetur
-                                                            <br><br>
-                                                            adipiscing elit, sed do eiusmod tempor incididunt
-                                                            ut labore et dolore magna al
-                                                            iqua. Ut enim ad minim veniam, quis nostrud exerc
-                                                            itation ullamco laboris nisi ut aliquip ex ea commodo
-                                                            consequat. Duis aute irure dolor in reprehenderit in v
-                                                            oluptate velit esse cillum dolore eu fugiat nulla pariatu
-                                                            r. Excepteur sint occaecat cupidatat non proident, sunt i
-                                                            n culpa qui officia deserunt mollit anim id est laborum.
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-6  " >
-                                                        <p class="fs-14 justify-text medium p-2 ">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea
-                                                            inventore distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam
-                                                            Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                            distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam aspernatur.
-                                                            Culpa et odit ipsam asperiores nemo nihil<br><br> possimus labore distinctio reprehenderit assumenda?
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </div>
 
-                                                            Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                            Culpa et odit ipsam asperiores nemo nihil possimus labore distinctio reprehenderit assumenda?</p>
-                                                    </div>
-                                                </div>
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="module background-second-color row">
+                                            <div class="col-6 color-white">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                </p>
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                        </article>
+                                        <article class="module">
+                                            <p class="color-main-color left-border text-justify fs-22 medium">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                <br>
+                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </p>
+                                        </article>
+                                    </div>
 
-                                            </article>
-                                        </div>
+                                </div>
+                            </article>
 
-                                        <div class="col-6 ml-5 mt-5 mt-md-3 mt-sm-3">
-                                            <article class="bleu-claire-background col-6 p-1 p-md-2 p-sm-2 row  article-border" >
-                                                <div class="col-6  ">
-                                                    <p class="fs-14 justify-text medium p-2">
-                                                        Lorem ipsum dolor sit amet, consectetur
-                                                        adipiscing elit, sed do eiusmod tempor
-                                                        incididunt ut labore et dolore magna aliqua.
-                                                        Ut enim ad minim veniam, quis nostrud exercitation
-                                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. D
-                                                        uis aute irure dolor in reprehenderit in volupt
-                                                        ate velit esse cillum dolore eu fugiat nulla par
-                                                        iatur. Excepteur sint occaecat cupidatat non proi
-                                                        dent, sunt in culpa qui officia deserunt mollit
-                                                        anim id est laborum.Lorem ipsum dolor sit amet, c
-                                                        onsectetur
-                                                        <br><br>
-                                                        adipiscing elit, sed do eiusmod tempor incididunt
-                                                        ut labore et dolore magna al
-                                                        iqua. Ut enim ad minim veniam, quis nostrud exerc
-                                                        itation ullamco laboris nisi ut aliquip ex ea commodo
-                                                        consequat. Duis aute irure dolor in reprehenderit in v
-                                                        oluptate velit esse cillum dolore eu fugiat nulla pariatu
-                                                        r. Excepteur sint occaecat cupidatat non proident, sunt i
-                                                        n culpa qui officia deserunt mollit anim id est laborum.
+                            <!--Texts-->
+                            <article>
+                                <header class="main-nav-choice" data-wc-target="text-list-elements">
+                                    <h2>Text</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="text-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="text-elements-container">
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="module">
+                                            <h3 class="highlight background-main-color color-white fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <p class="color-main-color text-justify fs-22 medium">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                <br>
+                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </p>
+                                        </article>
+
+                                        <article class="module background-main-color">
+                                            <h4 class="color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                            <p class="text-center color-white fs-28 bold">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                            </p>
+                                        </article>
+
+                                        <article class="module background-second-color">
+                                            <div class="left-border color-white row">
+                                                <h4 class="col-12 color-white text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                                <div class="col-6 color-white">
+                                                    <p class="text-justify color-white fs-13 medium">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                    </p>
+                                                    <p class="text-justify color-white fs-13 medium">
+                                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                                     </p>
                                                 </div>
-                                                <div class="col-6 " >
-                                                    <p class="fs-14 justify-text medium p-2">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea
-                                                        inventore distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam
-                                                        Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                        distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam aspernatur.
-                                                        Culpa et odit ipsam asperiores nemo nihil<br><br> possimus labore distinctio reprehenderit assumenda?
-
-                                                        Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                        Culpa et odit ipsam asperiores nemo nihil possimus labore distinctio reprehenderit assumenda?</p>
+                                                <div class="col-6">
+                                                    <p class="text-justify color-white fs-13 medium">
+                                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    </p>
+                                                    <p class="text-justify color-white fs-13 medium">
+                                                        p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                    </p>
                                                 </div>
-                                            </article>
-                                            <article class="gris-background  col-6 p-2 p-md-2 mt-md-3 p-sm-2 mt-sm-3 article-border mt-3  " >
-                                                <p class="bleu-fonce fs-22 center-left p-2 justify-text medium left-border" >
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Tempora, similique sapiente. Hic nulla eum aspernatur
-                                                    officiis voluptatibus iure obcaecati harum numquam qui,
-                                                    laudantium totam libero architecto nostrum aliquam inventore iusto
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    accusantium delectusc Lorem ipsum dolor sit amet consectetur.
+                                            </div>
+                                        </article>
 
-                                                    <br><br>
-                                                    aperiam. Voluptates dolore mollitia
-                                                    aperiam. Voluptates dolore mollitia
-                                                    necessitatibus quisquam maiores nihil corporis repellendus
-                                                    sint eligendi commodi quibusdam, quae natus totam aut exercitationem
-                                                    consequatur eligendi at? Ipsum velit voluptates maiores explicabo, voluptatem
-                                                    obcaecati omnis dolor accusamus blanditiis ad! Sed maxime voluptatem molestiae unde
-                                                    voluptate dignissimos exercitationem aperiam. Hic, eaque repellat.
-                                                </p>
-                                            </article>
-                                        </div>
                                     </div>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="module background-second-color row">
+                                            <h4 class="col-12 color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                            <h3 class="col-12 color-white text-center color-white fs-26 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <div class="col-6 color-white">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                </p>
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                                <p class="text-justify color-white fs-13 medium">
+                                                    p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                        </article>
+
+                                        <article class="module">
+                                            <div class="left-border color-main-color row">
+                                                <h4 class="col-12 color-main-color fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                                <p class="color-main-color text-justify fs-24 medium">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                                                    <br>
+                                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </div>
+
                                 </div>
                             </article>
+
                         </div>
-                        <div id="media-elements-container" class="collapse">
+                        <div id="media-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
                             <header>
-                                <h1 class="title title--black">Media</h1>
+                                <h1 class="title title--black">MEDIAS</h1>
                             </header>
+
+                            <!--Image-->
                             <article>
-                                <h2>Main colors</h2>
-                                <br>j                                <br>j
-jk                                <br>j
-jk                                <br>j
-kj                                <br>j
-jk                                <br>j
-jk                                <br>j
-jk                                <br>j
+                                <header class="main-nav-choice" data-wc-target="image-list-elements">
+                                    <h2>Image</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="image-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
 
-                            </article>
-                            <article>
-                                <h2>Main colors</h2>
-                                <div class="container-main-content container-main-content--list">
-                                    <div class="col-12 row center-text">
-                                        <div class="col-6 mt-5 mt-md-4 mt-sm-4">
-                                            <article class="gris-background  col-6 p-1 p-md-1 p-sm-1 article-border" >
-                                                <p class="bleu-fonce center-left fs-24 justify-text medium">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Tempora, similique sapiente. Hic nulla eum aspernatur
-                                                    repudiandae natus doloribus doloremque
-                                                    laudantium totam libero architecto nostrum aliquam inventore iusto
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    consequatur eligendi at? Ipsum velit voluptates maiores explicabo, voluptatem
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    accusantium delectus
-                                                    <br><br>
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="background-second-color module module--iframe">
+                                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
+                                                    width="100%"
+                                                    height="200"
+                                                    frameBorder="0"
+                                                    allowfullscreen=""
+                                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
 
-                                                    necessitatibus quisquam maiores nihil corporis repellendus
-                                                    sint eligendi commodi quibusdam, quae natus totam aut exercitationem
-                                                    obcaecati omnis dolor accusamus blanditiis ad! Sed maxime voluptatem molestiae unde
-                                                    voluptate dignissimos exercitationem aperiam. Hic, eaque repellat.
-                                                </p>
-                                            </article>
-                                            <article class="bleu-fonce-background col-5 p-1 p-md-1 mt-md-3 p-sm-1 mt-sm-3 mt-4 center-text article-border">
-                                                <p class="fs-28 medium">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Dignissimos quis vitae blanditiis pariatur libero molestiae qui
-                                                    Magnam, est! Lorem ipsum dolor, sit amet consectetur adipisicing
-                                                    elit. Iste, quae! Tempore expedita eaque et quos quo officia ut nost
-                                                    rum ab necessitatibus. Doloribus, excepturi quibusdam! Necessitatib
-                                                    us Lorem ipsum dolor sit amet consectetur. Lorem, ipsum.
-                                                </p>
-                                            </article>
-                                            <article class="bleu-claire-background  col-6 row mt-3 mt-md-3 p-md-2 mt-sm-3 p-sm-2 p-2 article-border" >
-                                                <div class=" left-border row">
-                                                    <div class="col-6 ">
-                                                        <p class="fs-14 justify-text medium  p-2">
-                                                            Lorem ipsum dolor sit amet, consectetur
-                                                            adipiscing elit, sed do eiusmod tempor
-                                                            incididunt ut labore et dolore magna aliqua.
-                                                            Ut enim ad minim veniam, quis nostrud exercitation
-                                                            ullamco laboris nisi ut aliquip ex ea commodo consequat. D
-                                                            uis aute irure dolor in reprehenderit in volupt
-                                                            ate velit esse cillum dolore eu fugiat nulla par
-                                                            iatur. Excepteur sint occaecat cupidatat non proi
-                                                            dent, sunt in culpa qui officia deserunt mollit
-                                                            anim id est laborum.Lorem ipsum dolor sit amet, c
-                                                            onsectetur
-                                                            <br><br>
-                                                            adipiscing elit, sed do eiusmod tempor incididunt
-                                                            ut labore et dolore magna al
-                                                            iqua. Ut enim ad minim veniam, quis nostrud exerc
-                                                            itation ullamco laboris nisi ut aliquip ex ea commodo
-                                                            consequat. Duis aute irure dolor in reprehenderit in v
-                                                            oluptate velit esse cillum dolore eu fugiat nulla pariatu
-                                                            r. Excepteur sint occaecat cupidatat non proident, sunt i
-                                                            n culpa qui officia deserunt mollit anim id est laborum.
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-6  " >
-                                                        <p class="fs-14 justify-text medium p-2 ">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea
-                                                            inventore distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam
-                                                            Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                            distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam aspernatur.
-                                                            Culpa et odit ipsam asperiores nemo nihil<br><br> possimus labore distinctio reprehenderit assumenda?
-
-                                                            Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                            Culpa et odit ipsam asperiores nemo nihil possimus labore distinctio reprehenderit assumenda?</p>
-                                                    </div>
-                                                </div>
-
-                                            </article>
-                                        </div>
-
-                                        <div class="col-6 ml-5 mt-5 mt-md-3 mt-sm-3">
-                                            <article class="bleu-claire-background col-6 p-1 p-md-2 p-sm-2 row  article-border" >
-                                                <div class="col-6  ">
-                                                    <p class="fs-14 justify-text medium p-2">
-                                                        Lorem ipsum dolor sit amet, consectetur
-                                                        adipiscing elit, sed do eiusmod tempor
-                                                        incididunt ut labore et dolore magna aliqua.
-                                                        Ut enim ad minim veniam, quis nostrud exercitation
-                                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. D
-                                                        uis aute irure dolor in reprehenderit in volupt
-                                                        ate velit esse cillum dolore eu fugiat nulla par
-                                                        iatur. Excepteur sint occaecat cupidatat non proi
-                                                        dent, sunt in culpa qui officia deserunt mollit
-                                                        anim id est laborum.Lorem ipsum dolor sit amet, c
-                                                        onsectetur
-                                                        <br><br>
-                                                        adipiscing elit, sed do eiusmod tempor incididunt
-                                                        ut labore et dolore magna al
-                                                        iqua. Ut enim ad minim veniam, quis nostrud exerc
-                                                        itation ullamco laboris nisi ut aliquip ex ea commodo
-                                                        consequat. Duis aute irure dolor in reprehenderit in v
-                                                        oluptate velit esse cillum dolore eu fugiat nulla pariatu
-                                                        r. Excepteur sint occaecat cupidatat non proident, sunt i
-                                                        n culpa qui officia deserunt mollit anim id est laborum.
-                                                    </p>
-                                                </div>
-                                                <div class="col-6 " >
-                                                    <p class="fs-14 justify-text medium p-2">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea
-                                                        inventore distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam
-                                                        Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                        distinctio, iste atque? ipsum dolor sit amet consectetur adipisicing elit. Hic ipsam aut veniam aspernatur.
-                                                        Culpa et odit ipsam asperiores nemo nihil<br><br> possimus labore distinctio reprehenderit assumenda?
-
-                                                        Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sunt ea inventore
-                                                        Culpa et odit ipsam asperiores nemo nihil possimus labore distinctio reprehenderit assumenda?</p>
-                                                </div>
-                                            </article>
-                                            <article class="gris-background  col-6 p-2 p-md-2 mt-md-3 p-sm-2 mt-sm-3 article-border mt-3  " >
-                                                <p class="bleu-fonce fs-22 center-left p-2 justify-text medium left-border" >
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Tempora, similique sapiente. Hic nulla eum aspernatur
-                                                    officiis voluptatibus iure obcaecati harum numquam qui,
-                                                    laudantium totam libero architecto nostrum aliquam inventore iusto
-                                                    voluptatum quas cumque? Corrupti fugiat dolorem
-                                                    accusantium delectusc Lorem ipsum dolor sit amet consectetur.
-
-                                                    <br><br>
-                                                    aperiam. Voluptates dolore mollitia
-                                                    aperiam. Voluptates dolore mollitia
-                                                    necessitatibus quisquam maiores nihil corporis repellendus
-                                                    sint eligendi commodi quibusdam, quae natus totam aut exercitationem
-                                                    consequatur eligendi at? Ipsum velit voluptates maiores explicabo, voluptatem
-                                                    obcaecati omnis dolor accusamus blanditiis ad! Sed maxime voluptatem molestiae unde
-                                                    voluptate dignissimos exercitationem aperiam. Hic, eaque repellat.
-                                                </p>
-                                            </article>
-                                        </div>
+                                        <article class="module module--iframe">
+                                            <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="color-main-color fs-14 medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
                                     </div>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="module module--iframe">
+                                            <h3 class="highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
+
+                                        <article class="module module--iframe background-main-color">
+                                            <div class="left-border color-white">
+                                                <h3 class="fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                                <h4 class="fs-14 medium">tv gango sphere</h4>
+                                                <iframe src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
+                                                        frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
                                 </div>
                             </article>
+
+                            <!--Quotes-->
+                            <article>
+                                <header class="main-nav-choice" data-wc-target="quotes-list-elements">
+                                    <h2>Quots</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="quotes-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="module module--quote-basic">
+                                            <figure class="color-main-color">
+                                                <blockquote cite="">
+                                                    <p>Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                            </figure>
+                                        </article>
+
+                                        <article class="center background-main-color module module--quote-wrap module--quote-mark module--quote-mark-background-color">
+                                            <figure class="color-white">
+                                                <blockquote cite="">
+                                                    <p class="highlight background-second-color color-white">Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                            </figure>
+                                        </article>
+
+                                        <article class="module module--quote-wrap">
+                                            <figure class="color-main-color left-border">
+                                                <blockquote cite="">
+                                                    <p>Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                            </figure>
+                                        </article>
+
+                                    </div>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="background-second-color module module--quote-wrap">
+                                            <figure class="color-white text-center">
+                                                <blockquote cite="">
+                                                    <p>Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                            </figure>
+                                        </article>
+
+                                        <article class="center background-second-color module module--quote-wrap module--quote-mark module--quote-mark-main-color">
+                                            <figure class="color-white">
+                                                <blockquote cite="">
+                                                    <p class="highlight background-background-color color-second-color">Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                            </figure>
+                                        </article>
+
+                                        <article class="background-main-color module module--quote-basic">
+                                            <figure class="color-white">
+                                                <blockquote cite="">
+                                                    <p class="background-background-color highlight color-main-color">Lorem ipsum ibra tv gango sphere</p>
+                                                </blockquote>
+                                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                            </figure>
+                                        </article>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                            <!--Audio-->
+                            <article>
+                                <header class="main-nav-choice" data-wc-target="audio-list-elements">
+                                    <h2>Audio</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="audio-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+                                        <article class="background-second-color module module--iframe">
+                                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
+                                                    width="100%"
+                                                    height="200"
+                                                    frameBorder="0"
+                                                    allowfullscreen=""
+                                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
+
+                                        <article class="module module--iframe">
+                                            <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="color-main-color fs-14 medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
+                                    </div>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="module module--iframe">
+                                            <h3 class="highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
+                                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                        </article>
+
+                                        <article class="module module--iframe background-main-color">
+                                            <div class="left-border color-white">
+                                                <h3 class="fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                                <h4 class="fs-14 medium">tv gango sphere</h4>
+                                                <iframe src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
+                                                        frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                            <!--Video-->
+                            <article>
+                                <header class="main-nav-choice" data-wc-target="video-list-elements">
+                                    <h2>Vidéo</h2>
+                                    <span class="material-icons-round">more_horiz</span>
+                                </header>
+                                <div id="video-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="background-second-color module module--iframe">
+                                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
+                                            <div class="container-16-9">
+                                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        </article>
+
+                                        <article class="module module--iframe">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h3 class="color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                                    <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
+                                                    <p class="color-main-color fs-14 medium">
+                                                        Lorem ipsum ibra
+                                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                                                    </p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="container-16-9">
+                                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                        </iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+                                    <div class="col-6 col-md-12 col-sm-12">
+
+                                        <article class="module module--iframe">
+                                            <div class="left-border row">
+                                                <div class="col-4">
+                                                    <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                                    <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
+                                                    <p class="color-main-color fs-14 medium">
+                                                        Lorem ipsum ibra
+                                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                                                    </p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="container-16-9">
+                                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                        </iframe>
+                                                    </div>
+                                                </div>
+                                             </div>
+                                        </article>
+
+                                        <article class="background-main-color module module--iframe">
+                                            <h3 class="color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                            <h4 class="fs-14 color-white medium">tv gango sphere</h4>
+                                            <p class="color-white fs-14 medium">
+                                                Lorem ipsum ibra
+                                                tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                                            </p>
+
+                                            <div class="container-16-9">
+                                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        </article>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </div>
+                        <div id="form-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
+                            <header>
+                                <h1 class="title title--black">Form</h1>
+                            </header>
+
                         </div>
                     </section>
                 </section>

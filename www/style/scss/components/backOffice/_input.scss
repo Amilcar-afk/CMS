@@ -15,7 +15,7 @@
 		background-color: $lighter-grey!important;
 		color: $black;
 		transition: all 0.3s;
-		border-radius: 5px;
+		border-radius: var(--radius, 5px);
 		border: none;
 		padding: 10px;
 		font-size: rem(14);

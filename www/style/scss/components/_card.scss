@@ -1,6 +1,6 @@
 // composants
 .card {
-    background-color: rgba(216,216,216, 0.5);
+    background-color: $grey;
     border-radius: var(--radius, 20px);
     display: flex;
     justify-content: space-between;
@@ -111,8 +111,8 @@
     // charts
 
     & #chartDonut {
-        width: 100% !important;
-
+        height: 88%!important;
+        width: unset!important;
         margin-bottom: 30px;
     }
 }
