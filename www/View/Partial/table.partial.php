@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-
+    
         <?php foreach($config[1] as $key=>$infos):?>
             <tr>
                 <td>
