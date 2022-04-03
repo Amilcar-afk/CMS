@@ -5,7 +5,10 @@
     <title><?= $titleSeo??"Template du front" ?></title>
     <meta name="description" content="ceci est la description de ma page">
     <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css">
-
+    <!-- Scripts and styles for datatables -->
+    <script type="text/javascript" src='../DataTables/media/js/jquery.js'></script>
+    <script type="text/javascript" src="../DataTables/media/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../DataTables/media/css/jquery.dataTables.min.css">
 </head>
 <body>
 
