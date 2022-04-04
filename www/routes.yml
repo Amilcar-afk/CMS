@@ -23,7 +23,7 @@
   controller: admin
   action: dashboard
 
-/dashboard/userManagement:
+/userManagement:
   controller: admin
   action: userManagement
 
