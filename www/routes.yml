@@ -22,3 +22,7 @@
 /dashboard:
   controller: admin
   action: dashboard
+
+/sendMail:
+  controller: user
+  action: sendMail
