@@ -80,3 +80,8 @@
 /page/:
   controller: pageengine
   action: buildpage
+
+/sendMail:
+  controller: user
+  action: sendMail
+
