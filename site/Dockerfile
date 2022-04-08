@@ -23,3 +23,8 @@ RUN a2enmod rewrite
 
 # Enable yaml
 #RUN a2enmod yaml
+
+#add Xdebug config
+RUN pecl install xdebug-2.8.0
+RUN docker-php-ext-enable xdebug
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/php.ini
