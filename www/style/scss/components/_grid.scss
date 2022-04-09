@@ -42,7 +42,7 @@ $gutter: 24px;
 	  
 		@each $value in $font-size-list {
 		  .fs-#{$value} {
-			font-size: pxToRem($value / 1.3);
+			font-size: pxToRem($value / 1.1);
 		  }
 		}
 	  }
@@ -91,7 +91,7 @@ $gutter: 24px;
 	  
 		@each $value in $font-size-list {
 		  .fs-#{$value} {
-			font-size: pxToRem($value / 1.1);
+			font-size: pxToRem($value / 0.9);
 		  }
 		}
 	  }

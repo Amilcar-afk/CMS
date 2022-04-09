@@ -18,7 +18,6 @@
   controller: user
   action: register
 
-
 /dashboard:
   controller: admin
   action: dashboard
@@ -26,3 +25,15 @@
 /integration:
   controller: general
   action: integration
+
+/mailconfirmation:
+  controller: user
+  action: mailconfirmation
+
+/users_list:
+  controller: user
+  action: usersList
+
+/user_delete/id:
+  controller: user
+  action: deleteUser

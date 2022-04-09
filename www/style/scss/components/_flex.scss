@@ -8,6 +8,9 @@
 .left-text{
 	text-align: left
 }
+.d-inline{
+	display: inline;
+}
 .center-text{
 	display: flex;
 	justify-content: center;
@@ -33,4 +36,26 @@
 .justify-text{
 	text-align: justify;
 	word-spacing: -2px;
+}
+
+.flex-grow{
+	flex-grow: 1;
+}
+
+.iframe-parent{
+	position: relative;
+  	padding-bottom: 56.25%;
+}
+.iframe{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.postion-relative{
+	position: relative;
+}
+.postion-absolute{
+	position: absolute;
 }

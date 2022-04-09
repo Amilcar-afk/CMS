@@ -37,7 +37,7 @@ h2 {
 
 p {
   font-family: "Lato", sans-serif;
-  padding: 5px;
+  margin: 0;
 }
 
 .container {
@@ -400,127 +400,127 @@ p {
   }
 
   .fs-1 {
-    font-size: 0.7692307692px;
+    font-size: 0.9090909091px;
   }
 
   .fs-2 {
-    font-size: 1.5384615385px;
+    font-size: 1.8181818182px;
   }
 
   .fs-3 {
-    font-size: 2.3076923077px;
+    font-size: 2.7272727273px;
   }
 
   .fs-4 {
-    font-size: 3.0769230769px;
+    font-size: 3.6363636364px;
   }
 
   .fs-5 {
-    font-size: 3.8461538462px;
+    font-size: 4.5454545455px;
   }
 
   .fs-6 {
-    font-size: 4.6153846154px;
+    font-size: 5.4545454545px;
   }
 
   .fs-7 {
-    font-size: 5.3846153846px;
+    font-size: 6.3636363636px;
   }
 
   .fs-8 {
-    font-size: 6.1538461538px;
+    font-size: 7.2727272727px;
   }
 
   .fs-9 {
-    font-size: 6.9230769231px;
+    font-size: 8.1818181818px;
   }
 
   .fs-10 {
-    font-size: 7.6923076923px;
+    font-size: 9.0909090909px;
   }
 
   .fs-11 {
-    font-size: 8.4615384615px;
-  }
-
-  .fs-12 {
-    font-size: 9.2307692308px;
-  }
-
-  .fs-13 {
     font-size: 10px;
   }
 
+  .fs-12 {
+    font-size: 10.9090909091px;
+  }
+
+  .fs-13 {
+    font-size: 11.8181818182px;
+  }
+
   .fs-14 {
-    font-size: 10.7692307692px;
+    font-size: 12.7272727273px;
   }
 
   .fs-16 {
-    font-size: 12.3076923077px;
+    font-size: 14.5454545455px;
   }
 
   .fs-20 {
-    font-size: 15.3846153846px;
+    font-size: 18.1818181818px;
   }
 
   .fs-22 {
-    font-size: 16.9230769231px;
-  }
-
-  .fs-24 {
-    font-size: 18.4615384615px;
-  }
-
-  .fs-26 {
     font-size: 20px;
   }
 
+  .fs-24 {
+    font-size: 21.8181818182px;
+  }
+
+  .fs-26 {
+    font-size: 23.6363636364px;
+  }
+
   .fs-28 {
-    font-size: 21.5384615385px;
+    font-size: 25.4545454545px;
   }
 
   .fs-32 {
-    font-size: 24.6153846154px;
+    font-size: 29.0909090909px;
   }
 
   .fs-34 {
-    font-size: 26.1538461538px;
+    font-size: 30.9090909091px;
   }
 
   .fs-36 {
-    font-size: 27.6923076923px;
+    font-size: 32.7272727273px;
   }
 
   .fs-38 {
-    font-size: 29.2307692308px;
+    font-size: 34.5454545455px;
   }
 
   .fs-40 {
-    font-size: 30.7692307692px;
+    font-size: 36.3636363636px;
   }
 
   .fs-42 {
-    font-size: 32.3076923077px;
+    font-size: 38.1818181818px;
   }
 
   .fs-44 {
-    font-size: 33.8461538462px;
+    font-size: 40px;
   }
 
   .fs-46 {
-    font-size: 35.3846153846px;
+    font-size: 41.8181818182px;
   }
 
   .fs-48 {
-    font-size: 36.9230769231px;
+    font-size: 43.6363636364px;
   }
 
   .fs-50 {
-    font-size: 38.4615384615px;
+    font-size: 45.4545454545px;
   }
 
   .fs-64 {
-    font-size: 49.2307692308px;
+    font-size: 58.1818181818px;
   }
 }
 @media (min-width: 768px) and (max-width: 992px) {
@@ -861,127 +861,127 @@ p {
   }
 
   .fs-1 {
-    font-size: 0.9090909091px;
+    font-size: 1.1111111111px;
   }
 
   .fs-2 {
-    font-size: 1.8181818182px;
+    font-size: 2.2222222222px;
   }
 
   .fs-3 {
-    font-size: 2.7272727273px;
+    font-size: 3.3333333333px;
   }
 
   .fs-4 {
-    font-size: 3.6363636364px;
+    font-size: 4.4444444444px;
   }
 
   .fs-5 {
-    font-size: 4.5454545455px;
+    font-size: 5.5555555556px;
   }
 
   .fs-6 {
-    font-size: 5.4545454545px;
+    font-size: 6.6666666667px;
   }
 
   .fs-7 {
-    font-size: 6.3636363636px;
+    font-size: 7.7777777778px;
   }
 
   .fs-8 {
-    font-size: 7.2727272727px;
+    font-size: 8.8888888889px;
   }
 
   .fs-9 {
-    font-size: 8.1818181818px;
-  }
-
-  .fs-10 {
-    font-size: 9.0909090909px;
-  }
-
-  .fs-11 {
     font-size: 10px;
   }
 
+  .fs-10 {
+    font-size: 11.1111111111px;
+  }
+
+  .fs-11 {
+    font-size: 12.2222222222px;
+  }
+
   .fs-12 {
-    font-size: 10.9090909091px;
+    font-size: 13.3333333333px;
   }
 
   .fs-13 {
-    font-size: 11.8181818182px;
+    font-size: 14.4444444444px;
   }
 
   .fs-14 {
-    font-size: 12.7272727273px;
+    font-size: 15.5555555556px;
   }
 
   .fs-16 {
-    font-size: 14.5454545455px;
+    font-size: 17.7777777778px;
   }
 
   .fs-20 {
-    font-size: 18.1818181818px;
+    font-size: 22.2222222222px;
   }
 
   .fs-22 {
-    font-size: 20px;
+    font-size: 24.4444444444px;
   }
 
   .fs-24 {
-    font-size: 21.8181818182px;
+    font-size: 26.6666666667px;
   }
 
   .fs-26 {
-    font-size: 23.6363636364px;
+    font-size: 28.8888888889px;
   }
 
   .fs-28 {
-    font-size: 25.4545454545px;
+    font-size: 31.1111111111px;
   }
 
   .fs-32 {
-    font-size: 29.0909090909px;
+    font-size: 35.5555555556px;
   }
 
   .fs-34 {
-    font-size: 30.9090909091px;
+    font-size: 37.7777777778px;
   }
 
   .fs-36 {
-    font-size: 32.7272727273px;
-  }
-
-  .fs-38 {
-    font-size: 34.5454545455px;
-  }
-
-  .fs-40 {
-    font-size: 36.3636363636px;
-  }
-
-  .fs-42 {
-    font-size: 38.1818181818px;
-  }
-
-  .fs-44 {
     font-size: 40px;
   }
 
+  .fs-38 {
+    font-size: 42.2222222222px;
+  }
+
+  .fs-40 {
+    font-size: 44.4444444444px;
+  }
+
+  .fs-42 {
+    font-size: 46.6666666667px;
+  }
+
+  .fs-44 {
+    font-size: 48.8888888889px;
+  }
+
   .fs-46 {
-    font-size: 41.8181818182px;
+    font-size: 51.1111111111px;
   }
 
   .fs-48 {
-    font-size: 43.6363636364px;
+    font-size: 53.3333333333px;
   }
 
   .fs-50 {
-    font-size: 45.4545454545px;
+    font-size: 55.5555555556px;
   }
 
   .fs-64 {
-    font-size: 58.1818181818px;
+    font-size: 71.1111111111px;
   }
 }
 @media (min-width: 992px) {
@@ -1548,21 +1548,21 @@ p {
   color: var(--background-color);
 }
 
-.bleu-fonce {
+.main-color {
   color: var(--main-color);
 }
 
-.bleu-fonce-background {
+.main-color-background {
   background-color: var(--main-color);
   color: var(--background-color);
 }
 
-.blanc-claire-background {
+.second-color-background-default {
   background-color: var(--background-color);
   color: var(--second-color);
 }
 
-.blanc-fonce-background {
+.main-color-background-default {
   background-color: var(--background-color);
   color: var(--main-color);
 }
@@ -1576,6 +1576,10 @@ p {
 
 .left-text {
   text-align: left;
+}
+
+.d-inline {
+  display: inline;
 }
 
 .center-text {
@@ -1609,12 +1613,42 @@ p {
   word-spacing: -2px;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
+.iframe-parent {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.postion-relative {
+  position: relative;
+}
+
+.postion-absolute {
+  position: absolute;
+}
+
 .left-border {
   border-left: 5px solid;
 }
 
-.article-border {
+.article-card {
   border-radius: 5px;
+  padding: 20px;
+}
+
+.style-none {
+  list-style: none;
 }
 
 .dataTables_wrapper {
