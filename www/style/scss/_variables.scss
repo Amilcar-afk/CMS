@@ -2,23 +2,34 @@
 
 $black: #000;
 $white: #FFF;
-$grey: #AAA;
-$light-grey: #F2F2F2;
+$grey: #E3E3E3;
+$light-grey: #818181;
 $dark-grey: #444;
 $red: #ce0a0a;
 $green: #31aa66;
 $container-width: 1200px;
-$grey-light:#ECECEC;
+$lighter-grey:#EBEBEB;
+
 :root {
     // colors
     --main-color: #396075;
     --second-color: #55A6D3;
     --third-color: #9BBCFF;
+
+    --main-color-rgb: 57,96,117;
+    --second-color-rgb: 85,166,211;
+    --third-color-rgb: 155,188,255;
+
     --background-color: white;
+    --font-color: black;
+
+    --submit-color:#81CF66;
+    --cancel-color:#FF7070;
 
     // others
     --bessels: 1200px;
     --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78);
     //--radius: 0px;
 }
+
 

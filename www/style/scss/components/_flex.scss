@@ -5,6 +5,16 @@
 	align-items: center;
 }
 
+.space-between{
+	display: flex;
+	justify-content: space-between;
+}
+
+.space-around{
+	display: flex;
+	justify-content: space-around;
+}
+
 .left-text{
 	text-align: left
 }

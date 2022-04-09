@@ -1,14 +1,21 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Meta -->
+  <head>
+    <title>Index</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="../style/dist/css/main.css" rel="stylesheet" />
+
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- MaterialIcons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- ChartJs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
@@ -16,172 +23,213 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <!-- DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <!-- Styles -->
-    <link href="../style/dist/css/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="../style/js/dashboardChart.js"></script>
+    <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
+    <style>
+      :root {
+        --main-color: #396075;
+        --second-color: #55A6D3;
+        --third-color: #9BBCFF;
+        --background-color: white;
 
-    <title>Document</title>
-</head>
+        --bessels: 1200px;
+        --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78);
 
-<body>
-    <div class="row">
+      }
+    </style>
+  </head>
+  <div class="background-container-back-office">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <body class="body-back-office">
+    <header>
+
+      <nav>
+        <ul>
+          <li><a id="back-office-logo" href="#"><img src="/style/images/logo_myfolio.png" alt="logo"></a></li>
+          <li><a class="button-menu selected" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">storage</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Add code"><span class="material-icons-round">code</span></a></li>
+          <li><a class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
+        </ul>
+      </nav>
+
+    </header>
+    <main>
+      <section id="back-office-container">
+
+        <header class="content-header">
+          <h1 class="title title--main-color">DASHBOARD</h1>
+        </header>
+
+        <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
+          <div class="row">
 
 
-      <div class="col-4">
-        <section class="card card--bottom">
-          <footer>
-            <h4>6</h4>
-            <p>New users</p>
-          </footer>
-       </section>
-      </div>
+            <div class="col-4 col-md-6 col-sm-6">
+              <section class="card card--bottom  card--background-main-color">
+                <header>
+                  <h4>6</h4>
+                  <h3>New users</h3>
+                </header>
+              </section>
+            </div>
 
-      <div class="col-4">
-        <section class="card">
-          <button>
-            <i class="material-icons">more_vert</i>
-          </button>
-          <div id="chartdiv"></div>
-          <footer>
-            <p>Sessions per country</p>
-          </footer>
+            <div class="col-4 col-md-6 col-sm-6">
+              <section class="card card--background-main-color">
+                <button>
+                  <i class="material-icons-round">more_vert</i>
+                </button>
+                <div id="chartdiv"></div>
+                <header>
+                  <h3>Sessions per country</h3>
+                </header>
+              </section>
+            </div>
+
+            <div class="col-2 col-md-6 col-sm-6">
+              <section class="card card--bottom card--background-main-color">
+                <header>
+                  <h4>2</h4>
+                  <h3>Messages</h3>
+                </header>
+              </section>
+            </div>
+
+            <div class="col-2 col-md-6 col-sm-6">
+              <section class="card card--bottom card--background-main-color">
+                <header>
+                  <i class="material-icons-round material-icons--big-icon">edit</i>
+                  <h3>Newsletter</h3>
+                </header>
+              </section>
+            </div>
+
+            <div class="col-4 col-md-6 col-sm-12">
+              <section class="card card--bigcard card--background-color">
+                <header>
+                  <h3>Page ranking</h3>
+                  <button>
+                    <i class="material-icons-round">more_vert</i>
+                  </button>
+                </header>
+                <div class="table-container">
+                  <table>
+                    <tbody>
+                    <tr>
+                      <td>home</td>
+                      <td>vue 24</td>
+                    </tr>
+                    <tr>
+                      <td>contact</td>
+                      <td>vue 21</td>
+                    </tr>
+                    <tr>
+                      <td>projet</td>
+                      <td>vue 17</td>
+                    </tr>
+                    <tr>
+                      <td>avis</td>
+                      <td>vue 17</td>
+                    </tr>
+                    <tr>
+                      <td>logout</td>
+                      <td>vue 12</td>
+                    </tr>
+                    <tr>
+                      <td>login</td>
+                      <td>vue 24</td>
+                    </tr>
+                    <tr>
+                      <td>avis</td>
+                      <td>vue 17</td>
+                    </tr>
+                    <tr>
+                      <td>logout</td>
+                      <td>vue 12</td>
+                    </tr>
+                    <tr>
+                      <td>login</td>
+                      <td>vue 24</td>
+                    </tr>
+                    <tr>
+                      <td>avis</td>
+                      <td>vue 17</td>
+                    </tr>
+                    <tr>
+                      <td>logout</td>
+                      <td>vue 12</td>
+                    </tr>
+                    <tr>
+                      <td>login</td>
+                      <td>vue 24</td>
+                    </tr>
+                    <tr>
+                      <td>avis</td>
+                      <td>vue 17</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <button class="cta-button cta-button--text-no-background">
+                    Show More
+                  </button>
+                </div>
+              </section>
+            </div>
+
+            <div class="col-4 col-md-6 col-sm-12">
+              <section class="card card--bigcard card--background-color">
+                <header>
+                  <h3>Session per device</h3>
+                </header>
+                <canvas id="chartDonut"></canvas>
+              </section>
+            </div>
+
+            <div class="col-4 col-md-6 col-sm-12">
+              <section class="card card--bigcard card--sessionweek-only card--background-color">
+                <header>
+                  <h3>Session week</h3>
+                  <button>
+                    <i class="material-icons-round">chevron_left</i>
+                    <i class="material-icons-round">chevron_right</i>
+                  </button>
+                </header>
+                <canvas id="chartBar"></canvas>
+              </section>
+
+              <section class="card card--smallcard card--background-color">
+                <div class="edge"><i class="material-icons-round">add</i></div>
+                <div class="edge-container">
+                  <div class="edge"><img src='../style/images/linkedin.png' /></div>
+                  <p>1</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"><img src='../style/images/twitter.png' /></div>
+                  <p>0</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"><img src='../style/images/youtube.png' /></div>
+                  <p>2</p>
+                </div>
+                <div class="edge-container">
+                  <div class="edge"><img src='../style/images/tiktok.png' /></div>
+                  <p>23</p>
+                </div>
+              </section>
+            </div>
+
+          </div>
         </section>
-      </div>
 
-      <div class="col-2">
-        <section class="card card--bottom">
-          <footer>
-            <h4>2</h4>
-            <p>Messages</p>
-          </footer>
-        </section>
-      </div>
-
-      <div class="col-2 col-h4">
-        <section class="card card--bottom">
-          <button  class="button--newslatter-only">
-            <i class="material-icons material-icons--newslatter-only">edit</i>
-          </button>
-          <footer>
-            <p>Newsletter</p>
-          </footer>
-        </section>
-      </div>
-
-      <div class="col-4 card card--bigcard">
-        <footer>
-          <p>Page ranking</p>
-          <button>
-            <i class="material-icons">more_vert</i>
-          </button>
-        </footer>
-          <table id="example" class="row-border">
-            <tbody>
-              <tr>
-                  <td>home</td>
-                  <td>vue 24</td>
-              </tr>
-              <tr>
-                <td>contact</td>
-                <td>vue 21</td>
-              </tr>
-              <tr>
-                <td>projet</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>avis</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>logout</td>
-                <td>vue 12</td>
-              </tr>
-              <tr>
-                <td>login</td>
-                <td>vue 24</td>
-              </tr>
-              <tr>
-                <td>avis</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>logout</td>
-                <td>vue 12</td>
-              </tr>
-              <tr>
-                <td>login</td>
-                <td>vue 24</td>
-              </tr>
-              <tr>
-                <td>avis</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>logout</td>
-                <td>vue 12</td>
-              </tr>
-              <tr>
-                <td>login</td>
-                <td>vue 24</td>
-              </tr>
-              <tr>
-                <td>avis</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>logout</td>
-                <td>vue 12</td>
-              </tr>
-              <tr>
-                <td>login</td>
-                <td>vue 24</td>
-              </tr>
-              <tr>
-                <td>avis</td>
-                <td>vue 17</td>
-              </tr>
-              <tr>
-                <td>logout</td>
-                <td>vue 12</td>
-              </tr>
-              <tr>
-                <td>login</td>
-                <td>vue 24</td>
-              </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Pages</td>
-              <td>Vues</td>
-            </tr>
-          </tfoot>
-          </table>
-      </div>
-
-      <div class="col-4 card card--bigcard">
-        <footer>
-          <p>Session per device</p>
-        </footer>
-        <canvas id="chartDonut"></canvas>
-      </div>
-
-      <div class="col-4 card card--bigcard">
-        <footer>
-          <p>Session week</p>
-          <button>
-            <i class="material-icons">chevron_left</i>
-            <i class="material-icons">chevron_right</i>
-          </button>
-        </footer>
-        <canvas id="chartBar"></canvas>
-      </div>
-      
-    </div>
-
-</body>
+      </section>
+    </main>
+  </body>
 </html>
 
 
@@ -191,95 +239,15 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- dataTable -->
+<!-- CHARTJS Bar -->
 <script>
-  $(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":        "600px",
-        "scrollCollapse": true,
-        "paging":         false,
-        searching: false, 
-        paging: false, 
-        info: false,
-        "columnDefs": [
-        {
-          "className": "dt-left dataTablesCol1", 
-          "targets": 0
-        },
-        {
-          "className": "dt-right dataTablesCol2", 
-          "targets": 1
-        }
-      ],
-    } );
-} );
+  chartBar1()
 </script>
-
-
-
 
 
 <!-- CHARTJS Donut-->
 <script>
-  const data = {
-  labels: [
-    'Mobile',
-    'Desktop',
-    'Other'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(57, 96, 117)',
-      'rgb(57, 96, 117, 0.5)',
-      'rgb(57, 96, 117, 0.2)'
-    ],
-    hoverOffset: 4
-  }]
-};
-const config = {
-  type: 'doughnut',
-  data: data,
-  options: {
-    plugins: {
-      beforeInit: function(chart, legend, options) {
-      const fitValue = chart.legend.fit;
-      chart.legend.fit = function fit() {
-        fitValue.bind(chart.legend)();
-        return this.height += 50;
-      }
-    },
-      legend: {
-        position: 'bottom',
-        labels: {
-          boxHeight: 35,
-          boxWidth: 120,
-          padding: 30,
-          borderRadius: 20
-        },
-      }
-    }
-  }
-};
-</script>
-<script>
-  const myChartDonut = new Chart(
-    document.getElementById('chartDonut'),
-    config
-  );
+  chartDonut1()
 </script>
 
 

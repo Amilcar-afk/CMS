@@ -1,0 +1,167 @@
+//put the module class in article
+
+.module{
+
+	& h1, h2, h3, h4, h5, h6, p{
+		padding-left: 3px;
+		padding-right: 3px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	&--iframe{
+		& iframe{
+			padding-left: 3px;
+			padding-right: 3px;
+			margin-top: 10px;
+			border-radius: 6px;
+		}
+	}
+
+	&--hover{
+		border-radius: var(--radius, 5px);
+		top: 0;
+		right: 0;
+		font-size: rem(40);
+		background: rgba(129, 129, 129, 0.3);
+		backdrop-filter: blur(6px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		opacity: 0;
+		& .material-icons-round{
+			font-size: rem(90);
+			color: $grey;
+		}
+	}
+
+	&--quote-basic{
+		& figure{
+			display: inline;
+
+			& blockquote{
+				display: inline;
+				margin: 0;
+
+				& > p {
+					display: inline;
+					font-size: rem(18);
+					font-weight: 800;
+				}
+			}
+			& figcaption{
+				display: inline;
+				font-size: rem(13);
+				font-weight: 400;
+			}
+		}
+	}
+
+	&--quote-wrap{
+		& figure{
+
+			& blockquote{
+				margin: 0;
+				& > p {
+					font-size: rem(18);
+					font-weight: 800;
+					margin: 0;
+				}
+			}
+			& figcaption{
+				font-size: rem(13);
+				font-weight: 400;
+			}
+		}
+	}
+
+
+	&--quote-mark {
+		& figure {
+			& blockquote {
+				position: relative;
+				& > p:before {
+					position: absolute;
+					content: '"';
+					font-weight: 800;
+					top: -10px;
+					font-size: rem(80);
+					left: -20px;
+				}
+				& > p:after {
+					position: absolute;
+					bottom: -40px;
+					right: -20px;
+					font-size: rem(80);
+					font-weight: 800;
+					content: '"';
+				}
+			}
+		}
+	}
+
+	&--quote-mark-font-color {
+		& figure {
+			& blockquote {
+				& > p:before {
+					color: var(--font-color);
+				}
+				& > p:after {
+					color: var(--font-color);
+				}
+			}
+		}
+	}
+	&--quote-mark-background-color {
+		& figure {
+			& blockquote {
+				& > p:before {
+					color: var(--background-color);
+				}
+				& > p:after {
+					color: var(--background-color);
+				}
+			}
+		}
+	}
+	&--quote-mark-main-color {
+		& figure {
+			& blockquote {
+				& > p:before {
+					color: var(--main-color);
+				}
+				& > p:after {
+					color: var(--main-color);
+				}
+			}
+		}
+	}
+	&--quote-mark-second-color {
+		& figure {
+			& blockquote {
+				& > p:before {
+					color: var(--second-color);
+				}
+				& > p:after {
+					color: var(--second-color);
+				}
+			}
+		}
+	}
+	&--quote-mark-third-color {
+		& figure {
+			& blockquote {
+				& > p:before {
+					color: var(--third-color);
+				}
+				& > p:after {
+					color: var(--third-color);
+				}
+			}
+		}
+	}
+}

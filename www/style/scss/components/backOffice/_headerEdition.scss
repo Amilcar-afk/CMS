@@ -1,0 +1,140 @@
+.content-header{
+  background: rgba(129, 129, 129, 0.3);
+  box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(60px);
+  border-radius: var(--radius, 20px);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 15px;
+  max-height: calc(43px + 1.25rem);
+  height: calc(43px + 1.25rem);
+
+  & .material-icons-round{
+    font-size: rem(30);
+  }
+
+  & > nav{
+    width: 33%;
+    display: flex;
+  }
+
+  & > :nth-child(3){
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    & > nav {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      & .cta-button {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  & > :nth-child(1){
+     justify-content: flex-start;
+
+     & .cta-button {
+       margin-right: 15px;
+     }
+
+   }
+
+  & > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--main-color);
+
+    .material-icons-round{
+      font-size: rem(14);
+    }
+    label{
+      font-size: rem(14);
+      font-weight: 500;
+    }
+    footer{
+      font-size: rem(12);
+    }
+  }
+
+  & > :nth-child(3){
+    justify-content: flex-end;
+
+    & .cta-button {
+      margin-left: 15px;
+    }
+
+  }
+
+}
+
+
+//reponsive tablet
+@media (max-width: 992px){
+  .content-header{
+    border-radius: 0px;
+    width: 100%;
+    margin-bottom: 0px;
+
+    & .material-icons-round{
+      font-size: rem(30);
+    }
+
+    & nav{
+      display: flex;
+      width: 33%;
+
+      & .cta-button {
+        padding: 0 10px;
+      }
+    }
+
+    & > :nth-child(1){
+      justify-content: flex-start;
+
+      & .cta-button {
+        margin-right: 15px;
+      }
+
+    }
+
+    & > :nth-child(2){
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--main-color);
+
+      .material-icons-round{
+        font-size: rem(14);
+      }
+      label{
+        font-size: rem(14);
+        font-weight: 500;
+      }
+      footer{
+        font-size: rem(12);
+      }
+    }
+
+    & > :nth-child(3){
+      justify-content: flex-end;
+
+      & .cta-button {
+        margin-left: 15px;
+      }
+
+    }
+
+  }
+}
+
+//responsive mobile
+@media (max-width:768px) {
+
+}
