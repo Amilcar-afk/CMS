@@ -84,4 +84,8 @@
 /sendMail:
   controller: user
   action: sendMail
-
+  
+/confirmAccount:
+  controller: user
+  action: validAccount
+  arg: true
