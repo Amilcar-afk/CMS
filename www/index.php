@@ -28,12 +28,24 @@ if(!file_exists($routeFile)){
 $routes = yaml_parse_file($routeFile);
 
 
-if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"]) ){
+if( empty($uri) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"]) ) {
+    //check for parameters
+    if( stristr( $uri, "?") != false ) {
+        $getUri = explode("?", $uri);
+        $uri = $getUri[0];
+
+        //check if parameters are accepted for this uri
+        if( !isset($routes[$uri]["arg"]) )
+            die("Page 404");
+
+    }else {
         die("Page 404");
+    }
 }
 
 $controller = ucfirst(strtolower($routes[$uri]["controller"]));
 $action = strtolower($routes[$uri]["action"]);
+
 
 // $controller = User ou $controller = Global
 // $action = login ou $action = logout ou $action = home
