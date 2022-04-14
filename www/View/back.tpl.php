@@ -7,9 +7,14 @@
     <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css">
 
 </head>
-<body>
-<h1>Administration</h1>
-<?php include $this->view.".view.php";?>
+<body class="main-color-background ">
+    <div class="article-card">
+        <h1>Administration</h1>
+        <div class="row article-card">
+            <?php include $this->view.".view.php";?>
+        </div>
+    </div>
+
 
 </body>
 </html>

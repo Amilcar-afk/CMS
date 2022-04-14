@@ -1,19 +1,122 @@
+*{
+	box-sizing: border-box;
+	font-family: $font1;
+}
+
+html{
+	height: 100vh;
+}
+
 body{
 	font-family: $font1;
-	background-color: $light-grey;
+	margin: 0;
 }
 
-h1{
-	font-family: $font2;
+
+figure{
+	margin: 0;
+}
+
+a{
+	text-decoration:none;
+}
+
+a:not([href]){
+	pointer-events: none;
+}
+
+span, small{
+	font-family: $font3;
 	font-size: rem(24);
+	margin: 0;
+	display: inline;
 }
 
-h2{
-	font-family: $font2;
-	font-size: rem(16);
+
+p{
+	font-family: $font2 ;
+	margin: 0;
 }
 
 .container{
-	max-width: $container-width;
-	margin: auto;
+	max-width: var(--bessels);
+    margin: auto;
+}
+
+.body-back-office{
+	padding: 30px;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	max-height: 100vh;
+
+	& main{
+		flex-grow: 1;
+	}
+}
+
+.body-setup{
+	display: flex;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+
+	& main{
+		z-index: 1;
+	}
+}
+
+#back-office-container{
+	z-index: 2;
+	position: relative;
+	height: 100%;
+}
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+*{
+	scrollbar-color: var(--main-color) $lighter-grey;
+	scrollbar-width: thin;
+	scrollbar-border-radius: var(--radius, 12px);
+}
+
+*::-webkit-scrollbar {
+	width: 6px;
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+*::-webkit-scrollbar-track {
+	background: $lighter-grey;
+
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	/* change me to blue to match the background */
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--main-color);
+	border: 0px solid;
+
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	/* change border color to blue to match the background */
+}
+
+
+//reponsive tablet
+@media (max-width: 992px){
+
+	.body-back-office{
+		position: relative;
+		padding: 0;
+	}
 }

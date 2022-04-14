@@ -8,6 +8,16 @@ abstract class BaseSQL
     private $pdo;
     private $table;
 
+    /**
+     * get_called_class()  Retourne le nom de la classe depuis laquelle une méthode statique a été appelée.
+     * strtolower() convertir le maj to mini 
+     * get_object_vars(this) Retourne les propriétés d'un objet
+     * get_class_vars(class) Retourne les valeurs par défaut des propriétés d'une classe
+     * get_class() Retourne le nom de la classe d'un objet
+     * array_filter(columns) Filtre les éléments d'un tableau grâce à une fonction de rappel
+     * array_diff_key($columns, $varsToExclude) Calcule la différence de deux tableaux en utilisant les clés pour comparaison
+     */
+
 
     public function __construct()
     {
@@ -51,14 +61,14 @@ abstract class BaseSQL
  * @param array $params
  * @return array|null
  */
-function findOneData( string $sql, $params): ?array  {
+
+function findOneData( string $sql, $params) {
 
     $statement = $this->pdo->prepare($sql);
-
     if($statement) {
-        $success = $statement->execute([$params])or die(print_r($statement->errorInfo(), TRUE));
+        $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
         if($success) {
-            $res = $statement->fetch(\PDO::FETCH_ASSOC);
+            $res = $statement->fetch(\PDO::FETCH_OBJ);
             if($res) {
                 return $res;
             }
@@ -67,22 +77,20 @@ function findOneData( string $sql, $params): ?array  {
     return null;
 }
 
-
-
 /**
  * @param PDO $db
  * @param string $sql
  * @param array $params
  * @return array|null
  */
-    function findAllData(string $sql, array $params): ?array  {
+    // function findAllData(string $sql, ?array $params): ?array  {
 
+    function findAllData(string $sql, array $params= null) {
         $statement = $this->pdo->prepare($sql);
-
         if($statement) {
             $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
             if($success) {
-                $res = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                $res = $statement->fetchAll(\PDO::FETCH_OBJ);
                 if($res) {
                     return $res;
                 }
@@ -90,6 +98,8 @@ function findOneData( string $sql, $params): ?array  {
         }
         return null;
     }
+
+
 
 /**
  * @param PDO $db

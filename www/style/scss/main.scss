@@ -2,7 +2,29 @@
 @import "fonts";
 @import "functions";
 @import "globals";
+
+// composants
 @import "components/grid";
-@import "components/button";
-@import "components/banner";
-@import "components/slider";
+@import "components/card";
+@import "components/flex";
+@import "components/responsive";
+@import "components/tables";
+
+//main theme
+@import "components/themes/basicProperties";
+@import "components/themes/module";
+
+
+//pour back office
+@import "components/backOffice/header";
+@import "components/backOffice/headerEdition";
+@import "components/backOffice/button";
+@import "components/backOffice/container";
+@import "components/backOffice/title";
+@import "components/backOffice/background";
+@import "components/backOffice/input";
+@import "components/backOffice/collapse";
+@import "components/backOffice/burgerMenu";
+
+// @import "components/back";
+// @import "components/slider";

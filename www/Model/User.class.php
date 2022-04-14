@@ -130,10 +130,16 @@ class User extends BaseSQL
         parent::save();
     }
 
-    public function select($sql, $param){
-        parent::findOneData($sql, $param);
+
+    public function select(string $sql, $params){
+
+        return parent::findOneData($sql, $params);
     }
 
+    public function selectAllData(string $sql ){
+
+        return parent::findAllData($sql);
+    }
     /**
      * Get the value of passwordOldFirst
      */ 

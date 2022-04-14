@@ -1,0 +1,144 @@
+.cta-button{
+	color: var(--main-color);
+	cursor: pointer;
+	transition: all 0.3s;
+	border-radius: var(--radius, 10px);
+	border: none;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	background-color: unset;
+
+	& .material-icons-round{
+		margin-right: 8px;
+		font-size: rem(20);
+	}
+
+	&--menu-burger{
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		display: none;
+
+		background: rgba(255, 255, 255, 0.3);
+
+		& .material-icons-round{
+			margin-right: 8px;
+			margin-left: 8px;
+			font-size: rem(30);
+		}
+
+		&::before{
+			content: '';
+		}
+
+		&:hover{
+			background: rgba(255, 255, 255, 0.6);
+		}
+	}
+
+	&--text-icon{
+		background: rgba(255, 255, 255, 0.3);
+		font-size: rem(16);
+
+		&:hover{
+			background: rgba(255, 255, 255, 0.6);
+		}
+	}
+
+	&--menu{
+		font-size: rem(14);
+		font-weight: 500;
+		border-radius: var(--radius, 10px);
+		width: 275px;
+		padding: 10px;
+		margin-top: 50px;
+
+		&.selected{
+			background-color: rgba(129, 129, 129, 0.3);
+
+			&:hover{
+				background: rgba(129, 129, 129, 0.3);
+			}
+		}
+
+		&:hover{
+			background: rgba(255, 255, 255, 0.6);
+		}
+	}
+
+	&--icon{
+		background-color: unset;
+		&:hover{
+			background: rgba(255, 255, 255, 0.6);
+		}
+
+		& .material-icons-round{
+			margin-right: 0px;
+		}
+	}
+	&--text-no-background{
+		font-size: rem(18);
+		font-weight: 500;
+		align-self: unset !important;
+
+		&:hover{
+			color: var(--second-color);
+		}
+	}
+
+	&--submit{
+		font-size: rem(18);
+		font-weight: 500;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		border-radius: var(--radius, 10px);
+		background-color: var(--main-color);
+		color: white;
+
+		&:hover{
+			background-color: var(--second-color);
+		}
+	}
+}
+
+//.show-table-button {
+	//font-family: $font3;
+	//font-style: normal;
+	//font-weight: bold;
+	//font-size: rem(18);
+	//line-height: rem(21);
+	//letter-spacing: 0.05em;
+	//color: var(--main-color);
+//}
+//reponsive tablet & mobile
+@media (max-width: 992px){
+
+
+	.cta-button{
+
+		&--menu{
+			width: 200px;
+			flex-grow: 1;
+			min-width: 50px;
+
+			margin-top: 15px;
+			background-color: rgba(129, 129, 129, 0.3);
+
+			&.selected{
+				background-color: var(--main-color);
+				color: #AFBCC3;
+
+				&:hover{
+					background-color: var(--main-color);
+				}
+			}
+
+			&:hover{
+				background: rgba(255, 255, 255, 0.6);
+			}
+		}
+
+	}
+}
