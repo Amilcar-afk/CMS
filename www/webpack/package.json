@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "compile": "node-sass ../style/scss/main.scss ../style/dist/css/main.css",
-    "watch": "node-sass ../style/scss/main.scss ../style/dist/css/main.css -w"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node_modules/.bin/webpack --config=node_modules/laravel-mix/setup/webpack.config.js -w",
+    "build": "webpack --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,7 @@
   "devDependencies": {
     "laravel-mix": "^5.0.0",
     "resolve-url-loader": "^3.1.0",
-    "sass": "~1.32.12",
+    "sass": "^1.23.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.46.0"

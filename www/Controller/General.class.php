@@ -15,12 +15,6 @@ class General{
     {
         $view = new View("contact");
     }
-
-    public function integration()
-    {
-        // $view = new View("integration");
-        include 'integration/index.html';
-    }
 }
 
 

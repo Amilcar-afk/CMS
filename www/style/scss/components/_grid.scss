@@ -1,154 +1,21 @@
 $columnNb: 12;
-$gutter: 24px;
+$gutter: 30px;
 
-  
-@media (max-width:768px) {
-    @for $i from 1 through $columnNb {
-        .col-sm-#{$i} {
-        flex: 0 0 100% / $columnNb * $i;
-        }
-        .col-sm-offset-#{$i}{
-            margin-left: 100% / $columnNb * $i;
-        }
-    }
-	@mixin generate($prefix, $property) {
-		$sizes: (0, .25, .5, 1, 1.5, 3);
-		$spacing: 1rem;
-		@for $i from 1 through length($sizes) {
-		  $size: nth($sizes, $i);
-		  .#{$prefix}-#{$i - 1} {
-			#{$property}: $spacing * $size;
-		  }
-		}
-	  }
-	@include generate(m-sm-, margin);
-	@include generate(ml-sm, margin-left);
-	@include generate(mr-sm, margin-right);
-	@include generate(mt-sm, margin-top);
-	@include generate(mb-sm, margin-bottom);
-  
-	@include generate(p-sm, padding);
-	@include generate(pl-sm, padding-left);
-	@include generate(pr-sm, padding-right);
-	@include generate(pt-sm, padding-top);
-	@include generate(pb-sm, padding-bottom);
-  
-	@function pxToRem($pxSize) {
-	  @return $pxSize+px;
-	}
-    @mixin font-size() {
-
-		$font-size-list: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 20 22 24 26 28 32 34 36 38 40 42 44 46 48 50 64;
-	  
-		@each $value in $font-size-list {
-		  .fs-#{$value} {
-			font-size: pxToRem($value / 1.1);
-		  }
-		}
-	  }
-	  
-	  @include font-size()
-}
-  
-@media (min-width: 768px) and (max-width: 992px){
-    @for $i from 1 through $columnNb {
-        .col-md-#{$i} {
-        flex: 0 0 100% / $columnNb * $i;
-        }
-        .col-md-offset-#{$i}{
-            margin-left: 100% / $columnNb * $i;
-        }
-    }
-	@mixin generate($prefix, $property) {
-		$sizes: (0, .25, .5, 1, 1.5, 3);
-		$spacing: 1rem;
-		@for $i from 1 through length($sizes) {
-		  $size: nth($sizes, $i);
-		  .#{$prefix}-#{$i - 1} {
-			#{$property}: $spacing * $size;
-		  }
-		}
-	  }
-	@include generate(m-md, margin);
-	@include generate(ml-md, margin-left);
-	@include generate(mr-md, margin-right);
-	@include generate(mt-md, margin-top);
-	@include generate(mb-md, margin-bottom);
-  
-	@include generate(p-md, padding);
-	@include generate(pl-md, padding-left);
-	@include generate(pr-md, padding-right);
-	@include generate(pt-md, padding-top);
-	@include generate(pb-md, padding-bottom);
-  
-	@function pxToRem($pxSize) {
-	  @return $pxSize+px;
-	}
-  
-	@mixin font-size() {
-
-		$font-size-list: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 20 22 24 26 28 32 34 36 38 40 42 44 46 48 50 64;
-	  
-		@each $value in $font-size-list {
-		  .fs-#{$value} {
-			font-size: pxToRem($value / 0.9);
-		  }
-		}
-	  }
-	  
-	  @include font-size()
-
-
-
+.row{
+	display: flex;
+	flex-wrap: wrap;
 }
 
-@media (min-width:992px) {
-    @for $i from 1 through $columnNb {
-        .col-#{$i} {
-        flex: 0 0 100% / $columnNb * $i;
-        }
-        .col-offset-#{$i}{
-            margin-left: 100% / $columnNb * $i;
-        }
-    }
-	@mixin generate($prefix, $property) {
-		$sizes: (0, .25, .5, 1, 1.5, 3);
-		$spacing: 1rem;
-		@for $i from 1 through length($sizes) {
-		  $size: nth($sizes, $i);
-		  .#{$prefix}-#{$i - 1} {
-			#{$property}: $spacing * $size;
-		  }
-		}
-	  }
-
-	@include generate(m, margin);
-	@include generate(ml, margin-left);
-	@include generate(mr, margin-right);
-	@include generate(mt, margin-top);
-	@include generate(mb, margin-bottom);
-  
-	@include generate(p, padding);
-	@include generate(pl, padding-left);
-	@include generate(pr, padding-right);
-	@include generate(pt, padding-top);
-	@include generate(pb, padding-bottom);
-  
-	@function pxToRem($pxSize) {
-	  @return $pxSize+px;
+@for $i from 1 through $columnNb {
+	.col-#{$i} {
+	//   flex-basis: (100 / ($grid__cols / $i) ) * 1%;
+	flex: 0 0 100% / $columnNb * $i;
 	}
-	@mixin font-size() {
-
-		$font-size-list: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 20 22 24 26 28 32 34 36 38 40 42 44 46 48 50 64;
-	  
-		@each $value in $font-size-list {
-		  .fs-#{$value} {
-			font-size: pxToRem($value);
-		  }
-		}
-	  }
-	  
-	  @include font-size()
-  
-}
+	.col-offset-#{$i}{
+		margin-left: 100% / $columnNb * $i;
+	}
+    .col-h-#{$i}{
+		height: 100% / $columnNb * $i;
+	}
+  }
 

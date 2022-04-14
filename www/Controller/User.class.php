@@ -1,50 +1,35 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
 use App\Core\CheckInputs;
+
 use App\Model\User as UserModel;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 class User{
 
     public $user;
+    
     public function __construct()
     {
         $this->user = new UserModel();
     }
 
-
     public function login()
     {
+
+        // APPEL LES VERIFS
         if( !empty($_POST)){
             $result = CheckInputs::checkEmail($_POST['email']);
-            if($result){
-                $this->user->setEmail($_POST['email']);
-                $sql = "SELECT * FROM cmsp_user WHERE email = :email";
-                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
-                if(!empty($resultat)){
-                    if(password_verify($_POST['password'], $resultat->password)){
-                        echo'Bienvenu ! fdp';
-                        header('location:/dashboard');
-                    }else{
-                        echo'mot de passe incorrect';
-                    }
-                }else{
-                    echo'email ou mot passe incorrect';
-                }
-            }else{
-                echo'email incorrect';
-            }
-     
+            $sql ="SELECT try FROM cmsp_user WHERE email =:email";
+            $res = $this->user->select($sql,$_POST['email']);
+            print_r($res);
         }
+
+        // CREER LA NOUVELLE VIEW
         $view = new View("login");
         $view->assign("user",$this->user);
     }
@@ -68,21 +53,7 @@ class User{
                 print_r($result);
             }
         }
-        $e = 1;
         $view = new View("register");
         $view->assign("user",$this->user);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-   
 }

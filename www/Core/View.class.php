@@ -7,7 +7,6 @@ class View
     private $view;
     private $template;
     private $data = [];
-    private $array = [];
 
     public function __construct($view, $template = "front")
     {
@@ -18,7 +17,6 @@ class View
     public function setView($view){
         $this->view = strtolower($view);
     }
-
 
     public function setTemplate($template){
         $this->template = strtolower($template);
@@ -46,7 +44,8 @@ class View
 
     public function __destruct()
     {
-        extract($this->data);//array(2) { ["firstname"]=> string(8) "Marouane" ["lastname"]=> string(5) "Talbi" } 
+        //Array ( [firstname] => Yves )
+        extract($this->data);
         include "View/".$this->template.".tpl.php";
     }
 

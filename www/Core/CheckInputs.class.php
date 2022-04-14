@@ -42,10 +42,12 @@ class CheckInputs
     public static function checkEmail($email)
     {
         if(filter_var($email, FILTER_VALIDATE_EMAIL)) { //:bool
-            return true;
+            // return true
+            echo "{$email}: is a valid email";
         }
         else {
-            return false;
+            // return false
+            echo "{$email}: is not a valid email";
         }
     }
 
