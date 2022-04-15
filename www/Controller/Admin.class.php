@@ -8,8 +8,8 @@ class Admin
 {
     public function dashboard()
     {
-        $firstname = "Yves";
-        $lastname = "SKRZYPCZYK";
+        $firstname = "Marouane";
+        $lastname = "Talbi";
 
         $view = new View("dashboard", "back");
         $view->assign("firstname", $firstname);

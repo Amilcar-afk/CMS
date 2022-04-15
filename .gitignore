@@ -5,4 +5,10 @@ www/vendor/
 www/composer.lock
 www/composer.json
 .idea/
-www/webpack/node_modules
+www/webpack/
+www/style/dist/css/main.css
+
+www/webpack/package-lock.json
+www/webpack/package.json
+www/style/dist/mix-manifest.json
+www/style/dist/css/main.css
