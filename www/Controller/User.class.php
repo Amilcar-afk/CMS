@@ -21,6 +21,33 @@ class User{
         $this->user = new UserModel();
     }
 
+    // public function mailConfirmation(){
+
+    //     $mail = new PHPMailer(true);
+    //         try {
+    //         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+    //         $mail->isSMTP();                                           
+    //         $mail->Host       = 'smtp.gmail.com';                  
+    //         $mail->SMTPAuth   = true;                                 
+    //         $mail->Username   = 'marwane.berkani@gmail.com';                 
+    //         $mail->Password   = 'marwaneberkani';                               
+    //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
+    //         $mail->Port       = 587;                                    
+            
+    //         $mail->setFrom('marwane.berkani@gmail.com', 'URBAN SOCCER');
+    //         $mail->addAddress('marwane.berkani@gmail.com', 'Mr/Mme');     
+            
+            
+    //         $mail->isHTML(true);                                  
+    //         $mail->Subject = 'Reservation';
+    //         $mail->Body    = "<p>nous vous Remercions pour votre Reservation a tres bientot !</p>  </div>";
+            
+    //         $mail->send();
+    //         echo 'Message has been sent';
+    //         } catch (Exception $e) {
+    //             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    //         }
+    // }
 
     public function login()
     {
@@ -47,6 +74,23 @@ class User{
         }
         $view = new View("login");
         $view->assign("user",$this->user);
+    }
+
+    public function usersList()
+    {
+        $usersLIst =  $this->user->findAllData($sql = "SELECT * FROM cmsp_user");
+        $view = new View("userslist",'back');
+        $view->assign("user",$this->user);
+        $view->assign("usersLIst", $usersLIst);
+
+    }
+
+    public function deleteUser()
+    {
+        
+        var_dump($_GET);
+        // $id = $_GET['id'];
+        // $this->user->findAllData($sql = "DELETE FROM cmsp_user WHERE id = :id", $id);
     }
 
     public function logout()
