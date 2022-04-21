@@ -30,7 +30,7 @@ class User{
         }
 
         // CREER LA NOUVELLE VIEW
-        $view = new View("login");
+        $view = new View("login", "back");
         $view->assign("user",$this->user);
     }
 

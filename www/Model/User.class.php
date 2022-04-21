@@ -287,7 +287,7 @@ class User extends BaseSQL
                         "type"=>"email",
                         "placeholder"=>"Votre email ...",
                         "id"=>"emailRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "error"=>"Email incorrect",
                         "unicity"=>true,
@@ -297,7 +297,7 @@ class User extends BaseSQL
                         "type"=>"password",
                         "placeholder"=>"Votre mot de passe ...",
                         "id"=>"pwdRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "error"=>"Votre mot de passe doit faire entre 8 et 16 et contenir des chiffres et des lettres",
                     ],
@@ -305,7 +305,7 @@ class User extends BaseSQL
                         "type"=>"password",
                         "placeholder"=>"Confirmation ...",
                         "id"=>"pwdConfirmRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "confirm"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
@@ -314,7 +314,7 @@ class User extends BaseSQL
                         "type"=>"text",
                         "placeholder"=>"Prénom ...",
                         "id"=>"firstnameRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "min"=>2,
                         "max"=>50,
                         "error"=>"Votre prénom n'est pas correct",
@@ -323,7 +323,7 @@ class User extends BaseSQL
                         "type"=>"text",
                         "placeholder"=>"Nom ...",
                         "id"=>"lastnameRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "min"=>2,
                         "max"=>100,
                         "error"=>"Votre nom n'est pas correct",
@@ -344,24 +344,27 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Se connecter"
+                "submit"=>"Login"
             ],
             "inputs"=>[
                 "email"=>[
+                    "label"=>"Mail",
                     "type"=>"email",
-                    "placeholder"=>"Votre email ...",
+                    "placeholder"=>"Your mail",
                     "id"=>"emailRegister",
-                    "class"=>"inputRegister",
+                    "class"=>"input",
                     "required"=>true,
                 ],
                 "password"=>[
+                    "label"=>"Password",
                     "type"=>"password",
-                    "placeholder"=>"Votre mot de passe ...",
+                    "placeholder"=>"Your password",
                     "id"=>"pwdRegister",
-                    "class"=>"inputRegister",
+                    "class"=>"input",
                     "required"=>true,
                 ]
             ]
+
         ];
     }
     public function getFormTp(): array
