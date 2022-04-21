@@ -45,7 +45,9 @@ class User{
             }
      
         }
-        $view = new View("login");
+
+        // CREER LA NOUVELLE VIEW
+        $view = new View("login", "back");
         $view->assign("user",$this->user);
     }
 
