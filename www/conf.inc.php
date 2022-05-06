@@ -7,4 +7,4 @@ define("DBPWD","password");
 define("DBDRIVER","mysql");
 define("DBPORT","3306");
 define("DBHOST","databaseCms");
-define("DBPREFIXE","cmsp_");
+define("DBPREFIXE","cmspf_");
