@@ -53,8 +53,6 @@ abstract class BaseSQL
         $queryPrepared->execute($columns);
     }
 
-
-
 /**
  * @param PDO $db
  * @param string $sql
@@ -119,6 +117,21 @@ function findOneData( string $sql, $params) {
         }
         return null;
     }
+
+/**
+ * @param PDO $db
+ * @param string $sql
+ * @param array $params
+ * @return string|null
+ */
+public function delete( string $sql, array $params): ?string {
+
+    $statement = $this->pdo->prepare($sql);
+    if($statement) {
+        $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
+    }
+    return null;
+}
 
 
 

@@ -3,7 +3,7 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 
-class User extends BaseSQL
+class Rdvs extends BaseSQL
 {
 
     protected $id = null;
@@ -179,4 +179,34 @@ class User extends BaseSQL
 
         return $this;
     }
+
+    public function save()
+    {
+        parent::save();
+    }
+
+    public function loadCalendar ($sql)
+    {
+        return parent::findAllData($sql);
+
+    }
+
+    public function deleteEvent ($sql, $params)
+    {
+        return parent::delete($sql, $params);
+
+    }
+
+    public function select(string $sql, $params){
+
+        return parent::findOneData($sql, $params);
+    }
+
+    public function selectAllData(string $sql ){
+
+        return parent::findAllData($sql);
+    }
+
+
+    
 }

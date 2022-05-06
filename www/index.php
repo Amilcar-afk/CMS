@@ -65,20 +65,6 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
 
 }
 
-// $pattern = "/id/i";
-// $e = preg_match($pattern, $uri); 
-
-// if($routes[$uri] && ($e === 1)){
-//     $er = $uri;
-//     $er = explode('/', $er);
-//     $id = $er[2];
-//     // print_r($er);
-//     print_r($er);
-
-//     echo $id;
-
-// }
-
 
 // ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
 $controller = ucfirst(strtolower($routes[$uri]["controller"]));

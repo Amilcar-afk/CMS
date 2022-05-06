@@ -4,14 +4,11 @@
 namespace App\Controller;
 
 
-use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
 use App\Core\CheckInputs;
 use App\Model\User as UserModel;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+
 
 class User{
 
