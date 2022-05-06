@@ -21,6 +21,7 @@ abstract class BaseSQL
 
     public function __construct()
     {
+        //remplacer par singleton
         try{
             $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -29,6 +30,17 @@ abstract class BaseSQL
         }
         $classExploded = explode("\\",get_called_class());
         $this->table = DBPREFIXE.strtolower(end($classExploded));
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): object
+    {
+        $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute( ["id"=>$id] );
+        return $queryPrepared->fetchObject(get_called_class());
     }
 
     protected function save()
@@ -55,34 +67,34 @@ abstract class BaseSQL
 
 
 
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return array|null
- */
+    /**
+     * @param PDO $db
+     * @param string $sql
+     * @param array $params
+     * @return array|null
+     */
 
-function findOneData( string $sql, $params) {
+    function findOneData( string $sql, $params) {
 
-    $statement = $this->pdo->prepare($sql);
-    if($statement) {
-        $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-        if($success) {
-            $res = $statement->fetch(\PDO::FETCH_OBJ);
-            if($res) {
-                return $res;
+        $statement = $this->pdo->prepare($sql);
+        if($statement) {
+            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
+            if($success) {
+                $res = $statement->fetch(\PDO::FETCH_OBJ);
+                if($res) {
+                    return $res;
+                }
             }
         }
+        return null;
     }
-    return null;
-}
 
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return array|null
- */
+    /**
+     * @param PDO $db
+     * @param string $sql
+     * @param array $params
+     * @return array|null
+     */
     // function findAllData(string $sql, ?array $params): ?array  {
 
     function findAllData(string $sql, array $params= null) {
@@ -101,19 +113,18 @@ function findOneData( string $sql, $params) {
 
 
 
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return string|null
- */
+    /**
+     * @param PDO $db
+     * @param string $sql
+     * @param array $params
+     * @return string|null
+     */
     public function insertData( string $sql, array $params): ?string {
 
         $statement = $this->pdo->prepare($sql);
         if($statement) {
             $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
             if($success) {
-                // createLog($sql, $params);
                 return $this->pdo->lastInsertId();
             }
         }
@@ -123,47 +134,4 @@ function findOneData( string $sql, $params) {
 
 
 
-/**
- * @param string $sql
- * @param array $params
- */
-    // function createLog(string $sql, array $params){
-    //     $actionLog = strtoupper(substr($sql, 0, strpos($sql, " ")));
-    //     if ($actionLog != "SELECT") {
-
-    //         switch ($actionLog) {
-    //             case "DELETE":
-    //                 $sql = substr($sql, strlen("DELETE FROM "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "DELETED FROM ";
-    //                 break;
-    //             case "INSERT":
-    //                 $sql = substr($sql, strlen("INSERT INTO "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "INSERTED INTO ";
-    //                 break;
-    //             case "UPDATE":
-    //                 $sql = substr($sql, strlen("UPDATE "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "UPDATED ";
-    //                 break;
-    //             default:
-    //                 $tableName = "database";
-    //                 $action = "OPERATION IN ";
-    //         }
-
-    //         $keys = array_keys($params);
-    //         $messageElements = "";
-    //         $keyLog = 0;
-    //         foreach ($params as $param) {
-    //             $messageElements .= $keys[$keyLog] . " = " . $param . ((($keyLog == 0  count($keys) - 1 == $keyLog)  count($keys) == 1) ? " " : ", ");
-    //             ++$keyLog;
-    //         }
-
-    //         $logUser = (isset($_SESSION["idUser"]) ? "USER#".$_SESSION["idUser"] : "ANONYM");
-
-    //         error_log("[" . date('Y-m-d H:i:s (e)') . "][" . $_SERVER["REMOTE_ADDR"] . "][" . $actionLog . "] " . $logUser . " | ". $action . $tableName ." ". $messageElements . "\n", 3, '../logs/' . date('Y-m') . "-reports.log");
-
-    //     }
-    // }
 }
