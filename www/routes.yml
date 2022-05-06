@@ -6,7 +6,7 @@
   controller: general
   action: contact
 
-/login:
+/login:   
   controller: user
   action: login
 
