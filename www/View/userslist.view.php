@@ -28,7 +28,7 @@
                         </a>
                     </td>
                     <td  class="text-center">
-                        <a class="btn btn-danger" href="/user_delete/<?= $user->id ?>"
+                        <a class="btn btn-danger" href="/user_delete/id=2"
                             onclick="return confirm('Etes vous sûr de ...')">
                             <!-- <i class="fas fa-trash"></i> -->
                             <button>D</button>
