@@ -53,6 +53,14 @@ abstract class BaseSQL
         $queryPrepared->execute($columns);
     }
 
+    public function getPramsFromUri()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        $res = explode('/', parse_url($url, PHP_URL_PATH));
+        $res = $res[2];
+        return $res;
+    }
+
 /**
  * @param PDO $db
  * @param string $sql

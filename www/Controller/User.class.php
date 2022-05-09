@@ -65,7 +65,6 @@ class User{
                 print_r($result);
             }
         }
-        $e = 1;
         $view = new View("register");
         $view->assign("user",$this->user);
     }

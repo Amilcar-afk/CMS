@@ -29,8 +29,6 @@ require 'vendor/autoload.php';
 
 
 
-
-
 function myAutoloader($class){
 
     //$class = App\Core\CleanWords
@@ -56,13 +54,14 @@ if(!file_exists($routeFile)){
 
 $routes = yaml_parse_file($routeFile);
 
-// en verifie l'existance du l'url l'existance du controller et l'existance de l'action
-
 
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
-
-    die("Page 404");
-
+    $pattern = '/([^\/$])([0-9])/';
+    $replacement = 'id';
+    $uri =  preg_replace($pattern, $replacement, $uri);
+    if(empty($routes[$uri])){
+        die("Page 404");
+    }
 }
 
 

@@ -53,3 +53,12 @@
 /rdv_calendar_update:
   controller: rendezvous
   action: updateEvent
+
+/public_rdvs_list:
+  controller: rendezvous
+  action: public_rdvs_List
+
+/public_rdvs_reserver/id:
+  controller: rendezvous
+  action: public_rdvs_reserver
+

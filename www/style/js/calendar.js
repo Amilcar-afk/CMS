@@ -47,23 +47,29 @@ $(document).ready(function() {
     },
 
     // UPDATE EVENTS /////////////////////////////////////////////
+    //rdvs_ status
+    //select - libre -devis - ..: tritre de rdv
+    //participant ou awner sur a table user_rdv_asso
 
-    // eventDrop:function(event)
-    // {
-    //  var start = moment(event.start).format("Y-MM-DD HH:mm:ss");
-    //  var end = moment(event.end).format("Y-MM-DD HH:mm:ss");
-    //  var id = event.id;
-    //  $.ajax({
-    //   url:"/rdv_calendar_update",
-    //   type:"POST",
-    //   data:{start:start, end:end, id:id},
-    //   success:function()
-    //   {
-    //    calendar.fullCalendar('refetchEvents');
-    //    alert("Event Updated");
-    //   }
-    //  });
-    // },
+
+
+    editable:true,
+    eventDrop:function(event)
+    {
+     var start = moment(event.start).format("Y-MM-DD HH:mm:ss");
+     var end = moment(event.end).format("Y-MM-DD HH:mm:ss");
+     var id = event.id;
+     $.ajax({
+      url:"/rdv_calendar_update",
+      type:"POST",
+      data:{start:start, end:end, id:id},
+      success:function()
+      {
+       calendar.fullCalendar('refetchEvents');
+       alert("Event Updated");
+      }
+     });
+    },
 
     editable:true,
     eventResize:function(event)

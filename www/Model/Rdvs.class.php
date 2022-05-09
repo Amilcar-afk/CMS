@@ -197,7 +197,7 @@ class Rdvs extends BaseSQL
 
     }
 
-    public function select(string $sql, $params){
+    public function selectOneByData(string $sql, $params){
 
         return parent::findOneData($sql, $params);
     }
@@ -207,6 +207,70 @@ class Rdvs extends BaseSQL
         return parent::findAllData($sql);
     }
 
+    public function getPramsFromUri(){
 
-    
+        return parent::getPramsFromUri();
+    }
+
+    public function getFormRegister(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"reserver",
+            ],
+            "select"=>[
+                "title"=>[
+                    "type"=>"select",
+                    "name"=>"title",
+                    "option"=>[
+                        "libre",
+                        "devis",
+                        "autre option",
+                    ],
+                    "required"=>true,
+                    "placeholder"=>"le titre ...",
+                    "id"=>"title",
+                    "class"=>"inputRegister",
+                    "required"=>true,
+                    "error"=>"titre incorrect",
+                ],
+
+            ],
+            "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "id"=>"id",
+                    "class"=>"inputRegister",
+                    "value"=> $this->getId(),
+                    ],
+              
+                "location"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre location ...",
+                    "id"=>"location",
+                    "class"=>"location",
+                    "required"=>true,
+                    "error"=>"location incorrect",
+                    "unicity"=>true,
+                    "value"=> $this->getLocation(),
+                ],
+            ],
+            "textarea"=>[
+                "description"=>[
+                    "type"=>"text",
+                    "placeholder"=>"description ...",
+                    "id"=>"description",
+                    "class"=>"description",
+                    "min"=>2,
+                    "max"=>50,
+                    "name"=>"description",
+                    "error"=>"champ ",
+                    "value"=> $this->getDescription(),
+                ]
+
+            ]
+        ];
+    }
 }
