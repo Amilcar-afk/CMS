@@ -61,4 +61,4 @@
 /public_rdvs_reserver/id:
   controller: rendezvous
   action: public_rdvs_reserver
-
+  # params: [id, nom]

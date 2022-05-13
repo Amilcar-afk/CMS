@@ -25,11 +25,14 @@ class User{
             $result = CheckInputs::checkEmail($_POST['email']);
             if($result){
                 $this->user->setEmail($_POST['email']);
-                $sql = "SELECT * FROM cmsp_user WHERE email = :email";
-                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
+                $this->user->setPassword($_POST['password']);
+
+                $sql = "SELECT * FROM cmspf_Users WHERE email = :email ";
+                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail(),]);
                 if(!empty($resultat)){
                     if(password_verify($_POST['password'], $resultat->password)){
-                        echo'Bienvenu ! fdp';
+                        session_start();
+                        $_SESSION['Auth'] = $resultat;
                         header('location:/dashboard');
                     }else{
                         echo'mot de passe incorrect';
@@ -60,6 +63,8 @@ class User{
                 $this->user->setLastname($_POST['lastname']);
                 $this->user->setPassword($_POST['password']);
                 $this->user->setEmail($_POST['email']);
+                $this->user->setRank(1);
+
                 $this->user->save();
             }else{
                 print_r($result);

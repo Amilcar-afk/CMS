@@ -6,6 +6,7 @@ use App\Core\BaseSQL;
 class User extends BaseSQL
 {
 
+    protected $table_name = 'Users';
     protected $id = null;
     protected $firstname;
     protected $lastname;

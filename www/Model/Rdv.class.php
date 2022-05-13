@@ -3,7 +3,7 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 
-class Rdvs extends BaseSQL
+class Rdv extends BaseSQL
 {
 
     protected $id = null;

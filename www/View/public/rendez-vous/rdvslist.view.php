@@ -17,7 +17,7 @@
             <tbody>
                 <?php foreach ($allRdvs as $rdv) { ?>
                     <tr>
-                            <td><?= $rdv['start'];?></td>
+                            <td><?= $rdv['start'] ;?></td>
                             <td><?= $rdv['end'];?></td>
                         <td class="text-center">
                             <a class="btn btn-warning" href="/public_rdvs_reserver/<?=$rdv['id']?>">

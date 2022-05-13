@@ -7,6 +7,7 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
+    private $lastInsertId;
 
     /**
      * get_called_class()  Retourne le nom de la classe depuis laquelle une méthode statique a été appelée.
@@ -28,7 +29,15 @@ abstract class BaseSQL
             die("Erreur SQL".$e->getMessage());
         }
         $classExploded = explode("\\",get_called_class());
-        $this->table = DBPREFIXE.strtolower(end($classExploded));
+        $this->table = DBPREFIXE.(end($classExploded)).'s';
+
+        // if(isset($this->table_name)){
+        //     $this->table = DBPREFIXE.($this->table_name);
+        // }else{
+        //     $classExploded = explode("\\",get_called_class());
+        //     $this->table = DBPREFIXE.(end($classExploded)).'s';
+        // }
+
     }
 
     protected function save()
@@ -48,11 +57,30 @@ abstract class BaseSQL
        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
+
        }
+
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
+        $lastInsertd = $this->pdo->lastInsertId();
+        $this->setLastId($lastInsertd );
     }
 
+    public function setLastId($lastId)
+    {
+        $this->lastInsertId = $lastId;
+
+    }
+
+    public function getLastId()
+    {
+        return $this->lastInsertId;
+    }
+
+    
+
+
+ 
     public function getPramsFromUri()
     {
         $url = $_SERVER['REQUEST_URI'];
@@ -82,6 +110,7 @@ function findOneData( string $sql, $params) {
     }
     return null;
 }
+
 
 /**
  * @param PDO $db
