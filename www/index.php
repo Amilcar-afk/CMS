@@ -32,6 +32,8 @@ if(!file_exists($routeFile)){
 $routes = yaml_parse_file($routeFile);
 
 
+
+
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
