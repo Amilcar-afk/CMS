@@ -58,10 +58,6 @@
   controller: rendezvous
   action: public_rdvs_List
 
-# /public_rdvs_reserver/id:
-#   controller: rendezvous
-#   action: public_rdvs_reserver
-#   # params: [id, nom]
 
 /public_rdvs_reserver:
   controller: rendezvous

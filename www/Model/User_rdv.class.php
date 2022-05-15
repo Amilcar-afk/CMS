@@ -7,7 +7,7 @@ class User_rdv extends BaseSQL
 {
 
     protected $id = null;
-    // protected $table_name = 'User_rdv';
+    protected $table_name = 'User_rdv';
     protected $type;
     protected $user_key;
     protected $rdv_key;
@@ -100,6 +100,8 @@ class User_rdv extends BaseSQL
     {
         parent::save();
     }
+
+   
 
 }
 

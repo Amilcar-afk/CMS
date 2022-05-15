@@ -28,15 +28,16 @@ abstract class BaseSQL
         }catch(\Exception $e){
             die("Erreur SQL".$e->getMessage());
         }
-        $classExploded = explode("\\",get_called_class());
-        $this->table = DBPREFIXE.(end($classExploded)).'s';
+        // $classExploded = explode("\\",get_called_class());
+        // $this->table = DBPREFIXE.(end($classExploded)).'s';
 
-        // if(isset($this->table_name)){
-        //     $this->table = DBPREFIXE.($this->table_name);
-        // }else{
-        //     $classExploded = explode("\\",get_called_class());
-        //     $this->table = DBPREFIXE.(end($classExploded)).'s';
-        // }
+        if(isset($this->table_name)){
+            $this->table = DBPREFIXE.$this->table_name;
+        }else{
+            $classExploded = explode("\\",get_called_class());
+            $this->table = DBPREFIXE.(end($classExploded)).'s';
+        }
+        
 
     }
 
@@ -44,8 +45,16 @@ abstract class BaseSQL
     {
 
         $columns  = get_object_vars($this);
+        // $varsToExclude = get_class_vars(get_class());
+        // $columns = array_diff_key($columns, $varsToExclude);
+        // $columns = array_filter($columns);
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
+            foreach($columns as $column => $value ){
+                if($column === 'table_name'){
+                    continue;
+                }
+            }
         $columns = array_filter($columns);
 
        if( !is_null($this->getId()) ){
@@ -65,6 +74,44 @@ abstract class BaseSQL
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
+
+
+    protected function test()
+    {
+
+        $columns  = get_object_vars($this);
+
+        
+        // foreach($columns as $column ){
+        //     // var_dump($column);
+        //     // if($column === 'table_name'){
+        //     //     echo 12;
+        //     //     continue;
+        //     // }else{
+        //     //     var_dump($column);
+        //     // }
+        // }
+        $varsToExclude = get_class_vars(get_class());
+        $columns = array_diff_key($columns, $varsToExclude);
+            foreach($columns as $column => $value ){
+                // var_dump($column);
+
+                if($column === 'table_name'){
+                    continue;
+                }else{
+                    var_dump($column);
+                }
+            }
+
+        $columns = array_filter($columns);
+
+      
+
+    }
+
+
+
+
 
     public function setLastId($lastId)
     {
