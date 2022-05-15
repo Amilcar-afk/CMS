@@ -15,17 +15,19 @@
                 <th colspan="2" class="text-center">reserver</th>
             </tr>
             <tbody>
-                <?php foreach ($allRdvs as $rdv) { ?>
-                    <tr>
-                            <td><?= $rdv['start'] ;?></td>
-                            <td><?= $rdv['end'];?></td>
-                        <td class="text-center">
-                            <a class="btn btn-warning" href="/public_rdvs_reserver/<?=$rdv['id']?>">
-                                <button>RESERVER</button>
-                            </a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                <?php foreach ($allRdvs as $rdv): ?>
+                    <?php if($rdv['status'] == 1):; ?>
+                        <tr>
+                                <td><?= $rdv['start'] ;?></td>
+                                <td><?= $rdv['end'];?></td>
+                            <td class="text-center">
+                                <a class="btn btn-warning" href="/public_rdvs_reserver/<?=$rdv['id']?>">
+                                    <button>RESERVER</button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

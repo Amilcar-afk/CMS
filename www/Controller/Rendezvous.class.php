@@ -102,6 +102,8 @@ class RendezVous{
             "id" => $row->id,
             "start" => $row->startDate,
             "end" => $row->endDate,
+            "status" => $row->status,
+
           );
         }
         $view = new View("public/rendez-vous/rdvslist");
@@ -113,7 +115,7 @@ class RendezVous{
     {
         $id = $this->rdv->getPramsFromUri();
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
-        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id]);
+        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id['id']]);
 
         $this->rdv->setId($currentRdv->id);
         $this->rdv->setTitle($currentRdv->title);
@@ -127,6 +129,8 @@ class RendezVous{
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
             $this->rdv->setDescription($_POST['description']);
+            $this->rdv->setStatus(2);
+
             $this->rdv->save();
             $userId = $_SESSION['Auth']->id;
             $this->user_rdv->setType(2);
@@ -139,6 +143,13 @@ class RendezVous{
         $view->assign("currentRdv", $currentRdv);
         $view->assign("rdv",$this->rdv);
 
+    }
+
+
+    public function test()
+    {
+       $id = $this->rdv->getPramsFromUri();
+       var_dump($id['id']);
     }
 
 }

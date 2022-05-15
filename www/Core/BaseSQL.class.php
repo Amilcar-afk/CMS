@@ -78,15 +78,35 @@ abstract class BaseSQL
     }
 
     
+    public function parseUrl()
+    {
+        $routeFile = "routes.yml";
+        $routes = yaml_parse_file($routeFile);
+        return $routes;
+    }
 
 
  
     public function getPramsFromUri()
     {
         $url = $_SERVER['REQUEST_URI'];
+        $routeFile = "routes.yml";
+        $routes = yaml_parse_file($routeFile);
         $res = explode('/', parse_url($url, PHP_URL_PATH));
-        $res = $res[2];
-        return $res;
+        $e = '/'.$res[1];
+        $paramsNumber = count($res);
+        $allParams =[];
+        $paramsOfUri=[];
+
+        for($i=2;$i<=($paramsNumber - 1);$i++){
+            array_push($paramsOfUri,$res[$i]);
+        }
+
+        foreach($routes[$e]['params'] as $param => $value){
+                $allParams[$value] = $paramsOfUri[$param];
+        }
+        return $allParams;
+
     }
 
 /**
