@@ -64,8 +64,8 @@
   action: public_rdvs_reserver
   params: [id]
 
-/public_test:
+/public/edit:
   controller: rendezvous
   action: test
-  params: [id, id_res]
+  params: [id_res]
 

@@ -124,19 +124,22 @@ class RendezVous{
 
 
         if($_POST){
-            var_dump($_POST);
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
             $this->rdv->setDescription($_POST['description']);
             $this->rdv->setStatus(2);
-
             $this->rdv->save();
+
+
             $userId = $_SESSION['Auth']->id;
+
+            
             $this->user_rdv->setType(2);
             $this->user_rdv->setUser_key($userId);
             $this->user_rdv->setRdv_key($_POST['id']);
             $this->user_rdv->save();
+            header('location:/public_rdvs_list');
         }
 
         $view = new View("public/rendez-vous/rdvsupdate");
@@ -148,8 +151,8 @@ class RendezVous{
 
     public function test()
     {
-
-       $this->rdv->testos();
+        $id = $this->rdv->getPramsFromUri();
+        var_dump($id);
     }
 
 }

@@ -45,30 +45,36 @@ abstract class BaseSQL
     {
 
         $columns  = get_object_vars($this);
+
         // $varsToExclude = get_class_vars(get_class());
         // $columns = array_diff_key($columns, $varsToExclude);
         // $columns = array_filter($columns);
+
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
             foreach($columns as $column => $value ){
-                if($column === 'table_name'){
-                    continue;
+                $table_name = 'table_name';
+                if(isset($table_name )){
+                    unset($columns[$table_name]);
+                     continue;
+                }else{
+                    echo 'introuvable';
                 }
             }
         $columns = array_filter($columns);
 
-       if( !is_null($this->getId()) ){
-           foreach ($columns as $key=>$value){
-                $setUpdate[]=$key."=:".$key;
-           }
-           $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate)." WHERE id=".$this->getId();
+        if( !is_null($this->getId()) ){
+            foreach ($columns as $key=>$value){
+                    $setUpdate[]=$key."=:".$key;
+            }
+            $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
+            " WHERE id=".$this->getId();
 
-       }else{
+        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
 
-       }
-
+        }
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
         $lastInsertd = $this->pdo->lastInsertId();
@@ -78,19 +84,7 @@ abstract class BaseSQL
 
     protected function test()
     {
-
         $columns  = get_object_vars($this);
-
-        
-        // foreach($columns as $column ){
-        //     // var_dump($column);
-        //     // if($column === 'table_name'){
-        //     //     echo 12;
-        //     //     continue;
-        //     // }else{
-        //     //     var_dump($column);
-        //     // }
-        // }
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
             foreach($columns as $column => $value ){
@@ -104,9 +98,6 @@ abstract class BaseSQL
             }
 
         $columns = array_filter($columns);
-
-      
-
     }
 
 
@@ -136,22 +127,36 @@ abstract class BaseSQL
  
     public function getPramsFromUri()
     {
+        
         $url = $_SERVER['REQUEST_URI'];
         $routeFile = "routes.yml";
         $routes = yaml_parse_file($routeFile);
-        $res = explode('/', parse_url($url, PHP_URL_PATH));
-        $e = '/'.$res[1];
-        $paramsNumber = count($res);
+        $parseUrl = explode('/', parse_url($url, PHP_URL_PATH));
+        array_shift($parseUrl);
+
+        $paramsNumber = count($parseUrl);
         $allParams =[];
         $paramsOfUri=[];
+        $uri = '/'.$parseUrl[0];
 
-        for($i=2;$i<=($paramsNumber - 1);$i++){
-            array_push($paramsOfUri,$res[$i]);
+        if(!isset($routes[$uri]['params']) ){
+            $uri = $uri.'/'.$parseUrl[1];
+            $paramsNumber = $paramsNumber - 1;
+        }
+        
+        for($i=1;$i<=($paramsNumber - 1);$i++){
+            array_push($paramsOfUri,$parseUrl[$i]);
         }
 
-        foreach($routes[$e]['params'] as $param => $value){
-                $allParams[$value] = $paramsOfUri[$param];
+        if(count($routes[$uri]['params']) != count($paramsOfUri)){
+            echo 'nombre de parametre invallid <br>';
+            die();
         }
+
+        foreach($routes[$uri]['params'] as $param => $value){
+            $allParams[$value] = $paramsOfUri[$param];
+        }
+
         return $allParams;
 
     }

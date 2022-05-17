@@ -5,14 +5,10 @@ namespace App;
 require "conf.inc.php";
 require 'vendor/autoload.php';
 
-
 function myAutoloader($class){
 
-    //$class = App\Core\CleanWords
     $class = str_ireplace("App\\", "", $class);
-    //$class = Core\CleanWords
     $class = str_ireplace("\\", "/", $class);
-    //$class = Core/CleanWords
     if(file_exists($class.".class.php")){
         include $class.".class.php";
     }
@@ -20,9 +16,7 @@ function myAutoloader($class){
 
 spl_autoload_register("App\myAutoloader");
 
-
-$uri = $_SERVER["REQUEST_URI"]; // => " / "
-
+$uri = $_SERVER["REQUEST_URI"]; 
 $routeFile = "routes.yml";
 
 if(!file_exists($routeFile)){
@@ -31,27 +25,22 @@ if(!file_exists($routeFile)){
 
 $routes = yaml_parse_file($routeFile);
 
-
-
-
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
-    $uri = '/'.$parseUrl[1];
-    if(count($parseUrl) > 2 && isset($routes[$uri]['params']) ){
+    array_shift($parseUrl);
+    $uri = '/'.$parseUrl[0];
+    if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
         echo '';
     }else{
-        die("Page 404");
+        $uri = $uri.'/'.$parseUrl[1];
+        if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
+            echo '';
+        }else{
+            die("Page 404");
+        }
     }
-
-    // $pattern = '/([^\/$])([0-9])/';
-    // $replacement = 'id';
-    // $uri =  preg_replace($pattern, $replacement, $uri);
-    // if(empty($routes[$uri])){
-    //     die("Page 404");
-    // }
 }
-
 
 $controller = ucfirst(strtolower($routes[$uri]["controller"]));
 $action = strtolower($routes[$uri]["action"]);
