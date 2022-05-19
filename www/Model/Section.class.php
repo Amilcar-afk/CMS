@@ -7,8 +7,24 @@ namespace App\Model;
 class Section
 {
     protected $id;
-    protected $witdth;
     protected $background;
+    protected $bessels;
+
+    /**
+     * @return mixed
+     */
+    public function getBessels()
+    {
+        return $this->bessels;
+    }
+
+    /**
+     * @param mixed $bessels
+     */
+    public function setBessels($bessels): void
+    {
+        $this->bessels = $bessels;
+    }
 
     /**
      * @return mixed
@@ -24,22 +40,6 @@ class Section
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWitdth()
-    {
-        return $this->witdth;
-    }
-
-    /**
-     * @param mixed $witdth
-     */
-    public function setWitdth($witdth): void
-    {
-        $this->witdth = $witdth;
     }
 
     /**
