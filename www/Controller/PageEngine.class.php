@@ -18,7 +18,7 @@ class PageEngine
     {
         $this->page = new Page();
     }
-    
+
     public function savePage()
     {
         if(isset($_POST['page']))
