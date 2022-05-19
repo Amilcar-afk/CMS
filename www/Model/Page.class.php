@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Model;
 
 
@@ -55,7 +54,7 @@ class Page
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
