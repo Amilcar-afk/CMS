@@ -152,7 +152,6 @@ class RendezVous{
     public function test()
     {
         $id = $this->rdv->getPramsFromUri();
-        var_dump($id);
     }
 
 }

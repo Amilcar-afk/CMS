@@ -43,26 +43,19 @@ abstract class BaseSQL
 
     protected function save()
     {
-
         $columns  = get_object_vars($this);
-
-        // $varsToExclude = get_class_vars(get_class());
-        // $columns = array_diff_key($columns, $varsToExclude);
-        // $columns = array_filter($columns);
-
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
-            foreach($columns as $column => $value ){
-                $table_name = 'table_name';
-                if(isset($table_name )){
-                    unset($columns[$table_name]);
-                     continue;
-                }else{
-                    echo 'introuvable';
-                }
+        foreach($columns as $column => $value ){
+            $table_name = 'table_name';
+            if(isset($table_name )){
+                unset($columns[$table_name]);
+                    continue;
+            }else{
+                echo 'introuvable';
             }
+        }
         $columns = array_filter($columns);
-
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
@@ -128,36 +121,50 @@ abstract class BaseSQL
     public function getPramsFromUri()
     {
         
-        $url = $_SERVER['REQUEST_URI'];
-        $routeFile = "routes.yml";
-        $routes = yaml_parse_file($routeFile);
+        $url = $_SERVER["REQUEST_URI"]; 
+        $routes = yaml_parse_file("routes.yml");
         $parseUrl = explode('/', parse_url($url, PHP_URL_PATH));
-        array_shift($parseUrl);
-
-        $paramsNumber = count($parseUrl);
-        $allParams =[];
-        $paramsOfUri=[];
-        $uri = '/'.$parseUrl[0];
-
-        if(!isset($routes[$uri]['params']) ){
-            $uri = $uri.'/'.$parseUrl[1];
-            $paramsNumber = $paramsNumber - 1;
+        for($i=0;$i<=sizeof($parseUrl);$i++){
+            array_pop($parseUrl);
+            $uri = implode('/',$parseUrl);
+            if(isset($routes[$uri]) ){
+                break;
+            }
         }
+        $e = str_replace($uri,'',$url);
+        $param = explode('/',$e);
+        array_shift($param);
+        var_dump($param);
+        // $parseUrl = explode('/', parse_url($url, PHP_URL_PATH));
+
+        // array_shift($parseUrl);
+
+        // $paramsNumber = count($parseUrl);
+        // $allParams =[];
+        // $paramsOfUri=[];
+
+        // if(!isset($routes[$uri]['params']) ){
+        //     $uri = $uri.'/'.$parseUrl[1];
+        // }
+
+        // if(!isset($routes[$uri]['params']) ){
+        //     $uri = $uri.'/'.$parseUrl[1];
+        // }
         
-        for($i=1;$i<=($paramsNumber - 1);$i++){
-            array_push($paramsOfUri,$parseUrl[$i]);
-        }
+        // for($i=2;$i<=($paramsNumber  -1 );$i++){
+        //     array_push($paramsOfUri,$parseUrl[$i]);
+        // }
 
-        if(count($routes[$uri]['params']) != count($paramsOfUri)){
-            echo 'nombre de parametre invallid <br>';
-            die();
-        }
+        // if(count($routes[$uri]['params']) != count($paramsOfUri)){
+        //     echo 'nombre de parametre invallid <br>';
+        //     die();
+        // }
 
-        foreach($routes[$uri]['params'] as $param => $value){
-            $allParams[$value] = $paramsOfUri[$param];
-        }
+        // foreach($routes[$uri]['params'] as $param => $value){
+        //     $allParams[$value] = $paramsOfUri[$param];
+        // }
 
-        return $allParams;
+        // return $allParams;
 
     }
 

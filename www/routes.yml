@@ -67,5 +67,5 @@
 /public/edit:
   controller: rendezvous
   action: test
-  params: [id_res]
+  params: [id_res,id]
 
