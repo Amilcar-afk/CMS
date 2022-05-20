@@ -18,7 +18,7 @@
         <div></div>
         <div></div>
     </div>
-    <body class="body-setup">
+    <body class="body-back-office">
         <header>
             <nav>
                 <ul>
