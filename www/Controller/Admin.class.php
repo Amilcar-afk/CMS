@@ -3,17 +3,9 @@
 namespace App\Controller;
 
 use App\Core\View;
-use App\Controller\Authadmin;
 
 class Admin
 {
-
-    public function __construct()
-    {
-        $this->authAdmin = new Authadmin();
-        Authadmin::isLogged();
-    }
-    
     public function dashboard()
     {
         $firstname = "Marouane";

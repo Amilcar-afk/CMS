@@ -1,14 +1,43 @@
 <?php
 
+/**
+ * creer la racine du namespace
+ * include le conf.inc.php ou y'a ou ya toutes les constante
+ * la fonction myAutoloader($class) qui prend en parametre la class et elle verifie si elle exite et fini par le inclure
+ * la fonction spl_autoload_register("App\myAutoloader"); qui prend en parametre la fonction myAutoloader qu'elle recupere grace en namespace
+ * $uri = $_SERVER["REQUEST_URI"]; recupere le url courrant
+ * en verifie l'existance du fichier routes.yml qui contient toute les routes et renvoi un message d'erruer si celuici existe pas
+ * yaml_parse_file permet de decouper le fihier pass" en parametre et elle le retoure en format tableau
+ * fichier routes.yml en forme de tableau d'objet {  ["/"]=> array(2) ["controller"]=> string(7) "general" ["action"]=> string(4) "home" }
+ * en verifie l'existance du l'url l'existance du controller et l'existance de l'action
+ * ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
+ * $controllerFile contient le controller courant
+ * verifie l'existance du controller 
+ * inclut le fichier du controller courrant
+ * la variable $controller contient la class du controller couant
+ * verifie l'existance du class du controller et renvoie un message d'erruer si celuici existe pas 
+ * 
+ * 
+ * 
+ *  
+ * */
+
 namespace App;
 
 require "conf.inc.php";
 require 'vendor/autoload.php';
 
+
+
+
+
 function myAutoloader($class){
 
+    //$class = App\Core\CleanWords
     $class = str_ireplace("App\\", "", $class);
+    //$class = Core\CleanWords
     $class = str_ireplace("\\", "/", $class);
+    //$class = Core/CleanWords
     if(file_exists($class.".class.php")){
         include $class.".class.php";
     }
@@ -16,7 +45,9 @@ function myAutoloader($class){
 
 spl_autoload_register("App\myAutoloader");
 
-$uri = $_SERVER["REQUEST_URI"]; 
+
+$uri = $_SERVER["REQUEST_URI"]; // => " / "
+
 $routeFile = "routes.yml";
 
 if(!file_exists($routeFile)){
@@ -25,43 +56,78 @@ if(!file_exists($routeFile)){
 
 $routes = yaml_parse_file($routeFile);
 
+// en verifie l'existance du l'url l'existance du controller et l'existance de l'action
+
+
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
-    $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
-    array_shift($parseUrl);
-    $uri = '/'.$parseUrl[0];
-    if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-        echo '';
-    }else{
-        $uri = $uri.'/'.$parseUrl[1];
-        if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-            echo '';
-        }else{
-            die("Page 404");
-        }
-    }
+    die("Page 404");
+
 }
 
-$controller = ucfirst(strtolower($routes[$uri]["controller"]));
-$action = strtolower($routes[$uri]["action"]);
+// $pattern = "/id/i";
+// $e = preg_match($pattern, $uri); 
 
+// if($routes[$uri] && ($e === 1)){
+//     $er = $uri;
+//     $er = explode('/', $er);
+//     $id = $er[2];
+//     // print_r($er);
+//     print_r($er);
+
+//     echo $id;
+
+// }
+
+
+// ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
+$controller = ucfirst(strtolower($routes[$uri]["controller"]));
+$action = strtolower($routes[$uri]["action"]); // la methode du controlleur
+
+// $controller = User ou $controller = Global
+// $action = login ou $action = logout ou $action = home
+
+//$controllerFile contient le controller courant
 $controllerFile = "Controller/".$controller.".class.php";
+//verifie l'existance du controller 
 if(!file_exists($controllerFile)){
     die("Le controller ".$controllerFile." n'existe pas");
 }
-include $controllerFile; 
+include $controllerFile; // inclut le fichier du controller courrant
 
-$controller = "App\\Controller\\".$controller; 
+//la variable $controller contient la class du controller couant
+$controller = "App\\Controller\\".$controller; //App\Controller\le nom de la class
+
+//verifie l'existance du class du controller et renvoie un message d'erruer si celuici existe pas 
+
 if( !class_exists($controller) ){
    die("La classe ".$controller." n'existe pas");
 }
 
-$objectController = new $controller(); 
+$objectController = new $controller(); //instancier l'objet e la classe courante
+
+//method_exists verifie l'existance de la methode de l'objet l'objet   et renvoie un message d'erruer si celuici existe pas 
 
 if( !method_exists($objectController, $action) ){
     die("La methode ".$action." n'existe pas");
 }
-$objectController->$action();
+
+$objectController->$action();//on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
 
 
 
+
+/**
+ * on recupere l'url courrant est on le stock dans une variable
+ * on recupere le nom du fichier.yml et on le stock dans une variable
+ * on verifie l'existance de celui-ci
+ * on parse le le fichier.yml est on stock le resultat dans un tableau a 2d
+ * on recuperer le controller et l'action et on les stoc dans des varible, le controlleur on lui met la premiere lettre en majuscule
+ * on verifie l'existance de ceux-ci
+ * on recupere le nom du fichier qui contien le controlleur chemin.$controller.controller.php et on l'inclut
+ * on verifie l'existance de celui-ci
+ * on recupere le nom de la class avec le chemain du namespace en utilisant la variable $controller qu'on a utiliser pour recuperer le controller du fichier.yml
+ * onverifie l'existance de celui-ci
+ * on creer $objectcontroller qui sera l'instanciation de la class $controller
+ * on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
+ */

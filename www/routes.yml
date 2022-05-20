@@ -34,38 +34,6 @@
   controller: user
   action: usersList
 
-/rdv_calendar:
-  controller: rendezvous
-  action: calendar
-
-/rdv_calendar_insert:
-  controller: rendezvous
-  action: insertRdv
-
-/calendar_load:
-  controller: rendezvous
-  action: load
-
-/calendar_delete:
-  controller: rendezvous
-  action: deleteEvent
-
-/rdv_calendar_update:
-  controller: rendezvous
-  action: updateEvent
-
-/public_rdvs_list:
-  controller: rendezvous
-  action: public_rdvs_List
-
-
-/public_rdvs_reserver:
-  controller: rendezvous
-  action: public_rdvs_reserver
-  params: [id]
-
-/public/edit:
-  controller: rendezvous
-  action: test
-  params: [id_res]
-
+/user_delete/id:
+  controller: user
+  action: deleteUser
