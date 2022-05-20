@@ -19,19 +19,6 @@
         <div></div>
     </div>
     <body class="body-setup">
-        <header>
-            <nav>
-                <ul>
-                    <li><a id="back-office-logo" href="#"><img src="/style/images/logo_myfolio.png" alt="logo"></a></li>
-                    <li><a class="button-menu selected" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">storage</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Add code"><span class="material-icons-round">code</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <?php include $this->view.".view.php";?>
-        </main>
+        <?php include $this->view.".view.php";?>
     </body>
 </html>
