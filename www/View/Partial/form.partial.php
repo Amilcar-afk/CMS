@@ -1,12 +1,11 @@
 <form method="<?= $config["config"]["method"]??"POST" ?>"
       action="<?= $config["config"]["action"]??"" ?>"
-    <?= (!empty($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
+    <?= (!empty($config["enctype"]))?'
+    enctype="'.$config["enctype"].'"':'' ?>>
 
     <?php foreach ($config["inputs"] as $name=>$input):?>
-
         <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
             <p><?=$input["question"]?></p>
-
             <?php foreach ($input["choice"] as $nameChoice=>$choice):?>
                 <div class="input-container">
                     <input name="<?=$name?>"
@@ -21,7 +20,9 @@
                 </div>
             <?php endforeach;?>
             <br>
+
         <?php elseif ($input["type"] == "select"):?>
+
             <div class="input-container">
                 <p><?=$input["question"]?></p>
 
@@ -39,6 +40,7 @@
             </div>
 
         <?php elseif ($input["type"] == "textarea"):?>
+
             <div class="input-container">
                 <label for="<?=$name?>"><?=$name?></label>
                 <textarea name="<?= $name ?>"
@@ -55,6 +57,7 @@
             </div>
 
         <?php else:?>
+
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["label"]?></label>
                 <input name="<?=$name?>"
@@ -66,10 +69,8 @@
                     <?= (!empty($input["required"]))?'required="required"':'' ?>
                 >
             </div>
-
         <?php endif;?>
 
     <?php endforeach;?>
-
     <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
 </form>

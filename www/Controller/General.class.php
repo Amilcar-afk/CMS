@@ -1,10 +1,19 @@
 <?php
 
 namespace App\Controller;
+use App\Controller\Authadmin;
 
 use App\Core\View;
 
 class General{
+
+    public $authAdmin ;
+
+    public function __construct()
+    {
+        $this->authAdmin = new Authadmin();
+        Authadmin::isLogged();
+    }
 
     public function home()
     {
