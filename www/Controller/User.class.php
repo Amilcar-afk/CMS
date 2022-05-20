@@ -47,7 +47,7 @@ class User{
         }
 
         // CREER LA NOUVELLE VIEW
-        $view = new View("login", "back");
+        $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
     }
 
@@ -70,8 +70,7 @@ class User{
                 print_r($result);
             }
         }
-        $e = 1;
-        $view = new View("register");
+        $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
     }
 
