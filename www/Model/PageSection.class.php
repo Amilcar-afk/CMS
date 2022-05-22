@@ -6,7 +6,7 @@ namespace App\Model;
 
 class PageSection
 {
-    protected $id = null;
+    public $id = null;
     protected $page_key;
 
     /**

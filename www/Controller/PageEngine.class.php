@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Core\BaseSQL;
+use App\Core\View;
 use App\Model\Page;
 use App\Model\Section;
 use App\Model\PageSection;
@@ -13,25 +15,67 @@ use App\Model\Translation;
 
 class PageEngine
 {
-    public $user;
+    public $page;
     public function __construct()
     {
         $this->page = new Page();
     }
 
-    public function savePage()
+    public function buildPage(){
+
+
+
+        $view = new View("page-editor", "back");
+        $view->assign("user",$this->page);
+    }
+
+    public function composePage()
     {
+        $_POST['page'] = [
+            "meta"=>[
+                "date_update"=>"",
+                "user_key"=>"1",
+                "status"=>"",
+                "title"=>"page okok",
+                "background"=>"ffffff",
+                "description"=>"pq pas"
+            ],
+            "sections"=>[
+                [
+                    "bessels"=>"1",
+                    "background"=>"ffffff",
+                    "place"=>"1",
+                    "components"=>[
+                        [
+                            "type"=>"1",
+                            "place"=>"1",
+                            "witdth"=>"2",
+                            "highlight"=>"1",
+                            "font"=>"1",
+                            "font_size"=>"12",
+                            "font_weight"=>"1",
+                            "color"=>"ffffff",
+                            "background"=>"ffffff",
+                            "align"=>"1",
+                            "contents"=>[
+                                [
+                                    "content"=>"oui",
+                                    "description"=>"description",
+                                ]
+                            ]
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
         if(isset($_POST['page']))
         {
-            $_POST['page'] = stripslashes(html_entity_decode($_POST['page']));
-            $_POST['page'] = json_decode($_POST['page'], true);
 
-            $sectionPlace = 1;
-            $componentPlace = 1;
+            //$_POST['page'] = stripslashes(html_entity_decode($_POST['page']));
+            //$_POST['page'] = json_decode($_POST['page'], true);
 
-            $this->page->setPlace($componentPlace++);
-            $this->page->setBackground($_POST['page']['background']);
-            $this->page->setBessels($_POST['page']['bessels']);
+            $this->page->setBackground($_POST['page']['meta']['background']);
             $this->page->save();
 
             //foreach sur les sections
@@ -40,13 +84,13 @@ class PageEngine
                 foreach ($_POST['page']["sections"] as $section)
                 {
                     $this->section = new Section();
-                    $this->section->setPlace($sectionPlace++);
+                    $this->section->setPlace($section['place']);
                     $this->section->setBackground($section['background']);
                     $this->section->setBessels($section['bessels']);
                     $this->section->save();
 
                     $this->pageSection = new PageSection();
-                    $this->pageSection->setPageKey(($this->page->id);
+                    $this->pageSection->setPageKey($this->page->id);
                     $this->pageSection->setSectionKey($this->section->id);
                     $this->pageSection->save();
 
@@ -56,7 +100,7 @@ class PageEngine
                         foreach ($section["components"] as $component)
                         {
                             $this->component = new Component();
-                            $this->component->setPlace($componentPlace++);
+                            $this->component->setPlace($component['place']);
                             $this->component->setType($component['type']);
                             $this->component->setWidth($component['width']);
                             $this->component->setColor($component['color']);
@@ -74,11 +118,11 @@ class PageEngine
                                 {
                                     $this->translation = new Translation();
                                     $this->translation->setContent($content['value']);
-                                    $this->translation->setLanguageKey();
+                                    $this->translation->setLanguageKey(1);
                                     $this->translation->save();
 
                                     $this->componentTranslation = new ComponentTranslation();
-                                    $this->componentTranslation->setComponentKey(($this->component->id);
+                                    $this->componentTranslation->setComponentKey($this->component->id);
                                     $this->componentTranslation->setTranslationKey($this->translation->id);
                                     $this->componentTranslation->setType($content['type']);
                                     $this->componentTranslation->save();

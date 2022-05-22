@@ -6,7 +6,7 @@ namespace App\Model;
 
 class Component
 {
-    protected $id = null;
+    public $id = null;
     protected $place;
     protected $type;
     protected $width;
@@ -211,5 +211,9 @@ class Component
         $this->align = $align;
     }
 
+    public function save()
+    {
+        parent::save();
+    }
 
 }
