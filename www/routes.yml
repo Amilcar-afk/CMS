@@ -76,3 +76,12 @@
 /user_delete/id:
   controller: user
   action: deleteUser
+  
+/page/compose:
+  controller: pageengine
+  action: composepage
+
+/page/:
+  controller: pageengine
+  action: buildpage
+
