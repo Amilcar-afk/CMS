@@ -11,6 +11,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <link href="../style/dist/css/main.css" rel="stylesheet" />
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
+        <script type="text/javascript" src="../style/js/animations.js"></script>
+        <script type="text/javascript" src="../style/js/pageEditor.js"></script>
     <head>
     <div class="background-container-back-office">
         <div></div>

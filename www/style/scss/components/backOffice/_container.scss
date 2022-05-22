@@ -121,6 +121,8 @@
       position: absolute;
       top: 30px;
       right: 50px;
+      padding: 0px;
+      z-index: 1;
 
       & .material-icons-round {
         font-size: rem(30);

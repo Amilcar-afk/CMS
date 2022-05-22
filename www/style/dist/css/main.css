@@ -43,12 +43,7 @@ span, small {
 
 p {
   font-family: "Lato", sans-serif;
-<<<<<<< HEAD
-  margin: 0;
-}
-=======
-  padding: 5px; }
->>>>>>> 095303a90d3829ca8fbf2a18744f4084defa7d5f
+  margin: 0; }
 
 .container {
   max-width: var(--bessels);
@@ -114,6 +109,33 @@ p {
   .body-back-office {
     position: relative;
     padding: 0; } }
+
+.a-zoom-in {
+  animation: zoom-in 0.3s; }
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0.85, 0.85);
+    opacity: 0%; }
+  100% {
+    opacity: 100%;
+    transform: scale(1, 1); } }
+
+.a-zoom-out {
+  animation: zoom-out 0.3s; }
+
+.a-zoom-out-end {
+  display: none !important; }
+
+@keyframes zoom-out {
+  0% {
+    display: unset;
+    opacity: 100%;
+    transform: scale(1, 1); }
+  100% {
+    transform: scale(0.85, 0.85);
+    opacity: 0%;
+    display: none; } }
 
 @media (max-width: 768px) {
   .col-sm-1 {
@@ -285,194 +307,68 @@ p {
   .pb-sm-5 {
     padding-bottom: 3rem; }
   .fs-1 {
-<<<<<<< HEAD
-    font-size: 0.9090909091px;
-  }
-
+    font-size: 0.90909px; }
   .fs-2 {
-    font-size: 1.8181818182px;
-  }
-
+    font-size: 1.81818px; }
   .fs-3 {
-    font-size: 2.7272727273px;
-  }
-
+    font-size: 2.72727px; }
   .fs-4 {
-    font-size: 3.6363636364px;
-  }
-
+    font-size: 3.63636px; }
   .fs-5 {
-    font-size: 4.5454545455px;
-  }
-
+    font-size: 4.54545px; }
   .fs-6 {
-    font-size: 5.4545454545px;
-  }
-
+    font-size: 5.45455px; }
   .fs-7 {
-    font-size: 6.3636363636px;
-  }
-
+    font-size: 6.36364px; }
   .fs-8 {
-    font-size: 7.2727272727px;
-  }
-
+    font-size: 7.27273px; }
   .fs-9 {
-    font-size: 8.1818181818px;
-  }
-
+    font-size: 8.18182px; }
   .fs-10 {
-    font-size: 9.0909090909px;
-  }
-
+    font-size: 9.09091px; }
   .fs-11 {
-    font-size: 10px;
-  }
-
-  .fs-12 {
-    font-size: 10.9090909091px;
-  }
-
-  .fs-13 {
-    font-size: 11.8181818182px;
-  }
-
-  .fs-14 {
-    font-size: 12.7272727273px;
-  }
-
-  .fs-16 {
-    font-size: 14.5454545455px;
-  }
-
-  .fs-20 {
-    font-size: 18.1818181818px;
-  }
-
-  .fs-22 {
-    font-size: 20px;
-  }
-
-  .fs-24 {
-    font-size: 21.8181818182px;
-  }
-
-  .fs-26 {
-    font-size: 23.6363636364px;
-  }
-
-  .fs-28 {
-    font-size: 25.4545454545px;
-  }
-
-  .fs-32 {
-    font-size: 29.0909090909px;
-  }
-
-  .fs-34 {
-    font-size: 30.9090909091px;
-  }
-
-  .fs-36 {
-    font-size: 32.7272727273px;
-  }
-
-  .fs-38 {
-    font-size: 34.5454545455px;
-  }
-
-  .fs-40 {
-    font-size: 36.3636363636px;
-  }
-
-  .fs-42 {
-    font-size: 38.1818181818px;
-  }
-
-  .fs-44 {
-    font-size: 40px;
-  }
-
-  .fs-46 {
-    font-size: 41.8181818182px;
-  }
-
-  .fs-48 {
-    font-size: 43.6363636364px;
-  }
-
-  .fs-50 {
-    font-size: 45.4545454545px;
-  }
-
-  .fs-64 {
-    font-size: 58.1818181818px;
-  }
-}
-=======
-    font-size: 0.76923px; }
-  .fs-2 {
-    font-size: 1.53846px; }
-  .fs-3 {
-    font-size: 2.30769px; }
-  .fs-4 {
-    font-size: 3.07692px; }
-  .fs-5 {
-    font-size: 3.84615px; }
-  .fs-6 {
-    font-size: 4.61538px; }
-  .fs-7 {
-    font-size: 5.38462px; }
-  .fs-8 {
-    font-size: 6.15385px; }
-  .fs-9 {
-    font-size: 6.92308px; }
-  .fs-10 {
-    font-size: 7.69231px; }
-  .fs-11 {
-    font-size: 8.46154px; }
-  .fs-12 {
-    font-size: 9.23077px; }
-  .fs-13 {
     font-size: 10px; }
+  .fs-12 {
+    font-size: 10.90909px; }
+  .fs-13 {
+    font-size: 11.81818px; }
   .fs-14 {
-    font-size: 10.76923px; }
+    font-size: 12.72727px; }
   .fs-16 {
-    font-size: 12.30769px; }
+    font-size: 14.54545px; }
   .fs-20 {
-    font-size: 15.38462px; }
+    font-size: 18.18182px; }
   .fs-22 {
-    font-size: 16.92308px; }
-  .fs-24 {
-    font-size: 18.46154px; }
-  .fs-26 {
     font-size: 20px; }
+  .fs-24 {
+    font-size: 21.81818px; }
+  .fs-26 {
+    font-size: 23.63636px; }
   .fs-28 {
-    font-size: 21.53846px; }
+    font-size: 25.45455px; }
   .fs-32 {
-    font-size: 24.61538px; }
+    font-size: 29.09091px; }
   .fs-34 {
-    font-size: 26.15385px; }
+    font-size: 30.90909px; }
   .fs-36 {
-    font-size: 27.69231px; }
+    font-size: 32.72727px; }
   .fs-38 {
-    font-size: 29.23077px; }
+    font-size: 34.54545px; }
   .fs-40 {
-    font-size: 30.76923px; }
+    font-size: 36.36364px; }
   .fs-42 {
-    font-size: 32.30769px; }
+    font-size: 38.18182px; }
   .fs-44 {
-    font-size: 33.84615px; }
+    font-size: 40px; }
   .fs-46 {
-    font-size: 35.38462px; }
+    font-size: 41.81818px; }
   .fs-48 {
-    font-size: 36.92308px; }
+    font-size: 43.63636px; }
   .fs-50 {
-    font-size: 38.46154px; }
+    font-size: 45.45455px; }
   .fs-64 {
-    font-size: 49.23077px; } }
+    font-size: 58.18182px; } }
 
->>>>>>> 095303a90d3829ca8fbf2a18744f4084defa7d5f
 @media (min-width: 768px) and (max-width: 992px) {
   .col-md-1 {
     flex: 0 0 8.33333%; }
@@ -643,194 +539,68 @@ p {
   .pb-md-5 {
     padding-bottom: 3rem; }
   .fs-1 {
-<<<<<<< HEAD
-    font-size: 1.1111111111px;
-  }
-
+    font-size: 1.11111px; }
   .fs-2 {
-    font-size: 2.2222222222px;
-  }
-
+    font-size: 2.22222px; }
   .fs-3 {
-    font-size: 3.3333333333px;
-  }
-
+    font-size: 3.33333px; }
   .fs-4 {
-    font-size: 4.4444444444px;
-  }
-
+    font-size: 4.44444px; }
   .fs-5 {
-    font-size: 5.5555555556px;
-  }
-
+    font-size: 5.55556px; }
   .fs-6 {
-    font-size: 6.6666666667px;
-  }
-
+    font-size: 6.66667px; }
   .fs-7 {
-    font-size: 7.7777777778px;
-  }
-
+    font-size: 7.77778px; }
   .fs-8 {
-    font-size: 8.8888888889px;
-  }
-
+    font-size: 8.88889px; }
   .fs-9 {
-    font-size: 10px;
-  }
-
-  .fs-10 {
-    font-size: 11.1111111111px;
-  }
-
-  .fs-11 {
-    font-size: 12.2222222222px;
-  }
-
-  .fs-12 {
-    font-size: 13.3333333333px;
-  }
-
-  .fs-13 {
-    font-size: 14.4444444444px;
-  }
-
-  .fs-14 {
-    font-size: 15.5555555556px;
-  }
-
-  .fs-16 {
-    font-size: 17.7777777778px;
-  }
-
-  .fs-20 {
-    font-size: 22.2222222222px;
-  }
-
-  .fs-22 {
-    font-size: 24.4444444444px;
-  }
-
-  .fs-24 {
-    font-size: 26.6666666667px;
-  }
-
-  .fs-26 {
-    font-size: 28.8888888889px;
-  }
-
-  .fs-28 {
-    font-size: 31.1111111111px;
-  }
-
-  .fs-32 {
-    font-size: 35.5555555556px;
-  }
-
-  .fs-34 {
-    font-size: 37.7777777778px;
-  }
-
-  .fs-36 {
-    font-size: 40px;
-  }
-
-  .fs-38 {
-    font-size: 42.2222222222px;
-  }
-
-  .fs-40 {
-    font-size: 44.4444444444px;
-  }
-
-  .fs-42 {
-    font-size: 46.6666666667px;
-  }
-
-  .fs-44 {
-    font-size: 48.8888888889px;
-  }
-
-  .fs-46 {
-    font-size: 51.1111111111px;
-  }
-
-  .fs-48 {
-    font-size: 53.3333333333px;
-  }
-
-  .fs-50 {
-    font-size: 55.5555555556px;
-  }
-
-  .fs-64 {
-    font-size: 71.1111111111px;
-  }
-}
-=======
-    font-size: 0.90909px; }
-  .fs-2 {
-    font-size: 1.81818px; }
-  .fs-3 {
-    font-size: 2.72727px; }
-  .fs-4 {
-    font-size: 3.63636px; }
-  .fs-5 {
-    font-size: 4.54545px; }
-  .fs-6 {
-    font-size: 5.45455px; }
-  .fs-7 {
-    font-size: 6.36364px; }
-  .fs-8 {
-    font-size: 7.27273px; }
-  .fs-9 {
-    font-size: 8.18182px; }
-  .fs-10 {
-    font-size: 9.09091px; }
-  .fs-11 {
     font-size: 10px; }
+  .fs-10 {
+    font-size: 11.11111px; }
+  .fs-11 {
+    font-size: 12.22222px; }
   .fs-12 {
-    font-size: 10.90909px; }
+    font-size: 13.33333px; }
   .fs-13 {
-    font-size: 11.81818px; }
+    font-size: 14.44444px; }
   .fs-14 {
-    font-size: 12.72727px; }
+    font-size: 15.55556px; }
   .fs-16 {
-    font-size: 14.54545px; }
+    font-size: 17.77778px; }
   .fs-20 {
-    font-size: 18.18182px; }
+    font-size: 22.22222px; }
   .fs-22 {
-    font-size: 20px; }
+    font-size: 24.44444px; }
   .fs-24 {
-    font-size: 21.81818px; }
+    font-size: 26.66667px; }
   .fs-26 {
-    font-size: 23.63636px; }
+    font-size: 28.88889px; }
   .fs-28 {
-    font-size: 25.45455px; }
+    font-size: 31.11111px; }
   .fs-32 {
-    font-size: 29.09091px; }
+    font-size: 35.55556px; }
   .fs-34 {
-    font-size: 30.90909px; }
+    font-size: 37.77778px; }
   .fs-36 {
-    font-size: 32.72727px; }
-  .fs-38 {
-    font-size: 34.54545px; }
-  .fs-40 {
-    font-size: 36.36364px; }
-  .fs-42 {
-    font-size: 38.18182px; }
-  .fs-44 {
     font-size: 40px; }
+  .fs-38 {
+    font-size: 42.22222px; }
+  .fs-40 {
+    font-size: 44.44444px; }
+  .fs-42 {
+    font-size: 46.66667px; }
+  .fs-44 {
+    font-size: 48.88889px; }
   .fs-46 {
-    font-size: 41.81818px; }
+    font-size: 51.11111px; }
   .fs-48 {
-    font-size: 43.63636px; }
+    font-size: 53.33333px; }
   .fs-50 {
-    font-size: 45.45455px; }
+    font-size: 55.55556px; }
   .fs-64 {
-    font-size: 58.18182px; } }
+    font-size: 71.11111px; } }
 
->>>>>>> 095303a90d3829ca8fbf2a18744f4084defa7d5f
 @media (min-width: 992px) {
   .col-1 {
     flex: 0 0 8.33333%; }
@@ -1072,92 +842,6 @@ p {
   align-items: center;
   padding: 20px;
   overflow: hidden;
-<<<<<<< HEAD
-}
-.card button {
-  border: none;
-  outline: none;
-  display: flex;
-  background: transparent;
-  align-self: flex-end;
-  padding: 0;
-  cursor: pointer;
-}
-.card i {
-  color: #FFFFFF;
-  font-size: 35px;
-}
-.card footer {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-}
-.card footer > h4 {
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 48px;
-  line-height: 56px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.05em;
-  color: #FFFFFF;
-}
-.card footer > p {
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 28px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.05em;
-  color: #FFFFFF;
-}
-.card > #chartdiv {
-  width: 100%;
-  height: 213px;
-}
-.card > #chartDonut {
-  height: 450px !important;
-  width: 450px !important;
-}
-
-.gris-background {
-  background-color: #DFDFDF;
-}
-
-.gris-claire-background {
-  background-color: #ECECEC;
-  color: var(--background-color);
-}
-
-.bleu-claire-background {
-  background-color: var(--second-color);
-  color: var(--background-color);
-}
-
-.main-color {
-  color: var(--main-color);
-}
-
-.main-color-background {
-  background-color: var(--main-color);
-  color: var(--background-color);
-}
-
-.second-color-background-default {
-  background-color: var(--background-color);
-  color: var(--second-color);
-}
-
-.main-color-background-default {
-  background-color: var(--background-color);
-  color: var(--main-color);
-}
-=======
   margin: 19px; }
   .card button {
     border: none;
@@ -1272,7 +956,6 @@ p {
         align-items: center;
         letter-spacing: 0.05em;
         color: #FFFFFF; } }
->>>>>>> 095303a90d3829ca8fbf2a18744f4084defa7d5f
 
 .center {
   display: flex;
@@ -1292,8 +975,7 @@ p {
   text-align: left; }
 
 .d-inline {
-  display: inline;
-}
+  display: inline; }
 
 .center-text {
   display: flex;
@@ -1321,45 +1003,26 @@ p {
   text-align: justify;
   word-spacing: -2px; }
 
-<<<<<<< HEAD
 .flex-grow {
-  flex-grow: 1;
-}
+  flex-grow: 1; }
 
 .iframe-parent {
   position: relative;
-  padding-bottom: 56.25%;
-}
+  padding-bottom: 56.25%; }
 
 .iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-}
+  height: 100%; }
 
 .postion-relative {
-  position: relative;
-}
+  position: relative; }
 
 .postion-absolute {
-  position: absolute;
-}
+  position: absolute; }
 
-.left-border {
-  border-left: 5px solid;
-}
-
-.article-card {
-  border-radius: 5px;
-  padding: 20px;
-}
-
-.style-none {
-  list-style: none;
-}
-=======
 .table-container {
   width: 100%;
   height: 86%;
@@ -1457,7 +1120,6 @@ p {
 
 .text-right {
   text-align: right; }
->>>>>>> 095303a90d3829ca8fbf2a18744f4084defa7d5f
 
 .text-left {
   text-align: left; }
@@ -1928,7 +1590,9 @@ p {
     .container-main-content--menu > button {
       position: absolute;
       top: 30px;
-      right: 50px; }
+      right: 50px;
+      padding: 0px;
+      z-index: 1; }
       .container-main-content--menu > button .material-icons-round {
         font-size: 1.875rem;
         font-weight: bolder; }
