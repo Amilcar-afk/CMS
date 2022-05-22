@@ -2,20 +2,23 @@
 
 namespace App\Model;
 
+use App\Core\BaseSQL;
 
-class Page
+class Page extends BaseSQL
 {
-    protected $id = null;
+    public $id = null;
     protected $dateUpdate;
     protected $description;
     protected $title;
     protected $status;
+    protected $background;
 
     /**
      * Page constructor.
      */
     public function __construct()
     {
+        parent::__construct();
     }
 
 
@@ -30,10 +33,10 @@ class Page
     /**
      * @param null $id
      */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
+    //public function setId($id): void
+    //{
+      //  $this->id = $id;
+    //}
 
     /**
      * @return mixed
@@ -99,29 +102,64 @@ class Page
         $this->status = $status;
     }
 
-    public function getPage(): array
+    /**
+     * @return mixed
+     */
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    /**
+     * @param mixed $background
+     */
+    public function setBackground($background): void
+    {
+        $this->background = $background;
+    }
+
+    public function save()
+    {
+        parent::save();
+    }
+
+    public function getPageData(): array
     {
         return [
             "meta"=>[
                 "id"=>"",
+                "date_update"=>"",
+                "user_key"=>"",
+                "status"=>"",
                 "title"=>"",
-                "dateUpdate"=>"",
-                "status"=>""
+                "description"=>""
             ],
             "sections"=>[
                 [
                     "id"=>"",
-                    "witdth"=>"",
+                    "bessels"=>"",
                     "background"=>"",
-                    "siteElements"=>[
+                    "place"=>"",
+                    "components"=>[
                         [
                             "id"=>"",
                             "type"=>"",
+                            "place"=>"",
+                            "witdth"=>"",
+                            "highlight"=>"",
                             "font"=>"",
+                            "font_size"=>"",
+                            "font_weight"=>"",
                             "color"=>"",
                             "background"=>"",
-                            "fontSize"=>"",
-                            "hAlign"=>""
+                            "align"=>"",
+                            "contents"=>[
+                                [
+                                    "content"=>"",
+                                    "date"=>"",
+                                    "other"=>""
+                                ]
+                            ]
                         ],
                     ],
                 ],

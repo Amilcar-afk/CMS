@@ -6,7 +6,7 @@ namespace App\Model;
 
 class Section
 {
-    protected $id;
+    public $id;
     protected $background;
     protected $bessels;
 
@@ -56,5 +56,10 @@ class Section
     public function setBackground($background): void
     {
         $this->background = $background;
+    }
+
+    public function save()
+    {
+        parent::save();
     }
 }
