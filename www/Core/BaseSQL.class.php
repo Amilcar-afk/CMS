@@ -28,8 +28,13 @@ abstract class BaseSQL
         }catch(\Exception $e){
             die("Erreur SQL".$e->getMessage());
         }
-        $classExploded = explode("\\",get_called_class());
-        $this->table = DBPREFIXE.strtolower(end($classExploded));
+
+        if(isset($this->table_name)){
+            $this->table = $this->table_name;
+        }else{
+            $classExploded = explode("\\",get_called_class());
+            $this->table = DBPREFIXE.(end($classExploded)).'s';
+        }
     }
 
     /**
@@ -45,7 +50,6 @@ abstract class BaseSQL
 
     protected function save()
     {
-
         $columns  = get_object_vars($this);
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
@@ -65,6 +69,42 @@ abstract class BaseSQL
         $queryPrepared->execute($columns);
     }
 
+    /**
+     * Delete element by id
+     * @return void
+     */
+    protected function delete($id)
+    {
+        if( !is_null($this->getId()) ){
+            $sql = "DELETE * FROM ".$this->table." WHERE id=".$this->getId();
+
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute();
+        }else{
+            http_response_code(400);
+        }
+    }
+
+    /**
+     * If you send id = return one ligne
+     * If no id = all lignes
+     * You can specify the name of the colunm "id"
+     * @param mixed $id
+     * @return void
+     */
+    protected function find($id, string $attribut = 'id')
+    {
+        if( isset($id) ){
+            $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
+            $param = [ $attribut=> $id ];
+        }else{
+            $sql = "SELECT * FROM ".$this->table;
+            $param = [];
+        }
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+    }
+
 
 
     /**
@@ -73,7 +113,6 @@ abstract class BaseSQL
      * @param array $params
      * @return array|null
      */
-
     function findOneData( string $sql, $params) {
 
         $statement = $this->pdo->prepare($sql);
@@ -95,7 +134,6 @@ abstract class BaseSQL
      * @param array $params
      * @return array|null
      */
-    // function findAllData(string $sql, ?array $params): ?array  {
 
     function findAllData(string $sql, array $params= null) {
         $statement = $this->pdo->prepare($sql);
@@ -110,28 +148,5 @@ abstract class BaseSQL
         }
         return null;
     }
-
-
-
-    /**
-     * @param PDO $db
-     * @param string $sql
-     * @param array $params
-     * @return string|null
-     */
-    public function insertData( string $sql, array $params): ?string {
-
-        $statement = $this->pdo->prepare($sql);
-        if($statement) {
-            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-            if($success) {
-                return $this->pdo->lastInsertId();
-            }
-        }
-        return null;
-    }
-
-
-
 
 }
