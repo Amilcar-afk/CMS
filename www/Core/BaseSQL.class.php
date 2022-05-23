@@ -11,6 +11,7 @@ abstract class BaseSQL
 
 
 
+
     public function __construct()
     {
         //remplacer par singleton

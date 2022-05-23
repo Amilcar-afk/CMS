@@ -1,35 +1,9 @@
 <?php
 
-/**
- * creer la racine du namespace
- * include le conf.inc.php ou y'a ou ya toutes les constante
- * la fonction myAutoloader($class) qui prend en parametre la class et elle verifie si elle exite et fini par le inclure
- * la fonction spl_autoload_register("App\myAutoloader"); qui prend en parametre la fonction myAutoloader qu'elle recupere grace en namespace
- * $uri = $_SERVER["REQUEST_URI"]; recupere le url courrant
- * en verifie l'existance du fichier routes.yml qui contient toute les routes et renvoi un message d'erruer si celuici existe pas
- * yaml_parse_file permet de decouper le fihier pass" en parametre et elle le retoure en format tableau
- * fichier routes.yml en forme de tableau d'objet {  ["/"]=> array(2) ["controller"]=> string(7) "general" ["action"]=> string(4) "home" }
- * en verifie l'existance du l'url l'existance du controller et l'existance de l'action
- * ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
- * $controllerFile contient le controller courant
- * verifie l'existance du controller 
- * inclut le fichier du controller courrant
- * la variable $controller contient la class du controller couant
- * verifie l'existance du class du controller et renvoie un message d'erruer si celuici existe pas 
- * 
- * 
- * 
- *  
- * */
-
 namespace App;
 
 require "conf.inc.php";
 require 'vendor/autoload.php';
-
-
-
-
 
 function myAutoloader($class){
 
@@ -60,7 +34,6 @@ $routes = yaml_parse_file($routeFile);
 
 
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
-
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
     for($i=0;$i<=sizeof($parseUrl);$i++){
