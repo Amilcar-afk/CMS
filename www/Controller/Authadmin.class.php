@@ -13,6 +13,13 @@ class Authadmin{
         }
     }
 
+
+
+
+
+
+    
+
     public static function logout(){
         unset($_SESSION['Auth']);
         header('location:/login');

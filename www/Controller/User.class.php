@@ -10,6 +10,12 @@ use App\Core\CheckInputs;
 use App\Model\User as UserModel;
 
 
+
+
+
+
+
+
 class User{
 
     public $user;

@@ -9,6 +9,9 @@ class Admin
 {
 
     public function __construct()
+
+
+    
     {
         $this->authAdmin = new Authadmin();
         Authadmin::isLogged();

@@ -10,6 +10,12 @@ abstract class BaseSQL
     private $lastInsertId;
 
 
+
+
+
+
+    
+
     public function __construct()
     {
         try{

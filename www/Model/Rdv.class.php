@@ -6,6 +6,17 @@ use App\Core\BaseSQL;
 class Rdv extends BaseSQL
 {
 
+
+
+
+
+
+
+
+
+
+
+
     protected $id = null;
     protected $title;
     protected $startDate;
@@ -212,10 +223,7 @@ class Rdv extends BaseSQL
         return parent::getPramsFromUri();
     }
 
-    public function testos()
-    {
-        parent::test();
-    }
+  
 
     public function getFormRegister(): array
     {

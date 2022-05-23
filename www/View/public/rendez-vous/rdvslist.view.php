@@ -7,6 +7,11 @@
             border: 1px solid black;
             }
         </style>
+
+
+
+
+
     <div class="main-color-background article-card col-6 col-offset-3 mt-2 row">
         <table class="second-color-background-default article-card col-12" >
             <tr>

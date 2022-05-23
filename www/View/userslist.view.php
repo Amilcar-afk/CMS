@@ -11,6 +11,13 @@
                 <th>creation Date</th>
                 <th>rank</th>
                 <th colspan="2" class="text-center">Actions</th>
+
+
+
+
+
+
+                
             </tr>
             <tbody>
                 <?php foreach ($usersLIst as $user) { ?>
