@@ -15,11 +15,6 @@ class View
         $this->setTemplate($template);
     }
 
-
-
-
-
-
     
     public function setView($view){
         $this->view = strtolower($view);
