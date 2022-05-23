@@ -9,13 +9,6 @@ use App\Core\View;
 use App\Core\CheckInputs;
 use App\Model\User as UserModel;
 
-
-
-
-
-
-
-
 class User{
 
     public $user;
@@ -23,7 +16,6 @@ class User{
     {
         $this->user = new UserModel();
     }
-
 
     public function login()
     {
