@@ -7,11 +7,11 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
-    private $lastInsertId;
 
 
     public function __construct()
     {
+        //remplacer par singleton
         try{
             $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -20,13 +20,22 @@ abstract class BaseSQL
         }
 
         if(isset($this->table_name)){
-            $this->table = DBPREFIXE.$this->table_name;
+            $this->table = $this->table_name;
         }else{
             $classExploded = explode("\\",get_called_class());
             $this->table = DBPREFIXE.(end($classExploded)).'s';
         }
-        
+    }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): object
+    {
+        $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute( ["id"=>$id] );
+        return $queryPrepared->fetchObject(get_called_class());
     }
 
     protected function save()
@@ -34,6 +43,7 @@ abstract class BaseSQL
         $columns  = get_object_vars($this);
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
+        
         foreach($columns as $column => $value ){
             $table_name = 'table_name';
             if(isset($table_name )){
@@ -44,22 +54,27 @@ abstract class BaseSQL
             }
         }
         $columns = array_filter($columns);
+
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
+        $columns = array_filter($columns);
 
-        }else{
+       if( !is_null($this->getId()) ){
+           foreach ($columns as $key=>$value){
+                $setUpdate[]=$key."=:".$key;
+           }
+           $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate)." WHERE id=".$this->getId();
+
+       }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
-
-        }
+       }
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
-        $lastInsertd = $this->pdo->lastInsertId();
-        $this->setLastId($lastInsertd );
     }
 
 
@@ -99,40 +114,84 @@ abstract class BaseSQL
         $param = explode('/',$e);
         array_shift($param);
         return $param;
-    }
+    /**
+     * Delete element by id
+     * @return void
+     */
+    protected function delete($id)
+    {
+        if( !is_null($this->getId()) ){
+            $sql = "DELETE * FROM ".$this->table." WHERE id=".$this->getId();
 
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return array|null
- */
-
-function findOneData( string $sql, $params) {
-
-    $statement = $this->pdo->prepare($sql);
-    if($statement) {
-        $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-        if($success) {
-            $res = $statement->fetch(\PDO::FETCH_OBJ);
-            if($res) {
-                return $res;
-            }
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute();
+        }else{
+            http_response_code(400);
         }
     }
-    return null;
-}
+
+    /**
+     * If you send id = return one ligne
+     * If no id = all lignes
+     * You can specify the name of the colunm "id"
+     * @param mixed $id
+     * @return void
+     */
+    protected function find($id, string $attribut = 'id')
+    {
+        if( isset($id) ){
+            $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
+            $param = [ $attribut=> $id ];
+        }else{
+            $sql = "SELECT * FROM ".$this->table;
+            $param = [];
+        }
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+    }
 
 
+
+    /**
+     * @param PDO $db
+     * @param string $sql
+     * @param array $params
+     * @return array|null
+     */
+    function findOneData( string $sql, $params) {
+
+        $statement = $this->pdo->prepare($sql);
+        if($statement) {
+            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
+            if($success) {
+                $res = $statement->fetch(\PDO::FETCH_OBJ);
+                if($res) {
+                    return $res;
+                }
+            }
+        }
+        return null;
+    }
+
+<<<<<<< HEAD
 /**
  * @param PDO $db
  * @param string $sql
  * @param array $params
- * @return array|null
+ * @return string|null
  */
-    // function findAllData(string $sql, ?array $params): ?array  {
+    public function insertData( string $sql, array $params): ?string {
+
+=======
+    /**
+     * @param PDO $db
+     * @param string $sql
+     * @param array $params
+     * @return array|null
+     */
 
     function findAllData(string $sql, array $params= null) {
+>>>>>>> f5a0572abcfcc3c6c46de717d08cae530c663891
         $statement = $this->pdo->prepare($sql);
         if($statement) {
             $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
@@ -146,84 +205,4 @@ function findOneData( string $sql, $params) {
         return null;
     }
 
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return string|null
- */
-    public function insertData( string $sql, array $params): ?string {
-
-        $statement = $this->pdo->prepare($sql);
-        if($statement) {
-            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-            if($success) {
-                // createLog($sql, $params);
-                return $this->pdo->lastInsertId();
-            }
-        }
-        return null;
-    }
-
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return string|null
- */
-public function delete( string $sql, array $params): ?string {
-
-    $statement = $this->pdo->prepare($sql);
-    if($statement) {
-        $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-    }
-    return null;
-}
-
-
-
-
-/**
- * @param string $sql
- * @param array $params
- */
-    // function createLog(string $sql, array $params){
-    //     $actionLog = strtoupper(substr($sql, 0, strpos($sql, " ")));
-    //     if ($actionLog != "SELECT") {
-
-    //         switch ($actionLog) {
-    //             case "DELETE":
-    //                 $sql = substr($sql, strlen("DELETE FROM "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "DELETED FROM ";
-    //                 break;
-    //             case "INSERT":
-    //                 $sql = substr($sql, strlen("INSERT INTO "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "INSERTED INTO ";
-    //                 break;
-    //             case "UPDATE":
-    //                 $sql = substr($sql, strlen("UPDATE "));
-    //                 $tableName = substr($sql, 0, strpos($sql, " "));
-    //                 $action = "UPDATED ";
-    //                 break;
-    //             default:
-    //                 $tableName = "database";
-    //                 $action = "OPERATION IN ";
-    //         }
-
-    //         $keys = array_keys($params);
-    //         $messageElements = "";
-    //         $keyLog = 0;
-    //         foreach ($params as $param) {
-    //             $messageElements .= $keys[$keyLog] . " = " . $param . ((($keyLog == 0  count($keys) - 1 == $keyLog)  count($keys) == 1) ? " " : ", ");
-    //             ++$keyLog;
-    //         }
-
-    //         $logUser = (isset($_SESSION["idUser"]) ? "USER#".$_SESSION["idUser"] : "ANONYM");
-
-    //         error_log("[" . date('Y-m-d H:i:s (e)') . "][" . $_SERVER["REMOTE_ADDR"] . "][" . $actionLog . "] " . $logUser . " | ". $action . $tableName ." ". $messageElements . "\n", 3, '../logs/' . date('Y-m') . "-reports.log");
-
-    //     }
-    // }
 }

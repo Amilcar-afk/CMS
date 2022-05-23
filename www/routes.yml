@@ -69,3 +69,6 @@
   params: [id_res]
   middlewear : ['auth']
 
+/user_delete/id:
+  controller: user
+  action: deleteUser

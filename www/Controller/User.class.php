@@ -4,11 +4,14 @@
 namespace App\Controller;
 
 
+use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
 use App\Core\CheckInputs;
 use App\Model\User as UserModel;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class User{
 
@@ -25,14 +28,11 @@ class User{
             $result = CheckInputs::checkEmail($_POST['email']);
             if($result){
                 $this->user->setEmail($_POST['email']);
-                $this->user->setPassword($_POST['password']);
-
-                $sql = "SELECT * FROM cmspf_Users WHERE email = :email ";
-                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail(),]);
+                $sql = "SELECT * FROM cmsp_user WHERE email = :email";
+                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
                 if(!empty($resultat)){
                     if(password_verify($_POST['password'], $resultat->password)){
-                        session_start();
-                        $_SESSION['Auth'] = $resultat;
+                        echo'Bienvenu ! fdp';
                         header('location:/dashboard');
                     }else{
                         echo'mot de passe incorrect';
@@ -45,7 +45,9 @@ class User{
             }
      
         }
-        $view = new View("login");
+
+        // CREER LA NOUVELLE VIEW
+        $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
     }
 
@@ -63,14 +65,12 @@ class User{
                 $this->user->setLastname($_POST['lastname']);
                 $this->user->setPassword($_POST['password']);
                 $this->user->setEmail($_POST['email']);
-                $this->user->setRank(1);
-
                 $this->user->save();
             }else{
                 print_r($result);
             }
         }
-        $view = new View("register");
+        $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
     }
 
