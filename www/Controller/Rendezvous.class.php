@@ -15,6 +15,12 @@ class RendezVous{
 
     public function __construct()
     {
+
+
+
+
+
+        
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
         $this->authAdmin = new Authadmin();
