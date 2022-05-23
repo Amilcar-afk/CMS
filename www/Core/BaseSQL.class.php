@@ -43,7 +43,6 @@ abstract class BaseSQL
         $columns  = get_object_vars($this);
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
-        
         foreach($columns as $column => $value ){
             $table_name = 'table_name';
             if(isset($table_name )){
@@ -54,20 +53,12 @@ abstract class BaseSQL
             }
         }
         $columns = array_filter($columns);
-
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
-        $columns = array_filter($columns);
-
-       if( !is_null($this->getId()) ){
-           foreach ($columns as $key=>$value){
-                $setUpdate[]=$key."=:".$key;
-           }
-           $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate)." WHERE id=".$this->getId();
 
        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
@@ -114,6 +105,10 @@ abstract class BaseSQL
         $param = explode('/',$e);
         array_shift($param);
         return $param;
+
+
+
+    }
     /**
      * Delete element by id
      * @return void
@@ -173,16 +168,7 @@ abstract class BaseSQL
         return null;
     }
 
-<<<<<<< HEAD
-/**
- * @param PDO $db
- * @param string $sql
- * @param array $params
- * @return string|null
- */
-    public function insertData( string $sql, array $params): ?string {
 
-=======
     /**
      * @param PDO $db
      * @param string $sql
@@ -191,7 +177,6 @@ abstract class BaseSQL
      */
 
     function findAllData(string $sql, array $params= null) {
->>>>>>> f5a0572abcfcc3c6c46de717d08cae530c663891
         $statement = $this->pdo->prepare($sql);
         if($statement) {
             $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
