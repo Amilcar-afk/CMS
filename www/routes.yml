@@ -58,7 +58,6 @@
   controller: rendezvous
   action: public_rdvs_List
 
-
 /public_rdvs_reserver:
   controller: rendezvous
   action: public_rdvs_reserver
@@ -67,5 +66,6 @@
 /public/edit:
   controller: rendezvous
   action: test
-  params: [id_res,id]
+  params: [id_res]
+  middlewear : ['auth']
 

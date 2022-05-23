@@ -10,10 +10,10 @@ class User extends BaseSQL
     protected $id = null;
     protected $firstname;
     protected $lastname;
-    protected $email;
-    protected $password;
-    protected $passwordOldFirst;
-    protected $passwordOldSecond;
+    protected $mail;
+    protected $pwd;
+    protected $pwd1;
+    protected $pwd2;
     protected $creationDate;
     protected $updateDate;
     protected $token;
@@ -49,7 +49,7 @@ class User extends BaseSQL
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->mail;
     }
 
     /**
@@ -57,7 +57,7 @@ class User extends BaseSQL
      */
     public function setEmail($email): void
     {
-        $this->email = strtolower(trim($email));
+        $this->mail = strtolower(trim($email));
     }
 
     /**
@@ -65,7 +65,7 @@ class User extends BaseSQL
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->pwd;
     }
 
     /**
@@ -73,7 +73,7 @@ class User extends BaseSQL
      */
     public function setPassword($password): void
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->pwd = password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
@@ -146,7 +146,7 @@ class User extends BaseSQL
      */ 
     public function getPasswordOldFirst()
     {
-        return $this->passwordOldFirst;
+        return $this->pwd1;
     }
 
     /**
@@ -156,7 +156,7 @@ class User extends BaseSQL
      */ 
     public function setPasswordOldFirst($passwordOldFirst)
     {
-        $this->passwordOldFirst = $passwordOldFirst;
+        $this->pwd1 = $passwordOldFirst;
 
         return $this;
     }
@@ -166,7 +166,7 @@ class User extends BaseSQL
      */ 
     public function getPasswordOldSecond()
     {
-        return $this->passwordOldSecond;
+        return $this->pwd2;
     }
 
     /**
@@ -176,7 +176,7 @@ class User extends BaseSQL
      */ 
     public function setPasswordOldSecond($passwordOldSecond)
     {
-        $this->passwordOldSecond = $passwordOldSecond;
+        $this->pwd2 = $passwordOldSecond;
 
         return $this;
     }

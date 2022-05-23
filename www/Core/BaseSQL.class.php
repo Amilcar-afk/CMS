@@ -9,16 +9,6 @@ abstract class BaseSQL
     private $table;
     private $lastInsertId;
 
-    /**
-     * get_called_class()  Retourne le nom de la classe depuis laquelle une méthode statique a été appelée.
-     * strtolower() convertir le maj to mini 
-     * get_object_vars(this) Retourne les propriétés d'un objet
-     * get_class_vars(class) Retourne les valeurs par défaut des propriétés d'une classe
-     * get_class() Retourne le nom de la classe d'un objet
-     * array_filter(columns) Filtre les éléments d'un tableau grâce à une fonction de rappel
-     * array_diff_key($columns, $varsToExclude) Calcule la différence de deux tableaux en utilisant les clés pour comparaison
-     */
-
 
     public function __construct()
     {
@@ -28,8 +18,6 @@ abstract class BaseSQL
         }catch(\Exception $e){
             die("Erreur SQL".$e->getMessage());
         }
-        // $classExploded = explode("\\",get_called_class());
-        // $this->table = DBPREFIXE.(end($classExploded)).'s';
 
         if(isset($this->table_name)){
             $this->table = DBPREFIXE.$this->table_name;
@@ -75,26 +63,6 @@ abstract class BaseSQL
     }
 
 
-    protected function test()
-    {
-        $columns  = get_object_vars($this);
-        $varsToExclude = get_class_vars(get_class());
-        $columns = array_diff_key($columns, $varsToExclude);
-            foreach($columns as $column => $value ){
-                // var_dump($column);
-
-                if($column === 'table_name'){
-                    continue;
-                }else{
-                    var_dump($column);
-                }
-            }
-
-        $columns = array_filter($columns);
-    }
-
-
-
 
 
     public function setLastId($lastId)
@@ -107,7 +75,6 @@ abstract class BaseSQL
     {
         return $this->lastInsertId;
     }
-
     
     public function parseUrl()
     {
@@ -115,8 +82,6 @@ abstract class BaseSQL
         $routes = yaml_parse_file($routeFile);
         return $routes;
     }
-
-
  
     public function getPramsFromUri()
     {
@@ -180,8 +145,6 @@ function findOneData( string $sql, $params) {
         }
         return null;
     }
-
-
 
 /**
  * @param PDO $db
