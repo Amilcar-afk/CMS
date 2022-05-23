@@ -121,10 +121,11 @@ abstract class BaseSQL
     protected function delete($id)
     {
         if( !is_null($this->getId()) ){
-            $sql = "DELETE * FROM ".$this->table." WHERE id=".$this->getId();
 
+            $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute();
+
         }else{
             http_response_code(400);
         }
@@ -172,7 +173,6 @@ abstract class BaseSQL
         }
         return null;
     }
-
 
     /**
      * @param PDO $db
