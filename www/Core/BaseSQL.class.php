@@ -7,6 +7,8 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
+    private $lastInsertId;
+
 
 
     public function __construct()
