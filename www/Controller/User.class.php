@@ -9,12 +9,6 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Core\CheckInputs;
 use App\Model\User as UserModel;
-<<<<<<< HEAD
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-=======
->>>>>>> feature/rdv
 
 class User{
 
