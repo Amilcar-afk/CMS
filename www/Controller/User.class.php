@@ -30,6 +30,10 @@ class User{
                 if(!empty($resultat)){
                     if(password_verify($_POST['password'], $resultat->password)){
                         session_start();
+
+
+
+                        
                         $_SESSION['Auth'] = $resultat;
                         header('location:/dashboard');
                     }else{
