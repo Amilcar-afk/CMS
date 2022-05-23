@@ -67,8 +67,10 @@ abstract class BaseSQL
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
        }
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute($columns);
+       $queryPrepared = $this->pdo->prepare($sql);
+       $queryPrepared->execute($columns);
+       $lastInsertd = $this->pdo->lastInsertId();
+       $this->setLastId($lastInsertd );
     }
 
 
