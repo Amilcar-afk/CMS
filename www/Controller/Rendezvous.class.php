@@ -75,22 +75,24 @@ class RendezVous{
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $sql = "DELETE FROM cmspf_Rdvs WHERE id=:id";
-            $this->rdv->deleteEvent($sql,['id'=> $id]);
+            $this->rdv->deleteEvent($this->rdv->setId($id));
         }
        
     }
 
     public function updateEvent()
     {
-        if(isset($_POST['id']))
-        {
-            $this->rdv->setId($_POST['id']);
-            $this->rdv->setEndDate($_POST['end']);
-            $this->rdv->setStartDate($_POST['start']);
-            $this->rdv->setRdv_step_key(1);
-            $this->rdv->save();
-        }
+
+        var_dump($_POST);
+
+        // if(isset($_POST['id']))
+        // {
+        //     $this->rdv->setId($_POST['id']);
+        //     $this->rdv->setEndDate($_POST['end']);
+        //     $this->rdv->setStartDate($_POST['start']);
+        //     $this->rdv->setRdv_step_key(1);
+        //     $this->rdv->save();
+        // }
     }
 
 
@@ -117,13 +119,10 @@ class RendezVous{
         $id = $this->rdv->getPramsFromUri();
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
         $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id['id']]);
-
         $this->rdv->setId($currentRdv->id);
         $this->rdv->setTitle($currentRdv->title);
         $this->rdv->setLocation($currentRdv->location);
         $this->rdv->setDescription($currentRdv->description);
-
-
         if($_POST){
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
@@ -131,22 +130,16 @@ class RendezVous{
             $this->rdv->setDescription($_POST['description']);
             $this->rdv->setStatus(2);
             $this->rdv->save();
-
-
             $userId = $_SESSION['Auth']->id;
-
-            
             $this->user_rdv->setType(2);
             $this->user_rdv->setUser_key($userId);
             $this->user_rdv->setRdv_key($_POST['id']);
             $this->user_rdv->save();
             header('location:/public_rdvs_list');
         }
-
         $view = new View("public/rendez-vous/rdvsupdate");
         $view->assign("currentRdv", $currentRdv);
         $view->assign("rdv",$this->rdv);
-
     }
 
 

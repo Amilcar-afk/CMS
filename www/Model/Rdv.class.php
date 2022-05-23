@@ -190,9 +190,9 @@ class Rdv extends BaseSQL
 
     }
 
-    public function deleteEvent ($sql, $params)
+    public function deleteEvent ($params)
     {
-        return parent::delete($sql, $params);
+        return parent::delete($params);
 
     }
 

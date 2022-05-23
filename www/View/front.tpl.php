@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="../DataTables/media/css/jquery.dataTables.min.css">
 </head>
 <body>
-
     <?php 
         include $this->view.".view.php";
     ?>

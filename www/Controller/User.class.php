@@ -43,16 +43,16 @@ class User{
             }
      
         }
-
-        // CREER LA NOUVELLE VIEW
         $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
     }
+
 
     public function logout()
     {
         echo "Se deco";
     }
+
 
     public function register()
     {
