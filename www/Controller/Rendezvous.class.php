@@ -18,8 +18,8 @@ class RendezVous{
 
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
-        // $this->authAdmin = new Authadmin();
-        // Authadmin::isLogged();
+        $this->authAdmin = new Authadmin();
+        Authadmin::isLogged();
     }
 
     public function calendar()
@@ -38,7 +38,6 @@ class RendezVous{
             "end" => $row->endDate,
           );
             }
-
         echo json_encode($allRdvs);
     }
 
@@ -63,7 +62,6 @@ class RendezVous{
                 $this->user_rdv->setRdv_key($lastId);
                 $this->user_rdv->save();
             }
-
         }else{
             echo 'Nok';
         }
@@ -77,22 +75,18 @@ class RendezVous{
             $id = $_POST['id'];
             $this->rdv->deleteEvent($this->rdv->setId($id));
         }
-       
     }
 
     public function updateEvent()
     {
-
-        var_dump($_POST);
-
-        // if(isset($_POST['id']))
-        // {
-        //     $this->rdv->setId($_POST['id']);
-        //     $this->rdv->setEndDate($_POST['end']);
-        //     $this->rdv->setStartDate($_POST['start']);
-        //     $this->rdv->setRdv_step_key(1);
-        //     $this->rdv->save();
-        // }
+        if(isset($_POST['id']))
+        {
+            $this->rdv->setId($_POST['id']);
+            $this->rdv->setEndDate($_POST['end']);
+            $this->rdv->setStartDate($_POST['start']);
+            $this->rdv->setRdv_step_key(1);
+            $this->rdv->save();
+        }
     }
 
 
