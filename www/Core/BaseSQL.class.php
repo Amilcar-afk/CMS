@@ -63,16 +63,16 @@ abstract class BaseSQL
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
 
-       }else{
+        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
-       }
-       $queryPrepared = $this->pdo->prepare($sql);
-       $queryPrepared->execute($columns);
-       $lastInsertd = $this->pdo->lastInsertId();
-       $this->setLastId($lastInsertd );
-    }
 
+        }
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($columns);
+        $lastInsertd = $this->pdo->lastInsertId();
+        $this->setLastId($lastInsertd );
+    }
 
     public function setLastId($lastId)
     {
