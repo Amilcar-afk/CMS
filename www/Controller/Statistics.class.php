@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use PDO;
-use App\Model\Stats as Stats;
+use App\Model\Stat as Stat;
 
 class Statistics
 {
@@ -13,7 +13,9 @@ class Statistics
 
     public function __construct()
     {
-        $this->stats = new Stats();
+
+        $this->stats = new Stat;
+
     }
 
 
@@ -26,7 +28,7 @@ class Statistics
         $view->assign("data", $data);
 
         // INCLUDE
-        include 'integration/dashboard.html';
+        // include 'integration/dashboard.html';
 
     }
 

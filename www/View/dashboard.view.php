@@ -1,9 +1,7 @@
-<?php 
+
+<?php
 
 echo "DATA : ";
 echo $data;
 
 ?>
-
-
-
