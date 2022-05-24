@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use App\Core\View;
+use PDO;
+use App\Model\Stats as Stats;
 
 class Admin
 {
+
     public function dashboard()
     {
-        $firstname = "Marouane";
-        $lastname = "Talbi";
-
         $view = new View("dashboard", "back");
-        $view->assign("firstname", $firstname);
-        $view->assign("lastname", $lastname);
+
+        include 'integration/dashboard.html';
 
     }
+
+    
 }

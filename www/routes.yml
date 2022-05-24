@@ -20,8 +20,8 @@
 
 
 /dashboard:
-  controller: admin
-  action: dashboard
+  controller: statistics
+  action: loadDashboard
 
 /integration:
   controller: general
