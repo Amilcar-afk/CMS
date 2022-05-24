@@ -30,17 +30,6 @@ abstract class BaseSQL
         }
     }
 
-    // /**
-    //  * @param mixed $id
-    //  */
-    // public function setId($id): object
-    // {
-    //     $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
-    //     $queryPrepared = $this->pdo->prepare($sql);
-    //     $queryPrepared->execute( ["id"=>$id] );
-    //     return $queryPrepared->fetchObject(get_called_class());
-    // }
-
     protected function save()
     {
         $columns  = get_object_vars($this);
@@ -108,10 +97,8 @@ abstract class BaseSQL
         $param = explode('/',$e);
         array_shift($param);
         return $param;
-
-
-
     }
+
     /**
      * Delete element by id
      * @return void
@@ -119,7 +106,6 @@ abstract class BaseSQL
     protected function delete($id)
     {
         if( !is_null($this->getId()) ){
-
             $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute();

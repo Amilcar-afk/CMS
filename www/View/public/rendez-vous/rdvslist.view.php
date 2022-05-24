@@ -16,7 +16,6 @@
             </tr>
             <tbody>
                 <?php foreach ($allRdvs as $rdv): ?>
-                    <?php if($rdv['status'] == 1):; ?>
                         <tr>
                                 <td><?= $rdv['start'] ;?></td>
                                 <td><?= $rdv['end'];?></td>
@@ -26,7 +25,6 @@
                                 </a>
                             </td>
                         </tr>
-                    <?php endif; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>

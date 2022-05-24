@@ -112,17 +112,18 @@ class RendezVous{
     {
         $id = $this->rdv->getPramsFromUri();
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
-        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id['id']]);
+        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id[0]]);
         $this->rdv->setId($currentRdv->id);
         $this->rdv->setTitle($currentRdv->title);
         $this->rdv->setLocation($currentRdv->location);
         $this->rdv->setDescription($currentRdv->description);
         if($_POST){
+            echo '11';
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
             $this->rdv->setDescription($_POST['description']);
-            $this->rdv->setStatus(2);
+            $this->rdv->setStatus('rdv');
             $this->rdv->save();
             $userId = $_SESSION['Auth']->id;
             $this->user_rdv->setType(2);

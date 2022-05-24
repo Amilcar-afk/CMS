@@ -335,12 +335,7 @@ class User extends BaseSQL
                         "max"=>100,
                         "error"=>"Votre nom n'est pas correct",
                     ],
-                
                 ],
-
-
-
-
         ];
     }
 
