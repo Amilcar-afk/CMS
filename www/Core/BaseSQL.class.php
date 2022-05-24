@@ -30,6 +30,17 @@ abstract class BaseSQL
         }
     }
 
+    // /**
+    //  * @param mixed $id
+    //  */
+    // public function setId($id): object
+    // {
+    //     $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
+    //     $queryPrepared = $this->pdo->prepare($sql);
+    //     $queryPrepared->execute( ["id"=>$id] );
+    //     return $queryPrepared->fetchObject(get_called_class());
+    // }
+
     protected function save()
     {
         $columns  = get_object_vars($this);
@@ -57,12 +68,12 @@ abstract class BaseSQL
             VALUES (:".implode(",:", array_keys($columns)).")";
 
         }
+
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
-
 
 
     public function setLastId($lastId)

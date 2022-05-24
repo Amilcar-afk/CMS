@@ -242,14 +242,19 @@ class Rdv extends BaseSQL
             "inputs"=>[
                 "id"=>[
                     "type"=>"hidden",
+                    "label"=>"id",
+
                     "id"=>"id",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
+
+                    
                     ],
               
                 "location"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre location ...",
+                    "label"=>"location",
                     "id"=>"location",
                     "class"=>"location",
                     "required"=>true,
