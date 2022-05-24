@@ -9,9 +9,6 @@ abstract class BaseSQL
     private $table;
     private $lastInsertId;
 
-
-
-
     public function __construct()
     {
         //remplacer par singleton
@@ -45,12 +42,15 @@ abstract class BaseSQL
             }
         }
         $columns = array_filter($columns);
+
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
+        //unset($columns['table_name']);
+
 
         }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
@@ -122,7 +122,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
-    protected function find($id, string $attribut = 'id')
+    protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
