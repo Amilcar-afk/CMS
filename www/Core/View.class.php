@@ -7,6 +7,7 @@ class View
     private $view;
     private $template;
     private $data = [];
+    private $array = [];
 
     public function __construct($view, $template = "front")
     {
@@ -14,9 +15,16 @@ class View
         $this->setTemplate($template);
     }
 
+
+
+
+
+
+    
     public function setView($view){
         $this->view = strtolower($view);
     }
+
 
     public function setTemplate($template){
         $this->template = strtolower($template);

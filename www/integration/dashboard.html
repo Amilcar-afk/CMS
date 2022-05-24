@@ -27,9 +27,26 @@
     <!-- Styles -->
     <script type="text/javascript" src="../style/js/dashboardChart.js"></script>
     <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
+    <style>
+      :root {
+        --main-color: #396075;
+        --second-color: #55A6D3;
+        --third-color: #9BBCFF;
+        --background-color: white;
 
+        --bessels: 1200px;
+        --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78);
+
+      }
+    </style>
   </head>
-  <body style="background: url(https://images.frandroid.com/wp-content/uploads/2021/06/windows-11-wallpaper-fond-ecran-1.jpg) 0 / cover fixed; background-position: center" class="body-back-office">
+  <div class="background-container-back-office">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <body class="body-back-office">
     <header>
 
       <nav>
@@ -54,7 +71,7 @@
           <div class="row">
 
 
-            <div class="col-4 col-md-12 col-sm-6">
+            <div class="col-4 col-md-6 col-sm-6">
               <section class="card card--bottom  card--background-main-color">
                 <header>
                   <h4>6</h4>
@@ -63,7 +80,7 @@
               </section>
             </div>
 
-            <div class="col-4 col-md-12 col-sm-6">
+            <div class="col-4 col-md-6 col-sm-6">
               <section class="card card--background-main-color">
                 <button>
                   <i class="material-icons-round">more_vert</i>
@@ -75,7 +92,7 @@
               </section>
             </div>
 
-            <div class="col-2 col-md-12 col-sm-6">
+            <div class="col-2 col-md-6 col-sm-6">
               <section class="card card--bottom card--background-main-color">
                 <header>
                   <h4>2</h4>
@@ -84,7 +101,7 @@
               </section>
             </div>
 
-            <div class="col-2 col-md-12 col-sm-6">
+            <div class="col-2 col-md-6 col-sm-6">
               <section class="card card--bottom card--background-main-color">
                 <header>
                   <i class="material-icons-round material-icons--big-icon">edit</i>
@@ -93,7 +110,7 @@
               </section>
             </div>
 
-            <div class="col-4 col-md-12 col-sm-12">
+            <div class="col-4 col-md-6 col-sm-12">
               <section class="card card--bigcard card--background-color">
                 <header>
                   <h3>Page ranking</h3>
@@ -165,7 +182,7 @@
               </section>
             </div>
 
-            <div class="col-4 col-md-12 col-sm-12">
+            <div class="col-4 col-md-6 col-sm-12">
               <section class="card card--bigcard card--background-color">
                 <header>
                   <h3>Session per device</h3>
@@ -174,7 +191,7 @@
               </section>
             </div>
 
-            <div class="col-4 col-md-12 col-sm-12">
+            <div class="col-4 col-md-6 col-sm-12">
               <section class="card card--bigcard card--sessionweek-only card--background-color">
                 <header>
                   <h3>Session week</h3>

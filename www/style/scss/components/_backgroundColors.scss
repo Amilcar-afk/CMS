@@ -9,19 +9,21 @@
 	background-color: var(--second-color);
 	color: var(--background-color);
 }
-.bleu-fonce {
+.main-color {
 	color:var(--main-color);
 }
-.bleu-fonce-background {
+.main-color-background {
 	background-color: var(--main-color);
 	color: var(--background-color);
 }
-.blanc-claire-background {
+
+.second-color-background-default{
 	background-color: var(--background-color);
 	color: var(--second-color);
 }
 
-.blanc-fonce-background {
+.main-color-background-default{
 	background-color: var(--background-color);
 	color: var(--main-color);
 }
+

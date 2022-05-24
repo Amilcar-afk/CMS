@@ -1,11 +1,30 @@
 .container-main-content{
-  border-radius: 20px;
+  border-radius: var(--radius, 20px);
   width: 100%;
 
   &--padding{
     padding: 19px;
     background-color: var(--background-color);
     height: calc(100% - 73px - 1.25rem);
+  }
+
+  &--list{
+    padding: 30px 0;
+    margin: -15px;
+    width: calc(100% + 30px);
+
+    & .col-6 > article{
+      position: relative;
+      border-radius: var(--radius, 5px);
+      background-color: $grey;
+      padding: 20px;
+      margin: 15px;
+      margin-bottom: 30px;
+    }
+
+    & .col-6{
+    }
+
   }
 
   &--dashboard {
@@ -52,23 +71,102 @@
       backdrop-filter: blur(60px);
       background-color: rgba(129, 129, 129, 0.3);
       padding: 30px 50px;
-      border-radius: 20px 0px 0px 20px;
+      border-radius: var(--radius, 20px) 0px 0px var(--radius, 20px);
     }
 
     & > section{
+      position: relative;
       background-color: var(--background-color);
       padding: 30px 50px;
       flex-grow: 1;
-      border-radius: 0px 20px 20px 0px;
+      border-radius: 0px var(--radius, 20px) var(--radius, 20px) 0px;
+      overflow-y: scroll;
 
-      & > header{
+      & > div > header{
         display: flex;
         justify-content: space-between;
+        margin-bottom: 50px;
+      }
 
-        & button .material-icons-round{
-          font-size: rem(30);
-          font-weight: bolder;
+      & > div > article > header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        padding-left: 0px;
+        padding-right: 0px;
+
+        &:hover{
+          background-color: rgba(129, 129, 129, 0.3);
+          color: var(--main-color);
+          border-radius: var(--radius, 10px);
+          padding-left: 20px;
+          padding-right: 20px;
+
         }
+
+        &.selected{
+          background-color: $grey;
+          color: var(--main-color);
+          border-radius: var(--radius, 14px);
+          padding-left: 20px;
+          padding-right: 20px;
+
+        }
+      }
+    }
+
+    & > button{
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      padding: 0px;
+      z-index: 1;
+
+      & .material-icons-round {
+        font-size: rem(30);
+        font-weight: bolder;
+      }
+    }
+  }
+
+  &--setup{
+    width: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > header{
+      backdrop-filter: blur(60px);
+      background-color: rgba(129, 129, 129, 0.3);
+      border-radius:var(--radius, 20px) var(--radius, 20px) 0px 0px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 50px;
+      padding-bottom: 15px;
+
+      & #back-office-logo img{
+        border-radius: 300px;
+        width: 75px;
+        box-shadow: 0px -200px 4px 0px var(--main-color) inset;
+        margin-bottom: 25px;
+      }
+    }
+
+    & > form{
+      background-color: var(--background-color);
+      padding: 40px;
+      border-radius:0px  0px var(--radius, 20px) var(--radius, 20px);
+
+      & a{
+        font-size: rem(13);
+        font-weight: 600;
+        color: var(--main-color);
+        margin-bottom: 25px;
       }
     }
   }
@@ -109,6 +207,12 @@
             margin-right: 25px;
           }
         }
+      }
+
+      & > button{
+        position: absolute;
+        top: 27px;
+        right: 40px;
       }
 
       & > section {
@@ -152,5 +256,30 @@
         }
       }
     }
+
+    &--setup{
+
+      & > header{
+        border-radius: 0px;
+      }
+
+      & > form{
+        border-radius:0px;
+      }
+    }
+  }
+}
+
+.container-16-9{
+  position: relative;
+  padding-bottom: 56.25%;
+  margin-top: 10px;
+  & > iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
   }
 }
