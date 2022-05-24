@@ -7,6 +7,7 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
+    private $lastInsertId;
 
     /**
      * get_called_class()  Retourne le nom de la classe depuis laquelle une méthode statique a été appelée.
@@ -54,6 +55,7 @@ abstract class BaseSQL
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
         $columns = array_filter($columns);
+        unset($columns['table_name']);
 
        if( !is_null($this->getId()) ){
            foreach ($columns as $key=>$value){
@@ -67,6 +69,19 @@ abstract class BaseSQL
        }
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
+        $lastInsertd = $this->pdo->lastInsertId();
+        $this->setLastId($lastInsertd );
+    }
+
+    public function setLastId($lastId)
+    {
+        $this->lastInsertId = $lastId;
+
+    }
+
+    public function getLastId()
+    {
+        return $this->lastInsertId;
     }
 
     /**
@@ -92,7 +107,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
-    protected function find($id, string $attribut = 'id')
+    protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
