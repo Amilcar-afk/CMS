@@ -29,6 +29,8 @@
             <?php endforeach; ?>
             </select>
         <?php endif ?>
+
+        
         <br>
 
         <?php if(isset($config["textarea"])): ?>
