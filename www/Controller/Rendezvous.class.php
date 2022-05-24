@@ -103,7 +103,7 @@ class RendezVous{
 
           );
         }
-        $view = new View("rdvs-list", "back");
+        $view = new View("public/rdvs-list", "back");
         $view->assign("allRdvs", $allRdvs);
 
     }
