@@ -10,8 +10,6 @@ abstract class BaseSQL
     private $lastInsertId;
 
 
-
-
     public function __construct()
     {
         //remplacer par singleton
@@ -30,6 +28,17 @@ abstract class BaseSQL
         }
     }
 
+    // /**
+    //  * @param mixed $id
+    //  */
+    // public function setId($id): object
+    // {
+    //     $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
+    //     $queryPrepared = $this->pdo->prepare($sql);
+    //     $queryPrepared->execute( ["id"=>$id] );
+    //     return $queryPrepared->fetchObject(get_called_class());
+    // }
+
     protected function save()
     {
         $columns  = get_object_vars($this);
@@ -45,6 +54,7 @@ abstract class BaseSQL
             }
         }
         $columns = array_filter($columns);
+
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
@@ -62,8 +72,6 @@ abstract class BaseSQL
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
-
-
 
     public function setLastId($lastId)
     {
@@ -124,7 +132,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
-    protected function find($id, string $attribut = 'id')
+    protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;

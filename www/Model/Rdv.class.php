@@ -245,6 +245,8 @@ class Rdv extends BaseSQL
                     "id"=>"id",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
+
+                    
                     ],
               
                 "location"=>[
