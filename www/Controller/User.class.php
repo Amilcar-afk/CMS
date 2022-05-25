@@ -24,11 +24,10 @@ class User{
             $result = CheckInputs::checkEmail($_POST['email']);
             if($result){
                 $this->user->setEmail($_POST['email']);
-                $sql = "SELECT * FROM cmsp_user WHERE email = :email";
+                $sql = "SELECT * FROM cmspf_Users WHERE mail = :email";
                 $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
                 if(!empty($resultat)){
-                    if(password_verify($_POST['password'], $resultat->password)){
-                        echo'Bienvenu ! fdp';
+                    if(password_verify($_POST['password'], $resultat->pwd)){
                         session_start();
                         $_SESSION['Auth'] = $resultat;
                         header('location:/dashboard');
@@ -43,16 +42,16 @@ class User{
             }
      
         }
-
-        // CREER LA NOUVELLE VIEW
         $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
     }
+
 
     public function logout()
     {
         echo "Se deco";
     }
+
 
     public function register()
     {
@@ -71,17 +70,4 @@ class User{
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-   
 }

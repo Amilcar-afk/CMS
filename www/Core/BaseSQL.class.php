@@ -9,7 +9,6 @@ abstract class BaseSQL
     private $table;
     private $lastInsertId;
 
-
     public function __construct()
     {
         //remplacer par singleton
@@ -62,12 +61,17 @@ abstract class BaseSQL
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
 
-       }else{
+        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
-       }
+
+        }
+
         $queryPrepared = $this->pdo->prepare($sql);
+        var_dump($columns);
+
         $queryPrepared->execute($columns);
+
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
@@ -106,10 +110,8 @@ abstract class BaseSQL
         $param = explode('/',$e);
         array_shift($param);
         return $param;
-
-
-
     }
+
     /**
      * Delete element by id
      * @return void
@@ -117,10 +119,10 @@ abstract class BaseSQL
     protected function delete($id)
     {
         if( !is_null($this->getId()) ){
-            $sql = "DELETE * FROM ".$this->table." WHERE id=".$this->getId();
-
+            $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute();
+
         }else{
             http_response_code(400);
         }
@@ -133,6 +135,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
+
     protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
@@ -145,7 +148,6 @@ abstract class BaseSQL
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
     }
-
 
 
     /**
@@ -168,7 +170,6 @@ abstract class BaseSQL
         }
         return null;
     }
-
 
     /**
      * @param PDO $db

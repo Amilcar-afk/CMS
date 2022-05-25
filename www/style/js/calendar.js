@@ -30,7 +30,6 @@ $(document).ready(function() {
     select: function(start, end, allDay)
     {
       if(start.isBefore(moment())) {
-        console.log(2)
         $('#calendar').fullCalendar('unselect');
         alert('Impossible de séléctionnez cette date')
         document.location.reload();
@@ -49,19 +48,10 @@ $(document).ready(function() {
             {
               confirm(start);
               calendar.fullCalendar('refetchEvents');
-              // document.location.reload();
-
             }
           })
         }
     },
-
-    // UPDATE EVENTS /////////////////////////////////////////////
-    //rdvs_ status
-    //select - libre -devis - ..: tritre de rdv
-    //participant ou awner sur a table user_rdv_asso
-
-
 
     editable:true,
     eventDrop:function(event)
