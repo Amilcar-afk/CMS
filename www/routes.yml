@@ -63,12 +63,6 @@
   action: public_rdvs_reserver
   params: [id]
 
-/public/edit:
-  controller: rendezvous
-  action: test
-  params: [id_res]
-  middlewear : ['auth']
-
 /user_delete/id:
   controller: user
   action: deleteUser
@@ -89,11 +83,11 @@
 
 /categorie/delete:
   controller: categorie
-  action: deleteCategorie
+  action: categoriedelete
   params: [ id ]
   midleware: [ 'auth', 'admin' ]
 
-/categorie:
+/categories:
   controller: categorie
   action: categoriesList
   params: [ id ]

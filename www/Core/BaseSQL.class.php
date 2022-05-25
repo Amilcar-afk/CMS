@@ -27,17 +27,6 @@ abstract class BaseSQL
         }
     }
 
-    // /**
-    //  * @param mixed $id
-    //  */
-    // public function setId($id): object
-    // {
-    //     $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
-    //     $queryPrepared = $this->pdo->prepare($sql);
-    //     $queryPrepared->execute( ["id"=>$id] );
-    //     return $queryPrepared->fetchObject(get_called_class());
-    // }
-
     protected function save()
     {
         $columns  = get_object_vars($this);
@@ -68,10 +57,7 @@ abstract class BaseSQL
         }
 
         $queryPrepared = $this->pdo->prepare($sql);
-        var_dump($columns);
-
         $queryPrepared->execute($columns);
-
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
@@ -103,13 +89,15 @@ abstract class BaseSQL
             array_pop($parseUrl);
             $uri = implode('/',$parseUrl);
             if(isset($routes[$uri]) ){
+                $url = $_SERVER["REQUEST_URI"]; 
+                $e = str_replace($uri,'',$url);
+                $param = explode('/',$e);
+                array_shift($param);
+                return $param;
                 break;
             }
         }
-        $e = str_replace($uri,'',$url);
-        $param = explode('/',$e);
-        array_shift($param);
-        return $param;
+        
     }
 
     /**
@@ -138,15 +126,25 @@ abstract class BaseSQL
 
     protected function find($id = null, string $attribut = 'id')
     {
+
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($param);
+            $res = $queryPrepared->fetch(\PDO::FETCH_OBJ);
+            return $res;
+
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($param);
+            $res = $queryPrepared->fetchAll(\PDO::FETCH_OBJ);
+            return $res;
         }
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute($param);
+        // $queryPrepared = $this->pdo->prepare($sql);
+        // $queryPrepared->execute($param);
     }
 
 

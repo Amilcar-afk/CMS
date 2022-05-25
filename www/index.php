@@ -40,42 +40,28 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         array_pop($parseUrl);
         $uri = implode('/',$parseUrl);
         if(isset($routes[$uri]) ){
+            $url = $_SERVER["REQUEST_URI"]; 
+            $replace = str_replace($uri,'',$url);
+            $param = explode('/',$replace);
+            array_shift($param);
+            if( sizeof($param) != sizeof($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
+            if(!isset($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
             break;
         }else{
             die("Page 404");
         }
     }
 
-    $url = $_SERVER["REQUEST_URI"]; 
-    $replace = str_replace($uri,'',$url);
-    $param = explode('/',$replace);
-    array_shift($param);
 
-    if(!isset($routes[$uri]['params']))
-    {
-        die("invalid params");
-
-    }
-
-    if( sizeof($param) != sizeof($routes[$uri]['params']))
-    {
-        die("invalid params");
-    }
 
 }
 
-    // array_shift($parseUrl);
-    // $uri = '/'.$parseUrl[0];
-    // if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //     echo '';
-    // }else{
-    //     $uri = $uri.'/'.$parseUrl[1];
-    //     if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //         echo '';
-    //     }else{
-    //         die("Page 404");
-    //     }
-    // }
 
 
 // ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
