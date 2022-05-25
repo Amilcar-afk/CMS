@@ -62,6 +62,7 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         die("invalid params");
     }
 
+
 if( empty($uri) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"]) ) {
     //check for parameters
     if( stristr( $uri, "?") != false ) {
@@ -94,6 +95,7 @@ if( empty($uri) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["a
 // ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
 $controller = ucfirst(strtolower($routes[$uri]["controller"]));
 $action = strtolower($routes[$uri]["action"]); // la methode du controlleur
+
 
 
 // $controller = User ou $controller = Global

@@ -22,6 +22,7 @@
   controller: admin
   action: dashboard
 
+<<<<<<< HEAD
 /integration:
   controller: general
   action: integration
@@ -89,3 +90,13 @@
   controller: user
   action: validAccount
   arg: true
+=======
+/sendMail:
+  controller: user
+  action: sendMail
+
+/confirmAccount:
+  controller: user
+  action: validAccount
+  arg: true
+>>>>>>> e837b48f64872829dd4cefb26d34c6ff98c398be
