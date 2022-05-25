@@ -32,7 +32,6 @@ $routes = yaml_parse_file($routeFile);
 
 // en verifie l'existance du l'url l'existance du controller et l'existance de l'action
 
-
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
@@ -57,10 +56,22 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
             die("Page 404");
         }
     }
-
-
-
 }
+
+if(isset($routes[$uri]["midleware"]) ){
+    $authFile = 'Controller/Authadmin.class.php';
+    include $authFile;
+    $authController = "App\\Controller\\Authadmin";
+    if( !class_exists($authController) ){
+        die("La classe ".$authController." n'existe pas");
+    }
+    $objectAuthController = new $authController();
+
+    foreach($routes[$uri]["midleware"] as $action){
+        $objectAuthController->$action();
+    }
+}
+
 
 
 

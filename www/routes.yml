@@ -1,4 +1,4 @@
-/:
+admin/:
   controller: general
   action: home
 
@@ -37,6 +37,8 @@
 /rdv_calendar:
   controller: rendezvous
   action: calendar
+  midleware: ['auth']
+
 
 /rdv_calendar_insert:
   controller: rendezvous
