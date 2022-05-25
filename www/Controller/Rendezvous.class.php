@@ -62,8 +62,6 @@ class RendezVous{
                 $this->user_rdv->setRdv_key($lastId);
                 $this->user_rdv->save();
             }
-        }else{
-            echo 'Nok';
         }
     }
 
@@ -94,13 +92,16 @@ class RendezVous{
     {
         $sql = "SELECT * FROM cmspf_Rdvs order by id";
         $data = $this->rdv->loadCalendar($sql);
-        foreach ($data as $row) {
-            $allRdvs[] = array(
-            "id" => $row->id,
-            "start" => $row->startDate,
-            "end" => $row->endDate,
-            "status" => $row->status,
-          );
+        $allRdvs = [];
+        if (isset($data)) {
+            foreach ($data as $row) {
+                $allRdvs[] = array(
+                    "id" => $row->id,
+                    "start" => $row->startDate,
+                    "end" => $row->endDate,
+                    "status" => $row->status,
+                );
+            }
         }
         $view = new View("public/rdvs-list", "back");
         $view->assign("allRdvs", $allRdvs);
@@ -116,7 +117,6 @@ class RendezVous{
         $this->rdv->setLocation($currentRdv->location);
         $this->rdv->setDescription($currentRdv->description);
         if($_POST){
-            echo '11';
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
@@ -133,13 +133,6 @@ class RendezVous{
         $view = new View("public/rdvsupdate",'back');//le fichier rdvsupdate il existe pas
         $view->assign("currentRdv", $currentRdv);
         $view->assign("rdv",$this->rdv);
-    }
-
-
-    public function test()
-    {
-        $id = $this->rdv->getPramsFromUri();
-        var_dump($id);
     }
 
 }

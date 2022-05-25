@@ -67,12 +67,6 @@
   action: public_rdvs_reserver
   params: [id]
 
-/public/edit:
-  controller: rendezvous
-  action: test
-  params: [id_res]
-  middlewear : ['auth']
-
 /user_delete/id:
   controller: user
   action: deleteUser
