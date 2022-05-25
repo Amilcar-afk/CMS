@@ -33,7 +33,7 @@
                         <option  value="<?= $choice['value'] ?>"
                                  id="<?= $choice['id'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?= $nameChoice ?>
+                            <?= $nameChoice?>
                         </option>
                     <?php endforeach;?>
                 </select>
@@ -68,23 +68,6 @@
                 >
             </div>
         <?php endif;?>
-
-
-
-
-
-        <input name="<?=$name?>"id="<?=$input["id"]?>"type="<?=$input["type"]?>"class="<?=$input["class"]?>"
-        <?php if(isset($input["value"])): ?>
-            value="<?=$input["value"]?>"
-        <?php endif ?>
-        <?php if(isset($input["placeholder"])): ?>
-            placeholder="<?=$input["placeholder"]?>"
-        <?php endif ?>
-        <?= (!empty($input["required"]))?'required="required"':'' ?>>
-        <br>
-
-       
     <?php endforeach;?>
-
     <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
 </form>

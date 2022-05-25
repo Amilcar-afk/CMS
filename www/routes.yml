@@ -80,3 +80,21 @@
 /page/:
   controller: pageengine
   action: buildpage
+
+/categorie/compose:
+  controller: categorie
+  action: composeCategorie
+  params: [id]
+  midleware : ['auth', 'admin']
+
+/categorie/delete:
+  controller: categorie
+  action: deleteCategorie
+  params: [ id ]
+  midleware: [ 'auth', 'admin' ]
+
+/categorie:
+  controller: categorie
+  action: listCategorie
+  params: [ id ]
+  midleware: [ 'auth', 'admin' ]
