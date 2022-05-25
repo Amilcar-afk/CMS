@@ -1,51 +1,49 @@
 <form method="<?= $config["config"]["method"]??"POST" ?>"
       action="<?= $config["config"]["action"]??"" ?>"
-    <?= (!empty($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
+    <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
     <?php foreach ($config["inputs"] as $name=>$input):?>
         <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
             <p><?=$input["question"]?></p>
-            <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
+            <?php foreach ($input["choices"] as $choice):?>
                 <div class="input-container">
                     <input name="<?=$name?>"
-                           id="<?=$choice["id"]?>"
+                           id="<?=$name?>"
                            type="<?=$input["type"]?>"
                            class="<?=$choice["class"]?>"
                            value="<?=$choice["value"]?>"
-                        <?= (!empty($choice["selected"]))?'checked="checked"':'' ?>
-                        <?= (!empty($choice["required"]))?'required="required"':'' ?>
+                        <?= (isset($choice["selected"]))?'checked="checked"':'' ?>
+                        <?= (isset($choice["required"]))?'required="required"':'' ?>
                     >
-                    <label for="<?=$choice["id"]?>" ><?=$nameChoice?></label>
+                    <label for="<?=$name?>" ><?=$choice["label"]?></label>
                 </div>
             <?php endforeach;?>
             <br>
         <?php elseif ($input["type"] == "select"):?>
             <div class="input-container">
                 <p><?=$input["question"]?></p>
-
                 <select name="<?= $name ?>">
-                    <?= (!empty($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
-                    <?= (!empty($choice["required"]))?'required="required"':'' ?>
-                    <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
+                    <?= (isset($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
+                    <?= (isset($choice["required"]))?'required="required"':'' ?>
+                    <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
-                                 id="<?= $choice['id'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?= $nameChoice ?>
+                            <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
                 </select>
             </div>
         <?php elseif ($input["type"] == "textarea"):?>
             <div class="input-container">
-                <label for="<?=$name?>"><?=$name?></label>
+                <label for="<?=$name?>"><?=$input["question"]?></label>
                 <textarea name="<?= $name ?>"
                           placeholder="<?= $input["placeholder"] ?>"
                           rows="<?= $input["rows"] ?>"
                           cols="<?= $input["cols"] ?>"
-                          id="<?= $input["id"] ?>"
+                          id="<?= $name ?>"
                           class="<?= $input["class"] ?>"
-                          minlenght="<?= $input["min"] ?>"
-                          maxlenght="<?= $input["max"] ?>"
-                        <?= (!empty($input["required"]))?'required="required"':'' ?>
+                          <?= (isset($input["min"]))?'minlenght="'. $input["min"] .'"':'' ?>
+                          <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
+                          <?= (isset($input["required"]))?'required="required"':'' ?>
                 ><?= $input["value"] ?>
                 </textarea>
             </div>
@@ -53,12 +51,12 @@
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["label"]?></label>
                 <input name="<?=$name?>"
-                       id="<?=$input["id"]?>"
+                       id="<?=$name?>"
                        type="<?=$input["type"]?>"
                        class="<?=$input["class"]?>"
                        placeholder="<?=$input["placeholder"]?>"
-                    <?= (!empty($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
-                    <?= (!empty($input["required"]))?'required="required"':'' ?>
+                    <?= (isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
+                    <?= (isset($input["required"]))?'required="required"':'' ?>
                 >
             </div>
         <?php endif;?>
