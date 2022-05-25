@@ -9,9 +9,11 @@ use App\Model\Table as TableModel;
 class Admin
 {
     public $tableUsers;
-    
+
     public function __construct()
     {
+        $this->authAdmin = new Authadmin();
+        Authadmin::isLogged();
         $this->tableUsers = new TableModel();
     }
 

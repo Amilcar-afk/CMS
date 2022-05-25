@@ -11,5 +11,4 @@ class CleanWords
         return $word;
     }
 
-
 }

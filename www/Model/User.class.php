@@ -9,10 +9,10 @@ class User extends BaseSQL
     protected $id = null;
     protected $firstname;
     protected $lastname;
-    protected $email;
-    protected $password;
-    protected $passwordOldFirst;
-    protected $passwordOldSecond;
+    protected $mail;
+    protected $pwd;
+    protected $pwd1;
+    protected $pwd2;
     protected $creationDate;
     protected $updateDate;
     protected $token;
@@ -48,7 +48,7 @@ class User extends BaseSQL
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->mail;
     }
 
     /**
@@ -56,7 +56,7 @@ class User extends BaseSQL
      */
     public function setEmail($email): void
     {
-        $this->email = strtolower(trim($email));
+        $this->mail = strtolower(trim($email));
     }
 
     /**
@@ -64,7 +64,7 @@ class User extends BaseSQL
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->pwd;
     }
 
     /**
@@ -72,7 +72,7 @@ class User extends BaseSQL
      */
     public function setPassword($password): void
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->pwd = password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
@@ -130,16 +130,22 @@ class User extends BaseSQL
         parent::save();
     }
 
-    public function select($sql, $param){
-        parent::findOneData($sql, $param);
+
+    public function select(string $sql, $params){
+
+        return parent::findOneData($sql, $params);
     }
 
+    public function selectAllData(string $sql ){
+
+        return parent::findAllData($sql);
+    }
     /**
      * Get the value of passwordOldFirst
      */ 
     public function getPasswordOldFirst()
     {
-        return $this->passwordOldFirst;
+        return $this->pwd1;
     }
 
     /**
@@ -149,7 +155,7 @@ class User extends BaseSQL
      */ 
     public function setPasswordOldFirst($passwordOldFirst)
     {
-        $this->passwordOldFirst = $passwordOldFirst;
+        $this->pwd1 = $passwordOldFirst;
 
         return $this;
     }
@@ -159,7 +165,7 @@ class User extends BaseSQL
      */ 
     public function getPasswordOldSecond()
     {
-        return $this->passwordOldSecond;
+        return $this->pwd2;
     }
 
     /**
@@ -169,7 +175,7 @@ class User extends BaseSQL
      */ 
     public function setPasswordOldSecond($passwordOldSecond)
     {
-        $this->passwordOldSecond = $passwordOldSecond;
+        $this->pwd2 = $passwordOldSecond;
 
         return $this;
     }
@@ -287,7 +293,7 @@ class User extends BaseSQL
                         "type"=>"email",
                         "placeholder"=>"Votre email ...",
                         "id"=>"emailRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "error"=>"Email incorrect",
                         "unicity"=>true,
@@ -297,7 +303,7 @@ class User extends BaseSQL
                         "type"=>"password",
                         "placeholder"=>"Votre mot de passe ...",
                         "id"=>"pwdRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "error"=>"Votre mot de passe doit faire entre 8 et 16 et contenir des chiffres et des lettres",
                     ],
@@ -305,7 +311,7 @@ class User extends BaseSQL
                         "type"=>"password",
                         "placeholder"=>"Confirmation ...",
                         "id"=>"pwdConfirmRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "required"=>true,
                         "confirm"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
@@ -314,7 +320,7 @@ class User extends BaseSQL
                         "type"=>"text",
                         "placeholder"=>"Prénom ...",
                         "id"=>"firstnameRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "min"=>2,
                         "max"=>50,
                         "error"=>"Votre prénom n'est pas correct",
@@ -323,17 +329,12 @@ class User extends BaseSQL
                         "type"=>"text",
                         "placeholder"=>"Nom ...",
                         "id"=>"lastnameRegister",
-                        "class"=>"inputRegister",
+                        "class"=>"input",
                         "min"=>2,
                         "max"=>100,
                         "error"=>"Votre nom n'est pas correct",
                     ],
-                
                 ],
-
-
-
-
         ];
     }
 
@@ -344,24 +345,27 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Se connecter"
+                "submit"=>"Login"
             ],
             "inputs"=>[
                 "email"=>[
+                    "label"=>"Mail",
                     "type"=>"email",
-                    "placeholder"=>"Votre email ...",
+                    "placeholder"=>"Your mail",
                     "id"=>"emailRegister",
-                    "class"=>"inputRegister",
+                    "class"=>"input",
                     "required"=>true,
                 ],
                 "password"=>[
+                    "label"=>"Password",
                     "type"=>"password",
-                    "placeholder"=>"Votre mot de passe ...",
+                    "placeholder"=>"Your password",
                     "id"=>"pwdRegister",
-                    "class"=>"inputRegister",
+                    "class"=>"input",
                     "required"=>true,
                 ]
             ]
+
         ];
     }
     public function getFormTp(): array

@@ -1,18 +1,18 @@
 <?php
 
+
 namespace App\Controller;
+
 
 use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
 use App\Core\CheckInputs;
-
 use App\Model\User as UserModel;
 
 class User{
 
     public $user;
-    
     public function __construct()
     {
         $this->user = new UserModel();
@@ -20,24 +20,38 @@ class User{
 
     public function login()
     {
-
-        // APPEL LES VERIFS
         if( !empty($_POST)){
             $result = CheckInputs::checkEmail($_POST['email']);
-            $sql ="SELECT try FROM cmsp_user WHERE email =:email";
-            $res = $this->user->select($sql,$_POST['email']);
-            print_r($res);
+            if($result){
+                $this->user->setEmail($_POST['email']);
+                $sql = "SELECT * FROM cmspf_Users WHERE mail = :email";
+                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
+                if(!empty($resultat)){
+                    if(password_verify($_POST['password'], $resultat->pwd)){
+                        session_start();
+                        $_SESSION['Auth'] = $resultat;
+                        header('location:/dashboard');
+                    }else{
+                        echo'mot de passe incorrect';
+                    }
+                }else{
+                    echo'email ou mot passe incorrect';
+                }
+            }else{
+                echo'email incorrect';
+            }
+     
         }
-
-        // CREER LA NOUVELLE VIEW
-        $view = new View("login");
+        $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
     }
+
 
     public function logout()
     {
         echo "Se deco";
     }
+
 
     public function register()
     {
@@ -53,7 +67,7 @@ class User{
                 print_r($result);
             }
         }
-        $view = new View("register");
+        $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
     }
 }

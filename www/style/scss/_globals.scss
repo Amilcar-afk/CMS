@@ -35,7 +35,7 @@ span, small{
 
 p{
 	font-family: $font2 ;
-	padding: 5px;
+	margin: 0;
 }
 
 .container{
@@ -78,16 +78,37 @@ p{
 	flex-wrap: wrap;
 }
 
-.light{
-	font-weight: 300;
+*{
+	scrollbar-color: var(--main-color) $lighter-grey;
+	scrollbar-width: thin;
+	scrollbar-border-radius: var(--radius, 12px);
 }
 
-.medium{
-	font-weight: 500;
+*::-webkit-scrollbar {
+	width: 6px;
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
 }
+*::-webkit-scrollbar-track {
+	background: $lighter-grey;
 
-.bold{
-	font-weight: bold;
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	/* change me to blue to match the background */
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--main-color);
+	border: 0px solid;
+
+	border-radius: var(--radius, 12px);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	/* change border color to blue to match the background */
 }
 
 
