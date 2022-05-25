@@ -2,6 +2,10 @@
 <?php
 
 echo "DATA : ";
-echo $data;
+print_r($data);
+
+echo $os;
+echo '<br />';
+echo $detectDevice;
 
 ?>

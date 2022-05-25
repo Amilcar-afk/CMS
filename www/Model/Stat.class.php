@@ -13,15 +13,16 @@ class Stat extends BaseSQL
     protected $page_key;
     protected $ip;
     protected $type;
+    protected $device;
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function loadStats()
+    public function loadStats ($sql)
     {
-        return parent::find();
+        return parent::findAllData($sql);
 
     }
     /**
@@ -138,14 +139,25 @@ class Stat extends BaseSQL
         return $this;
     }
 
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    public function setDevice($device)
+    {
+        $this->device = $device;
+        return $this;
+    }
 
     public function save()
     {
         parent::save();
     }
 
-    public function select($sql, $param){
-        parent::findOneData($sql, $param);
+    public function find($id = null, $attribut = 'id')
+    {
+        parent::find($id, $attribut);
     }
     
 }
