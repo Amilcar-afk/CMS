@@ -4,7 +4,7 @@
     <?php foreach ($config["inputs"] as $name=>$input):?>
         <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
             <p><?=$input["question"]?></p>
-            <?php foreach ($input["choice"] as $nameChoice=>$choice):?>
+            <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
                 <div class="input-container">
                     <input name="<?=$name?>"
                            id="<?=$choice["id"]?>"
@@ -25,7 +25,7 @@
                 <select name="<?= $name ?>">
                     <?= (!empty($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (!empty($choice["required"]))?'required="required"':'' ?>
-                    <?php foreach ($input["choice"] as $nameChoice=>$choice):?>
+                    <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  id="<?= $choice['id'] ?>"
                                  class="<?= $choice['class'] ?>">
