@@ -32,27 +32,6 @@ class Statistics
 
         // INCLUDE
         // include 'integration/dashboard.html';
-        // Statistics::getAllStats();
-
-        $detectDevice = $_SERVER['HTTP_USER_AGENT'];
-        if(strpos($detectDevice,"Linux")) {
-            $os = "Linux";
-        } else if (strpos($detectDevice,"iPhone") || strpos($detectDevice,"iPad") || strpos($detectDevice,"iPod")){
-            $os = "iOs";
-        } else if (strpos($detectDevice,"Windows")){
-            $os = "Windows";
-        } else if (strpos($detectDevice,"Mac OS X")){
-            $os = "Mac OS X";
-        } else if (strpos($detectDevice,"Android")){
-            $os = "Android";
-        }
-
-
-
-        $view->assign("os", $os);
-        $view->assign("detectDevice", $detectDevice);
-
-        
 
     }
 
@@ -70,18 +49,35 @@ class Statistics
         $countryCode = $query['countryCode'];
 
         // GET DEVICES
-        $detectDevice = preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]); 
-        if ($detectDevice) {
-            $device = 'Mobile';
+        $detectDevice = $_SERVER['HTTP_USER_AGENT'];
+        $isMobile = preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+        if ($isMobile) {
+
+            if (strpos($detectDevice,"iPhone") || strpos($detectDevice,"iPad") || strpos($detectDevice,"iPod")){
+                $device = "Ios";
+            } else if (strpos($detectDevice,"Android")){
+                $device = "Android";
+            } else {
+                $device = "Other";
+            }
+
         } else {
-            $device = 'Windows';
+
+            if (strpos($detectDevice,"Windows")){
+                $device = "Windows";
+            } else if (strpos($detectDevice,"Mac OS X")){
+                $device = "MacOs";
+            } else {
+                $device = "Other";
+            }
+
         }
 
         // GET DATE
         $date = date("Y-m-d");
 
-        // GET PAGE
-        $page = basename($_SERVER['REQUEST_URI']);
+        // GET PAGE KEY
+
 
         // INSERT STATS
         $this->stats->setType(1); // NOT OK
@@ -90,7 +86,7 @@ class Statistics
         $this->stats->setReseauSocKey(1); // NOT OK
         $this->stats->setCountry($countryCode); // OK
         $this->stats->setDate($date); // OK
-        $this->stats->setDevice($device);
+        $this->stats->setDevice($device); // OK
         $this->stats->save();
 
     }
