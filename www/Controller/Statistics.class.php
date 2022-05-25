@@ -43,6 +43,8 @@ class Statistics
             $os = "Windows";
         } else if (strpos($detectDevice,"Mac OS X")){
             $os = "Mac OS X";
+        } else if (strpos($detectDevice,"Android")){
+            $os = "Android";
         }
 
 
