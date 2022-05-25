@@ -29,7 +29,7 @@
                         <option  value="<?= $choice['value'] ?>"
                                  id="<?= $choice['id'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?= $nameChoice ?>
+                            <?= $nameChoice?>
                         </option>
                     <?php endforeach;?>
                 </select>
@@ -105,10 +105,7 @@
                     <?= (!empty($input["required"]))?'required="required"':'' ?>
                 >
             </div>
-
         <?php endif;?>
-
     <?php endforeach;?>
-
     <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
 </form>

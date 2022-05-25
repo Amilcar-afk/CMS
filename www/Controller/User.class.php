@@ -70,17 +70,4 @@ class User{
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-   
 }

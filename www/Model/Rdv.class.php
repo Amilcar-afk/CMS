@@ -190,11 +190,6 @@ class Rdv extends BaseSQL
 
     }
 
-    public function deleteEvent ($params)
-    {
-        return parent::delete($params);
-
-    }
 
     public function selectOneByData(string $sql, $params){
 

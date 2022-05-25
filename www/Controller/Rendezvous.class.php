@@ -100,12 +100,10 @@ class RendezVous{
             "start" => $row->startDate,
             "end" => $row->endDate,
             "status" => $row->status,
-
           );
         }
         $view = new View("public/rdvs-list", "back");
         $view->assign("allRdvs", $allRdvs);
-
     }
 
     public function public_rdvs_reserver()
@@ -132,7 +130,7 @@ class RendezVous{
             $this->user_rdv->save();
             header('location:/public_rdvs_list');
         }
-        $view = new View("public/rendez-vous/rdvsupdate");
+        $view = new View("public/rdvsupdate",'back');//le fichier rdvsupdate il existe pas
         $view->assign("currentRdv", $currentRdv);
         $view->assign("rdv",$this->rdv);
     }

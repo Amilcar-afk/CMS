@@ -58,7 +58,10 @@ abstract class BaseSQL
 
         }
         $queryPrepared = $this->pdo->prepare($sql);
+        var_dump($columns);
+
         $queryPrepared->execute($columns);
+
         $lastInsertd = $this->pdo->lastInsertId();
         $this->setLastId($lastInsertd );
     }
@@ -122,6 +125,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
+
     protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
@@ -134,7 +138,6 @@ abstract class BaseSQL
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
     }
-
 
 
     /**
