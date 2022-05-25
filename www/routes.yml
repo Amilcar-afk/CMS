@@ -95,6 +95,6 @@
 
 /categorie:
   controller: categorie
-  action: listCategorie
+  action: categoriesList
   params: [ id ]
   midleware: [ 'auth', 'admin' ]

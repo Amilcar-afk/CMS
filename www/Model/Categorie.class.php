@@ -62,6 +62,12 @@ class Categorie extends BaseSQL
 
     }
 
+    public function getAllCategories($sql)
+    {
+        return parent::findAllData($sql);
+
+    }
+
     public function getCategorieForm(): array
     {
         return [
@@ -76,7 +82,7 @@ class Categorie extends BaseSQL
                 "type"=>[
                     "type"=>"select",
                     "question"=>"nav",
-                    "choice"=>[
+                    "choices"=>[
                         [
                             "id"=>"",
                             "value"=>"nav",

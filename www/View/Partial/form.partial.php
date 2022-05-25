@@ -7,7 +7,7 @@
 
         <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
             <p><?=$input["question"]?></p>
-            <?php foreach ($input["choice"] as $nameChoice=>$choice):?>
+            <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
                 <div class="input-container">
                     <input name="<?=$name?>"
                            id="<?=$choice["id"]?>"
@@ -29,16 +29,16 @@
                 <select name="<?= $name ?>">
                     <?= (!empty($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (!empty($choice["required"]))?'required="required"':'' ?>
-                    <?php foreach ($input["choice"] as $nameChoice=>$choice):?>
+                    <?php foreach ($input["choices"] as $nameChoice=>$choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  id="<?= $choice['id'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?= $nameChoice?>
+                            <?= $choice['value']?>
                         </option>
                     <?php endforeach;?>
                 </select>
             </div>
-            </br>
+
         <?php elseif ($input["type"] == "textarea"):?>
             <div class="input-container">
                 <label for="<?=$name?>"><?=$name?></label>
@@ -54,7 +54,6 @@
                 ><?= $input["value"] ?>
                 </textarea>
             </div>
-
         <?php else:?>
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["label"]?></label>

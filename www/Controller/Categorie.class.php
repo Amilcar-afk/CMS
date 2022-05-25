@@ -20,41 +20,32 @@ class Categorie{
 
     public function categoriesList()
     {
-
+        $sql = "SELECT * FROM cmspf_Categories";
+        $allCategories = $this->categorie->getAllCategories($sql);
+        $view = new View("categorielist", "back-sandbox");
+        $view->assign("categories",$allCategories);
     }
 
     public function composeCategorie()
     {
         if(isset($_POST['id']))
         {
-            
             $this->categorie->setId($_POST['id']);
             $this->categorie->setType($_POST['type']);
             echo 'id existe';
             $this->categorie->save();
         }else{
             echo 'id existe pas';
-
+            var_dump($_POST);
             if(isset($_POST['type'])){
-                $this->categorie->setType('nav');
+                $this->categorie->setType($_POST['type']);
                 $this->categorie->save();
-                // $lastId = $this->categorie->getLastId();
             }else{
                 echo 'Nok';
             }
         }
         $view = new View("categorieinsert", "back-sandbox");
         $view->assign("categorie",$this->categorie);
-    }
-
-    public function categoriesUpdate()
-    {
-        if(isset($_POST['id']))
-        {
-            $this->categorie->setId($_POST['id']);
-            $this->categorie->setType($_POST['type']);
-            $this->rdv->save();
-        }
     }
 
     public function categoriesDelete()
