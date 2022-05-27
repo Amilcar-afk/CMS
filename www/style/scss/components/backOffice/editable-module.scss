@@ -1,0 +1,54 @@
+.module{
+  position: relative;
+}
+
+.editable-module{
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  button{
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &--tool-bar{
+    background: rgba(129, 129, 129, 0.3);
+    box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(60px);
+    border-radius: var(--radius, 8px);
+    display: flex;
+    right: 0;
+    position: absolute;
+    top: -50px;
+  }
+
+  &--border{
+    border : 3px rgba(129, 129, 129, 0.3) solid;
+    box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius, 5px);
+    height: 100%;
+    width: 100%;
+  }
+
+  &--footer-nav{
+    display: flex;
+    justify-content: center;
+    bottom: 60px;
+    bottom: -33px;
+    position: relative;
+
+    button{
+      background: rgba(129, 129, 129, 0.3);
+      box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(60px);
+      border-radius: var(--radius, 8px);
+    }
+  }
+}
+

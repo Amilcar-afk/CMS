@@ -11,7 +11,6 @@ class Page extends BaseSQL
     protected $description;
     protected $title;
     protected $status;
-    protected $background;
 
     /**
      * Page constructor.
@@ -21,6 +20,15 @@ class Page extends BaseSQL
         parent::__construct();
     }
 
+    public function save()
+    {
+        parent::save();
+    }
+
+    public function find($id = null, $attribut = 'id')
+    {
+        parent::find($id, $attribut);
+    }
 
     /**
      * @return null
@@ -30,13 +38,12 @@ class Page extends BaseSQL
         return $this->id;
     }
 
-    /**
-     * @param null $id
-     */
-    //public function setId($id): void
-    //{
-      //  $this->id = $id;
-    //}
+    public function setId($id): object
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -100,27 +107,6 @@ class Page extends BaseSQL
     public function setStatus($status): void
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBackground()
-    {
-        return $this->background;
-    }
-
-    /**
-     * @param mixed $background
-     */
-    public function setBackground($background): void
-    {
-        $this->background = $background;
-    }
-
-    public function save()
-    {
-        parent::save();
     }
 
     public function getPageData(): array

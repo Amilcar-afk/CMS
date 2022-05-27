@@ -1546,6 +1546,7 @@ p {
     .container-main-content--dashboard .row > :nth-child(7) > :nth-child(2) {
       height: calc(40% - 57px); }
   .container-main-content--menu {
+    z-index: 2;
     position: absolute;
     top: 0;
     left: 0;
@@ -1831,3 +1832,45 @@ h2 {
       .burger-menu-container nav > :last-child {
         border-bottom: #444 0px solid !important;
         border-radius: 0px 0px 10px 10px !important; } }
+
+.module {
+  position: relative; }
+
+.editable-module {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; }
+  .editable-module button {
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center; }
+  .editable-module--tool-bar {
+    background: rgba(129, 129, 129, 0.3);
+    box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(60px);
+    border-radius: var(--radius, 8px);
+    display: flex;
+    right: 0;
+    position: absolute;
+    top: -50px; }
+  .editable-module--border {
+    border: 3px rgba(129, 129, 129, 0.3) solid;
+    box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius, 5px);
+    height: 100%;
+    width: 100%; }
+  .editable-module--footer-nav {
+    display: flex;
+    justify-content: center;
+    bottom: 60px;
+    bottom: -33px;
+    position: relative; }
+    .editable-module--footer-nav button {
+      background: rgba(129, 129, 129, 0.3);
+      box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(60px);
+      border-radius: var(--radius, 8px); }
