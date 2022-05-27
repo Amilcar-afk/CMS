@@ -1,3 +1,4 @@
+<?php //var_dump($config[1][0]); ?>
 <table class="<?=$config[0]["table"]["class"]?>" id="<?=$config[0]["table"]["id"]?>">
     <caption><?=$config[0]["title"]?></caption>
     <thead>
@@ -10,41 +11,33 @@
         </tr>
     </thead>
     <tbody>
-    
         <?php foreach($config[1] as $key=>$infos):?>
             <tr>
                 <td>
-                    <?=$infos->id?>
+                    <?=$infos["id"]?>
                 </td>
                 <td>
-                    <?=$infos->lastname?>
+                    <?=$infos["lastname"]?>
                 </td>
                 <td>
-                    <?=$infos->firstname?>
+                    <?=$infos["firstname"]?>
                 </td>
                 <td>
-                    <?=$infos->mail?>
+                    <?=$infos["email"]?>
                 </td>
                 <td>
-                    <?=$infos->date_creation?>
+                    <?=$infos["creationDate"]?>
                 </td>
                 <td>
-                    <?=$infos->date_update?>
+                    <?=$infos["updateDate"]?>
                 </td>
                 <td>
                     <?="Validé"?>
                 </td>
                 <td>
-                    <?=$infos->rank?>
-                </td>
-                <td>
-                    <?="<button>Supprimer</button>"?>
-                </td>
-                <td>
-                    <?="<button>Modifier</button>"?>
+                    <?=$infos["rank"]?>
                 </td>
             </tr>
         <?php endforeach;?>
     </tbody>
 </table>
-
