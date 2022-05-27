@@ -4,7 +4,7 @@ namespace App\Controller;
 session_start();
 
 
-class Midleware{
+class Middleware{
 
     public static function auth(){
         if(!isset($_SESSION['Auth'])){

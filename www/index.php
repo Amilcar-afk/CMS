@@ -58,16 +58,16 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
     }
 }
 
-if(isset($routes[$uri]["midleware"]) ){
-    $authFile = 'Controller/midleware.class.php';
+if(isset($routes[$uri]["middleware"]) ){
+    $authFile = 'Controller/middleware.class.php';
     include $authFile;
-    $authController = "App\\Controller\\Midleware";
+    $authController = "App\\Controller\\Middleware";
     if( !class_exists($authController) ){
         die("La classe ".$authController." n'existe pas");
     }
     $objectAuthController = new $authController();
 
-    foreach($routes[$uri]["midleware"] as $action){
+    foreach($routes[$uri]["middleware"] as $action){
         $objectAuthController->$action();
     }
 }
@@ -108,21 +108,3 @@ if( !method_exists($objectController, $action) ){
 }
 
 $objectController->$action();//on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
-
-
-
-
-/**
- * on recupere l'url courrant est on le stock dans une variable
- * on recupere le nom du fichier.yml et on le stock dans une variable
- * on verifie l'existance de celui-ci
- * on parse le le fichier.yml est on stock le resultat dans un tableau a 2d
- * on recuperer le controller et l'action et on les stoc dans des varible, le controlleur on lui met la premiere lettre en majuscule
- * on verifie l'existance de ceux-ci
- * on recupere le nom du fichier qui contien le controlleur chemin.$controller.controller.php et on l'inclut
- * on verifie l'existance de celui-ci
- * on recupere le nom de la class avec le chemain du namespace en utilisant la variable $controller qu'on a utiliser pour recuperer le controller du fichier.yml
- * onverifie l'existance de celui-ci
- * on creer $objectcontroller qui sera l'instanciation de la class $controller
- * on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
- */

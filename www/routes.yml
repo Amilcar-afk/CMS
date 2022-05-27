@@ -95,16 +95,16 @@ admin/:
   controller: categorie
   action: composeCategorie
   params: [id]
-  midleware : ['auth', 'admin']
+  middleware : ['auth', 'admin']
 
 /categorie/delete:
   controller: categorie
   action: categoriedelete
   params: [ id ]
-  midleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin' ]
 
 /categories:
   controller: categorie
   action: categoriesList
   params: [ id ]
-  midleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin' ]
