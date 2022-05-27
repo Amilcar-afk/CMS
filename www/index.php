@@ -32,7 +32,6 @@ $routes = yaml_parse_file($routeFile);
 
 // en verifie l'existance du l'url l'existance du controller et l'existance de l'action
 
-
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
@@ -40,42 +39,40 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         array_pop($parseUrl);
         $uri = implode('/',$parseUrl);
         if(isset($routes[$uri]) ){
+            $url = $_SERVER["REQUEST_URI"]; 
+            $replace = str_replace($uri,'',$url);
+            $param = explode('/',$replace);
+            array_shift($param);
+            if( sizeof($param) != sizeof($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
+            if(!isset($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
             break;
         }else{
             die("Page 404");
         }
     }
-
-    $url = $_SERVER["REQUEST_URI"]; 
-    $replace = str_replace($uri,'',$url);
-    $param = explode('/',$replace);
-    array_shift($param);
-
-    if(!isset($routes[$uri]['params']))
-    {
-        die("invalid params");
-
-    }
-
-    if( sizeof($param) != sizeof($routes[$uri]['params']))
-    {
-        die("invalid params");
-    }
-
 }
 
-    // array_shift($parseUrl);
-    // $uri = '/'.$parseUrl[0];
-    // if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //     echo '';
-    // }else{
-    //     $uri = $uri.'/'.$parseUrl[1];
-    //     if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //         echo '';
-    //     }else{
-    //         die("Page 404");
-    //     }
-    // }
+if(isset($routes[$uri]["midleware"]) ){
+    $authFile = 'Controller/midleware.class.php';
+    include $authFile;
+    $authController = "App\\Controller\\Midleware";
+    if( !class_exists($authController) ){
+        die("La classe ".$authController." n'existe pas");
+    }
+    $objectAuthController = new $authController();
+
+    foreach($routes[$uri]["midleware"] as $action){
+        $objectAuthController->$action();
+    }
+}
+
+
 
 
 // ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule

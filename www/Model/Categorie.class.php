@@ -62,13 +62,69 @@ class Categorie extends BaseSQL
 
     }
 
-    public function getCategorieForm(): array
+    public function getAllCategories($sql)
+    {
+        return parent::findAllData($sql);
+
+    }
+
+    public function getCategorie()
+    {
+        return parent::find();
+    }
+
+    public function getCategories($id)
+    {
+        return parent::find($id);
+    }
+
+    public function getParams()
+    {
+        return parent::getPramsFromUri();
+    }
+
+
+
+    public function categorieUpdateForm(): array
     {
         return [
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"reserver",
+                "submit"=>"valider",
+            ],
+ 
+            "inputs"=>[
+
+                "id"=>[
+                    "type"=>"hidden",
+                    "label"=>"",
+                    "id"=>"id",
+                    "placeholder"=>"",
+
+                    "class"=>"inputRegister",
+                    "value"=> $this->getId(),
+                    ],
+                "type"=>[
+                    "type"=>"text",
+                    "label"=>"type",
+                    "placeholder"=>"",
+                    "id"=>"type",
+                    "class"=>"type",
+                    "required"=>true,
+                    "value"=> $this->getType(),
+                ],
+            ]
+        ];
+    }
+
+    public function getCategorieForm (): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"valider",
             ],
  
             "inputs"=>[
@@ -76,7 +132,7 @@ class Categorie extends BaseSQL
                 "type"=>[
                     "type"=>"select",
                     "question"=>"nav",
-                    "choice"=>[
+                    "choices"=>[
                         [
                             "id"=>"",
                             "value"=>"nav",

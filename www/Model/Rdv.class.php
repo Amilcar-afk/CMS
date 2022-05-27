@@ -183,6 +183,11 @@ class Rdv extends BaseSQL
     {
         parent::save();
     }
+    public function deleteEvent($id)
+    {
+        parent::delete($id);
+    }
+
 
     public function loadCalendar ($sql)
     {

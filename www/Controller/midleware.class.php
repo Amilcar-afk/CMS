@@ -4,21 +4,17 @@ namespace App\Controller;
 session_start();
 
 
-class Authadmin{
+class Midleware{
 
-    public static function isLogged(){
+    public static function auth(){
         if(!isset($_SESSION['Auth'])){
             header('location:/login');
             exit;
         }
     }
 
-    public static function logout(){
-        unset($_SESSION['Auth']);
-        header('location:/login');
-    }
 
-    public static function accessUser(){
+    public static function admin(){
         if($_SESSION['Auth']->rank != 1){
             header('location:/login');
             exit; 

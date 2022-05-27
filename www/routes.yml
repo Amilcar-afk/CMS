@@ -1,4 +1,4 @@
-/:
+admin/:
   controller: general
   action: home
 
@@ -41,6 +41,8 @@
 /rdv_calendar:
   controller: rendezvous
   action: calendar
+  midleware: ['auth']
+
 
 /rdv_calendar_insert:
   controller: rendezvous
@@ -97,12 +99,12 @@
 
 /categorie/delete:
   controller: categorie
-  action: deleteCategorie
+  action: categoriedelete
   params: [ id ]
   midleware: [ 'auth', 'admin' ]
 
-/categorie:
+/categories:
   controller: categorie
-  action: listCategorie
+  action: categoriesList
   params: [ id ]
   midleware: [ 'auth', 'admin' ]
