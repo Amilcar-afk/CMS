@@ -1,7 +1,3 @@
-/:
-  controller: general
-  action: home
-
 /me-contacter:
   controller: general
   action: contact
@@ -71,6 +67,18 @@
   controller: user
   action: deleteUser
 
+
+/:
+  controller: general
+  action: viewPage
+  params: [ slug ]
+
+/page:
+  controller: pageengine
+  action: listPage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
 /page/compose:
   controller: pageengine
   action: composePage
@@ -83,11 +91,6 @@
   params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
-/page:
-  controller: pageengine
-  action: listPage
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]
 
 /categorie/compose:
   controller: categorie

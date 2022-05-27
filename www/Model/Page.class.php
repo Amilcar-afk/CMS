@@ -109,47 +109,41 @@ class Page extends BaseSQL
         $this->status = $status;
     }
 
-    public function getPageData(): array
+    public function getFormNewPage(): array
     {
         return [
-            "meta"=>[
-                "id"=>"",
-                "date_update"=>"",
-                "user_key"=>"",
-                "status"=>"",
-                "title"=>"",
-                "description"=>""
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Login"
             ],
-            "sections"=>[
-                [
-                    "id"=>"",
-                    "bessels"=>"",
-                    "background"=>"",
-                    "place"=>"",
-                    "components"=>[
-                        [
-                            "id"=>"",
-                            "type"=>"",
-                            "place"=>"",
-                            "witdth"=>"",
-                            "highlight"=>"",
-                            "font"=>"",
-                            "font_size"=>"",
-                            "font_weight"=>"",
-                            "color"=>"",
-                            "background"=>"",
-                            "align"=>"",
-                            "contents"=>[
-                                [
-                                    "content"=>"",
-                                    "date"=>"",
-                                    "other"=>""
-                                ]
-                            ]
-                        ],
-                    ],
+            "inputs"=>[
+                "title"=>[
+                    "label"=>"Tite",
+                    "type"=>"text",
+                    "placeholder"=>"Page title",
+                    "id"=>"title",
+                    "class"=>"input",
+                    "required"=>true,
                 ],
-            ],
+                "slug"=>[
+                    "label"=>"Slug",
+                    "type"=>"password",
+                    "placeholder"=>"Page slug",
+                    "id"=>"slug",
+                    "class"=>"input",
+                    "required"=>true,
+                ],
+                "slug"=>[
+                    "label"=>"Slug",
+                    "type"=>"password",
+                    "placeholder"=>"Page slug",
+                    "id"=>"slug",
+                    "class"=>"input",
+                    "required"=>true,
+                ]
+            ]
+
         ];
     }
 }

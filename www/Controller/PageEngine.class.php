@@ -31,8 +31,8 @@ class PageEngine
 
 
 
-        $view = new View("page-editor", "back");
-        $view->assign("user",$this->page);
+        $view = new View("page-manager", "back");
+        //$view->assign("user",$this->page);
     }
 
     public function composePage()
@@ -95,6 +95,9 @@ class PageEngine
         // CREER LA NOUVELLE VIEW
         $view = new View("page-editor", "back");
         //$view->assign("user",$this->user);
+
+        $view = new View("page-editor", "back");
+        $view->assign("user",$this->page);
     }
 
     public function logout()
