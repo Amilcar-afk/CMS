@@ -17,6 +17,8 @@ class RendezVous{
 
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
+        $this->authAdmin = new Authadmin();
+        Authadmin::isLogged();
     }
 
     public function calendar()

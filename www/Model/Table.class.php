@@ -34,7 +34,9 @@ class Table extends BaseSQL
                 "Date de création du compte",
                 "Date de mise à jour du compte",
                 "Etat du compte",
-                "Rang"
+                "Rang",
+                "",
+                ""
             ]
 
         ];

@@ -1,5 +1,4 @@
 <h1>Gestion utilisateurs</h1>
-
 <?php
     $data = [
         $tableUsers->getTableUsers(),
@@ -9,7 +8,10 @@
 ?>
 
 <script>
-    $(document).ready(function () {
-        $('#usersTab').DataTable();
+    $.noConflict();
+    jQuery(document).ready(function(){
+        jQuery('#usersTab').DataTable();
     });
 </script>
+
+

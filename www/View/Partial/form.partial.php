@@ -30,13 +30,14 @@
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?= $choice['value']?>
+                            <?= //$choice['value']?>
                             <!-- <?php // $choice['label'] ?> -->
+                            <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
                 </select>
             </div>
-
+            
         <?php elseif ($input["type"] == "textarea"):?>
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["question"]?></label>
@@ -61,8 +62,8 @@
                        class="<?=$input["class"]?>"
                        placeholder="<?=$input["placeholder"]?>"
                     <?= (isset($input["value"]))?'value="'.$input["value"].'"':'' ?>
-                    <?= (isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
-                    <?= (isset($input["required"]))?'required="required"':'' ?>
+                    <?= //(isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
+                    <?= //(isset($input["required"]))?'required="required"':'' ?> 
                 >
             </div>
         <?php endif;?>
