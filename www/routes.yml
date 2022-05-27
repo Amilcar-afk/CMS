@@ -22,6 +22,10 @@ admin/:
   controller: admin
   action: dashboard
 
+/userManagement:
+  controller: admin
+  action: userManagement
+
 /integration:
   controller: general
   action: integration
@@ -71,26 +75,36 @@ admin/:
 
 /page/compose:
   controller: pageengine
-  action: composepage
+  action: composePage
+  params: [id]
+  middleware : ['auth', 'admin']
 
-/page/:
+/page/delete:
   controller: pageengine
-  action: buildpage
+  action: deletePage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/page:
+  controller: pageengine
+  action: listPage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
 
 /categorie/compose:
   controller: categorie
   action: composeCategorie
   params: [id]
-  midleware : ['auth', 'admin']
+  middleware : ['auth', 'admin']
 
 /categorie/delete:
   controller: categorie
   action: categoriedelete
   params: [ id ]
-  midleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin' ]
 
 /categories:
   controller: categorie
   action: categoriesList
   params: [ id ]
-  midleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin' ]

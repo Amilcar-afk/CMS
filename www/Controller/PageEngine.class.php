@@ -21,7 +21,13 @@ class PageEngine
         $this->page = new Page();
     }
 
-    public function buildPage(){
+
+
+    public function deletePage(){
+
+    }
+
+    public function listPage(){
 
 
 
@@ -31,6 +37,8 @@ class PageEngine
 
     public function composePage()
     {
+
+
         $_POST['page'] = [
             "meta"=>[
                 "date_update"=>"",
@@ -49,7 +57,7 @@ class PageEngine
                         [
                             "type"=>"1",
                             "place"=>"1",
-                            "witdth"=>"2",
+                            "width"=>"2",
                             "highlight"=>"1",
                             "font"=>"1",
                             "font_size"=>"12",
@@ -75,68 +83,18 @@ class PageEngine
             //$_POST['page'] = stripslashes(html_entity_decode($_POST['page']));
             //$_POST['page'] = json_decode($_POST['page'], true);
 
-            $this->page->setBackground($_POST['page']['meta']['background']);
-            $this->page->save();
+            //$this->page->save();
 
             //foreach sur les sections
             if(!empty($_POST['page']["sections"]))
             {
-                foreach ($_POST['page']["sections"] as $section)
-                {
-                    $this->section = new Section();
-                    $this->section->setPlace($section['place']);
-                    $this->section->setBackground($section['background']);
-                    $this->section->setBessels($section['bessels']);
-                    $this->section->save();
 
-                    $this->pageSection = new PageSection();
-                    $this->pageSection->setPageKey($this->page->id);
-                    $this->pageSection->setSectionKey($this->section->id);
-                    $this->pageSection->save();
-
-                    //foreach sur les components
-                    if(!empty($section["components"]))
-                    {
-                        foreach ($section["components"] as $component)
-                        {
-                            $this->component = new Component();
-                            $this->component->setPlace($component['place']);
-                            $this->component->setType($component['type']);
-                            $this->component->setWidth($component['width']);
-                            $this->component->setColor($component['color']);
-                            $this->component->setBackground($component['background']);
-                            $this->component->setFontSize($component['fontSize']);
-                            $this->component->setFontWeight($component['fontWeight']);
-                            $this->component->setHighLight($component['fontWeight']);
-                            $this->component->setAlign($component['Align']);
-                            $this->component->setSectionKey($this->section->id);
-                            $this->component->save();
-
-                            if(!empty($component['contents']))
-                            {
-                                foreach ($component['contents'] as $content)
-                                {
-                                    $this->translation = new Translation();
-                                    $this->translation->setContent($content['value']);
-                                    $this->translation->setLanguageKey(1);
-                                    $this->translation->save();
-
-                                    $this->componentTranslation = new ComponentTranslation();
-                                    $this->componentTranslation->setComponentKey($this->component->id);
-                                    $this->componentTranslation->setTranslationKey($this->translation->id);
-                                    $this->componentTranslation->setType($content['type']);
-                                    $this->componentTranslation->save();
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
         // CREER LA NOUVELLE VIEW
-        $view = new View("login", "back");
-        $view->assign("user",$this->user);
+        $view = new View("page-editor", "back");
+        //$view->assign("user",$this->user);
     }
 
     public function logout()
