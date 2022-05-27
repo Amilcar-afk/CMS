@@ -11,10 +11,16 @@
             <header>
                 <h1 class="title title--black">My meets</h1>
             </header>
+            <style>
+                a:not([href]) {
+                    pointer-events: auto; 
+                }
+            </style>
 
            <div id="calendar"></div>
 
         </div>
+
         <div id="slots-container" class="collapse" data-group-collapse="section-container">
             <header>
                 <h1 class="title title--black">My slots</h1>

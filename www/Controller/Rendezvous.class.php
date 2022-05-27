@@ -44,6 +44,8 @@ class RendezVous{
 
             $allRdvs[] = array(
                 "id" => $row->id,
+                "title"=>$row->title,
+                "rank"=>$statusOfUser,
                 "start" => $row->startDate,
                 "end" => $row->endDate,
                 "color" => $color,
@@ -127,7 +129,8 @@ class RendezVous{
         $this->rdv->setTitle($currentRdv->title);
         $this->rdv->setLocation($currentRdv->location);
         $this->rdv->setDescription($currentRdv->description);
-        if($_POST){
+
+        if(isset($_POST['id'])){
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
@@ -139,10 +142,9 @@ class RendezVous{
             $this->user_rdv->setUser_key($userId);
             $this->user_rdv->setRdv_key($_POST['id']);
             $this->user_rdv->save();
-            header('location:/public_rdvs_list');
+            header('location:/rdv_calendar');
         }
-        $view = new View("public/rdvsupdate",'back');//le fichier rdvsupdate il existe pas
-        $view->assign("currentRdv", $currentRdv);
+        $view = new View("public/rdvsupdate");
         $view->assign("rdv",$this->rdv);
     }
 

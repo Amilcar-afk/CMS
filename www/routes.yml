@@ -69,6 +69,8 @@ admin/:
   controller: rendezvous
   action: public_rdvs_reserver
   params: [id]
+  middleware : ['auth']
+
 
 /user_delete/id:
   controller: user
