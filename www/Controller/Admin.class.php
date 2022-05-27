@@ -13,8 +13,7 @@ class Admin
     public function __construct()
     {
         $this->tableUsers = new TableModel();
-        //$this->authAdmin = new Authadmin();
-        $this->authAdmin = new Middleware();
+        $this->authAdmin = new Authadmin();
     }
 
     public function dashboard()
