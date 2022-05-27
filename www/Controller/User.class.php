@@ -62,6 +62,7 @@ class User{
                 $this->user->setLastname($_POST['lastname']);
                 $this->user->setPassword($_POST['password']);
                 $this->user->setEmail($_POST['email']);
+                $this->user->setRank(1);
                 $this->user->save();
             }else{
                 print_r($result);

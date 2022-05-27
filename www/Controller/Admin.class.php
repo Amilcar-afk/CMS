@@ -9,9 +9,10 @@ use App\Model\Table as TableModel;
 class Admin
 {
     public $tableUsers;
-
+    
     public function __construct()
     {
+        $this->tableUsers = new TableModel();
         $this->authAdmin = new Authadmin();
     }
 
@@ -28,7 +29,7 @@ class Admin
 
     public function userManagement(){
 
-        $sql ="SELECT * FROM cmsp_user";
+        $sql ="SELECT * FROM cmspf_Users";
         $params = [];
         $res = $this->tableUsers->selectAllUsers($sql, $params);
         

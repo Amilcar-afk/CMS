@@ -59,6 +59,11 @@
                 </div>
                 <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum djijkjolor sit amet consectetur.</h4>
             </article>
+        <!--<div class="row">
+            <button style="background-color: #ce0a0a" class="cta-button cta--button-a col-6" data-a-target="container-main-content--component-list">
+                <span class="material-icons-round">add</span>
+            </button>-->
+
         </div>
     </section>
     <?php include "Partial/component-list.view.php";?>
