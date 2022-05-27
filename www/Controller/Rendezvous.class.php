@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Core\View;
 use App\Model\Rdv as rdvModel;
 use App\Model\User_rdv as User_rdv;
+use App\Controller\Midleware;
 use PDO;
 
 class RendezVous{
@@ -11,12 +12,16 @@ class RendezVous{
     public $rdv;
     public $authAdmin ;
     public $user_rdv;
+    
 
     public function __construct()
     {
 
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
+        $this->authAdmin = new Midleware();
+
+
     }
 
     public function calendar()
@@ -26,17 +31,28 @@ class RendezVous{
 
     public function load()
     {
+        var_dump($_SESSION['Auth']);
+        
         $sql = "SELECT * FROM cmspf_Rdvs order by id";
         $data = $this->rdv->loadCalendar($sql);
         foreach ($data as $row) {
+            if($row->status === 'slot'){
+                $color = '#32CD32';
+            }else{
+                $color = '#DC143C';
+            }
             $allRdvs[] = array(
             "id" => $row->id,
             "start" => $row->startDate,
             "end" => $row->endDate,
-          );
-            }
+            "color" => $color,
+
+            );
+        }
         echo json_encode($allRdvs);
     }
+
+
 
     public function insertRdv()
     {

@@ -9,7 +9,6 @@ class Admin
 
     public function __construct()
     {
-        $this->authAdmin = new Authadmin();
     }
     
     public function dashboard()

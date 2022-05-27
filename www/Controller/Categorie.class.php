@@ -3,8 +3,6 @@
 namespace App\Controller;
 use App\Core\View;
 use App\Model\Categorie as Categorie_model;
-use App\Controller\Authadmin;
-use PDO;
 
 class Categorie{
 
@@ -14,7 +12,6 @@ class Categorie{
     public function __construct()
     {
         $this->categorie = new Categorie_model();
-        $this->authAdmin = new Authadmin();
     }
 
 

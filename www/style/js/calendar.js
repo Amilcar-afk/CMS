@@ -14,6 +14,7 @@ $(document).ready(function() {
       $.ajax({
           method: 'POST',
           url:"/calendar_load",
+          color: '#000',
           dataType: 'json',
           success: function(events) {
             callback(events);
