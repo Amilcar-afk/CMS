@@ -190,11 +190,6 @@ class Rdv extends BaseSQL
 
     }
 
-    public function deleteEvent ($params)
-    {
-        return parent::delete($params);
-
-    }
 
     public function selectOneByData(string $sql, $params){
 
@@ -242,6 +237,8 @@ class Rdv extends BaseSQL
             "inputs"=>[
                 "id"=>[
                     "type"=>"hidden",
+                    "label"=>"id",
+
                     "id"=>"id",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
@@ -252,6 +249,7 @@ class Rdv extends BaseSQL
                 "location"=>[
                     "type"=>"text",
                     "placeholder"=>"Votre location ...",
+                    "label"=>"location",
                     "id"=>"location",
                     "class"=>"location",
                     "required"=>true,

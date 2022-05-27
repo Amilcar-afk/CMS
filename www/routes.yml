@@ -22,6 +22,10 @@
   controller: admin
   action: dashboard
 
+/userManagement:
+  controller: admin
+  action: userManagement
+
 /integration:
   controller: general
   action: integration
@@ -63,39 +67,42 @@
   action: public_rdvs_reserver
   params: [id]
 
-/public/edit:
-  controller: rendezvous
-  action: test
-  params: [id_res]
-  middlewear : ['auth']
-
 /user_delete/id:
   controller: user
   action: deleteUser
 
 /page/compose:
   controller: pageengine
-  action: composepage
-
-/page/:
-  controller: pageengine
-  action: composepage
-
-
-/page/compose:
-  controller: pageengine
   action: composePage
   params: [id]
-  midleware : ['auth', 'admin']
+  middleware : ['auth', 'admin']
 
 /page/delete:
   controller: pageengine
   action: deletePage
   params: [ id ]
-  midleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin' ]
 
 /page:
   controller: pageengine
   action: listPage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/categorie/compose:
+  controller: categorie
+  action: composeCategorie
+  params: [id]
+  midleware : ['auth', 'admin']
+
+/categorie/delete:
+  controller: categorie
+  action: deleteCategorie
+  params: [ id ]
+  midleware: [ 'auth', 'admin' ]
+
+/categorie:
+  controller: categorie
+  action: listCategorie
   params: [ id ]
   midleware: [ 'auth', 'admin' ]
