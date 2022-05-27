@@ -79,4 +79,23 @@
 
 /page/:
   controller: pageengine
-  action: buildpage
+  action: composepage
+
+
+/page/compose:
+  controller: pageengine
+  action: composePage
+  params: [id]
+  midleware : ['auth', 'admin']
+
+/page/delete:
+  controller: pageengine
+  action: deletePage
+  params: [ id ]
+  midleware: [ 'auth', 'admin' ]
+
+/page:
+  controller: pageengine
+  action: listPage
+  params: [ id ]
+  midleware: [ 'auth', 'admin' ]

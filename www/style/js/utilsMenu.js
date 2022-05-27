@@ -35,7 +35,7 @@ $(document).ready(function(){
     })
 
     //HOVE CARD
-    $(".module").mouseover(function (){
+    $(".module-list").mouseover(function (){
 
         let hovered = $(".module--hover")[0];
         if ($(hovered) != undefined){
