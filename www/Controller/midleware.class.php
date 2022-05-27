@@ -4,7 +4,7 @@ namespace App\Controller;
 session_start();
 
 
-class Authadmin{
+class Midleware{
 
     public static function auth(){
         if(!isset($_SESSION['Auth'])){

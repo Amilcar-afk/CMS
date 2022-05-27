@@ -59,9 +59,9 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
 }
 
 if(isset($routes[$uri]["midleware"]) ){
-    $authFile = 'Controller/Authadmin.class.php';
+    $authFile = 'Controller/midleware.class.php';
     include $authFile;
-    $authController = "App\\Controller\\Authadmin";
+    $authController = "App\\Controller\\Midleware";
     if( !class_exists($authController) ){
         die("La classe ".$authController." n'existe pas");
     }
