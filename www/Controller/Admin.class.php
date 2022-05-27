@@ -12,7 +12,7 @@ class Admin
 
     public function __construct()
     {
-        $this->authAdmin = new Authadmin();
+        $this->authAdmin = new Middleware();
     }
 
     public function dashboard()
