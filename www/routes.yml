@@ -51,6 +51,7 @@ admin/:
 /calendar_load:
   controller: rendezvous
   action: load
+  middleware: ['auth']
 
 /calendar_delete:
   controller: rendezvous

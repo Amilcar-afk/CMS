@@ -206,12 +206,6 @@ class Rdv extends BaseSQL
         return parent::findAllData($sql);
     }
 
-    public function getPramsFromUri(){
-
-        return parent::getPramsFromUri();
-    }
-
-  
 
     public function getFormRegister(): array
     {

@@ -80,25 +80,25 @@ abstract class BaseSQL
         return $routes;
     }
  
-    public function getPramsFromUri()
-    {
-        $url = $_SERVER["REQUEST_URI"]; 
-        $routes = yaml_parse_file("routes.yml");
-        $parseUrl = explode('/', parse_url($url, PHP_URL_PATH));
-        for($i=0;$i<=sizeof($parseUrl);$i++){
-            array_pop($parseUrl);
-            $uri = implode('/',$parseUrl);
-            if(isset($routes[$uri]) ){
-                $url = $_SERVER["REQUEST_URI"]; 
-                $e = str_replace($uri,'',$url);
-                $param = explode('/',$e);
-                array_shift($param);
-                return $param;
-                break;
-            }
-        }
+    // public function getPramsFromUri()
+    // {
+    //     $url = $_SERVER["REQUEST_URI"]; 
+    //     $routes = yaml_parse_file("routes.yml");
+    //     $parseUrl = explode('/', parse_url($url, PHP_URL_PATH));
+    //     for($i=0;$i<=sizeof($parseUrl);$i++){
+    //         array_pop($parseUrl);
+    //         $uri = implode('/',$parseUrl);
+    //         if(isset($routes[$uri]) ){
+    //             $url = $_SERVER["REQUEST_URI"]; 
+    //             $e = str_replace($uri,'',$url);
+    //             $param = explode('/',$e);
+    //             array_shift($param);
+    //             return $param;
+    //             break;
+    //         }
+    //     }
         
-    }
+    // }
 
     /**
      * Delete element by id

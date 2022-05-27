@@ -14,7 +14,6 @@ class RendezVous{
 
     public function __construct()
     {
-
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
     }
@@ -26,15 +25,31 @@ class RendezVous{
 
     public function load()
     {
+
+        $statusOfUser = $_SESSION['Auth']->rank;
+
         $sql = "SELECT * FROM cmspf_Rdvs order by id";
         $data = $this->rdv->loadCalendar($sql);
         foreach ($data as $row) {
-            $allRdvs[] = array(
-            "id" => $row->id,
-            "start" => $row->startDate,
-            "end" => $row->endDate,
-          );
+
+            if($statusOfUser != 1 && $row->status === 'rdv'){
+                continue;
             }
+            
+            if($row->status === 'slot'){
+                $color = '#32CD32';
+            }else{
+                $color = '#DC143C';
+            }
+
+            $allRdvs[] = array(
+                "id" => $row->id,
+                "start" => $row->startDate,
+                "end" => $row->endDate,
+                "color" => $color,
+            );
+        }
+
         echo json_encode($allRdvs);
     }
 
@@ -104,9 +119,8 @@ class RendezVous{
         $view->assign("allRdvs", $allRdvs);
     }
 
-    public function public_rdvs_reserver()
+    public function public_rdvs_reserver($id)
     {
-        $id = $this->rdv->getPramsFromUri();
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
         $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id[0]]);
         $this->rdv->setId($currentRdv->id);

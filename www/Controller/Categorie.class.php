@@ -3,7 +3,6 @@
 namespace App\Controller;
 use App\Core\View;
 use App\Model\Categorie as Categorie_model;
-use App\Controller\Authadmin;
 use PDO;
 
 class Categorie{
@@ -14,7 +13,6 @@ class Categorie{
     public function __construct()
     {
         $this->categorie = new Categorie_model();
-        $this->authAdmin = new Authadmin();
     }
 
 
@@ -25,29 +23,24 @@ class Categorie{
         $view->assign("categories",$allCategories);
     }
 
-    public function composeCategorie()
+    public function composeCategorie($id)
     {
-
-        if($this->categorie->getParams()){
-
-            $categorie = $this->categorie->getCategories($this->categorie->getParams()[0]);
-
+        if(isset($id)){
+        $categorie = $this->categorie->getCategories($id[0]);
             $this->categorie->setId($categorie->id);
             $this->categorie->setType($categorie->type);
-
             if(isset($_POST['id']) )
             {
                 $this->categorie->setId($_POST['id']);
                 $this->categorie->setType($_POST['type']);
                 $this->categorie->save();
                 header('location:/categories');
-
             }
             $view = new View("categorieupdate", "back-sandbox");
             $view->assign("categorie",$this->categorie);
 
-        }else{
 
+        }else{
             if(!isset($_POST['id']) && isset($_POST['type']) )
             {
                 $this->categorie->setType($_POST['type']);
@@ -56,17 +49,16 @@ class Categorie{
             $view = new View("categorieinsert", "back-sandbox");
             $view->assign("categorie",$this->categorie);
         }
+
     }
 
-    public function categoriedelete()
+    public function categoriedelete($id)
     {
-        if($this->categorie->getParams())
+        if(isset($id))
         {
-            $id = $this->categorie->getParams()[0];
-            $this->categorie->deleteCategorie($this->categorie->setId($id));
+            $this->categorie->deleteCategorie($this->categorie->setId($id[0]));
             header('location:/categories');
         }
-
     }
 
 }
