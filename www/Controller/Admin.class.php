@@ -30,7 +30,7 @@ class Admin
 
     public function userManagement(){
 
-        $sql ="SELECT * FROM cmsp_user";
+        $sql ="SELECT * FROM cmspf_Users";
         $params = [];
         $res = $this->tableUsers->selectAllUsers($sql, $params);
         

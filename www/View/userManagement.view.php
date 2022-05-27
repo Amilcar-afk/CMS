@@ -8,8 +8,10 @@
 ?>
 
 <script>
-    $(document).ready(function () {
-        $('#usersTab').DataTable();
+    $.noConflict();
+    jQuery(document).ready(function(){
+        jQuery('#usersTab').DataTable();
     });
 </script>
+
 
