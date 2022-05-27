@@ -49,7 +49,6 @@ abstract class BaseSQL
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
             " WHERE id=".$this->getId();
-        //unset($columns['table_name']);
 
         }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
@@ -98,11 +97,7 @@ abstract class BaseSQL
                 break;
             }
         }
-
-        $e = str_replace($uri,'',$url);
-        $param = explode('/',$e);
-        array_shift($param);
-        return $param;
+        
     }
 
     /**

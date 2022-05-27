@@ -85,9 +85,7 @@ class Categorie extends BaseSQL
 
 
 
-    //public function categorieUpdateForm(): array
-
-    public function getCategorieForm(): array
+    public function categorieUpdateForm(): array
     {
         return [
             "config"=>[
@@ -127,7 +125,6 @@ class Categorie extends BaseSQL
                 "method"=>"POST",
                 "action"=>"",
                 "submit"=>"valider",
-                //"submit"=>"reserver",
             ],
  
             "inputs"=>[
@@ -135,8 +132,7 @@ class Categorie extends BaseSQL
                 "type"=>[
                     "type"=>"select",
                     "question"=>"nav",
-                    //"choices"=>[
-                    "choice"=>[
+                    "choices"=>[
                         [
                             "id"=>"",
                             "value"=>"nav",
