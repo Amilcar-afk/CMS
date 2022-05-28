@@ -13,7 +13,6 @@
             <div id="pages-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                 <header>
                     <h1 class="title title--black">MY PAGES</h1>
-                    <br>
                     <p>Here you can modify the sitemap of your website with navigations, the visibility of the different pages as well as their metadatas.</p>
                 </header>
 
@@ -23,7 +22,6 @@
                         New page
                     </button>
                     <div id="new-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="page-manager-container">
-
                     </div>
                 </article>
 
@@ -35,20 +33,35 @@
                     </header>
                     <div id="public-pages-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="page-manager-container" style="opacity: 1">
 
-                        <div class="col-6 col-md-12 col-sm-12">
-                            <article class="module-list">
-                                <h3 class="highlight background-second-color color-white text-center fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
-                            </article>
-                            <article class="module-list">
-                                <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
-                            </article>
-                        </div>
-
-                        <div class="col-6 col-md-12 col-sm-12">
-                            <article class="module-list background-main-color">
-                                <h2 class="color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
-                            </article>
-                        </div>
+                        <table>
+                            <tbody>
+                            <tr class="table-line">
+                                <td>
+                                    <span class="material-icons-round">home</span>
+                                    <h4>Home page</h4>
+                                    <label class="sticker sticker--slug">/index</label>
+                                    <label class="sticker sticker">#tag</label>
+                                </td>
+                                <td>
+                                    <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
+                                    <button class="cta-button"><span class="material-icons-round">mode</span></button>
+                                    <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-main-content--component-list"><span class="material-icons-round">build</span></button>
+                                </td>
+                            </tr>
+                            <tr class="table-line">
+                                <td>
+                                    <h4>Home page</h4>
+                                    <label class="sticker sticker--slug">/index</label>
+                                    <label class="sticker sticker--tag">#tag</label>
+                                </td>
+                                <td>
+                                    <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
+                                    <button class="cta-button"><span class="material-icons-round">mode</span></button>
+                                    <button class="cta-button"><span class="material-icons-round">build</span></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                     </div>
                 </article>
@@ -59,22 +72,8 @@
                         <h2>Darft</h2>
                         <span class="material-icons-round">more_horiz</span>
                     </header>
-                    <div id="draft-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="text-elements-container">
+                    <div id="draft-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="page-manager-container">
 
-                        <div class="col-6 col-md-12 col-sm-12">
-                            <article class="module-list">
-                                <h3 class="highlight background-second-color color-white text-center fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
-                            </article>
-                            <article class="module-list">
-                                <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
-                            </article>
-                        </div>
-
-                        <div class="col-6 col-md-12 col-sm-12">
-                            <article class="module-list background-main-color">
-                                <h2 class="color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
-                            </article>
-                        </div>
 
                     </div>
                 </article>
@@ -119,4 +118,27 @@
             </div>
         </section>
     </section>
+
+    <!-- add page form -->
+    <section id="container-main-content--component-list" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-list-component" class="cta-button cta-button--icon cta-button-a" data-a-target="container-main-content--component-list"><span class="material-icons-round">close</span></button>
+        <div class="menu-container">
+
+        </div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black">TEXT ELEMENTS</h1>
+                </header>
+
+                <!--Titles-->
+                <article>
+                    <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                </article>
+
+            </div>
+
+        </section>
+    </section>
+
 </section>

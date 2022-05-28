@@ -11,6 +11,7 @@ class Page extends BaseSQL
     protected $description;
     protected $title;
     protected $status;
+    protected $slug;
 
     /**
      * Page constructor.
@@ -29,6 +30,23 @@ class Page extends BaseSQL
     {
         parent::find($id, $attribut);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
 
     /**
      * @return null
@@ -114,31 +132,50 @@ class Page extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
-                "submit"=>"Login"
+                "action"=>"page/compose",
+                "submit"=>"Save"
             ],
             "inputs"=>[
                 "title"=>[
-                    "label"=>"Tite",
+                    "question"=>"Title",
                     "type"=>"text",
                     "placeholder"=>"Page title",
-                    "id"=>"title",
+                    "name"=>"title",
                     "class"=>"input",
                     "required"=>true,
                 ],
+                "visibility"=>[
+                    "question"=>"Visibility",
+                    "type"=>"select",
+                    "name"=>"status",
+                    "class"=>"input",
+                    "required"=>true,
+                    "choices"=>[
+                        [
+                            "value" => "Public",
+                            "label" => "Public",
+                            "class"=>"input"
+                        ],
+                        [
+                            "value" => "Draft",
+                            "label" => "Draft",
+                            "class"=>"input"
+                        ],
+                    ]
+                ],
                 "slug"=>[
-                    "label"=>"Slug",
-                    "type"=>"password",
+                    "question"=>"Slug",
+                    "type"=>"text",
+                    "name"=>"slug",
                     "placeholder"=>"Page slug",
-                    "id"=>"slug",
                     "class"=>"input",
                     "required"=>true,
                 ],
-                "slug"=>[
-                    "label"=>"Slug",
-                    "type"=>"password",
-                    "placeholder"=>"Page slug",
-                    "id"=>"slug",
+                "description"=>[
+                    "question"=>"Description",
+                    "type"=>"textarea",
+                    "placeholder"=>"Page description",
+                    "name"=>"description",
                     "class"=>"input",
                     "required"=>true,
                 ]

@@ -26,6 +26,8 @@
     </header>
     <section class="container-main-content container-main-content--padding" >
         <div class="row" >
+            <button class="cta-button-bold">bold</button>
+            <input id="text" name="editor" type="text">
             <article class="module" data-a-target="editable-module-1">
                 <div id="editable-module-1" class="editable-module a-zoom-out-end">
                     <nav class="editable-module--tool-bar">
@@ -57,7 +59,7 @@
                         </button>
                     </nav>
                 </div>
-                <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum djijkjolor sit amet consectetur.</h4>
+                <h4 class="color-main-color text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
             </article>
         </div>
     </section>
