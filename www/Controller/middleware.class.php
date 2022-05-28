@@ -15,7 +15,7 @@ class Middleware{
 
 
     public static function admin(){
-        if($_SESSION['Auth']->rank != 1){
+        if($_SESSION['Auth']->rank != 'admin'){
             header('location:/login');
             exit; 
         }

@@ -43,9 +43,9 @@
                                         <label class="sticker sticker">#tag</label>
                                     </td>
                                     <td>
-                                        <a href="/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
+                                        <a href="pageloader/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
                                         <a href="page/compose/<?= $page->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
-                                        <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-new-page"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
@@ -107,6 +107,29 @@
             </div>
         </section>
     </section>
+
+    <?php foreach ($pages as $page):?>
+        <!-- add page form -->
+        <section id="container-setting-page-<?=$page->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-setting-page-<?=$page->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">close</span></button>
+            <div class="menu-container">
+
+            </div>
+            <section class="collapse-parent">
+                <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                    <header>
+                        <h1 class="title title--black"><?= ucfirst($page->getTitle()) ?></h1>
+                    </header>
+
+                    <article>
+                        <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                    </article>
+
+                </div>
+
+            </section>
+        </section>
+    <?php endforeach;?>
 
     <!-- add page form -->
     <section id="container-new-page" class="container-main-content container-main-content--menu a-zoom-out-end">
