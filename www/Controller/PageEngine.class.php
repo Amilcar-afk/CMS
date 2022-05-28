@@ -23,6 +23,16 @@ class PageEngine
 
     }
 
+    public function pageLoader($request){
+        print_r($request);
+        echo "ok";
+        $page = $this->page->find($request['slug'], 'slug');
+
+        $view = new View("load-page", "front");
+        $view->assign("page", $page);
+
+    }
+
     public function listPage(){
 
         $pages = $this->page->find();

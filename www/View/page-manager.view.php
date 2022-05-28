@@ -43,21 +43,9 @@
                                         <label class="sticker sticker">#tag</label>
                                     </td>
                                     <td>
-                                        <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
-                                        <button class="cta-button"><span class="material-icons-round">mode</span></button>
+                                        <a href="/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
+                                        <a href="page/compose/<?= $page->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                         <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-main-content--component-list"><span class="material-icons-round">build</span></button>
-                                    </td>
-                                </tr>
-                                <tr class="table-line">
-                                    <td>
-                                        <h4>Home page</h4>
-                                        <label class="sticker sticker--slug">/index</label>
-                                        <label class="sticker sticker--tag">#tag</label>
-                                    </td>
-                                    <td>
-                                        <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
-                                        <button class="cta-button"><span class="material-icons-round">mode</span></button>
-                                        <button class="cta-button"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
