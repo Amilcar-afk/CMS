@@ -23,7 +23,7 @@ class PageEngine
 
     }
 
-    public function loadPage($request){
+    public function pageLoader($request){
         print_r($request);
         echo "ok";
         $page = $this->page->find($request['slug'], 'slug');
