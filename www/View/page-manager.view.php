@@ -32,34 +32,35 @@
                         <span class="material-icons-round">more_horiz</span>
                     </header>
                     <div id="public-pages-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="page-manager-container" style="opacity: 1">
-                        <?=print_r($pages) ?>
                         <table>
                             <tbody>
-                            <tr class="table-line">
-                                <td>
-                                    <span class="material-icons-round">home</span>
-                                    <h4>Home page</h4>
-                                    <label class="sticker sticker--slug">/index</label>
-                                    <label class="sticker sticker">#tag</label>
-                                </td>
-                                <td>
-                                    <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
-                                    <button class="cta-button"><span class="material-icons-round">mode</span></button>
-                                    <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-main-content--component-list"><span class="material-icons-round">build</span></button>
-                                </td>
-                            </tr>
-                            <tr class="table-line">
-                                <td>
-                                    <h4>Home page</h4>
-                                    <label class="sticker sticker--slug">/index</label>
-                                    <label class="sticker sticker--tag">#tag</label>
-                                </td>
-                                <td>
-                                    <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
-                                    <button class="cta-button"><span class="material-icons-round">mode</span></button>
-                                    <button class="cta-button"><span class="material-icons-round">build</span></button>
-                                </td>
-                            </tr>
+                            <?php foreach ($pages as $page):?>
+                                <tr class="table-line">
+                                    <td>
+                                        <span class="material-icons-round">home</span>
+                                        <h4><?= ucfirst($page->getTitle()) ?></h4>
+                                        <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
+                                        <label class="sticker sticker">#tag</label>
+                                    </td>
+                                    <td>
+                                        <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
+                                        <button class="cta-button"><span class="material-icons-round">mode</span></button>
+                                        <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-main-content--component-list"><span class="material-icons-round">build</span></button>
+                                    </td>
+                                </tr>
+                                <tr class="table-line">
+                                    <td>
+                                        <h4>Home page</h4>
+                                        <label class="sticker sticker--slug">/index</label>
+                                        <label class="sticker sticker--tag">#tag</label>
+                                    </td>
+                                    <td>
+                                        <button class="cta-button"><span class="material-icons-round">open_in_new</span></button>
+                                        <button class="cta-button"><span class="material-icons-round">mode</span></button>
+                                        <button class="cta-button"><span class="material-icons-round">build</span></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
                             </tbody>
                         </table>
 

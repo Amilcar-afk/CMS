@@ -7,6 +7,7 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
+    private $class;
     private $lastInsertId;
 
     public function __construct()
@@ -18,6 +19,8 @@ abstract class BaseSQL
         }catch(\Exception $e){
             die("Erreur SQL".$e->getMessage());
         }
+
+        $this->class = explode("\\",get_called_class());
 
         if(isset($this->table_name)){
             $this->table = $this->table_name;
@@ -126,13 +129,12 @@ abstract class BaseSQL
 
     protected function find($id = null, string $attribut = 'id')
     {
-
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            $res = $queryPrepared->fetch(\PDO::FETCH_OBJ);
+            $res = $queryPrepared->fetchObject($this->class[2]);
             return $res;
 
         }else{
@@ -140,11 +142,9 @@ abstract class BaseSQL
             $param = [];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            $res = $queryPrepared->fetchAll(\PDO::FETCH_OBJ);
+            $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
             return $res;
         }
-        // $queryPrepared = $this->pdo->prepare($sql);
-        // $queryPrepared->execute($param);
     }
 
 
