@@ -24,12 +24,15 @@ class PageEngine
     }
 
     public function pageLoader($request){
-        print_r($request);
-        echo "ok";
-        $page = $this->page->find($request['slug'], 'slug');
 
-        $view = new View("load-page", "front");
-        $view->assign("page", $page);
+        $page = $this->page->find($request[0], 'slug');
+
+        if (true){
+            $view = new View("load-page", "front");
+            $view->assign("page", $page);
+        }else{
+            echo "error 404";
+        }
 
     }
 
@@ -41,10 +44,15 @@ class PageEngine
         $view->assign("pages", $pages);
     }
 
+    public function buildPage(){
+
+
+        $view = new View("page-editor", "back");
+        $view->assign("page",$this->page);
+    }
+
     public function composePage()
     {
-
-
         if( isset($_POST) )
 
             //$result = Validator::run($this->page->getFormNewPage(), $_POST);

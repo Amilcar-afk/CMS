@@ -1,1 +1,5 @@
-bonjour
+
+<?=ucfirst($page->getTitle())?>
+<?=$page->getStatus()?>
+
+

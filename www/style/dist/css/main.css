@@ -1532,6 +1532,8 @@ tr:first-child {
     color: white; }
     .cta-button--submit:hover {
       background-color: var(--second-color); }
+    .cta-button--submit--add {
+      margin-bottom: 40px; }
 
 @media (max-width: 992px) {
   .cta-button--menu {
@@ -1595,7 +1597,8 @@ tr:first-child {
       backdrop-filter: blur(60px);
       background-color: rgba(129, 129, 129, 0.3);
       padding: 30px 50px;
-      border-radius: var(--radius, 20px) 0px 0px var(--radius, 20px); }
+      border-radius: var(--radius, 20px) 0px 0px var(--radius, 20px);
+      min-width: 375px; }
     .container-main-content--menu > section {
       position: relative;
       background-color: var(--background-color);
@@ -1682,7 +1685,8 @@ tr:first-child {
         backdrop-filter: blur(60px);
         background-color: rgba(129, 129, 129, 0.3);
         padding: 27px 40px;
-        border-radius: 0px; }
+        border-radius: 0px;
+        min-width: unset; }
         .container-main-content--menu .menu-container nav {
           display: flex;
           justify-content: space-between;

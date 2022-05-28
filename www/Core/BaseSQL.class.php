@@ -134,7 +134,7 @@ abstract class BaseSQL
             $param = [ $attribut=> $id ];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            $res = $queryPrepared->fetchObject($this->class[2]);
+            $res = $queryPrepared->fetchObject("App\Model\\".$this->class[2]);
             return $res;
 
         }else{

@@ -77,7 +77,7 @@ admin/:
   action: deleteUser
 
 
-/test:
+/:
   controller: pageengine
   action: pageLoader
   params: [ slug ]

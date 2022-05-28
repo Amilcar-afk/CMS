@@ -18,7 +18,7 @@
 
                 <!--Add page-->
                 <article>
-                    <button class="cta-button cta-button--submit" data-wc-target="new-pages-elements">
+                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-page">
                         New page
                     </button>
                     <div id="new-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="page-manager-container">
@@ -45,7 +45,7 @@
                                     <td>
                                         <a href="/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
                                         <a href="page/compose/<?= $page->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
-                                        <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-main-content--component-list"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a cta--button-toolbar-editor" data-a-target="container-new-page"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
@@ -109,15 +109,15 @@
     </section>
 
     <!-- add page form -->
-    <section id="container-main-content--component-list" class="container-main-content container-main-content--menu a-zoom-out-end">
-        <button id="cta-button-close-list-component" class="cta-button cta-button--icon cta-button-a" data-a-target="container-main-content--component-list"><span class="material-icons-round">close</span></button>
+    <section id="container-new-page" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-new-page" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-page"><span class="material-icons-round">close</span></button>
         <div class="menu-container">
 
         </div>
         <section class="collapse-parent">
             <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
                 <header>
-                    <h1 class="title title--black">TEXT ELEMENTS</h1>
+                    <h1 class="title title--black">NEW PAGE</h1>
                 </header>
 
                 <!--Titles-->

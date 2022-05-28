@@ -72,6 +72,7 @@
       background-color: rgba(129, 129, 129, 0.3);
       padding: 30px 50px;
       border-radius: var(--radius, 20px) 0px 0px var(--radius, 20px);
+      min-width: 375px;
     }
 
     & > section{
@@ -197,6 +198,7 @@
         background-color: rgba(129, 129, 129, 0.3);
         padding: 27px 40px;
         border-radius: 0px;
+        min-width: unset;
 
         & nav{
           display: flex;
