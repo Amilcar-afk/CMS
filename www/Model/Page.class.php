@@ -11,6 +11,8 @@ class Page extends BaseSQL
     protected $description;
     protected $title;
     protected $status;
+    protected $slug;
+    protected $user_key;
 
     /**
      * Page constructor.
@@ -25,10 +27,43 @@ class Page extends BaseSQL
         parent::save();
     }
 
-    public function find($id = null, $attribut = 'id')
+    public function find($id = null, string $attribut = 'id')
     {
-        parent::find($id, $attribut);
+        return parent::find($id, $attribut);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserKey()
+    {
+        return $this->user_key;
+    }
+
+    /**
+     * @param mixed $user_key
+     */
+    public function setUserKey($user_key): void
+    {
+        $this->user_key = $user_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
 
     /**
      * @return null
@@ -109,47 +144,60 @@ class Page extends BaseSQL
         $this->status = $status;
     }
 
-    public function getPageData(): array
+    public function getFormNewPage(): array
     {
         return [
-            "meta"=>[
-                "id"=>"",
-                "date_update"=>"",
-                "user_key"=>"",
-                "status"=>"",
-                "title"=>"",
-                "description"=>""
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"page/compose",
+                "submit"=>"Save"
             ],
-            "sections"=>[
-                [
-                    "id"=>"",
-                    "bessels"=>"",
-                    "background"=>"",
-                    "place"=>"",
-                    "components"=>[
-                        [
-                            "id"=>"",
-                            "type"=>"",
-                            "place"=>"",
-                            "witdth"=>"",
-                            "highlight"=>"",
-                            "font"=>"",
-                            "font_size"=>"",
-                            "font_weight"=>"",
-                            "color"=>"",
-                            "background"=>"",
-                            "align"=>"",
-                            "contents"=>[
-                                [
-                                    "content"=>"",
-                                    "date"=>"",
-                                    "other"=>""
-                                ]
-                            ]
-                        ],
-                    ],
+            "inputs"=>[
+                "title"=>[
+                    "question"=>"Title",
+                    "type"=>"text",
+                    "placeholder"=>"Page title",
+                    "name"=>"title",
+                    "class"=>"input",
+                    "required"=>true,
                 ],
-            ],
+                "status"=>[
+                    "question"=>"Visibility",
+                    "type"=>"select",
+                    "name"=>"status",
+                    "class"=>"input",
+                    "required"=>true,
+                    "choices"=>[
+                        [
+                            "value" => "Public",
+                            "label" => "Public",
+                            "class"=>"input"
+                        ],
+                        [
+                            "value" => "Draft",
+                            "label" => "Draft",
+                            "class"=>"input"
+                        ],
+                    ]
+                ],
+                "slug"=>[
+                    "question"=>"Slug",
+                    "type"=>"text",
+                    "name"=>"slug",
+                    "placeholder"=>"Page slug",
+                    "class"=>"input",
+                    "required"=>true,
+                ],
+                "description"=>[
+                    "question"=>"Description",
+                    "type"=>"textarea",
+                    "placeholder"=>"Page description",
+                    "name"=>"description",
+                    "class"=>"input",
+                    "required"=>true,
+                ]
+            ]
+
         ];
     }
 }

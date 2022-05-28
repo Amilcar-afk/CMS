@@ -1,0 +1,12 @@
+.sticker{
+  color: var(--background-color);
+  font-size: rem(16);
+  background-color: $light-grey;
+  border-radius: var(--radius, 5px);
+  padding: 4px;
+
+  &--slug{
+    background-color: $dark-grey;
+  }
+}
+

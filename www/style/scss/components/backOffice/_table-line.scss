@@ -1,0 +1,13 @@
+.table-line{
+  td:first-child{
+    & > *{
+      margin-right: 10px;
+    }
+  }
+
+  & td > h4{
+    font-size: rem(16);
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+  }
+}

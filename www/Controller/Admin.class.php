@@ -12,6 +12,10 @@ class Admin
 
     public function __construct()
     {
+<<<<<<< HEAD
+=======
+        $this->authAdmin = new Middleware();
+>>>>>>> f769d37374770d35cad22b3e11e6dcacf71807f3
     }
 
     public function dashboard()
