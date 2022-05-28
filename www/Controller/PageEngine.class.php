@@ -25,8 +25,10 @@ class PageEngine
 
     public function listPage(){
 
+        $pages = $this->page->find();
+
         $view = new View("page-manager", "back");
-        $view->assign("page",$this->page);
+        $view->assign("pages", $pages);
     }
 
     public function composePage()
@@ -43,6 +45,7 @@ class PageEngine
             $this->page->setSlug($_POST['slug']);
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
+            $this->page->setUserKey($_SESSION['Auth']->id);
             $this->page->save();
 
         // CREER LA NOUVELLE VIEW

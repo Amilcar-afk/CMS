@@ -12,6 +12,7 @@ class Page extends BaseSQL
     protected $title;
     protected $status;
     protected $slug;
+    protected $user_key;
 
     /**
      * Page constructor.
@@ -26,9 +27,25 @@ class Page extends BaseSQL
         parent::save();
     }
 
-    public function find($id = null, $attribut = 'id')
+    public function find($id = null, string $attribut = 'id')
     {
-        parent::find($id, $attribut);
+        return parent::find($id, $attribut);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserKey()
+    {
+        return $this->user_key;
+    }
+
+    /**
+     * @param mixed $user_key
+     */
+    public function setUserKey($user_key): void
+    {
+        $this->user_key = $user_key;
     }
 
     /**
@@ -144,7 +161,7 @@ class Page extends BaseSQL
                     "class"=>"input",
                     "required"=>true,
                 ],
-                "visibility"=>[
+                "status"=>[
                     "question"=>"Visibility",
                     "type"=>"select",
                     "name"=>"status",

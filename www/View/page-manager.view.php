@@ -32,7 +32,7 @@
                         <span class="material-icons-round">more_horiz</span>
                     </header>
                     <div id="public-pages-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="page-manager-container" style="opacity: 1">
-
+                        <?=print_r($pages) ?>
                         <table>
                             <tbody>
                             <tr class="table-line">

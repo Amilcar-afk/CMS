@@ -7,10 +7,10 @@
         <div>
             <label>
                 <span class="material-icons-round">https</span>
-                Public . Home page
+                . <?=ucfirst($page->getTitle())?>
             </label>
             <footer>
-                published
+                <?=$page->getStatus()?>
             </footer>
         </div>
         <div class="burger-menu-container">

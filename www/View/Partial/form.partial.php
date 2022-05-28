@@ -30,7 +30,7 @@
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  class="<?= $choice['class'] ?>">
-                            <?php // $choice['label'] ?>
+                            <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
                 </select>
