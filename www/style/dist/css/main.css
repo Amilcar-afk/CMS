@@ -81,6 +81,37 @@ p {
   scrollbar-width: thin;
   scrollbar-border-radius: var(--radius, 12px); }
 
+tr {
+  display: flex;
+  justify-content: space-between;
+  color: #6D6D6D;
+  border-bottom: solid 2px #E2E2E2;
+  border-top: solid 2px #E2E2E2;
+  border-right: solid 4px #E2E2E2;
+  border-left: solid 4px #E2E2E2;
+  padding: 10px; }
+
+td {
+  display: flex;
+  align-items: center; }
+
+table {
+  width: 100%;
+  border-collapse: inherit;
+  overflow: hidden;
+  border: solid -2px #E2E2E2;
+  border-radius: 15px;
+  margin: 0;
+  padding: 15px; }
+
+tr:last-child {
+  border-bottom: solid 4px #E2E2E2;
+  border-radius: 0 0 15px 15px; }
+
+tr:first-child {
+  border-top: solid 4px #E2E2E2;
+  border-radius: 15px 15px 0 0; }
+
 *::-webkit-scrollbar {
   width: 6px;
   border-radius: var(--radius, 12px);
@@ -1242,6 +1273,8 @@ p {
   max-height: calc(100vh - 60px);
   padding: 20px;
   z-index: 3; }
+  .body-back-office > header nav {
+    height: 100%; }
   .body-back-office > header #back-office-logo img {
     border-radius: 300px;
     width: 50px;
@@ -1255,10 +1288,16 @@ p {
     align-items: center;
     margin: 0;
     padding: 0;
-    list-style: none; }
+    list-style: none;
+    height: 100%; }
   .body-back-office > header ul:nth-child(3):before {
     content: "";
     flex-grow: 1; }
+  .body-back-office > header li:last-child {
+    height: fit-content;
+    height: 100%;
+    align-items: end;
+    display: flex; }
   .body-back-office > header li a {
     padding: 0.3em;
     margin-top: 1.875rem;
@@ -1565,8 +1604,6 @@ p {
       border-radius: 0px var(--radius, 20px) var(--radius, 20px) 0px;
       overflow-y: scroll; }
       .container-main-content--menu > section > div > header {
-        display: flex;
-        justify-content: space-between;
         margin-bottom: 50px; }
       .container-main-content--menu > section > div > article > header {
         display: flex;
@@ -1874,3 +1911,20 @@ h2 {
       box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(60px);
       border-radius: var(--radius, 8px); }
+
+.table-line td:first-child > * {
+  margin-right: 10px; }
+
+.table-line td > h4 {
+  font-size: 1rem;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important; }
+
+.sticker {
+  color: var(--background-color);
+  font-size: 1rem;
+  background-color: #818181;
+  border-radius: var(--radius, 5px);
+  padding: 4px; }
+  .sticker--slug {
+    background-color: #444; }

@@ -4,7 +4,6 @@ namespace App\Controller;
 use App\Core\View;
 use App\Model\Rdv as rdvModel;
 use App\Model\User_rdv as User_rdv;
-use App\Controller\Midleware;
 use PDO;
 
 class RendezVous{
@@ -16,12 +15,8 @@ class RendezVous{
 
     public function __construct()
     {
-
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
-        $this->authAdmin = new Midleware();
-
-
     }
 
     public function calendar()
@@ -31,24 +26,31 @@ class RendezVous{
 
     public function load()
     {
-        var_dump($_SESSION['Auth']);
-        
+        $statusOfUser = $_SESSION['Auth']->rank;
+
         $sql = "SELECT * FROM cmspf_Rdvs order by id";
         $data = $this->rdv->loadCalendar($sql);
         foreach ($data as $row) {
+
+            if($statusOfUser != 1 && $row->status === 'rdv'){
+                continue;
+            }
+            
             if($row->status === 'slot'){
                 $color = '#32CD32';
             }else{
                 $color = '#DC143C';
             }
             $allRdvs[] = array(
-            "id" => $row->id,
-            "start" => $row->startDate,
-            "end" => $row->endDate,
-            "color" => $color,
-
+                "id" => $row->id,
+                "title"=>$row->title,
+                "rank"=>$statusOfUser,
+                "start" => $row->startDate,
+                "end" => $row->endDate,
+                "color" => $color,
             );
         }
+
         echo json_encode($allRdvs);
     }
 
@@ -120,16 +122,16 @@ class RendezVous{
         $view->assign("allRdvs", $allRdvs);
     }
 
-    public function public_rdvs_reserver()
+    public function public_rdvs_reserver($id)
     {
-        $id = $this->rdv->getPramsFromUri();
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
         $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id[0]]);
         $this->rdv->setId($currentRdv->id);
         $this->rdv->setTitle($currentRdv->title);
         $this->rdv->setLocation($currentRdv->location);
         $this->rdv->setDescription($currentRdv->description);
-        if($_POST){
+
+        if(isset($_POST['id'])){
             $this->rdv->setId($_POST['id']);
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setLocation($_POST['location']);
@@ -141,10 +143,9 @@ class RendezVous{
             $this->user_rdv->setUser_key($userId);
             $this->user_rdv->setRdv_key($_POST['id']);
             $this->user_rdv->save();
-            header('location:/public_rdvs_list');
+            header('location:/rdv_calendar');
         }
-        $view = new View("public/rdvsupdate",'back');//le fichier rdvsupdate il existe pas
-        $view->assign("currentRdv", $currentRdv);
+        $view = new View("public/rdvsupdate");
         $view->assign("rdv",$this->rdv);
     }
 

@@ -51,6 +51,7 @@ admin/:
 /calendar_load:
   controller: rendezvous
   action: load
+  middleware: ['auth']
 
 /calendar_delete:
   controller: rendezvous
@@ -68,10 +69,24 @@ admin/:
   controller: rendezvous
   action: public_rdvs_reserver
   params: [id]
+  middleware : ['auth']
+
 
 /user_delete/id:
   controller: user
   action: deleteUser
+
+
+/:
+  controller: general
+  action: viewPage
+  params: [ slug ]
+
+/page:
+  controller: pageengine
+  action: listPage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
 
 /page/compose:
   controller: pageengine
@@ -85,11 +100,6 @@ admin/:
   params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
-/page:
-  controller: pageengine
-  action: listPage
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]
 
 /categorie/compose:
   controller: categorie

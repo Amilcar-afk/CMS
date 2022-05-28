@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    //    editor.document.designMode = "on";
+    //editor.document.designMode = "on";
 
     $(".cta--button-toolbar-editor").click(function (){
         $("#container-main-content--component-list").toggleClass("a-zoom-out");

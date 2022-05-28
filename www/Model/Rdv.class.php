@@ -206,12 +206,6 @@ class Rdv extends BaseSQL
         return parent::findAllData($sql);
     }
 
-    public function getPramsFromUri(){
-
-        return parent::getPramsFromUri();
-    }
-
-  
 
     public function getFormRegister(): array
     {
@@ -221,35 +215,43 @@ class Rdv extends BaseSQL
                 "action"=>"",
                 "submit"=>"reserver",
             ],
-            "select"=>[
-                "title"=>[
-                    "type"=>"select",
-                    "name"=>"title",
-                    "option"=>[
-                        "libre",
-                        "devis",
-                        "autre option",
-                    ],
-                    "required"=>true,
-                    "placeholder"=>"le titre ...",
-                    "id"=>"title",
-                    "class"=>"inputRegister",
-                    "required"=>true,
-                    "error"=>"titre incorrect",
-                ],
-
-            ],
+            // "select"=>[
+            //     "title"=>[
+            //         "type"=>"select",
+            //         "name"=>"title",
+            //         "option"=>[
+            //             "libre",
+            //             "devis",
+            //             "autre option",
+            //         ],
+            //         "required"=>true,
+            //         "placeholder"=>"le titre ...",
+            //         "id"=>"title",
+            //         "class"=>"inputRegister",
+            //         "required"=>true,
+            //         "error"=>"titre incorrect",
+            //     ],
+            // ],
             "inputs"=>[
+
                 "id"=>[
                     "type"=>"hidden",
-                    "label"=>"id",
-
+                    "label"=>"",
                     "id"=>"id",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
-
-                    
                     ],
+
+                "title"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Votre title ...",
+                    "label"=>"title",
+                    "id"=>"title",
+                    "class"=>"title",
+                    "required"=>true,
+                    "unicity"=>true,
+                    "value"=> $this->getTitle(),
+                ],
               
                 "location"=>[
                     "type"=>"text",
@@ -262,21 +264,34 @@ class Rdv extends BaseSQL
                     "unicity"=>true,
                     "value"=> $this->getLocation(),
                 ],
-            ],
-            "textarea"=>[
+
                 "description"=>[
-                    "type"=>"text",
+                    "type"=>"textarea",
                     "placeholder"=>"description ...",
                     "id"=>"description",
                     "class"=>"description",
+                    "question"=>"",
                     "min"=>2,
                     "max"=>50,
                     "name"=>"description",
                     "error"=>"champ ",
                     "value"=> $this->getDescription(),
                 ]
+            ],
+            // "textarea"=>[
+            //     "description"=>[
+            //         "type"=>"text",
+            //         "placeholder"=>"description ...",
+            //         "id"=>"description",
+            //         "class"=>"description",
+            //         "min"=>2,
+            //         "max"=>50,
+            //         "name"=>"description",
+            //         "error"=>"champ ",
+            //         "value"=> $this->getDescription(),
+            //     ]
 
-            ]
+            // ]
         ];
     }
 }

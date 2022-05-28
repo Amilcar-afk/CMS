@@ -78,12 +78,6 @@ class Categorie extends BaseSQL
         return parent::find($id);
     }
 
-    public function getParams()
-    {
-        return parent::getPramsFromUri();
-    }
-
-
 
     public function categorieUpdateForm(): array
     {
