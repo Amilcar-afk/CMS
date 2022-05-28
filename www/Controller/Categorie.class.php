@@ -20,50 +20,51 @@ class Categorie{
 
     public function categoriesList()
     {
-
+        $allCategories = $this->categorie->getCategorie();
+        $view = new View("categorielist", "back-sandbox");
+        $view->assign("categories",$allCategories);
     }
 
     public function composeCategorie()
     {
-        if(isset($_POST['id']))
-        {
-            
-            $this->categorie->setId($_POST['id']);
-            $this->categorie->setType($_POST['type']);
-            echo 'id existe';
-            $this->categorie->save();
-        }else{
-            echo 'id existe pas';
 
-            if(isset($_POST['type'])){
-                $this->categorie->setType('nav');
+        if($this->categorie->getParams()){
+
+            $categorie = $this->categorie->getCategories($this->categorie->getParams()[0]);
+
+            $this->categorie->setId($categorie->id);
+            $this->categorie->setType($categorie->type);
+
+            if(isset($_POST['id']) )
+            {
+                $this->categorie->setId($_POST['id']);
+                $this->categorie->setType($_POST['type']);
                 $this->categorie->save();
-                // $lastId = $this->categorie->getLastId();
-            }else{
-                echo 'Nok';
+                header('location:/categories');
+
             }
+            $view = new View("categorieupdate", "back-sandbox");
+            $view->assign("categorie",$this->categorie);
+
+        }else{
+
+            if(!isset($_POST['id']) && isset($_POST['type']) )
+            {
+                $this->categorie->setType($_POST['type']);
+                $this->categorie->save();
+            }
+            $view = new View("categorieinsert", "back-sandbox");
+            $view->assign("categorie",$this->categorie);
         }
-        $view = new View("categorieinsert", "back-sandbox");
-        $view->assign("categorie",$this->categorie);
     }
 
-    public function categoriesUpdate()
+    public function categoriedelete()
     {
-        if(isset($_POST['id']))
+        if($this->categorie->getParams())
         {
-            $this->categorie->setId($_POST['id']);
-            $this->categorie->setType($_POST['type']);
-            $this->rdv->save();
-        }
-    }
-
-    public function categoriesDelete()
-    {
-
-        if(isset($_POST['id']))
-        {
-            $id = $_POST['id'];
-            $this->categorie->deleteCategorie($this->rdv->setId($id));
+            $id = $this->categorie->getParams()[0];
+            $this->categorie->deleteCategorie($this->categorie->setId($id));
+            header('location:/categories');
         }
 
     }

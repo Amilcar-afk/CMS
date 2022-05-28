@@ -4,7 +4,6 @@ namespace App\Controller;
 use App\Core\View;
 use App\Model\Rdv as rdvModel;
 use App\Model\User_rdv as User_rdv;
-use App\Controller\Authadmin;
 use PDO;
 
 class RendezVous{
@@ -18,8 +17,6 @@ class RendezVous{
 
         $this->rdv = new rdvModel();
         $this->user_rdv = new User_rdv();
-        $this->authAdmin = new Authadmin();
-        Authadmin::isLogged();
     }
 
     public function calendar()

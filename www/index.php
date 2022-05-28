@@ -32,7 +32,6 @@ $routes = yaml_parse_file($routeFile);
 
 // en verifie l'existance du l'url l'existance du controller et l'existance de l'action
 
-
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
 
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
@@ -40,42 +39,40 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         array_pop($parseUrl);
         $uri = implode('/',$parseUrl);
         if(isset($routes[$uri]) ){
+            $url = $_SERVER["REQUEST_URI"]; 
+            $replace = str_replace($uri,'',$url);
+            $param = explode('/',$replace);
+            array_shift($param);
+            if( sizeof($param) != sizeof($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
+            if(!isset($routes[$uri]['params']))
+            {
+                die("invalid params");
+            }
             break;
         }else{
             die("Page 404");
         }
     }
-
-    $url = $_SERVER["REQUEST_URI"]; 
-    $replace = str_replace($uri,'',$url);
-    $param = explode('/',$replace);
-    array_shift($param);
-
-    if(!isset($routes[$uri]['params']))
-    {
-        die("invalid params");
-
-    }
-
-    if( sizeof($param) != sizeof($routes[$uri]['params']))
-    {
-        die("invalid params");
-    }
-
 }
 
-    // array_shift($parseUrl);
-    // $uri = '/'.$parseUrl[0];
-    // if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //     echo '';
-    // }else{
-    //     $uri = $uri.'/'.$parseUrl[1];
-    //     if(count($parseUrl) > 1 && isset($routes[$uri]['params']) ){
-    //         echo '';
-    //     }else{
-    //         die("Page 404");
-    //     }
-    // }
+if(isset($routes[$uri]["middleware"]) ){
+    $authFile = 'Controller/middleware.class.php';
+    include $authFile;
+    $authController = "App\\Controller\\Middleware";
+    if( !class_exists($authController) ){
+        die("La classe ".$authController." n'existe pas");
+    }
+    $objectAuthController = new $authController();
+
+    foreach($routes[$uri]["middleware"] as $action){
+        $objectAuthController->$action();
+    }
+}
+
+
 
 
 // ucfirst(strtolower( mettre la prmiere lettre du controlleur en majuscule
@@ -111,21 +108,3 @@ if( !method_exists($objectController, $action) ){
 }
 
 $objectController->$action();//on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
-
-
-
-
-/**
- * on recupere l'url courrant est on le stock dans une variable
- * on recupere le nom du fichier.yml et on le stock dans une variable
- * on verifie l'existance de celui-ci
- * on parse le le fichier.yml est on stock le resultat dans un tableau a 2d
- * on recuperer le controller et l'action et on les stoc dans des varible, le controlleur on lui met la premiere lettre en majuscule
- * on verifie l'existance de ceux-ci
- * on recupere le nom du fichier qui contien le controlleur chemin.$controller.controller.php et on l'inclut
- * on verifie l'existance de celui-ci
- * on recupere le nom de la class avec le chemain du namespace en utilisant la variable $controller qu'on a utiliser pour recuperer le controller du fichier.yml
- * onverifie l'existance de celui-ci
- * on creer $objectcontroller qui sera l'instanciation de la class $controller
- * on apelle l'action "methode" defini dans le fichier route.yml grance a l'instance de la classe courante
- */
