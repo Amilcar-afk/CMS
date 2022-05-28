@@ -75,8 +75,8 @@ admin/:
 
 
 /:
-  controller: general
-  action: viewPage
+  controller: pageengine
+  action: loadPage
   params: [ slug ]
 
 /page:
