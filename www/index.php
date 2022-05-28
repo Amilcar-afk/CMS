@@ -108,7 +108,7 @@ $objectController = new $controller();
 if( !method_exists($objectController, $action) ){
     die("La methode ".$action." n'existe pas");
 }
-var_dump($currentParams);
+
 if(sizeof($currentParams)!=0){
     $objectController->$action($currentParams);
 }else{

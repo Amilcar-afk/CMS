@@ -25,7 +25,7 @@ class PageEngine
 
     public function pageLoader($request){
 
-        $page = $this->page->find($request[0], 'slug');
+        $page = $this->page->find($request['slug'], 'slug');
 
         if (true){
             $view = new View("load-page", "front");
