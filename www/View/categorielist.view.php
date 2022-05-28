@@ -31,12 +31,12 @@
                         <tbody>
                         <?php foreach ($categories as $categorie): ?>
                             <tr>
-                                <td><?= $categorie->type;?></td>
+                                <td><?= $categorie->getType();?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-warning" href="/categorie/compose/<?=$categorie->id?>">
+                                    <a class="btn btn-warning" href="/categorie/compose/<?=$categorie->getId()?>">
                                         <button>modifier</button>
                                     </a>
-                                    <a class="btn btn-warning" href="/categorie/delete/<?=$categorie->id?>" 
+                                    <a class="btn btn-warning" href="/categorie/delete/<?=$categorie->getId()?>" 
                                     onclick="return confirm('Etes vous sûr de supprimer cette categorie')"
                                     >
                                         <button>supprimer</button>
