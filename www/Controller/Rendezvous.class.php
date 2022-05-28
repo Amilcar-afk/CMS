@@ -125,7 +125,7 @@ class RendezVous{
     public function public_rdvs_reserver($id)
     {
         $sql = "SELECT * FROM cmspf_Rdvs WHERE id= :id";
-        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id[0]]);
+        $currentRdv =$this->rdv->selectOneByData($sql,['id'=>$id['id']]);
         $this->rdv->setId($currentRdv->id);
         $this->rdv->setTitle($currentRdv->title);
         $this->rdv->setLocation($currentRdv->location);

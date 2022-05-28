@@ -68,15 +68,21 @@ class Categorie extends BaseSQL
 
     }
 
-    public function getCategorie()
+    // public function getCategorie()
+    // {
+    //     return parent::find();
+    // }
+
+    // public function getCategories($id)
+    // {
+    //     return parent::find($id);
+    // }
+
+    public function find($id = null, string $attribut = 'id')
     {
-        return parent::find();
+        return parent::find($id, $attribut);
     }
 
-    public function getCategories($id)
-    {
-        return parent::find($id);
-    }
 
 
     public function categorieUpdateForm(): array
@@ -95,13 +101,14 @@ class Categorie extends BaseSQL
                     "label"=>"",
                     "id"=>"id",
                     "placeholder"=>"",
-
+                    "question"=>"",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
                     ],
                 "type"=>[
                     "type"=>"text",
                     "label"=>"type",
+                    "question"=>"",
                     "placeholder"=>"",
                     "id"=>"type",
                     "class"=>"type",

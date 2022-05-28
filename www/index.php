@@ -44,7 +44,15 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
             $replace = str_replace($uri,'',$url);
             $param = explode('/',$replace);
             array_shift($param);
-            $currentParams = $param;
+
+            if(sizeof($routes[$uri]['params']) === sizeof($param)){
+                foreach($routes[$uri]['params'] as $key => $itemParam){
+                    $currentParams = [
+                        $itemParam => $param[$key]
+                    ];
+                }
+            }
+
 
             if( sizeof($param) != sizeof($routes[$uri]['params']))
             {
@@ -100,10 +108,9 @@ $objectController = new $controller();
 if( !method_exists($objectController, $action) ){
     die("La methode ".$action." n'existe pas");
 }
-
+var_dump($currentParams);
 if(sizeof($currentParams)!=0){
     $objectController->$action($currentParams);
 }else{
     $objectController->$action();
-
 }

@@ -18,7 +18,7 @@ class Categorie{
 
     public function categoriesList()
     {
-        $allCategories = $this->categorie->getCategorie();
+        $allCategories = $this->categorie->find();
         $view = new View("categorielist", "back-sandbox");
         $view->assign("categories",$allCategories);
     }
@@ -26,9 +26,10 @@ class Categorie{
     public function composeCategorie($id)
     {
         if(isset($id)){
-        $categorie = $this->categorie->getCategories($id[0]);
-            $this->categorie->setId($categorie->id);
-            $this->categorie->setType($categorie->type);
+        $categorie = $this->categorie->find($id['id']);
+
+            $this->categorie->setId($categorie->getId());
+            $this->categorie->setType($categorie->getType());
             if(isset($_POST['id']) )
             {
                 $this->categorie->setId($_POST['id']);
@@ -38,8 +39,6 @@ class Categorie{
             }
             $view = new View("categorieupdate", "back-sandbox");
             $view->assign("categorie",$this->categorie);
-
-
         }else{
             if(!isset($_POST['id']) && isset($_POST['type']) )
             {
@@ -49,14 +48,13 @@ class Categorie{
             $view = new View("categorieinsert", "back-sandbox");
             $view->assign("categorie",$this->categorie);
         }
-
     }
 
     public function categoriedelete($id)
     {
         if(isset($id))
         {
-            $this->categorie->deleteCategorie($this->categorie->setId($id[0]));
+            $this->categorie->deleteCategorie($this->categorie->setId($id['id']));
             header('location:/categories');
         }
     }
