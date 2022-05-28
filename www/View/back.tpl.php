@@ -13,7 +13,6 @@
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <script type="text/javascript" src="../style/js/wysiwyg.js"></script>
         <script type="text/javascript" src="../style/js/animations.js"></script>
-        <script type="text/javascript" src="../style/js/pageEditor.js"></script>
     <head>
     <div class="background-container-back-office">
         <div></div>

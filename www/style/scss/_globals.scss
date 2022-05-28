@@ -84,6 +84,42 @@ p{
 	scrollbar-border-radius: var(--radius, 12px);
 }
 
+tr {
+	display: flex;
+	justify-content: space-between;
+	color: #6D6D6D;
+	border-bottom: solid 2px #E2E2E2;
+	border-top: solid 2px #E2E2E2;
+	border-right: solid 4px #E2E2E2;
+	border-left: solid 4px #E2E2E2;
+	padding: 10px;
+}
+
+td {
+	display: flex;
+	align-items: center;
+}
+table {
+	width: 100%;
+	border-collapse: inherit;
+	overflow: hidden;
+	border: solid -2px #E2E2E2;
+	border-radius: 15px;
+	margin: 0;
+	padding: 15px;
+}
+
+tr:last-child{
+	border-bottom: solid 4px #E2E2E2;
+	border-radius: 0 0 15px 15px;
+}
+
+tr:first-child{
+	border-top: solid 4px #E2E2E2;
+	border-radius: 15px 15px 0 0;
+}
+
+
 *::-webkit-scrollbar {
 	width: 6px;
 	border-radius: var(--radius, 12px);
@@ -100,6 +136,7 @@ p{
 	margin-right: 20px;
 	/* change me to blue to match the background */
 }
+
 *::-webkit-scrollbar-thumb {
 	background: var(--main-color);
 	border: 0px solid;
@@ -110,6 +147,8 @@ p{
 	margin-right: 20px;
 	/* change border color to blue to match the background */
 }
+
+
 
 
 //reponsive tablet
