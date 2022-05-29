@@ -25,13 +25,18 @@ class Statistics
         //$data = $this->stats->find();
         $sql = "SELECT * FROM cmspf_Stats order by id";
         $data = $this->stats->loadStats($sql);
+        
+        // foreach ($data as $row) {
+        //     $test[] = array(
+        //     "id" => $row->id
+        //     );
+        // }
+
 
         // VIEW
         $view = new View("dashboard", "back");
-        $view->assign("data", json_encode($data));
-
-        // INCLUDE
-        // include 'integration/dashboard.html';
+        $view->assign("data", $data);
+        // $view->assign("test", $test);
 
     }
 
@@ -87,7 +92,7 @@ class Statistics
         $this->stats->setCountry($countryCode); // OK
         $this->stats->setDate($date); // OK
         $this->stats->setDevice($device); // OK
-        $this->stats->save();
+        $this->stats->save(); 
 
     }
     

@@ -15,7 +15,10 @@
 
                         <?php
 
-                            echo $data;
+                            //var_dump($data);
+                            
+                            
+                            //print_r($test);
 
                         ?>
 
