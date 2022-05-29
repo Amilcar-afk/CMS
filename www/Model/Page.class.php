@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
+use App\Controller\Statistics;
 use App\Core\BaseSQL;
-use App\Controller\Statistics as statistics;
 
 class Page extends BaseSQL
 {

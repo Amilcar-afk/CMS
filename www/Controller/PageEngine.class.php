@@ -43,15 +43,21 @@ class PageEngine
 
         $pages = $this->page->find();
 
-        $view = new View("page-manager", "back");
+        $view = new View("page-list", "back");
         $view->assign("pages", $pages);
     }
 
-    public function buildPage(){
+    public function buildPage($request){
 
 
-        $view = new View("page-editor", "back");
-        $view->assign("page",$this->page);
+        $page = $this->page->find($request['slug'], 'slug');
+
+        if (true){
+            $view = new View("page-editor", "back");
+            $view->assign("page", $page);
+        }else {
+            echo "error 404";
+        }
     }
 
     public function composePage()
