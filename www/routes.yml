@@ -19,8 +19,8 @@ admin/:
   action: register
 
 /dashboard:
-  controller: admin
-  action: dashboard
+  controller: statistics
+  action: loadDashboard
 
 /userManagement:
   controller: admin
