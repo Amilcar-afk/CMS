@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Core\View;
-use PDO;
 use App\Model\Stat as Stat;
 
 class Statistics
@@ -42,7 +41,10 @@ class Statistics
 
 
 
-    public function getAllStats() {
+    public function composeStats(int $elementId, string $type) {
+
+        if (!isset($elementId) && !isset($type))
+            die();
 
         // GET PUBLIC IP
         $externalContent = file_get_contents('http://checkip.dyndns.com/');
@@ -81,14 +83,15 @@ class Statistics
         // GET DATE
         $date = date("Y-m-d");
 
-        // GET PAGE KEY
-
 
         // INSERT STATS
-        $this->stats->setType(1); // NOT OK
+        if ($type == "view") {
+            $this->stats->setPageKey($elementId); // OK
+        }elseif ($type == "reseaux_soc") {
+            $this->stats->setReseauSocKey($elementId); // OK
+        }
+        $this->stats->setType($type); // OK
         $this->stats->setIp($externalIp); //OK
-        $this->stats->setPageKey(1); // NOT OK
-        $this->stats->setReseauSocKey(1); // NOT OK
         $this->stats->setCountry($countryCode); // OK
         $this->stats->setDate($date); // OK
         $this->stats->setDevice($device); // OK

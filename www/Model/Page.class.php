@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
+use App\Controller\Statistics as statistics;
 
 class Page extends BaseSQL
 {
@@ -20,6 +21,12 @@ class Page extends BaseSQL
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function composeStats(int $elementId, string $type)
+    {
+        $stat = new Statistics();
+        $stat->composeStats($elementId, $type);
     }
 
     public function save()
@@ -68,7 +75,7 @@ class Page extends BaseSQL
     /**
      * @return null
      */
-    public function getId()
+    public function getId(): ? int
     {
         return $this->id;
     }

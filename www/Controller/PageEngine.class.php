@@ -28,6 +28,9 @@ class PageEngine
         $page = $this->page->find($request['slug'], 'slug');
 
         if (true){
+
+            $page->composeStats($page->getId(), "view");
+
             $view = new View("load-page", "front");
             $view->assign("page", $page);
         }else{
