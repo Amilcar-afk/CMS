@@ -108,7 +108,6 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
-
     protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
@@ -127,6 +126,36 @@ abstract class BaseSQL
             $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
             return $res;
         }
+    }
+
+
+    /**
+     * @param $class
+     * @param string|null $foreign_key
+     * @return array|false
+     */
+    protected function hasMany( $class, string $foreign_key = null)
+    {
+        if(isset($class->table_name)){
+            $targetTable = $class->table_name;
+        }else{
+            $targetTable = DBPREFIXE.($class).'s';
+        }
+
+        if (!isset($foreign_key)){
+            $classExploded = explode("\\",get_called_class());
+            $foreign_key = lcfirst(end($classExploded))."_key";
+        }
+
+        $sql = "SELECT * FROM ".$targetTable." WHERE ".$foreign_key." = :".$foreign_key;
+        $param = [
+            $foreign_key => $this->id
+        ];
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+        $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
+        return $res;
     }
 
 
