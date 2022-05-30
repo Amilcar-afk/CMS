@@ -7,17 +7,8 @@ abstract class BaseSQL
 {
     private $pdo;
     private $table;
-
-    /**
-     * get_called_class()  Retourne le nom de la classe depuis laquelle une méthode statique a été appelée.
-     * strtolower() convertir le maj to mini 
-     * get_object_vars(this) Retourne les propriétés d'un objet
-     * get_class_vars(class) Retourne les valeurs par défaut des propriétés d'une classe
-     * get_class() Retourne le nom de la classe d'un objet
-     * array_filter(columns) Filtre les éléments d'un tableau grâce à une fonction de rappel
-     * array_diff_key($columns, $varsToExclude) Calcule la différence de deux tableaux en utilisant les clés pour comparaison
-     */
-
+    private $class;
+    private $lastInsertId;
 
     public function __construct()
     {
@@ -29,6 +20,8 @@ abstract class BaseSQL
             die("Erreur SQL".$e->getMessage());
         }
 
+        $this->class = explode("\\",get_called_class());
+
         if(isset($this->table_name)){
             $this->table = $this->table_name;
         }else{
@@ -37,36 +30,57 @@ abstract class BaseSQL
         }
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): object
-    {
-        $sql = "SELECT * FROM ".$this->table. " WHERE id=:id ";
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute( ["id"=>$id] );
-        return $queryPrepared->fetchObject(get_called_class());
-    }
-
     protected function save()
     {
         $columns  = get_object_vars($this);
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
+        foreach($columns as $column => $value ){
+            $table_name = 'table_name';
+            if(isset($table_name )){
+                unset($columns[$table_name]);
+                    continue;
+            }else{
+                echo 'introuvable';
+            }
+        }
         $columns = array_filter($columns);
 
-       if( !is_null($this->getId()) ){
-           foreach ($columns as $key=>$value){
-                $setUpdate[]=$key."=:".$key;
-           }
-           $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate)." WHERE id=".$this->getId();
+        if( !is_null($this->getId()) ){
+            foreach ($columns as $key=>$value){
+                    $setUpdate[]=$key."=:".$key;
+            }
+            $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
+            " WHERE id=".$this->getId();
 
-       }else{
+        }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")
             VALUES (:".implode(",:", array_keys($columns)).")";
-       }
+
+        }
+
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($columns);
+        $lastInsertd = $this->pdo->lastInsertId();
+        $this->setLastId($lastInsertd );
+    }
+
+    public function setLastId($lastId)
+    {
+        $this->lastInsertId = $lastId;
+
+    }
+
+    public function getLastId()
+    {
+        return $this->lastInsertId;
+    }
+    
+    public function parseUrl()
+    {
+        $routeFile = "routes.yml";
+        $routes = yaml_parse_file($routeFile);
+        return $routes;
     }
 
     /**
@@ -76,8 +90,7 @@ abstract class BaseSQL
     protected function delete($id)
     {
         if( !is_null($this->getId()) ){
-            $sql = "DELETE * FROM ".$this->table." WHERE id=".$this->getId();
-
+            $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute();
         }else{
@@ -97,14 +110,20 @@ abstract class BaseSQL
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($param);
+            $res = $queryPrepared->fetchObject("App\Model\\".$this->class[2]);
+            return $res;
+
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute($param);
+            $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
+            return $res;
         }
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute($param);
     }
-
 
 
     /**
@@ -136,6 +155,28 @@ abstract class BaseSQL
         return $res;
     }
 
+    protected function belongsTo( $class, string $foreign_key = null, string $owner_key = "id")
+    {
+        if(isset($class->table_name)){
+            $targetTable = $class->table_name;
+        }else{
+            $targetTable = DBPREFIXE.($class).'s';
+        }
+
+        if (!isset($foreign_key)){
+            $foreign_key = lcfirst($class)."_key";
+        }
+
+        $sql = "SELECT * FROM ".$targetTable." WHERE ".$owner_key." = :".$owner_key;
+        $param = [
+            $owner_key => $this->$foreign_key
+        ];
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+        $res = $queryPrepared->fetchObject("App\Model\\".$class);
+        return $res;
+    }
 
     /**
      * @param PDO $db
