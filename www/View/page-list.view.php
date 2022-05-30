@@ -37,7 +37,9 @@
                             <?php foreach ($pages as $page):?>
                                 <tr class="table-line">
                                     <td>
-                                        <span class="material-icons-round">home</span>
+                                        <?php if ($page->getSlug() == ""): ?>
+                                            <span class="material-icons-round">home</span>
+                                        <?php endif;?>
                                         <h4><?= ucfirst($page->getTitle()) ?></h4>
                                         <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
                                         <h4>
@@ -50,7 +52,7 @@
                                     </td>
                                     <td>
                                         <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
-                                        <a href="build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
+                                        <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>

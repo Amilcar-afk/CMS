@@ -3,11 +3,9 @@
 
 namespace App\Controller;
 
-use App\Core\BaseSQL;
-use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
-
+use App\Core\Query;
 
 class PageEngine
 {
@@ -41,8 +39,15 @@ class PageEngine
 
     public function listPage(){
 
-        $pages = $this->page->find();
+        //$pages = $this->page->find();
+        $pages = Query::from('cmspf_Pages')->execute();
 
+
+        //$pages = (new Query())->from('cmspf_Pages')->execute();
+        //echo $pages;
+        //echo "<pre>";
+        //print_r($pages);
+        //echo "</pre>";
         $view = new View("page-list", "back");
         $view->assign("pages", $pages);
     }

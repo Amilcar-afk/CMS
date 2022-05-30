@@ -10,6 +10,14 @@ abstract class BaseSQL
     private $class;
     private $lastInsertId;
 
+    /**
+     * @return \PDO
+     */
+    public function getPdo(): \PDO
+    {
+        return $this->pdo;
+    }
+
     public function __construct()
     {
         //remplacer par singleton
@@ -20,7 +28,8 @@ abstract class BaseSQL
             die("Erreur SQL".$e->getMessage());
         }
 
-        $this->class = explode("\\",get_called_class());
+        $class = explode("\\",get_called_class());
+        $this->class = end($class);
 
         if(isset($this->table_name)){
             $this->table = DBPREFIXE.$this->table_name;
@@ -114,13 +123,13 @@ abstract class BaseSQL
             $param = [ $attribut=> $id ];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            return $queryPrepared->fetchObject("App\Model\\".$this->class[2]);
+            return $queryPrepared->fetchObject("App\Model\\".$this->class);
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
+            return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class);
         }
     }
 
@@ -151,6 +160,14 @@ abstract class BaseSQL
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
+    }
+
+    /**
+     * @return false|string[]
+     */
+    public function getClass()
+    {
+        return $this->class;
     }
 
 
@@ -198,7 +215,7 @@ abstract class BaseSQL
             $targetTable = DBPREFIXE.($class).'s';
         }
         if (!isset($relation_foreign_key)){
-            $relation_foreign_key = lcfirst($this->class[2])."_key";
+            $relation_foreign_key = lcfirst($this->class)."_key";
         }
 
         //$sql = "SELECT * FROM cmspf_Categories WHERE id IN ( SELECT cmspf_Page_categorie.id FROM cmspf_Page_categorie INNER JOIN cmspf_Pages ON cmspf_Page_categorie.page_key = cmspf_Pages.id WHERE cmspf_Pages.id = 1)"
