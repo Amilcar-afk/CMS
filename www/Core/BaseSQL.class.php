@@ -114,16 +114,13 @@ abstract class BaseSQL
             $param = [ $attribut=> $id ];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            $res = $queryPrepared->fetchObject("App\Model\\".$this->class[2]);
-            return $res;
-
+            return $queryPrepared->fetchObject("App\Model\\".$this->class[2]);
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute($param);
-            $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
-            return $res;
+            return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class[2]);
         }
     }
 
@@ -153,10 +150,16 @@ abstract class BaseSQL
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
-        $res = $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
-        return $res;
+        return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
 
+
+    /**
+     * @param $class
+     * @param string|null $foreign_key
+     * @param string $owner_key
+     * @return false|mixed|object|\stdClass|null
+     */
     protected function belongsTo( $class, string $foreign_key = null, string $owner_key = "id")
     {
         if(isset($class->table_name)){
@@ -176,8 +179,37 @@ abstract class BaseSQL
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
-        $res = $queryPrepared->fetchObject("App\Model\\".$class);
-        return $res;
+        return $queryPrepared->fetchObject("App\Model\\".$class);
+    }
+
+    /**
+     * @param $class
+     * @param string|null $relationTable
+     * @param string $owner_key
+     * @param string $foreign_key
+     * @param string|null $relation_foreign_key
+     * @return array|false
+     */
+    protected function belongsToMany( $class, string $relationTable = null, string $owner_key = "id", string $foreign_key = "id", string $relation_foreign_key = null)
+    {
+        if(isset($class->table_name)){
+            $targetTable = $class->table_name;
+        }else{
+            $targetTable = DBPREFIXE.($class).'s';
+        }
+        if (!isset($relation_foreign_key)){
+            $relation_foreign_key = lcfirst($this->class[2])."_key";
+        }
+
+        //$sql = "SELECT * FROM cmspf_Categories WHERE id IN ( SELECT cmspf_Page_categorie.id FROM cmspf_Page_categorie INNER JOIN cmspf_Pages ON cmspf_Page_categorie.page_key = cmspf_Pages.id WHERE cmspf_Pages.id = 1)"
+        $sql = "SELECT * FROM ".$targetTable." WHERE ".$foreign_key." IN ( SELECT ".$relationTable.".id FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_key." WHERE ".$this->table.".".$owner_key." = :".$owner_key.")";
+        $param = [
+            $owner_key => $this->id
+        ];
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+        return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
 
     /**

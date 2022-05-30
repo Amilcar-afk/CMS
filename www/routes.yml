@@ -88,6 +88,11 @@ admin/:
   params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
+/build:
+  controller: pageengine
+  action: buildPage
+  params: [ slug ]
+
 /page/compose:
   controller: pageengine
   action: composePage
