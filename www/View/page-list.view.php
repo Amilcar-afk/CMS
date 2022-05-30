@@ -40,7 +40,13 @@
                                         <span class="material-icons-round">home</span>
                                         <h4><?= ucfirst($page->getTitle()) ?></h4>
                                         <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
-                                        <label class="sticker sticker">#tag</label>
+                                        <h4>
+                                            <?php foreach ($page->categories() as $categorie):?>
+                                                <?php if($categorie->getType() == 'tag'): ?>
+                                                <label class="sticker sticker">#<?= $categorie->getType()?></label>
+                                                <?php endif;?>
+                                            <?php endforeach;?>
+                                        </h4>
                                     </td>
                                     <td>
                                         <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
