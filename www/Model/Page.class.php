@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
+use Categorie;
 
 class Page extends BaseSQL
 {
@@ -37,6 +38,11 @@ class Page extends BaseSQL
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
+    }
+
+    public function categories()
+    {
+        return parent::belongsToMany(Categorie::class, 'cmspf_Page_categorie');
     }
 
     /**
