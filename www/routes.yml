@@ -13,6 +13,7 @@ admin/:
 /logout:
   controller: user
   action: logout
+  middleware: ['auth']
 
 /register:
   controller: user
@@ -41,7 +42,7 @@ admin/:
 /rdv_calendar:
   controller: rendezvous
   action: calendar
-  midleware: ['auth']
+  middleware: ['auth']
 
 
 /rdv_calendar_insert:

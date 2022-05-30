@@ -7,18 +7,15 @@ session_start();
 class Middleware{
 
     public static function auth(){
-        if(!isset($_SESSION['Auth'])){
+        if(!isset($_SESSION['Auth']->rank)){
             header('location:/login');
-            exit;
         }
     }
-
 
     public static function admin(){
         if($_SESSION['Auth']->rank != 'admin'){
             header('location:/login');
-            exit; 
         }
     }
-    
+
 }
