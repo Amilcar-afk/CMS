@@ -82,7 +82,6 @@ abstract class BaseSQL
         $routes = yaml_parse_file($routeFile);
         return $routes;
     }
- 
 
 
     /**
@@ -158,6 +157,28 @@ abstract class BaseSQL
         return $res;
     }
 
+    protected function belongsTo( $class, string $foreign_key = null, string $owner_key = "id")
+    {
+        if(isset($class->table_name)){
+            $targetTable = $class->table_name;
+        }else{
+            $targetTable = DBPREFIXE.($class).'s';
+        }
+
+        if (!isset($foreign_key)){
+            $foreign_key = lcfirst($class)."_key";
+        }
+
+        $sql = "SELECT * FROM ".$targetTable." WHERE ".$owner_key." = :".$owner_key;
+        $param = [
+            $owner_key => $this->$foreign_key
+        ];
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute($param);
+        $res = $queryPrepared->fetchObject("App\Model\\".$class);
+        return $res;
+    }
 
     /**
      * @param PDO $db
