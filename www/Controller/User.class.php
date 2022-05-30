@@ -49,6 +49,7 @@ class User{
 
     public function logout()
     {
+        session_destroy();
         echo "Se deco";
     }
 
