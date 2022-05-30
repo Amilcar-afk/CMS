@@ -7,7 +7,7 @@ use App\Core\View;
 use App\Model\Page;
 use App\Core\Query;
 
-class PageEngine
+class Pageengine
 {
     public $page;
     public function __construct()
