@@ -26,14 +26,17 @@ class Query extends BaseSQL
         return call_user_func_array([$query, $method], $arguments);
     }
 
-    public function from(string $table, ?string $alias = null): self
+
+
+    public function from(string $table, ?string $alias = null)
     {
         if ($alias){
-            self::$from[$alias] = $table;
+             self::$from[$alias] = $table;
         }else {
-            self::$from[] = $table;
+             self::$from[] = $table;
         }
-        return self;
+
+         return (new Query);
     }
 
     public function select(string ...$fields): self
@@ -95,8 +98,8 @@ class Query extends BaseSQL
 
     public function execute()
     {
-        $query = self::__toString();
-        $statement = self::$pdo->prepare($query);
+        $query = $this->__toString();
+        $statement = $this->pdo->prepare($query);
         $statement->execute();
         //return $this->class;
         return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\Page");
