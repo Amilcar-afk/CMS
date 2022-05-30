@@ -10,11 +10,12 @@ use App\Core\Query;
 class Pageengine
 {
     public $page;
+
+
     public function __construct()
     {
         $this->page = new Page();
     }
-
 
 
     public function deletePage(){
@@ -42,7 +43,7 @@ class Pageengine
         //$pages = $this->page->find();
 
         
-        $pages = Query::from('cmspf_Pages')->execute();
+        $pages = Query::from('cmspf_Pages')->execute('Page');
 
 
         //$pages = (new Query())->from('cmspf_Pages')->execute();
