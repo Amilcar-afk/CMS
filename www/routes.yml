@@ -127,3 +127,8 @@ admin/:
   controller: categorie
   action: categoriesList
   middleware: [ 'auth', 'admin' ]
+
+/navigations:
+  controller: categorie
+  action: navigationsList
+  middleware: [ 'auth', 'admin' ]
