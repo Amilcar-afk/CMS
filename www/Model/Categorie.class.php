@@ -2,8 +2,10 @@
 
 
 namespace App\Model;
-
+use Page;
 use App\Core\BaseSQL;
+
+use App\Core\Query;
 
 
 class Categorie extends BaseSQL
@@ -79,21 +81,10 @@ class Categorie extends BaseSQL
 
     }
 
-    public function getAllCategories($sql)
+    public function pages()
     {
-        return parent::findAllData($sql);
-
+        return parent::belongsToMany(Page::class, 'cmspf_Page_categorie');
     }
-
-    // public function getCategorie()
-    // {
-    //     return parent::find();
-    // }
-
-    // public function getCategories($id)
-    // {
-    //     return parent::find($id);
-    // }
 
     public function find($id = null, string $attribut = 'id')
     {
@@ -136,7 +127,7 @@ class Categorie extends BaseSQL
         ];
     }
 
-    public function getCategorieForm (): array
+    public function getFormNewCategorie(): array
     {
         return [
             "config"=>[
