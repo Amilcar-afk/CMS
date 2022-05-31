@@ -10,6 +10,23 @@ class Categorie extends BaseSQL
 {
     public $id = null;
     protected $type;
+    protected $title;
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
   
 
     /**
