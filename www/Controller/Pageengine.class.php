@@ -11,7 +11,6 @@ class Pageengine
 {
     public $page;
 
-
     public function __construct()
     {
         $this->page = new Page();
@@ -39,24 +38,12 @@ class Pageengine
     }
 
     public function listPage(){
-
-        //$pages = $this->page->find();
-
-        
-        $pages = Query::from('cmspf_Pages')->execute('Page');
-
-
-        //$pages = (new Query())->from('cmspf_Pages')->execute();
-        //echo $pages;
-        //echo "<pre>";
-        //print_r($pages);
-        //echo "</pre>";
+        $pages = $this->page->find();
         $view = new View("page-list", "back");
         $view->assign("pages", $pages);
     }
 
     public function buildPage($request){
-
 
         $page = $this->page->find($request['slug'], 'slug');
 
@@ -86,5 +73,16 @@ class Pageengine
         // CREER LA NOUVELLE VIEW
         $view = new View("page-editor", "back");
         $view->assign("page",$this->page);
+    }
+
+    public function listAddCode(){
+        //$pages = $this->page->find();;
+
+        $view = new View("add-code", "back");
+        //$view->assign("pages", $pages);
+    }
+
+    public function composeAddCode(){
+
     }
 }
