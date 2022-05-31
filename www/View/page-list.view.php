@@ -44,7 +44,9 @@
                                             <h4><?= ucfirst($page->getTitle()) ?></h4>
                                             <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
                                             <?php foreach ($page->categories() as $categorie):?>
-                                                <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                <?php if($categorie->getType() == 'tag'): ?>
+                                                    <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                <?php endif;?>
                                             <?php endforeach;?>
                                         </td>
                                         <td>
@@ -82,7 +84,9 @@
                                             <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
                                             <h4>
                                                 <?php foreach ($page->categories() as $categorie):?>
-                                                    <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                    <?php if($categorie->getType() == 'tag'): ?>
+                                                        <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                    <?php endif;?>
                                                 <?php endforeach;?>
                                             </h4>
                                         </td>
