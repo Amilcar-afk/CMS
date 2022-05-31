@@ -22,6 +22,14 @@ class Categorie{
         $view->assign("categories",$categories);
     }
 
+    public function navigationsList()
+    {
+        $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
+        $view = new View("navigation-list", "back");
+        $view->assign("navigations",$navigations);
+    }
+
+
     public function composeCategorie($id)
     {
         if(isset($id)){

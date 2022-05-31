@@ -58,7 +58,7 @@
     <?php foreach ($categories as $categorie):?>
         <!-- update categorie form -->
         <section id="container-setting-categorie-<?=$categorie->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
-            <button id="cta-button-close-container-setting-categorie-<?=$categorie->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-categorie-<?=$page->getId() ?>"><span class="material-icons-round">close</span></button>
+            <button id="cta-button-close-container-setting-categorie-<?=$categorie->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-categorie-<?=$categorie->getId() ?>"><span class="material-icons-round">close</span></button>
             <div class="menu-container">
 
             </div>

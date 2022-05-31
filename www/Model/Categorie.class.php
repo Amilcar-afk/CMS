@@ -92,41 +92,6 @@ class Categorie extends BaseSQL
     }
 
 
-
-    public function categorieUpdateForm(): array
-    {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "submit"=>"valider",
-            ],
- 
-            "inputs"=>[
-
-                "id"=>[
-                    "type"=>"hidden",
-                    "label"=>"",
-                    "id"=>"id",
-                    "placeholder"=>"",
-                    "question"=>"",
-                    "class"=>"inputRegister",
-                    "value"=> $this->getId(),
-                    ],
-                "type"=>[
-                    "type"=>"text",
-                    "label"=>"type",
-                    "question"=>"",
-                    "placeholder"=>"",
-                    "id"=>"type",
-                    "class"=>"type",
-                    "required"=>true,
-                    "value"=> $this->getType(),
-                ],
-            ]
-        ];
-    }
-
     public function getFormNewCategorie(): array
     {
         return [
