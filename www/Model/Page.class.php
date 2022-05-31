@@ -162,7 +162,7 @@ class Page extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"page/compose",
+                "action"=>"compose",
                 "submit"=>"Save"
             ],
             "inputs"=>[

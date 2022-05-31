@@ -26,10 +26,10 @@
             <nav>
                 <ul>
                     <li><a id="back-office-logo" href="#"><img src="/style/images/logo_myfolio.png" alt="logo"></a></li>
-                    <li><a class="button-menu selected" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">map</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>
-                    <li><a class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
+                    <li><a href="dashboard" class="button-menu selected" href="" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
+                    <li><a href="pages" class="button-menu" href="" data-alt="Site map"><span class="material-icons-round">map</span></a></li>
+                    <li><a href="conversations" class="button-menu" href="" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>
+                    <li><a href="settings" class="button-menu" href="" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
                 </ul>
             </nav>
         </header>

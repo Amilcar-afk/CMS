@@ -102,7 +102,6 @@ class Query extends BaseSQL
         $query = $this->__toString();
         $statement = $this->pdo->prepare($query);
         $statement->execute();
-        //return $this->class;
         return $statement->fetchAll(\PDO::FETCH_CLASS,"App\Model\\".$model);
     }
 

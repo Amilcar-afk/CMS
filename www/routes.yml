@@ -83,7 +83,7 @@ admin/:
   action: pageLoader
   params: [ slug ]
 
-/page:
+/pages:
   controller: pageengine
   action: listPage
   params: [ id ]
@@ -106,6 +106,10 @@ admin/:
   params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
+/add-code:
+  controller: pageengine
+  action: listAddCode
+  middleware: [ 'auth', 'admin' ]
 
 /categorie/compose:
   controller: categorie
@@ -122,5 +126,4 @@ admin/:
 /categories:
   controller: categorie
   action: categoriesList
-  params: [ id ]
   middleware: [ 'auth', 'admin' ]
