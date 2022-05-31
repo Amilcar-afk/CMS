@@ -18,8 +18,6 @@ class Query extends BaseSQL
     {
         parent::__construct();
         $this->pdo = parent::getPdo();
-      
-
     }
 
     public static function __callStatic($method, $arguments)
