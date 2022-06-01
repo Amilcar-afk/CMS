@@ -75,6 +75,17 @@ class Pageengine
         $view->assign("page",$this->page);
     }
 
+    public function saveContentPage()
+    {
+        if( isset($_POST)
+            && isset($_POST['id'])
+            && isset($_POST['content']) )
+
+            $this->page->setId($_POST['id']);
+            $this->page->setContent($_POST['content']);
+            $this->page->save();
+    }
+
     public function listAddCode(){
         //$pages = $this->page->find();;
 

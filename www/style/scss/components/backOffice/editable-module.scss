@@ -1,5 +1,6 @@
 .module{
   position: relative;
+  height: min-content;
 }
 
 .editable-module{
@@ -7,8 +8,10 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  top: -5px;
+  left: -5px;
 
   button{
     height: 45px;
@@ -25,7 +28,8 @@
     display: flex;
     right: 0;
     position: absolute;
-    top: -50px;
+    top: -55px;
+    transition: all 3ms;
   }
 
   &--border{
@@ -40,7 +44,7 @@
     display: flex;
     justify-content: center;
     bottom: 60px;
-    bottom: -33px;
+    bottom: calc(-100% + -1px);
     position: relative;
 
     button{
@@ -51,4 +55,6 @@
     }
   }
 }
+
+
 

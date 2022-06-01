@@ -94,6 +94,11 @@ admin/:
   action: buildPage
   params: [ slug ]
 
+/build/save:
+  controller: pageengine
+  action: saveContentPage
+  middleware : ['auth', 'admin']
+
 /page/compose:
   controller: pageengine
   action: composePage

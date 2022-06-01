@@ -173,6 +173,10 @@
   }
 }
 
+#container-editor{
+  overflow-y: scroll;
+}
+
 
 //reponsive tablet & mobile
 @media (max-width: 992px){

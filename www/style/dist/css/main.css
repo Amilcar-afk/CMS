@@ -1513,6 +1513,8 @@ tr:first-child {
     background-color: unset; }
     .cta-button--icon:hover {
       background: rgba(255, 255, 255, 0.6); }
+    .cta-button--icon.selected {
+      background-color: rgba(162, 162, 162, 0.6); }
     .cta-button--icon .material-icons-round {
       margin-right: 0px; }
   .cta-button--text-no-background {
@@ -1667,6 +1669,9 @@ tr:first-child {
         font-weight: 600;
         color: var(--main-color);
         margin-bottom: 25px; }
+
+#container-editor {
+  overflow-y: scroll; }
 
 @media (max-width: 992px) {
   .container-main-content {
@@ -1875,15 +1880,18 @@ h2 {
         border-radius: 0px 0px 10px 10px !important; } }
 
 .module {
-  position: relative; }
+  position: relative;
+  height: min-content; }
 
 .editable-module {
   z-index: 1;
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%; }
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  top: -5px;
+  left: -5px; }
   .editable-module button {
     height: 45px;
     width: 45px;
@@ -1897,7 +1905,8 @@ h2 {
     display: flex;
     right: 0;
     position: absolute;
-    top: -50px; }
+    top: -55px;
+    transition: all 3ms; }
   .editable-module--border {
     border: 3px rgba(129, 129, 129, 0.3) solid;
     box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
@@ -1908,7 +1917,7 @@ h2 {
     display: flex;
     justify-content: center;
     bottom: 60px;
-    bottom: -33px;
+    bottom: calc(-100% + -1px);
     position: relative; }
     .editable-module--footer-nav button {
       background: rgba(129, 129, 129, 0.3);
