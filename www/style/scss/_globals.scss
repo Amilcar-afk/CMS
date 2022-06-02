@@ -17,6 +17,11 @@ figure{
 	margin: 0;
 }
 
+.sp-container{
+	position: absolute!important;
+	z-index: 5;
+}
+
 a{
 	text-decoration:none;
 }

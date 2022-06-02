@@ -1,6 +1,6 @@
 //put the module class in article
 
-.module{
+.module-list, .module{
 
 	& h1, h2, h3, h4, h5, h6, p{
 		padding-left: 3px;
@@ -10,13 +10,13 @@
 	}
 
 	& iframe{
-		& iframe{
-			padding-left: 3px;
-			padding-right: 3px;
-			margin-top: 10px;
-			border-radius: var(--radius, 6px);
-		}
+		padding-left: 3px;
+		padding-right: 3px;
+		margin-top: 10px;
+		border-radius: var(--radius, 6px);
 	}
+
+
 
 	&--hover{
 		border-radius: var(--radius, 5px);

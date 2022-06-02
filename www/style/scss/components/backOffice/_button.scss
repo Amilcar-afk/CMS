@@ -14,6 +14,28 @@
 		font-size: rem(20);
 	}
 
+	&--editor-color{
+
+		&--selected{
+			span {
+				border: solid 3px var(--font-color, black);
+			}
+		}
+
+		&--custom{
+			position: relative;
+			span {
+				background: linear-gradient(45deg, red, yellow, green);
+			}
+		}
+
+		span{
+			width: 20px;
+			height: 20px;
+			border-radius: 20px;
+		}
+	}
+
 	&--menu-burger{
 		border: none;
 		padding: 0;

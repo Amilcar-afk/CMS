@@ -8,7 +8,6 @@ $(document).ready(function(){
         if ($(this).attr('data-a-target') == 'editable-module'){
             return;
         }
-
         if ($("#editable-module") && $($('.module[data-a-target="editable-module"]')[0]) != $(this)){
             $($('.module[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
             $("#editable-module").remove();
@@ -16,6 +15,11 @@ $(document).ready(function(){
 
         let neededBtns = [];
         var module = $(this).children(":first");
+
+
+        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+            $(this).attr('contenteditable', 'true');
+        });
         /*var classList = $(module).attr('class').split(/\s+/);
         $.each(classList, function(index, item) {
             if (item === 'someClass') {
@@ -60,7 +64,7 @@ $(document).ready(function(){
             '                            <span class="material-icons-round">format_size</span>\n' +
             '                        </button>\n' +
             '                        <button class="cta-button cta-button--icon cta-button-align">\n' +
-            '                            <span class="material-icons-round">format_align_left</span>\n' +
+            '                            <span class="material-icons-round">'+getModuleAlign($(this))+'</span>\n' +
             '                        </button>\n' +
             '                        <button class="cta-button cta-button--icon cta-button-insert-link">\n' +
             '                            <span class="material-icons-round">insert_link</span>\n' +
@@ -207,27 +211,80 @@ $(document).ready(function(){
         editor.document.execCommand('underlined', false, null);
     })
 
-    //background-color component
-    $(".cta-button-background-color").click(function () {
-        editor.document.execCommand('underlined', false, null);
+    //background-color menu component
+    $(document).on( "click", ".cta-button-background-color", function () {
+        cleanEditToolBar(this);
+        let moduleBackgroundColor = getModuleBackgroundColor();
+        let selected = '';
+        if (moduleBackgroundColor == "unset"){
+            selected = "selected";
+        }
+        var $ctaUnsetColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update '+selected+'"><span class="material-icons-round">block</span></button>' );
+        $(this).parent().append($ctaUnsetColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-main-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaMainColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color '+selected+'"><span class="background-main-color"></span></button>' );
+        $(this).parent().append($ctaMainColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-second-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaSecondColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color '+selected+'"><span class="background-second-color"></span></button>' );
+        $(this).parent().append($ctaSecondColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-third-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaThirdColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color '+selected+'"><span class="background-third-color"></span></button>' );
+        $(this).parent().append($ctaThirdColor);
+
+        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color cta-button--editor-color--custom"><span></span></button>' );
+        $(this).parent().append($ctaCustomColor);
+    })
+    //background color component
+    $(document).on( "click", ".cta-button-background-color-update", function () {
+        $(this).parent().parent().parent().removeClass('background-main-color');
+        $(this).parent().parent().parent().removeClass('background-second-color');
+        $(this).parent().parent().parent().removeClass('background-third-color');
+        //$(this).parent().parent().parent().style("background-color", "");
+        if ($(this).hasClass("cta-button--editor-color--custom")){
+            var $newComponent = $( "<input value='' />" );
+            $(this).append($newComponent);
+            $newComponent.spectrum({
+                type: "flat",
+                showPalette: false
+            });
+        }else {
+            $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));
+        }
     })
 
     //font-size component
     $(".cta-button-font-size").click(function () {
-        getModu
         editor.document.execCommand('underlined', false, null);
     })
 
     //align component
     $(document).on( "click", ".cta-button-align", function () {
-        if ($(moduldeContent).hasClass('text-center')){
-            return 'text-center';
-        }else if ($(moduldeContent).hasClass('text-right')){
-            return 'text-right';
-        }else if ($(moduldeContent).hasClass('text-justify')){
-            return 'text-justify';
+        var module = $($(this).parent().parent().parent().find(":last"));
+        if ($(module).hasClass('text-center')){
+            $(this).html('<span class="material-icons-round">format_align_right</span>');
+            $(module).toggleClass('text-center');
+            $(module).toggleClass('text-right');
+        }else if ($(module).hasClass('text-right')){
+            $(this).html('<span class="material-icons-round">format_align_justify</span>');
+            $(module).toggleClass('text-right');
+            $(module).toggleClass('text-justify');
+        }else if ($(module).hasClass('text-justify')){
+            $(this).html('<span class="material-icons-round">format_align_left</span>');
+            $(module).toggleClass('text-justify');
+            $(module).toggleClass('text-left');
         }else{
-            return 'text-left';
+            $(this).html('<span class="material-icons-round">format_align_center</span>');
+            $(module).toggleClass('text-left');
+            $(module).toggleClass('text-center');
         }
     })
 
@@ -497,16 +554,14 @@ function getModuleFontSize(btn){
 function getModuleBackgroundColor(btn){
     var module = $(btn).parent().parent().parent();
 
-    if ($(module).hasClass('main-color')){
-        return 'main-color';
-    }else if ($(module).hasClass('main-color-background')){
-        return 'main-color-background';
-    }else if ($(module).hasClass('second-color-background-default')){
-        return 'second-color-background-default';
-    }else if ($(module).hasClass('main-color-background-default')){
-        return 'main-color-background-default';
+    if ($(module).hasClass('background-main-color')){
+        return 'background-main-color';
+    }else if ($(module).hasClass('background-second-color')){
+        return 'background-second-color';
+    }else if ($(module).hasClass('background-third-color')){
+        return 'background-third-color';
     }else {
-        return 'none';
+        return 'unset';
     }
 }
 
@@ -525,15 +580,14 @@ function getModuleFontWeight(btn){
 }
 
 function getModuleAlign(btn){
-    var moduldeContent = $($($(btn).parent().parent().parent()).children()[1]);
-
-    if ($(moduldeContent).hasClass('text-center')){
-        return ['text-center', 'format_align_center'];
-    }else if ($(moduldeContent).hasClass('text-right')){
-        return ['text-right', 'format_align_right'];
-    }else if ($(moduldeContent).hasClass('text-justify')){
-        return ['text-justify', 'format_align_justify'];
+    var module = $($(btn).find(":last"));
+    if ($(module).hasClass('text-center')){
+        return 'format_align_center';
+    }else if ($(module).hasClass('text-right')){
+        return 'format_align_right';
+    }else if ($(module).hasClass('text-justify')){
+        return 'format_align_justify'
     }else{
-        return ['text-left', 'format_align_left'];
+        return 'format_align_left';
     }
 }
