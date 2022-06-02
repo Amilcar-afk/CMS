@@ -191,6 +191,8 @@ class Page extends BaseSQL
                     "name"=>"title",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>30,
                 ],
                 "status"=>[
                     "question"=>"Visibility",
@@ -198,6 +200,8 @@ class Page extends BaseSQL
                     "name"=>"status",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>16,
                     "choices"=>[
                         [
                             "value" => "Public",
@@ -218,6 +222,8 @@ class Page extends BaseSQL
                     "placeholder"=>"Page slug",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>16,
                 ],
                 "description"=>[
                     "question"=>"Description",
@@ -226,6 +232,8 @@ class Page extends BaseSQL
                     "name"=>"description",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>100,
                 ]
             ]
 

@@ -20,5 +20,6 @@
     </div>
     <body class="body-setup">
         <?php include $this->view.".view.php";?>
+        
     </body>
 </html>

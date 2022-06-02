@@ -298,6 +298,8 @@ class User extends BaseSQL
                         "required"=>true,
                         "error"=>"Email incorrect",
                         "unicity"=>true,
+                        "min"=>10,
+                        "max"=>255,
                         "errorUnicity"=>"Email existe déjà en bdd"
                     ],
                     "password"=>[
@@ -307,6 +309,8 @@ class User extends BaseSQL
                         "name"=>"pwdRegister",
                         "class"=>"input",
                         "required"=>true,
+                        "min"=>16,
+                        "max"=>60,
                         "error"=>"Votre mot de passe doit faire entre 8 et 16 et contenir des chiffres et des lettres",
                     ],
                     "passwordConfirm"=>[
