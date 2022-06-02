@@ -1168,11 +1168,11 @@ tr:first-child {
   margin-top: 10px;
   margin-bottom: 10px; }
 
-.module--iframe iframe {
+.module iframe iframe {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 10px;
-  border-radius: 6px; }
+  border-radius: var(--radius, 6px); }
 
 .module--hover {
   border-radius: var(--radius, 5px);
