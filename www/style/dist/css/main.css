@@ -29,6 +29,10 @@ body {
 figure {
   margin: 0; }
 
+.sp-container {
+  position: absolute !important;
+  z-index: 5; }
+
 a {
   text-decoration: none; }
 
@@ -1162,19 +1166,19 @@ tr:first-child {
   border-left: 4px solid;
   padding-left: -10px; }
 
-.module h1, .module h2, .module h3, .module h4, .module h5, .module h6, .module p {
+.module-list h1, .module-list h2, .module-list h3, .module-list h4, .module-list h5, .module-list h6, .module-list p, .module h1, .module h2, .module h3, .module h4, .module h5, .module h6, .module p {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 10px;
   margin-bottom: 10px; }
 
-.module--iframe iframe {
+.module-list iframe, .module iframe {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 10px;
-  border-radius: 6px; }
+  border-radius: var(--radius, 6px); }
 
-.module--hover {
+.module-list--hover, .module--hover {
   border-radius: var(--radius, 5px);
   top: 0;
   right: 0;
@@ -1189,45 +1193,45 @@ tr:first-child {
   height: 100%;
   cursor: pointer;
   opacity: 0; }
-  .module--hover .material-icons-round {
+  .module-list--hover .material-icons-round, .module--hover .material-icons-round {
     font-size: 5.625rem;
     color: #E3E3E3; }
 
-.module--quote-basic figure {
+.module-list--quote-basic figure, .module--quote-basic figure {
   display: inline; }
-  .module--quote-basic figure blockquote {
+  .module-list--quote-basic figure blockquote, .module--quote-basic figure blockquote {
     display: inline;
     margin: 0; }
-    .module--quote-basic figure blockquote > p {
+    .module-list--quote-basic figure blockquote > p, .module--quote-basic figure blockquote > p {
       display: inline;
       font-size: 1.125rem;
       font-weight: 800; }
-  .module--quote-basic figure figcaption {
+  .module-list--quote-basic figure figcaption, .module--quote-basic figure figcaption {
     display: inline;
     font-size: 0.8125rem;
     font-weight: 400; }
 
-.module--quote-wrap figure blockquote {
+.module-list--quote-wrap figure blockquote, .module--quote-wrap figure blockquote {
   margin: 0; }
-  .module--quote-wrap figure blockquote > p {
+  .module-list--quote-wrap figure blockquote > p, .module--quote-wrap figure blockquote > p {
     font-size: 1.125rem;
     font-weight: 800;
     margin: 0; }
 
-.module--quote-wrap figure figcaption {
+.module-list--quote-wrap figure figcaption, .module--quote-wrap figure figcaption {
   font-size: 0.8125rem;
   font-weight: 400; }
 
-.module--quote-mark figure blockquote {
+.module-list--quote-mark figure blockquote, .module--quote-mark figure blockquote {
   position: relative; }
-  .module--quote-mark figure blockquote > p:before {
+  .module-list--quote-mark figure blockquote > p:before, .module--quote-mark figure blockquote > p:before {
     position: absolute;
     content: '"';
     font-weight: 800;
     top: -10px;
     font-size: 5rem;
     left: -20px; }
-  .module--quote-mark figure blockquote > p:after {
+  .module-list--quote-mark figure blockquote > p:after, .module--quote-mark figure blockquote > p:after {
     position: absolute;
     bottom: -40px;
     right: -20px;
@@ -1235,34 +1239,34 @@ tr:first-child {
     font-weight: 800;
     content: '"'; }
 
-.module--quote-mark-font-color figure blockquote > p:before {
+.module-list--quote-mark-font-color figure blockquote > p:before, .module--quote-mark-font-color figure blockquote > p:before {
   color: var(--font-color); }
 
-.module--quote-mark-font-color figure blockquote > p:after {
+.module-list--quote-mark-font-color figure blockquote > p:after, .module--quote-mark-font-color figure blockquote > p:after {
   color: var(--font-color); }
 
-.module--quote-mark-background-color figure blockquote > p:before {
+.module-list--quote-mark-background-color figure blockquote > p:before, .module--quote-mark-background-color figure blockquote > p:before {
   color: var(--background-color); }
 
-.module--quote-mark-background-color figure blockquote > p:after {
+.module-list--quote-mark-background-color figure blockquote > p:after, .module--quote-mark-background-color figure blockquote > p:after {
   color: var(--background-color); }
 
-.module--quote-mark-main-color figure blockquote > p:before {
+.module-list--quote-mark-main-color figure blockquote > p:before, .module--quote-mark-main-color figure blockquote > p:before {
   color: var(--main-color); }
 
-.module--quote-mark-main-color figure blockquote > p:after {
+.module-list--quote-mark-main-color figure blockquote > p:after, .module--quote-mark-main-color figure blockquote > p:after {
   color: var(--main-color); }
 
-.module--quote-mark-second-color figure blockquote > p:before {
+.module-list--quote-mark-second-color figure blockquote > p:before, .module--quote-mark-second-color figure blockquote > p:before {
   color: var(--second-color); }
 
-.module--quote-mark-second-color figure blockquote > p:after {
+.module-list--quote-mark-second-color figure blockquote > p:after, .module--quote-mark-second-color figure blockquote > p:after {
   color: var(--second-color); }
 
-.module--quote-mark-third-color figure blockquote > p:before {
+.module-list--quote-mark-third-color figure blockquote > p:before, .module--quote-mark-third-color figure blockquote > p:before {
   color: var(--third-color); }
 
-.module--quote-mark-third-color figure blockquote > p:after {
+.module-list--quote-mark-third-color figure blockquote > p:after, .module--quote-mark-third-color figure blockquote > p:after {
   color: var(--third-color); }
 
 .body-back-office > header {
@@ -1477,6 +1481,16 @@ tr:first-child {
   .cta-button .material-icons-round {
     margin-right: 8px;
     font-size: 1.25rem; }
+  .cta-button--editor-color--selected span {
+    border: solid 3px var(--font-color, black); }
+  .cta-button--editor-color--custom {
+    position: relative; }
+    .cta-button--editor-color--custom span {
+      background: linear-gradient(45deg, red, yellow, green); }
+  .cta-button--editor-color span {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px; }
   .cta-button--menu-burger {
     border: none;
     padding: 0;
@@ -1672,6 +1686,9 @@ tr:first-child {
 
 #container-editor {
   overflow-y: scroll; }
+  #container-editor p, #container-editor h1, #container-editor h2, #container-editor h3, #container-editor h4, #container-editor h5, #container-editor h6 {
+    z-index: 2;
+    position: inherit; }
 
 @media (max-width: 992px) {
   .container-main-content {
