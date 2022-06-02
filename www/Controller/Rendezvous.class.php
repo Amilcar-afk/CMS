@@ -21,7 +21,8 @@ class RendezVous{
 
     public function calendar()
     {
-        $view = new View("rendezvous");
+        $view = new View("rendezvous", "back");
+
     }
 
     public function load()

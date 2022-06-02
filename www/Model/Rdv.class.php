@@ -215,23 +215,6 @@ class Rdv extends BaseSQL
                 "action"=>"",
                 "submit"=>"reserver",
             ],
-            // "select"=>[
-            //     "title"=>[
-            //         "type"=>"select",
-            //         "name"=>"title",
-            //         "option"=>[
-            //             "libre",
-            //             "devis",
-            //             "autre option",
-            //         ],
-            //         "required"=>true,
-            //         "placeholder"=>"le titre ...",
-            //         "id"=>"title",
-            //         "class"=>"inputRegister",
-            //         "required"=>true,
-            //         "error"=>"titre incorrect",
-            //     ],
-            // ],
             "inputs"=>[
 
                 "id"=>[
@@ -278,20 +261,7 @@ class Rdv extends BaseSQL
                     "value"=> $this->getDescription(),
                 ]
             ],
-            // "textarea"=>[
-            //     "description"=>[
-            //         "type"=>"text",
-            //         "placeholder"=>"description ...",
-            //         "id"=>"description",
-            //         "class"=>"description",
-            //         "min"=>2,
-            //         "max"=>50,
-            //         "name"=>"description",
-            //         "error"=>"champ ",
-            //         "value"=> $this->getDescription(),
-            //     ]
-
-            // ]
+            
         ];
     }
 }
