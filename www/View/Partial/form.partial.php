@@ -53,10 +53,12 @@
         <?php else:?>
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["question"]?></label>
+
                 <input name="<?=$name?>"
                        id="<?=$name?>"
                        type="<?=$input["type"]?>"
                        class="<?=$input["class"]?>"
+                      
                     <?= (isset($input["placeholder"]))?'placeholder="'.$input["placeholder"].'"':'' ?>
                     <?= (isset($input["value"]))?'value="'.$input["value"].'"':'' ?>
                     <?= (isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>

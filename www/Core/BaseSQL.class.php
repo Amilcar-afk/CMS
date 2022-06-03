@@ -116,6 +116,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
+    
     protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
@@ -230,6 +231,7 @@ abstract class BaseSQL
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
+    
 
     /**
      * @param PDO $db

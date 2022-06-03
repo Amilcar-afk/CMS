@@ -1,13 +1,9 @@
 <?php
 
-
 namespace App\Controller;
 
-
-use App\Core\BaseSQL;
 use App\Core\Validator;
 use App\Core\View;
-use App\Core\CheckInputs;
 use App\Model\User as UserModel;
 
 class User{
@@ -21,13 +17,11 @@ class User{
     public function login()
     {
         if( !empty($_POST)){
-            $result = CheckInputs::checkEmail($_POST['email']);
+            $result = Validator::checkEmail($_POST['email']);
             if($result){
-                $this->user->setEmail($_POST['email']);
-                $sql = "SELECT * FROM cmspf_Users WHERE mail = :email";
-                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
+                $resultat = $this->user->find($_POST['email'],'mail');
                 if(!empty($resultat)){
-                    if(password_verify($_POST['password'], $resultat->pwd)){
+                    if(password_verify($_POST['password'], $resultat->getPassword())){
                         session_start();
                         $_SESSION['Auth'] = $resultat;
                         header('location:/dashboard');
@@ -40,7 +34,6 @@ class User{
             }else{
                 echo'email incorrect';
             }
-     
         }
         $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
@@ -56,19 +49,21 @@ class User{
 
     public function register()
     {
+        $view = new View("register", "back-sandbox");
+        $view->assign("user",$this->user);
         if( !empty($_POST)){
             $result = Validator::run($this->user->getFormRegister(), $_POST);
+
             if(empty($result)){
                 $this->user->setFirstname($_POST['firstname']);
                 $this->user->setLastname($_POST['lastname']);
                 $this->user->setPassword($_POST['password']);
                 $this->user->setEmail($_POST['email']);
                 $this->user->save();
-            }else{
-                print_r($result);
             }
+            // else{
+            //     var_dump($result);
+            // }
         }
-        $view = new View("register", "back-sandbox");
-        $view->assign("user",$this->user);
     }
 }
