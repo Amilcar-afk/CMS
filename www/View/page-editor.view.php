@@ -29,7 +29,7 @@
     </header>
     <section id="container-editor" class="container-main-content container-main-content--padding" >
         <div class="row">
-            <article class="module col-6">
+            <article class="module col-6 col-offset-1">
 
                 <h4 class="color-main-color text-center fs-26 bold col-12">Lorem ipsum dolor sit amet consectetur.</h4>
             </article>

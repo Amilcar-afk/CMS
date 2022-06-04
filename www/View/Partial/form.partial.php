@@ -54,6 +54,8 @@
             <div class="input-container">
                 <label for="<?=$name?>"><?=$input["question"]?></label>
 
+              <p style="color: red;"> <?= (isset($input["error"]))?$input["error"]:'' ?></p> 
+
                 <input name="<?=$name?>"
                        id="<?=$name?>"
                        type="<?=$input["type"]?>"

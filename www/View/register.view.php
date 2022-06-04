@@ -5,7 +5,13 @@
             <h1 class="title title--main-color">Log In</h1>
         </header>
 
+        <?php if(!isset($error_from)):  ?>
             <?php $this->includePartial("form", $user->getFormRegister()) ?>
+        <?php elseif(isset($error_from)):  ?>
+            <?php $this->includePartial("form", $error_from) ?>
+        <?php endif  ?>
+
+        
 
     </section>
 </main>

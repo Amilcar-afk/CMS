@@ -36,11 +36,10 @@ $(document).ready(function(){
 
     //HOVE CARD
     $(".module-list").mouseover(function (){
-
-        let hovered = $(".module--hover")[0];
+        var hovered = $(".module--hover")[0];
         if ($(hovered) != undefined){
-            if ($(hovered) == $(this)) {
-                die;
+            if ($($(this).find(".module--hover"))[0]) {
+                return;
             }else {
                 $($(".module--hover")[0]).animate({
                     opacity: '0'
@@ -49,14 +48,13 @@ $(document).ready(function(){
             }
         }
 
-
         let hover = $('<div></div>');
         hover.attr('class', 'module--hover');
         hover.append('<span class=\"material-icons-round\">add</span>');
         $(this).append(hover);
         $($(".module--hover")[0]).animate({
             opacity: '1'
-        }, 20);
+        });
     })
 
     //COLLAPSE

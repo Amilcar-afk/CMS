@@ -10,55 +10,59 @@ use App\Core\BaseSQL;
 class Validator extends BaseSQL
 {
 
+    public static $form_errors;
+
     public function __construct()
     {
         parent::__construct();
     }
 
 
-    public static function run($config, $data): array
+    public static function run($config, $data, $unicity)
     {
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
         }
-        foreach ($config["inputs"] as $name=>$input){
+
+        foreach ($config["inputs"] as $name => $input){
 
             if(!isset($data[$name])){
-                $input['error']="Fields are missing";
+                $config['inputs'][$name]['error'] = "Fields are missing";
             }
+
             if(!empty($input["required"]) && empty($data[$name])){
-                $input['error']="You deleted the required attribute ";
+                $config['inputs'][$name]['error'] = "You deleted the required attribute";
+
             }
+
             if($input["type"]=="password" && self::checkPassword($data[$name])){
                 $input['error']="";
             }else if($input["type"]=="email"  && !self::checkEmail($data[$name])){
-                $input['error']="Email incorrect";
+                $config['inputs'][$name]['error'] = "Email incorrect";
+
+
             }
             if(self::valueEquality($data['password'], $data['passwordConfirm'])){
-                $input['error']="Password does not match confirmation";
+                $config['inputs'][$name]['error'] = "Password does not match confirmation";
             }
-            
+
             if(isset($input['min']) && $input['max']){
-                if(!self::size($data[$name],$input['min'],$input['max'])){
-                    $input['error']="size of $name no valide";
+                if(self::size($data[$name],$input['min'],$input['max'])){
+                    $config['inputs'][$name]['error']="size of $name not valide";
                 }
             }
 
+            if($unicity !== false){
+                $config['inputs'][$name]['error']="this email alreay exist";
 
-
-
-            return $config;
-
+            }
         }
+
+
+        return $config;
     }
 
-  
 
-    public function  checkEmailUnicity($email)
-    {
-         parent::find($email,'mail');
-        // return filter_var($email, FILTER_VALIDATE_EMAIL);
-    }
 
 
     //les errurs en anglais

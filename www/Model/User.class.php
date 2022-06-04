@@ -287,6 +287,7 @@ class User extends BaseSQL
     
     public function getFormRegister(): array
     {
+
             return [
                 "config"=>[
                     "method"=>"POST",

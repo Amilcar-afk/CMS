@@ -20,6 +20,8 @@ class Categorie{
         $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
         $view = new View("categorie-list", "back");
         $view->assign("categories",$categories);
+        $view->assign("categorie",$this->categorie);
+
     }
 
     public function navigationsList()

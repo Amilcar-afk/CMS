@@ -47,13 +47,14 @@ class User{
     }
 
 
+
     public function register()
     {
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
         if( !empty($_POST)){
-            $result = Validator::run($this->user->getFormRegister(), $_POST);
-
+            $unic_email = $this->user->find($_POST['email'],'mail');
+            $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
             if(empty($result)){
                 $this->user->setFirstname($_POST['firstname']);
                 $this->user->setLastname($_POST['lastname']);
@@ -61,9 +62,9 @@ class User{
                 $this->user->setEmail($_POST['email']);
                 $this->user->save();
             }
-            // else{
-            //     var_dump($result);
-            // }
+            else{
+                $view->assign("error_from",$result);
+            }
         }
     }
 }
