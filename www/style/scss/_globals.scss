@@ -22,6 +22,15 @@ figure{
 	z-index: 5;
 }
 
+button:focus {outline:0;}
+p:focus {outline:0;}
+h1:focus {outline:0;}
+h2:focus {outline:0;}
+h3:focus {outline:0;}
+h4:focus {outline:0;}
+input:focus {outline:0;}
+
+
 a{
 	text-decoration:none;
 }

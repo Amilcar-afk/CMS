@@ -1,8 +1,8 @@
 <section id="back-office-container">
     <header class="content-header">
         <nav>
-            <button class="cta-button cta-button--icon"><span class="material-icons-round">undo</span></button>
-            <button class="cta-button cta-button--icon"><span class="material-icons-round">redo</span></button>
+            <button class="cta-button cta-button--icon cta-button-undo"><span class="material-icons-round">undo</span></button>
+            <button class="cta-button cta-button--icon cta-button-redo"><span class="material-icons-round">redo</span></button>
         </nav>
         <div>
             <label>
