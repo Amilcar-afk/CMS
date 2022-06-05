@@ -130,16 +130,11 @@ class User extends BaseSQL
         parent::save();
     }
 
-
-    public function select(string $sql, $params){
-
-        return parent::findOneData($sql, $params);
+    public function find($id = null, string $attribut = 'id')
+    {
+        return parent::find($id, $attribut);
     }
 
-    public function selectAllData(string $sql ){
-
-        return parent::findAllData($sql);
-    }
     /**
      * Get the value of passwordOldFirst
      */ 
@@ -375,16 +370,6 @@ class User extends BaseSQL
                 ]
             ]
 
-        ];
-    }
-    public function getFormTp(): array
-    {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "submit"=>"Se connecter"
-            ],
         ];
     }
 }

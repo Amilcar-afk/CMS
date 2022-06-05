@@ -123,6 +123,16 @@ table {
 	padding: 15px;
 }
 
+table.dataTable.no-footer {
+	border: none!important;
+}
+
+thead{
+	tr{
+		border: none!important;
+	}
+}
+
 tr:last-child{
 	border-bottom: solid 4px #E2E2E2;
 	border-radius: 0 0 15px 15px;
