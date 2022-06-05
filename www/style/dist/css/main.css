@@ -1826,8 +1826,14 @@ tr:first-child {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap; }
+          .container-main-content--menu .menu-container nav a:nth-child(odd) {
+            margin-right: 10px; }
+          .container-main-content--menu .menu-container nav a:nth-child(even) {
+            margin-left: 10px; }
           .container-main-content--menu .menu-container nav button:nth-child(odd) {
-            margin-right: 25px; }
+            margin-right: 10px; }
+          .container-main-content--menu .menu-container nav button:nth-child(even) {
+            margin-left: 10px; }
       .container-main-content--menu > button {
         position: absolute;
         top: 27px;

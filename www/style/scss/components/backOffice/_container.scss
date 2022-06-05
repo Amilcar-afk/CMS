@@ -249,8 +249,20 @@
           justify-content: space-between;
           flex-wrap: wrap;
 
+          & a:nth-child(odd) {
+            margin-right: 10px;
+          }
+
+          & a:nth-child(even) {
+            margin-left: 10px;
+          }
+
           & button:nth-child(odd) {
-            margin-right: 25px;
+            margin-right: 10px;
+          }
+
+          & button:nth-child(even) {
+            margin-left: 10px;
           }
         }
       }
