@@ -64,10 +64,6 @@ class User{
             }
             else{
                 $view->assign("error_from",$result);
-                echo '<pre>';
-                var_dump($_POST);
-                echo '</pre>';
-
             }
         }
     }
