@@ -305,7 +305,7 @@ class User extends BaseSQL
                             "required"=>true,
                             "error"=>"",
                             "unicity"=>true,
-                            "min"=>30,
+                            "min"=>10,
                             "max"=>255,
                             "errorUnicity"=>"Email existe déjà en bdd"
                         ],
@@ -316,7 +316,7 @@ class User extends BaseSQL
                             "name"=>"pwdRegister",
                             "class"=>"input",
                             "required"=>true,
-                            "min"=>16,
+                            "min"=>12,
                             "max"=>60,
                             "error"=>"",
                         ],
@@ -352,7 +352,6 @@ class User extends BaseSQL
                         ],
                     ],
             ];
-       
     }
 
 

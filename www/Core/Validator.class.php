@@ -24,6 +24,8 @@ class Validator extends BaseSQL
             $config["inputs"]['error']="Form modified by a user";
         }
 
+        $errors = [];
+
         foreach ($config["inputs"] as $name => $input){
 
             if(!isset($data[$name])){
@@ -38,12 +40,12 @@ class Validator extends BaseSQL
             if($input["type"]=="password" && self::checkPassword($data[$name])){
                 $input['error']="";
             }else if($input["type"]=="email"  && !self::checkEmail($data[$name])){
-                $config['inputs'][$name]['error'] = "Email incorrect";
+                $config['inputs']['email']['error'] = "Email incorrect";
 
 
             }
             if(self::valueEquality($data['password'], $data['passwordConfirm'])){
-                $config['inputs'][$name]['error'] = "Password does not match confirmation";
+                $config['inputs']['password']['error'] = "Password does not match confirmation";
             }
 
             if(isset($input['min']) && $input['max']){
@@ -53,19 +55,23 @@ class Validator extends BaseSQL
             }
 
             if($unicity !== false){
-                $config['inputs'][$name]['error']="this email alreay exist";
+                $config['inputs']['email']['error']="this email alreay exist";
 
+            }
+
+            array_push($errors, $config["inputs"][$name]['error'] );
+        }
+
+        foreach($errors as $error){
+            if(strlen($error) == 0){
+                return ;
+            }else{
+                return $config;
             }
         }
 
-
-        return $config;
     }
 
-
-
-
-    //les errurs en anglais
 
     public static function size($value, $minSize, $maxSize)
     {
