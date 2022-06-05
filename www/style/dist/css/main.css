@@ -129,6 +129,12 @@ table {
   margin: 0;
   padding: 15px; }
 
+table.dataTable.no-footer {
+  border: none !important; }
+
+thead tr {
+  border: none !important; }
+
 tr:last-child {
   border-bottom: solid 4px #E2E2E2;
   border-radius: 0 0 15px 15px; }
@@ -1506,6 +1512,11 @@ tr:first-child {
   .cta-button .material-icons-round {
     margin-right: 8px;
     font-size: 1.25rem; }
+  .cta-button--mains-color--custom {
+    position: relative; }
+    .cta-button--mains-color--custom .sp-container.sp-flat {
+      position: relative;
+      left: 50px; }
   .cta-button--editor-color--selected span {
     border: solid 3px var(--font-color, black); }
   .cta-button--editor-color--custom {
@@ -2008,3 +2019,48 @@ h2 {
   padding: 4px; }
   .sticker--slug {
     background-color: #444; }
+
+.sp-container, .sp-container button, .sp-container input {
+  background: rgba(229, 229, 229, 0.8) !important;
+  box-shadow: 0px 0px 250px rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(60px) !important;
+  border-radius: var(--radius, 5px) !important; }
+  .sp-container .sp-button-container.sp-cf, .sp-container .sp-initial.sp-thumb.sp-cf, .sp-container .sp-input-container.sp-cf, .sp-container button .sp-button-container.sp-cf, .sp-container button .sp-initial.sp-thumb.sp-cf, .sp-container button .sp-input-container.sp-cf, .sp-container input .sp-button-container.sp-cf, .sp-container input .sp-initial.sp-thumb.sp-cf, .sp-container input .sp-input-container.sp-cf {
+    height: 25px;
+    display: flex;
+    justify-content: space-between !important; }
+    .sp-container .sp-button-container.sp-cf .sp-cancel, .sp-container .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container .sp-input-container.sp-cf .sp-cancel, .sp-container button .sp-button-container.sp-cf .sp-cancel, .sp-container button .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container button .sp-input-container.sp-cf .sp-cancel, .sp-container input .sp-button-container.sp-cf .sp-cancel, .sp-container input .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container input .sp-input-container.sp-cf .sp-cancel {
+      border-radius: 3px;
+      border: none;
+      background: 0 0;
+      line-height: 1;
+      padding: 0 8px;
+      height: 25px;
+      text-transform: capitalize;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #606c72;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: end; }
+    .sp-container .sp-button-container.sp-cf .sp-choose, .sp-container .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container .sp-input-container.sp-cf .sp-choose, .sp-container button .sp-button-container.sp-cf .sp-choose, .sp-container button .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container button .sp-input-container.sp-cf .sp-choose, .sp-container input .sp-button-container.sp-cf .sp-choose, .sp-container input .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container input .sp-input-container.sp-cf .sp-choose {
+      color: #fff;
+      margin-left: 5px;
+      color: var(--main-color);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: var(--radius, 10px);
+      border: none;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: unset;
+      font-weight: 500;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border-radius: var(--radius, 10px);
+      background-color: var(--main-color) !important;
+      color: white; }

@@ -3,10 +3,10 @@
         <div class="menu-container">
             <h1 class="title title--main-color">SITE MAP</h1>
             <nav>
-                <a href="user-manager" class="cta-button cta-button--menu main-nav-choice" data-wc-target="user-manager-container"><span class="material-icons-round">supervisor_account</span>User manager</a>
-                <a href="style" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="style-container"><span class="material-icons-round">brush</span>Style</a>
-                <a href="database" class="cta-button cta-button--menu main-nav-choice" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Database</a>
-                <a href="media-library" class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-library-container"><span class="material-icons-round">video_library</span>Media library</a>
+                <a href="/settings/user-manager" class="cta-button cta-button--menu main-nav-choice" data-wc-target="user-manager-container"><span class="material-icons-round">supervisor_account</span>User manager</a>
+                <a href="/settings/style" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="style-container"><span class="material-icons-round">brush</span>Style</a>
+                <a href="/settings/database" class="cta-button cta-button--menu main-nav-choice" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Database</a>
+                <a href="/settings/media-library" class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-library-container"><span class="material-icons-round">video_library</span>Media library</a>
             </nav>
         </div>
         <section class="collapse-parent">
@@ -29,15 +29,15 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block" style="background-color: #396075"></span>
+                                <span class="input-block cta-button--mains-color--custom" style="background-color: #396075"></span>
                                 <label>Main color</label>
                             </article>
                             <article>
-                                <span class="input-block" style="background-color: #55A6D3"></span>
+                                <span class="input-block cta-button--mains-color--custom" style="background-color: #55A6D3"></span>
                                 <label>Seconde color</label>
                             </article>
                             <article>
-                                <span class="input-block" style="background-color: #9DDCFF"></span>
+                                <span class="input-block cta-button--mains-color--custom" style="background-color: #9DDCFF"></span>
                                 <label>Third color</label>
                             </article>
                         </section>

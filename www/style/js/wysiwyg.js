@@ -288,7 +288,11 @@ $(document).ready(function(){
             $(this).append($newComponent);
             $newComponent.spectrum({
                 type: "flat",
-                showPalette: false
+                showPalette: false,
+                hideAfterPaletteSelect: true,
+                showInput: true,
+                showInitial: true,
+                showAlpha: false
             });
         }else {
             $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));

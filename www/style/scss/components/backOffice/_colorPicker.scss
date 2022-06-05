@@ -1,0 +1,51 @@
+.sp-container, .sp-container button, .sp-container input{
+	background: rgba(229, 229, 229, 0.8)!important;
+	box-shadow: 0px 0px 250px rgba(255, 255, 255, 0.25)!important;
+	backdrop-filter: blur(60px)!important;
+	border-radius: var(--radius, 5px)!important;
+
+	.sp-button-container.sp-cf, .sp-initial.sp-thumb.sp-cf, .sp-input-container.sp-cf {
+		height: 25px;
+		display: flex;
+		justify-content: space-between !important;
+
+		.sp-cancel{
+			border-radius: 3px;
+			border: none;
+			background: 0 0;
+			line-height: 1;
+			padding: 0 8px;
+			height: 25px;
+			text-transform: capitalize;
+			text-align: center;
+			vertical-align: middle;
+			cursor: pointer;
+			color: #606c72;
+			font-weight: 700;
+			display: flex;
+			flex-direction: column;
+			align-items: end;
+		}
+
+		.sp-choose {
+			color: #fff;
+			margin-left: 5px;
+			color: var(--main-color);
+			cursor: pointer;
+			transition: all 0.3s;
+			border-radius: var(--radius, 10px);
+			border: none;
+			display: flex;
+			align-items: center;
+			padding: 10px;
+			background-color: unset;
+			font-weight: 500;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			border-radius: var(--radius, 10px);
+			background-color: var(--main-color)!important;
+			color: white;
+		}
+	}
+}
