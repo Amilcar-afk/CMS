@@ -193,6 +193,7 @@ class Page extends BaseSQL
                     "required"=>true,
                     "min"=>3,
                     "max"=>30,
+                    "value"=>$this->getTitle(),
                 ],
                 "status"=>[
                     "question"=>"Visibility",
@@ -224,6 +225,7 @@ class Page extends BaseSQL
                     "required"=>true,
                     "min"=>3,
                     "max"=>16,
+                    "value"=>$this->getSlug(),
                 ],
                 "description"=>[
                     "question"=>"Description",
@@ -234,6 +236,7 @@ class Page extends BaseSQL
                     "required"=>true,
                     "min"=>3,
                     "max"=>100,
+                    "value"=>$this->getDescription(),
                 ]
             ]
 
