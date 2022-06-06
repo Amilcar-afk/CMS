@@ -25,6 +25,21 @@ class User extends BaseSQL
         parent::__construct();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPwd()
+    {
+        return $this->pwd;
+    }
+
+    /**
+     * @param mixed $pwd
+     */
+    public function setPwd($pwd): void
+    {
+        $this->pwd = $pwd;
+    }
 
     /**
      * @return mixed
@@ -46,7 +61,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getEmail(): string
+    public function getMail(): string
     {
         return $this->mail;
     }
@@ -54,7 +69,7 @@ class User extends BaseSQL
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
+    public function setMail($email): void
     {
         $this->mail = strtolower(trim($email));
     }
@@ -130,21 +145,11 @@ class User extends BaseSQL
         parent::save();
     }
 
-
-    public function select(string $sql, $params){
-
-        return parent::findOneData($sql, $params);
-    }
-
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
     }
 
-    public function selectAllData(string $sql ){
-
-        return parent::findAllData($sql);
-    }
     /**
      * Get the value of passwordOldFirst
      */ 
@@ -382,16 +387,6 @@ class User extends BaseSQL
                 ]
             ]
 
-        ];
-    }
-    public function getFormTp(): array
-    {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "submit"=>"Se connecter"
-            ],
         ];
     }
 }

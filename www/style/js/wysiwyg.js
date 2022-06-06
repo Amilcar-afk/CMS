@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    const fontSizeSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 20, 22, 24, 26, 28, 32, 34, 36, 38, 40, 42, 46, 48, 50, 64];
     //editor.document.designMode = "on";
 
     //add editor tool bar for model
@@ -16,9 +16,14 @@ $(document).ready(function(){
         let neededBtns = [];
         var module = $(this).children(":first");
 
-
         $('p, h1, h2, h3, h4, h5, h6').each(function() {
+            $(this).removeAttr('contenteditable');
+            $(this).removeClass("module--on");
+        });
+
+        $(this).find('p, h1, h2, h3, h4, h5, h6').each(function() {
             $(this).attr('contenteditable', 'true');
+            $(this).addClass("module--on");
         });
         /*var classList = $(module).attr('class').split(/\s+/);
         $.each(classList, function(index, item) {
@@ -50,9 +55,6 @@ $(document).ready(function(){
             '                        </button>\n' +
             '                        <button class="cta-button cta-button--icon cta-button-bold">\n' +
             '                            <span class="material-icons-round">format_bold</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-underlined">\n' +
-            '                            <span class="material-icons-round">format_underlined</span>\n' +
             '                        </button>\n' +
             '                        <button class="cta-button cta-button--icon cta-button-font-color">\n' +
             '                            <span class="material-icons-round">color_lens</span>\n' +
@@ -143,7 +145,9 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-offset-less", function () {
         let offset = getModuleOffset(this);
         if (offset > 0) {
-            $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
+            if ($($(this).parent().parent().parent()).toggleClass("col-offset-" + offset)){
+                $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
+            }
             offset--;
             printActionToolBar(this, offset);
             $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
@@ -153,7 +157,9 @@ $(document).ready(function(){
     $(document).on( "click", ".cta-button-offset-more", function () {
         let offset = getModuleOffset(this);
         if (offset < 11) {
-            $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
+            if ($($(this).parent().parent().parent()).toggleClass("col-offset-" + offset)){
+                $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
+            }
             offset++;
             printActionToolBar(this, offset);
             $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
@@ -174,7 +180,9 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-resize-less", function () {
         let size = getModuleSize(this);
         if (size > 1) {
-            $($(this).parent().parent().parent()).toggleClass("col-" + size);
+            if ($($(this).parent().parent().parent()).hasClass("col-" + size)){
+                $($(this).parent().parent().parent()).toggleClass("col-" + size);
+            }
             size--;
             printActionToolBar(this, size);
             $($(this).parent().parent().parent()).toggleClass("col-" + size);
@@ -184,7 +192,9 @@ $(document).ready(function(){
     $(document).on( "click", ".cta-button-resize-more", function () {
         let size = getModuleSize(this);
         if (size < 12) {
-            $($(this).parent().parent().parent()).toggleClass("col-" + size);
+            if ($($(this).parent().parent().parent()).hasClass("col-" + size)){
+                $($(this).parent().parent().parent()).toggleClass("col-" + size);
+            }
             size++;
             printActionToolBar(this, size);
             $($(this).parent().parent().parent()).toggleClass("col-" + size);
@@ -197,18 +207,42 @@ $(document).ready(function(){
     })
 
     //bold component
-    $(".cta-button-bold").click(function () {
-        editor.document.execCommand('bold', false, null);
-    })
-
-    //underlined component
-    $(".cta-button-underlined").click(function () {
-        editor.document.execCommand('underlined', false, null);
+    $(document).on( "click", ".cta-button-bold", function () {
+        document.execCommand('bold', false);
     })
 
     //font-color component
-    $(".cta-button-font-color").click(function () {
-        editor.document.execCommand('underlined', false, null);
+    $(document).on( "click", ".cta-button-font-color", function () {
+        cleanEditToolBar(this);
+        let moduleBackgroundColor = "";
+        let selected = '';
+        if (moduleBackgroundColor == "unset"){
+            selected = "selected";
+        }
+        var $ctaUnsetColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update '+selected+'"><span class="material-icons-round">block</span></button>' );
+        $(this).parent().append($ctaUnsetColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-main-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaMainColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-main-color"></span></button>' );
+        $(this).parent().append($ctaMainColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-second-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaSecondColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-second-color"></span></button>' );
+        $(this).parent().append($ctaSecondColor);
+        selected = '';
+        if (moduleBackgroundColor == "background-third-color"){
+            selected = "cta-button--editor-color--selected";
+        }
+        var $ctaThirdColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-third-color"></span></button>' );
+        $(this).parent().append($ctaThirdColor);
+
+        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color cta-button--editor-color--custom"><span></span></button>' );
+        $(this).parent().append($ctaCustomColor);
+        document.execCommand('underlined', false, null);
     })
 
     //background-color menu component
@@ -254,7 +288,11 @@ $(document).ready(function(){
             $(this).append($newComponent);
             $newComponent.spectrum({
                 type: "flat",
-                showPalette: false
+                showPalette: false,
+                hideAfterPaletteSelect: true,
+                showInput: true,
+                showInitial: true,
+                showAlpha: false
             });
         }else {
             $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));
@@ -262,8 +300,42 @@ $(document).ready(function(){
     })
 
     //font-size component
-    $(".cta-button-font-size").click(function () {
-        editor.document.execCommand('underlined', false, null);
+    $(document).on( "click", ".cta-button-font-size", function () {
+        cleanEditToolBar(this);
+        var $ctaLessFontSize = $( '<button class="cta-button cta-button--icon cta-button-font-size-less"><span class="material-icons-round">chevron_left</span></button>' );
+        $(this).parent().append($ctaLessFontSize);
+        var $printFontSize = $( '<div class="cta-button bold action-print">'+getModuleFontSize(this)+'</div>' );
+        $(this).parent().append($printFontSize);
+        var $ctaMoreFontSize = $( '<button class="cta-button cta-button--icon cta-button-font-size-more"><span class="material-icons-round">chevron_right</span></button>' );
+        $(this).parent().append($ctaMoreFontSize);
+    })
+    //font-size less component
+    $(document).on("click", ".cta-button-font-size-less", function () {
+        let fontSize = getModuleFontSize(this);
+        if (fontSize > 1) {
+            if ($($(this).parent().parent().parent().children(":last")).hasClass("fs-" + fontSize)){
+                $($(this).parent().parent().parent().children(":last")).toggleClass("fs-" + fontSize);
+            }
+            fontSize = fontSizeSet.indexOf(fontSize)
+            fontSize--;
+            fontSize = fontSizeSet[fontSize];
+            printActionToolBar(this, fontSize);
+            $($(this).parent().parent().parent().children(":last")).addClass("fs-" + fontSize);
+        }
+    })
+    //font-size more component
+    $(document).on( "click", ".cta-button-font-size-more", function () {
+        let fontSize = getModuleFontSize(this);
+        if (fontSize < 65) {
+            if ($($(this).parent().parent().parent().children(":last")).hasClass("fs-" + fontSize)){
+                $($(this).parent().parent().parent().children(":last")).toggleClass("fs-" + fontSize);
+            }
+            fontSize = fontSizeSet.indexOf(fontSize)
+            fontSize++;
+            fontSize = fontSizeSet[fontSize];
+            printActionToolBar(this, fontSize);
+            $($(this).parent().parent().parent().children(":last")).addClass("fs-" + fontSize);
+        }
     })
 
     //align component
@@ -283,14 +355,25 @@ $(document).ready(function(){
             $(module).toggleClass('text-left');
         }else{
             $(this).html('<span class="material-icons-round">format_align_center</span>');
-            $(module).toggleClass('text-left');
+            if ($(module).hasClass('text-left')){
+                $(module).toggleClass('text-left');
+            }
             $(module).toggleClass('text-center');
         }
     })
 
+    //undo
+    $(document).on( "click", ".cta-button-undo", function () {
+        document.execCommand('undo',false,'')
+    })
+    //redo
+    $(document).on( "click", ".cta-button-redo", function () {
+        document.execCommand('redo',false,'')
+    })
+
     //insert-link component
     $(".cta-button-insert-link").click(function () {
-        editor.document.execCommand('underlined', false, null);
+        document.execCommand('underlined', false, null);
     })
 
     //add component
@@ -300,12 +383,8 @@ $(document).ready(function(){
         $newComponent.removeClass('module-list');
         $newComponent.addClass('col-6');
         $($newComponent.find('.module--hover')[0]).remove();
-        $(".module .a-zoom-in").each(function(){
-            $(this).parent().parent().append($newComponent);
-        });
-
+        $("#editable-module").parent().after($newComponent);
         $("#cta-button-close-list-component").click();
-
     })
 
     $(".cta-button-save").click(function () {
@@ -318,6 +397,10 @@ $(document).ready(function(){
             $("#editable-module").remove();
         }
 
+        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+            $(this).removeAttr('contenteditable');
+            $(this).removeClass("module--on");
+        });
         $.ajax({
             url:"/build/save",
             type:"POST",
@@ -418,9 +501,9 @@ function getModuleOffset(btn){
 }
 
 function getModuleFontSize(btn){
-    var moduldeContent = $($($(btn).parent().parent().parent()).children()[1]);
+    var moduldeContent = $(btn).parent().parent().parent().children(":last");
 
-    if ($(module).hasClass('fs-1')){
+    if ($(moduldeContent).hasClass('fs-1')){
         return 1;
     }else if ($(moduldeContent).hasClass('fs-2')){
         return 2;
@@ -446,111 +529,44 @@ function getModuleFontSize(btn){
         return 12;
     }else if ($(moduldeContent).hasClass('fs-13')){
         return 13;
-    }else if ($(moduldeContent).hasClass('fs-15')){
-        return 15;
     }else if ($(moduldeContent).hasClass('fs-16')){
         return 16;
-    }else if ($(moduldeContent).hasClass('fs-17')){
-        return 17;
-    }else if ($(moduldeContent).hasClass('fs-18')){
-        return 18;
-    }else if ($(moduldeContent).hasClass('fs-19')){
-        return 19;
     }else if ($(moduldeContent).hasClass('fs-20')){
         return 20;
-    }else if ($(moduldeContent).hasClass('fs-21')){
-        return 21;
     }else if ($(moduldeContent).hasClass('fs-22')){
         return 22;
-    }else if ($(moduldeContent).hasClass('fs-23')){
-        return 23;
     }else if ($(moduldeContent).hasClass('fs-24')){
         return 24;
-    }else if ($(moduldeContent).hasClass('fs-25')){
-        return 25;
     }else if ($(moduldeContent).hasClass('fs-26')){
         return 26;
-    }else if ($(moduldeContent).hasClass('fs-27')){
-        return 27;
     }else if ($(moduldeContent).hasClass('fs-28')){
         return 28;
-    }else if ($(moduldeContent).hasClass('fs-29')){
-        return 29;
-    }else if ($(moduldeContent).hasClass('fs-30')){
-        return 30;
-    }else if ($(moduldeContent).hasClass('fs-31')){
-        return 31;
     }else if ($(moduldeContent).hasClass('fs-32')){
         return 32;
-    }else if ($(moduldeContent).hasClass('fs-33')){
-        return 33;
     }else if ($(moduldeContent).hasClass('fs-34')){
         return 34;
-    }else if ($(moduldeContent).hasClass('fs-35')){
-        return 35;
     }else if ($(moduldeContent).hasClass('fs-36')){
         return 36;
-    }else if ($(moduldeContent).hasClass('fs-37')){
-        return 37;
     }else if ($(moduldeContent).hasClass('fs-38')){
         return 38;
-    }else if ($(moduldeContent).hasClass('fs-39')){
-        return 39;
     }else if ($(moduldeContent).hasClass('fs-40')){
         return 40;
-    }else if ($(moduldeContent).hasClass('fs-41')){
-        return 41;
     }else if ($(moduldeContent).hasClass('fs-42')){
         return 42;
-    }else if ($(moduldeContent).hasClass('fs-43')){
-        return 43;
     }else if ($(moduldeContent).hasClass('fs-44')){
         return 44;
-    }else if ($(moduldeContent).hasClass('fs-45')){
-        return 45;
     }else if ($(moduldeContent).hasClass('fs-46')){
         return 46;
-    }else if ($(moduldeContent).hasClass('fs-47')){
-        return 47;
     }else if ($(moduldeContent).hasClass('fs-48')){
         return 48;
-    }else if ($(moduldeContent).hasClass('fs-49')){
-        return 49;
     }else if ($(moduldeContent).hasClass('fs-50')){
         return 50;
-    }else if ($(moduldeContent).hasClass('fs-51')){
-        return 51;
-    }else if ($(moduldeContent).hasClass('fs-52')){
-        return 52;
-    }else if ($(moduldeContent).hasClass('fs-53')){
-        return 53;
-    }else if ($(moduldeContent).hasClass('fs-54')){
-        return 54;
-    }else if ($(moduldeContent).hasClass('fs-55')){
-        return 55;
-    }else if ($(moduldeContent).hasClass('fs-56')){
-        return 56;
-    }else if ($(moduldeContent).hasClass('fs-57')){
-        return 57;
-    }else if ($(moduldeContent).hasClass('fs-58')){
-        return 58;
-    }else if ($(moduldeContent).hasClass('fs-59')){
-        return 59;
-    }else if ($(moduldeContent).hasClass('fs-60')){
-        return 60;
-    }else if ($(moduldeContent).hasClass('fs-61')){
-        return 61;
-    }else if ($(moduldeContent).hasClass('fs-62')){
-        return 62;
-    }else if ($(moduldeContent).hasClass('fs-63')){
-        return 63;
     }else if ($(moduldeContent).hasClass('fs-64')){
         return 64;
     }else {
         return 14;
     }
 }
-
 function getModuleBackgroundColor(btn){
     var module = $(btn).parent().parent().parent();
 

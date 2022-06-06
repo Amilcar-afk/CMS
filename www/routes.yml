@@ -137,3 +137,23 @@ admin/:
   controller: categorie
   action: navigationsList
   middleware: [ 'auth', 'admin' ]
+
+/settings/style:
+  controller: settings
+  action: listStyle
+  middleware : ['auth', 'admin']
+
+/settings/user-manager:
+  controller: settings
+  action: listUser
+  middleware : ['auth', 'admin']
+
+/settings/database:
+  controller: settings
+  action: composeDatabase
+  middleware : ['auth', 'admin']
+
+/settings/media-library:
+  controller: settings
+  action: listMedia
+  middleware : ['auth', 'admin']

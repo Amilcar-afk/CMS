@@ -16,6 +16,10 @@
 		border-radius: var(--radius, 6px);
 	}
 
+	&--on{
+		z-index: 2;
+		position: inherit;
+	}
 
 
 	&--hover{

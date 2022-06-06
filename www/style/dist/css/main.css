@@ -33,6 +33,27 @@ figure {
   position: absolute !important;
   z-index: 5; }
 
+button:focus {
+  outline: 0; }
+
+p:focus {
+  outline: 0; }
+
+h1:focus {
+  outline: 0; }
+
+h2:focus {
+  outline: 0; }
+
+h3:focus {
+  outline: 0; }
+
+h4:focus {
+  outline: 0; }
+
+input:focus {
+  outline: 0; }
+
 a {
   text-decoration: none; }
 
@@ -107,6 +128,64 @@ table {
   border-radius: 15px;
   margin: 0;
   padding: 15px; }
+
+table.dataTable.no-footer {
+  border: none !important; }
+
+thead tr {
+  border: none !important; }
+  thead tr td {
+    border: none !important; }
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+  color: var(--main-color);
+  font-weight: bold; }
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+  color: #333;
+  display: flex; }
+
+.dataTables_filter label {
+  color: #000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important; }
+
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 3px;
+  background-color: #EBEBEB !important;
+  color: #000 !important;
+  transition: all 0.3s;
+  border-radius: var(--radius, 5px) !important;
+  border: none !important;
+  padding: 10px !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important; }
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  border: none !important;
+  background-color: rgba(230, 230, 230, 0.1) !important;
+  color: var(--main-color) !important;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: var(--radius, 10px);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: unset; }
+
+table.dataTable thead th, table.dataTable thead td {
+  padding: 0px !important;
+  border-bottom: unset !important; }
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+  border-top: unset !important; }
+
+table.dataTable tbody th, table.dataTable tbody td {
+  padding: 0px !important; }
+
+table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > tr.odd > * {
+  box-shadow: unset !important; }
 
 tr:last-child {
   border-bottom: solid 4px #E2E2E2;
@@ -1178,6 +1257,10 @@ tr:first-child {
   margin-top: 10px;
   border-radius: var(--radius, 6px); }
 
+.module-list--on, .module--on {
+  z-index: 2;
+  position: inherit; }
+
 .module-list--hover, .module--hover {
   border-radius: var(--radius, 5px);
   top: 0;
@@ -1481,6 +1564,11 @@ tr:first-child {
   .cta-button .material-icons-round {
     margin-right: 8px;
     font-size: 1.25rem; }
+  .cta-button--mains-color--custom {
+    position: relative; }
+    .cta-button--mains-color--custom .sp-container.sp-flat {
+      position: relative;
+      left: 50px; }
   .cta-button--editor-color--selected span {
     border: solid 3px var(--font-color, black); }
   .cta-button--editor-color--custom {
@@ -1573,6 +1661,33 @@ tr:first-child {
     padding: 19px;
     background-color: var(--background-color);
     height: calc(100% - 73px - 1.25rem); }
+  .container-main-content--menu-content {
+    padding-top: 30px;
+    padding: 15px;
+    padding-bottom: 100px;
+    width: calc(100% + 30px);
+    display: unset; }
+    .container-main-content--menu-content header {
+      padding-bottom: 30px; }
+    .container-main-content--menu-content .section-config-blocks {
+      display: flex;
+      margin-bottom: 60px; }
+      .container-main-content--menu-content .section-config-blocks article {
+        display: flex;
+        flex-direction: column;
+        margin-right: 30px; }
+        .container-main-content--menu-content .section-config-blocks article .input-block {
+          width: 145px;
+          height: 110px;
+          border-radius: var(--radius, 5px);
+          margin-bottom: 3px;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #F1F1F1; }
+        .container-main-content--menu-content .section-config-blocks article label {
+          font-size: 0.875rem; }
   .container-main-content--list {
     padding: 30px 0;
     margin: -15px;
@@ -1685,10 +1800,8 @@ tr:first-child {
         margin-bottom: 25px; }
 
 #container-editor {
-  overflow-y: scroll; }
-  #container-editor p, #container-editor h1, #container-editor h2, #container-editor h3, #container-editor h4, #container-editor h5, #container-editor h6 {
-    z-index: 2;
-    position: inherit; }
+  overflow-y: scroll;
+  padding-top: 60px; }
 
 @media (max-width: 992px) {
   .container-main-content {
@@ -1713,8 +1826,14 @@ tr:first-child {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap; }
+          .container-main-content--menu .menu-container nav a:nth-child(odd) {
+            margin-right: 10px; }
+          .container-main-content--menu .menu-container nav a:nth-child(even) {
+            margin-left: 10px; }
           .container-main-content--menu .menu-container nav button:nth-child(odd) {
-            margin-right: 25px; }
+            margin-right: 10px; }
+          .container-main-content--menu .menu-container nav button:nth-child(even) {
+            margin-left: 10px; }
       .container-main-content--menu > button {
         position: absolute;
         top: 27px;
@@ -1920,7 +2039,7 @@ h2 {
     backdrop-filter: blur(60px);
     border-radius: var(--radius, 8px);
     display: flex;
-    right: 0;
+    right: 5px;
     position: absolute;
     top: -55px;
     transition: all 3ms; }
@@ -1958,3 +2077,48 @@ h2 {
   padding: 4px; }
   .sticker--slug {
     background-color: #444; }
+
+.sp-container, .sp-container button, .sp-container input {
+  background: rgba(229, 229, 229, 0.8) !important;
+  box-shadow: 0px 0px 250px rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(60px) !important;
+  border-radius: var(--radius, 5px) !important; }
+  .sp-container .sp-button-container.sp-cf, .sp-container .sp-initial.sp-thumb.sp-cf, .sp-container .sp-input-container.sp-cf, .sp-container button .sp-button-container.sp-cf, .sp-container button .sp-initial.sp-thumb.sp-cf, .sp-container button .sp-input-container.sp-cf, .sp-container input .sp-button-container.sp-cf, .sp-container input .sp-initial.sp-thumb.sp-cf, .sp-container input .sp-input-container.sp-cf {
+    height: 25px;
+    display: flex;
+    justify-content: space-between !important; }
+    .sp-container .sp-button-container.sp-cf .sp-cancel, .sp-container .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container .sp-input-container.sp-cf .sp-cancel, .sp-container button .sp-button-container.sp-cf .sp-cancel, .sp-container button .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container button .sp-input-container.sp-cf .sp-cancel, .sp-container input .sp-button-container.sp-cf .sp-cancel, .sp-container input .sp-initial.sp-thumb.sp-cf .sp-cancel, .sp-container input .sp-input-container.sp-cf .sp-cancel {
+      border-radius: 3px;
+      border: none;
+      background: 0 0;
+      line-height: 1;
+      padding: 0 8px;
+      height: 25px;
+      text-transform: capitalize;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #606c72;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: end; }
+    .sp-container .sp-button-container.sp-cf .sp-choose, .sp-container .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container .sp-input-container.sp-cf .sp-choose, .sp-container button .sp-button-container.sp-cf .sp-choose, .sp-container button .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container button .sp-input-container.sp-cf .sp-choose, .sp-container input .sp-button-container.sp-cf .sp-choose, .sp-container input .sp-initial.sp-thumb.sp-cf .sp-choose, .sp-container input .sp-input-container.sp-cf .sp-choose {
+      color: #fff;
+      margin-left: 5px;
+      color: var(--main-color);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: var(--radius, 10px);
+      border: none;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: unset;
+      font-weight: 500;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border-radius: var(--radius, 10px);
+      background-color: var(--main-color) !important;
+      color: white; }

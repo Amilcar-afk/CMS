@@ -57,6 +57,20 @@ $(document).ready(function(){
         });
     })
 
+    //SHOW COLOR PICKER
+    $(".cta-button--mains-color--custom").click(function () {
+        var $newComponent = $("<input value='' />");
+        $(this).append($newComponent);
+        $newComponent.spectrum({
+            type: "flat",
+            showPalette: false,
+            hideAfterPaletteSelect: true,
+            showInput: true,
+            showInitial: true,
+            showAlpha: false
+        });
+    })
+
     //COLLAPSE
     $(".main-nav-choice[data-wc-target]").click(function (){
         if ($("#" + $(this).data('wc-target')).data('group-collapse') != null){
