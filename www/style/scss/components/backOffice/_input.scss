@@ -1,5 +1,6 @@
 .input-container{
-	margin-bottom: 15px;
+	margin-bottom: 25px;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 
@@ -23,5 +24,12 @@
 		&::placeholder{
 			color: var(--main-color)!important;
 		}
+	}
+
+	.input--error{
+		color: red;
+		position: absolute;
+		bottom: -15px;
+		font-size: 12px;
 	}
 }

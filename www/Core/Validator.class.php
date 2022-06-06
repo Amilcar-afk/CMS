@@ -48,7 +48,7 @@ class Validator
 
 
             if(self::valueEquality($data['password'], $data['passwordConfirm'])){
-                $config['inputs']['password']['error'] = "Password does not match confirmation";
+                $config['inputs']['password']['error'] = "Passwords does not match";
             }
 
             if(isset($input['min']) && $input['max']){
