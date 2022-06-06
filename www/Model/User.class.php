@@ -62,7 +62,7 @@ class User extends BaseSQL
      * @return mixed
      */
 
-    public function getMail(): string
+    public function getMail(): ? string
     {
         return $this->mail;
     }
