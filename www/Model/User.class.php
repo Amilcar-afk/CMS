@@ -61,7 +61,8 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getMail(): string
+
+    public function getMail(): ? string
     {
         return $this->mail;
     }
@@ -77,7 +78,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getPassword(): string
+    public function getPassword(): ? string
     {
         return $this->pwd;
     }
@@ -93,7 +94,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getFirstname(): string
+    public function getFirstname(): ? string
     {
         return $this->firstname;
     }
@@ -109,7 +110,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getLastname(): string
+    public function getLastname(): ? string
     {
         return $this->lastname;
     }
@@ -289,72 +290,77 @@ class User extends BaseSQL
 
         return $this;
     }
+    
     public function getFormRegister(): array
     {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "submit"=>"S'inscrire",
-                "selectename"=>"pays"
-            ],
-            "inputs"=>[
-                    "email"=>[
-                        "question"=>"Email",
-                        "type"=>"email",
-                        "placeholder"=>"Your email",
-                        "name"=>"emailRegister",
-                        "class"=>"input",
-                        "required"=>true,
-                        "error"=>"Email incorrect",
-                        "unicity"=>true,
-                        "min"=>10,
-                        "max"=>255,
-                        "errorUnicity"=>"Email existe déjà en bdd"
-                    ],
-                    "password"=>[
-                        "question"=>"Password",
-                        "type"=>"password",
-                        "placeholder"=>"Your password",
-                        "name"=>"pwdRegister",
-                        "class"=>"input",
-                        "required"=>true,
-                        "min"=>16,
-                        "max"=>60,
-                        "error"=>"Votre mot de passe doit faire entre 8 et 16 et contenir des chiffres et des lettres",
-                    ],
-                    "passwordConfirm"=>[
-                        "question"=>"Confirm password",
-                        "type"=>"password",
-                        "placeholder"=>"Confirm password",
-                        "name"=>"pwdConfirmRegister",
-                        "class"=>"input",
-                        "required"=>true,
-                        "confirm"=>"password",
-                        "error"=>"Votre mot de passe de confirmation ne correspond pas",
-                    ],
-                    "firstname"=>[
-                        "question"=>"Fisrtname",
-                        "type"=>"text",
-                        "placeholder"=>"your Fisrtname",
-                        "name"=>"firstnameRegister",
-                        "class"=>"input",
-                        "min"=>2,
-                        "max"=>50,
-                        "error"=>"Votre prénom n'est pas correct",
-                    ],
-                    "lastname"=>[
-                        "question"=>"Lastname",
-                        "type"=>"text",
-                        "placeholder"=>"Your lastname",
-                        "name"=>"lastnameRegister",
-                        "class"=>"input",
-                        "min"=>2,
-                        "max"=>100,
-                        "error"=>"Votre nom n'est pas correct",
-                    ],
+
+            return [
+                "config"=>[
+                    "method"=>"POST",
+                    "action"=>"",
+                    "submit"=>"S'inscrire",
+                    "selectename"=>"pays"
                 ],
-        ];
+                "inputs"=>[
+                        "email"=>[
+                            "question"=>"Email",
+                            "type"=>"email",
+                            "placeholder"=>"Your email",
+                            "value"=> $this->getMail(),
+                            "name"=>"emailRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "error"=>"",
+                            "unicity"=>true,
+                            "min"=>10,
+                            "max"=>255,
+                            "error"=>""
+                        ],
+                        "password"=>[
+                            "question"=>"Password",
+                            "type"=>"password",
+                            "placeholder"=>"Your password",
+                            "name"=>"pwdRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "min"=>12,
+                            "max"=>60,
+                            "error"=>""
+                        ],
+                        "passwordConfirm"=>[
+                            "question"=>"Confirm password",
+                            "type"=>"password",
+                            "placeholder"=>"Confirm password",
+                            "name"=>"pwdConfirmRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "confirm"=>"password",
+                            "error"=>""
+                        ],
+                        "firstname"=>[
+                            "question"=>"Fisrtname",
+                            "type"=>"text",
+                            "placeholder"=>"your Fisrtname",
+                            "value"=> $this->getFirstname(),
+                            "name"=>"firstnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>50,
+                            "error"=>""
+                        ],
+                        "lastname"=>[
+                            "question"=>"Lastname",
+                            "type"=>"text",
+                            "placeholder"=>"Your lastname",
+                            "value"=> $this->getLastname(),
+                            "name"=>"lastnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>100,
+                            "error"=>""
+                        ],
+                    ],
+            ];
     }
 
 

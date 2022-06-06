@@ -1947,7 +1947,8 @@ h2 {
     backdrop-filter: blur(60px); }
 
 .input-container {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  position: relative;
   display: flex;
   flex-direction: column; }
   .input-container label {
@@ -1968,6 +1969,11 @@ h2 {
     font-weight: 400; }
     .input-container .input::placeholder {
       color: var(--main-color) !important; }
+  .input-container .input--error {
+    color: red;
+    position: absolute;
+    bottom: -15px;
+    font-size: 12px; }
 
 .collapse {
   transition: all 0.5s ease;

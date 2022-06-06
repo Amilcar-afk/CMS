@@ -110,11 +110,13 @@ class Categorie extends BaseSQL
                         [
                             "id"=>"",
                             "value"=>"nav",
+                            "label"=>"nav",
                             "class"=>"",
                         ],
                         [
                             "id"=>"",
                             "value"=>"tag",
+                            "label"=>"tag",
                             "class"=>"",
                         ],
                         

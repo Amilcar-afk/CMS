@@ -3,6 +3,7 @@
         <div class="menu-container">
             <h1 class="title title--main-color">SITE MAP</h1>
             <nav>
+
                 <a href="pages" class="cta-button cta-button--menu main-nav-choice" data-wc-target="pages-container"><span class="material-icons-round">view_quilt</span>My pages</a>
                 <a href="navigations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">dynamic_feed</span>Navigations</a>
                 <a href="categories" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="categories-container"><span class="material-icons-round">tag</span>Categories</a>
@@ -93,10 +94,7 @@
                 <article>
                     <?php  $this->includePartial("form", $categorie->getFormNewCategorie()) ?>
                 </article>
-
             </div>
-
         </section>
     </section>
-
 </section>

@@ -2,10 +2,6 @@ admin/:
   controller: general
   action: home
 
-/me-contacter:
-  controller: general
-  action: contact
-
 /login:
   controller: user
   action: login
@@ -23,55 +19,9 @@ admin/:
   controller: statistics
   action: loadDashboard
 
-/userManagement:
-  controller: admin
-  action: userManagement
-
-/integration:
-  controller: general
-  action: integration
-
 /mailconfirmation:
   controller: user
   action: mailconfirmation
-
-/users_list:
-  controller: user
-  action: usersList
-
-/rdv_calendar:
-  controller: rendezvous
-  action: calendar
-  middleware: ['auth']
-
-
-/rdv_calendar_insert:
-  controller: rendezvous
-  action: insertRdv
-
-/calendar_load:
-  controller: rendezvous
-  action: load
-  middleware: ['auth']
-
-/calendar_delete:
-  controller: rendezvous
-  action: deleteEvent
-
-/rdv_calendar_update:
-  controller: rendezvous
-  action: updateEvent
-
-/public_rdvs_list:
-  controller: rendezvous
-  action: public_rdvs_List
-
-/public_rdvs_reserver:
-  controller: rendezvous
-  action: public_rdvs_reserver
-  params: [id]
-  middleware : ['auth']
-
 
 /user_delete/id:
   controller: user
@@ -138,6 +88,8 @@ admin/:
   action: navigationsList
   middleware: [ 'auth', 'admin' ]
 
+
+
 /settings/style:
   controller: settings
   action: listStyle
@@ -157,3 +109,59 @@ admin/:
   controller: settings
   action: listMedia
   middleware : ['auth', 'admin']
+
+
+/conversations:
+  controller: communication
+  action: listConversation
+  middleware : ['auth']
+
+/meetings:
+  controller: meeting
+  action: listMeeting
+  middleware : ['auth']
+
+/slots:
+  controller: meeting
+  action: listSlot
+  middleware : ['auth']
+
+/projects:
+  controller: communication
+  action: listProject
+  middleware : ['auth']
+
+
+
+/rdv_calendar:
+  controller: rendezvous
+  action: calendar
+  middleware: ['auth']
+
+
+/rdv_calendar_insert:
+  controller: rendezvous
+  action: insertRdv
+
+/calendar_load:
+  controller: rendezvous
+  action: load
+  middleware: ['auth']
+
+/calendar_delete:
+  controller: rendezvous
+  action: deleteEvent
+
+/rdv_calendar_update:
+  controller: rendezvous
+  action: updateEvent
+
+/public_rdvs_list:
+  controller: rendezvous
+  action: public_rdvs_List
+
+/public_rdvs_reserver:
+  controller: rendezvous
+  action: public_rdvs_reserver
+  params: [id]
+  middleware : ['auth']
