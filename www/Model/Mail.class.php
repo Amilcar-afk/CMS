@@ -1,6 +1,5 @@
 <?php
-//C:\Users\AmilcarFernandes\Desktop\esgi\PA\CMS\www\vendor\phpmailer\phpmailer\src\Exception.php
-namespace App\Core;
+namespace App\Model;
 
 use PHPMailer\PHPMailer\PHPMailer as PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -11,13 +10,13 @@ require_once('vendor/phpmailer/phpmailer/src/SMTP.php');
 require_once('vendor/phpmailer/phpmailer/src/Exception.php');
 require_once('vendor/autoload.php');
 
-class ConstructMailer extends PHPMailer
+class Mail extends PHPMailer
 {
-    public function sendEmail($from_email, $from_name, $to_email, $to_name, $subject, $body)
+    public function sendEmail($to_email, $to_name, $subject, $body)
     {
         $mail = new PHPMailer(TRUE);
         try {
-            $mail->setFrom($from_email, $from_name);
+            $mail->setFrom("fernandesamilcar28@gmail.com", "CMS PORTFOLIO");
             $mail->addAddress($to_email, $to_name);
             $mail->Subject = $subject;
             $mail->Body = $body;
@@ -46,5 +45,11 @@ class ConstructMailer extends PHPMailer
         catch (\Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    public function confirmMail($mailAddress, $name){
+        $subject = "Confirmation d'inscription";
+        $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail cliquez ici.";
+        $this->sendEmail($mailAddress, $name, $subject, $message);
     }
 }
