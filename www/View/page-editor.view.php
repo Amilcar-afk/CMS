@@ -10,10 +10,9 @@
                 <?=$page->getStatus()?> . <?=ucfirst($page->getTitle())?>
             </label>
             <footer>
-                <?php if ( empty($page->getSlug())): ?>
+                /<?php if ( empty($page->getSlug())): ?>
                     Home
-                <?php endif;?>
-                <?=$page->getSlug()?>
+                <?php endif;?><?=$page->getSlug()?>
             </footer>
         </div>
         <div class="burger-menu-container">
