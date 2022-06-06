@@ -25,6 +25,21 @@ class User extends BaseSQL
         parent::__construct();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPwd()
+    {
+        return $this->pwd;
+    }
+
+    /**
+     * @param mixed $pwd
+     */
+    public function setPwd($pwd): void
+    {
+        $this->pwd = $pwd;
+    }
 
     /**
      * @return mixed
@@ -46,7 +61,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getEmail(): string
+    public function getMail(): string
     {
         return $this->mail;
     }
@@ -54,7 +69,7 @@ class User extends BaseSQL
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
+    public function setMail($email): void
     {
         $this->mail = strtolower(trim($email));
     }

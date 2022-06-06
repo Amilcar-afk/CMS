@@ -49,7 +49,7 @@
                                     <?=$user->getLastname()?>
                                 </td>
                                 <td>
-                                    <?=$user->getEmail()?>
+                                    <?=$user->getMail()?>
                                 </td>
                                 <td>
 

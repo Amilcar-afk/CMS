@@ -23,13 +23,19 @@ class User{
         if( !empty($_POST)){
             $result = CheckInputs::checkEmail($_POST['email']);
             if($result){
-                $this->user->setEmail($_POST['email']);
-                $sql = "SELECT * FROM cmspf_Users WHERE mail = :email";
-                $resultat = $this->user->select($sql,['email'=>$this->user->getEmail()] );
-                if(!empty($resultat)){
-                    if(password_verify($_POST['password'], $resultat->pwd)){
+                $this->user->setMail($_POST['email']);
+                $user = $this->user->find($this->user->getMail(), "mail");
+                if(!empty($user)){
+                    if(password_verify($_POST['password'], $user->getPwd())){
                         session_start();
-                        $_SESSION['Auth'] = $resultat;
+                        $_SESSION['Auth']->mail = $user->getMail();
+                        $_SESSION['Auth']->lastname = $user->getLastname();
+                        $_SESSION['Auth']->firstname = $user->getFirstname();
+                        $_SESSION['Auth']->id = $user->getId();
+                        $_SESSION['Auth']->token = $user->getToken();
+                        $_SESSION['Auth']->creationDate = $user->getCreationDate();
+                        $_SESSION['Auth']->updateDate = $user->getUpdateDate();
+                        $_SESSION['Auth']->rank = $user->getRank();
                         header('location:/dashboard');
                     }else{
                         echo'mot de passe incorrect';
