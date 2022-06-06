@@ -314,7 +314,6 @@ class User extends BaseSQL
                             "unicity"=>true,
                             "min"=>10,
                             "max"=>255,
-                            "errorUnicity"=>"Email existe déjà en bdd"
                         ],
                         "password"=>[
                             "question"=>"Password",
@@ -325,7 +324,6 @@ class User extends BaseSQL
                             "required"=>true,
                             "min"=>12,
                             "max"=>60,
-                            "error"=>"",
                         ],
                         "passwordConfirm"=>[
                             "question"=>"Confirm password",
@@ -335,7 +333,6 @@ class User extends BaseSQL
                             "class"=>"input",
                             "required"=>true,
                             "confirm"=>"password",
-                            "error"=>"",
                         ],
                         "firstname"=>[
                             "question"=>"Fisrtname",
@@ -346,7 +343,6 @@ class User extends BaseSQL
                             "class"=>"input",
                             "min"=>2,
                             "max"=>50,
-                            "error"=>"",
                         ],
                         "lastname"=>[
                             "question"=>"Lastname",
@@ -357,7 +353,6 @@ class User extends BaseSQL
                             "class"=>"input",
                             "min"=>2,
                             "max"=>100,
-                            "error"=>"",
                         ],
                     ],
             ];
