@@ -61,6 +61,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
+
     public function getMail(): string
     {
         return $this->mail;
@@ -77,7 +78,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getPassword(): string
+    public function getPassword(): ? string
     {
         return $this->pwd;
     }
@@ -93,7 +94,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getFirstname(): string
+    public function getFirstname(): ? string
     {
         return $this->firstname;
     }
@@ -109,7 +110,7 @@ class User extends BaseSQL
     /**
      * @return mixed
      */
-    public function getLastname(): string
+    public function getLastname(): ? string
     {
         return $this->lastname;
     }
@@ -305,6 +306,7 @@ class User extends BaseSQL
                             "question"=>"Email",
                             "type"=>"email",
                             "placeholder"=>"Your email",
+                            "value"=> $this->getMail(),
                             "name"=>"emailRegister",
                             "class"=>"input",
                             "required"=>true,
@@ -339,6 +341,7 @@ class User extends BaseSQL
                             "question"=>"Fisrtname",
                             "type"=>"text",
                             "placeholder"=>"your Fisrtname",
+                            "value"=> $this->getFirstname(),
                             "name"=>"firstnameRegister",
                             "class"=>"input",
                             "min"=>2,
@@ -349,6 +352,7 @@ class User extends BaseSQL
                             "question"=>"Lastname",
                             "type"=>"text",
                             "placeholder"=>"Your lastname",
+                            "value"=> $this->getLastname(),
                             "name"=>"lastnameRegister",
                             "class"=>"input",
                             "min"=>2,

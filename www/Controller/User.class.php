@@ -62,13 +62,15 @@ class User{
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
         if( !empty($_POST)){
+            $this->user->setFirstname($_POST['firstname']);
+            $this->user->setLastname($_POST['lastname']);
+            $this->user->setPassword($_POST['password']);
+            $this->user->setMail($_POST['email']);
+
             $unic_email = $this->user->find($_POST['email'],'mail');
             $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
+            
             if(empty($result)){
-                $this->user->setFirstname($_POST['firstname']);
-                $this->user->setLastname($_POST['lastname']);
-                $this->user->setPassword($_POST['password']);
-                $this->user->setMail($_POST['email']);
                 $this->user->save();
             }
             else{

@@ -2,20 +2,11 @@
 
 namespace App\Core;
 
-use App\Core\CheckInputs;
-use App\Core\BaseSQL;
 
-
-
-class Validator extends BaseSQL
+class Validator 
 {
 
     public static $form_errors;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
 
     public static function run($config, $data, $unicity)
@@ -39,11 +30,23 @@ class Validator extends BaseSQL
 
             if($input["type"]=="password" && self::checkPassword($data[$name])){
                 $input['error']="";
-            }else if($input["type"]=="email"  && !self::checkEmail($data[$name])){
-                $config['inputs']['email']['error'] = "Email incorrect";
-
-
             }
+
+            if($input["type"]=="email" ){
+                if(!self::checkEmail($data[$name])){
+                    $config['inputs']['email']['error'] = "Email incorrect";   
+                }elseif($unicity !== false){
+                    $config['inputs']['email']['error']="this email alreay exist";
+                }
+            }
+
+            if(isset($config['inputs']['slug'])  && $unicity !== false){
+              
+                $config['inputs']['slug']['error']="this slug alreay exist";
+    
+            }
+
+
             if(self::valueEquality($data['password'], $data['passwordConfirm'])){
                 $config['inputs']['password']['error'] = "Password does not match confirmation";
             }
@@ -54,10 +57,6 @@ class Validator extends BaseSQL
                 }
             }
 
-            if($unicity !== false){
-                $config['inputs']['email']['error']="this email alreay exist";
-
-            }
 
             array_push($errors, $config["inputs"][$name]['error'] );
         }
@@ -71,6 +70,7 @@ class Validator extends BaseSQL
         }
 
     }
+
 
 
     public static function size($value, $minSize, $maxSize)
