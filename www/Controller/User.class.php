@@ -20,6 +20,9 @@ class User{
 
     public function login()
     {
+
+ 
+        
         if( !empty($_POST)){
             $result = Validator::checkEmail($_POST['email']);
             if($result){
@@ -36,7 +39,11 @@ class User{
                         $_SESSION['Auth']->creationDate = $user->getCreationDate();
                         $_SESSION['Auth']->updateDate = $user->getUpdateDate();
                         $_SESSION['Auth']->rank = $user->getRank();
-                        header('location:/dashboard');
+                        if(!isset($_SESSION['redirect_url'])){
+                            header('location:/dashboard');
+                        }else{
+                            header('location:'.$_SESSION['redirect_url']);
+                        }
                     }else{
                         echo'mot de passe incorrect';
                     }
