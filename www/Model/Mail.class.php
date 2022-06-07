@@ -22,8 +22,8 @@ class Mail extends PHPMailer
         $this->mail->Host = 'smtp.gmail.com';
         $this->mail->SMTPAuth = TRUE;
         $this->mail->SMTPSecure = 'tls';
-        $this->mail->Username = 'fernandesamilcar28@gmail.com';
-        $this->mail->Password = 'lkgrmrlgeffvqoqt';
+        $this->mail->Username = MAILADDR;
+        $this->mail->Password = MAILPWD;
         $this->mail->Port = 587;
 
         $this->mail->SMTPOptions = array(
@@ -34,7 +34,7 @@ class Mail extends PHPMailer
             )
         );
 
-        $this->mail->setFrom("fernandesamilcar28@gmail.com", "CMS PORTFOLIO");
+        $this->mail->setFrom($this->mail->Username, "CMS PORTFOLIO");
     }
 
     public function sendEmail($to_email, $to_name, $subject, $body)
@@ -54,14 +54,17 @@ class Mail extends PHPMailer
         }
     }
 
-    public function confirmMail($mailAddress, $name){
+    public function confirmMail($mailAddress, $name)
+    {
+        $this->generateToken($mailAddress);
+        $token = $this->token;
         $subject = "Confirmation d'inscription";
-        $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail cliquez ici.";
+        $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href=''>cliquez ici</a>.";
         $this->sendEmail($mailAddress, $name, $subject, $message);
     }
 
-    public function generateToken(): void
+    public function generateToken($mailAddress): void
     {
-        $this->token = str_shuffle(md5(uniqid()));
+        $this->token = str_shuffle(md5(uniqid())) . $mailAddress;
     }
 }
