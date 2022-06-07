@@ -12,32 +12,39 @@ require_once('vendor/autoload.php');
 
 class Mail extends PHPMailer
 {
+    protected $token;
+    protected $mail;
+
+    public function __construct()
+    {
+        $this->mail = new PHPMailer(TRUE);
+        $this->mail->isSMTP();
+        $this->mail->Host = 'smtp.gmail.com';
+        $this->mail->SMTPAuth = TRUE;
+        $this->mail->SMTPSecure = 'tls';
+        $this->mail->Username = 'fernandesamilcar28@gmail.com';
+        $this->mail->Password = 'lkgrmrlgeffvqoqt';
+        $this->mail->Port = 587;
+
+        $this->mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        $this->mail->setFrom("fernandesamilcar28@gmail.com", "CMS PORTFOLIO");
+    }
+
     public function sendEmail($to_email, $to_name, $subject, $body)
     {
-        $mail = new PHPMailer(TRUE);
         try {
-            $mail->setFrom("fernandesamilcar28@gmail.com", "CMS PORTFOLIO");
-            $mail->addAddress($to_email, $to_name);
-            $mail->Subject = $subject;
-            $mail->Body = $body;
+            $this->mail->addAddress($to_email, $to_name);
+            $this->mail->Subject = $subject;
+            $this->mail->Body = $body;
 
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = TRUE;
-            $mail->SMTPSecure = 'tls';
-            $mail->Username = 'fernandesamilcar28@gmail.com';
-            $mail->Password = 'lkgrmrlgeffvqoqt';
-            $mail->Port = 587;
-
-            $mail->SMTPOptions = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
-
-            return $mail->send();
+            return $this->mail->send();
 
         }catch (Exception $e){
             echo $e->errorMessage();
@@ -51,5 +58,10 @@ class Mail extends PHPMailer
         $subject = "Confirmation d'inscription";
         $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail cliquez ici.";
         $this->sendEmail($mailAddress, $name, $subject, $message);
+    }
+
+    public function generateToken(): void
+    {
+        $this->token = str_shuffle(md5(uniqid()));
     }
 }

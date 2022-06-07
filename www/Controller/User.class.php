@@ -75,9 +75,8 @@ class User{
             $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
             
             if(empty($result)){
-                //$this->user->save();
-                var_dump($this->mail->confirmMail($_POST['email'], $_POST['firstname']));
-                exit();
+                $this->user->save();
+                $this->mail->confirmMail($_POST['email'], $_POST['firstname']);
             }
             else{
                 $view->assign("error_from",$result);
