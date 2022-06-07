@@ -145,7 +145,7 @@
 
                 <!--Titles-->
                 <article>
-                    <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                    <?php  $this->includePartial("form", $pageEmpty->getFormNewPage()) ?>
                 </article>
 
             </div>
