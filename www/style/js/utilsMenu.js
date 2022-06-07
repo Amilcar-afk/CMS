@@ -1,12 +1,18 @@
 $(document).ready(function(){
 
+    if ($(".place-menu")){
+        let placeMenu = $(".place-menu").text();
+        $('[data-alt=' + ucFisrt(placeMenu) + ']').addClass('selected');
+    }
+
+
     //ALT BUBBLE
     $(".button-menu").mouseover(function (){
 
         let isAlt = $(".alt-on")[0];
         if ($(isAlt) != undefined){
             if ($(isAlt) == $(this)) {
-                die;
+                return;
             }else {
                 $($(".bubble-alt")[0]).remove();
                 $(isAlt).removeClass("alt-on");
@@ -17,8 +23,20 @@ $(document).ready(function(){
         alt.append('<label>'+ $(this).data("alt") +'</label>');
         $(this).addClass("alt-on");
         $(this).append(alt);
-
     })
+    $(".button-menu").mouseleave(function (){
+        let isAlt = $(".alt-on")[0];
+        if ($(isAlt) != undefined) {
+            setTimeout(function (){
+                $($(".bubble-alt")[0]).remove();
+                $($(".bubble-alt")[0]).animate({
+                    opacity: '0'
+                }, 500);
+                $(isAlt).removeClass("alt-on");
+            }, 500);
+        }
+    })
+
 
     //BURGER MENU
     $(".cta-button--menu-burger").click(function (){
@@ -106,4 +124,8 @@ function callCollapse(btn){
     $("#" + $(btn).data('wc-target')).toggleClass("collapse--open");
 }
 
+function ucFisrt(string){
+    string = string.toLowerCase();
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 

@@ -310,7 +310,6 @@ class User extends BaseSQL
                             "name"=>"emailRegister",
                             "class"=>"input",
                             "required"=>true,
-                            "error"=>"",
                             "unicity"=>true,
                             "min"=>10,
                             "max"=>255,

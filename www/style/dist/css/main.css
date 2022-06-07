@@ -2128,3 +2128,26 @@ h2 {
       border-radius: var(--radius, 10px);
       background-color: var(--main-color) !important;
       color: white; }
+
+.alert {
+  position: absolute;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius, 5px);
+  font-size: 1.25rem;
+  color: var(--main-color);
+  background: rgba(129, 129, 129, 0.6);
+  box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(60px);
+  position: absolute;
+  left: 50%;
+  transform: translateY(-50%);
+  bottom: 50px; }
+  .alert p {
+    min-width: 300px;
+    padding: 10px 60px; }
+  .alert span {
+    font-size: 1.25rem;
+    padding-right: 20px; }

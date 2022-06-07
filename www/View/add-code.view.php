@@ -1,7 +1,7 @@
 <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
-            <h1 class="title title--main-color">SITE MAP</h1>
+            <h1 class="title title--main-color place-menu">SITEMAP</h1>
             <nav>
                 <a href="pages" class="cta-button cta-button--menu main-nav-choice" data-wc-target="pages-container"><span class="material-icons-round">view_quilt</span>My pages</a>
                 <a href="navigations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">dynamic_feed</span>Navigations</a>

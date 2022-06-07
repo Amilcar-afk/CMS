@@ -1,6 +1,6 @@
 <section id="back-office-container">
     <header class="content-header">
-        <h1 class="title title--main-color">DASHBOARD</h1>
+        <h1 class="title title--main-color place-menu">DASHBOARD</h1>
     </header>
 
     <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
