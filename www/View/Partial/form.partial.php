@@ -20,12 +20,13 @@
 
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select name="<?= $name ?>">
-                    <?= (isset($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
+                <select name="<?= $name ?>" class="<?=$input["class"]?>">
+                    <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
-                                 class="<?= $choice['class'] ?>">
+                                 class="<?= $choice['class'] ?>"
+                                <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
                             <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>

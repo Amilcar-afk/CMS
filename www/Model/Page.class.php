@@ -180,7 +180,7 @@ class Page extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"compose",
+                "action"=>"page/compose",
                 "submit"=>"Save"
             ],
             "inputs"=>[
@@ -194,6 +194,7 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>30,
                     "value"=>$this->getTitle(),
+                    "error"=>""
                 ],
                 "status"=>[
                     "question"=>"Visibility",
@@ -203,6 +204,8 @@ class Page extends BaseSQL
                     "required"=>true,
                     "min"=>3,
                     "max"=>16,
+                    "error"=>"",
+                    "value"=>$this->getStatus(),
                     "choices"=>[
                         [
                             "value" => "Public",
@@ -226,6 +229,8 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>16,
                     "value"=>$this->getSlug(),
+                    "unicity"=>true,
+                    "error"=>""
                 ],
                 "description"=>[
                     "question"=>"Description",
@@ -237,6 +242,7 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>100,
                     "value"=>$this->getDescription(),
+                    "error"=>""
                 ]
             ]
 
