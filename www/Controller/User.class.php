@@ -23,7 +23,6 @@ class User{
         if( !empty($_POST)){
             $result = Validator::checkEmail($_POST['email']);
             if($result){
-
                 $this->user->setMail($_POST['email']);
                 $user = $this->user->find($this->user->getMail(), "mail");
                 if(!empty($user)){
