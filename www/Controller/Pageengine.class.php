@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
 use App\Core\Query;
@@ -58,21 +59,23 @@ class Pageengine
     public function composePage()
     {
         if( isset($_POST) )
-
-            //$result = Validator::run($this->page->getFormNewPage(), $_POST);
-            if (isset($_POST['id']))
-                $this->page->setId($_POST['id']);
-
             $this->page->setTitle($_POST['title']);
             $this->page->setSlug($_POST['slug']);
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
             $this->page->setUserKey($_SESSION['Auth']->id);
-            $this->page->save();
+            $unic_page = $this->page->find($_POST['slug'],'slug');
+            if (isset($_POST['id']))
+                $this->page->setId($_POST['id']);
+            $result = Validator::run($this->page->getFormNewPage(), $_POST,$unic_page);
+
+            if(empty($result)){
+                $this->page->save();
+            }
 
         // CREER LA NOUVELLE VIEW
-        $view = new View("page-editor", "back");
-        $view->assign("page",$this->page);
+        //$view = new View("page-editor", "back");
+        //$view->assign("page",$this->page);
     }
 
     public function saveContentPage()
