@@ -96,10 +96,6 @@ $(document).ready(function(){
         getAnimateOneAtTime(this, 'module');
     })
 
-    $(document).on( "click", ".cta-button-a", function () {
-        getAnimate(this);
-    })
-
     $(document).on("click", ".cta-button-back-tool-bar", function () {
         var $elements = $(this).parent().children();
 

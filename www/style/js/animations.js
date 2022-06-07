@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    $(document).on( "click", ".cta-button-a", function () {
+        getAnimate(this);
+    })
+});
+
 function getAnimate(target) {
     if ($("#" + $(target).data('a-target')) != null) {
         if ($("#" + $(target).data('a-target')).hasClass("a-zoom-out-end")) {

@@ -29,6 +29,10 @@ class Validator
 
         foreach ($config["inputs"] as $name => $input){
 
+            if($input["name"] == "id"){
+                continue;
+            }
+
             if(!isset($data[$name])){
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }

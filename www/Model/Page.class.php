@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
+use App\Core\Query;
 use Categorie;
 
 class Page extends BaseSQL
@@ -130,7 +131,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getDescription(): string
+    public function getDescription(): ? string
     {
         return $this->description;
     }
@@ -146,7 +147,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getTitle(): ? string
     {
         return $this->title;
     }
@@ -162,7 +163,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getStatus(): ? string
     {
         return $this->status;
     }
@@ -177,13 +178,30 @@ class Page extends BaseSQL
 
     public function getFormNewPage(): array
     {
+        $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+        foreach($categories as $categories){
+            $categoriesList['choices'][] = [
+                "value" => $categories->getId(),
+                "label" => $categories->getTitle(),
+                "class"=>"input"
+            ];
+        }
+
+
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"page/compose",
-                "submit"=>"Save"
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-page"
             ],
             "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
+                ],
                 "title"=>[
                     "question"=>"Title",
                     "type"=>"text",
@@ -231,6 +249,17 @@ class Page extends BaseSQL
                     "value"=>$this->getSlug(),
                     "unicity"=>true,
                     "error"=>""
+                ],
+                "categorie"=>[
+                    "question"=>"Categorie",
+                    "type"=>"select",
+                    "name"=>"categorie",
+                    "class"=>"input",
+                    "required"=>true,
+                    "min"=>3,
+                    "max"=>16,
+                    "error"=>"",
+                    "choices"=>$categoriesList['choices']
                 ],
                 "description"=>[
                     "question"=>"Description",
