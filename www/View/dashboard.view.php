@@ -15,10 +15,14 @@
 
                         <?php
 
-                            //var_dump($data);
+                            //print_r($data);
                             
                             
-                            //print_r($test);
+                            
+                            // var_dump($test['page-ranking']);
+                            foreach ($test['per-device'] as $row) {
+                                echo $row;
+                            }
 
                         ?>
 
