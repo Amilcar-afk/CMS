@@ -116,6 +116,7 @@ abstract class BaseSQL
      * @param mixed $id
      * @return void
      */
+    
     protected function find($id = null, string $attribut = 'id')
     {
         if( isset($id) ){
@@ -207,27 +208,30 @@ abstract class BaseSQL
      * @param string|null $relation_foreign_key
      * @return array|false
      */
-    protected function belongsToMany( $class, string $relationTable = null, string $owner_key = "id", string $foreign_key = "id", string $relation_foreign_key = null)
+    protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null)
     {
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{
             $targetTable = DBPREFIXE.($class).'s';
         }
+        $relation_target_key = lcfirst($class)."_key";
+
         if (!isset($relation_foreign_key)){
             $relation_foreign_key = lcfirst($this->class)."_key";
         }
-
-        //$sql = "SELECT * FROM cmspf_Categories WHERE id IN ( SELECT cmspf_Page_categorie.id FROM cmspf_Page_categorie INNER JOIN cmspf_Pages ON cmspf_Page_categorie.page_key = cmspf_Pages.id WHERE cmspf_Pages.id = 1)"
-        $sql = "SELECT * FROM ".$targetTable." WHERE ".$foreign_key." IN ( SELECT ".$relationTable.".id FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_key." WHERE ".$this->table.".".$owner_key." = :".$owner_key.")";
+        
+        //$sql = "SELECT * FROM cmspf_Categories WHERE id IN ( SELECT cmspf_Page_categorie.categorie_key FROM cmspf_Page_categorie INNER JOIN cmspf_Pages ON cmspf_Page_categorie.page_key = cmspf_Pages.id WHERE cmspf_Pages.id = 1)"
+        $sql = "SELECT * FROM ".$targetTable." WHERE ".$target_id_name." IN ( SELECT ".$relationTable.".".$relation_target_key." FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_id_name." WHERE ".$this->table.".".$owner_id_name." = :".$owner_id_name.")";
         $param = [
-            $owner_key => $this->id
+            $owner_id_name => $this->id
         ];
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
+    
 
     /**
      * @param PDO $db

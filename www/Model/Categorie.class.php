@@ -2,20 +2,39 @@
 
 
 namespace App\Model;
-
+use Page;
 use App\Core\BaseSQL;
+
+use App\Core\Query;
 
 
 class Categorie extends BaseSQL
 {
     public $id = null;
     protected $type;
+    protected $title;
+
+    /**
+     * @return mixed
+     */
+    public function getTitle(): ? string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
   
 
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getId(): ? int
     {
         return $this->id;
     }
@@ -56,27 +75,16 @@ class Categorie extends BaseSQL
         parent::save();
     }
 
-    public function deleteCategorie ($params)
+    public function delete($params)
     {
         return parent::delete($params);
 
     }
 
-    public function getAllCategories($sql)
+    public function pages()
     {
-        return parent::findAllData($sql);
-
+        return parent::belongsToMany(Page::class, 'cmspf_Page_categorie');
     }
-
-    // public function getCategorie()
-    // {
-    //     return parent::find();
-    // }
-
-    // public function getCategories($id)
-    // {
-    //     return parent::find($id);
-    // }
 
     public function find($id = null, string $attribut = 'id')
     {
@@ -84,76 +92,34 @@ class Categorie extends BaseSQL
     }
 
 
-
-    public function categorieUpdateForm(): array
+    public function getFormNewCategorie(): array
     {
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
                 "submit"=>"valider",
+                "cta"=>"cta-button-compose-categorie"
             ],
- 
             "inputs"=>[
-
                 "id"=>[
                     "type"=>"hidden",
-                    "label"=>"",
-                    "id"=>"id",
-                    "placeholder"=>"",
-                    "question"=>"",
-                    "class"=>"inputRegister",
-                    "value"=> $this->getId(),
-                    ],
-                "type"=>[
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
+                ],
+                "title"=>[
+                    "question"=>"Title",
                     "type"=>"text",
-                    "label"=>"type",
-                    "question"=>"",
-                    "placeholder"=>"",
-                    "id"=>"type",
-                    "class"=>"type",
+                    "placeholder"=>"Title",
+                    "name"=>"title",
+                    "class"=>"input",
                     "required"=>true,
-                    "value"=> $this->getType(),
-                ],
-            ]
-        ];
-    }
-
-    public function getCategorieForm (): array
-    {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "submit"=>"valider",
-            ],
- 
-            "inputs"=>[
-     
-                "type"=>[
-                    "type"=>"select",
-                    "question"=>"nav",
-                    "choices"=>[
-                        [
-                            "id"=>"",
-                            "value"=>"nav",
-                            "class"=>"",
-                        ],
-                        [
-                            "id"=>"",
-                            "value"=>"tag",
-                            "class"=>"",
-                        ],
-                        
-                    ],
-                    "placeholder"=>"Le type ...",
-                    "label"=>"type",
-                    "id"=>"type",
-                    "class"=>"type",
-                    "required"=>true,
-                    "error"=>"type incorrect",
-                    "unicity"=>true,
-                ],
+                    "min"=>3,
+                    "max"=>30,
+                    "value"=>$this->getTitle(),
+                    "error"=>""
+                ]
             ],
             
         ];

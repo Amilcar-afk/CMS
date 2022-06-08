@@ -1,12 +1,12 @@
 <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
-            <h1 class="title title--main-color">SITE MAP</h1>
+            <h1 class="title title--main-color place-menu">SITEMAP</h1>
             <nav>
-                <button class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="pages-container"><span class="material-icons-round">view_quilt</span>My pages</button>
-                <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">dynamic_feed</span>Navigations</button>
-                <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="categories-container"><span class="material-icons-round">tag</span>Categories</button>
-                <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="add-code-container"><span class="material-icons-round">code</span>Add code</button>
+                <a href="pages" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="pages-container"><span class="material-icons-round">view_quilt</span>My pages</a>
+                <a href="navigations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">dynamic_feed</span>Navigations</a>
+                <a href="categories" class="cta-button cta-button--menu main-nav-choice" data-wc-target="categories-container"><span class="material-icons-round">tag</span>Categories</a>
+                <a href="add-code" class="cta-button cta-button--menu main-nav-choice" data-wc-target="add-code-container"><span class="material-icons-round">code</span>Add code</a>
             </nav>
         </div>
         <section class="collapse-parent">
@@ -35,27 +35,27 @@
                         <table>
                             <tbody>
                             <?php foreach ($pages as $page):?>
-                                <tr class="table-line">
-                                    <td>
-                                        <?php if ($page->getSlug() == ""): ?>
-                                            <span class="material-icons-round">home</span>
-                                        <?php endif;?>
-                                        <h4><?= ucfirst($page->getTitle()) ?></h4>
-                                        <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
-                                        <h4>
+                                <?php if ($page->getStatus() == 'Public'): ?>
+                                    <tr class="table-line">
+                                        <td>
+                                            <?php if ($page->getSlug() == ""): ?>
+                                                <span class="material-icons-round">home</span>
+                                            <?php endif;?>
+                                            <h4><?= ucfirst($page->getTitle()) ?></h4>
+                                            <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
                                             <?php foreach ($page->categories() as $categorie):?>
                                                 <?php if($categorie->getType() == 'tag'): ?>
-                                                <label class="sticker sticker">#<?= $categorie->getType()?></label>
+                                                    <label class="sticker">#<?= $categorie->getTitle()?></label>
                                                 <?php endif;?>
                                             <?php endforeach;?>
-                                        </h4>
-                                    </td>
-                                    <td>
-                                        <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
-                                        <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
-                                        <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
+                                            <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
+                                            <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        </td>
+                                    </tr>
+                                <?php endif;?>
                             <?php endforeach;?>
                             </tbody>
                         </table>
@@ -66,58 +66,50 @@
                 <!--Draft-->
                 <article>
                     <header class="main-nav-choice" data-wc-target="draft-pages-elements">
-                        <h2>Darft</h2>
+                        <h2>Draft</h2>
                         <span class="material-icons-round">more_horiz</span>
                     </header>
                     <div id="draft-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="page-manager-container">
 
+                        <table>
+                            <tbody>
+                            <?php foreach ($pages as $page):?>
+                                <?php if ($page->getStatus() == 'Draft'): ?>
+                                    <tr class="table-line">
+                                        <td>
+                                            <?php if ($page->getSlug() == ""): ?>
+                                                <span class="material-icons-round">home</span>
+                                            <?php endif;?>
+                                            <h4><?= ucfirst($page->getTitle()) ?></h4>
+                                            <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
+                                            <h4>
+                                                <?php foreach ($page->categories() as $categorie):?>
+                                                    <?php if($categorie->getType() == 'tag'): ?>
+                                                        <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                    <?php endif;?>
+                                                <?php endforeach;?>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
+                                            <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
+                                            <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        </td>
+                                    </tr>
+                                <?php endif;?>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
 
                     </div>
                 </article>
 
-            </div>
-            <div id="navigations-container" class="collapse" data-group-collapse="section-container">
-                <header>
-                    <h1 class="title title--black">NAVIGATIONS</h1>
-                </header>
-
-                <article>
-
-                </article>
-            </div>
-            <div id="categories-container" class="collapse" data-group-collapse="section-container">
-                <header>
-                    <h1 class="title title--black">CATEGORIES</h1>
-                </header>
-
-                <article>
-
-                </article>
-            </div>
-            <div id="add-code-container" class="collapse" data-group-collapse="section-container">
-                <header>
-                    <h1 class="title title--black">ADD CODE</h1>
-                    <p>You can add some code in the head and in the footer. This can be useful if you want to use for example external trackers for your website.</p>
-                </header>
-
-                <article>
-                    <div>
-                        <div class="input-container">
-                            <h2>Header</h2>
-                            <textarea class="input" placeholder="<head> add code here... </head>" rows="16"></textarea>
-                        </div>
-                        <div class="input-container">
-                            <h2>Footer</h2>
-                            <textarea class="input" placeholder="<footer> add code here... </footer>" rows="16"></textarea>
-                        </div>
-                    </div>
-                </article>
             </div>
         </section>
     </section>
 
     <?php foreach ($pages as $page):?>
-        <!-- add page form -->
+        <!-- update page form -->
         <section id="container-setting-page-<?=$page->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
             <button id="cta-button-close-container-setting-page-<?=$page->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">close</span></button>
             <div class="menu-container">
@@ -153,7 +145,7 @@
 
                 <!--Titles-->
                 <article>
-                    <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                    <?php  $this->includePartial("form", $pageEmpty->getFormNewPage()) ?>
                 </article>
 
             </div>

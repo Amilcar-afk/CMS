@@ -1,6 +1,6 @@
 <section id="back-office-container">
     <header class="content-header">
-        <h1 class="title title--main-color">DASHBOARD</h1>
+        <h1 class="title title--main-color place-menu">DASHBOARD</h1>
     </header>
 
     <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
@@ -15,10 +15,14 @@
 
                         <?php
 
-                            //var_dump($data);
+                            //print_r($data);
                             
                             
-                            //print_r($test);
+                            
+                            // var_dump($test['page-ranking']);
+                            foreach ($test['per-device'] as $row) {
+                                echo $row;
+                            }
 
                         ?>
 

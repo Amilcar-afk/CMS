@@ -1,13 +1,13 @@
+
 <form method="<?= $config["config"]["method"]??"POST" ?>"
-      action="<?= $config["config"]["action"]??"" ?>"
+    <?= (isset($config["action"]))?'action="'.$config["config"]["action"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
     <?php foreach ($config["inputs"] as $name=>$input):?>
 
-
-        <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
-            <p><?=$input["question"]?></p>
-            <?php foreach ($input["choices"] as $choice):?>
-                <div class="input-container">
+        <div  <?= (isset($input["type"]) && $input["type"] == "hidden")?'':'class="input-container"' ?>>
+            <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
+                <p><?=$input["question"]?></p>
+                <?php foreach ($input["choices"] as $choice):?>
                     <input name="<?=$name?>"
                            id="<?=$name?>"
                            type="<?=$input["type"]?>"
@@ -17,27 +17,23 @@
                         <?= (isset($choice["required"]))?'required="required"':'' ?>
                     >
                     <label for="<?=$name?>" ><?=$choice["label"]?></label>
-                </div>
-            <?php endforeach;?>
-            <br>
+                <?php endforeach;?>
 
-        <?php elseif ($input["type"] == "select"):?>
-            <div class="input-container">
+            <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select name="<?= $name ?>">
-                    <?= (isset($input["question"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
+                <select name="<?= $name ?>" class="<?=$input["class"]?>">
+                    <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
-                                 class="<?= $choice['class'] ?>">
+                                 class="<?= $choice['class'] ?>"
+                                <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
                             <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
                 </select>
-            </div>
 
-        <?php elseif ($input["type"] == "textarea"):?>
-            <div class="input-container">
+            <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>
                 <textarea name="<?= $name ?>"
                           rows="<?= $input["rows"] ?>"
@@ -49,21 +45,26 @@
                           <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
                           <?= (isset($input["required"]))?'required="required"':'' ?>
                 ><?= (isset($input["value"]))? $input["value"] :'' ?></textarea>
-            </div>
-        <?php else:?>
-            <div class="input-container">
-                <label for="<?=$name?>"><?=$input["question"]?></label>
+            <?php else:?>
+                <?php if (isset($input["question"])):?>
+                    <label for="<?=$name?>"><?=$input["question"]?></label>
+                <?php endif;?>
                 <input name="<?=$name?>"
                        id="<?=$name?>"
                        type="<?=$input["type"]?>"
-                       class="<?=$input["class"]?>"
+                    <?= (isset($input["class"]))?'class="'.$input["class"].'"':'' ?>
                     <?= (isset($input["placeholder"]))?'placeholder="'.$input["placeholder"].'"':'' ?>
                     <?= (isset($input["value"]))?'value="'.$input["value"].'"':'' ?>
                     <?= (isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
                     <?= (isset($input["required"]))?'required="required"':'' ?>
                 >
-            </div>
-        <?php endif;?>
+            <?php endif;?>
+            <p class="input--error"><?= (isset($input["error"]))?$input["error"]:'' ?></p>
+        </div>
     <?php endforeach;?>
-    <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
+    <?php if (isset($config["action"])):?>
+        <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
 </form>
+    <?php else:?>
+        <button class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Valider" ?></button>
+    <?php endif;?>

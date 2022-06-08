@@ -2,10 +2,6 @@ admin/:
   controller: general
   action: home
 
-/me-contacter:
-  controller: general
-  action: contact
-
 /login:
   controller: user
   action: login
@@ -23,21 +19,119 @@ admin/:
   controller: statistics
   action: loadDashboard
 
-/userManagement:
-  controller: admin
-  action: userManagement
-
-/integration:
-  controller: general
-  action: integration
-
 /mailconfirmation:
   controller: user
   action: mailconfirmation
 
-/users_list:
+/user_delete/id:
   controller: user
-  action: usersList
+  action: deleteUser
+
+
+/pageloader:
+  controller: pageengine
+  action: pageLoader
+  params: [ slug ]
+
+/pages:
+  controller: pageengine
+  action: listPage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/build:
+  controller: pageengine
+  action: buildPage
+  params: [ slug ]
+
+/build/save:
+  controller: pageengine
+  action: saveContentPage
+  middleware : ['auth', 'admin']
+
+/page/compose:
+  controller: pageengine
+  action: composePage
+  params: [id]
+  middleware : ['auth', 'admin']
+
+/page/delete:
+  controller: pageengine
+  action: deletePage
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/add-code:
+  controller: pageengine
+  action: listAddCode
+  middleware: [ 'auth', 'admin' ]
+
+/categorie/compose:
+  controller: categorie
+  action: composeCategorie
+  params: [id]
+  middleware : ['auth', 'admin']
+
+/categorie/delete:
+  controller: categorie
+  action: categoriedelete
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/categories:
+  controller: categorie
+  action: categoriesList
+  middleware: [ 'auth', 'admin' ]
+
+/navigations:
+  controller: categorie
+  action: navigationsList
+  middleware: [ 'auth', 'admin' ]
+
+
+
+/settings/style:
+  controller: settings
+  action: listStyle
+  middleware : ['auth', 'admin']
+
+/settings/user-manager:
+  controller: settings
+  action: listUser
+  middleware : ['auth', 'admin']
+
+/settings/database:
+  controller: settings
+  action: composeDatabase
+  middleware : ['auth', 'admin']
+
+/settings/media-library:
+  controller: settings
+  action: listMedia
+  middleware : ['auth', 'admin']
+
+
+/conversations:
+  controller: communication
+  action: listConversation
+  middleware : ['auth']
+
+/meetings:
+  controller: meeting
+  action: listMeeting
+  middleware : ['auth']
+
+/slots:
+  controller: meeting
+  action: listSlot
+  middleware : ['auth']
+
+/projects:
+  controller: communication
+  action: listProject
+  middleware : ['auth']
+
+
 
 /rdv_calendar:
   controller: rendezvous
@@ -71,56 +165,3 @@ admin/:
   action: public_rdvs_reserver
   params: [id]
   middleware : ['auth']
-
-
-/user_delete/id:
-  controller: user
-  action: deleteUser
-
-
-/pageloader:
-  controller: pageengine
-  action: pageLoader
-  params: [ slug ]
-
-/page:
-  controller: pageengine
-  action: listPage
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]
-
-/build:
-  controller: pageengine
-  action: buildPage
-  params: [ slug ]
-
-/page/compose:
-  controller: pageengine
-  action: composePage
-  params: [id]
-  middleware : ['auth', 'admin']
-
-/page/delete:
-  controller: pageengine
-  action: deletePage
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]
-
-
-/categorie/compose:
-  controller: categorie
-  action: composeCategorie
-  params: [id]
-  middleware : ['auth', 'admin']
-
-/categorie/delete:
-  controller: categorie
-  action: categoriedelete
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]
-
-/categories:
-  controller: categorie
-  action: categoriesList
-  params: [ id ]
-  middleware: [ 'auth', 'admin' ]

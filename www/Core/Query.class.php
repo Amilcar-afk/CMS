@@ -12,12 +12,12 @@ class Query extends BaseSQL
     private static $order;
     private static $limit;
     private static $params = [];
+    private static $class;
 
     public function __construct()
     {
         parent::__construct();
         $this->pdo = parent::getPdo();
-        $this->class = parent::getClass();
     }
 
     public static function __callStatic($method, $arguments)
@@ -26,26 +26,28 @@ class Query extends BaseSQL
         return call_user_func_array([$query, $method], $arguments);
     }
 
-    public function from(string $table, ?string $alias = null): self
+
+    public function from(string $table, ?string $alias = null)
     {
         if ($alias){
-            self::$from[$alias] = $table;
+             self::$from[$alias] = $table;
         }else {
-            self::$from[] = $table;
+             self::$from[] = $table;
         }
-        return self;
+
+         return (new Query);
     }
 
     public function select(string ...$fields): self
     {
         self::$select = $fields;
-        return self;
+        return (new Query);
     }
 
     public function where(string ...$condition): self
     {
         self::$where = array_merge(self::$where, $condition);
-        return self;
+        return (new Query);
     }
 
     public function count(string ...$condition): int
@@ -57,7 +59,7 @@ class Query extends BaseSQL
     public function params(array $params): self
     {
         self::$params = $params;
-        return self;
+        return (new Query);
     }
 
     public function __toString()
@@ -93,13 +95,12 @@ class Query extends BaseSQL
         return join(', ', $from);
     }
 
-    public function execute()
+    public function execute($model)
     {
-        $query = self::__toString();
-        $statement = self::$pdo->prepare($query);
+        $query = $this->__toString();
+        $statement = $this->pdo->prepare($query);
         $statement->execute();
-        //return $this->class;
-        return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\Page");
+        return $statement->fetchAll(\PDO::FETCH_CLASS,"App\Model\\".$model);
     }
 
 }

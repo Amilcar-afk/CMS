@@ -1,0 +1,27 @@
+.alert{
+	position: absolute;
+	z-index: 8;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius, 5px);
+	font-size: rem(20);
+	color: var(--main-color);
+	background: rgba(129, 129, 129, 0.6);
+	box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
+	backdrop-filter: blur(60px);
+	position: absolute;
+	left: 50%;
+	transform: translateY(-50%);
+	bottom: 50px;
+
+	p{
+		min-width: 300px;
+		padding: 10px 60px;
+		font-size: rem(20);
+	}
+	span{
+		font-size: rem(20);
+		padding-right: 20px;
+	}
+}

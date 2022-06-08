@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    $(document).on( "click", ".cta-button-a", function () {
+        getAnimate(this);
+    })
+});
+
 function getAnimate(target) {
     if ($("#" + $(target).data('a-target')) != null) {
         if ($("#" + $(target).data('a-target')).hasClass("a-zoom-out-end")) {
@@ -15,9 +21,9 @@ function getAnimateOneAtTime(target, classTarget) {
     if ($("#" + $(target).data('a-target')) != null) {
 
         if ($("."+ classTarget + " .a-zoom-in")[0] != null) {
-            $("."+ classTarget + " .a-zoom-in")[0].data('a-target').removeClass("a-zoom-in");
-            $("."+ classTarget + " .a-zoom-in")[0].data('a-target').addClass("a-zoom-out");
-            delay(299).then(() => callZoomOutEnd($("."+ classTarget, "a-zoom-in")[0].data('a-target')));
+            $($($("."+ classTarget + " .a-zoom-in")[0]).data('a-target')).toggleClass("a-zoom-in");
+            $($($("."+ classTarget + " .a-zoom-in")[0]).data('a-target')).addClass("a-zoom-out");
+            delay(299).then(() => callZoomOutEnd($($("."+ classTarget, "a-zoom-in")[0]).data('a-target')));
         }
 
         if ($("#" + $(target).data('a-target')).hasClass("a-zoom-out-end")) {

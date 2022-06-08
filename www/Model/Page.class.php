@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
+use App\Core\Query;
 use Categorie;
 
 class Page extends BaseSQL
@@ -15,6 +16,24 @@ class Page extends BaseSQL
     protected $status;
     protected $slug;
     protected $user_key;
+    protected $content;
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
 
     /**
      * Page constructor.
@@ -112,7 +131,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getDescription(): string
+    public function getDescription(): ? string
     {
         return $this->description;
     }
@@ -128,7 +147,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getTitle(): ? string
     {
         return $this->title;
     }
@@ -144,7 +163,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getStatus(): ? string
     {
         return $this->status;
     }
@@ -159,13 +178,42 @@ class Page extends BaseSQL
 
     public function getFormNewPage(): array
     {
+        /*$categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+        foreach($categories as $categories){
+            $categoriesList['choices'][] = [
+                "value" => $categories->getId(),
+                "label" => $categories->getTitle(),
+                "class"=>"input"
+            ];
+        }
+
+        "categorie"=>[
+            "question"=>"Categorie",
+            "type"=>"select",
+            "name"=>"categorie",
+            "class"=>"input",
+            "required"=>true,
+            "min"=>3,
+            "max"=>16,
+            "error"=>"",
+            "choices"=>$categoriesList['choices']
+        ],*/
+
+
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"page/compose",
-                "submit"=>"Save"
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-page"
             ],
             "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
+                ],
                 "title"=>[
                     "question"=>"Title",
                     "type"=>"text",
@@ -173,6 +221,10 @@ class Page extends BaseSQL
                     "name"=>"title",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>30,
+                    "value"=>$this->getTitle(),
+                    "error"=>""
                 ],
                 "status"=>[
                     "question"=>"Visibility",
@@ -180,6 +232,10 @@ class Page extends BaseSQL
                     "name"=>"status",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>16,
+                    "error"=>"",
+                    "value"=>$this->getStatus(),
                     "choices"=>[
                         [
                             "value" => "Public",
@@ -200,6 +256,11 @@ class Page extends BaseSQL
                     "placeholder"=>"Page slug",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>16,
+                    "value"=>$this->getSlug(),
+                    "unicity"=>true,
+                    "error"=>""
                 ],
                 "description"=>[
                     "question"=>"Description",
@@ -208,6 +269,10 @@ class Page extends BaseSQL
                     "name"=>"description",
                     "class"=>"input",
                     "required"=>true,
+                    "min"=>3,
+                    "max"=>100,
+                    "value"=>$this->getDescription(),
+                    "error"=>""
                 ]
             ]
 

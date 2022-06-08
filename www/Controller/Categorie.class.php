@@ -3,12 +3,11 @@
 namespace App\Controller;
 use App\Core\View;
 use App\Model\Categorie as Categorie_model;
-
+use App\Core\Query;
 
 class Categorie{
 
     public $categorie;
-    public $authAdmin ;
 
     public function __construct()
     {
@@ -18,10 +17,20 @@ class Categorie{
 
     public function categoriesList()
     {
-        $allCategories = $this->categorie->find();
-        $view = new View("categorielist", "back-sandbox");
-        $view->assign("categories",$allCategories);
+        $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+        $view = new View("categorie-list", "back");
+        $view->assign("categories",$categories);
+        $view->assign("categorie",$this->categorie);
+
     }
+
+    public function navigationsList()
+    {
+        $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
+        $view = new View("navigation-list", "back");
+        $view->assign("navigations",$navigations);
+    }
+
 
     public function composeCategorie($id)
     {

@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
 use App\Core\Query;
@@ -10,11 +11,11 @@ use App\Core\Query;
 class Pageengine
 {
     public $page;
+
     public function __construct()
     {
         $this->page = new Page();
     }
-
 
 
     public function deletePage(){
@@ -30,30 +31,22 @@ class Pageengine
             $page->composeStats($page->getId(), "view");
 
             $view = new View("load-page", "front");
-            $view->assign("page", $page);
+            $view->assign("page", $page );
         }else{
-            echo "error 404";
+            http_response_code(404);
         }
 
     }
 
     public function listPage(){
-
-        //$pages = $this->page->find();
-        $pages = Query::from('cmspf_Pages')->execute();
-
-
-        //$pages = (new Query())->from('cmspf_Pages')->execute();
-        //echo $pages;
-        //echo "<pre>";
-        //print_r($pages);
-        //echo "</pre>";
+        $pageEmpty = $this->page;
+        $pages = $this->page->find();
         $view = new View("page-list", "back");
         $view->assign("pages", $pages);
+        $view->assign("pageEmpty", $pageEmpty);
     }
 
     public function buildPage($request){
-
 
         $page = $this->page->find($request['slug'], 'slug');
 
@@ -61,27 +54,67 @@ class Pageengine
             $view = new View("page-editor", "back");
             $view->assign("page", $page);
         }else {
-            echo "error 404";
+            http_response_code(404);;
         }
     }
 
     public function composePage()
     {
-        if( isset($_POST) )
-
-            //$result = Validator::run($this->page->getFormNewPage(), $_POST);
-            if (isset($_POST['id']))
-                $this->page->setId($_POST['id']);
-
+        if( isset($_POST) ) {
             $this->page->setTitle($_POST['title']);
-            $this->page->setSlug($_POST['slug']);
+            $this->page->setSlug(str_replace(' ', '-', strtolower(trim($_POST['slug']))));
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
             $this->page->setUserKey($_SESSION['Auth']->id);
-            $this->page->save();
+            if (isset($_POST['id']) && $_POST['id'] != null) {
+                if (!$this->page->find($_POST['id'])){
+                    return include "View/Partial/form.partial.php";
+                }
+                $this->page->setId($_POST['id']);
+                $unic_page = Query::from('cmspf_Pages')
+                    ->where("slug = '" . $_POST['slug'] . "'")
+                    ->where("id = " . $_POST['id'] . "")
+                    ->execute('Page');
+            }else{
+                $unic_page = $this->page->find($_POST['slug'], 'slug');
+            }
+            $config = Validator::run($this->page->getFormNewPage(), $_POST, $unic_page);
 
-        // CREER LA NOUVELLE VIEW
-        $view = new View("page-editor", "back");
-        $view->assign("page",$this->page);
+            if (empty($config)) {
+                $this->page->save();
+
+                $pageEmpty = $this->page;
+                $pages = $this->page->find();
+                $view = new View("page-list");
+                $view->assign("pages", $pages);
+                $view->assign("pageEmpty", $pageEmpty);
+            } else {
+                return include "View/Partial/form.partial.php";
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function saveContentPage()
+    {
+        if( isset($_POST)
+            && isset($_POST['id'])
+            && isset($_POST['content']) )
+
+            $this->page->setId($_POST['id']);
+            $this->page->setContent($_POST['content']);
+            $this->page->save();
+    }
+
+    public function listAddCode(){
+        //$pages = $this->page->find();;
+
+        $view = new View("add-code", "back");
+        //$view->assign("pages", $pages);
+    }
+
+    public function composeAddCode(){
+
     }
 }
