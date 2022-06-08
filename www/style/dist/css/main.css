@@ -219,6 +219,9 @@ tr:first-child {
   margin-right: 20px;
   /* change border color to blue to match the background */ }
 
+.section-module {
+  padding: 20px; }
+
 @media (max-width: 992px) {
   .body-back-office {
     position: relative;
@@ -2025,8 +2028,14 @@ h2 {
   position: relative;
   height: min-content; }
 
+.section-module {
+  position: relative;
+  height: min-content; }
+  .section-module--on {
+    z-index: 2; }
+
 .editable-module {
-  z-index: 1;
+  z-index: -1;
   position: absolute;
   display: flex;
   flex-direction: column;
