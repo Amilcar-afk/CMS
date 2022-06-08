@@ -29,7 +29,7 @@
             <div class="col-4 col-md-6 col-sm-6">
                 <section class="card card--background-main-color">
                     <button>
-                        <i class="material-icons-round">more_vert</i>
+                        <span class="material-icons-round">more_vert</span>
                     </button>
                     <div id="chartdiv"></div>
                     <header>
@@ -50,7 +50,7 @@
             <div class="col-2 col-md-6 col-sm-6">
                 <section class="card card--bottom card--background-main-color">
                     <header>
-                        <i class="material-icons-round material-icons--big-icon">edit</i>
+                        <span class="material-icons-round">edit</span>
                         <h3>Newsletter</h3>
                     </header>
                 </section>
@@ -61,7 +61,7 @@
                     <header>
                         <h3>Page ranking</h3>
                         <button>
-                            <i class="material-icons-round">more_vert</i>
+                            <span class="material-icons-round">more_vert</span>
                         </button>
                     </header>
                     <div class="table-container">
@@ -142,15 +142,15 @@
                     <header>
                         <h3>Session week</h3>
                         <button>
-                            <i class="material-icons-round">chevron_left</i>
-                            <i class="material-icons-round">chevron_right</i>
+                            <span class="material-icons-round">chevron_left</span>
+                            <span class="material-icons-round">chevron_right</span>
                         </button>
                     </header>
                     <canvas id="chartBar"></canvas>
                 </section>
 
                 <section class="card card--smallcard card--background-color">
-                    <div class="edge"><i class="material-icons-round">add</i></div>
+                    <div class="edge"><span class="material-icons-round">add</span></div>
                     <div class="edge-container">
                         <div class="edge"><img src='../style/images/linkedin.png' /></div>
                         <p>1</p>
