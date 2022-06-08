@@ -131,16 +131,13 @@ abstract class BaseSQL
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
-            // $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared->execute($param);
             return $queryPrepared->fetchObject("App\Model\\".$this->class);
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
-            // $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared = self::$bdd->prepare($sql);
-
             $queryPrepared->execute($param);
             return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class);
         }

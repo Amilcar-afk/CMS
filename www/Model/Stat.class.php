@@ -47,7 +47,7 @@ class Stat extends BaseSQL
      */
     public function getDate()
     {
-        return $this->email;
+        return $this->date;
     }
 
     /**

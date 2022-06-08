@@ -14,16 +14,9 @@
                         <h3>New users</h3>
 
                         <?php
-
-                            //print_r($data);
-                            
-                            
-                            
-                            // var_dump($test['page-ranking']);
-                            foreach ($test['per-device'] as $row) {
-                                echo $row;
+                            foreach($data as $e){
+                                echo $e->getDate().'<br>';
                             }
-
                         ?>
 
                     </header>

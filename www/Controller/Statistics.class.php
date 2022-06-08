@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\View;
-use App\Model\Stat as Stat;
+use App\Model\Stats as Stat;
 
 class Statistics
 {
@@ -21,29 +21,9 @@ class Statistics
 
     public function loadDashboard() {
 
-        // $data = $this->stats->find();
-        $sql = "SELECT * FROM cmspf_Stats order by id";
-        $data = $this->stats->loadStats($sql);
-        
-        foreach ($data as $row) {
-            $test = array(
-                'page-ranking' => [
-                    "page" => $row->page_key,
-                    "date" => $row->date
-                ],
-                'per-device' => [
-                    "device" => $row->device,
-                    "date" => $row->date
-                ]
-            );
-        }
-        
-
-
-        // VIEW
+        $data = $this->stats->loadStats();
         $view = new View("dashboard", "back");
-        // $view->assign("data", $data);
-        $view->assign("test", $test);
+        $view->assign("data", $data);
 
     }
 
