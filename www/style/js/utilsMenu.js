@@ -88,19 +88,19 @@ $(document).ready(function(){
             showAlpha: false
         });
     })
-
-    //COLLAPSE
-    $(document).on("click", ".main-nav-choice[data-wc-target]", function (){
-        if ($("#" + $(this).data('wc-target')).data('group-collapse') != null){
-            if($(".collapse--open[data-group-collapse='"+$("#" + $(this).data('wc-target')).data('group-collapse')+"']")[0]){
-                callCollapse($("[data-wc-target='"+$(".collapse--open[data-group-collapse='"+$("#" + $(this).data('wc-target')).data('group-collapse')+"']")[0].id+"']")[0]);
-                delay(250).then(() => callCollapse(this));
-                return;
-            }
-        }
-        callCollapse(this);
-    })
 });
+
+//COLLAPSE
+$(document).on("click", ".main-nav-choice[data-wc-target]", function (){
+    if ($("#" + $(this).data('wc-target')).data('group-collapse') != null){
+        if($(".collapse--open[data-group-collapse='"+$("#" + $(this).data('wc-target')).data('group-collapse')+"']")[0]){
+            callCollapse($("[data-wc-target='"+$(".collapse--open[data-group-collapse='"+$("#" + $(this).data('wc-target')).data('group-collapse')+"']")[0].id+"']")[0]);
+            delay(250).then(() => callCollapse(this));
+            return;
+        }
+    }
+    callCollapse(this);
+})
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
