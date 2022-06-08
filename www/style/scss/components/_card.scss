@@ -9,6 +9,18 @@
     padding: 20px;
     overflow: hidden;
     margin: 19px;
+
+    &--bottom{
+        display: flex;
+        justify-content: end;
+
+        header{
+            .material-icons-round {
+                font-size: rem(46)!important;
+                line-height: rem(56)!important;
+            }
+        }
+    }
     
     & button {
         border: none;
@@ -19,16 +31,16 @@
         padding: 0;
         cursor: pointer;
     }
-    & i {
+
+    & .material-icons-round {
         color: #FFFFFF;
-        font-size: rem(35);
     }
 
     & header {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-        &  h4,i {
+        &  h4, .material-icons-round {
             margin: 0;
             font-style: normal;
             font-weight: bold;
@@ -39,7 +51,7 @@
             letter-spacing: 0.05em;
             color: #FFFFFF;
         }
-        & h3 {
+        & h3, .material-icons-round {
             margin: 0;
             font-style: normal;
             font-weight: 900;
@@ -74,7 +86,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        & i {
+        & .material-icons-round {
             font-size: rem(60);
         }
         & img {
@@ -93,7 +105,7 @@
             flex-direction: row !important;
             justify-content: space-between !important;
             align-self: stretch !important;
-            & h3, i {
+            & h3, .material-icons-round {
                 color: #396075 !important;
             }
         }
@@ -102,7 +114,7 @@
         //height: 152px !important;
         background: rgba(57, 96, 117, 0.5) !important;
         flex-direction: row;
-        align-items: flex-start;
+        //align-items: flex-start;
     }
     #chartBar{
         max-width: 100%;
@@ -111,8 +123,8 @@
     // charts
 
     & #chartDonut {
-        height: 88%!important;
-        width: unset!important;
+        //height: 88%!important;
+        //width: unset!important;
         margin-bottom: 30px;
     }
 }
@@ -124,7 +136,7 @@
         margin: 9px;
         padding: 15px;
 
-        & i {
+        & .material-icons-round {
             color: #FFFFFF;
             font-size: rem(32);
         }
@@ -133,7 +145,7 @@
             display: flex;
             flex-direction: column;
             align-self: flex-start;
-            &  h4,i {
+            &  h4, .material-icons-round {
                 margin: 0;
                 font-style: normal;
                 font-weight: bold;
@@ -144,7 +156,7 @@
                 letter-spacing: 0.05em;
                 color: #FFFFFF;
             }
-            & h3 {
+            & h3, .material-icons-round {
                 margin: 0;
                 font-style: normal;
                 font-weight: 900;

@@ -2,14 +2,68 @@ $(document).ready(function(){
     const fontSizeSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 20, 22, 24, 26, 28, 32, 34, 36, 38, 40, 42, 46, 48, 50, 64];
     //editor.document.designMode = "on";
 
+    //EDITOR BAR FOR SECTION MODULE
+    $(document).on( "click", ".section-module-ok",function(e) {
+
+        if (e.target !== this) {
+            return;
+        }
+
+        if ($(this).attr('data-a-target') == 'editable-module'){
+            return;
+        }
+
+        if ($("#editable-module") && $($('[data-a-target="editable-module"]')[0]) != $(this)){
+            $($('[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
+            $("#editable-module").remove();
+        }
+
+        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+            $(this).removeAttr('contenteditable');
+            $(this).removeClass("module--on");
+        });
+
+        $(this).addClass('section-module--on');
+        $(this).attr('data-a-target', 'editable-module');
+
+        var $editorToolBar = '<div id="editable-module" contenteditable="false" class="editable-module a-zoom-out-end">\n' +
+            '                    <nav class="editable-module--tool-bar">\n' +
+            '                        <button class="cta-button cta-button--icon cta-button-resize">\n' +
+            '                            <span class="material-icons-round">transform</span>\n' +
+            '                        </button>\n' +
+            '                        <button class="cta-button cta-button--icon cta-button-tab">\n' +
+            '                            <span class="material-icons-round">keyboard_tab</span>\n' +
+            '                        </button>\n' +
+            '                        <button class="cta-button cta-button--icon cta-button-wrap">\n' +
+            '                            <span class="material-icons-round">keyboard_return</span>\n' +
+            '                        </button>\n' +
+            '                        <button class="cta-button cta-button--icon cta-button-background-color">\n' +
+            '                            <span class="material-icons-round">format_paint</span>\n' +
+            '                        </button>\n' +
+            '                        <button class="cta-button cta-button--icon cta-button-delete-module">\n' +
+            '                            <span class="material-icons-round">delete</span>\n' +
+            '                        </button>\n' +
+            '                    </nav>\n' +
+            '                    <div class="editable-module editable-module--border">\n' +
+            '                    </div>\n' +
+            '                    <nav class="editable-module--footer-nav">\n' +
+            '                       <button class="cta-button cta-button--icon cta-button-a" data-a-target="container-main-content--component-list">\n' +
+            '                            <span class="material-icons-round">add</span>\n' +
+            '                        </button>\n' +
+            '                    </nav>\n' +
+            '                </div>';
+
+        $(this).prepend($editorToolBar);
+    });
+
     //add editor tool bar for model
     $(document).on( "click", ".module", function () {
 
         if ($(this).attr('data-a-target') == 'editable-module'){
             return;
         }
-        if ($("#editable-module") && $($('.module[data-a-target="editable-module"]')[0]) != $(this)){
-            $($('.module[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
+        if ($("#editable-module") && $($('[data-a-target="editable-module"]')[0]) != $(this)){
+            $($('[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
             $("#editable-module").remove();
         }
 
@@ -21,10 +75,9 @@ $(document).ready(function(){
             $(this).removeClass("module--on");
         });
 
-        $(this).find('p, h1, h2, h3, h4, h5, h6').each(function() {
-            $(this).attr('contenteditable', 'true');
-            $(this).addClass("module--on");
-        });
+        $(this).attr('contenteditable', 'true');
+        $(this).addClass("module--on");
+
         /*var classList = $(module).attr('class').split(/\s+/);
         $.each(classList, function(index, item) {
             if (item === 'someClass') {
@@ -42,7 +95,7 @@ $(document).ready(function(){
 
         $(this).attr('data-a-target', 'editable-module');
 
-        var $editorToolBar = '<div id="editable-module" class="editable-module a-zoom-out-end">\n' +
+        var $editorToolBar = '<div id="editable-module" contenteditable="false" class="editable-module a-zoom-out-end">\n' +
             '                    <nav class="editable-module--tool-bar">\n' +
             '                        <button class="cta-button cta-button--icon cta-button-resize">\n' +
             '                            <span class="material-icons-round">transform</span>\n' +
@@ -95,9 +148,8 @@ $(document).ready(function(){
     $(document).on( "click", ".module", function () {
         getAnimateOneAtTime(this, 'module');
     })
-
-    $(document).on( "click", ".cta-button-a", function () {
-        getAnimate(this);
+    $(document).on( "click", ".section-module-ok", function () {
+        getAnimateOneAtTime(this, 'section-module-ok');
     })
 
     $(document).on("click", ".cta-button-back-tool-bar", function () {
@@ -145,7 +197,7 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-offset-less", function () {
         let offset = getModuleOffset(this);
         if (offset > 0) {
-            if ($($(this).parent().parent().parent()).toggleClass("col-offset-" + offset)){
+            if ($($(this).parent().parent().parent()).hasClass("col-offset-" + offset)){
                 $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
             }
             offset--;
@@ -157,7 +209,7 @@ $(document).ready(function(){
     $(document).on( "click", ".cta-button-offset-more", function () {
         let offset = getModuleOffset(this);
         if (offset < 11) {
-            if ($($(this).parent().parent().parent()).toggleClass("col-offset-" + offset)){
+            if ($($(this).parent().parent().parent()).hasClass("col-offset-" + offset)){
                 $($(this).parent().parent().parent()).toggleClass("col-offset-" + offset);
             }
             offset++;
@@ -313,34 +365,34 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-font-size-less", function () {
         let fontSize = getModuleFontSize(this);
         if (fontSize > 1) {
-            if ($($(this).parent().parent().parent().children(":last")).hasClass("fs-" + fontSize)){
-                $($(this).parent().parent().parent().children(":last")).toggleClass("fs-" + fontSize);
+            if ($($(this).parent().parent().parent()).hasClass("fs-" + fontSize)){
+                $($(this).parent().parent().parent()).toggleClass("fs-" + fontSize);
             }
             fontSize = fontSizeSet.indexOf(fontSize)
             fontSize--;
             fontSize = fontSizeSet[fontSize];
             printActionToolBar(this, fontSize);
-            $($(this).parent().parent().parent().children(":last")).addClass("fs-" + fontSize);
+            $($(this).parent().parent().parent()).addClass("fs-" + fontSize);
         }
     })
     //font-size more component
     $(document).on( "click", ".cta-button-font-size-more", function () {
         let fontSize = getModuleFontSize(this);
         if (fontSize < 65) {
-            if ($($(this).parent().parent().parent().children(":last")).hasClass("fs-" + fontSize)){
-                $($(this).parent().parent().parent().children(":last")).toggleClass("fs-" + fontSize);
+            if ($($(this).parent().parent().parent()).hasClass("fs-" + fontSize)){
+                $($(this).parent().parent().parent()).toggleClass("fs-" + fontSize);
             }
             fontSize = fontSizeSet.indexOf(fontSize)
             fontSize++;
             fontSize = fontSizeSet[fontSize];
             printActionToolBar(this, fontSize);
-            $($(this).parent().parent().parent().children(":last")).addClass("fs-" + fontSize);
+            $($(this).parent().parent().parent()).addClass("fs-" + fontSize);
         }
     })
 
     //align component
     $(document).on( "click", ".cta-button-align", function () {
-        var module = $($(this).parent().parent().parent().find(":last"));
+        var module = $($(this).parent().parent().parent());
         if ($(module).hasClass('text-center')){
             $(this).html('<span class="material-icons-round">format_align_right</span>');
             $(module).toggleClass('text-center');
@@ -378,8 +430,21 @@ $(document).ready(function(){
 
     //add component
     $(".module-list").click(function () {
-        var $newComponent = $( "<article class='module'>"+$(this).html()+"</article>" );
-        $newComponent.addClass($(this).attr("class"));
+        /*var $newComponent = $( "<article class='module'>"+$(this).html()+"</article>" );
+        $newComponent.addClass($(this).attr("class"));*/
+
+        if ($(this).hasClass('section-module')) {
+            var $newComponent = $("<article>" + $(this).html() + "</article>");
+            var classList = $(this).attr('class').split(/\s+/);
+            $.each(classList, function (index, item) {
+                $newComponent.addClass(item);
+            });
+            $newComponent.addClass('section-module');
+            $newComponent.addClass('section-module-ok');
+            $newComponent.addClass('row');
+        }else {
+            var $newComponent = $( $(this).html() );
+        }
         $newComponent.removeClass('module-list');
         $newComponent.addClass('col-6');
         $($newComponent.find('.module--hover')[0]).remove();
@@ -414,7 +479,6 @@ $(document).ready(function(){
         });
     })
 });
-
 
 function cleanEditToolBar(elementToKeep){
     $(elementToKeep).addClass("selected");
@@ -499,7 +563,7 @@ function getModuleOffset(btn){
 }
 
 function getModuleFontSize(btn){
-    var moduldeContent = $(btn).parent().parent().parent().children(":last");
+    var moduldeContent = $(btn).parent().parent().parent();
 
     if ($(moduldeContent).hasClass('fs-1')){
         return 1;

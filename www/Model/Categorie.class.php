@@ -17,7 +17,7 @@ class Categorie extends BaseSQL
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getTitle(): ? string
     {
         return $this->title;
     }
@@ -34,7 +34,7 @@ class Categorie extends BaseSQL
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getId(): ? int
     {
         return $this->id;
     }
@@ -75,7 +75,7 @@ class Categorie extends BaseSQL
         parent::save();
     }
 
-    public function deleteCategorie ($params)
+    public function delete($params)
     {
         return parent::delete($params);
 
@@ -97,38 +97,29 @@ class Categorie extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
                 "submit"=>"valider",
+                "cta"=>"cta-button-compose-categorie"
             ],
- 
             "inputs"=>[
-     
-                "type"=>[
-                    "type"=>"select",
-                    "question"=>"nav",
-                    "choices"=>[
-                        [
-                            "id"=>"",
-                            "value"=>"nav",
-                            "label"=>"nav",
-                            "class"=>"",
-                        ],
-                        [
-                            "id"=>"",
-                            "value"=>"tag",
-                            "label"=>"tag",
-                            "class"=>"",
-                        ],
-                        
-                    ],
-                    "placeholder"=>"Le type ...",
-                    "label"=>"type",
-                    "id"=>"type",
-                    "class"=>"type",
-                    "required"=>true,
-                    "error"=>"type incorrect",
-                    "unicity"=>true,
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
                 ],
+                "title"=>[
+                    "question"=>"Title",
+                    "type"=>"text",
+                    "placeholder"=>"Title",
+                    "name"=>"title",
+                    "class"=>"input",
+                    "required"=>true,
+                    "min"=>3,
+                    "max"=>30,
+                    "value"=>$this->getTitle(),
+                    "error"=>""
+                ]
             ],
             
         ];

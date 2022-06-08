@@ -219,6 +219,9 @@ tr:first-child {
   margin-right: 20px;
   /* change border color to blue to match the background */ }
 
+.section-module {
+  padding: 20px; }
+
 @media (max-width: 992px) {
   .body-back-office {
     position: relative;
@@ -957,6 +960,12 @@ tr:first-child {
   padding: 20px;
   overflow: hidden;
   margin: 19px; }
+  .card--bottom {
+    display: flex;
+    justify-content: end; }
+    .card--bottom header .material-icons-round {
+      font-size: 2.875rem !important;
+      line-height: 3.5rem !important; }
   .card button {
     border: none;
     outline: none;
@@ -965,14 +974,13 @@ tr:first-child {
     align-self: flex-end;
     padding: 0;
     cursor: pointer; }
-  .card i {
-    color: #FFFFFF;
-    font-size: 2.1875rem; }
+  .card .material-icons-round {
+    color: #FFFFFF; }
   .card header {
     display: flex;
     flex-direction: column;
     align-self: flex-start; }
-    .card header h4, .card header i {
+    .card header h4, .card header .material-icons-round {
       margin: 0;
       font-style: normal;
       font-weight: bold;
@@ -982,7 +990,7 @@ tr:first-child {
       align-items: center;
       letter-spacing: 0.05em;
       color: #FFFFFF; }
-    .card header h3 {
+    .card header h3, .card header .material-icons-round {
       margin: 0;
       font-style: normal;
       font-weight: 900;
@@ -1013,7 +1021,7 @@ tr:first-child {
     display: flex;
     align-items: center;
     justify-content: center; }
-    .card .edge i {
+    .card .edge .material-icons-round {
       font-size: 3.75rem; }
     .card .edge img {
       width: 45px;
@@ -1026,31 +1034,28 @@ tr:first-child {
       flex-direction: row !important;
       justify-content: space-between !important;
       align-self: stretch !important; }
-      .card--bigcard header h3, .card--bigcard header i {
+      .card--bigcard header h3, .card--bigcard header .material-icons-round {
         color: #396075 !important; }
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
-    flex-direction: row;
-    align-items: flex-start; }
+    flex-direction: row; }
   .card #chartBar {
     max-width: 100%; }
   .card #chartDonut {
-    height: 88% !important;
-    width: unset !important;
     margin-bottom: 30px; }
 
 @media (max-width: 992px) {
   .card {
     margin: 9px;
     padding: 15px; }
-    .card i {
+    .card .material-icons-round {
       color: #FFFFFF;
       font-size: 2rem; }
     .card header {
       display: flex;
       flex-direction: column;
       align-self: flex-start; }
-      .card header h4, .card header i {
+      .card header h4, .card header .material-icons-round {
         margin: 0;
         font-style: normal;
         font-weight: bold;
@@ -1060,7 +1065,7 @@ tr:first-child {
         align-items: center;
         letter-spacing: 0.05em;
         color: #FFFFFF; }
-      .card header h3 {
+      .card header h3, .card header .material-icons-round {
         margin: 0;
         font-style: normal;
         font-weight: 900;
@@ -2025,8 +2030,14 @@ h2 {
   position: relative;
   height: min-content; }
 
+.section-module {
+  position: relative;
+  height: min-content; }
+  .section-module--on {
+    z-index: 2; }
+
 .editable-module {
-  z-index: 1;
+  z-index: -1;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -2147,7 +2158,8 @@ h2 {
   bottom: 50px; }
   .alert p {
     min-width: 300px;
-    padding: 10px 60px; }
+    padding: 10px 60px;
+    font-size: 1.25rem; }
   .alert span {
     font-size: 1.25rem;
     padding-right: 20px; }
