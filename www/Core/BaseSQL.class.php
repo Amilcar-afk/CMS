@@ -16,7 +16,6 @@ abstract class BaseSQL
      */
     public function getPdo(): \PDO
     {
-        // return $this->pdo;
         return self::$bdd ;
 
     }
@@ -78,9 +77,9 @@ abstract class BaseSQL
 
         }
 
-        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute($columns);
-        $lastInsertd = $this->pdo->lastInsertId();
+        $lastInsertd = self::$bdd->lastInsertId();
         $this->setLastId($lastInsertd );
     }
 
@@ -111,7 +110,7 @@ abstract class BaseSQL
     {
         if( !is_null($this->getId()) ){
             $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
-            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared->execute();
 
         }else{
@@ -132,14 +131,14 @@ abstract class BaseSQL
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
-            // $queryPrepared = $this->pdo->prepare($sql);
+            // $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared->execute($param);
             return $queryPrepared->fetchObject("App\Model\\".$this->class);
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
-            // $queryPrepared = $this->pdo->prepare($sql);
+            // $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared = self::$bdd->prepare($sql);
 
             $queryPrepared->execute($param);
@@ -171,7 +170,6 @@ abstract class BaseSQL
             $foreign_key => $this->id
         ];
 
-        // $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared = self::$bdd->prepare($sql);
 
         $queryPrepared->execute($param);
@@ -210,7 +208,6 @@ abstract class BaseSQL
             $owner_key => $this->$foreign_key
         ];
 
-        // $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared = self::$bdd->prepare($sql);
 
         $queryPrepared->execute($param);
@@ -244,7 +241,6 @@ abstract class BaseSQL
             $owner_id_name => $this->id
         ];
 
-        // $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared = self::$bdd->prepare($sql);
 
         $queryPrepared->execute($param);
