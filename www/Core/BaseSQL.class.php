@@ -9,28 +9,38 @@ abstract class BaseSQL
     private $table;
     private $class;
     private $lastInsertId;
+    private static $bdd;
 
     /**
      * @return \PDO
      */
     public function getPdo(): \PDO
     {
-        return $this->pdo;
+        // return $this->pdo;
+        return self::$bdd ;
+
     }
+
+    private static function getBdd()
+    {
+        if(self::$bdd === null){
+
+            try{
+                self::$bdd = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
+                self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            }catch(\Exception $e){
+                die("Erreur SQL".$e->getMessage());
+            }
+
+        }
+        return self::$bdd;
+    }       
 
     public function __construct()
     {
-        //remplacer par singleton
-        try{
-            $this->pdo = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
-            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        }catch(\Exception $e){
-            die("Erreur SQL".$e->getMessage());
-        }
-
+        self::getBdd();
         $class = explode("\\",get_called_class());
         $this->class = end($class);
-
         if(isset($this->table_name)){
             $this->table = DBPREFIXE.$this->table_name;
         }else{
@@ -122,13 +132,16 @@ abstract class BaseSQL
         if( isset($id) ){
             $sql = "SELECT * FROM ".$this->table." WHERE ".$attribut." = :".$attribut;
             $param = [ $attribut=> $id ];
-            $queryPrepared = $this->pdo->prepare($sql);
+            // $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared->execute($param);
             return $queryPrepared->fetchObject("App\Model\\".$this->class);
         }else{
             $sql = "SELECT * FROM ".$this->table;
             $param = [];
-            $queryPrepared = $this->pdo->prepare($sql);
+            // $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared = self::$bdd->prepare($sql);
+
             $queryPrepared->execute($param);
             return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$this->class);
         }
@@ -158,7 +171,9 @@ abstract class BaseSQL
             $foreign_key => $this->id
         ];
 
-        $queryPrepared = $this->pdo->prepare($sql);
+        // $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared = self::$bdd->prepare($sql);
+
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
@@ -195,7 +210,9 @@ abstract class BaseSQL
             $owner_key => $this->$foreign_key
         ];
 
-        $queryPrepared = $this->pdo->prepare($sql);
+        // $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared = self::$bdd->prepare($sql);
+
         $queryPrepared->execute($param);
         return $queryPrepared->fetchObject("App\Model\\".$class);
     }
@@ -227,7 +244,9 @@ abstract class BaseSQL
             $owner_id_name => $this->id
         ];
 
-        $queryPrepared = $this->pdo->prepare($sql);
+        // $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared = self::$bdd->prepare($sql);
+
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
@@ -241,7 +260,7 @@ abstract class BaseSQL
      */
     function findOneData( string $sql, $params) {
 
-        $statement = $this->pdo->prepare($sql);
+        $statement = self::$bdd->prepare($sql);
         if($statement) {
             $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
             if($success) {
@@ -262,7 +281,7 @@ abstract class BaseSQL
      */
 
     function findAllData(string $sql, array $params= null) {
-        $statement = $this->pdo->prepare($sql);
+        $statement = self::$bdd->prepare($sql);
         if($statement) {
             $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
             if($success) {
