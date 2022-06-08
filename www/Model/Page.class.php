@@ -178,7 +178,7 @@ class Page extends BaseSQL
 
     public function getFormNewPage(): array
     {
-        $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+        /*$categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
         foreach($categories as $categories){
             $categoriesList['choices'][] = [
                 "value" => $categories->getId(),
@@ -186,6 +186,18 @@ class Page extends BaseSQL
                 "class"=>"input"
             ];
         }
+
+        "categorie"=>[
+            "question"=>"Categorie",
+            "type"=>"select",
+            "name"=>"categorie",
+            "class"=>"input",
+            "required"=>true,
+            "min"=>3,
+            "max"=>16,
+            "error"=>"",
+            "choices"=>$categoriesList['choices']
+        ],*/
 
 
         return [
@@ -249,17 +261,6 @@ class Page extends BaseSQL
                     "value"=>$this->getSlug(),
                     "unicity"=>true,
                     "error"=>""
-                ],
-                "categorie"=>[
-                    "question"=>"Categorie",
-                    "type"=>"select",
-                    "name"=>"categorie",
-                    "class"=>"input",
-                    "required"=>true,
-                    "min"=>3,
-                    "max"=>16,
-                    "error"=>"",
-                    "choices"=>$categoriesList['choices']
                 ],
                 "description"=>[
                     "question"=>"Description",
