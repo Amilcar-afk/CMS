@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Rdv as rdvModel;
 use App\Model\User_rdv as User_rdv;
@@ -19,11 +20,6 @@ class RendezVous{
         $this->user_rdv = new User_rdv();
     }
 
-    public function calendar()
-    {
-        $view = new View("rendezvous", "back");
-
-    }
 
     public function load()
     {
@@ -57,51 +53,6 @@ class RendezVous{
 
 
 
-    public function insertRdv()
-    {
-        if(isset($_POST['start'])){
-            //insert pour la table Rdvs
-            $this->rdv->setTitle('titre');
-            $this->rdv->setStartDate($_POST['start']);
-            $this->rdv->setEndDate($_POST['end']);
-            $this->rdv->setStatus(1);
-            $this->rdv->setLocation('location');
-            $this->rdv->setDescription('desc');
-            $this->rdv->setRdv_step_key(1);
-            $this->rdv->save();
-            //insert pour la table User_rdv
-            $lastId = $this->rdv->getLastId();
-            if($lastId){
-                $userId = $_SESSION['Auth']->id;
-                $this->user_rdv->setType(1);
-                $this->user_rdv->setUser_key($userId);
-                $this->user_rdv->setRdv_key($lastId);
-                $this->user_rdv->save();
-            }
-        }
-    }
-
-
-    public function deleteEvent()
-    {
-        if(isset($_POST['id']))
-        {
-            $id = $_POST['id'];
-            $this->rdv->deleteEvent($this->rdv->setId($id));
-        }
-    }
-
-    public function updateEvent()
-    {
-        if(isset($_POST['id']))
-        {
-            $this->rdv->setId($_POST['id']);
-            $this->rdv->setEndDate($_POST['end']);
-            $this->rdv->setStartDate($_POST['start']);
-            $this->rdv->setRdv_step_key(1);
-            $this->rdv->save();
-        }
-    }
 
 
     public function public_rdvs_List()

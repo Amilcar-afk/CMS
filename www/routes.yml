@@ -116,52 +116,34 @@ admin/:
   action: listConversation
   middleware : ['auth']
 
-/meetings:
-  controller: meeting
-  action: listMeeting
-  middleware : ['auth']
-
-/slots:
-  controller: meeting
-  action: listSlot
-  middleware : ['auth']
-
 /projects:
   controller: communication
   action: listProject
   middleware : ['auth']
 
 
-
-/rdv_calendar:
-  controller: rendezvous
-  action: calendar
-  middleware: ['auth']
-
-
-/rdv_calendar_insert:
-  controller: rendezvous
-  action: insertRdv
-
-/calendar_load:
-  controller: rendezvous
-  action: load
-  middleware: ['auth']
-
-/calendar_delete:
-  controller: rendezvous
-  action: deleteEvent
-
-/rdv_calendar_update:
-  controller: rendezvous
-  action: updateEvent
-
-/public_rdvs_list:
-  controller: rendezvous
-  action: public_rdvs_List
-
-/public_rdvs_reserver:
-  controller: rendezvous
-  action: public_rdvs_reserver
-  params: [id]
+/meetings:
+  controller: meeting
+  action: listRdv
   middleware : ['auth']
+
+/meeting/compose:
+  controller: meeting
+  action: composeMeeting
+  middleware: ['auth']
+
+/slots:
+  controller: meeting
+  action: listSlot
+  middleware : ['auth', 'admin']
+
+/slot/compose:
+  controller: meeting
+  action: composeSlot
+  middleware: ['auth', 'admin']
+
+/meeting/delete:
+  controller: meeting
+  action: deleteRdv
+  middleware : ['auth']
+
