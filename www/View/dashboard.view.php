@@ -11,7 +11,7 @@
                 <section class="card card--bottom  card--background-main-color">
                     <header>
                         <h4>6</h4>
-                        <h3>New users</h3>
+                        <h3>New users of the month</h3>
 
                         <?php
                             foreach($data as $e){

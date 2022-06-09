@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\View;
-use App\Model\Stats as Stat;
+use App\Model\Stat;
 
 class Statistics
 {
