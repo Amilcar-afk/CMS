@@ -41,7 +41,7 @@ abstract class BaseSQL
         $class = explode("\\",get_called_class());
         $this->class = end($class);
         if(isset($this->table_name)){
-            $this->table = DBPREFIXE.$this->table_name;
+            $this->table = $this->table_name;
         }else{
             $classExploded = explode("\\",get_called_class());
             $this->table = DBPREFIXE.(end($classExploded)).'s';
