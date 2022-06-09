@@ -227,6 +227,7 @@
       padding: 5px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
+      padding-bottom: calc(1.875rem + 90px);
     }
 
     &--menu {
@@ -276,7 +277,7 @@
       & > section {
         padding: 27px 40px;
         border-radius: 0px;
-
+        padding-bottom: calc(1.875rem + 90px);
       }
     }
 
