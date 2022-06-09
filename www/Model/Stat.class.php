@@ -3,7 +3,7 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 
-class Stats extends BaseSQL
+class Stat extends BaseSQL
 {
 
     protected $id = null;
