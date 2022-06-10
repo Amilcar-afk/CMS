@@ -64,12 +64,12 @@ abstract class BaseSQL
         }
         $columns = array_filter($columns);
 
-        if( !is_null($this->getId()) ){
+        if( !is_null($this->getLastId()) ){
             foreach ($columns as $key=>$value){
                     $setUpdate[]=$key."=:".$key;
             }
             $sql = "UPDATE ".$this->table." SET ".implode(",",$setUpdate).
-            " WHERE id=".$this->getId();
+            " WHERE id=".$this->getLastId();
 
         }else{
             $sql = "INSERT INTO ".$this->table." (".implode(",", array_keys($columns)).")

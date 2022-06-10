@@ -4,6 +4,12 @@
     </header>
 
     <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
+
+        <?php
+/*        echo '<pre>';
+        var_dump($sortedData);
+        echo '</pre>';
+        */?>
         <div class="row">
 
 
@@ -11,12 +17,16 @@
                 <section class="card card--bottom  card--background-main-color">
                     <header>
                         <h4>6</h4>
-                        <h3>New users</h3>
+                        <h3>New users of the month</h3>
 
                         <?php
-                            foreach($data as $e){
-                                echo $e->getDate().'<br>';
-                            }
+                            // foreach($data as $e){
+                            //     echo $e->getDate().'<br>';
+                            //     echo $e->getDevice().'<br>';
+                            // }
+
+
+                            
                         ?>
 
                     </header>
@@ -24,13 +34,26 @@
             </div>
 
             <div class="col-4 col-md-6 col-sm-6">
-                <section class="card card--background-main-color">
-                    <button>
+                <section id="per-country-container" class="card card--background-main-color">
+                    <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
                     </button>
-                    <div id="chartdiv"></div>
+
+                    <canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>
+
+                    <div id="range-per-country" class="collapse" data-group-collapse="per-country-container">
+                        <div class="input-container">
+                            <label for="SincePerCountry">Since</label>
+                            <input id="SincePerCountry" name="SincePerCountry" type="date" class="input">
+                        </div>
+                        <div class="input-container">
+                            <label for="toPerCountry">To</label>
+                            <input id="toPerCountry" name="toPerCountry" type="date" class="input">
+                        </div>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-country">Submit</button>
+                    </div>
                     <header>
-                        <h3>Sessions per country</h3>
+                        <h3>Per country</h3>
                     </header>
                 </section>
             </div>
@@ -54,14 +77,15 @@
             </div>
 
             <div class="col-4 col-md-6 col-sm-12">
-                <section class="card card--bigcard card--background-color">
+                <section id="per-page-container" class="card card--bigcard card--background-color">
                     <header>
                         <h3>Page ranking</h3>
-                        <button>
+                        <button class="main-nav-choice" data-wc-target="range-per-page">
                             <span class="material-icons-round">more_vert</span>
                         </button>
                     </header>
-                    <div class="table-container">
+
+                    <div id="chart-per-page" class="table-container collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
                         <table>
                             <tbody>
                             <tr>
@@ -122,26 +146,51 @@
                             Show More
                         </button>
                     </div>
+
+                    <div id="range-per-page" class="collapse" data-group-collapse="per-page-container">
+                        <div class="input-container">
+                            <label for="SincePerPage">Since</label>
+                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
+                        </div>
+                        <div class="input-container">
+                            <label for="toPerPage">To</label>
+                            <input id="toPerPage" name="toPerPage" type="date" class="input">
+                        </div>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-page">Submit</button>
+                    </div>
+
                 </section>
             </div>
 
             <div class="col-4 col-md-6 col-sm-12">
-                <section class="card card--bigcard card--background-color">
+                <section id="per-device-container" class="card card--bigcard card--background-color">
                     <header>
-                        <h3>Session per device</h3>
+                        <h3>Per device</h3>
+                        <button class="main-nav-choice" data-wc-target="range-per-device">
+                            <span class="material-icons-round">more_vert</span>
+                        </button>
                     </header>
-                    <canvas id="chartDonut"></canvas>
+
+                    <canvas id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></canvas>
+
+                    <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
+                        <div class="input-container">
+                            <label for="SincePerDevice">Since</label>
+                            <input id="SincePerDevice" name="SincePerDevice" type="date" class="input">
+                        </div>
+                        <div class="input-container">
+                            <label for="toPerDevice">To</label>
+                            <input id="toPerDevice" name="toPerDevice" type="date" class="input">
+                        </div>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-device">Submit</button>
+                    </div>
                 </section>
             </div>
 
             <div class="col-4 col-md-6 col-sm-12">
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
-                        <h3>Session week</h3>
-                        <button>
-                            <span class="material-icons-round">chevron_left</span>
-                            <span class="material-icons-round">chevron_right</span>
-                        </button>
+                        <h3>Per week</h3>
                     </header>
                     <canvas id="chartBar"></canvas>
                 </section>
