@@ -59,20 +59,11 @@ class Mail extends BaseSQL
 
     public function confirmMail($mailAddress, $name, $token)
     {
+        $uri = $_SERVER["HTTP_HOST"] . "/mailconfirmation&token=" . $token;
         if ($token){
             $subject = "Confirmation d'inscription";
-            $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href='www.google.com'>cliquez ici</a>.";
+            $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href='" . $uri . "'>cliquez ici</a>.";
             $this->sendEmail($mailAddress, $name, $subject, $message);
         }
-    }
-
-    public function generateToken(): void
-    {
-        $this->token = str_shuffle(md5(uniqid()));
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->token;
     }
 }
