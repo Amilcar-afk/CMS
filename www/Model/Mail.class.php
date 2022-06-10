@@ -4,16 +4,18 @@ namespace App\Model;
 use PHPMailer\PHPMailer\PHPMailer as PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use App\Core\BaseSQL;
 
 require_once('vendor/phpmailer/phpmailer/src/PHPMailer.php');
 require_once('vendor/phpmailer/phpmailer/src/SMTP.php');
 require_once('vendor/phpmailer/phpmailer/src/Exception.php');
 require_once('vendor/autoload.php');
 
-class Mail extends PHPMailer
+class Mail extends BaseSQL
 {
     protected $token;
     protected $mail;
+    protected $id = null;
 
     public function __construct()
     {
@@ -54,17 +56,26 @@ class Mail extends PHPMailer
         }
     }
 
-    public function confirmMail($mailAddress, $name)
+    public function confirmMail($mailAddress, $name, $id)
     {
-        $this->generateToken($mailAddress);
-        $token = $this->token;
-        $subject = "Confirmation d'inscription";
-        $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href=''>cliquez ici</a>.";
-        $this->sendEmail($mailAddress, $name, $subject, $message);
+        $this->generateToken();
+        $token = $this->getToken() . $mailAddress;
+        $this->id = $id;
+
+        if ($token){
+            $subject = "Confirmation d'inscription";
+            $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href='www.google.com '>cliquez ici</a>.";
+            $this->sendEmail($mailAddress, $name, $subject, $message);
+        }
     }
 
-    public function generateToken($mailAddress): void
+    public function generateToken(): void
     {
-        $this->token = str_shuffle(md5(uniqid())) . $mailAddress;
+        $this->token = str_shuffle(md5(uniqid()));
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
     }
 }
