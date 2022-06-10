@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
+use Page;
 
 class Stat extends BaseSQL
 {
@@ -20,10 +21,25 @@ class Stat extends BaseSQL
         parent::__construct();
     }
 
-    public function loadStats ($sql)
+    /**
+     * @return mixed
+     */
+    public function getDevice()
     {
-        return parent::findAllData($sql);
+        return $this->device;
+    }
 
+    /**
+     * @param mixed $device
+     */
+    public function setDevice($device): void
+    {
+        $this->device = $device;
+    }
+
+    public function find($id = null, string $attribut = 'id')
+    {
+        return parent::find($id, $attribut);
     }
     /**
      * @return mixed
@@ -139,25 +155,14 @@ class Stat extends BaseSQL
         return $this;
     }
 
-    public function getDevice()
-    {
-        return $this->device;
-    }
-
-    public function setDevice($device)
-    {
-        $this->device = $device;
-        return $this;
-    }
 
     public function save()
     {
         parent::save();
     }
 
-    public function find($id = null, $attribut = 'id')
-    {
-        parent::find($id, $attribut);
+    public function page(){
+        return parent::belongsTo(Page::class);
     }
     
 }

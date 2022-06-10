@@ -40,26 +40,23 @@
         display: flex;
         flex-direction: column;
         align-self: flex-start;
+        font-weight: 600;
         &  h4, .material-icons-round {
             margin: 0;
-            font-style: normal;
-            font-weight: bold;
             font-size: rem(48);
             line-height: rem(56);
             display: flex;
             align-items: center;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.005em;
             color: #FFFFFF;
         }
         & h3, .material-icons-round {
             margin: 0;
-            font-style: normal;
-            font-weight: 900;
             font-size: rem(24);
             line-height: rem(28);
             display: flex;
             align-items: center;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.005em;
             color: #FFFFFF;
         }
     }
@@ -73,8 +70,7 @@
             padding: 0;
             text-align: center;
             color: white;
-            font-style: normal;
-            font-weight: bold;
+            font-weight: 600;
             font-size: rem(14);
         }
     }
@@ -135,10 +131,12 @@
     .card {
         margin: 9px;
         padding: 15px;
+        border-radius: var(--radius, 15px);
+        min-height: 120px;
 
         & .material-icons-round {
             color: #FFFFFF;
-            font-size: rem(32);
+            font-size: rem(20);
         }
 
         & header {
@@ -147,25 +145,13 @@
             align-self: flex-start;
             &  h4, .material-icons-round {
                 margin: 0;
-                font-style: normal;
-                font-weight: bold;
-                font-size: rem(36);
-                line-height: rem(38);
-                display: flex;
-                align-items: center;
-                letter-spacing: 0.05em;
-                color: #FFFFFF;
+                font-size: rem(20);
+                line-height: rem(21);
             }
             & h3, .material-icons-round {
                 margin: 0;
-                font-style: normal;
-                font-weight: 900;
-                font-size: rem(18);
-                line-height: rem(18);
-                display: flex;
-                align-items: center;
-                letter-spacing: 0.05em;
-                color: #FFFFFF;
+                font-size: rem(20);
+                line-height: rem(21);
             }
         }
     }

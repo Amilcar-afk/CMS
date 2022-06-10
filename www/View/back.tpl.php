@@ -16,7 +16,8 @@
         <script type="text/javascript" src="../style/js/wysiwyg.js"></script>
         <script type="text/javascript" src="../style/js/animations.js"></script>
         <script type="text/javascript" src="../style/js/pages.js"></script>
-    <head>
+        <script type="text/javascript" src="../style/js/addCode.js"></script>
+        <head>
     <div class="background-container-back-office">
         <div></div>
         <div></div>

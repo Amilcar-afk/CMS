@@ -66,6 +66,11 @@ admin/:
   action: listAddCode
   middleware: [ 'auth', 'admin' ]
 
+/add-code/compose:
+  controller: pageengine
+  action: composeAddCode
+  middleware: [ 'auth', 'admin' ]
+
 /categorie/compose:
   controller: categorie
   action: composeCategorie

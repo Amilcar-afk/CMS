@@ -5,24 +5,19 @@ namespace App\Controller;
 use App\Core\Validator;
 use App\Core\View;
 use App\Model\User as UserModel;
-use App\Model\Mail as MailModel;
+use App\Controller\Mail;
 
 class User{
 
     public $user;
-    public $mail;
 
     public function __construct()
     {
         $this->user = new UserModel();
-        $this->mail = new MailModel();
     }
 
     public function login()
     {
-
- 
-        
         if( !empty($_POST)){
             $result = Validator::checkEmail($_POST['email']);
             if($result){
@@ -81,9 +76,15 @@ class User{
             $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
             
             if(empty($result)){
-                //$this->user->save();
-                var_dump($this->mail->confirmMail($_POST['email'], $_POST['firstname']));
-                exit();
+                //generate confirmKey
+                $this->user->generateToken();
+                $confirmKey = $this->user->getToken();
+                $confirmKey .= $_POST['email'];
+                $this->user->setConfirmKey($confirmKey);
+
+                $mail = new Mail();
+                $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+                $this->user->save();
             }
             else{
                 $view->assign("error_from",$result);

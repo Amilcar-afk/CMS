@@ -122,7 +122,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                        <?php  $this->includePartial("form", $page->getFormNewPage($categories)) ?>
                     </article>
 
                 </div>
@@ -145,7 +145,7 @@
 
                 <!--Titles-->
                 <article>
-                    <?php  $this->includePartial("form", $pageEmpty->getFormNewPage()) ?>
+                    <?php  $this->includePartial("form", $pageEmpty->getFormNewPage($categories)) ?>
                 </article>
 
             </div>

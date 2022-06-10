@@ -34,7 +34,7 @@
                                 <tr class="table-line">
                                     <td>
                                         <h4><?= ucfirst($categorie->getTitle()) ?></h4>
-                                        <?php foreach ($categorie->categories() as $nav):?>
+                                        <?php foreach ($categorie->navigations() as $nav):?>
                                             <?php if ($nav->getType() == "nav"):?>
                                                 <label class="sticker">#<?= $nav->getTitle()?></label>
                                             <?php endif;?>

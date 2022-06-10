@@ -979,26 +979,23 @@ tr:first-child {
   .card header {
     display: flex;
     flex-direction: column;
-    align-self: flex-start; }
+    align-self: flex-start;
+    font-weight: 600; }
     .card header h4, .card header .material-icons-round {
       margin: 0;
-      font-style: normal;
-      font-weight: bold;
       font-size: 3rem;
       line-height: 3.5rem;
       display: flex;
       align-items: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.005em;
       color: #FFFFFF; }
     .card header h3, .card header .material-icons-round {
       margin: 0;
-      font-style: normal;
-      font-weight: 900;
       font-size: 1.5rem;
       line-height: 1.75rem;
       display: flex;
       align-items: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.005em;
       color: #FFFFFF; }
   .card .edge-container {
     width: 75px;
@@ -1010,8 +1007,7 @@ tr:first-child {
       padding: 0;
       text-align: center;
       color: white;
-      font-style: normal;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 0.875rem; }
   .card .edge {
     width: 75px;
@@ -1047,34 +1043,24 @@ tr:first-child {
 @media (max-width: 992px) {
   .card {
     margin: 9px;
-    padding: 15px; }
+    padding: 15px;
+    border-radius: var(--radius, 15px);
+    min-height: 120px; }
     .card .material-icons-round {
       color: #FFFFFF;
-      font-size: 2rem; }
+      font-size: 1.25rem; }
     .card header {
       display: flex;
       flex-direction: column;
       align-self: flex-start; }
       .card header h4, .card header .material-icons-round {
         margin: 0;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 2.25rem;
-        line-height: 2.375rem;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.05em;
-        color: #FFFFFF; }
+        font-size: 1.25rem;
+        line-height: 1.3125rem; }
       .card header h3, .card header .material-icons-round {
         margin: 0;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 1.125rem;
-        line-height: 1.125rem;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.05em;
-        color: #FFFFFF; } }
+        font-size: 1.25rem;
+        line-height: 1.3125rem; } }
 
 .center {
   display: flex;
@@ -1814,7 +1800,8 @@ tr:first-child {
     .container-main-content--padding {
       padding: 5px;
       height: unset;
-      min-height: calc(100% - 73px - 1.25rem); }
+      min-height: calc(100% - 73px - 1.25rem);
+      padding-bottom: calc(1.875rem + 90px); }
     .container-main-content--menu {
       position: absolute;
       top: 0;
@@ -1845,7 +1832,8 @@ tr:first-child {
         right: 40px; }
       .container-main-content--menu > section {
         padding: 27px 40px;
-        border-radius: 0px; }
+        border-radius: 0px;
+        padding-bottom: calc(1.875rem + 90px); }
     .container-main-content--dashboard .row {
       height: unset; }
       .container-main-content--dashboard .row .card {
@@ -2159,7 +2147,9 @@ h2 {
   .alert p {
     min-width: 300px;
     padding: 10px 60px;
-    font-size: 1.25rem; }
+    font-size: 1.25rem;
+    align-items: center;
+    display: flex; }
   .alert span {
     font-size: 1.25rem;
     padding-right: 20px; }

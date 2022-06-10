@@ -29,7 +29,11 @@ class Validator
 
         foreach ($config["inputs"] as $name => $input){
 
-            if($input["name"] == "id"){
+            if(isset($input["name"]) &&  $input["name"] == "id"){
+                continue;
+            }
+
+            if($input["name"] == "Categorie"){
                 continue;
             }
 
@@ -48,13 +52,13 @@ class Validator
 
             if($input["type"]=="email" ){
                 if(!self::checkEmail($data[$name])){
-                    $config['inputs']['email']['error'] = "Email incorrect";   
+                    $config['inputs']['email']['error'] = "Bad Email";
                 }elseif($unicity !== false){
                     $config['inputs']['email']['error']="This email alreay exist";
                 }
             }
 
-            if(isset($input['min']) && $input['max']){
+            if(isset($input['min']) && isset($input['max'])){
                 if(self::size($data[$name],$input['min'],$input['max'])){
                     $config['inputs'][$name]['error']="Min ".$input['min']." and max ".$input['max']." caracteres";
                 }
