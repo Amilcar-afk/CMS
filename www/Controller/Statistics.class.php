@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Model\Stat;
+use function MongoDB\BSON\fromJSON;
 
 class Statistics
 {
@@ -21,9 +22,49 @@ class Statistics
 
     public function loadDashboard() {
 
-        $data = $this->stats->loadStats();
+        $stats = $this->stats->find();
+
+        foreach($stats as $stat){
+            $sortedData['per-device'][] = [
+                "device" => $stat->getDevice(),
+                "date" => $stat->getDate()
+            ];
+            $sortedData['page-ranking'][] = [
+                "page_key" => $stat->getPageKey(),
+                "page_name" => $stat->page()->getTitle(),
+                "date" => $stat->getDate()
+            ];
+            $sortedData['page-ranking'][] = [
+                "page_key" => $stat->getPageKey(),
+                "page_name" => $stat->page()->getTitle(),
+                "date" => $stat->getDate()
+            ];
+
+            $listPage[$stat->getPageKey()][] = [
+                "page_key" => $stat->getPageKey(),
+                "page_name" => $stat->page()->getTitle(),
+                "date" => $stat->getDate()
+            ];
+
+        }
+
+        /*foreach ($stats as $stat){
+            if (isset() && ){
+                $page[$stat->getPageKey()]["total_views"] = $page[$stat->getPageKey()]["total_views"]++;
+            }
+        }
+
+        $page = [
+            "index_page" => [
+                "page_name" => $stat->getPageKey()
+                "total_views" => $stat->getDate()
+            ]
+        ];*/
+
+        
         $view = new View("dashboard", "back");
-        $view->assign("data", $data);
+        $view->assign("data", $stats);
+        $view->assign("sortedData", $sortedData);
 
     }
 
