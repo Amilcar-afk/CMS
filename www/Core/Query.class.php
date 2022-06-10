@@ -26,7 +26,6 @@ class Query extends BaseSQL
         return call_user_func_array([$query, $method], $arguments);
     }
 
-
     public function from(string $table, ?string $alias = null)
     {
         if ($alias){
@@ -100,6 +99,12 @@ class Query extends BaseSQL
         $query = $this->__toString();
         $statement = $this->pdo->prepare($query);
         $statement->execute();
+
+        self::$params = [];
+        self::$select = [];
+        self::$from = [];
+        self::$where = [];
+
         return $statement->fetchAll(\PDO::FETCH_CLASS,"App\Model\\".$model);
     }
 
