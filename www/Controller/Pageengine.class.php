@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
+use App\Model\Option;
 use App\Model\Page_categorie;
 use App\Core\Query;
 
@@ -25,6 +26,10 @@ class Pageengine
 
     public function pageLoader($request){
 
+        $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+        $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
+
+
         $page = $this->page->find($request['slug'], 'slug');
 
         if (true){
@@ -33,6 +38,8 @@ class Pageengine
 
             $view = new View("load-page", "front");
             $view->assign("page", $page );
+            $view->assign("headCode", $headCode);
+            $view->assign("footerCode", $footerCode);
         }else{
             http_response_code(404);
         }
@@ -128,13 +135,35 @@ class Pageengine
     }
 
     public function listAddCode(){
-        //$pages = $this->page->find();;
+
+        $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+        $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
         $view = new View("add-code", "back");
-        //$view->assign("pages", $pages);
+        $view->assign("headCode", $headCode);
+        $view->assign("footerCode", $footerCode);
     }
 
     public function composeAddCode(){
+        $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+        $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
+        $headCode = $headCode[0];
+        $footerCode = $footerCode[0];
+
+        if (!$headCode) {
+            $headCode = new Option();
+        }
+        if (!$footerCode) {
+            $footerCode = new Option();
+        }
+        $footerCode->setValue($_POST['footerCode']);
+        $headCode->setValue($_POST['headCode']);
+        $footerCode->setType('footerCode');
+        $headCode->setType('headCode');
+        $footerCode->setUserKey($_SESSION['Auth']->id);
+        $headCode->setUserKey($_SESSION['Auth']->id);
+        $footerCode->save();
+        $headCode->save();
     }
 }
