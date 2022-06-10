@@ -148,14 +148,15 @@ class Pageengine
         $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
         $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
-        $headCode = $headCode[0];
-        $footerCode = $footerCode[0];
-
-        if (!$headCode) {
+        if (!$headCode[0]) {
             $headCode = new Option();
+        }else{
+            $headCode = $headCode[0];
         }
-        if (!$footerCode) {
+        if (!$footerCode[0]) {
             $footerCode = new Option();
+        }else{
+            $footerCode = $footerCode[0];
         }
         $footerCode->setValue($_POST['footerCode']);
         $headCode->setValue($_POST['headCode']);
