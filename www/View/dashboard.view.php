@@ -50,7 +50,7 @@
                             <label for="toPerCountry">To</label>
                             <input id="toPerCountry" name="toPerCountry" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-country">Submit</button>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
                     <header>
                         <h3>Per country</h3>
@@ -85,8 +85,8 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="table-container collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
-                        <table>
+                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
+                        <table class="table-container">
                             <tbody>
                             <tr>
                                 <td>home</td>
@@ -142,7 +142,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <button class="cta-button cta-button--text-no-background">
+                        <button class="cta-button--text-no-background">
                             Show More
                         </button>
                     </div>
@@ -156,7 +156,7 @@
                             <label for="toPerPage">To</label>
                             <input id="toPerPage" name="toPerPage" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-page">Submit</button>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
 
                 </section>
@@ -182,7 +182,7 @@
                             <label for="toPerDevice">To</label>
                             <input id="toPerDevice" name="toPerDevice" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--submit--add selected" data-wc-target="chart-per-device">Submit</button>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-device">Submit</button>
                     </div>
                 </section>
             </div>

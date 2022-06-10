@@ -10,6 +10,34 @@
     overflow: hidden;
     margin: 19px;
 
+    & div{
+        width: 100%;
+
+        & .cta-button {
+            color: var(--main-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: var(--radius, 10px);
+            border: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: unset;
+            font-size: rem(18);
+            font-weight: 500;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border-radius: var(--radius, 10px);
+            background-color: var(--main-color);
+            color: white;
+
+            &:hover {
+                background-color: var(--second-color);
+            }
+        }
+    }
+
     &--bottom{
         display: flex;
         justify-content: end;
@@ -93,6 +121,21 @@
 
     &--background-main-color {
         background-color: var(--main-color, #D8D8D8);
+
+        & label{
+            color: var(--background-color)!important;
+        }
+
+        & .cta-button {
+            color: var(--background-color) !important;
+            background-color: var(--second-color) !important;
+
+            &:hover{
+                background-color: var(--background-color) !important;
+                color: var(--second-color) !important;
+
+            }
+        }
     }
 
     &--bigcard {
@@ -122,6 +165,13 @@
         //height: 88%!important;
         //width: unset!important;
         margin-bottom: 30px;
+    }
+
+    & .table-container {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        padding-left: 0px!important;
+        padding-right: 0px!important;
     }
 }
 
