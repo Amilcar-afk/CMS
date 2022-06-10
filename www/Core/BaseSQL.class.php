@@ -219,15 +219,16 @@ abstract class BaseSQL
      * @param string|null $relation_foreign_key
      * @return array|false
      */
-    protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null)
+    protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null, string $relation_target_key = null)
     {
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{
             $targetTable = DBPREFIXE.($class).'s';
         }
-        $relation_target_key = lcfirst($class)."_key";
-
+        if (!isset($relation_target_key)) {
+            $relation_target_key = lcfirst($class) . "_key";
+        }
         if (!isset($relation_foreign_key)){
             $relation_foreign_key = lcfirst($this->class)."_key";
         }

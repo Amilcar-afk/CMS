@@ -86,6 +86,11 @@ class Categorie extends BaseSQL
         return parent::belongsToMany(Page::class, 'cmspf_Page_categorie');
     }
 
+    public function navigations()
+    {
+        return parent::belongsToMany(Categorie::class, 'cmspf_Categorie_categorie', 'id', 'id', 'categorie_parent_key', 'categorie_child_key');
+    }
+
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
