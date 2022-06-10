@@ -29,15 +29,15 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #396075"></span>
+                                <span class="input-block cta-button--mains-color--custom" id="mainColor" style="background-color: #396075"></span>
                                 <label>Main color</label>
                             </article>
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #55A6D3"></span>
+                                <span class="input-block cta-button--mains-color--custom" id="secondeColor" style="background-color: #55A6D3"></span>
                                 <label>Seconde color</label>
                             </article>
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #9DDCFF"></span>
+                                <span class="input-block cta-button--mains-color--custom" id="thirdColor" style="background-color: #9DDCFF"></span>
                                 <label>Third color</label>
                             </article>
                         </section>
@@ -67,15 +67,15 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <input type="file" class="input-block">
+                                <span class="input-block">
                                     <img src="">
-                                </input>
+                                </span>
                                 <label>Main logo</label>
                             </article>
                             <article>
-                                <input type="file" class="input-block">
+                                <span class="input-block">
                                     <img src="">
-                                </input>
+                                </span>
                                 <label>Favicon</label>
                             </article>
                         </section>
@@ -96,9 +96,9 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <input type="file" class="input-block">
+                                <span class="input-block">
                                     <span class="material-icons-round">add</span>
-                                </input>
+                                </span>
                                 <label>Add font</label>
                             </article>
                             <article>
