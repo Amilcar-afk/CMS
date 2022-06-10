@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
+use App\Core\Query;
 use Categorie;
 
 class Page extends BaseSQL
@@ -130,7 +131,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getDescription(): string
+    public function getDescription(): ? string
     {
         return $this->description;
     }
@@ -146,7 +147,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getTitle(): ? string
     {
         return $this->title;
     }
@@ -162,7 +163,7 @@ class Page extends BaseSQL
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getStatus(): ? string
     {
         return $this->status;
     }
@@ -175,15 +176,31 @@ class Page extends BaseSQL
         $this->status = $status;
     }
 
-    public function getFormNewPage(): array
+    public function getFormNewPage($categories): array
     {
+        foreach($categories as $categorie){
+            $categoriesList['choices'][] = [
+                "value" => $categorie->getId(),
+                "label" => $categorie->getTitle(),
+                "class"=>"input"
+            ];
+        }
+
+
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"compose",
-                "submit"=>"Save"
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-page"
             ],
             "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
+                ],
                 "title"=>[
                     "question"=>"Title",
                     "type"=>"text",
@@ -194,6 +211,7 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>30,
                     "value"=>$this->getTitle(),
+                    "error"=>""
                 ],
                 "status"=>[
                     "question"=>"Visibility",
@@ -203,6 +221,8 @@ class Page extends BaseSQL
                     "required"=>true,
                     "min"=>3,
                     "max"=>16,
+                    "error"=>"",
+                    "value"=>$this->getStatus(),
                     "choices"=>[
                         [
                             "value" => "Public",
@@ -226,6 +246,17 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>16,
                     "value"=>$this->getSlug(),
+                    "unicity"=>true,
+                    "error"=>""
+                ],
+                "categorie"=>[
+                    "question"=>"Categorie",
+                    "type"=>"select",
+                    "name"=>"categorie",
+                    "class"=>"input",
+                    "error"=>"",
+                    "idToVerif"=>true,
+                    "choices"=>$categoriesList['choices']
                 ],
                 "description"=>[
                     "question"=>"Description",
@@ -237,6 +268,7 @@ class Page extends BaseSQL
                     "min"=>3,
                     "max"=>100,
                     "value"=>$this->getDescription(),
+                    "error"=>""
                 ]
             ]
 

@@ -1,7 +1,7 @@
 <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
-            <h1 class="title title--main-color">COMMUNICATION</h1>
+            <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
             <nav>
                 <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
                 <a href="/meetings" class="cta-button cta-button--menu main-nav-choice" data-wc-target="meetings-container"><span class="material-icons-round">today</span>Meetings</a>

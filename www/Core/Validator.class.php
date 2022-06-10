@@ -17,14 +17,32 @@ class Validator
 
         $errors = [];
 
+        if(isset($config['inputs']['slug'])  && $unicity !== false){
+            $config['inputs']['slug']['error']="This slug alreay exist";
+        }
+
+        if(isset($config['inputs']['passwordConfirm'])
+            && isset($config['inputs']['password'])
+            && self::valueEquality($data['password'], $data['passwordConfirm'])){
+            $config['inputs']['password']['error'] = "Passwords does not match";
+        }
+
         foreach ($config["inputs"] as $name => $input){
+
+            if(isset($input["name"]) &&  $input["name"] == "id"){
+                continue;
+            }
+
+            if($input["name"] == "Categorie"){
+                continue;
+            }
 
             if(!isset($data[$name])){
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }
 
             if(!empty($input["required"]) && empty($data[$name])){
-                $config['inputs'][$name]['error'] = "You deleted the required attribute";
+                $config['inputs'][$name]['error'] = "You deleted a required input";
 
             }
 
@@ -34,26 +52,15 @@ class Validator
 
             if($input["type"]=="email" ){
                 if(!self::checkEmail($data[$name])){
-                    $config['inputs']['email']['error'] = "Email incorrect";   
+                    $config['inputs']['email']['error'] = "Bad Email";
                 }elseif($unicity !== false){
-                    $config['inputs']['email']['error']="this email alreay exist";
+                    $config['inputs']['email']['error']="This email alreay exist";
                 }
             }
 
-            if(isset($config['inputs']['slug'])  && $unicity !== false){
-              
-                $config['inputs']['slug']['error']="this slug alreay exist";
-    
-            }
-
-
-            if(self::valueEquality($data['password'], $data['passwordConfirm'])){
-                $config['inputs']['password']['error'] = "Passwords does not match";
-            }
-
-            if(isset($input['min']) && $input['max']){
+            if(isset($input['min']) && isset($input['max'])){
                 if(self::size($data[$name],$input['min'],$input['max'])){
-                    $config['inputs'][$name]['error']="size of $name not valide";
+                    $config['inputs'][$name]['error']="Min ".$input['min']." and max ".$input['max']." caracteres";
                 }
             }
 

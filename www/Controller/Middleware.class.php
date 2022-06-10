@@ -8,7 +8,10 @@ class Middleware{
 
     public static function auth(){
         if(!isset($_SESSION['Auth']->rank)){
-            header('location:/login');
+            if($_SERVER['REQUEST_URI'] !== '/logout' && $_SERVER['REQUEST_URI'] !== '/login' ){
+                $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+                header('location:/login');
+            }
         }
     }
 

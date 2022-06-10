@@ -10,10 +10,9 @@
                 <?=$page->getStatus()?> . <?=ucfirst($page->getTitle())?>
             </label>
             <footer>
-                <?php if ( empty($page->getSlug())): ?>
+                /<?php if ( empty($page->getSlug())): ?>
                     Home
-                <?php endif;?>
-                <?=$page->getSlug()?>
+                <?php endif;?><?=$page->getSlug()?>
             </footer>
         </div>
         <div class="burger-menu-container">
@@ -22,7 +21,7 @@
             </button>
             <nav>
                 <a href="/pageloader/<?= $page->getSlug() ?>" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
-                <a href="" class="cta-button cta-button--text-icon cta-button-save" data-page-id="<?=$page->getId()?>"><span class="material-icons-round">save</span>Save</a>
+                <button class="cta-button cta-button--text-icon cta-button-save" data-page-id="<?=$page->getId()?>"><span class="material-icons-round">save</span>Save</button>
                 <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span>Published</a>
             </nav>
         </div>

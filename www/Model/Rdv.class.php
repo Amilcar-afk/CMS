@@ -183,29 +183,16 @@ class Rdv extends BaseSQL
     {
         parent::save();
     }
-    public function deleteEvent($id)
+
+    public function delete($id)
     {
         parent::delete($id);
     }
 
-
-    public function loadCalendar ($sql)
+    public function find($id = null, string $attribut = 'id')
     {
-        return parent::findAllData($sql);
-
+        return parent::find($id, $attribut);
     }
-
-
-    public function selectOneByData(string $sql, $params){
-
-        return parent::findOneData($sql, $params);
-    }
-
-    public function selectAllData(string $sql ){
-
-        return parent::findAllData($sql);
-    }
-
 
     public function getFormRegister(): array
     {

@@ -1,7 +1,7 @@
 <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
-            <h1 class="title title--main-color">SITE MAP</h1>
+            <h1 class="title title--main-color place-menu">SETTINGS</h1>
             <nav>
                 <a href="/settings/user-manager" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="user-manager-container"><span class="material-icons-round">supervisor_account</span>User manager</a>
                 <a href="/settings/style" class="cta-button cta-button--menu main-nav-choice" data-wc-target="style-container"><span class="material-icons-round">brush</span>Style</a>

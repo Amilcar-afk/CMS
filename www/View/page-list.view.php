@@ -1,7 +1,7 @@
 <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
-            <h1 class="title title--main-color">SITE MAP</h1>
+            <h1 class="title title--main-color place-menu">SITEMAP</h1>
             <nav>
                 <a href="pages" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="pages-container"><span class="material-icons-round">view_quilt</span>My pages</a>
                 <a href="navigations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">dynamic_feed</span>Navigations</a>
@@ -32,7 +32,7 @@
                         <span class="material-icons-round">more_horiz</span>
                     </header>
                     <div id="public-pages-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="page-manager-container" style="opacity: 1">
-                        <table>
+                        <table class="table">
                             <tbody>
                             <?php foreach ($pages as $page):?>
                                 <?php if ($page->getStatus() == 'Public'): ?>
@@ -122,7 +122,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                        <?php  $this->includePartial("form", $page->getFormNewPage($categories)) ?>
                     </article>
 
                 </div>
@@ -145,7 +145,7 @@
 
                 <!--Titles-->
                 <article>
-                    <?php  $this->includePartial("form", $page->getFormNewPage()) ?>
+                    <?php  $this->includePartial("form", $pageEmpty->getFormNewPage($categories)) ?>
                 </article>
 
             </div>

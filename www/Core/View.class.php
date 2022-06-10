@@ -5,14 +5,16 @@ namespace App\Core;
 class View
 {
     private $view;
-    private $template;
+    private $template = null;
     private $data = [];
     private $array = [];
 
-    public function __construct($view, $template = "front")
+    public function __construct($view, $template = null)
     {
         $this->setView($view);
-        $this->setTemplate($template);
+        if ($template != null){
+            $this->setTemplate($template);
+        }
     }
 
     
@@ -47,8 +49,12 @@ class View
 
     public function __destruct()
     {
-        extract($this->data);//array(2) { ["firstname"]=> string(8) "Marouane" ["lastname"]=> string(5) "Talbi" } 
-        include "View/".$this->template.".tpl.php";
+        extract($this->data);
+        if (isset($this->data) && isset($this->template)) {
+            include "View/" . $this->template . ".tpl.php";
+        }else{
+            include "View/" .$this->view.".view.php";
+        }
     }
 
 }

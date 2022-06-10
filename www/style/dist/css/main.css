@@ -219,6 +219,9 @@ tr:first-child {
   margin-right: 20px;
   /* change border color to blue to match the background */ }
 
+.section-module {
+  padding: 20px; }
+
 @media (max-width: 992px) {
   .body-back-office {
     position: relative;
@@ -957,6 +960,12 @@ tr:first-child {
   padding: 20px;
   overflow: hidden;
   margin: 19px; }
+  .card--bottom {
+    display: flex;
+    justify-content: end; }
+    .card--bottom header .material-icons-round {
+      font-size: 2.875rem !important;
+      line-height: 3.5rem !important; }
   .card button {
     border: none;
     outline: none;
@@ -965,32 +974,28 @@ tr:first-child {
     align-self: flex-end;
     padding: 0;
     cursor: pointer; }
-  .card i {
-    color: #FFFFFF;
-    font-size: 2.1875rem; }
+  .card .material-icons-round {
+    color: #FFFFFF; }
   .card header {
     display: flex;
     flex-direction: column;
-    align-self: flex-start; }
-    .card header h4, .card header i {
+    align-self: flex-start;
+    font-weight: 600; }
+    .card header h4, .card header .material-icons-round {
       margin: 0;
-      font-style: normal;
-      font-weight: bold;
       font-size: 3rem;
       line-height: 3.5rem;
       display: flex;
       align-items: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.005em;
       color: #FFFFFF; }
-    .card header h3 {
+    .card header h3, .card header .material-icons-round {
       margin: 0;
-      font-style: normal;
-      font-weight: 900;
       font-size: 1.5rem;
       line-height: 1.75rem;
       display: flex;
       align-items: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.005em;
       color: #FFFFFF; }
   .card .edge-container {
     width: 75px;
@@ -1002,8 +1007,7 @@ tr:first-child {
       padding: 0;
       text-align: center;
       color: white;
-      font-style: normal;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 0.875rem; }
   .card .edge {
     width: 75px;
@@ -1013,7 +1017,7 @@ tr:first-child {
     display: flex;
     align-items: center;
     justify-content: center; }
-    .card .edge i {
+    .card .edge .material-icons-round {
       font-size: 3.75rem; }
     .card .edge img {
       width: 45px;
@@ -1026,50 +1030,37 @@ tr:first-child {
       flex-direction: row !important;
       justify-content: space-between !important;
       align-self: stretch !important; }
-      .card--bigcard header h3, .card--bigcard header i {
+      .card--bigcard header h3, .card--bigcard header .material-icons-round {
         color: #396075 !important; }
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
-    flex-direction: row;
-    align-items: flex-start; }
+    flex-direction: row; }
   .card #chartBar {
     max-width: 100%; }
   .card #chartDonut {
-    height: 88% !important;
-    width: unset !important;
     margin-bottom: 30px; }
 
 @media (max-width: 992px) {
   .card {
     margin: 9px;
-    padding: 15px; }
-    .card i {
+    padding: 15px;
+    border-radius: var(--radius, 15px);
+    min-height: 120px; }
+    .card .material-icons-round {
       color: #FFFFFF;
-      font-size: 2rem; }
+      font-size: 1.25rem; }
     .card header {
       display: flex;
       flex-direction: column;
       align-self: flex-start; }
-      .card header h4, .card header i {
+      .card header h4, .card header .material-icons-round {
         margin: 0;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 2.25rem;
-        line-height: 2.375rem;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.05em;
-        color: #FFFFFF; }
-      .card header h3 {
+        font-size: 1.25rem;
+        line-height: 1.3125rem; }
+      .card header h3, .card header .material-icons-round {
         margin: 0;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 1.125rem;
-        line-height: 1.125rem;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.05em;
-        color: #FFFFFF; } }
+        font-size: 1.25rem;
+        line-height: 1.3125rem; } }
 
 .center {
   display: flex;
@@ -1809,7 +1800,8 @@ tr:first-child {
     .container-main-content--padding {
       padding: 5px;
       height: unset;
-      min-height: calc(100% - 73px - 1.25rem); }
+      min-height: calc(100% - 73px - 1.25rem);
+      padding-bottom: calc(1.875rem + 90px); }
     .container-main-content--menu {
       position: absolute;
       top: 0;
@@ -1840,7 +1832,8 @@ tr:first-child {
         right: 40px; }
       .container-main-content--menu > section {
         padding: 27px 40px;
-        border-radius: 0px; }
+        border-radius: 0px;
+        padding-bottom: calc(1.875rem + 90px); }
     .container-main-content--dashboard .row {
       height: unset; }
       .container-main-content--dashboard .row .card {
@@ -2025,8 +2018,14 @@ h2 {
   position: relative;
   height: min-content; }
 
+.section-module {
+  position: relative;
+  height: min-content; }
+  .section-module--on {
+    z-index: 2; }
+
 .editable-module {
-  z-index: 1;
+  z-index: -1;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -2128,3 +2127,29 @@ h2 {
       border-radius: var(--radius, 10px);
       background-color: var(--main-color) !important;
       color: white; }
+
+.alert {
+  position: absolute;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius, 5px);
+  font-size: 1.25rem;
+  color: var(--main-color);
+  background: rgba(129, 129, 129, 0.6);
+  box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(60px);
+  position: absolute;
+  left: 50%;
+  transform: translateY(-50%);
+  bottom: 50px; }
+  .alert p {
+    min-width: 300px;
+    padding: 10px 60px;
+    font-size: 1.25rem;
+    align-items: center;
+    display: flex; }
+  .alert span {
+    font-size: 1.25rem;
+    padding-right: 20px; }

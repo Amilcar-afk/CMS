@@ -20,9 +20,25 @@ class Stat extends BaseSQL
         parent::__construct();
     }
 
-    public function loadStats ($sql)
+    /**
+     * @return mixed
+     */
+    public function getDevice()
     {
-        return parent::findAllData($sql);
+        return $this->device;
+    }
+
+    /**
+     * @param mixed $device
+     */
+    public function setDevice($device): void
+    {
+        $this->device = $device;
+    }
+
+    public function loadStats()
+    {
+        return parent::find();
 
     }
     /**
@@ -47,7 +63,7 @@ class Stat extends BaseSQL
      */
     public function getDate()
     {
-        return $this->email;
+        return $this->date;
     }
 
     /**
@@ -139,25 +155,14 @@ class Stat extends BaseSQL
         return $this;
     }
 
-    public function getDevice()
-    {
-        return $this->device;
-    }
-
-    public function setDevice($device)
-    {
-        $this->device = $device;
-        return $this;
-    }
 
     public function save()
     {
         parent::save();
     }
 
-    public function find($id = null, $attribut = 'id')
-    {
-        parent::find($id, $attribut);
+    public function select($sql, $param){
+        parent::findOneData($sql, $param);
     }
     
 }

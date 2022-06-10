@@ -62,7 +62,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                             </p>
                         </article>
-                        <article class="module-list background-second-color row">
+                        <article class="section-module module-list background-second-color row">
                             <div class="col-6 left-border color-white">
                                 <p class="module text-justify color-white fs-13 medium">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="module-list background-second-color row">
+                        <article class="section-module module-list background-second-color row">
                             <div class="col-6 color-white">
                                 <p class="module text-justify color-white fs-13 medium">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
@@ -123,38 +123,38 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list">
-                            <h3 class="highlight background-main-color color-white fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <p class="color-main-color text-justify fs-22 medium">
+                        <article class="section-module module-list">
+                            <h3 class="module highlight background-main-color color-white fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <p class="module color-main-color text-justify fs-22 medium">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
                                 <br>
                                 adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                             </p>
                         </article>
 
-                        <article class="module-list background-main-color">
-                            <h4 class="color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
-                            <p class="text-center color-white fs-28 bold">
+                        <article class="section-module module-list background-main-color">
+                            <h4 class="module color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                            <p class="module text-center color-white fs-28 bold">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                             </p>
                         </article>
 
-                        <article class="module-list background-second-color">
+                        <article class="section-module module-list background-second-color">
                             <div class="left-border color-white row">
-                                <h4 class="col-12 color-white text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                <h4 class="module col-12 color-white text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
                                 <div class="col-6 color-white">
-                                    <p class="text-justify color-white fs-13 medium">
+                                    <p class="module text-justify color-white fs-13 medium">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
                                     </p>
-                                    <p class="text-justify color-white fs-13 medium">
+                                    <p class="module text-justify color-white fs-13 medium">
                                         adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                     </p>
                                 </div>
                                 <div class="col-6">
-                                    <p class="text-justify color-white fs-13 medium">
+                                    <p class="module text-justify color-white fs-13 medium">
                                         adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                     </p>
-                                    <p class="text-justify color-white fs-13 medium">
+                                    <p class="module text-justify color-white fs-13 medium">
                                         p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                     </p>
                                 </div>
@@ -164,31 +164,31 @@
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="module-list background-second-color row">
-                            <h4 class="col-12 color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
-                            <h3 class="col-12 color-white text-center color-white fs-26 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                        <article class="section-module module-list background-second-color row">
+                            <h4 class="module col-12 color-white text-center fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                            <h3 class="module col-12 color-white text-center color-white fs-26 medium">Lorem ipsum dolor sit amet consectetur.</h3>
                             <div class="col-6 color-white">
-                                <p class="text-justify color-white fs-13 medium">
+                                <p class="module text-justify color-white fs-13 medium">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
                                 </p>
-                                <p class="text-justify color-white fs-13 medium">
+                                <p class="module text-justify color-white fs-13 medium">
                                     adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
                             </div>
                             <div class="col-6">
-                                <p class="text-justify color-white fs-13 medium">
+                                <p class="module text-justify color-white fs-13 medium">
                                     adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
-                                <p class="text-justify color-white fs-13 medium">
+                                <p class="module text-justify color-white fs-13 medium">
                                     p ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
                             </div>
                         </article>
 
                         <article class="module-list">
-                            <div class="left-border color-main-color row">
-                                <h4 class="col-12 color-main-color fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
-                                <p class="color-main-color text-justify fs-24 medium">
+                            <div class="section-module left-border color-main-color row">
+                                <h4 class="module col-12 color-main-color fs-36 bold">Lorem ipsum dolor sit amet consectetur.</h4>
+                                <p class="module color-main-color text-justify fs-24 medium">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
                                     <br>
                                     adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -338,10 +338,10 @@
                 <div id="audio-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="background-second-color module-list">
-                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
+                        <article class="section-module background-second-color module-list">
+                            <h3 class="module color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module color-white text-center fs-14 medium">tv gango sphere</h4>
+                            <iframe class="module" src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
                                     width="100%"
                                     height="200"
                                     frameBorder="0"
@@ -349,28 +349,28 @@
                                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                         </article>
 
-                        <article class="module-list">
-                            <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="color-main-color fs-14 medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                        <article class="section-module module-list">
+                            <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module color-main-color fs-14 medium">tv gango sphere</h4>
+                            <iframe class="module" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                         </article>
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list">
-                            <h3 class="highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                        <article class="section-module module-list">
+                            <h3 class="module highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                            <iframe class="module" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                         </article>
 
-                        <article class="module-list background-main-color">
+                        <article class="section-module module-list background-main-color">
                             <div class="left-border color-white">
-                                <h3 class="fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                <h4 class="fs-14 medium">tv gango sphere</h4>
-                                <iframe src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
+                                <h3 class="module fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                <h4 class="module fs-14 medium">tv gango sphere</h4>
+                                <iframe class="module" src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
                                         frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                             </div>
                         </article>
@@ -390,10 +390,10 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="background-second-color module-list">
-                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
-                            <div class="container-16-9">
+                        <article class="section-module background-second-color module-list">
+                            <h3 class="module color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module color-white text-center fs-14 medium">tv gango sphere</h4>
+                            <div class="module container-16-9">
                                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
@@ -401,17 +401,17 @@
                         </article>
 
                         <article class="module-list">
-                            <div class="row">
+                            <div class="section-module row">
                                 <div class="col-4">
-                                    <h3 class="color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                    <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
-                                    <p class="color-main-color fs-14 medium">
+                                    <h3 class="module color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                                    <p class="module color-main-color fs-14 medium">
                                         Lorem ipsum ibra
                                         tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                                     </p>
                                 </div>
                                 <div class="col-8">
-                                    <div class="container-16-9">
+                                    <div class="module container-16-9">
                                         <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
@@ -425,17 +425,17 @@
                     <div class="col-6 col-md-12 col-sm-12">
 
                         <article class="module-list">
-                            <div class="left-border row">
+                            <div class="section-module left-border row">
                                 <div class="col-4">
-                                    <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                    <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
-                                    <p class="color-main-color fs-14 medium">
+                                    <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                                    <p class="module color-main-color fs-14 medium">
                                         Lorem ipsum ibra
                                         tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                                     </p>
                                 </div>
                                 <div class="col-8">
-                                    <div class="container-16-9">
+                                    <div class="module container-16-9">
                                         <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                         </iframe>
@@ -444,15 +444,15 @@
                             </div>
                         </article>
 
-                        <article class="background-main-color module-list">
-                            <h3 class="color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="fs-14 color-white medium">tv gango sphere</h4>
-                            <p class="color-white fs-14 medium">
+                        <article class="section-module background-main-color module-list">
+                            <h3 class="module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module fs-14 color-white medium">tv gango sphere</h4>
+                            <p class="module color-white fs-14 medium">
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
 
-                            <div class="container-16-9">
+                            <div class="module container-16-9">
                                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
