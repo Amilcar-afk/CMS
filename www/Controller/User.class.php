@@ -81,8 +81,14 @@ class User{
             $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
             
             if(empty($result)){
+                //generate confirmKey
+                $this->user->generateToken();
+                $confirmKey = $this->user->getToken();
+                $confirmKey .= $_POST['email'];
+                $this->user->setConfirmKey($confirmKey);
+
+                $this->mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
                 $this->user->save();
-                $this->mail->confirmMail($_POST['email'], $_POST['firstname']);
             }
             else{
                 $view->assign("error_from",$result);
