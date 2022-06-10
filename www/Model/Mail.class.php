@@ -27,6 +27,7 @@ class Mail extends BaseSQL
         $this->mail->Username = MAILADDR;
         $this->mail->Password = MAILPWD;
         $this->mail->Port = 587;
+        $this->mail->IsHTML(true);
 
         $this->mail->SMTPOptions = array(
             'ssl' => array(
@@ -56,15 +57,11 @@ class Mail extends BaseSQL
         }
     }
 
-    public function confirmMail($mailAddress, $name, $id)
+    public function confirmMail($mailAddress, $name, $token)
     {
-        $this->generateToken();
-        $token = $this->getToken() . $mailAddress;
-        $this->id = $id;
-
         if ($token){
             $subject = "Confirmation d'inscription";
-            $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href='www.google.com '>cliquez ici</a>.";
+            $message = "Bienvenue chez nous " . $name . ". Pour confirmer votre adresse mail <a href='www.google.com'>cliquez ici</a>.";
             $this->sendEmail($mailAddress, $name, $subject, $message);
         }
     }
