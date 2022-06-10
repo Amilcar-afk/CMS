@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
+use Page;
 
 class Stats extends BaseSQL
 {
@@ -23,7 +24,10 @@ class Stats extends BaseSQL
     public function loadStats()
     {
         return parent::find();
-
+    }
+    public function getPageName()
+    {
+        return parent::belongsTo(Page::class, 'page_key', 'title');
     }
     /**
      * @return mixed
@@ -136,6 +140,17 @@ class Stats extends BaseSQL
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
+    }
+
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    public function setDevice($device)
+    {
+        $this->device = $device;
         return $this;
     }
 

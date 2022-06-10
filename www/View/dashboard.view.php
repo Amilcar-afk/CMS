@@ -14,9 +14,21 @@
                         <h3>New users</h3>
 
                         <?php
-                            foreach($data as $e){
-                                echo $e->getDate().'<br>';
+                            // foreach($data as $e){
+                            //     echo $e->getDate().'<br>';
+                            //     echo $e->getDevice().'<br>';
+                            // }
+
+                            foreach($sortedData as $key => $value) {
+                                foreach ($value as $key => $value) {
+                                    foreach ($value as $key => $value) {
+                                        echo $value['device'];
+                                        echo $value['date'];
+                                    }
+                                    
+                                }
                             }
+                            
                         ?>
 
                     </header>

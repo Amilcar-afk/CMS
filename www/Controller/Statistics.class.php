@@ -22,8 +22,45 @@ class Statistics
     public function loadDashboard() {
 
         $data = $this->stats->loadStats();
+
+        foreach($data as $row){
+            $sortedData['dashboard']
+            ['per-device'][] = [
+                "device" => $row->getDevice().'<br>',
+                "date" => $row->getDate().'<br>'
+            ];
+            $sortedData['dashboard']
+            ['page-ranking'][] = [
+                "page_key" => $row->getPageKey().'<br>',
+                "date" => $row->getDate().'<br>'
+            ];
+
+        }
+
+        
+
+        // foreach($data as $row) {
+        //     $sortedData = ['dashboard' => [
+        //         'per-device' => [
+        //                 "device" => $row->getDevice().'<br>',
+        //                 "date" => $row->getDate().'<br>'
+        //             ]
+        //         ]
+        //     ];
+        // }
+
+
+        // $pageName = $this->stats->getPageName();
+        // echo $pageName;
+        
+        echo '<pre>';
+        var_dump($sortedData);
+        echo '</pre>';
+
+        
         $view = new View("dashboard", "back");
         $view->assign("data", $data);
+        $view->assign("sortedData", $sortedData);
 
     }
 
