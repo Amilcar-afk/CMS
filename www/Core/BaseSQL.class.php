@@ -221,6 +221,9 @@ abstract class BaseSQL
      */
     protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null, string $relation_target_key = null)
     {
+        $class = explode("\\", $class);
+        $class = end($class);
+
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{

@@ -43,9 +43,16 @@
                                             <?php endif;?>
                                             <h4><?= ucfirst($page->getTitle()) ?></h4>
                                             <label class="sticker sticker--slug">/<?= $page->getSlug() ?></label>
+
+                                            <?php foreach ($page->categories() as $navigation):?>
+                                                <?php if($navigation->getType() == 'nav'): ?>
+                                                    <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $navigation->getTitle()?></label>
+                                                <?php endif;?>
+                                            <?php endforeach;?>
+
                                             <?php foreach ($page->categories() as $categorie):?>
                                                 <?php if($categorie->getType() == 'tag'): ?>
-                                                    <label class="sticker">#<?= $categorie->getTitle()?></label>
+                                                    <label class="sticker"><span class="material-icons-round">tag</span><?= $categorie->getTitle()?></label>
                                                 <?php endif;?>
                                             <?php endforeach;?>
                                         </td>

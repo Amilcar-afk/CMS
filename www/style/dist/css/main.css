@@ -2134,7 +2134,11 @@ h2 {
   font-size: 1rem;
   background-color: #818181;
   border-radius: var(--radius, 5px);
-  padding: 4px; }
+  padding: 4px;
+  display: flex;
+  align-items: center; }
+  .sticker .material-icons-round {
+    font-size: 1.0625rem; }
   .sticker--slug {
     background-color: #444; }
 
