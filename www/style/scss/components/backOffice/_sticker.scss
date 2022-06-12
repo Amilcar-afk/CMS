@@ -4,6 +4,12 @@
   background-color: $light-grey;
   border-radius: var(--radius, 5px);
   padding: 4px;
+  display: flex;
+  align-items: center;
+
+  & .material-icons-round{
+    font-size: rem(17);
+  }
 
   &--slug{
     background-color: $dark-grey;
