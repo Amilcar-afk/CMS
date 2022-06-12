@@ -15,7 +15,6 @@
                 <header>
                     <h1 class="title title--black">STYLE</h1>
                 </header>
-
                 <!--Colors-->
                 <article>
                     <header class="main-nav-choice selected" data-wc-target="colors-elements">
@@ -29,25 +28,40 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #396075"></span>
+                                <span class="
+                                main_color
+                                input-block cta-button--mains-color--custom" 
+                                <?= ($main_color &&  $main_color->getId()) ? 'id="'.$main_color->getId().'"':'id=""'?>
+                                <?= ($main_color && $main_color->getValue()) != null?   'style="background-color:'.$main_color->getValue(). '"':'style="background-color:#396075"'  ?>
+                                ></span>
                                 <label>Main color</label>
                             </article>
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #55A6D3"></span>
+                                <span class="second_color main input-block cta-button--mains-color--custom" 
+                                <?= ($second_color && $second_color->getId()) != null? 'id="'.$second_color->getId().'"':'id=""'?>
+                                <?= ($second_color && $second_color->getValue()) != null?   'style="background-color:'.$second_color->getValue(). '"':'style="background-color:#396075"'  ?>
+                                ></span>
                                 <label>Seconde color</label>
                             </article>
                             <article>
-                                <span class="input-block cta-button--mains-color--custom" style="background-color: #9DDCFF"></span>
+                                <span class="third_color input-block cta-button--mains-color--custom" 
+                                <?= ($third_color && $third_color->getId()) != null? 'id="'.$third_color->getId().'"':'id=""'?>
+                                <?= ($third_color && $third_color->getValue()) != null?   'style="background-color:'.$third_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
+                                ></span>
                                 <label>Third color</label>
                             </article>
                         </section>
+
                         <header class="main-nav-choice">
                             <h2>Other colors</h2>
                             <p>The background color is the most of the time white or black if your are a dark mode fan. You always can be creative.</p>
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block"></span>
+                                <span class="background_color input-block cta-button--mains-color--custom"
+                                <?= ($background_color && $background_color->getId()) != null? 'id="'.$background_color->getId().'"':'id=""'?>
+                                <?= ($background_color && $background_color->getValue()) != null?   'style="background-color:'.$background_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
+                                ></span>
                                 <label>Background color</label>
                             </article>
                         </section>
@@ -67,15 +81,23 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <input type="file" class="input-block">
+                                <span class="input-block ">
                                     <img src="">
-                                </input>
+                                    <input type="file" name="main_logo" class="main_logo ">
+                                </span>
+                                <!-- <form action="/option/compose" method="POST" enctype="multipart/form-data" > -->
+                                    <!-- <button type="submit">Valider</button>
+                                </form> -->
                                 <label>Main logo</label>
                             </article>
                             <article>
-                                <input type="file" class="input-block">
-                                    <img src="">
-                                </input>
+                                <!-- <form action="/option/compose" method="POST" enctype="multipart/form-data" >
+                                    <button type="submit">Valider</button>
+                                </form> -->
+                                    <span class="input-block ">
+                                        <img src="">
+                                        <input type="file" name="main_favicon"  class="main_favicon">
+                                    </span>
                                 <label>Favicon</label>
                             </article>
                         </section>
@@ -90,15 +112,14 @@
                         <span class="material-icons-round">more_horiz</span>
                     </header>
                     <div id="fonts-elements" class="container-main-content container-main-content--menu-content collapse row" data-group-collapse="style-manager-container">
-
                         <header class="main-nav-choice">
                             <h2>My fonts</h2>
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <input type="file" class="input-block">
+                                <span class="input-block">
                                     <span class="material-icons-round">add</span>
-                                </input>
+                                </span>
                                 <label>Add font</label>
                             </article>
                             <article>
@@ -143,11 +164,17 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block" style="background-color: #396075"></span>
+                                <span class="radius input-block main_border"
+                                <?= ($radius && $radius->getValue()) != null?   $radius->getValue():''  ?>
+                                <?= ($radius && $radius->getId()) != null?  'id="'.$radius->getId().'"':''  ?>
+                                style="background-color: #396075"></span>
                                 <label>Radius</label>
                             </article>
                             <article>
-                                <span class="input-block" style="background-color: #55A6D3"></span>
+                                <span class="right_angle input-block main_border"
+                                <?= ($radius && $radius->getValue()) != null?   $radius->getValue():''  ?>
+                                <?= ($radius && $radius->getId()) != null?  'id="'.$radius->getId().'"':''  ?>
+                                style="background-color: #55A6D3"></span>
                                 <label>Right angle</label>
                             </article>
                         </section>
@@ -157,26 +184,36 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="input-block" style="background-color: #396075"></span>
+                                <span 
+                                class="small input-block bessels" 
+                                style="background-color: #396075"
+                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
+                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
+                                ></span>
                                 <label>Small</label>
                             </article>
                             <article>
-                                <span class="input-block" style="background-color: #55A6D3"></span>
+                                <span 
+                                class="medium_classic input-block bessels" 
+                                style="background-color: #55A6D3"
+                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
+                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
+                                ></span>
                                 <label>Medium - classic</label>
                             </article>
                             <article>
-                                <span class="input-block" style="background-color: #55A6D3"></span>
+                                <span 
+                                class="big input-block bessels" 
+                                style="background-color: #55A6D3"
+                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
+                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
+                                ></span>
                                 <label>Big</label>
                             </article>
                         </section>
-
                     </div>
                 </article>
-
-
             </div>
-
         </section>
     </section>
-
 </section>

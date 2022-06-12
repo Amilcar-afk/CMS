@@ -96,8 +96,8 @@ admin/:
 
 
 /settings/style:
-  controller: settings
-  action: listStyle
+  controller: option
+  action: loadOption
   middleware : ['auth', 'admin']
 
 /settings/user-manager:
@@ -151,4 +151,10 @@ admin/:
   controller: meeting
   action: deleteRdv
   middleware : ['auth']
+
+/option/compose:
+  controller: option
+  action: composeOption
+  middleware: ['auth']
+
 

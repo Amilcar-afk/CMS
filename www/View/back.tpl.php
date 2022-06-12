@@ -41,6 +41,7 @@
         </main>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
         <script async src="../style/js/calendar.js"></script>
+        <script async src="../style/js/options.js"></script>
         <script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/moment.min.js'></script>
         <script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery.min.js'></script>
         <script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery-ui.min.js'></script>

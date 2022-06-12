@@ -5,10 +5,8 @@ $(document).ready(function(){
         $('[data-alt=' + ucFisrt(placeMenu) + ']').addClass('selected');
     }
 
-
     //ALT BUBBLE
     $(".button-menu").mouseover(function (){
-
         let isAlt = $(".alt-on")[0];
         if ($(isAlt) != undefined){
             if ($(isAlt) == $(this)) {
@@ -36,7 +34,6 @@ $(document).ready(function(){
             }, 500);
         }
     })
-
 
     //BURGER MENU
     $(".cta-button--menu-burger").click(function (){
@@ -76,8 +73,8 @@ $(document).ready(function(){
     })
 
     //SHOW COLOR PICKER
-    $(".cta-button--mains-color--custom").click(function () {
-        var $newComponent = $("<input value='' />");
+    $(".cta-button--mains-color--custom").click(function (e) {
+        var $newComponent = $("<input value='' class='e' />");
         $(this).append($newComponent);
         $newComponent.spectrum({
             type: "flat",
@@ -89,6 +86,12 @@ $(document).ready(function(){
         });
     })
 });
+
+
+
+
+
+
 
 //COLLAPSE
 $(document).on("click", ".main-nav-choice[data-wc-target]", function (){
