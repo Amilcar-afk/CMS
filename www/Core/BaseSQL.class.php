@@ -79,7 +79,13 @@ abstract class BaseSQL
 
         $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute($columns);
-        $lastInsertd = self::$bdd->lastInsertId();
+
+        $stmt = self::$bdd->query("SELECT LAST_INSERT_ID()");
+        if( !is_null($this->getId()) ){
+            $lastInsertd = $this->getId();
+        }else{
+            $lastInsertd = $stmt->fetchColumn();
+        }
         $this->setLastId($lastInsertd );
     }
 
