@@ -82,6 +82,8 @@ class Option{
             $this->option->setUserKey($id_user);
             $this->option->save();
         }
+
+
         // if(!isset($_POST['id']) && !(!isset($_FILES['main_favicon']) || !isset($_FILES['main_logo']))){
         // else if(isset($_FILES['main_logo']) || isset($_FILES['main_favicon'])){
         //     if(isset($_FILES['main_logo']) ){
@@ -93,7 +95,9 @@ class Option{
         //         $name = $_FILES['main_favicon']['name'];
         //         $type = 'main_favicon';
         //     }
+
         //     move_uploaded_file($tmpName, "./style/images/photos/".$name);
+
         //     $this->option->setPath($tmpName);
         //     $this->option->setType($type);
         //     $this->option->setUserKey($id_user);
