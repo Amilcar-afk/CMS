@@ -69,8 +69,6 @@ class Page_categorie extends BaseSQL
         parent::save();
     }
 
-   
-
 }
 
    

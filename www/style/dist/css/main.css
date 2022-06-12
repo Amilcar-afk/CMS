@@ -1,20 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-:root {
-  --main-color: #396075;
-  --second-color: #55A6D3;
-  --third-color: #9BBCFF;
-  --main-color-rgb: 57,96,117;
-  --second-color-rgb: 85,166,211;
-  --third-color-rgb: 155,188,255;
-  --background-color: white;
-  --font-color: black;
-  --submit-color:#81CF66;
-  --cancel-color:#FF7070;
-  --bessels: 1200px;
-  --shadow: 0px 0px 15px rgba(0, 0, 0, 0.78); }
-
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif; }
@@ -2186,6 +2172,20 @@ h2 {
       border-radius: var(--radius, 10px);
       background-color: var(--main-color) !important;
       color: white; }
+
+.color-picker--editor .sp-replacer {
+  border: unset !important;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px; }
+
+.color-picker--setting .sp-replacer {
+  border: unset !important;
+  width: 100%;
+  height: 100%; }
+
+.color-picker .sp-dd {
+  display: none !important; }
 
 .alert {
   position: absolute;

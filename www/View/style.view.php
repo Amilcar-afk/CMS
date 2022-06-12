@@ -28,26 +28,27 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="
-                                main_color
-                                input-block cta-button--mains-color--custom" 
-                                <?= ($main_color &&  $main_color->getId()) ? 'id="'.$main_color->getId().'"':'id=""'?>
+                                <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
                                 <?= ($main_color && $main_color->getValue()) != null?   'style="background-color:'.$main_color->getValue(). '"':'style="background-color:#396075"'  ?>
-                                ></span>
+                                >
+                                    <input type="hidden" class="color-picker--input" data-type="main_color" value="<?= ($main_color && $main_color->getValue()) != null? $main_color->getValue() : '#396075'?>">
+                                </span>
                                 <label>Main color</label>
                             </article>
                             <article>
-                                <span class="second_color main input-block cta-button--mains-color--custom" 
-                                <?= ($second_color && $second_color->getId()) != null? 'id="'.$second_color->getId().'"':'id=""'?>
+                                <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
                                 <?= ($second_color && $second_color->getValue()) != null?   'style="background-color:'.$second_color->getValue(). '"':'style="background-color:#396075"'  ?>
-                                ></span>
+                                >
+                                    <input type="hidden" class="color-picker--input" data-type="second_color" value="<?= ($second_color && $second_color->getValue()) != null? $second_color->getValue() : '#396075'?>">
+                                </span>
                                 <label>Seconde color</label>
                             </article>
                             <article>
-                                <span class="third_color input-block cta-button--mains-color--custom" 
-                                <?= ($third_color && $third_color->getId()) != null? 'id="'.$third_color->getId().'"':'id=""'?>
+                                <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
                                 <?= ($third_color && $third_color->getValue()) != null?   'style="background-color:'.$third_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
-                                ></span>
+                                >
+                                    <input type="hidden" class="color-picker--input" data-type="third_color" value="<?= ($third_color && $third_color->getValue()) != null? $third_color->getValue() : '#9DDCFF'?>">
+                                </span>
                                 <label>Third color</label>
                             </article>
                         </section>
@@ -58,10 +59,11 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="background_color input-block cta-button--mains-color--custom"
-                                <?= ($background_color && $background_color->getId()) != null? 'id="'.$background_color->getId().'"':'id=""'?>
-                                <?= ($background_color && $background_color->getValue()) != null?   'style="background-color:'.$background_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
-                                ></span>
+                                <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
+                                <?= ($background_color && $background_color->getValue()) != null?   'style="background-color:'.$background_color->getValue(). '"':'style="background-color:#F1F1F1"'  ?>
+                                >
+                                    <input type="hidden" class="color-picker--input" data-type="background_color" value="<?= ($background_color && $background_color->getValue()) != null? $background_color->getValue() : '#F1F1F1'?>">
+                                </span>
                                 <label>Background color</label>
                             </article>
                         </section>

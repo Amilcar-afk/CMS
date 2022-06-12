@@ -73,18 +73,20 @@ $(document).ready(function(){
     })
 
     //SHOW COLOR PICKER
-    $(".cta-button--mains-color--custom").click(function (e) {
-        var $newComponent = $("<input value='' class='e' />");
-        $(this).append($newComponent);
-        $newComponent.spectrum({
-            type: "flat",
+    $(".cta-button--mains-color--custom").each(function() {
+        $($(this).find('input')[0]).spectrum({
+            type: "color",
             showPalette: false,
             hideAfterPaletteSelect: true,
             showInput: true,
+            containerClassName: $(this).attr('data-type'),
             showInitial: true,
-            showAlpha: false
+            preferredFormat: "hex",
+            showAlpha: false,
+            appendTo: $(this)
         });
     })
+
 });
 
 
