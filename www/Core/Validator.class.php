@@ -33,10 +33,6 @@ class Validator
                 continue;
             }
 
-            if($input["name"] == "Categorie"){
-                continue;
-            }
-
             if(!isset($data[$name])){
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }

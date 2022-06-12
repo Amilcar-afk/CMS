@@ -10,7 +10,8 @@ $(document).ready(function(){
                     title:$(this).parent().find('[name=title]').val(),
                     status:$(this).parent().find('[name=status]').val(),
                     slug:$(this).parent().find('[name=slug]').val(),
-                    description:$(this).parent().find('[name=description]').val()
+                    description:$(this).parent().find('[name=description]').val(),
+                    categorie:$(this).parent().find('[name=categorie]').val()
                 },
             success:function(answer)
             {
