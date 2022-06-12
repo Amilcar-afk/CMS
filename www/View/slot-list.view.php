@@ -26,17 +26,15 @@
                 </article>
 
                 <article>
-                    <div id="slots-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="slot-manager-container" style="opacity: 1">
+                    <div class=" col-6 col-offset-3 background-background-color p-3 " id="calendar"></div>
+                    <!-- <div id="slots-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="slot-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
                             </tbody>
                         </table>
-
-                    </div>
+                    </div> -->
                 </article>
-
             </div>
-
         </section>
     </section>
 

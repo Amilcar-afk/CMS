@@ -1,7 +1,6 @@
 $(document).ready(function() {
   //il faut supprimer le // a:not([href]) {pointer-events:none// du css pour pouvoir manipuler le calandrier 
   const calendar = $('#calendar').fullCalendar({   
-    lang: 'fr',
     editable:true,
     header:{
       left:'prev,next today',
@@ -30,16 +29,16 @@ $(document).ready(function() {
     selectHelper:true,
     select: function(start, end, allDay,event)
     {
-    if(event.rank == 1){
-      if(start.isBefore(moment())) {
-        $('#calendar').fullCalendar('unselect');
-        alert('Impossible de séléctionnez cette date')
-        document.location.reload();
-       }else{
+    // if(event.rank == 1){
+    //   if(start.isBefore(moment())) {
+    //     $('#calendar').fullCalendar('unselect');
+    //     alert('Impossible de séléctionnez cette date')
+    //     document.location.reload();
+    //    }else{
         var start = moment(start).format("Y-MM-DD HH:mm:ss");
         var end = moment(end).format("Y-MM-DD HH:mm:ss");
         $.ajax({
-          url:"/rdv_calendar_insert",
+          url:"/slot/compose",
           type:"POST",
           data:
           {
@@ -52,12 +51,12 @@ $(document).ready(function() {
               calendar.fullCalendar('refetchEvents');
             }
           })
-        }
-      }else{
-        $('#calendar').fullCalendar('unselect');
-        calendar.fullCalendar('refetchEvents');
+        // }
+      // }else{
+      //   $('#calendar').fullCalendar('unselect');
+      //   calendar.fullCalendar('refetchEvents');
 
-      }
+      // }
     },
 
     editable:true,

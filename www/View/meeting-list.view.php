@@ -24,19 +24,16 @@
                     <div id="new-meeting-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="meeting-manager-container">
                     </div>
                 </article>
-
                 <article>
-                    <div id="meetings-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="meeting-manager-container" style="opacity: 1">
+                    <div class=" col-6 col-offset-3 background-background-color p-3 " id="calendar"></div>
+                    <!-- <div id="meetings-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="meeting-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
                             </tbody>
                         </table>
-
-                    </div>
+                    </div> -->
                 </article>
-
             </div>
-
         </section>
     </section>
 

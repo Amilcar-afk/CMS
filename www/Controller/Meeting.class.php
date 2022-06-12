@@ -21,6 +21,7 @@ class Meeting
 
     public function listRdv()
     {
+
         $view = new View("meeting-list", "back");
     }
 
@@ -34,27 +35,30 @@ class Meeting
     {
         if (isset($_POST)) {
             //insert pour la table Rdvs
+            var_dump($_POST);
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
             $this->rdv->setStatus('slot');
-            if (isset($_POST['id']) && $_POST['id'] != null) {
-                if (!$this->rdv->find($_POST['id'])) {
-                    return include "View/Partial/form.partial.php";
-                }
-                $this->rdv->setId($_POST['id']);
-            }
-            $config = Validator::run($this->rdv->getFormNewSlot(), $_POST);
-            if (empty($config)) {
-                $this->rdv->save();
-                //insert pour la table User_rdv
-                $lastId = $this->rdv->getLastId();
-                if ($lastId && !isset($_POST['id'])) {
-                    $this->user_rdv->setType('owner');
-                    $this->user_rdv->setUser_key($_SESSION['Auth']->id);
-                    $this->user_rdv->setRdv_key($lastId);
-                    $this->user_rdv->save();
-                }
-            }
+            // if (isset($_POST['id']) && $_POST['id'] != null) {
+            //     if (!$this->rdv->find($_POST['id'])) {
+            //         return include "View/Partial/form.partial.php";
+            //     }
+            //     $this->rdv->setId($_POST['id']);
+            // }
+
+            // $config = Validator::run($this->rdv->getFormNewSlot(), $_POST);
+
+            // if (empty($config)) {
+            //     $this->rdv->save();
+            //     //insert pour la table User_rdv
+            //     $lastId = $this->rdv->getLastId();
+            //     if ($lastId && !isset($_POST['id'])) {
+            //         $this->user_rdv->setType('owner');
+            //         $this->user_rdv->setUser_key($_SESSION['Auth']->id);
+            //         $this->user_rdv->setRdv_key($lastId);
+            //         $this->user_rdv->save();
+            //     }
+            // }
         }
 
     }
