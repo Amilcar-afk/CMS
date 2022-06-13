@@ -194,7 +194,7 @@ class Rdv extends BaseSQL
         return parent::find($id, $attribut);
     }
 
-    public function getFormRegister(): array
+    public function getFormNewSlot(): array
     {
         return [
             "config"=>[
@@ -203,10 +203,42 @@ class Rdv extends BaseSQL
                 "submit"=>"reserver",
             ],
             "inputs"=>[
+                "start"=>[
+                    "type"=>"date",
+                    "label"=>"",
+                    "id"=>"id",
+                    "class"=>"inputRegister",
+                    "value"=> $this->getStartDate(),
+                    "error"=>""
+                    ],
+                "end"=>[
+                    "type"=>"date",
+                    "label"=>"",
+                    "id"=>"id",
+                    "class"=>"inputRegister",
+                    "value"=> $this->getEndDate(),
+                    "error"=>""
+                    ],
+            ],
+            
+        ];
+    }
+
+
+
+    public function getFormNewMeeting(): array
+    {
+        return [
+            "config"=>[
+       
+                "submit"=>"reserver",
+            ],
+            "inputs"=>[
 
                 "id"=>[
                     "type"=>"hidden",
                     "label"=>"",
+                    "name"=>"id",
                     "id"=>"id",
                     "class"=>"inputRegister",
                     "value"=> $this->getId(),
@@ -217,10 +249,12 @@ class Rdv extends BaseSQL
                     "placeholder"=>"Votre title ...",
                     "label"=>"title",
                     "id"=>"title",
-                    "class"=>"title",
+                    "class"=>"title_rdv",
                     "required"=>true,
-                    "unicity"=>true,
+                    "min"=>2,
+                    "max"=>50,
                     "value"=> $this->getTitle(),
+                    "error"=>""
                 ],
               
                 "location"=>[
@@ -229,10 +263,11 @@ class Rdv extends BaseSQL
                     "label"=>"location",
                     "id"=>"location",
                     "class"=>"location",
+                    "min"=>2,
+                    "max"=>50,
                     "required"=>true,
-                    "error"=>"location incorrect",
-                    "unicity"=>true,
                     "value"=> $this->getLocation(),
+                    "error"=>""
                 ],
 
                 "description"=>[
@@ -240,12 +275,14 @@ class Rdv extends BaseSQL
                     "placeholder"=>"description ...",
                     "id"=>"description",
                     "class"=>"description",
+                    "rows"=>"",
+                    "cols"=>"",
                     "question"=>"",
                     "min"=>2,
                     "max"=>50,
                     "name"=>"description",
-                    "error"=>"champ ",
                     "value"=> $this->getDescription(),
+                    "error"=>""
                 ]
             ],
             

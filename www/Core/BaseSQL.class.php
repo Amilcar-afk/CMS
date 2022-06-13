@@ -108,6 +108,7 @@ abstract class BaseSQL
      */
     protected function delete($id)
     {
+        var_dump($id);
         if( !is_null($this->getId()) ){
             $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = self::$bdd->prepare($sql);

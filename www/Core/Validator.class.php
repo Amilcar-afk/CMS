@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use DateTime;
 
 class Validator 
 {
@@ -9,7 +10,7 @@ class Validator
     public static $form_errors;
 
 
-    public static function run($config, $data, $unicity)
+    public static function run($config, $data, $unicity =null)
     {
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
@@ -33,7 +34,7 @@ class Validator
                 continue;
             }
 
-            if($input["name"] == "Categorie"){
+            if(isset($input["name"]) && $input["name"] == "Categorie"){
                 continue;
             }
 
@@ -58,26 +59,45 @@ class Validator
                 }
             }
 
-            if(isset($input['min']) && isset($input['max'])){
-                if(self::size($data[$name],$input['min'],$input['max'])){
-                    $config['inputs'][$name]['error']="Min ".$input['min']." and max ".$input['max']." caracteres";
+            if($input["type"]=="date" ){
+                if(!self::validateDate($data[$name])){
+                    $config['inputs']['email']['error'] = "Bad Date";
                 }
             }
 
-
+            if(isset($input['min']) && isset($input['max'])){
+                if(self::size($data[$name],$input['min'],$input['max'])){
+                    $config['inputs'][$name]['error']="Min ".$input['min']." and max ".$input['max']." caracteres";
+                
+                }
+            }
+            
             array_push($errors, $config["inputs"][$name]['error'] );
         }
 
-        foreach($errors as $error){
-            if(strlen($error) == 0){
-                return ;
-            }else{
-                return $config;
+
+        foreach($errors as $error => $e ){
+            if(strlen($e) == 0){
+                unset($errors[$error]);
             }
         }
+        if(empty($errors)){
+            return ;
+        }else{
+            return $config;
+        }
+     
 
     }
 
+
+
+
+    public static function validateDate($date, $format = 'Y-m-d H:i:s')
+    {
+        $currentDate = DateTime::createFromFormat($format, $date);
+        return $currentDate && $currentDate->format($format) == $date;
+    }
 
 
     public static function size($value, $minSize, $maxSize)

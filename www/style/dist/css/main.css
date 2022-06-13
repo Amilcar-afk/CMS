@@ -57,8 +57,7 @@ input:focus {
 a {
   text-decoration: none; }
 
-a:not([href]) {
-  pointer-events: none; }
+
 
 span, small {
   font-family: "Montserrat", sans-serif;
@@ -104,7 +103,7 @@ p {
 * {
   scrollbar-color: var(--main-color) #EBEBEB;
   scrollbar-width: thin;
-  scrollbar-border-radius: var(--radius, 12px); }
+  scrollbar-border-radius: var(--radius, 12px); } */
 
 /* tr {
   display: flex;
@@ -135,9 +134,9 @@ table.dataTable.no-footer {
 thead tr {
   border: none !important; }
   thead tr td {
-    border: none !important; } */
+    border: none !important; }
 
-.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+ .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
   color: var(--main-color);
   font-weight: bold; }
 
@@ -208,7 +207,23 @@ tr:first-child {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-  /* change me to blue to match the background */ }
+  }
+  /* change me to blue to match the background */ 
+
+*::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border: 0px solid;
+  border-radius: var(--radius, 12px);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px; 
+  }
+  /* change border color to blue to match the background */ 
+
+.section-module {
+  padding: 20px; }
+
+/* change me to blue to match the background */ 
 
 *::-webkit-scrollbar-thumb {
   background: var(--main-color);
@@ -217,12 +232,13 @@ tr:first-child {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-  /* change border color to blue to match the background */ }
+}
+/* change border color to blue to match the background */ 
 
 .section-module {
-  padding: 20px; }
+  padding: 20px; } 
 
-@media (max-width: 992px) {
+ @media (max-width: 992px) {
   .body-back-office {
     position: relative;
     padding: 0; } }
@@ -252,7 +268,7 @@ tr:first-child {
   100% {
     transform: scale(0.85, 0.85);
     opacity: 0%;
-    display: none; } }
+    display: none; } } 
 
 @media (max-width: 768px) {
   .col-sm-1 {

@@ -127,9 +127,21 @@ admin/:
   middleware : ['auth']
 
 
+
+
 /meetings:
   controller: meeting
   action: listRdv
+  middleware : ['auth']
+
+/load:
+  controller: meeting
+  action: load
+  middleware : ['auth']
+
+/loadmeetings:
+  controller: meeting
+  action: loadMeetings
   middleware : ['auth']
 
 /meeting/compose:
@@ -152,9 +164,16 @@ admin/:
   action: deleteRdv
   middleware : ['auth']
 
+/slot/delete:
+  controller: meeting
+  action: deleteRdv
+  middleware : ['auth']
+
 /option/compose:
   controller: option
   action: composeOption
   middleware: ['auth']
+
+
 
 
