@@ -24,15 +24,17 @@
                     <div id="new-meeting-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="meeting-manager-container">
                     </div>
                 </article>
-                <article>
-                    <div class=" col-6 background-background-color p-3 " id="calendar"></div>
-                    <!-- <div id="meetings-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="meeting-manager-container" style="opacity: 1">
+               <article class="calendar_article1">
+                     <!-- <div id="meetings-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="meeting-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
+                                <div class="main_meeting_calendar p-3 " id="calendar"></div>
+
                             </tbody>
                         </table>
-                    </div> -->
-                </article>
+                    </div>-->
+                </article> 
+             
             </div>
         </section>
     </section>
@@ -47,10 +49,9 @@
                 <header>
                     <h1 class="title title--black">NEW MEETING</h1>
                 </header>
-                <article>
-                      <div class=" col-6  p-3 " id="calendar" style="display: none;"></div>
-                </article>
+                <article class="calendar_article2">
 
+                </article>
                 <div id="meeting_inputs">
                     <?php  $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
                 </div>

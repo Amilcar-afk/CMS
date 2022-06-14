@@ -1,19 +1,44 @@
 $(document).ready(function() {
   var rank = [];
 
+  var activeAvailableMeetings = false
+
   $('#meeting_inputs').hide();
+  $('.new_meeting_calendar').hide();
+  $( "<div class='main_meeting_calendar p-3 ' id='calendar'></div>" ).prependTo( ".calendar_article1" );
+  loadcalendar($('#calendar'))
 
-  console.log(location.pathname)
+  $('.cta-button.cta-button-a.cta-button--submit.cta-button--submit--add').on('click',function(){
+    activeAvailableMeetings = true
+    $('.calendar_article2').show()
+    $( ".calendar_article1" ).hide();
+    $( "<div class='main_meeting_calendar p-3 ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
+    setTimeout(() => {
+      loadcalendar($('#calendar2'))
+    }, 100);
+  })
 
 
-  // $('.cta-button.cta-button-a.cta-button--submit.cta-button--submit--add').on('click',function(){
-  //     $('.a-zoom-out-end').css('display','block')
-  // })
+  $('.material-icons-round').on('click',function(){
+    activeAvailableMeetings = false
+
+    if($('#calendar')){
+      $('#calendar').hide()
+    }
+    $('#calendar2').remove()
+    $('.calendar_article2').hide()
+    $( ".calendar_article1" ).css('display','block');
+    $( "<div class='main_meeting_calendar p-3 ' id='calendar'></div>" ).prependTo( ".calendar_article1" )
+
+    loadcalendar($('#calendar'))
+  })
 
 
   //il faut supprimer le // a:not([href]) {pointer-events:none// du css pour pouvoir manipuler le calandrier 
-  const calendar = $('#calendar').fullCalendar({   
 
+function loadcalendar(id){
+// $('#calendar')
+  const calendar = id.fullCalendar({   
     lang: 'fr',
     editable:true,
     header:{
@@ -21,11 +46,13 @@ $(document).ready(function() {
       center:'title',
       right:'month,agendaWeek,agendaDay'
     },
-
     // LOAD EVENTS /////////////////////////////////////////////
 
     events: function(start, end, timezone, callback) { 
-      if(location.pathname == '/slots'){
+
+
+      if(location.pathname == '/slots' || activeAvailableMeetings){
+        console.log( $('#calendar2'))
         $.ajax({
             method: 'POST',
             url:"/load",
@@ -55,8 +82,6 @@ $(document).ready(function() {
           }
         });
       }
-      
-
     },  
 
     // INSERT EVENTS /////////////////////////////////////////////
@@ -67,9 +92,9 @@ $(document).ready(function() {
     selectHelper:true,
     select: function(start, end, allDay,event)
     {
-      if(rank[0] == 'admin'){
+      if(rank[0] == 'admin' || location.pathname == '/slots'){
         if(start.isBefore(moment())) {
-          $('#calendar').fullCalendar('unselect');
+          id.fullCalendar('unselect');
           alert('Impossible de séléctionnez cette date')
           // document.location.reload();
           console.log(1)
@@ -93,7 +118,7 @@ $(document).ready(function() {
             })
           }
       }else{
-        document.location.reload();
+        id.fullCalendar('unselect');
       }
     },
 
@@ -145,8 +170,7 @@ $(document).ready(function() {
 
     eventClick:function(event)
     {
-      if(event.rank == '1'){
-        
+      if(event.rank == 'admin' && location.pathname == '/slots' ){
         if(confirm("Vous etes sur de supprimer de rendez-vous"))
         {
          var id = event.id;
@@ -194,5 +218,6 @@ $(document).ready(function() {
       return false
     },
   });
+}
 });
   

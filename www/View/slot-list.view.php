@@ -25,8 +25,8 @@
                     </div>
                 </article>
 
-                <article>
-                    <div class=" col-6 background-background-color p-3 " id="calendar"></div>
+                <article class="calendar_article1">
+                    <!-- <div class="main_slot_calendar col-6 background-background-color p-3 " id="calendar"></div> -->
                     <!-- <div id="slots-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="slot-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
@@ -48,8 +48,8 @@
                 <header>
                     <h1 class="title title--black">NEW SLOT</h1>
                 </header>
-                <article>
-                    <!-- <div class=" col-6  p-3 " id="calendar"></div> -->
+                <article class="calendar_article2">
+
                 </article>
             </div>
         </section>

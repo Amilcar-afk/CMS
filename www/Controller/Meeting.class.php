@@ -49,7 +49,6 @@ class Meeting
 
     public function listRdv()
     {
-        
         $view = new View("meeting-list", "back");
         $view->assign("rdv", $this->rdv);
     }
@@ -58,21 +57,26 @@ class Meeting
 
         $id = $_SESSION['Auth']->id;
         $myMeetings = Query::from('cmspf_User_rdv')->where("user_key=".$id)->execute('Rdv');
-        $es = [];
+        $meetings = [];
         foreach($myMeetings as $e){
             $rdv = $this->rdv->find($e->rdv_key);
-            array_push($es, $rdv);
+            array_push($meetings, $rdv);
         }
-        foreach($es as $row){
+       
+        foreach($meetings as $row){
             if($row != false){
+                if($row->getStatus() == 'slot'){
+                    continue;
+                }
                 $allRdvs[] = array(
                 "id" => $row->getId(),
                 "title"=>$row->getTitle(),
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
+                "color" => '#ff7f00',
+
             );
             }
-            
         }
         echo json_encode($allRdvs);
 

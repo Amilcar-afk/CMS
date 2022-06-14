@@ -225,7 +225,6 @@ class Rdv extends BaseSQL
     }
 
 
-
     public function getFormNewMeeting(): array
     {
         return [
