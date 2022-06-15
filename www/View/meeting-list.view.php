@@ -52,10 +52,28 @@
                 <article class="calendar_article2">
 
                 </article>
-                <div id="meeting_inputs">
-                    <?php  $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
-                </div>
+                <!-- <div id="meeting_inputs">
+                    <?php // $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
+                </div> -->
             </div>
         </section>
     </section>
+
+
+
+    <section id="container-new-form-meeting" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-new-form-meeting" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-form-meeting"><span class="material-icons-round">close</span></button>
+        <div class="menu-container">
+        </div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black"> date !!</h1>
+                </header>
+                    <?php   $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
+            </div>
+        </section>
+    </section>
+
+
 </section>

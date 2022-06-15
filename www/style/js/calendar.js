@@ -49,8 +49,6 @@ function loadcalendar(id){
     // LOAD EVENTS /////////////////////////////////////////////
 
     events: function(start, end, timezone, callback) { 
-
-
       if(location.pathname == '/slots' || activeAvailableMeetings){
         console.log( $('#calendar2'))
         $.ajax({
@@ -72,8 +70,6 @@ function loadcalendar(id){
           color: '#000',
           dataType: 'json',
           success: function(events) {
-
-            console.log(events)
             callback(events);
             events.map((e)=>{
               rank.push(e.rank);
@@ -97,7 +93,6 @@ function loadcalendar(id){
           id.fullCalendar('unselect');
           alert('Impossible de séléctionnez cette date')
           // document.location.reload();
-          console.log(1)
          }else{
           var start = moment(start).format("Y-MM-DD HH:mm:ss");
           var end = moment(end).format("Y-MM-DD HH:mm:ss");
@@ -113,7 +108,7 @@ function loadcalendar(id){
               {
                 confirm('insertion reussie');
                 calendar.fullCalendar('refetchEvents');
-                document.location.reload();
+                // document.location.reload();
               }
             })
           }
@@ -143,6 +138,9 @@ function loadcalendar(id){
         calendar.fullCalendar('refetchEvents');
       }
     },
+
+    //enlever les slos en rouges dans meetings
+    //
 
     editable:true,
     eventResize:function(event)
@@ -186,33 +184,35 @@ function loadcalendar(id){
          })
         }
       }else{
-        if(confirm("vous etes sur de choiosir ce rendez-vous")){
-          $('#meeting_inputs').show()
-          $('.cta-button.cta-button--submit.col-12').on('click',function(e){
+        // if(confirm("vous etes sur de choiosir ce rendez-vous")){
+          // $('#meeting_inputs').show()
+        // }
+
+        console.log($('[name="description"]'))
+          var btn = '<button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-form-meeting">New meeting </button>';
+          getAnimate($(btn));
+          $('.cta-button-compose-rdv').on('click',function(e){
              var id = event.id;
              $.ajax({
               url:"/meeting/compose",
               type:"POST",
               data:{
                 id:id,
-                title: $('.title_rdv').val(),
-                location: $('.location').val(),
-                description: $('.description').val(),
+                title: $('[name="title"]').val(),
+                location: $('[name="location"]').val(),
+                description: $('#description').val(),
               },
-              success:function()
+              success:function(answer)
               {
-                // calendar.fullCalendar('refetchEvents');
-                if ( window.history.replaceState ) {
-                  window.history.replaceState( null, null, window.location.href );
-              }
-                alert("rendez-vous choisie");
+                if (answer.includes('<section id="back-office-container">')){
+                  $($('main')[0]).html(answer);
+                  alertMessage("Chosen Meeting");
+                }
               },
-             })
+            })
           })
-        }
       }
     },
-
     // EMPECHER DE SELECTIONNER UNE DATE EXISTANTE
     selectOverlap: function(event) {
       return false
@@ -221,3 +221,7 @@ function loadcalendar(id){
 }
 });
   
+// calendar.fullCalendar('refetchEvents');
+// if ( window.history.replaceState ) {
+//   window.history.replaceState( null, null, window.location.href );
+// }

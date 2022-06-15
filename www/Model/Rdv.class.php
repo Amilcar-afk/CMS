@@ -229,26 +229,27 @@ class Rdv extends BaseSQL
     {
         return [
             "config"=>[
-       
-                "submit"=>"reserver",
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-rdv",
+                "method"=>"POST",
+                
             ],
             "inputs"=>[
-
                 "id"=>[
                     "type"=>"hidden",
-                    "label"=>"",
+                    "question"=>"",
                     "name"=>"id",
-                    "id"=>"id",
-                    "class"=>"inputRegister",
+                    "class"=>"input",
                     "value"=> $this->getId(),
                     ],
 
                 "title"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre title ...",
-                    "label"=>"title",
+                    "placeholder"=>"Meeting title ...",
+                    "name"=>"title",
+                    "question"=>"Title",
                     "id"=>"title",
-                    "class"=>"title_rdv",
+                    "class"=>"input",
                     "required"=>true,
                     "min"=>2,
                     "max"=>50,
@@ -258,10 +259,10 @@ class Rdv extends BaseSQL
               
                 "location"=>[
                     "type"=>"text",
-                    "placeholder"=>"Votre location ...",
-                    "label"=>"location",
-                    "id"=>"location",
-                    "class"=>"location",
+                    "placeholder"=>"Meeting location ...",
+                    "name"=>"location",
+                    "question"=>"Location",
+                    "class"=>"input",
                     "min"=>2,
                     "max"=>50,
                     "required"=>true,
@@ -271,14 +272,14 @@ class Rdv extends BaseSQL
 
                 "description"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"description ...",
-                    "id"=>"description",
-                    "class"=>"description",
-                    "rows"=>"",
-                    "cols"=>"",
-                    "question"=>"",
+                    "placeholder"=>"Meeting description ...",
+                    "class"=>"input",
+                    "question"=>"Description",
+                    "id"=>"description_form",
                     "min"=>2,
                     "max"=>50,
+                    "rows"=>4,
+                    "cols"=>10,
                     "name"=>"description",
                     "value"=> $this->getDescription(),
                     "error"=>""

@@ -79,8 +79,8 @@ class Meeting
             }
         }
         echo json_encode($allRdvs);
-
     }
+
 
     public function listSlot()
     {
@@ -133,9 +133,13 @@ class Meeting
     {
         if (isset($_POST)) {
 
+            echo 1;
+
             if (!$this->rdv->find($_POST['id'])) {
                 return include "View/Partial/form.partial.php";
             }
+            echo 2;
+
             //insert pour la table Rdvs
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setStatus('rdv');
@@ -144,22 +148,27 @@ class Meeting
             //$this->rdv->setRdv_step_key();
             $this->rdv->setId($_POST['id']);
             $config = Validator::run($this->rdv->getFormNewMeeting(),$_POST);
+            echo 3;
 
             if (empty($config)) {
+            echo 4;
+
                 $this->rdv->save();
+            echo 5;
+                
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId) {
+            echo 6;
+
                     $this->user_rdv->setType('customer');
                     $this->user_rdv->setUser_key($_SESSION['Auth']->id);
                     $this->user_rdv->setRdv_key($lastId);
                     $this->user_rdv->save();
+                    $view = new View("meeting-list", "back");
+                    $view->assign("rdv", $this->rdv);
                 }
             }
         }
     }
-
-
-
-
 }
