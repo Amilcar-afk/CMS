@@ -1646,6 +1646,7 @@ tr:first-child {
       background: rgba(255, 255, 255, 0.6); } }
 
 .container-main-content {
+  transition: all 0.3s;
   border-radius: var(--radius, 20px);
   width: 100%; }
   .container-main-content--padding {
@@ -1677,6 +1678,61 @@ tr:first-child {
           justify-content: center;
           align-items: center;
           background-color: #F1F1F1; }
+        .container-main-content--menu-content .section-config-blocks article .radius div {
+          width: 40%;
+          height: 50%;
+          border-top: var(--font-color, black) solid 5px;
+          border-left: var(--font-color, black) solid 5px;
+          border-radius: 20px 0 0 0;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .radius.selected div {
+          border-top: var(--background-color, white) solid 5px;
+          border-left: var(--background-color, white) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .right_angle div {
+          width: 40%;
+          height: 50%;
+          border-top: var(--font-color, black) solid 5px;
+          border-left: var(--font-color, black) solid 5px;
+          border-radius: 5px 0 0 0;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .right_angle.selected div {
+          border-top: var(--background-color, white) solid 5px;
+          border-left: var(--background-color, white) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .small div {
+          width: 28%;
+          height: 50%;
+          border-right: var(--font-color, black) solid 5px;
+          border-left: var(--font-color, black) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .small.selected div {
+          border-right: var(--background-color, white) solid 5px;
+          border-left: var(--background-color, white) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .medium_classic div {
+          width: 46%;
+          height: 50%;
+          border-right: var(--font-color, black) solid 5px;
+          border-left: var(--font-color, black) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .medium_classic.selected div {
+          border-right: var(--background-color, white) solid 5px;
+          border-left: var(--background-color, white) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .big div {
+          width: 64%;
+          height: 50%;
+          border-right: var(--font-color, black) solid 5px;
+          border-left: var(--font-color, black) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .big.selected div {
+          border-right: var(--background-color, white) solid 5px;
+          border-left: var(--background-color, white) solid 5px;
+          transition: all 0.3s; }
+        .container-main-content--menu-content .section-config-blocks article .selected {
+          background: var(--main-color);
+          transition: all 0.3s; }
         .container-main-content--menu-content .section-config-blocks article label {
           font-size: 0.875rem; }
   .container-main-content--list {

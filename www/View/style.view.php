@@ -85,15 +85,9 @@
                                     <img src="">
                                     <input type="file" name="main_logo" class="main_logo ">
                                 </span>
-                                <!-- <form action="/option/compose" method="POST" enctype="multipart/form-data" > -->
-                                    <!-- <button type="submit">Valider</button>
-                                </form> -->
                                 <label>Main logo</label>
                             </article>
                             <article>
-                                <!-- <form action="/option/compose" method="POST" enctype="multipart/form-data" >
-                                    <button type="submit">Valider</button>
-                                </form> -->
                                     <span class="input-block ">
                                         <img src="">
                                         <input type="file" name="main_favicon"  class="main_favicon">
@@ -164,17 +158,15 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span class="radius input-block main_border"
-                                <?= ($radius && $radius->getValue()) != null?   $radius->getValue():''  ?>
-                                <?= ($radius && $radius->getId()) != null?  'id="'.$radius->getId().'"':''  ?>
-                                style="background-color: #396075"></span>
+                                <span data-type="radius" data-value="radius" class="radius <?= ($radius->getValue() != null && $radius->getValue() == "radius")?   'selected':''  ?> input-block main_border compose-option">
+                                    <div></div>
+                                </span>
                                 <label>Radius</label>
                             </article>
                             <article>
-                                <span class="right_angle input-block main_border"
-                                <?= ($radius && $radius->getValue()) != null?   $radius->getValue():''  ?>
-                                <?= ($radius && $radius->getId()) != null?  'id="'.$radius->getId().'"':''  ?>
-                                style="background-color: #55A6D3"></span>
+                                <span data-type="radius" data-value="right_angle" class="right_angle <?= ($radius->getValue() != null && $radius->getValue() == "right_angle")?   'selected':''  ?> input-block main_border compose-option">
+                                    <div></div>
+                                </span>
                                 <label>Right angle</label>
                             </article>
                         </section>
@@ -184,30 +176,21 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span 
-                                class="small input-block bessels" 
-                                style="background-color: #396075"
-                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
-                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
-                                ></span>
+                                <span data-type="bessels" data-value="small" class="small input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "small")?   'selected':''  ?>">
+                                    <div></div>
+                                </span>
                                 <label>Small</label>
                             </article>
                             <article>
-                                <span 
-                                class="medium_classic input-block bessels" 
-                                style="background-color: #55A6D3"
-                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
-                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
-                                ></span>
+                                <span data-type="bessels" data-value="medium_classic" class="medium_classic input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "medium_classic")?   'selected':''  ?>">
+                                    <div></div>
+                                </span>
                                 <label>Medium - classic</label>
                             </article>
                             <article>
-                                <span 
-                                class="big input-block bessels" 
-                                style="background-color: #55A6D3"
-                                <?= ($bessels && $bessels->getValue()) != null?   $bessels->getValue():''  ?>
-                                <?= ($bessels && $bessels->getId()) != null?  'id="'.$bessels->getId().'"':''  ?>
-                                ></span>
+                                <span data-type="bessels" data-value="big" class="big input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "big")?   'selected':''  ?>">
+                                    <div></div>
+                                </span>
                                 <label>Big</label>
                             </article>
                         </section>

@@ -106,6 +106,51 @@ class Option extends BaseSQL
         return parent::find($id, $attribut);
     }
 
+    public function getFormNewFont(): array
+    {
+
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-page"
+            ],
+            "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=>$this->getId(),
+                    "error"=>""
+                ],
+                "type"=>[
+                    "type"=>"hidden",
+                    "name"=>"type",
+                    "class"=>"input",
+                    "value"=>$this->getType(),
+                    "error"=>""
+                ],
+                "font"=>[
+                    "question"=>"Font file",
+                    "type"=>"file",
+                    "name"=>"font",
+                    "class"=>"input",
+                    "value"=>$this->getPath(),
+                    "error"=>""
+                ],
+                "default"=>[
+                    "question"=>"Default Font",
+                    "type"=>"checkbox",
+                    "name"=>"default",
+                    "class"=>"input",
+                    "value"=>$this->getDefault(),
+                    "error"=>""
+                ],
+            ]
+
+        ];
+    }
+
 }
 
    
