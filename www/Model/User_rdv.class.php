@@ -16,6 +16,14 @@ class User_rdv extends BaseSQL
         parent::__construct();
     }
 
+    /**
+     * @return string
+     */
+    public function getTableName(): string
+    {
+        return $this->table_name;
+    }
+
      /**
      * Get the value of id
      */ 

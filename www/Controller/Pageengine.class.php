@@ -99,8 +99,9 @@ class Pageengine
                 $this->page->save();
 
                 $lastId = $this->page->getLastId();
+
                 if ($lastId
-                    && !isset($_POST['categorie'])
+                    && isset($_POST['categorie'])
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {

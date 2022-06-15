@@ -34,11 +34,13 @@
                                 <tr class="table-line">
                                     <td>
                                         <h4><?= ucfirst($categorie->getTitle()) ?></h4>
+
                                         <?php foreach ($categorie->navigations() as $nav):?>
                                             <?php if ($nav->getType() == "nav"):?>
-                                                <label class="sticker">#<?= $nav->getTitle()?></label>
+                                                <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $nav->getTitle()?></label>
                                             <?php endif;?>
                                         <?php endforeach;?>
+
                                     </td>
                                     <td>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-categorie-<?=$categorie->getId() ?>"><span class="material-icons-round">build</span></button>

@@ -79,7 +79,13 @@ abstract class BaseSQL
 
         $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute($columns);
-        $lastInsertd = self::$bdd->lastInsertId();
+
+        $stmt = self::$bdd->query("SELECT LAST_INSERT_ID()");
+        if( !is_null($this->getId()) ){
+            $lastInsertd = $this->getId();
+        }else{
+            $lastInsertd = $stmt->fetchColumn();
+        }
         $this->setLastId($lastInsertd );
     }
 
@@ -222,6 +228,9 @@ abstract class BaseSQL
      */
     protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null, string $relation_target_key = null)
     {
+        $class = explode("\\", $class);
+        $class = end($class);
+
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{

@@ -1,4 +1,5 @@
 .container-main-content{
+  transition: all 0.3s;
   border-radius: var(--radius, 20px);
   width: 100%;
 
@@ -38,6 +39,103 @@
           justify-content: center;
           align-items: center;
           background-color: #F1F1F1;
+        }
+
+        .radius{
+          div{
+            width: 40%;
+            height: 50%;
+            border-top : var(--font-color, black) solid 5px;
+            border-left : var(--font-color, black) solid 5px;
+            border-radius: 20px 0 0 0;
+            transition: all 0.3s;
+          }
+
+          &.selected{
+            div {
+              border-top: var(--background-color, white) solid 5px;
+              border-left: var(--background-color, white) solid 5px;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .right_angle {
+          div {
+            width: 40%;
+            height: 50%;
+            border-top: var(--font-color, black) solid 5px;
+            border-left: var(--font-color, black) solid 5px;
+            border-radius: 5px 0 0 0;
+            transition: all 0.3s;
+          }
+
+          &.selected {
+            div {
+              border-top: var(--background-color, white) solid 5px;
+              border-left: var(--background-color, white) solid 5px;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .small{
+          div{
+            width: 28%;
+            height: 50%;
+            border-right : var(--font-color, black) solid 5px;
+            border-left : var(--font-color, black) solid 5px;
+            transition: all 0.3s;
+          }
+
+          &.selected{
+            div {
+              border-right: var(--background-color, white) solid 5px;
+              border-left: var(--background-color, white) solid 5px;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .medium_classic{
+          div{
+            width: 46%;
+            height: 50%;
+            border-right : var(--font-color, black) solid 5px;
+            border-left : var(--font-color, black) solid 5px;
+            transition: all 0.3s;
+          }
+
+          &.selected{
+            div {
+              border-right: var(--background-color, white) solid 5px;
+              border-left: var(--background-color, white) solid 5px;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .big{
+          div{
+            width: 64%;
+            height: 50%;
+            border-right : var(--font-color, black) solid 5px;
+            border-left : var(--font-color, black) solid 5px;
+            transition: all 0.3s;
+          }
+
+          &.selected{
+            div {
+              border-right: var(--background-color, white) solid 5px;
+              border-left: var(--background-color, white) solid 5px;
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .selected{
+          background: var(--main-color);
+          transition: all 0.3s;
         }
 
         label{

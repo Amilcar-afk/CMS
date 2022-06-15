@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core;
+use App\Core\Query;
 
 class View
 {
@@ -37,15 +38,40 @@ class View
         return "Ceci est la classe View";
     }
 
-    public function includePartial($name, $config)
+    public function includePartial($name, $config=null)
     {
         if(!file_exists("View/Partial/".$name.".partial.php"))
         {
             die("partial ".$name." 404");
         }
+
+        if ($name == 'design-variables'){
+            $mainColor = Query::from('cmspf_Options')
+                ->where("type = 'main_color'")
+                ->execute('Option');
+
+            $secondColor = Query::from('cmspf_Options')
+                ->where("type = 'second_color'")
+                ->execute('Option');
+
+            $thirdColor = Query::from('cmspf_Options')
+                ->where("type = 'third_color'")
+                ->execute('Option');
+
+            $backgroundColor = Query::from('cmspf_Options')
+                ->where("type = 'background_color'")
+                ->execute('Option');
+
+            $radius = Query::from('cmspf_Options')
+                ->where("type = 'radius'")
+                ->execute('Option');
+
+            $bessels = Query::from('cmspf_Options')
+                ->where("type = 'bessels'")
+                ->execute('Option');
+        }
         include "View/Partial/".$name.".partial.php";
     }
-    
 
     public function __destruct()
     {

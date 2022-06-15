@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Controller;
+use App\Core\Validator;
 use App\Core\View;
+use App\Core\Query;
+
 use App\Model\Option as option_model;
 
 class Option{
@@ -68,20 +71,63 @@ class Option{
 
     public function composeOption()
     {
-        $id_user = $_SESSION['Auth']->id;
-        if(!isset($_POST['id'])){
-            $this->option->setValue($_POST['value']);
-            $this->option->setType($_POST['type']);
-            $this->option->setUserKey($id_user);
-            $this->option->save();
+        if( isset($_POST) && isset($_POST['value']) ) {
+
+            if( in_array($_POST['value'], ['main_color', 'second_color', 'third_color', 'background_color'])
+                && preg_match('/^#[a-f0-9]{6}$/i', $_POST['value'])){
+
+                $error = true;
+
+            }elseif(true){
+
+            }
+
+            $option = Query::from('cmspf_Options')
+                ->where("type = '" . $_POST['type'] . "'")
+                ->execute('Option');
+
+            if (!isset($error)) {
+                if (isset($option[0])) {
+                    $this->option->setId($option[0]->getId());
+                }
+                $this->option->setValue($_POST['value']);
+                $this->option->setType($_POST['type']);
+                $this->option->setUserKey($_SESSION['Auth']->id);
+                $this->option->save();
+
+                $mainColor = Query::from('cmspf_Options')
+                    ->where("type = 'main_color'")
+                    ->execute('Option');
+
+                $secondColor = Query::from('cmspf_Options')
+                    ->where("type = 'second_color'")
+                    ->execute('Option');
+
+                $thirdColor = Query::from('cmspf_Options')
+                    ->where("type = 'third_color'")
+                    ->execute('Option');
+
+                $backgroundColor = Query::from('cmspf_Options')
+                    ->where("type = 'background_color'")
+                    ->execute('Option');
+
+                $radius = Query::from('cmspf_Options')
+                    ->where("type = 'radius'")
+                    ->execute('Option');
+
+                $bessels = Query::from('cmspf_Options')
+                    ->where("type = 'bessels'")
+                    ->execute('Option');
+                return include "View/Partial/design-variables.partial.php";
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
         }
-        else{
-            $this->option->setId($_POST['id']);
-            $this->option->setValue($_POST['value']);
-            $this->option->setType($_POST['type']);
-            $this->option->setUserKey($id_user);
-            $this->option->save();
-        }
+
+
+
         // if(!isset($_POST['id']) && !(!isset($_FILES['main_favicon']) || !isset($_FILES['main_logo']))){
         // else if(isset($_FILES['main_logo']) || isset($_FILES['main_favicon'])){
         //     if(isset($_FILES['main_logo']) ){
@@ -93,7 +139,9 @@ class Option{
         //         $name = $_FILES['main_favicon']['name'];
         //         $type = 'main_favicon';
         //     }
+
         //     move_uploaded_file($tmpName, "./style/images/photos/".$name);
+
         //     $this->option->setPath($tmpName);
         //     $this->option->setType($type);
         //     $this->option->setUserKey($id_user);

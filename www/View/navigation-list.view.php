@@ -35,6 +35,7 @@
                                         <h4><?= ucfirst($navigation->getTitle()) ?></h4>
                                     </td>
                                     <td>
+                                        <a href="/build/navigation/<?= $navigation->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$navigation->getId() ?>"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
