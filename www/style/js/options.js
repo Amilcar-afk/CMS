@@ -20,93 +20,27 @@ $(document).ready(function(){
         });
     })
 
-    $(".main_border").click(function (e) {
-        var type = 'radius';
-        var value = e.currentTarget.classList[0];
-        var id= e.currentTarget.id; 
-        console.log(type)
-        if(id === ''){
-            $.ajax({
-                url:"/option/compose",
-                type:"POST",
-                data:
-                    {
-                        type: type,
-                        value: value,
-                    },
-                success:function(answer)
+    $(".compose-option").click(function () {
+        var btn = $(this);
+        $.ajax({
+            url:"/option/compose",
+            type:"POST",
+            data:
                 {
-                    alert('insert success')
-                    location.reload();
+                    type: $(this).attr('data-type'),
+                    value: $(this).attr('data-value'),
                 },
-                error: function (data, textStatus, errorThrown) {
-                    alertMessage('Error', 'warning');
-                }
-            });
-        }else{
-            $.ajax({
-                url:"/option/compose",
-                type:"POST",
-                data:
-                    {
-                        id: id,
-                        type: type,
-                        value: value,
-                    },
-                success:function(answer)
-                {
-                    alert('update success')
-                    location.reload();
-                },
-                error: function (data, textStatus, errorThrown) {
-                    alertMessage('Error', 'warning');
-                }
-            });
-        }
-    })
-
-    $(".bessels").click(function (e) {
-        var type = 'bessels';
-        var value = e.currentTarget.classList[0];
-        var id= e.currentTarget.id; 
-        if(id === ''){
-            $.ajax({
-                url:"/option/compose",
-                type:"POST",
-                data:
-                    {
-                        type: type,
-                        value: value,
-                    },
-                success:function(answer)
-                {
-                    alert('insert success')
-                    location.reload();
-                },
-                error: function (data, textStatus, errorThrown) {
-                    alertMessage('Error', 'warning');
-                }
-            });
-        }else{
-            $.ajax({
-                url:"/option/compose",
-                type:"POST",
-                data:
-                    {
-                        id: id,
-                        type: type,
-                        value: value,
-                    },
-                success:function(answer)
-                {
-                    alert('update success')
-                    location.reload();
-                },
-                error: function (data, textStatus, errorThrown) {
-                    alertMessage('Error', 'warning');
-                }
-            });
-        }
+            success:function(answer)
+            {
+                $($(btn).parent().parent().find('.selected')[0]).removeClass('selected');
+                $(btn).addClass('selected');
+                $($('style')[0]).replaceWith(answer);
+                alertMessage('Design updated!');
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
     })
 
     // $(".main_logo").click(function (e) {
