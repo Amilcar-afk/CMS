@@ -84,18 +84,20 @@
                         <section class="section-config-blocks">
                             <article>
                                 <span class="input-block ">
-                                    <img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
                                     <form method="POST" enctype="multipart/form-data">
-                                        <input data-type="logo" type="file" class="compose-main-image">
+                                        <input data-type="logo" type="file" class="compose-main-image compose-file">
+                                        <img class="logo" src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
                                     </form>
                                 </span>
                                 <label>Main logo</label>
                             </article>
                             <article>
-                                    <span class="input-block ">
-                                        <img src="<?= (isset($favicon[0]))? $favicon[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
-                                        <input data-type="favicon" type="file" class="compose-main-image">
-                                    </span>
+                                <span class="input-block ">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <input data-type="favicon" type="file" class="compose-main-image compose-file">
+                                        <img class="favicon" src="<?= (isset($favicon[0]))? $favicon[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
+                                    </form>
+                                </span>
                                 <label>Favicon</label>
                             </article>
                         </section>
@@ -113,37 +115,24 @@
                         <header class="main-nav-choice">
                             <h2>My fonts</h2>
                         </header>
-                        <section class="section-config-blocks">
+                        <section id="container-list-fonts" class="section-config-blocks">
                             <article>
                                 <span class="input-block">
-                                    <span class="material-icons-round">add</span>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <input data-type="font" type="file" class="compose-font compose-file">
+                                        <span class="material-icons-round">add</span>
+                                    </form>
                                 </span>
                                 <label>Add font</label>
                             </article>
-                            <article>
-                                <span class="input-block">
-                                    aA
-                                </span>
-                                <label>Racing Sans One</label>
-                            </article>
-                            <article>
-                                <span class="input-block">
-                                    aA
-                                </span>
-                                <label>Roboto</label>
-                            </article>
-                        </section>
-
-                        <header class="main-nav-choice">
-                            <h2>My default fonts</h2>
-                        </header>
-                        <section class="section-config-blocks">
-                            <article>
-                                <span class="input-block">
-                                    aA
-                                </span>
-                                <label>Roboto</label>
-                            </article>
+                            <?php foreach ($fonts as $font):?>
+                                <article class="cta-button-a" data-a-target="container-setting-font-<?=$font->getId() ?>">
+                                    <span class="input-block" style="font-family: '<?= $font->getValue()?>'">
+                                        aA
+                                    </span>
+                                    <label><?= $font->getValue()?></label>
+                                </article>
+                            <?php endforeach;?>
                         </section>
 
                     </div>
@@ -203,4 +192,34 @@
             </div>
         </section>
     </section>
+
+    <?php foreach ($fonts as $font):?>
+        <!-- update font form -->
+        <section id="container-setting-font-<?=$font->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-setting-font-<?=$font->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-font-<?=$font->getId() ?>"><span class="material-icons-round">close</span></button>
+            <div class="menu-container">
+            </div>
+            <section class="collapse-parent">
+                <div id="font-element-container" class="collapse--open" data-group-collapse="fonts-elements-conatiner">
+                    <header>
+                        <h1 class="title title--black"><?= ucfirst($font->getValue()) ?></h1>
+                    </header>
+                    <article>
+                        <p class="input-block fs-40" style="font-family: '<?= $font->getValue()?>'">
+                             a b c d e f g h i j k l m n o p q r s t u v w x y z
+                        </p>
+                        <br>
+                        <p class="input-block fs-36" style="font-family: '<?= $font->getValue()?>'">
+                             0 1 2 3 4 5 6 7 8 9
+                        </p>
+                        <br>
+                        <p class="input-block fs-36" style="font-family: '<?= $font->getValue()?>'">
+                            $ € £ ! " ' # % & ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </section>
+    <?php endforeach;?>
+
 </section>

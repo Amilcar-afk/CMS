@@ -69,6 +69,10 @@ class View
             $bessels = Query::from('cmspf_Options')
                 ->where("type = 'bessels'")
                 ->execute('Option');
+
+            $fonts = Query::from('cmspf_Options')
+                ->where("type = 'font'")
+                ->execute('Option');
         }
         include "View/Partial/".$name.".partial.php";
     }
