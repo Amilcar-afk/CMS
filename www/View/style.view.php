@@ -84,15 +84,17 @@
                         <section class="section-config-blocks">
                             <article>
                                 <span class="input-block ">
-                                    <img src="">
-                                    <input type="file" name="main_logo" class="main_logo ">
+                                    <img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <input data-type="logo" type="file" class="compose-main-image">
+                                    </form>
                                 </span>
                                 <label>Main logo</label>
                             </article>
                             <article>
                                     <span class="input-block ">
-                                        <img src="">
-                                        <input type="file" name="main_favicon"  class="main_favicon">
+                                        <img src="<?= (isset($favicon[0]))? $favicon[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
+                                        <input data-type="favicon" type="file" class="compose-main-image">
                                     </span>
                                 <label>Favicon</label>
                             </article>

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+    //colors
     $(".color-picker--input").change(function () {
 
         $.ajax({
@@ -20,6 +22,8 @@ $(document).ready(function(){
         });
     })
 
+
+    //design
     $(".compose-option").click(function () {
         var btn = $(this);
         $.ajax({
@@ -43,36 +47,44 @@ $(document).ready(function(){
         });
     })
 
-    // $(".main_logo").click(function (e) {
-    //     var type = e.currentTarget.classList[0];
-    //     $(".main_logo").change(function(){
-    //     var path = this.files[0].name;
-    //         $.ajax({
-    //             url:"/option/compose",
-    //             type:"POST",
-    //             data:
-    //                 {
-    //                     type: type,
-    //                     path: path,
-    //                 },
-    //             success:function(answer)
-    //             {
-    //                 alert('insert success')
-    //                 // location.reload();
-    //             },
-    //             error: function (data, textStatus, errorThrown) {
-    //                 alertMessage('Error', 'warning');
-    //             }
-    //         });
-    //     })
-    // })
 
-    // $(".main_favicon").click(function (e) {
-    //     var type = e.currentTarget.classList[0];
-    //     console.log(type)
-    //     // $(".main_favicon").change(function(){
-    //     //    console.log($(".main_favicon").val())
-    //     // })
-    // })
+    //logos
+    $(".compose-main-image").change(function () {
+        let formData = new FormData();
+        let file = $(this)[0].files[0];
+        let type = $(this).attr('data-type');
+        formData.append('file', file);
+        formData.append('type', type);
+
+        $.ajax({
+            url: "/option/compose",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data:formData,
+            success: function (answer) {
+                alertMessage('Color image!');
+
+                const reader = new FileReader();
+
+                reader.addEventListener("load", function () {
+                    // convert image file to base64 string
+                    if (type == 'logo') {
+                        $($('#back-office-logo').find('img')[0]).attr('src', reader.result);
+                    }else {
+                        $('#container-favicon').attr('href', reader.result);
+                    }
+                }, false);
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    })
+
 });
 

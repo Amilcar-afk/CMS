@@ -76,6 +76,13 @@ class View
     public function __destruct()
     {
         extract($this->data);
+        $logo = Query::from('cmspf_Options')
+            ->where("type = 'logo'")
+            ->execute('Option');
+
+        $favicon = Query::from('cmspf_Options')
+            ->where("type = 'favicon'")
+            ->execute('Option');
         if (isset($this->data) && isset($this->template)) {
             include "View/" . $this->template . ".tpl.php";
         }else{

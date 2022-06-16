@@ -45,6 +45,10 @@ class Option{
                 $radius = $option;
             }else if($option->getType() == 'bessels'){
                 $bessels = $option;
+            }else if($option->getType() == 'logo'){
+                $logo = $option;
+            }else if($option->getType() == 'favicon'){
+                $favicon = $option;
             }
             
             // else if($option->getType() == 'main_logo'){
@@ -60,6 +64,8 @@ class Option{
         $view->assign("background_color", $background_color);
         $view->assign("radius", $radius);
         $view->assign("bessels", $bessels);
+        $view->assign("logo", $logo);
+        $view->assign("favicon", $favicon);
 
 
         // $view->assign("main_logo", $main_logo);
@@ -71,26 +77,53 @@ class Option{
 
     public function composeOption()
     {
-        if( isset($_POST) && isset($_POST['value']) ) {
-
-            if( in_array($_POST['value'], ['main_color', 'second_color', 'third_color', 'background_color'])
-                && preg_match('/^#[a-f0-9]{6}$/i', $_POST['value'])){
-
-                $error = true;
-
-            }elseif(true){
-
-            }
+        if( (isset($_POST) && isset($_POST['value'])) || isset($_FILES)) {
 
             $option = Query::from('cmspf_Options')
                 ->where("type = '" . $_POST['type'] . "'")
                 ->execute('Option');
 
+            if(isset($_FILES) && in_array($_POST['type'], ['logo', 'favicon', 'font']) ){
+                if (isset($_FILES["file"]['name'])) {
+                    $tailleMax = 2097152;
+                    $authExt = array('jpg','jpeg','png','svg');
+                    if($_FILES["file"]['size'] <= $tailleMax) {
+                        $extensionUpload = strtolower(substr(strrchr($_FILES["file"]['name'], '.'), 1));
+                        if(in_array($extensionUpload, $authExt)) {
+                            $chemin = realpath(dirname(__FILE__))."/../style/medias/logos/cust-" . $_POST['type'] . ".".$extensionUpload;
+                            $move = move_uploaded_file($_FILES["file"]["tmp_name"], $chemin);
+                            if ($move) {
+
+                                $this->option->setPath("/style/medias/logos/cust-" . $_POST['type'] . ".".$extensionUpload);
+
+                            }else{
+                                return "Error importing";
+                            }
+                        }else{
+                            return "Format invalid";
+                        }
+                    }else{
+                        return "Invalid size";
+                    }
+                }else{
+                    return;
+                }
+            }else{
+                if( isset($_POST) && in_array($_POST['type'], ['main_color', 'second_color', 'third_color', 'background_color'])
+                    && preg_match('/^#[a-f0-9]{6}$/i', $_POST['value'])){
+
+                    $error = true;
+
+                }elseif(true){
+
+                }
+                $this->option->setValue($_POST['value']);
+            }
+
             if (!isset($error)) {
                 if (isset($option[0])) {
                     $this->option->setId($option[0]->getId());
                 }
-                $this->option->setValue($_POST['value']);
                 $this->option->setType($_POST['type']);
                 $this->option->setUserKey($_SESSION['Auth']->id);
                 $this->option->save();
