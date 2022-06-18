@@ -144,6 +144,11 @@ admin/:
   action: loadMeetings
   middleware : ['auth']
 
+/loadavailablemeetings:
+  controller: meeting
+  action: loadAvailableMeetings
+  middleware : ['auth']
+
 /meeting/compose:
   controller: meeting
   action: composeMeeting

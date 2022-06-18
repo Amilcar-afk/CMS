@@ -30,9 +30,9 @@ class Meeting
             //     continue;
             // }
             if($row->getStatus() === 'slot'){
-                $color = '#32CD32';
+                $color = '#32CD32';//GREEN
             }else{
-                $color = '#DC143C';
+                $color = '#DC143C';//RED
             }
             $allRdvs[] = array(
                 "id" => $row->getId(),
@@ -40,6 +40,7 @@ class Meeting
                 "rank"=> $statusOfUser,
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
+                "status" => $row->getStatus(),
                 "color" => $color,
             );
         }
@@ -49,8 +50,11 @@ class Meeting
 
     public function listRdv()
     {
+        $rdvEmpty = new Rdv();
         $view = new View("meeting-list", "back");
+        $view->assign("rdvEmpty", $rdvEmpty);
         $view->assign("rdv", $this->rdv);
+
     }
 
     public function loadMeetings(){
@@ -62,10 +66,43 @@ class Meeting
             $rdv = $this->rdv->find($e->rdv_key);
             array_push($meetings, $rdv);
         }
+        $unicMeeting = array_unique($meetings,SORT_REGULAR);
+        foreach($unicMeeting as $row){
+            if($row != false){
+                if($row->getStatus() == 'slot'){
+                    continue;
+                }
+
+
+                $allRdvs[] = array(
+                    "id" => $row->getId(),
+                    "title"=>$row->getTitle(),
+                    "start" => $row->getStartDate(),
+                    "end" => $row->getEndDate(),
+                    "status" => $row->getStatus(),
+                    "color" => '#ff7f00',//ORANGE
+                );
+            }
+        }
+
+
+
+        echo json_encode($allRdvs);
+    }
+
+    public function loadAvailableMeetings(){
+
+        $id = $_SESSION['Auth']->id;
+        $myMeetings = Query::from('cmspf_User_rdv')->where("user_key=".$id)->execute('Rdv');
+        $meetings = [];
+        foreach($myMeetings as $e){
+            $rdv = $this->rdv->find($e->rdv_key);
+            array_push($meetings, $rdv);
+        }
        
         foreach($meetings as $row){
             if($row != false){
-                if($row->getStatus() == 'slot'){
+                if($row->getStatus() == 'rdv'){
                     continue;
                 }
                 $allRdvs[] = array(
@@ -73,7 +110,8 @@ class Meeting
                 "title"=>$row->getTitle(),
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
-                "color" => '#ff7f00',
+                "status" => $row->getStatus(),
+                "color" => '#32CD32',
 
             );
             }
@@ -95,7 +133,7 @@ class Meeting
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
             $this->rdv->setStatus('slot');
-            $this->rdv->setTitle('defaultTitle');
+            $this->rdv->setTitle('New Slot');
             $this->rdv->setDescription('defaultDescription');
 
             if (isset($_POST['id']) && $_POST['id'] != null) {
@@ -103,8 +141,13 @@ class Meeting
                     return include "View/Partial/form.partial.php";
                 }
                 $this->rdv->setId($_POST['id']);
+                $config = Validator::run($this->rdv->getFormUpdateSlot(), $_POST);
+
+            }else{
+
+                $config = Validator::run($this->rdv->getFormNewSlot(), $_POST);
             }
-            $config = Validator::run($this->rdv->getFormNewSlot(), $_POST);
+
 
             if (empty($config)) {
                 $this->rdv->save();
@@ -117,6 +160,10 @@ class Meeting
                     $this->user_rdv->save();
                 }
             }
+
+
+
+            
         }
 
     }
@@ -132,14 +179,9 @@ class Meeting
     public function composeMeeting()
     {
         if (isset($_POST)) {
-
-            echo 1;
-
             if (!$this->rdv->find($_POST['id'])) {
                 return include "View/Partial/form.partial.php";
             }
-            echo 2;
-
             //insert pour la table Rdvs
             $this->rdv->setTitle($_POST['title']);
             $this->rdv->setStatus('rdv');
@@ -148,26 +190,22 @@ class Meeting
             //$this->rdv->setRdv_step_key();
             $this->rdv->setId($_POST['id']);
             $config = Validator::run($this->rdv->getFormNewMeeting(),$_POST);
-            echo 3;
-
             if (empty($config)) {
-            echo 4;
-
                 $this->rdv->save();
-            echo 5;
-                
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId) {
-            echo 6;
-
                     $this->user_rdv->setType('customer');
                     $this->user_rdv->setUser_key($_SESSION['Auth']->id);
                     $this->user_rdv->setRdv_key($lastId);
                     $this->user_rdv->save();
-                    $view = new View("meeting-list", "back");
+                    $view = new View("meeting-list");
                     $view->assign("rdv", $this->rdv);
+                    $rdvEmpty = new Rdv();
+                    $view->assign("rdvEmpty", $rdvEmpty);
                 }
+            } else {
+                return include "View/Partial/form.partial.php";
             }
         }
     }

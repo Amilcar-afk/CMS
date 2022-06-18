@@ -206,7 +206,45 @@ class Rdv extends BaseSQL
                 "start"=>[
                     "type"=>"date",
                     "label"=>"",
+                    "id"=>"start",
+                    "class"=>"inputRegister",
+                    "value"=> $this->getStartDate(),
+                    "error"=>""
+                    ],
+                "end"=>[
+                    "type"=>"date",
+                    "label"=>"",
                     "id"=>"id",
+                    "class"=>"inputRegister",
+                    "value"=> $this->getEndDate(),
+                    "error"=>""
+                    ],
+            ],
+            
+        ];
+    }
+
+    public function getFormUpdateSlot(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"reserver",
+            ],
+            "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "question"=>"",
+                    "name"=>"id",
+                    "class"=>"input",
+                    "value"=> $this->getId(),
+                    "error"=>""
+                    ],
+                "start"=>[
+                    "type"=>"date",
+                    "label"=>"",
+                    "id"=>"start",
                     "class"=>"inputRegister",
                     "value"=> $this->getStartDate(),
                     "error"=>""
@@ -241,6 +279,7 @@ class Rdv extends BaseSQL
                     "name"=>"id",
                     "class"=>"input",
                     "value"=> $this->getId(),
+                    "error"=>""
                     ],
 
                 "title"=>[

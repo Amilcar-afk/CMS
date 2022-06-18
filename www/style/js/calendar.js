@@ -19,9 +19,9 @@ $(document).ready(function() {
   })
 
 
+
   $('.material-icons-round').on('click',function(){
     activeAvailableMeetings = false
-
     if($('#calendar')){
       $('#calendar').hide()
     }
@@ -29,10 +29,19 @@ $(document).ready(function() {
     $('.calendar_article2').hide()
     $( ".calendar_article1" ).css('display','block');
     $( "<div class='main_meeting_calendar p-3 ' id='calendar'></div>" ).prependTo( ".calendar_article1" )
-
     loadcalendar($('#calendar'))
   })
 
+
+  function showMeetingCalendarMeetings() {
+    activeAvailableMeetings = true
+    $('.calendar_article2').show()
+    $( ".calendar_article1" ).hide();
+    $( "<div class='main_meeting_calendar p-3 ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
+    setTimeout(() => {
+      loadcalendar($('#calendar2'))
+    }, 100);
+  }
 
   //il faut supprimer le // a:not([href]) {pointer-events:none// du css pour pouvoir manipuler le calandrier 
 
@@ -49,8 +58,7 @@ function loadcalendar(id){
     // LOAD EVENTS /////////////////////////////////////////////
 
     events: function(start, end, timezone, callback) { 
-      if(location.pathname == '/slots' || activeAvailableMeetings){
-        console.log( $('#calendar2'))
+      if(location.pathname == '/slots'){
         $.ajax({
             method: 'POST',
             url:"/load",
@@ -63,7 +71,7 @@ function loadcalendar(id){
               })
             }
         });
-      }else if(location.pathname == '/meetings'){
+      }else if(location.pathname == '/meetings' && !activeAvailableMeetings){
         $.ajax({
           method: 'POST',
           url:"/loadmeetings",
@@ -77,7 +85,22 @@ function loadcalendar(id){
             })
           }
         });
+      }else if(location.pathname == '/meetings' && activeAvailableMeetings ){
+         $.ajax({
+          method: 'POST',
+          url:"/loadavailablemeetings",
+          color: '#000',
+          dataType: 'json',
+          success: function(events) {
+            callback(events);
+            events.map((e)=>{
+              rank.push(e.rank);
+            })
+          }
+        });
       }
+
+
     },  
 
     // INSERT EVENTS /////////////////////////////////////////////
@@ -88,7 +111,7 @@ function loadcalendar(id){
     selectHelper:true,
     select: function(start, end, allDay,event)
     {
-      if(rank[0] == 'admin' || location.pathname == '/slots'){
+      if(rank[0] == 'admin' && location.pathname == '/slots' && activeAvailableMeetings ){
         if(start.isBefore(moment())) {
           id.fullCalendar('unselect');
           alert('Impossible de séléctionnez cette date')
@@ -112,7 +135,7 @@ function loadcalendar(id){
               }
             })
           }
-      }else{
+      }else {
         id.fullCalendar('unselect');
       }
     },
@@ -168,7 +191,7 @@ function loadcalendar(id){
 
     eventClick:function(event)
     {
-      if(event.rank == 'admin' && location.pathname == '/slots' ){
+      if(event.rank == 'admin' && location.pathname == '/slots' && activeAvailableMeetings   ){
         if(confirm("Vous etes sur de supprimer de rendez-vous"))
         {
          var id = event.id;
@@ -183,15 +206,17 @@ function loadcalendar(id){
           }
          })
         }
-      }else{
-        // if(confirm("vous etes sur de choiosir ce rendez-vous")){
-          // $('#meeting_inputs').show()
-        // }
-
-        console.log($('[name="description"]'))
+      }else if(activeAvailableMeetings && location.pathname == '/meetings'){
           var btn = '<button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-form-meeting">New meeting </button>';
           getAnimate($(btn));
-          $('.cta-button-compose-rdv').on('click',function(e){
+          
+          $(document).on('click','#cta-button-close-container-new-form-meeting',function(e){
+            showMeetingCalendarMeetings()
+          })
+        
+          $('.start_end_title').text(event.start._i + '  -  ' + event.end._i);
+          
+          $(document).on('click','.cta-button-compose-rdv',function(e){
              var id = event.id;
              $.ajax({
               url:"/meeting/compose",
@@ -207,7 +232,9 @@ function loadcalendar(id){
                 if (answer.includes('<section id="back-office-container">')){
                   $($('main')[0]).html(answer);
                   alertMessage("Chosen Meeting");
-                }
+                }else{
+                  $('#form-new-meeting').html(answer);
+              }
               },
             })
           })
@@ -221,7 +248,3 @@ function loadcalendar(id){
 }
 });
   
-// calendar.fullCalendar('refetchEvents');
-// if ( window.history.replaceState ) {
-//   window.history.replaceState( null, null, window.location.href );
-// }

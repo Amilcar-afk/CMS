@@ -12,6 +12,8 @@ class Validator
 
     public static function run($config, $data, $unicity =null)
     {
+
+
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
         }
@@ -34,6 +36,7 @@ class Validator
                 continue;
             }
 
+   
             if(isset($input["name"]) && $input["name"] == "Categorie"){
                 continue;
             }
@@ -42,6 +45,7 @@ class Validator
             if(!isset($data[$name])){
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }
+
 
             if(!empty($input["required"]) && empty($data[$name])){
                 $config['inputs'][$name]['error'] = "You deleted a required input";

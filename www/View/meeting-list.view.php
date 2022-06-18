@@ -52,13 +52,9 @@
                 <article class="calendar_article2">
 
                 </article>
-                <!-- <div id="meeting_inputs">
-                    <?php // $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
-                </div> -->
             </div>
         </section>
     </section>
-
 
 
     <section id="container-new-form-meeting" class="container-main-content container-main-content--menu a-zoom-out-end">
@@ -68,9 +64,11 @@
         <section class="collapse-parent">
             <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
                 <header>
-                    <h1 class="title title--black"> date !!</h1>
+                    <h1 class="start_end_title title title--black "></h1>
                 </header>
-                    <?php   $this->includePartial("form", $rdv->getFormNewMeeting()) ?>
+                <article id="form-new-meeting">
+                    <?php   $this->includePartial("form", $rdvEmpty->getFormNewMeeting()) ?>
+                </article>
             </div>
         </section>
     </section>
