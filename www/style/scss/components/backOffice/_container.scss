@@ -24,6 +24,34 @@
       display: flex;
       margin-bottom: 60px;
 
+      & form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+
+        & .logo{
+          width: 50%;
+          max-height: 80%;
+          cursor: pointer;
+        }
+        & .favicon{
+          width: 35%;
+          max-height: 35%;
+          cursor: pointer;
+        }
+
+        & .compose-file{
+          cursor: pointer;
+          width: 100%;
+          font-size: 90px;
+          position: absolute;
+          opacity: 0;
+          overflow: hidden;
+        }
+      }
+
       article{
         display: flex;
         flex-direction: column;

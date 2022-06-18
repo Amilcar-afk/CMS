@@ -14,6 +14,8 @@
   & #back-office-logo img{
     border-radius: 300px;
     width: 50px;
+    height: 50px;
+    object-fit: cover;
     box-shadow: 0px -200px 4px 0px var(--main-color) inset;
   }
 
@@ -104,6 +106,7 @@
 
     & #back-office-logo img{
       width: rem(30);
+      height: rem(30);
     }
 
     & #back-office-logo{

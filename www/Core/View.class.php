@@ -69,6 +69,10 @@ class View
             $bessels = Query::from('cmspf_Options')
                 ->where("type = 'bessels'")
                 ->execute('Option');
+
+            $fonts = Query::from('cmspf_Options')
+                ->where("type = 'font'")
+                ->execute('Option');
         }
         include "View/Partial/".$name.".partial.php";
     }
@@ -76,6 +80,13 @@ class View
     public function __destruct()
     {
         extract($this->data);
+        $logo = Query::from('cmspf_Options')
+            ->where("type = 'logo'")
+            ->execute('Option');
+
+        $favicon = Query::from('cmspf_Options')
+            ->where("type = 'favicon'")
+            ->execute('Option');
         if (isset($this->data) && isset($this->template)) {
             include "View/" . $this->template . ".tpl.php";
         }else{

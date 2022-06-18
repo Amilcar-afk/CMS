@@ -1413,6 +1413,8 @@ tr:first-child {
   .body-back-office > header #back-office-logo img {
     border-radius: 300px;
     width: 50px;
+    height: 50px;
+    object-fit: cover;
     box-shadow: 0px -200px 4px 0px var(--main-color) inset; }
   .body-back-office > header #back-office-logo {
     margin-top: 0;
@@ -1475,7 +1477,8 @@ tr:first-child {
     right: 0px;
     width: 100%; }
     .body-back-office > header #back-office-logo img {
-      width: 1.875rem; }
+      width: 1.875rem;
+      height: 1.875rem; }
     .body-back-office > header #back-office-logo {
       margin-bottom: 0px; }
     .body-back-office > header ul {
@@ -1721,6 +1724,27 @@ tr:first-child {
     .container-main-content--menu-content .section-config-blocks {
       display: flex;
       margin-bottom: 60px; }
+      .container-main-content--menu-content .section-config-blocks form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer; }
+        .container-main-content--menu-content .section-config-blocks form .logo {
+          width: 50%;
+          max-height: 80%;
+          cursor: pointer; }
+        .container-main-content--menu-content .section-config-blocks form .favicon {
+          width: 35%;
+          max-height: 35%;
+          cursor: pointer; }
+        .container-main-content--menu-content .section-config-blocks form .compose-file {
+          cursor: pointer;
+          width: 100%;
+          font-size: 90px;
+          position: absolute;
+          opacity: 0;
+          overflow: hidden; }
       .container-main-content--menu-content .section-config-blocks article {
         display: flex;
         flex-direction: column;
