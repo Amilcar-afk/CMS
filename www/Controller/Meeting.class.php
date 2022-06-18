@@ -160,12 +160,7 @@ class Meeting
                     $this->user_rdv->save();
                 }
             }
-
-
-
-            
         }
-
     }
 
     public function deleteRdv()
@@ -209,4 +204,8 @@ class Meeting
             }
         }
     }
+
+
+
+    
 }

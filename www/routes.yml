@@ -27,7 +27,6 @@ admin/:
   controller: user
   action: deleteUser
 
-
 /pageloader:
   controller: pageengine
   action: pageLoader
@@ -93,8 +92,6 @@ admin/:
   action: navigationsList
   middleware: [ 'auth', 'admin' ]
 
-
-
 /settings/style:
   controller: option
   action: loadOption
@@ -125,9 +122,6 @@ admin/:
   controller: communication
   action: listProject
   middleware : ['auth']
-
-
-
 
 /meetings:
   controller: meeting

@@ -49,7 +49,7 @@
                 <header>
                     <h1 class="title title--black">NEW MEETING</h1>
                 </header>
-                <article class="calendar_article2">
+                <article class="calendar_article2 col-6">
 
                 </article>
             </div>
