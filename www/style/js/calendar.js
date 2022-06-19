@@ -5,14 +5,14 @@ $(document).ready(function() {
 
   $('#meeting_inputs').hide();
   $('.new_meeting_calendar').hide();
-  $( "<div class='main_meeting_calendar p-3 col-6 ' id='calendar'></div>" ).prependTo( ".calendar_article1" );
+  $( "<div class='main_meeting_calendar col-6 ' id='calendar'></div>" ).prependTo( ".calendar_article1" );
   loadcalendar($('#calendar'))
 
   $('.cta-button.cta-button-a.cta-button--submit.cta-button--submit--add').on('click',function(){
     activeAvailableMeetings = true
     $('.calendar_article2').show()
     $( ".calendar_article1" ).hide();
-    $( "<div class='main_meeting_calendar p-3 col-6  ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
+    $( "<div class='main_meeting_calendar col-6  ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
     setTimeout(() => {
       loadcalendar($('#calendar2'))
     }, 100);
@@ -28,7 +28,7 @@ $(document).ready(function() {
     $('#calendar2').remove()
     $('.calendar_article2').hide()
     $( ".calendar_article1" ).css('display','block');
-    $( "<div class='main_meeting_calendar p-3 col-6 ' id='calendar'></div>" ).prependTo( ".calendar_article1" )
+    $( "<div class='main_meeting_calendar col-6 ' id='calendar'></div>" ).prependTo( ".calendar_article1" )
     loadcalendar($('#calendar'))
   })
 
@@ -37,7 +37,7 @@ $(document).ready(function() {
     activeAvailableMeetings = true
     $('.calendar_article2').show()
     $( ".calendar_article1" ).hide();
-    $( "<div class='main_meeting_calendar p-3  col-6 ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
+    $( "<div class='main_meeting_calendar  col-6 ' id='calendar2'></div>" ).prependTo( ".calendar_article2" );
     setTimeout(() => {
       loadcalendar($('#calendar2'))
     }, 100);
@@ -51,6 +51,7 @@ function loadcalendar(id){
     lang: 'fr',
     editable:true,
     header:{
+      initialView: 'listWeek',
       left:'prev,next today',
       center:'title',
       right:'month,agendaWeek,agendaDay'
@@ -104,7 +105,7 @@ function loadcalendar(id){
     },  
 
     // INSERT EVENTS /////////////////////////////////////////////
-
+    initialView: 'dayGridWeek',
     minTime: '09:00:00', 
     maxTime: '21:00:00', 
     selectable:true,
