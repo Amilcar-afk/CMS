@@ -72,8 +72,6 @@ class Meeting
                 if($row->getStatus() == 'slot'){
                     continue;
                 }
-
-
                 $allRdvs[] = array(
                     "id" => $row->getId(),
                     "title"=>$row->getTitle(),
@@ -84,9 +82,6 @@ class Meeting
                 );
             }
         }
-
-
-
         echo json_encode($allRdvs);
     }
 
@@ -106,14 +101,13 @@ class Meeting
                     continue;
                 }
                 $allRdvs[] = array(
-                "id" => $row->getId(),
-                "title"=>$row->getTitle(),
-                "start" => $row->getStartDate(),
-                "end" => $row->getEndDate(),
-                "status" => $row->getStatus(),
-                "color" => '#32CD32',
-
-            );
+                    "id" => $row->getId(),
+                    "title"=>$row->getTitle(),
+                    "start" => $row->getStartDate(),
+                    "end" => $row->getEndDate(),
+                    "status" => $row->getStatus(),
+                    "color" => '#32CD32',
+                );
             }
         }
         echo json_encode($allRdvs);
@@ -142,13 +136,9 @@ class Meeting
                 }
                 $this->rdv->setId($_POST['id']);
                 $config = Validator::run($this->rdv->getFormUpdateSlot(), $_POST);
-
             }else{
-
                 $config = Validator::run($this->rdv->getFormNewSlot(), $_POST);
             }
-
-
             if (empty($config)) {
                 $this->rdv->save();
                 //insert pour la table User_rdv

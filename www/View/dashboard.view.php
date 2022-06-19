@@ -4,35 +4,15 @@
     </header>
 
     <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
-
-        <?php
-/*        echo '<pre>';
-        var_dump($sortedData);
-        echo '</pre>';
-        */?>
         <div class="row">
-
-
             <div class="col-4 col-md-6 col-sm-6">
                 <section class="card card--bottom  card--background-main-color">
                     <header>
                         <h4>6</h4>
                         <h3>New users of the month</h3>
-
-                        <?php
-                            // foreach($data as $e){
-                            //     echo $e->getDate().'<br>';
-                            //     echo $e->getDevice().'<br>';
-                            // }
-
-
-                            
-                        ?>
-
                     </header>
                 </section>
             </div>
-
             <div class="col-4 col-md-6 col-sm-6">
                 <section id="per-country-container" class="card card--background-main-color">
                     <button class="main-nav-choice" data-wc-target="range-per-country">
