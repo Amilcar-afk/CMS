@@ -9,6 +9,8 @@ class Data_base extends BaseSQL
     protected $host_name;
     protected $password;
     protected $port;
+    protected $db_name;
+
 
     public function __construct()
     {
@@ -123,6 +125,20 @@ class Data_base extends BaseSQL
 
                     ],
 
+                "db_name"=>[
+                    "type"=>"text",
+                    "placeholder"=>"DB name ...",
+                    "name"=>"db_name",
+                    "question"=>"DB name ",
+                    "id"=>"db_name",
+                    "class"=>"input",
+                    "required"=>true,
+                    "value"=> $this->getDb_name(),
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
+                    ],
+
                 "password"=>[
                     "type"=>"password",
                     "placeholder"=>"Password ...",
@@ -154,4 +170,24 @@ class Data_base extends BaseSQL
         ];
     }
 
+
+    /**
+     * Get the value of db_name
+     */ 
+    public function getDb_name()
+    {
+        return $this->db_name;
+    }
+
+    /**
+     * Set the value of db_name
+     *
+     * @return  self
+     */ 
+    public function setDb_name($db_name)
+    {
+        $this->db_name = $db_name;
+
+        return $this;
+    }
 }

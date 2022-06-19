@@ -37,26 +37,28 @@ class Settings
         if($_POST){
             $config = Validator::run($this->database->dataBaseForm(),$_POST);
             if(empty($config)){
-                $filename = './database.json';
+                $filename = './env.json';
                 $info = json_encode($_POST);
                 if (file_exists($filename)) {
                     file_put_contents($filename, $info);
                 } else {
-                    $filename = fopen('./database.json','w+') ;
+                    $filename = fopen('./env.json','w+') ;
                     fwrite($filename, $info);
                     fclose($filename);
                 }
+
+                //recuperer les info du fichier json
+                $view = new View("database");
+                $view->assign("database", $this->database);
             }else{
                 return include "View/Partial/form.partial.php";
             }
         }
-
     }
 
     public function loadDatabase()
     {
-        //chec
-
+        //recuperer les info du fichier json
         $view = new View("database", "back");
         $view->assign("database", $this->database);
     }

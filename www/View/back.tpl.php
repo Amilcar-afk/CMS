@@ -21,6 +21,8 @@
         <script type="text/javascript" src="../style/js/addCode.js"></script>
         <script type="text/javascript" src="../style/js/options.js"></script>
         <script type="text/javascript" src="../style/js/categorie.js"></script>
+        <script type="text/javascript" src="../style/js/database.js"></script>
+
     </head>
     <div class="background-container-back-office">
         <div></div>
