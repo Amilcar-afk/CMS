@@ -9,7 +9,7 @@ class Validator
     public static $form_errors;
 
 
-    public static function run($config, $data, $unicity)
+    public static function run($config, $data, $unicity = null)
     {
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";

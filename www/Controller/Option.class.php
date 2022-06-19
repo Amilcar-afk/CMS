@@ -32,39 +32,40 @@ class Option{
 
         $options = $this->option->find();
 
-        foreach($options as $option){
-            if($option->getType() == 'main_color'){
-                $main_color = $option;
-            }else if($option->getType() == 'second_color'){
-                $second_color = $option;
-            }else if($option->getType() == 'third_color'){
-                $third_color = $option;
-            }else if($option->getType() == 'background_color'){
-                $background_color = $option;
-            }else if($option->getType() == 'radius'){
-                $radius = $option;
-            }else if($option->getType() == 'bessels'){
-                $bessels = $option;
-            }else if($option->getType() == 'logo'){
-                $logo = $option;
-            }else if($option->getType() == 'favicon'){
-                $favicon = $option;
-            }
-        }
         $fonts = Query::from('cmspf_Options')
             ->where("type = 'font'")
             ->execute('Option');
 
         $view = new View("style", "back");
-        $view->assign("main_color", $main_color);
-        $view->assign("second_color", $second_color);
-        $view->assign("third_color", $third_color);
-        $view->assign("background_color", $background_color);
-        $view->assign("radius", $radius);
-        $view->assign("bessels", $bessels);
-        $view->assign("logo", $logo);
-        $view->assign("favicon", $favicon);
         $view->assign("fonts", $fonts);
+
+        foreach($options as $option){
+            if($option->getType() == 'main_color'){
+                $main_color = $option;
+                $view->assign("main_color", $main_color);
+            }else if($option->getType() == 'second_color'){
+                $second_color = $option;
+                $view->assign("second_color", $second_color);
+            }else if($option->getType() == 'third_color'){
+                $third_color = $option;
+                $view->assign("third_color", $third_color);
+            }else if($option->getType() == 'background_color'){
+                $background_color = $option;
+                $view->assign("background_color", $background_color);
+            }else if($option->getType() == 'radius'){
+                $radius = $option;
+                $view->assign("radius", $radius);
+            }else if($option->getType() == 'bessels'){
+                $bessels = $option;
+                $view->assign("bessels", $bessels);
+            }else if($option->getType() == 'logo'){
+                $logo = $option;
+                $view->assign("logo", $logo);
+            }else if($option->getType() == 'favicon'){
+                $favicon = $option;
+                $view->assign("favicon", $favicon);
+            }
+        }
 
     }
 

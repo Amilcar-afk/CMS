@@ -47,7 +47,7 @@ class Categorie{
                 $this->categorie->setId($_POST['id']);
             }
             $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
-            $config = Validator::run($this->page->getFormNewPage($navigations), $_POST);
+            $config = Validator::run($this->categorie->getFormNewCategorie($navigations), $_POST);
 
             if (empty($config)) {
                 $this->categorie->save();
@@ -75,13 +75,11 @@ class Categorie{
                     $categorie_categorie->save();
                 }
 
-                $pageEmpty = $this->page;
                 $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
                 $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
-                $view = new View("page-list");
+                $view = new View("categorie-list");
                 $view->assign("categories", $categories);
                 $view->assign("navigations", $navigations);
-                $view->assign("pageEmpty", $pageEmpty);
             } else {
                 return include "View/Partial/form.partial.php";
             }
