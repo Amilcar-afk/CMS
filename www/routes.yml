@@ -1,7 +1,3 @@
-admin/:
-  controller: general
-  action: home
-
 /login:
   controller: user
   action: login

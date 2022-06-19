@@ -10,7 +10,8 @@ class Validator
     public static $form_errors;
 
 
-    public static function run($config, $data, $unicity =null)
+
+    public static function run($config, $data, $unicity = null)
     {
 
 

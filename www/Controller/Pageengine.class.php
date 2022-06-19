@@ -72,8 +72,6 @@ class Pageengine
 
     public function composePage()
     {
-        $page_categorie = new Page_categorie();
-
         if( isset($_POST) ) {
             $this->page->setTitle($_POST['title']);
             $this->page->setSlug(str_replace(' ', '-', strtolower(trim($_POST['slug']))));
@@ -105,6 +103,17 @@ class Pageengine
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {
+
+                    $page_categorie = Query::from('cmspf_Page_categorie')
+                        ->where("page_key = " . $lastId . "")
+                        ->execute('Page_categorie');
+
+                    if (isset($page_categorie[0])){
+                        $page_categorie = $page_categorie[0];
+                    }else {
+                        $page_categorie = new Page_categorie();
+                    }
+
                     $page_categorie->setPagekey($lastId);
                     $page_categorie->setCategorieKey($_POST['categorie']);
                     $page_categorie->save();

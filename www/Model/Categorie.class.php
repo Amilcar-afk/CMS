@@ -97,12 +97,20 @@ class Categorie extends BaseSQL
     }
 
 
-    public function getFormNewCategorie(): array
+    public function getFormNewCategorie($navigations): array
     {
+        foreach($navigations as $navigation){
+            $navigationsList['choices'][] = [
+                "value" => $navigation->getId(),
+                "label" => $navigation->getTitle(),
+                "class"=>"input"
+            ];
+        }
+
         return [
             "config"=>[
                 "method"=>"POST",
-                "submit"=>"valider",
+                "submit"=>"Save",
                 "cta"=>"cta-button-compose-categorie"
             ],
             "inputs"=>[
@@ -124,7 +132,16 @@ class Categorie extends BaseSQL
                     "max"=>30,
                     "value"=>$this->getTitle(),
                     "error"=>""
-                ]
+                ],
+                "navigation"=>[
+                    "question"=>"Navigation",
+                    "type"=>"select",
+                    "name"=>"navigation",
+                    "class"=>"input",
+                    "error"=>"",
+                    "idToVerif"=>true,
+                    "choices"=>$navigationsList['choices']
+                ],
             ],
             
         ];
