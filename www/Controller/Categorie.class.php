@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 use App\Core\View;
+use App\Core\Validator;
 use App\Model\Categorie as Categorie_model;
+use App\Model\Categorie_categorie;
 use App\Core\Query;
 
 class Categorie{
@@ -18,9 +20,10 @@ class Categorie{
     public function categoriesList()
     {
         $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+        $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("categorie-list", "back");
         $view->assign("categories",$categories);
-        $view->assign("categorie",$this->categorie);
+        $view->assign("navigations", $navigations);
 
     }
 
@@ -32,30 +35,58 @@ class Categorie{
     }
 
 
-    public function composeCategorie($id)
+    public function composeCategorie()
     {
-        if(isset($id)){
-        $categorie = $this->categorie->find($id['id']);
-
-            $this->categorie->setId($categorie->getId());
-            $this->categorie->setType($categorie->getType());
-            if(isset($_POST['id']) )
-            {
+        if( isset($_POST) ) {
+            $this->categorie->setTitle($_POST['title']);
+            $this->categorie->setType('tag');
+            if (isset($_POST['id']) && $_POST['id'] != null) {
+                if (!$this->categorie->find($_POST['id'])){
+                    return include "View/Partial/form.partial.php";
+                }
                 $this->categorie->setId($_POST['id']);
-                $this->categorie->setType($_POST['type']);
-                $this->categorie->save();
-                header('location:/categories');
             }
-            $view = new View("categorieupdate", "back-sandbox");
-            $view->assign("categorie",$this->categorie);
+            $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
+            $config = Validator::run($this->page->getFormNewPage($navigations), $_POST);
+
+            if (empty($config)) {
+                $this->categorie->save();
+
+                $lastId = $this->categorie->getLastId();
+
+                if ($lastId
+                    && isset($_POST['navigation'])
+                    && Query::from('cmspf_Categories')
+                        ->where("id = " . $_POST['navigation'] . "")
+                        ->execute('Categorie')) {
+
+                    $categorie_categorie = Query::from('cmspf_Categorie_categorie')
+                        ->where("categorie_child_key = " . $lastId . "")
+                        ->execute('Categorie_categorie');
+
+                    if (isset($categorie_categorie[0])){
+                        $categorie_categorie = $categorie_categorie[0];
+                    }else {
+                        $categorie_categorie = new Categorie_categorie();
+                    }
+
+                    $categorie_categorie->setCategorieChildKey($lastId);
+                    $categorie_categorie->setCategorieParentKey($_POST['categorie']);
+                    $categorie_categorie->save();
+                }
+
+                $pageEmpty = $this->page;
+                $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
+                $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
+                $view = new View("page-list");
+                $view->assign("categories", $categories);
+                $view->assign("navigations", $navigations);
+                $view->assign("pageEmpty", $pageEmpty);
+            } else {
+                return include "View/Partial/form.partial.php";
+            }
         }else{
-            if(!isset($_POST['id']) && isset($_POST['type']) )
-            {
-                $this->categorie->setType($_POST['type']);
-                $this->categorie->save();
-            }
-            $view = new View("categorieinsert", "back-sandbox");
-            $view->assign("categorie",$this->categorie);
+            http_response_code(500);
         }
     }
 

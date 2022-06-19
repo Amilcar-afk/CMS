@@ -72,7 +72,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $categorie->getFormNewCategorie()) ?>
+                        <?php  $this->includePartial("form", $categorie->getFormNewCategorie($navigations)) ?>
                     </article>
 
                 </div>
@@ -94,7 +94,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $categorie->getFormNewCategorie()) ?>
+                    <?php  $this->includePartial("form", $categorie->getFormNewCategorie($navigations)) ?>
                 </article>
             </div>
         </section>

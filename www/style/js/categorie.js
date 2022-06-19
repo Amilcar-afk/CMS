@@ -7,7 +7,8 @@ $(document).ready(function(){
             data:
                 {
                     id:$(this).parent().find('[name=id]').val(),
-                    title:$(this).parent().find('[name=title]').val()
+                    title:$(this).parent().find('[name=title]').val(),
+                    navigation:$(this).parent().find('[name=categorie]').val()
                 },
             success:function(answer)
             {
