@@ -37,12 +37,12 @@ class Settings
         if($_POST){
             $config = Validator::run($this->database->dataBaseForm(),$_POST);
             if(empty($config)){
-                $filename = './Core/database.json';
+                $filename = './database.json';
                 $info = json_encode($_POST);
                 if (file_exists($filename)) {
                     file_put_contents($filename, $info);
                 } else {
-                    $filename = fopen('./Core/database.json','w+') ;
+                    $filename = fopen('./database.json','w+') ;
                     fwrite($filename, $info);
                     fclose($filename);
                 }
@@ -50,9 +50,21 @@ class Settings
                 return include "View/Partial/form.partial.php";
             }
         }
+
+    }
+
+    public function loadDatabase()
+    {
+        //chec
+
         $view = new View("database", "back");
         $view->assign("database", $this->database);
     }
+
+
+
+
+
 
     public function listMedia()
     {

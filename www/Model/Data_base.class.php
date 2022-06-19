@@ -104,12 +104,12 @@ class Data_base extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
+                "cta"=>"cta-button-compose-database",
                 "submit"=>"SAVE",
             ],
             "inputs"=>[
                 "host_name"=>[
                     "type"=>"text",
-                    "label"=>"host_name",
                     "placeholder"=>"Host Name ...",
                     "name"=>"host_name",
                     "id"=>"host_name",
@@ -125,8 +125,8 @@ class Data_base extends BaseSQL
 
                 "password"=>[
                     "type"=>"password",
-                    "label"=>"password",
                     "placeholder"=>"Password ...",
+                    "name"=>"password",
                     "question"=>"Password",
                     "id"=>"password",
                     "class"=>"input",
@@ -139,8 +139,8 @@ class Data_base extends BaseSQL
 
                 "port"=>[
                     "type"=>"text",
-                    "label"=>"port",
                     "placeholder"=>"Port ...",
+                    "name"=>"port",
                     "question"=>"Port",
                     "id"=>"port",
                     "class"=>"input",

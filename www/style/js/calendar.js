@@ -114,7 +114,7 @@ function loadcalendar(id){
       if(rank[0] == 'admin' && location.pathname == '/slots' && activeAvailableMeetings ){
         if(start.isBefore(moment())) {
           id.fullCalendar('unselect');
-          alert('Impossible de séléctionnez cette date')
+          alertMessage('Impossible de séléctionnez cette date','warning')
           // document.location.reload();
          }else{
           var start = moment(start).format("Y-MM-DD HH:mm:ss");
@@ -154,7 +154,7 @@ function loadcalendar(id){
           success:function()
           {
           calendar.fullCalendar('refetchEvents');
-          alert("Event Updated");
+          alertMessage("Event Updated");
           }
         });
       }else{
@@ -179,7 +179,7 @@ function loadcalendar(id){
           data:{start:start, end:end, id:id},
           success:function(){
           calendar.fullCalendar('refetchEvents');
-          alert('Event Update');
+          alertMessage('Event Update');
           }
         })
       }else{
@@ -202,7 +202,7 @@ function loadcalendar(id){
           success:function()
           {
            calendar.fullCalendar('refetchEvents');
-           alert("Event Removed");
+           alertMessage("Event Removed");
           }
          })
         }

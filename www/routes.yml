@@ -100,6 +100,11 @@
 
 /settings/database:
   controller: settings
+  action: loadDatabase
+  middleware : ['auth', 'admin']
+
+/settings/database/compose:
+  controller: settings
   action: composeDatabase
   middleware : ['auth', 'admin']
 
