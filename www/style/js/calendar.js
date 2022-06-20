@@ -50,12 +50,13 @@ function loadcalendar(id){
   const calendar = id.fullCalendar({   
     lang: 'fr',
     editable:true,
+    defaultView: 'basicWeek',
     header:{
-      initialView: 'listWeek',
       left:'prev,next today',
       center:'title',
-      right:'month,agendaWeek,agendaDay'
+      right:'month,agendaWeek,agendaDay',
     },
+
     // LOAD EVENTS /////////////////////////////////////////////
 
     events: function(start, end, timezone, callback) { 
@@ -112,7 +113,7 @@ function loadcalendar(id){
     selectHelper:true,
     select: function(start, end, allDay,event)
     {
-      if(rank[0] == 'admin' && location.pathname == '/slots' && activeAvailableMeetings ){
+      if(location.pathname == '/slots' && activeAvailableMeetings ){
         if(start.isBefore(moment())) {
           id.fullCalendar('unselect');
           alertMessage('Impossible de séléctionnez cette date','warning')
@@ -130,7 +131,7 @@ function loadcalendar(id){
             },
               success:function(session)
               {
-                confirm('insertion reussie');
+                alertMessage('insertion reussie');
                 calendar.fullCalendar('refetchEvents');
                 // document.location.reload();
               }
@@ -138,6 +139,8 @@ function loadcalendar(id){
           }
       }else {
         id.fullCalendar('unselect');
+      console.log(activeAvailableMeetings)
+
       }
     },
 

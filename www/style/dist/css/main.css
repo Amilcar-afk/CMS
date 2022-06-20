@@ -43,8 +43,6 @@ input:focus {
 a {
   text-decoration: none; }
 
-a:not([href]) {
-  pointer-events: none; }
 
 span, small {
   font-family: "Montserrat", sans-serif;
@@ -91,7 +89,7 @@ p {
   scrollbar-color: var(--main-color) #EBEBEB;
   scrollbar-width: thin;
   scrollbar-border-radius: var(--radius, 12px); }
-
+/* 
 tr {
   display: flex;
   justify-content: space-between;
@@ -180,7 +178,7 @@ tr:last-child {
 
 tr:first-child {
   border-top: solid 4px #E2E2E2;
-  border-radius: 15px 15px 0 0; }
+  border-radius: 15px 15px 0 0; } */
 
 *::-webkit-scrollbar {
   width: 6px;

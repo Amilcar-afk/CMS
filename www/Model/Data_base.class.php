@@ -105,7 +105,6 @@ class Data_base extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
                 "cta"=>"cta-button-compose-database",
                 "submit"=>"SAVE",
             ],
