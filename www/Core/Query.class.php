@@ -7,6 +7,7 @@ use App\Core\BaseSQL;
 class Query extends BaseSQL
 {
     private static $select = [];
+    private static $delete = [];
     private static $from;
     private static $where = [];
     private static $order;
@@ -43,6 +44,12 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function deleteAll(string ...$fields): self
+    {
+        self::$delete = $fields;
+        return (new Query);
+    }
+
     public function where(string ...$condition): self
     {
         self::$where = array_merge(self::$where, $condition);
@@ -63,11 +70,15 @@ class Query extends BaseSQL
 
     public function __toString()
     {
-        $parts = ['SELECT'];
-        if (self::$select)
+        if (self::$delete)
         {
+            $parts = ['DELETE'];
+        }elseif (self::$select)
+        {
+            $parts = ['SELECT'];
             $parts[] = join(', ', self::$select);
         }else{
+            $parts = ['SELECT'];
             $parts[] = '*';
         }
 
@@ -94,7 +105,7 @@ class Query extends BaseSQL
         return join(', ', $from);
     }
 
-    public function execute($model)
+    public function execute($model = null)
     {
         $query = $this->__toString();
         $statement = $this->pdo->prepare($query);
@@ -102,10 +113,12 @@ class Query extends BaseSQL
 
         self::$params = [];
         self::$select = [];
+        self::$delete = [];
         self::$from = [];
         self::$where = [];
-
-        return $statement->fetchAll(\PDO::FETCH_CLASS,"App\Model\\".$model);
+        if ($model != null) {
+            return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
+        }
     }
 
 }
