@@ -18,10 +18,13 @@
 /mailconfirmation:
   controller: user
   action: mailconfirmation
+  params: [ token ]
 
-/user_delete/id:
+/userdelete:
   controller: user
   action: deleteUser
+  params: [id]
+
 
 /pageloader:
   controller: pageengine
