@@ -94,7 +94,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $categorie->getFormNewCategorie($navigations)) ?>
+                    <?php  $this->includePartial("form", $categorieEmpty->getFormNewCategorie($navigations)) ?>
                 </article>
             </div>
         </section>

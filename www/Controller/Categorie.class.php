@@ -19,12 +19,13 @@ class Categorie{
 
     public function categoriesList()
     {
+        $categorieEmpty = $this->categorie;
         $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
         $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("categorie-list", "back");
         $view->assign("categories",$categories);
         $view->assign("navigations", $navigations);
-
+        $view->assign("categorieEmpty", $categorieEmpty);
     }
 
     public function navigationsList()
@@ -38,6 +39,8 @@ class Categorie{
     public function composeCategorie()
     {
         if( isset($_POST) ) {
+            $categorieEmpty = $this->categorie;
+
             $this->categorie->setTitle($_POST['title']);
             $this->categorie->setType('tag');
             if (isset($_POST['id']) && $_POST['id'] != null) {
@@ -71,7 +74,7 @@ class Categorie{
                     }
 
                     $categorie_categorie->setCategorieChildKey($lastId);
-                    $categorie_categorie->setCategorieParentKey($_POST['categorie']);
+                    $categorie_categorie->setCategorieParentKey($_POST['navigation']);
                     $categorie_categorie->save();
                 }
 
@@ -80,6 +83,7 @@ class Categorie{
                 $view = new View("categorie-list");
                 $view->assign("categories", $categories);
                 $view->assign("navigations", $navigations);
+                $view->assign("categorieEmpty", $categorieEmpty);
             } else {
                 return include "View/Partial/form.partial.php";
             }
