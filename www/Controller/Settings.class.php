@@ -46,8 +46,13 @@ class Settings
                     fwrite($filename, $info);
                     fclose($filename);
                 }
+                $env_file = 'env.json';
+                $data_base_env = yaml_parse_file($env_file);
+                $this->database->setHost_name($data_base_env['host_name']);
+                $this->database->setPassword($data_base_env['password']);
+                $this->database->setPort($data_base_env['port']);
+                $this->database->setDb_name($data_base_env['db_name']);
 
-                //recuperer les info du fichier json
                 $view = new View("database");
                 $view->assign("database", $this->database);
             }else{
@@ -59,6 +64,12 @@ class Settings
     public function loadDatabase()
     {
         //recuperer les info du fichier json
+        $env_file = 'env.json';
+        $data_base_env = yaml_parse_file($env_file);
+        $this->database->setHost_name($data_base_env['host_name']);
+        $this->database->setPassword($data_base_env['password']);
+        $this->database->setPort($data_base_env['port']);
+        $this->database->setDb_name($data_base_env['db_name']);
         $view = new View("database", "back");
         $view->assign("database", $this->database);
     }
