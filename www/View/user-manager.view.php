@@ -58,7 +58,7 @@
                                     <?=$user->getRank()?>
                                 </td>
                                 <td>
-                                    <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$user->getId() ?>"><span class="material-icons-round">delete</span></button>
+                                    <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$user->getId() ?>" data-id-user="<?=$user->getId()?>"><span class="material-icons-round" onclick="deleteUser(this.parentNode)">delete</span></button>
                                 </td>
                             </tr>
                         <?php endforeach;?>

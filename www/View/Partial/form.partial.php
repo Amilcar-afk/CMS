@@ -62,9 +62,10 @@
             <p class="input--error"><?= (isset($input["error"]))?$input["error"]:'' ?></p>
         </div>
     <?php endforeach;?>
-    <?php if (isset($config["action"])):?>
-        <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Valider" ?>">
-</form>
-    <?php else:?>
-        <button class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Valider" ?></button>
+    <?php if (isset($config["config"]["action"])):?>
+        <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Submit" ?>">
     <?php endif;?>
+</form>
+<?php if (isset($config["config"]["cta"])):?>
+    <button class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Submit" ?></button>
+<?php endif;?>

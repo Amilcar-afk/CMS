@@ -43,7 +43,8 @@ input:focus {
 a {
   text-decoration: none; }
 
-
+a:not([href]) {
+  pointer-events: none; }
 
 span, small {
   font-family: "Montserrat", sans-serif;
@@ -89,9 +90,9 @@ p {
 * {
   scrollbar-color: var(--main-color) #EBEBEB;
   scrollbar-width: thin;
-  scrollbar-border-radius: var(--radius, 12px); } */
+  scrollbar-border-radius: var(--radius, 12px); }
 
-/* tr {
+tr {
   display: flex;
   justify-content: space-between;
   color: #6D6D6D;
@@ -123,7 +124,7 @@ thead tr {
   thead tr td {
     border: none !important; }
 
- .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
   color: var(--main-color);
   font-weight: bold; }
 
@@ -194,23 +195,7 @@ tr:first-child {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-  }
-  /* change me to blue to match the background */ 
-
-*::-webkit-scrollbar-thumb {
-  background: var(--main-color);
-  border: 0px solid;
-  border-radius: var(--radius, 12px);
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 20px; 
-  }
-  /* change border color to blue to match the background */ 
-
-.section-module {
-  padding: 20px; }
-
-/* change me to blue to match the background */ 
+  /* change me to blue to match the background */ }
 
 *::-webkit-scrollbar-thumb {
   background: var(--main-color);
@@ -219,13 +204,12 @@ tr:first-child {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-}
-/* change border color to blue to match the background */ 
+  /* change border color to blue to match the background */ }
 
 .section-module {
-  padding: 20px; } 
+  padding: 20px; }
 
- @media (max-width: 992px) {
+@media (max-width: 992px) {
   .body-back-office {
     position: relative;
     padding: 0; } }
@@ -255,7 +239,7 @@ tr:first-child {
   100% {
     transform: scale(0.85, 0.85);
     opacity: 0%;
-    display: none; } } 
+    display: none; } }
 
 @media (max-width: 768px) {
   .col-sm-1 {
@@ -2308,3 +2292,48 @@ h2 {
   .alert span {
     font-size: 1.25rem;
     padding-right: 20px; }
+
+.fullCalendar .fc th, .fullCalendar .fc td {
+  border-style: unset !important;
+  border-width: unset !important; }
+
+.fullCalendar .fc-state-default {
+  background-image: unset !important;
+  background-repeat: unset !important;
+  text-shadow: unset !important;
+  box-shadow: unset !important; }
+
+.fullCalendar .fc-toolbar button {
+  position: unset !important; }
+
+.fullCalendar .fc-state-default.fc-corner-left {
+  border-top-left-radius: var(--radius, 10px) !important;
+  border-bottom-left-radius: var(--radius, 10px) !important; }
+
+.fullCalendar .fc {
+  direction: unset !important; }
+
+.fullCalendar .fc .fc-button-group > * {
+  margin: unset; }
+
+.fullCalendar .fc button {
+  -moz-box-sizing: unset !important;
+  -webkit-box-sizing: unset !important;
+  box-sizing: unset !important;
+  height: unset !important;
+  padding: unset !important;
+  font-size: unset !important;
+  white-space: unset !important;
+  cursor: pointer;
+  color: var(--main-color) !important;
+  transition: all 0.3s !important;
+  border-radius: var(--radius, 10px) !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 10px !important;
+  background-color: unset !important;
+  background: rgba(96, 96, 96, 0.3) !important;
+  font-size: 1rem !important; }
+  .fullCalendar .fc button:hover {
+    background: rgba(114, 114, 114, 0.6) !important; }

@@ -29,24 +29,25 @@ class Meeting
             // if($statusOfUser != 1 && $row->getStatus() === 'rdv'){
             //     continue;
             // }
-            if($row->getStatus() === 'slot'){
+            if ($row->getStatus() === 'slot') {
                 $color = '#32CD32';//GREEN
-            }else{
+            } else {
                 $color = '#DC143C';//RED
             }
             $allRdvs[] = array(
                 "id" => $row->getId(),
-                "title"=>$row->getTitle(),
-                "rank"=> $statusOfUser,
+                "title" => $row->getTitle(),
+                "rank" => $statusOfUser,
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
                 "status" => $row->getStatus(),
                 "color" => $color,
             );
         }
-        echo json_encode($allRdvs);
+        if (isset($allRdvs)) {
+            echo json_encode($allRdvs);
+        }
     }
-
 
     public function listRdv()
     {

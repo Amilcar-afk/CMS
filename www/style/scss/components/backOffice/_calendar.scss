@@ -1,0 +1,53 @@
+.fullCalendar{
+	.fc th, .fc td {
+		border-style: unset!important;
+		border-width: unset!important;
+	}
+
+	.fc-state-default {
+		background-image: unset!important;
+		background-repeat: unset!important;
+		text-shadow: unset!important;
+		box-shadow: unset!important;
+	}
+	.fc-toolbar button {
+		position: unset!important;
+	}
+	.fc-state-default.fc-corner-left {
+		border-top-left-radius: var(--radius, 10px)!important;
+		border-bottom-left-radius: var(--radius, 10px)!important;
+	}
+
+
+	.fc {
+		direction: unset!important;
+	}
+	.fc .fc-button-group > * {
+		margin: unset;
+	}
+	.fc button {
+		-moz-box-sizing: unset !important;
+		-webkit-box-sizing: unset !important;
+		box-sizing: unset !important;
+		height: unset !important;
+		padding: unset !important;
+		font-size: unset !important;
+		white-space: unset !important;
+		cursor: pointer;
+		color: var(--main-color) !important;
+		transition: all 0.3s !important;
+		border-radius: var(--radius, 10px) !important;
+		border: none !important;
+		display: flex !important;
+		align-items: center !important;
+		padding: 10px !important;
+		background-color: unset !important;
+
+		background: rgba(96, 96, 96, 0.3) !important;
+		font-size: rem(16) !important;
+
+		&:hover {
+			background: rgba(114, 114, 114, 0.6) !important;
+		}
+	}
+}

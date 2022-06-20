@@ -14,7 +14,6 @@ class Validator
     public static function run($config, $data, $unicity = null)
     {
 
-
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
         }
@@ -52,7 +51,6 @@ class Validator
                 $config['inputs'][$name]['error'] = "You deleted a required input";
 
             }
-
             if($input["type"]=="password" && self::checkPassword($data[$name])){
                 $input['error']="";
             }
