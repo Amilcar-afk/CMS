@@ -29,25 +29,25 @@
                         <section class="section-config-blocks">
                             <article>
                                 <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
-                                <?= ($main_color && $main_color->getValue()) != null?   'style="background-color:'.$main_color->getValue(). '"':'style="background-color:#396075"'  ?>
+                                <?= (isset($main_color) && $main_color->getValue()) != null?   'style="background-color:'.$main_color->getValue(). '"':'style="background-color:#396075"'  ?>
                                 >
-                                    <input type="hidden" class="color-picker--input" data-type="main_color" value="<?= ($main_color && $main_color->getValue()) != null? $main_color->getValue() : '#396075'?>">
+                                    <input type="hidden" class="color-picker--input" data-type="main_color" value="<?= (isset($main_color) && $main_color->getValue()) != null? $main_color->getValue() : '#396075'?>">
                                 </span>
                                 <label>Main color</label>
                             </article>
                             <article>
                                 <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
-                                <?= ($second_color && $second_color->getValue()) != null?   'style="background-color:'.$second_color->getValue(). '"':'style="background-color:#396075"'  ?>
+                                <?= (isset($second_color) && $second_color->getValue()) != null?   'style="background-color:'.$second_color->getValue(). '"':'style="background-color:#396075"'  ?>
                                 >
-                                    <input type="hidden" class="color-picker--input" data-type="second_color" value="<?= ($second_color && $second_color->getValue()) != null? $second_color->getValue() : '#396075'?>">
+                                    <input type="hidden" class="color-picker--input" data-type="second_color" value="<?= (isset($second_color) && $second_color->getValue()) != null? $second_color->getValue() : '#396075'?>">
                                 </span>
                                 <label>Seconde color</label>
                             </article>
                             <article>
                                 <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
-                                <?= ($third_color && $third_color->getValue()) != null?   'style="background-color:'.$third_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
+                                <?= (isset($third_color) && $third_color->getValue()) != null?   'style="background-color:'.$third_color->getValue(). '"':'style="background-color:#9DDCFF"'  ?>
                                 >
-                                    <input type="hidden" class="color-picker--input" data-type="third_color" value="<?= ($third_color && $third_color->getValue()) != null? $third_color->getValue() : '#9DDCFF'?>">
+                                    <input type="hidden" class="color-picker--input" data-type="third_color" value="<?= (isset($third_color) && $third_color->getValue()) != null? $third_color->getValue() : '#9DDCFF'?>">
                                 </span>
                                 <label>Third color</label>
                             </article>
@@ -60,9 +60,9 @@
                         <section class="section-config-blocks">
                             <article>
                                 <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
-                                <?= ($background_color && $background_color->getValue()) != null?   'style="background-color:'.$background_color->getValue(). '"':'style="background-color:#F1F1F1"'  ?>
+                                <?= (isset($background_color) && $background_color->getValue()) != null?   'style="background-color:'.$background_color->getValue(). '"':'style="background-color:#F1F1F1"'  ?>
                                 >
-                                    <input type="hidden" class="color-picker--input" data-type="background_color" value="<?= ($background_color && $background_color->getValue()) != null? $background_color->getValue() : '#F1F1F1'?>">
+                                    <input type="hidden" class="color-picker--input" data-type="background_color" value="<?= (isset($background_color) && $background_color->getValue()) != null? $background_color->getValue() : '#F1F1F1'?>">
                                 </span>
                                 <label>Background color</label>
                             </article>
@@ -151,13 +151,13 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span data-type="radius" data-value="radius" class="radius <?= ($radius->getValue() != null && $radius->getValue() == "radius")?   'selected':''  ?> input-block main_border compose-option">
+                                <span data-type="radius" data-value="radius" class="radius <?= ((isset($radius) && $radius->getValue() != null && $radius->getValue() == "radius") || (!isset($radius)))?   'selected':''  ?> input-block main_border compose-option">
                                     <div></div>
                                 </span>
                                 <label>Radius</label>
                             </article>
                             <article>
-                                <span data-type="radius" data-value="right_angle" class="right_angle <?= ($radius->getValue() != null && $radius->getValue() == "right_angle")?   'selected':''  ?> input-block main_border compose-option">
+                                <span data-type="radius" data-value="right_angle" class="right_angle <?= (isset($radius) && $radius->getValue() != null && $radius->getValue() == "right_angle")?   'selected':''  ?> input-block main_border compose-option">
                                     <div></div>
                                 </span>
                                 <label>Right angle</label>
@@ -169,19 +169,19 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span data-type="bessels" data-value="small" class="small input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "small")?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="small" class="small input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "small")?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Small</label>
                             </article>
                             <article>
-                                <span data-type="bessels" data-value="medium_classic" class="medium_classic input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "medium_classic")?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="medium_classic" class="medium_classic input-block compose-option <?= ((isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "medium_classic")) || (!isset($bessels))?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Medium - classic</label>
                             </article>
                             <article>
-                                <span data-type="bessels" data-value="big" class="big input-block compose-option <?= ($bessels->getValue() != null && $bessels->getValue() == "big")?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="big" class="big input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "big")?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Big</label>
