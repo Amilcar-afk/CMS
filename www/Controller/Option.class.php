@@ -111,12 +111,15 @@ class Option{
                 }else{
                     return;
                 }
-            }else{
-                if( in_array($_POST['type'], ['main_color', 'second_color', 'third_color', 'background_color', 'font_color'])
-                    && preg_match('/^#[a-f0-9]{6}$/i', $_POST['value'])){
+            }else {
+                if (in_array($_POST['type'], ['main_color', 'second_color', 'third_color', 'background_color', 'font_color'])){
+                    if (preg_match('/^#[a-f0-9]{6}$/i', $_POST['value'])) {
+                        $this->option->setValue($_POST['value']);
+                    } else{
+                        $error = false;
+                    }
+                }else{
                     $this->option->setValue($_POST['value']);
-                }elseif(true){
-                    $error = false;
                 }
             }
 
@@ -157,9 +160,11 @@ class Option{
                     ->execute('Option');
                 return include "View/Partial/design-variables.partial.php";
             }else{
+                echo "ok";
                 http_response_code(500);
             }
         }else{
+            echo 'okkk';
             http_response_code(500);
         }
 
