@@ -69,6 +69,11 @@ class Page_categorie extends BaseSQL
         parent::save();
     }
 
+    public function delete($id)
+    {
+        return parent::delete($id);
+
+    }
 }
 
    

@@ -21,7 +21,22 @@ class Pageengine
 
 
     public function deletePage(){
+        if( isset($_POST['id']) ) {
+            $page = $this->page->find($_POST['id']);
+            if ($page->getId() != null) {
 
+                $pageCategories = Query::from('cmspf_Page_categorie')->where("page_key = " . $_POST['id'] . "")->execute('Page_categorie');
+                foreach ($pageCategories as $pageCategorie)
+                {
+                    $pageCategorie->delete($pageCategorie->getId());
+                }
+                Query::deleteAll('')->from('cmspf_Stats')->where("page_key = " . $_POST['id'] . "")->execute();
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
     }
 
     public function pageLoader($request){

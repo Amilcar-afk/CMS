@@ -92,12 +92,23 @@ class Categorie{
         }
     }
 
-    public function categoriedelete($id)
+    public function categoriedelete()
     {
-        if(isset($id))
-        {
-            $this->categorie->deleteCategorie($this->categorie->setId($id['id']));
-            header('location:/categories');
+        if( isset($_POST['id']) ) {
+            $categorie = $this->categorie->find($_POST['id']);
+            if ($categorie->getId() != null) {
+
+                $categorieCategories = Query::from('cmspf_Categorie_categorie')->where("categorie_child_key = " . $_POST['id'] . "")->execute('Categorie_categorie');
+                foreach ($categorieCategories as $categorieCategorie)
+                {
+                    $categorieCategorie->delete($categorieCategorie->getId());
+                }
+                $categorie->delete($_POST['id']);
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
         }
     }
 

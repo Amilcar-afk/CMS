@@ -60,6 +60,7 @@
                                             <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
                                             <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                             <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
+                                            <button class="cta-button cta-button-a cta-button-delete-page" data-page-id="<?= $page->getId() ?>"><span class="material-icons-round">delete</span></button>
                                         </td>
                                     </tr>
                                 <?php endif;?>
@@ -101,6 +102,7 @@
                                             <a href="pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
                                             <a href="/build/<?= $page->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                             <button class="cta-button cta-button-a" data-a-target="container-setting-page-<?=$page->getId() ?>"><span class="material-icons-round">build</span></button>
+                                            <button class="cta-button cta-button-a cta-button-delete-page" data-page-id="<?= $page->getId() ?>"><span class="material-icons-round">delete</span></button>
                                         </td>
                                     </tr>
                                 <?php endif;?>

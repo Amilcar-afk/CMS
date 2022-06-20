@@ -55,6 +55,12 @@ class Categorie_categorie extends BaseSQL
         $this->categorie_child_key = $categorie_child_key;
     }
 
+    public function delete($id)
+    {
+        return parent::delete($id);
+
+    }
+
     /**
      * @return null
      */

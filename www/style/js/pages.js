@@ -27,10 +27,9 @@ $(document).ready(function(){
             }
         });
     })
-});
 
-$(document).ready(function(){
     $(document).on("click", ".cta-button-delete-page", function () {
+        var pageContainer = $(this);
         $.ajax({
             url:"/page/delete",
             type:"POST",
@@ -38,9 +37,10 @@ $(document).ready(function(){
                 {
                     id:$(this).attr('data-page-id')
                 },
-            success:function(answer)
+            success:function()
             {
-                alertMessage(answer);
+                $(pageContainer).parent().parent().remove();
+                alertMessage('Page deleted!');
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');
