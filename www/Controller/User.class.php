@@ -104,8 +104,24 @@ class User{
         }
     }
 
-    public function updateRank(){
-        echo "updated rank";
+    public function updateRank()
+    {
+        if(!empty($_GET['id'])){
+
+            $rank = $this->user->getRank();
+
+            if($rank === "admin")
+                $this->user->setRank("user");
+            else
+                $this->user->setRank("admin");
+
+            $this->user->setId($_GET['id']);
+            $this->user->save();
+            echo "rank updated";
+
+        }else{
+            echo "error in update";
+        }
     }
 
 }
