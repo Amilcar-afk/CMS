@@ -2,17 +2,24 @@
 //import {affiche} from '/httpRequest.js';
 
 const url = location.protocol + "//" + location.host + "/";
+let htmlParent = null;
 
 function deleteUser(parent) {
     let uri = url + "userdelete/";
     let id = parent.getAttribute("data-id-user");
+    htmlParent = parent.parentNode.parentNode; //get the <tr> of the user
+
     //let data = `id=${id}`;
     let data = '?id='+id;
-    console.log(data);
-    ajaxRequest(uri, "DELETE", data, true);
+    ajaxRequest(uri, "DELETE", data, deleteUserAnswer, true);
 }
 
-function ajaxRequest(uri ,method, data, success, async = true) {
+function deleteUserAnswer(req) {
+    alertMessage(req.responseText);
+    htmlParent.remove();
+}
+
+function ajaxRequest(uri ,method, data, onSuccess, async = true) {
     let request = new XMLHttpRequest();
 
     if (method === "GET" || method === "DELETE"){
@@ -20,7 +27,7 @@ function ajaxRequest(uri ,method, data, success, async = true) {
 
         request.onreadystatechange = function () {
             if(request.readyState === 4 && request.status === 200){
-                console.log(request.responseText);
+                onSuccess(request);
             }
         };
 
@@ -31,7 +38,7 @@ function ajaxRequest(uri ,method, data, success, async = true) {
 
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
-                console.log(request.responseText);
+                success(null, request);
             }
         };
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

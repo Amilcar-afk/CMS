@@ -91,4 +91,21 @@ class User{
             }
         }
     }
+
+    public function deleteUser()
+    {
+        if(!empty($_GET['id'])){
+            $this->user->setDeleted(1);
+            $this->user->setId($_GET['id']);
+            $this->user->save();
+            echo "user deleted successfully";
+        }else{
+            echo "user not deleted";
+        }
+    }
+
+    public function updateRank(){
+        echo "updated rank";
+    }
+
 }
