@@ -56,6 +56,13 @@
                                 </td>
                                 <td>
                                     <?=$user->getRank()?>
+                                    <?php
+                                        if($user->getRank() === "admin"){
+                                            echo '<button data-id-user='.$user->getId().' style="margin-left: 5px" onclick="updateRank(this)">User</button>';
+                                        }else{
+                                            echo '<button data-id-user='.$user->getId().' style="margin-left: 5px" onclick="updateRank(this)">Admin</button>';
+                                        }
+                                    ?>
                                 </td>
                                 <td>
                                     <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$user->getId() ?>" data-id-user="<?=$user->getId()?>"><span class="material-icons-round" onclick="deleteUser(this.parentNode)">delete</span></button>
