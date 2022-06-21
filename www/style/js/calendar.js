@@ -67,8 +67,9 @@ function loadcalendar(id){
             color: '#000',
             dataType: 'json',
             success: function(events) {
-              callback(events);
               events.map((e)=>{
+              console.log(e)
+                
                 rank.push(e.rank);
               })
             }
@@ -80,8 +81,10 @@ function loadcalendar(id){
           color: '#000',
           dataType: 'json',
           success: function(events) {
+            console.log(events)
             callback(events);
             events.map((e)=>{
+              console.log(e)
               rank.push(e.rank);
 
             })
@@ -96,6 +99,7 @@ function loadcalendar(id){
           success: function(events) {
             callback(events);
             events.map((e)=>{
+
               rank.push(e.rank);
             })
           }
@@ -106,7 +110,6 @@ function loadcalendar(id){
     },  
 
     // INSERT EVENTS /////////////////////////////////////////////
-    initialView: 'dayGridWeek',
     minTime: '09:00:00', 
     maxTime: '21:00:00', 
     selectable:true,
@@ -139,8 +142,6 @@ function loadcalendar(id){
           }
       }else {
         id.fullCalendar('unselect');
-      console.log(activeAvailableMeetings)
-
       }
     },
 
@@ -165,10 +166,6 @@ function loadcalendar(id){
         calendar.fullCalendar('refetchEvents');
       }
     },
-
-    //enlever les slos en rouges dans meetings
-    //
-
     editable:true,
     eventResize:function(event)
     {
@@ -190,9 +187,7 @@ function loadcalendar(id){
         calendar.fullCalendar('refetchEvents');
       }
     },
-
     // DELETE EVENTS /////////////////////////////////////////////
-
     eventClick:function(event)
     {
       if(event.rank == 'admin' && location.pathname == '/slots' && activeAvailableMeetings   ){

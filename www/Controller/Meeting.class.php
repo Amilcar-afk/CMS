@@ -7,17 +7,23 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Rdv;
 use App\Model\User_rdv;
+use App\Controller\Mail; ;
+
 
 class Meeting
 {
     public $rdv;
     public $authAdmin ;
     public $user_rdv;
+    public $mail;
+
 
     public function __construct()
     {
         $this->rdv = new Rdv();
         $this->user_rdv = new User_rdv();
+        $this->mail = new Mail();
+
     }
 
 
@@ -83,7 +89,9 @@ class Meeting
                 );
             }
         }
-        echo json_encode($allRdvs);
+        if (isset($allRdvs)) {
+            echo json_encode($allRdvs);
+        }
     }
 
     public function loadAvailableMeetings(){
@@ -95,6 +103,7 @@ class Meeting
             $rdv = $this->rdv->find($e->rdv_key);
             array_push($meetings, $rdv);
         }
+
        
         foreach($meetings as $row){
             if($row != false){
@@ -107,6 +116,8 @@ class Meeting
                     "start" => $row->getStartDate(),
                     "end" => $row->getEndDate(),
                     "status" => $row->getStatus(),
+                    "location" => $row->getLocation(),
+                    "name" => $_SESSION['Auth']->firstname,
                     "color" => '#32CD32',
                 );
             }
@@ -142,6 +153,7 @@ class Meeting
             }
             if (empty($config)) {
                 $this->rdv->save();
+
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId && !isset($_POST['id'])) {
@@ -178,6 +190,7 @@ class Meeting
             $config = Validator::run($this->rdv->getFormNewMeeting(),$_POST);
             if (empty($config)) {
                 $this->rdv->save();
+                $this->mail->confirmMail('','','');
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId) {
