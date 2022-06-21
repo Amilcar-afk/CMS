@@ -6,6 +6,7 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Controller\Mail;
+use App\Core\Query;
 
 class User{
 
@@ -106,16 +107,16 @@ class User{
 
     public function updateRank()
     {
-        if(!empty($_GET['id'])){
+        if(!empty($_POST['id'])){
+            $infos = Query::from('cmspf_Users')->where("id=" . $_POST['id'])->execute("User");
+            $rank = $infos[0]->getRank();
 
-            $rank = $this->user->getRank();
-
-            if($rank === "admin")
+            if($rank === "admin" || empty($rank))
                 $this->user->setRank("user");
             else
                 $this->user->setRank("admin");
 
-            $this->user->setId($_GET['id']);
+            $this->user->setId($_POST['id']);
             $this->user->save();
             echo "rank updated";
 

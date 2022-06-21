@@ -25,11 +25,10 @@
   action: deleteUser
   params: [id]
 
-/udpdaterank:
+/updaterank:
   controller: user
   action: updateRank
   params: [id]
-
 
 /pageloader:
   controller: pageengine

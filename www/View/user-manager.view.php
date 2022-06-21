@@ -55,7 +55,7 @@
 
                                 </td>
                                 <td>
-                                    <?=$user->getRank()?>
+                                    <span style="font-size: 1rem"><?=$user->getRank()?></span>
                                     <?php
                                         if($user->getRank() === "admin"){
                                             echo '<button data-id-user='.$user->getId().' style="margin-left: 5px" onclick="updateRank(this)">User</button>';
