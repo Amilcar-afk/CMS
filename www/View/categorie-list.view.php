@@ -44,6 +44,7 @@
                                     </td>
                                     <td>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-categorie-<?=$categorie->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a cta-button-delete-categorie" data-categorie-id="<?= $categorie->getId() ?>"><span class="material-icons-round">delete</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach;?>

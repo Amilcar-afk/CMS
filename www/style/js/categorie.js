@@ -24,20 +24,20 @@ $(document).ready(function(){
             }
         });
     })
-});
 
-$(document).ready(function(){
     $(document).on("click", ".cta-button-delete-categorie", function () {
+        var categorieContainer = $(this);
         $.ajax({
             url:"/categorie/delete",
             type:"POST",
             data:
                 {
-                    id:$(this).attr('data-page-id')
+                    id:$(this).attr('data-categorie-id')
                 },
-            success:function(answer)
+            success:function()
             {
-                alertMessage(answer);
+                $(categorieContainer).parent().parent().remove();
+                alertMessage('Categorie deleted!');
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');

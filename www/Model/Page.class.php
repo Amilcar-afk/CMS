@@ -176,6 +176,11 @@ class Page extends BaseSQL
         $this->status = $status;
     }
 
+    public function delete($id)
+    {
+        parent::delete($id);
+    }
+
     public function getFormNewPage($categories): array
     {
         foreach($categories as $categorie){
@@ -243,7 +248,7 @@ class Page extends BaseSQL
                     "placeholder"=>"Page slug",
                     "class"=>"input",
                     "required"=>true,
-                    "min"=>3,
+                    "min"=>0,
                     "max"=>16,
                     "value"=>$this->getSlug(),
                     "unicity"=>true,

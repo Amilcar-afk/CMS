@@ -5,7 +5,7 @@
 
     <section class="container-main-content container-main-content--padding container-main-content--dashboard" >
         <div class="row">
-            <div class="col-4 col-md-6 col-sm-6">
+            <div class="col-4 col-md-4 col-sm-4">
                 <section class="card card--bottom  card--background-main-color">
                     <header>
                         <h4>6</h4>
@@ -13,7 +13,7 @@
                     </header>
                 </section>
             </div>
-            <div class="col-4 col-md-6 col-sm-6">
+            <div class="col-4 col-md-12 col-sm-12">
                 <section id="per-country-container" class="card card--background-main-color">
                     <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
@@ -38,7 +38,7 @@
                 </section>
             </div>
 
-            <div class="col-2 col-md-6 col-sm-6">
+            <div class="col-2 col-md-4 col-sm-4">
                 <section class="card card--bottom card--background-main-color">
                     <header>
                         <h4>2</h4>
@@ -47,7 +47,7 @@
                 </section>
             </div>
 
-            <div class="col-2 col-md-6 col-sm-6">
+            <div class="col-2 col-md-4 col-sm-4">
                 <section class="card card--bottom card--background-main-color">
                     <header>
                         <span class="material-icons-round">edit</span>
@@ -56,7 +56,7 @@
                 </section>
             </div>
 
-            <div class="col-4 col-md-6 col-sm-12">
+            <div class="col-4 col-md-12 col-sm-12">
                 <section id="per-page-container" class="card card--bigcard card--background-color">
                     <header>
                         <h3>Page ranking</h3>
@@ -142,7 +142,7 @@
                 </section>
             </div>
 
-            <div class="col-4 col-md-6 col-sm-12">
+            <div class="col-4 col-md-12 col-sm-12">
                 <section id="per-device-container" class="card card--bigcard card--background-color">
                     <header>
                         <h3>Per device</h3>
@@ -167,7 +167,7 @@
                 </section>
             </div>
 
-            <div class="col-4 col-md-6 col-sm-12">
+            <div class="col-4 col-md-12 col-sm-12">
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>

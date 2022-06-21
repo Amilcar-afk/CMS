@@ -25,6 +25,11 @@
   action: deleteUser
   params: [id]
 
+/udpdaterank:
+  controller: user
+  action: updateRank
+  params: [id]
+
 
 /pageloader:
   controller: pageengine
@@ -56,7 +61,6 @@
 /page/delete:
   controller: pageengine
   action: deletePage
-  params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
 /add-code:
@@ -77,8 +81,7 @@
 
 /categorie/delete:
   controller: categorie
-  action: categoriedelete
-  params: [ id ]
+  action: categorieDelete
   middleware: [ 'auth', 'admin' ]
 
 /categories:

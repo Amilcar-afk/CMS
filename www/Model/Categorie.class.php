@@ -75,9 +75,9 @@ class Categorie extends BaseSQL
         parent::save();
     }
 
-    public function delete($params)
+    public function delete($id)
     {
-        return parent::delete($params);
+        return parent::delete($id);
 
     }
 
@@ -95,7 +95,6 @@ class Categorie extends BaseSQL
     {
         return parent::find($id, $attribut);
     }
-
 
     public function getFormNewCategorie($navigations): array
     {

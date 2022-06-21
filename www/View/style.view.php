@@ -5,7 +5,7 @@
             <nav>
                 <a href="/settings/user-manager" class="cta-button cta-button--menu main-nav-choice" data-wc-target="user-manager-container"><span class="material-icons-round">supervisor_account</span>User manager</a>
                 <a href="/settings/style" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="style-container"><span class="material-icons-round">brush</span>Style</a>
-                <a href="/settings/database" class="cta-button cta-button--menu main-nav-choice" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Database</a>
+                <a href="/settings/database" class="cta-button cta-button--menu main-nav-choice" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Config</a>
                 <a href="/settings/media-library" class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-library-container"><span class="material-icons-round">video_library</span>Media library</a>
             </nav>
         </div>
@@ -169,19 +169,19 @@
                         </header>
                         <section class="section-config-blocks">
                             <article>
-                                <span data-type="bessels" data-value="small" class="small input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "small")?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="body-small" class="small input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "small")?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Small</label>
                             </article>
                             <article>
-                                <span data-type="bessels" data-value="medium_classic" class="medium_classic input-block compose-option <?= ((isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "medium_classic")) || (!isset($bessels))?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="body-medium" class="medium_classic input-block compose-option <?= ((isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "medium_classic")) || (!isset($bessels))?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Medium - classic</label>
                             </article>
                             <article>
-                                <span data-type="bessels" data-value="big" class="big input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "big")?   'selected':''  ?>">
+                                <span data-type="bessels" data-value="body-big" class="big input-block compose-option <?= (isset($bessels) && $bessels->getValue() != null && $bessels->getValue() == "big")?   'selected':''  ?>">
                                     <div></div>
                                 </span>
                                 <label>Big</label>

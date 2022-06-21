@@ -159,7 +159,7 @@
 	.cta-button{
 
 		&--menu{
-			width: 200px;
+			width: 60px;
 			flex-grow: 1;
 			min-width: 50px;
 
@@ -180,5 +180,15 @@
 			}
 		}
 
+	}
+}
+
+//mobile
+@media (max-width: 768px){
+	.cta-button {
+
+		&--menu {
+			width: 140px;
+		}
 	}
 }

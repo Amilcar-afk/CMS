@@ -20,14 +20,14 @@
                 <span class="material-icons-round">menu</span>
             </button>
             <nav>
-                <a href="/pageloader/<?= $page->getSlug() ?>" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
+                <a href="/pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
                 <button class="cta-button cta-button--text-icon cta-button-save" data-page-id="<?=$page->getId()?>"><span class="material-icons-round">save</span>Save</button>
                 <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span>Published</a>
             </nav>
         </div>
     </header>
     <section id="container-editor" class="container-main-content container-main-content--padding" >
-        <div class="row">
+        <div class="row <?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?>">
             <article class="module col-6 col-offset-1">
 
                 <h4 class="color-main-color text-center fs-26 bold col-12">Lorem ipsum dolor sit amet consectetur.</h4>
