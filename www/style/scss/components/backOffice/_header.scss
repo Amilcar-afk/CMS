@@ -65,10 +65,16 @@
     }
 
     & a:hover{
+      span{
+        color: var(--main-color);
+      }
       color: var(--main-color);
     }
 
     & .selected{
+      span{
+        color: var(--main-color);
+      }
       color: var(--main-color)!important;
     }
   }
@@ -89,6 +95,10 @@
     transition-duration: 2s;
     transition-timing-function: ease;
     width: max-content;
+
+    & label{
+      color: var(--background-color);
+    }
   }
 
 }

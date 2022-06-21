@@ -1352,127 +1352,6 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 .module-list--quote-mark-third-color figure blockquote > p:after, .module--quote-mark-third-color figure blockquote > p:after {
   color: var(--third-color); }
 
-.body-back-office > header {
-  background-color: var(--background-color);
-  border-radius: var(--radius, 20px);
-  margin-right: 30px;
-  color: #D9D9D9;
-  max-height: calc(100vh - 60px);
-  padding: 20px;
-  z-index: 3; }
-  .body-back-office > header nav {
-    height: 100%; }
-  .body-back-office > header #back-office-logo img {
-    border-radius: 300px;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    box-shadow: 0px -200px 4px 0px var(--main-color) inset; }
-  .body-back-office > header #back-office-logo {
-    margin-top: 0;
-    margin-bottom: 10px; }
-  .body-back-office > header ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    height: 100%; }
-  .body-back-office > header ul:nth-child(3):before {
-    content: "";
-    flex-grow: 1; }
-  .body-back-office > header li:last-child {
-    height: fit-content;
-    height: 100%;
-    align-items: end;
-    display: flex; }
-  .body-back-office > header li a {
-    padding: 0.3em;
-    margin-top: 1.875rem;
-    display: block;
-    text-decoration: none;
-    color: #D9D9D9;
-    transition: all 0.3s;
-    position: relative;
-    display: flex;
-    align-items: center; }
-    .body-back-office > header li a span {
-      color: #D9D9D9; }
-  .body-back-office > header li a:hover {
-    color: var(--main-color); }
-  .body-back-office > header li .selected {
-    color: var(--main-color) !important; }
-  .body-back-office > header .material-icons-round {
-    font-size: 2.0625rem; }
-  .body-back-office > header .bubble-alt {
-    font-size: 0.875rem;
-    background-color: var(--main-color);
-    color: var(--background-color);
-    border-radius: var(--radius, 50px);
-    position: absolute;
-    padding: 8px;
-    left: 3rem;
-    font-weight: 500;
-    transition-duration: 2s;
-    transition-timing-function: ease;
-    width: max-content; }
-
-@media (max-width: 992px) {
-  .body-back-office > header {
-    border-radius: var(--radius, 30px) var(--radius, 30px) 0px 0px;
-    box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.1);
-    margin-right: 0px;
-    flex-direction: row;
-    max-height: unset;
-    padding: 25px;
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    width: 100%; }
-    .body-back-office > header #back-office-logo img {
-      width: 1.875rem;
-      height: 1.875rem; }
-    .body-back-office > header #back-office-logo {
-      margin-bottom: 0px; }
-    .body-back-office > header ul {
-      flex-direction: row;
-      justify-content: space-between; }
-      .body-back-office > header ul li:nth-child(1) {
-        order: 3; }
-      .body-back-office > header ul li:nth-child(2) {
-        order: 1; }
-      .body-back-office > header ul li:nth-child(3) {
-        order: 2; }
-      .body-back-office > header ul li:nth-child(4) {
-        order: 4; }
-      .body-back-office > header ul li:nth-child(5) {
-        order: 5; }
-    .body-back-office > header li a {
-      padding: 0.3em;
-      margin-top: 0rem;
-      display: block;
-      text-decoration: none;
-      color: #D9D9D9;
-      transition: all 0.3s; }
-    .body-back-office > header li .selected {
-      position: relative; }
-    .body-back-office > header li .selected::after {
-      position: absolute;
-      bottom: -4px;
-      left: calc(50% - 4px);
-      content: "";
-      border-radius: var(--radius, 20px);
-      width: 8px;
-      height: 8px;
-      background-color: var(--main-color); }
-    .body-back-office > header .material-icons-round {
-      font-size: 1.875rem; }
-    .body-back-office > header li a:hover {
-      color: var(--main-color); }
-    .body-back-office > header .bubble-alt {
-      display: none; } }
-
 .content-header {
   background: rgba(129, 129, 129, 0.3);
   box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
@@ -2362,3 +2241,130 @@ h2 {
   font-size: 1rem !important; }
   .fullCalendar .fc button:hover {
     background: rgba(114, 114, 114, 0.6) !important; }
+
+.body-back-office > header {
+  background-color: var(--background-color);
+  border-radius: var(--radius, 20px);
+  margin-right: 30px;
+  color: #D9D9D9;
+  max-height: calc(100vh - 60px);
+  padding: 20px;
+  z-index: 3; }
+  .body-back-office > header nav {
+    height: 100%; }
+  .body-back-office > header #back-office-logo img {
+    border-radius: 300px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    box-shadow: 0px -200px 4px 0px var(--main-color) inset; }
+  .body-back-office > header #back-office-logo {
+    margin-top: 0;
+    margin-bottom: 10px; }
+  .body-back-office > header ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 100%; }
+  .body-back-office > header ul:nth-child(3):before {
+    content: "";
+    flex-grow: 1; }
+  .body-back-office > header li:last-child {
+    height: fit-content;
+    height: 100%;
+    align-items: end;
+    display: flex; }
+  .body-back-office > header li a {
+    padding: 0.3em;
+    margin-top: 1.875rem;
+    display: block;
+    text-decoration: none;
+    color: #D9D9D9;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center; }
+    .body-back-office > header li a span {
+      color: #D9D9D9; }
+  .body-back-office > header li a:hover {
+    color: var(--main-color); }
+    .body-back-office > header li a:hover span {
+      color: var(--main-color); }
+  .body-back-office > header li .selected {
+    color: var(--main-color) !important; }
+    .body-back-office > header li .selected span {
+      color: var(--main-color); }
+  .body-back-office > header .material-icons-round {
+    font-size: 2.0625rem; }
+  .body-back-office > header .bubble-alt {
+    font-size: 0.875rem;
+    background-color: var(--main-color);
+    color: var(--background-color);
+    border-radius: var(--radius, 50px);
+    position: absolute;
+    padding: 8px;
+    left: 3rem;
+    font-weight: 500;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+    width: max-content; }
+    .body-back-office > header .bubble-alt label {
+      color: var(--background-color); }
+
+@media (max-width: 992px) {
+  .body-back-office > header {
+    border-radius: var(--radius, 30px) var(--radius, 30px) 0px 0px;
+    box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 0px;
+    flex-direction: row;
+    max-height: unset;
+    padding: 25px;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 100%; }
+    .body-back-office > header #back-office-logo img {
+      width: 1.875rem;
+      height: 1.875rem; }
+    .body-back-office > header #back-office-logo {
+      margin-bottom: 0px; }
+    .body-back-office > header ul {
+      flex-direction: row;
+      justify-content: space-between; }
+      .body-back-office > header ul li:nth-child(1) {
+        order: 3; }
+      .body-back-office > header ul li:nth-child(2) {
+        order: 1; }
+      .body-back-office > header ul li:nth-child(3) {
+        order: 2; }
+      .body-back-office > header ul li:nth-child(4) {
+        order: 4; }
+      .body-back-office > header ul li:nth-child(5) {
+        order: 5; }
+    .body-back-office > header li a {
+      padding: 0.3em;
+      margin-top: 0rem;
+      display: block;
+      text-decoration: none;
+      color: #D9D9D9;
+      transition: all 0.3s; }
+    .body-back-office > header li .selected {
+      position: relative; }
+    .body-back-office > header li .selected::after {
+      position: absolute;
+      bottom: -4px;
+      left: calc(50% - 4px);
+      content: "";
+      border-radius: var(--radius, 20px);
+      width: 8px;
+      height: 8px;
+      background-color: var(--main-color); }
+    .body-back-office > header .material-icons-round {
+      font-size: 1.875rem; }
+    .body-back-office > header li a:hover {
+      color: var(--main-color); }
+    .body-back-office > header .bubble-alt {
+      display: none; } }
