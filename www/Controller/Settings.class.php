@@ -7,6 +7,7 @@ use App\Core\View;
 use App\Model\Data_base;
 use App\Model\User;
 use App\Model\Option;
+use App\Core\Query;
 
 
 class Settings
@@ -27,7 +28,8 @@ class Settings
 
     public function listUser()
     {
-        $users = $this->user->find();
+        $users = Query::from('cmspf_Users')->where("deleted IS NULL OR deleted = 0")->execute("User");
+        //$users = $this->user->find();
         $view = new View("user-manager", "back");
         $view->assign("users", $users);
     }
