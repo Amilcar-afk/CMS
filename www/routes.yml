@@ -45,6 +45,7 @@
   controller: pageengine
   action: buildPage
   params: [ slug ]
+  middleware: [ 'auth', 'admin' ]
 
 /build/save:
   controller: pageengine
@@ -202,12 +203,12 @@
 /slot/delete:
   controller: meeting
   action: deleteRdv
-  middleware : ['auth']
+  middleware : ['auth', 'admin']
 
 /option/compose:
   controller: option
   action: composeOption
-  middleware: ['auth']
+  middleware: ['auth', 'admin']
 
 /social-media/compose:
   controller: statistics
