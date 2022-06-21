@@ -22,15 +22,21 @@ abstract class BaseSQL
 
     private static function getBdd()
     {
-        if(self::$bdd === null){
-
-            try{
-                self::$bdd = new \PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME ,DBUSER ,DBPWD );
-                self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            }catch(\Exception $e){
-                die("Erreur SQL".$e->getMessage());
+        if(file_exists('env.json') ){
+            $envFile= 'env.json';
+            $json_data = file_get_contents($envFile);
+            $config = json_decode($json_data, true);
+            
+            if(self::$bdd === null){
+                
+                try{
+                    self::$bdd = new \PDO( $config['DBDRIVER'].":host=".$config['DBHOST'].";port=".$config['DBPORT'].";dbname=".$config['DBNAME'] ,$config['DBUSER'] ,$config['DBPWD'] );
+                    self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                }catch(\Exception $e){
+                    die("Erreur SQL".$e->getMessage());
+                }
+                
             }
-
         }
         return self::$bdd;
     }       
