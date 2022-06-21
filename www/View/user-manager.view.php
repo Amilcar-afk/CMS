@@ -17,7 +17,7 @@
                 </header>
 
                 <article>
-                    <table id="usersTab" class="display">
+                    <table id="usersTab" class="table display">
                         <thead>
                         <tr>
                             <th>

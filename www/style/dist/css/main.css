@@ -3,7 +3,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif; }
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color, black); }
 
 html {
   height: 100vh; }
@@ -43,6 +44,8 @@ input:focus {
 a {
   text-decoration: none; }
 
+a:not([href]) {
+  pointer-events: none; }
 
 span, small {
   font-family: "Montserrat", sans-serif;
@@ -89,38 +92,9 @@ p {
   scrollbar-color: var(--main-color) #EBEBEB;
   scrollbar-width: thin;
   scrollbar-border-radius: var(--radius, 12px); }
-/* 
-tr {
-  display: flex;
-  justify-content: space-between;
-  color: #6D6D6D;
-  border-bottom: solid 2px #E2E2E2;
-  border-top: solid 2px #E2E2E2;
-  border-right: solid 4px #E2E2E2;
-  border-left: solid 4px #E2E2E2;
-  padding: 10px;
-  background-color: var(--background-color); }
-
-td {
-  display: flex;
-  align-items: center; }
-
-table {
-  width: 100%;
-  border-collapse: inherit;
-  overflow: hidden;
-  border: solid -2px #E2E2E2;
-  border-radius: 15px;
-  margin: 0;
-  padding: 15px; }
 
 table.dataTable.no-footer {
   border: none !important; }
-
-thead tr {
-  border: none !important; }
-  thead tr td {
-    border: none !important; }
 
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
   color: var(--main-color);
@@ -171,14 +145,6 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > tr.odd > * {
   box-shadow: unset !important; }
-
-tr:last-child {
-  border-bottom: solid 4px #E2E2E2;
-  border-radius: 0 0 15px 15px; }
-
-tr:first-child {
-  border-top: solid 4px #E2E2E2;
-  border-radius: 15px 15px 0 0; } */
 
 *::-webkit-scrollbar {
   width: 6px;
@@ -1001,17 +967,7 @@ tr:first-child {
 .postion-absolute {
   position: absolute; }
 
-.table-container {
-  width: 100%;
-  height: 86%;
-  background-color: unset;
-  border-radius: 20px;
-  padding: 10px 5px 0px 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
+.table {
   width: 100%;
   border-collapse: inherit;
   overflow: hidden;
@@ -1019,14 +975,13 @@ tr:first-child {
   border-radius: 15px;
   margin: 0;
   padding: 15px; }
-  .table-container tbody {
+  .table thead tr {
+    border: none !important; }
+    .table thead tr td {
+      border: none !important; }
+  .table tbody {
     width: 100%; }
-  .table-container tr {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 22px;
-    border-bottom: 1px solid #9E9E9E;
+  .table tr {
     display: flex;
     justify-content: space-between;
     color: #6D6D6D;
@@ -1036,16 +991,15 @@ tr:first-child {
     border-left: solid 4px #E2E2E2;
     padding: 10px;
     background-color: var(--background-color); }
-    .table-container tr td {
-      font-family: "Montserrat", sans-serif;
-      color: black;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 0.875rem;
-      line-height: 1rem;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center; }
+  .table td {
+    display: flex;
+    align-items: center; }
+  .table tr:last-child {
+    border-bottom: solid 4px #E2E2E2;
+    border-radius: 0 0 15px 15px; }
+  .table tr:first-child {
+    border-top: solid 4px #E2E2E2;
+    border-radius: 15px 15px 0 0; }
 
 .card {
   background-color: #E3E3E3;
@@ -1107,7 +1061,7 @@ tr:first-child {
       display: flex;
       align-items: center;
       letter-spacing: 0.005em;
-      color: #FFFFFF; }
+      color: var(--background-color, white); }
     .card header h3, .card header .material-icons-round {
       margin: 0;
       font-size: 1.5rem;
@@ -1115,7 +1069,7 @@ tr:first-child {
       display: flex;
       align-items: center;
       letter-spacing: 0.005em;
-      color: #FFFFFF; }
+      color: var(--background-color, white); }
   .card .edge-container {
     width: 75px;
     height: 97px;
@@ -1443,6 +1397,8 @@ tr:first-child {
     position: relative;
     display: flex;
     align-items: center; }
+    .body-back-office > header li a span {
+      color: #D9D9D9; }
   .body-back-office > header li a:hover {
     color: var(--main-color); }
   .body-back-office > header li .selected {
@@ -1555,12 +1511,15 @@ tr:first-child {
     flex-direction: column;
     color: var(--main-color); }
     .content-header > :nth-child(2) .material-icons-round {
+      color: var(--main-color);
       font-size: 0.875rem; }
     .content-header > :nth-child(2) label {
       font-size: 0.875rem;
-      font-weight: 500; }
+      font-weight: 500;
+      color: var(--main-color); }
     .content-header > :nth-child(2) footer {
-      font-size: 0.75rem; }
+      font-size: 0.75rem;
+      color: var(--main-color); }
   .content-header > :nth-child(3) {
     justify-content: flex-end; }
     .content-header > :nth-child(3) .cta-button {
@@ -1637,6 +1596,7 @@ tr:first-child {
     .cta-button--menu-burger .material-icons-round {
       margin-right: 8px;
       margin-left: 8px;
+      color: var(--main-color);
       font-size: 1.875rem; }
     .cta-button--menu-burger::before {
       content: ''; }
@@ -1645,6 +1605,8 @@ tr:first-child {
   .cta-button--text-icon {
     background: rgba(255, 255, 255, 0.3);
     font-size: 1rem; }
+    .cta-button--text-icon span {
+      color: var(--main-color); }
     .cta-button--text-icon:hover {
       background: rgba(255, 255, 255, 0.6); }
   .cta-button--menu {
@@ -1654,6 +1616,8 @@ tr:first-child {
     width: 275px;
     padding: 10px;
     margin-top: 50px; }
+    .cta-button--menu span {
+      color: var(--main-color); }
     .cta-button--menu.selected {
       background-color: rgba(129, 129, 129, 0.3); }
       .cta-button--menu.selected:hover {
@@ -1667,11 +1631,14 @@ tr:first-child {
     .cta-button--icon.selected {
       background-color: rgba(162, 162, 162, 0.6); }
     .cta-button--icon .material-icons-round {
+      color: var(--main-color);
       margin-right: 0px; }
   .cta-button--text-no-background {
     font-size: 1.125rem;
     font-weight: 500;
     align-self: unset !important; }
+    .cta-button--text-no-background span {
+      color: var(--main-color); }
     .cta-button--text-no-background:hover {
       color: var(--second-color); }
   .cta-button--submit {
@@ -1682,7 +1649,7 @@ tr:first-child {
     justify-content: center;
     border-radius: var(--radius, 10px);
     background-color: var(--main-color);
-    color: white; }
+    color: var(--background-color, white); }
     .cta-button--submit:hover {
       background-color: var(--second-color); }
     .cta-button--submit--add {
@@ -2052,9 +2019,9 @@ tr:first-child {
   .title--second-color {
     color: var(--second-color); }
   .title--black {
-    color: #000; }
+    color: var(--text-color, black); }
   .title--white {
-    color: #FFF; }
+    color: var(--background-color, white); }
 
 h1 {
   font-family: "Roboto", sans-serif;
@@ -2112,7 +2079,7 @@ h2 {
   display: flex;
   flex-direction: column; }
   .input-container label {
-    color: #000;
+    color: var(--text-color, black);
     font-weight: 600;
     font-size: 0.875rem;
     margin: 0;
@@ -2120,7 +2087,7 @@ h2 {
   .input-container .input {
     width: 100%;
     background-color: #EBEBEB !important;
-    color: #000;
+    color: var(--text-color, black);
     transition: all 0.3s;
     border-radius: var(--radius, 5px);
     border: none;
@@ -2250,6 +2217,8 @@ h2 {
   display: flex;
   align-items: center; }
   .sticker .material-icons-round {
+    color: var(--background-color);
+    margin-right: 4px;
     font-size: 1.0625rem; }
   .sticker--slug {
     background-color: #444; }
@@ -2346,6 +2315,12 @@ h2 {
 .fullCalendar .fc th, .fullCalendar .fc td {
   border-style: unset !important;
   border-width: unset !important; }
+
+.fullCalendar .fc-day-header span {
+  font-size: 1rem; }
+
+.fullCalendar .fc-day span, .fullCalendar .fc-axis span {
+  font-size: 0.875rem !important; }
 
 .fullCalendar .fc-state-default {
   background-image: unset !important;
