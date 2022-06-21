@@ -4,6 +4,18 @@
 		border-width: unset!important;
 	}
 
+	.fc-day-header{
+		span{
+			font-size: rem(16);
+		}
+	}
+
+	.fc-day, .fc-axis{
+		& span {
+			font-size: rem(14) !important;
+		}
+	}
+
 	.fc-state-default {
 		background-image: unset!important;
 		background-repeat: unset!important;

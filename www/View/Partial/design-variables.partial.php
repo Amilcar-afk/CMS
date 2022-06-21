@@ -18,9 +18,8 @@
     --third-color-rgb: 155,188,255;
 
     --background-color: <?= (isset($backgroundColor[0]) )? $backgroundColor[0]->getValue() :'white' ?>;
-    --font-color: black;
+    --text-color: <?= (isset($textColor[0]) )? $textColor[0]->getValue() :'black' ?>;
 
-    --bessels: 1200px;
     <?= (isset($radius[0]) && $radius[0]->getValue() == 'right_angle' )? '--radius: 5px;' : '' ?>
     }
 </style>

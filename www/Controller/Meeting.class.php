@@ -27,7 +27,7 @@ class Meeting
     }
 
 
-    public function load ()
+    public function loadSlot ()
     {
         $statusOfUser = $_SESSION['Auth']->rank;
         $rdvs = $this->rdv->find();
@@ -139,7 +139,7 @@ class Meeting
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
             $this->rdv->setStatus('slot');
-            $this->rdv->setTitle('New Slot');
+            $this->rdv->setTitle('Slot');
             $this->rdv->setDescription('defaultDescription');
 
             if (isset($_POST['id']) && $_POST['id'] != null) {

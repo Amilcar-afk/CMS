@@ -63,7 +63,7 @@ function loadcalendar(id){
       if(location.pathname == '/slots'){
         $.ajax({
             method: 'POST',
-            url:"/load",
+            url:"/load/slots",
             color: '#000',
             dataType: 'json',
             success: function(events) {
@@ -77,7 +77,7 @@ function loadcalendar(id){
       }else if(location.pathname == '/meetings' && !activeAvailableMeetings){
         $.ajax({
           method: 'POST',
-          url:"/loadmeetings",
+          url:"/load/meetings",
           color: '#000',
           dataType: 'json',
           success: function(events) {
@@ -93,7 +93,7 @@ function loadcalendar(id){
       }else if(location.pathname == '/meetings' && activeAvailableMeetings ){
          $.ajax({
           method: 'POST',
-          url:"/loadavailablemeetings",
+          url:"/load/availablemeetings",
           color: '#000',
           dataType: 'json',
           success: function(events) {

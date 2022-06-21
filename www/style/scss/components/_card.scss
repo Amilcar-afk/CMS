@@ -76,7 +76,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.005em;
-            color: #FFFFFF;
+            color: var(--background-color, white);
         }
         & h3, .material-icons-round {
             margin: 0;
@@ -85,7 +85,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.005em;
-            color: #FFFFFF;
+            color: var(--background-color, white);
         }
     }
     & .edge-container {

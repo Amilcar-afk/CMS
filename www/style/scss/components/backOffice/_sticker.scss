@@ -8,6 +8,8 @@
   align-items: center;
 
   & .material-icons-round{
+    color: var(--background-color);
+    margin-right: 4px;
     font-size: rem(17);
   }
 

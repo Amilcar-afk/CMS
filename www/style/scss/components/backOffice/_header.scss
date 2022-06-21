@@ -58,6 +58,10 @@
       position: relative;
       display: flex;
       align-items: center;
+
+      & span{
+        color: #D9D9D9;
+      }
     }
 
     & a:hover{

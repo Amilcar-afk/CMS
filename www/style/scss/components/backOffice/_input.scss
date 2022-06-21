@@ -5,7 +5,7 @@
 	flex-direction: column;
 
 	& label{
-		color: $black;
+		color: var(--text-color, black);
 		font-weight: 600;
 		font-size: rem(14);
 		margin: 0;
@@ -14,7 +14,7 @@
 	& .input{
 		width: 100%;
 		background-color: $lighter-grey!important;
-		color: $black;
+		color: var(--text-color, black);
 		transition: all 0.3s;
 		border-radius: var(--radius, 5px);
 		border: none;

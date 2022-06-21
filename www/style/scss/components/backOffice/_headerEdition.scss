@@ -51,14 +51,17 @@
     color: var(--main-color);
 
     .material-icons-round{
+      color: var(--main-color);
       font-size: rem(14);
     }
     label{
       font-size: rem(14);
       font-weight: 500;
+      color: var(--main-color);
     }
     footer{
       font-size: rem(12);
+      color: var(--main-color);
     }
   }
 

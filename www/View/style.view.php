@@ -66,6 +66,14 @@
                                 </span>
                                 <label>Background color</label>
                             </article>
+                            <article>
+                                <span class="input-block cta-button--mains-color--custom color-picker color-picker--setting"
+                                <?= (isset($text_color) && $text_color->getValue()) != null?   'style="background-color:'.$text_color->getValue(). '"':'style="background-color:black"'  ?>
+                                >
+                                    <input type="hidden" class="color-picker--input" data-type="text_color" value="<?= (isset($text_color) && $text_color->getValue()) != null? $text_color->getValue() : 'black'?>">
+                                </span>
+                                <label>Text color</label>
+                            </article>
                         </section>
                     </div>
                 </article>

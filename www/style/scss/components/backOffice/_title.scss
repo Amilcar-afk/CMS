@@ -17,11 +17,11 @@
 	}
 
 	&--black{
-		color: $black;
+		color: var(--text-color, black);
 	}
 
 	&--white{
-		color: $white;
+		color: var(--background-color, white);
 	}
 
 }

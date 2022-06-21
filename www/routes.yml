@@ -125,27 +125,57 @@
   action: listConversation
   middleware : ['auth']
 
+/conversation/compose:
+  controller: communication
+  action: composeConversation
+  middleware : ['auth', 'admin']
+
+/conversation/delete:
+  controller: communication
+  action: deleteConversation
+  middleware: [ 'auth', 'admin' ]
+
 /projects:
   controller: communication
   action: listProject
   middleware : ['auth']
+
+/project/compose:
+  controller: project
+  action: composeProject
+  middleware : ['auth', 'admin']
+
+/project/delete:
+  controller: project
+  action: deleteProject
+  middleware: [ 'auth', 'admin' ]
+
+/step/compose:
+  controller: project
+  action: composeStep
+  middleware : ['auth', 'admin']
+
+/step/delete:
+  controller: project
+  action: deleteStep
+  middleware: [ 'auth', 'admin' ]
 
 /meetings:
   controller: meeting
   action: listRdv
   middleware : ['auth']
 
-/load:
+/load/slots:
   controller: meeting
-  action: load
+  action: loadslot
   middleware : ['auth']
 
-/loadmeetings:
+/load/meetings:
   controller: meeting
   action: loadMeetings
   middleware : ['auth']
 
-/loadavailablemeetings:
+/load/availablemeetings:
   controller: meeting
   action: loadAvailableMeetings
   middleware : ['auth']

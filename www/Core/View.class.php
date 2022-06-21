@@ -62,6 +62,10 @@ class View
                 ->where("type = 'background_color'")
                 ->execute('Option');
 
+            $textColor = Query::from('cmspf_Options')
+                ->where("type = 'text_color'")
+                ->execute('Option');
+
             $radius = Query::from('cmspf_Options')
                 ->where("type = 'radius'")
                 ->execute('Option');

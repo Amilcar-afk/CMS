@@ -52,6 +52,9 @@ class Option{
             }else if($option->getType() == 'background_color'){
                 $background_color = $option;
                 $view->assign("background_color", $background_color);
+            }else if($option->getType() == 'text_color'){
+                $text_color = $option;
+                $view->assign("text_color", $text_color);
             }else if($option->getType() == 'radius'){
                 $radius = $option;
                 $view->assign("radius", $radius);
