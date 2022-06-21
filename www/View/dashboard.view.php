@@ -66,7 +66,7 @@
                     </header>
 
                     <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
-                        <table class="table-container">
+                        <table class="table table--lite">
                             <tbody>
                             <tr>
                                 <td>home</td>
@@ -176,27 +176,66 @@
                 </section>
 
                 <section class="card card--smallcard card--background-color">
-                    <div class="edge"><span class="material-icons-round">add</span></div>
-                    <div class="edge-container">
-                        <div class="edge"><img src='../style/images/linkedin.png' /></div>
-                        <p>1</p>
-                    </div>
-                    <div class="edge-container">
-                        <div class="edge"><img src='../style/images/twitter.png' /></div>
-                        <p>0</p>
-                    </div>
-                    <div class="edge-container">
-                        <div class="edge"><img src='../style/images/youtube.png' /></div>
-                        <p>2</p>
-                    </div>
-                    <div class="edge-container">
-                        <div class="edge"><img src='../style/images/tiktok.png' /></div>
-                        <p>23</p>
-                    </div>
+                    <?php if(sizeof($reseauxSocs) < 5): ?>
+                        <div class="edge cta-button-a" data-a-target="container-rs">
+                            <span class="material-icons-round">add</span>
+                        </div>
+                    <?php endif;?>
+                    <?php foreach ($reseauxSocs as $reseauxSoc):?>
+                        <div class="edge-container cta-button-a" data-a-target="container-rs-<?= $reseauxSoc->getType() ?>">
+                            <div class="edge"><img src='../style/images/<?= $reseauxSoc->getType() ?>.png' /></div>
+                            <p>1</p>
+                        </div>
+                    <?php endforeach;?>
                 </section>
             </div>
 
         </div>
+    </section>
+
+    <?php foreach ($reseauxSocs as $reseauxSoc):?>
+        <!-- update reseaux Soc form -->
+        <section id="container-rs-<?= $reseauxSoc->getType() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-rs-<?= $reseauxSoc->getType() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-rs-<?= $reseauxSoc->getType() ?>"><span class="material-icons-round">close</span></button>
+            <div class="menu-container">
+
+            </div>
+            <section class="collapse-parent">
+                <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                    <header>
+                        <h1 class="title title--black"><?= ucfirst($reseauxSoc->getType()) ?></h1>
+                    </header>
+
+                    <article>
+                        <?php  $this->includePartial("form", $reseauxSoc->getFormNewReseauxSoc()) ?>
+                    </article>
+
+                </div>
+
+            </section>
+        </section>
+    <?php endforeach;?>
+
+    <!-- reseaux soc list -->
+    <section id="container-rs" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-rs" class="cta-button cta-button--icon cta-button-a" data-a-target="container-rs"><span class="material-icons-round">close</span></button>
+        <div class="menu-container">
+
+        </div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black">ADD SOCIAL MEDIA</h1>
+                </header>
+
+                <!--Titles-->
+                <article>
+                    <?php  $this->includePartial("form", $emptyReseauxSoc->getFormNewReseauxSoc()) ?>
+                </article>
+
+            </div>
+
+        </section>
     </section>
 
 </section>
