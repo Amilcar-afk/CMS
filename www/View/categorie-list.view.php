@@ -28,7 +28,7 @@
 
                 <article>
                     <div id="categories-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="categorie-manager-container" style="opacity: 1">
-                        <table>
+                        <table class="table">
                             <tbody>
                             <?php foreach ($categories as $categorie):?>
                                 <tr class="table-line">

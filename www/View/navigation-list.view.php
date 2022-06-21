@@ -27,7 +27,7 @@
 
                 <article>
                     <div id="navigations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="navigation-manager-container" style="opacity: 1">
-                        <table>
+                        <table class="table">
                             <tbody>
                             <?php foreach ($navigations as $navigation):?>
                                 <tr class="table-line">

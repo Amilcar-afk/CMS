@@ -79,7 +79,7 @@
                     </header>
                     <div id="draft-pages-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="page-manager-container">
 
-                        <table>
+                        <table class="table">
                             <tbody>
                             <?php foreach ($pages as $page):?>
                                 <?php if ($page->getStatus() == 'Draft'): ?>
