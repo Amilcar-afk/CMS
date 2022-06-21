@@ -210,6 +210,11 @@
   action: composeOption
   middleware: ['auth']
 
+/social-media/compose:
+  controller: statistics
+  action: composereseauxsoc
+  middleware : ['auth', 'admin']
+
 
 
 

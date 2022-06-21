@@ -4,7 +4,7 @@
 * {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  color: var(--text-color, black); }
+  color: var(--text-color); }
 
 html {
   height: 100vh; }
@@ -1000,6 +1000,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .table tr:first-child {
     border-top: solid 4px #E2E2E2;
     border-radius: 15px 15px 0 0; }
+  .table--lite {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding: 0px !important; }
+    .table--lite tr {
+      padding: 0px 4px !important;
+      border-right: solid 4px #E2E2E2;
+      border-left: solid 4px #E2E2E2; }
 
 .card {
   background-color: #E3E3E3;
@@ -1089,7 +1097,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     border-radius: 20px;
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    cursor: pointer; }
     .card .edge .material-icons-round {
       font-size: 3.75rem; }
     .card .edge img {

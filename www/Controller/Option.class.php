@@ -22,6 +22,7 @@ class Option{
         $second_color = null;
         $third_color = null;
         $background_color = null;
+        $text_color = null;
         $radius = null;
         $bessels = null;
 

@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Core\Query;
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Stat;
+use App\Model\Reseaux_soc;
 use function MongoDB\BSON\fromJSON;
 
 class Statistics
@@ -21,6 +24,10 @@ class Statistics
 
 
     public function loadDashboard() {
+
+        $reseauxSoc = new Reseaux_soc();
+        $emptyReseauxSoc = $reseauxSoc;
+        $reseauxSocs = $reseauxSoc->find();
 
         $stats = $this->stats->find();
 
@@ -65,10 +72,45 @@ class Statistics
         $view = new View("dashboard", "back");
         $view->assign("data", $stats);
         $view->assign("sortedData", $sortedData);
-
+        $view->assign("reseauxSocs", $reseauxSocs);
+        $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
     }
 
+    public function composeReseauxSoc() {
 
+        if( isset($_POST) ) {
+            $reseauxSoc = new Reseaux_soc();
+            $reseauxSoc->setPath($_POST['link']);
+            $reseauxSoc->setType($_POST['type']);
+            $reseauxSoc->setUserKey($_SESSION['Auth']->id);
+            $reseauxSocOfThisType = Query::from('cmspf_Reseaux_soc')
+                ->where("type = '" . $_POST['type'] . "'")
+                ->execute('Reseaux_soc');
+            if (isset($reseauxSocOfThisType[0])){
+                $reseauxSoc->setId($reseauxSocOfThisType[0]->getId());
+            }
+            $config = Validator::run($reseauxSoc->getFormNewReseauxSoc(), $_POST);
+            if (empty($config)) {
+                $reseauxSoc->save();
+
+                $reseauxSoc = new Reseaux_soc();
+                $emptyReseauxSoc = $reseauxSoc;
+                $reseauxSocs = $reseauxSoc->find();
+
+                $stats = $this->stats->find();
+
+                $view = new View("dashboard");
+                $view->assign("data", $stats);
+                $view->assign("reseauxSocs", $reseauxSocs);
+                $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
+
+            } else {
+                return include "View/Partial/form.partial.php";
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
 
     public function composeStats(int $elementId, string $type) {
 
