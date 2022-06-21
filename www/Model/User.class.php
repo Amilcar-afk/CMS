@@ -292,6 +292,11 @@ class User extends BaseSQL
         return $this;
     }
 
+    public function getDeleted($deleted)
+    {
+        return $this->deleted;
+    }
+
     public function getConfirm()
     {
         return $this->confirm;
