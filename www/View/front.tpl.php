@@ -12,7 +12,7 @@
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <?php  $this->includePartial('design-variables') ?>
     </head>
-    <body>
+    <body class="<?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?>">
         <?php
             include $this->view.".view.php";
         ?>

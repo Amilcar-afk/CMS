@@ -1,0 +1,16 @@
+.body-small{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--background-color);
+}
+.body-medium{
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: var(--background-color);
+}
+.body-big{
+  width: 100%;
+  background-color: var(--background-color);
+}
