@@ -118,7 +118,7 @@ class User{
 
             $this->user->setId($_POST['id']);
             $this->user->save();
-            echo "rank updated";    
+            echo "rank updated";
 
         }else{
             echo "error in update";

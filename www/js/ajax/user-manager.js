@@ -19,7 +19,7 @@ function updateRank(parent) {
     let id = parent.getAttribute("data-id-user");
     let data = `id=` + encodeURIComponent(id);
 
-    htmlParent = parent.parentNode.parentNode; //get the <tr> of the user
+    htmlParent = parent.parentNode.parentNode; //get the <tr> line of the user
 
     ajaxRequest(uri, "POST", data, updateRankAnswer, true);
 }
@@ -34,8 +34,14 @@ function deleteUserAnswer(req) {
 function updateRankAnswer(req) {
     let childHtml = htmlParent.children;
     alertMessage(req.responseText);
+
     if(req.responseText === "rank updated"){
-        console.log(childHtml[4]);
+        let rankLine = childHtml[4].children;
+        console.log(rankLine[0].innerHTML);
+        if(rankLine[0].innerHTML === "user")
+            rankLine[0].innerHTML = "admin";
+        else
+            rankLine[0].innerHTML = "user";
     }
 }
 
