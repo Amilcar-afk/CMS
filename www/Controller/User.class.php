@@ -91,4 +91,37 @@ class User{
             }
         }
     }
+
+    public function deleteUser()
+    {
+        if(!empty($_GET['id'])){
+            $this->user->setDeleted(1);
+            $this->user->setId($_GET['id']);
+            $this->user->save();
+            echo "user deleted successfully";
+        }else{
+            echo "user not deleted";
+        }
+    }
+
+    public function updateRank()
+    {
+        if(!empty($_GET['id'])){
+
+            $rank = $this->user->getRank();
+
+            if($rank === "admin")
+                $this->user->setRank("user");
+            else
+                $this->user->setRank("admin");
+
+            $this->user->setId($_GET['id']);
+            $this->user->save();
+            echo "rank updated";
+
+        }else{
+            echo "error in update";
+        }
+    }
+
 }
