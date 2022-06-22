@@ -27,7 +27,7 @@ class Meeting
     }
 
 
-    public function loadSlot ()
+    public function loadslot ()
     {
         $statusOfUser = $_SESSION['Auth']->rank;
         $rdvs = $this->rdv->find();
@@ -43,9 +43,9 @@ class Meeting
             $allRdvs[] = array(
                 "id" => $row->getId(),
                 "title" => $row->getTitle(),
-                "rank" => $statusOfUser,
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
+                "rank" => $statusOfUser,
                 "status" => $row->getStatus(),
                 "color" => $color,
             );
@@ -134,7 +134,10 @@ class Meeting
 
     public function composeSlot()
     {
+
+        
         if (isset($_POST)) {
+            var_dump($_POST);
             //insert pour la table Rdvs
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
@@ -153,7 +156,6 @@ class Meeting
             }
             if (empty($config)) {
                 $this->rdv->save();
-
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId && !isset($_POST['id'])) {
