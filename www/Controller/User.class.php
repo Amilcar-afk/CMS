@@ -23,18 +23,21 @@ class User{
             $result = Validator::checkEmail($_POST['email']);
             if($result){
                 $this->user->setMail($_POST['email']);
-                $user = $this->user->find($this->user->getMail(), "mail");
+                //$user = $this->user->find($this->user->getMail(), "mail");
+                $user = Query::from('cmspf_Users')
+                    ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0)")
+                    ->execute("User");
                 if(!empty($user)){
-                    if(password_verify($_POST['password'], $user->getPwd())){
+                    if(password_verify($_POST['password'], $user[0]->getPwd())){
                         session_start();
-                        $_SESSION['Auth']->mail = $user->getMail();
-                        $_SESSION['Auth']->lastname = $user->getLastname();
-                        $_SESSION['Auth']->firstname = $user->getFirstname();
-                        $_SESSION['Auth']->id = $user->getId();
-                        $_SESSION['Auth']->token = $user->getToken();
-                        $_SESSION['Auth']->creationDate = $user->getCreationDate();
-                        $_SESSION['Auth']->updateDate = $user->getUpdateDate();
-                        $_SESSION['Auth']->rank = $user->getRank();
+                        $_SESSION['Auth']->mail = $user[0]->getMail();
+                        $_SESSION['Auth']->lastname = $user[0]->getLastname();
+                        $_SESSION['Auth']->firstname = $user[0]->getFirstname();
+                        $_SESSION['Auth']->id = $user[0]->getId();
+                        $_SESSION['Auth']->token = $user[0]->getToken();
+                        $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
+                        $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
+                        $_SESSION['Auth']->rank = $user[0]->getRank();
                         if(!isset($_SESSION['redirect_url'])){
                             header('location:/dashboard');
                         }else{
@@ -74,7 +77,9 @@ class User{
             $this->user->setMail($_POST['email']);
 
 
-            $unic_email = Query::from('cmspf_Users')->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")->execute("User");
+            $unic_email = Query::from('cmspf_Users')
+                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                            ->execute("User");
             //$unic_email = $this->user->find($_POST['email'],'mail');
 
             if(!count($unic_email) > 0)
