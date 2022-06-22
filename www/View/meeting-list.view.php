@@ -25,14 +25,6 @@
                     </div>
                 </article>
                <article class="fullCalendar calendar_article1">
-                     <!-- <div id="meetings-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="meeting-manager-container" style="opacity: 1">
-                        <table>
-                            <tbody>
-                                <div class="main_meeting_calendar" id="calendar"></div>
-
-                            </tbody>
-                        </table>
-                    </div>-->
                 </article> 
              
             </div>
