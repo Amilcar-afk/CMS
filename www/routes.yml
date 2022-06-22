@@ -24,11 +24,13 @@
   controller: user
   action: deleteUser
   params: [id]
+  middleware: [ 'auth', 'admin' ]
 
 /updaterank:
   controller: user
   action: updateRank
   params: [id]
+  middleware: [ 'auth', 'admin' ]
 
 /pageloader:
   controller: pageengine
