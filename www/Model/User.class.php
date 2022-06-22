@@ -427,7 +427,7 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Reset",
+                "submit"=>"Validate",
                 "forgotPwd" => ""
             ],
             "inputs"=>[
@@ -439,6 +439,40 @@ class User extends BaseSQL
                     "class"=>"input",
                     "required"=>true,
                 ],
+            ]
+
+        ];
+    }
+
+    public function getFormNewPwd(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Reset password",
+                "forgotPwd" => ""
+            ],
+            "password"=>[
+                "question"=>"Password",
+                "type"=>"password",
+                "placeholder"=>"Your password",
+                "name"=>"pwdRegister",
+                "class"=>"input",
+                "required"=>true,
+                "min"=>12,
+                "max"=>60,
+                "error"=>""
+            ],
+            "passwordConfirm"=>[
+                "question"=>"Confirm password",
+                "type"=>"password",
+                "placeholder"=>"Confirm password",
+                "name"=>"pwdConfirmRegister",
+                "class"=>"input",
+                "required"=>true,
+                "confirm"=>"password",
+                "error"=>""
             ]
 
         ];
