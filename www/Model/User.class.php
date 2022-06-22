@@ -20,6 +20,7 @@ class User extends BaseSQL
     protected $try;
     protected $deleted;
     protected $confirmKey;
+    protected $confirm;
 
     public function __construct()
     {
@@ -280,9 +281,9 @@ class User extends BaseSQL
         return $this->confirmKey;
     }
 
-    public function setConfirmKey()
+    public function setConfirmKey($confirmKey)
     {
-        return $this->confirmKey;
+        $this->confirmKey = $confirmKey;
     }
 
     /**
@@ -305,6 +306,11 @@ class User extends BaseSQL
     public function getConfirm()
     {
         return $this->confirm;
+    }
+
+    public function setConfirm($confirm)
+    {
+        $this->confirm = $confirm;
     }
 
     public function delete($id)
