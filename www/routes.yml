@@ -15,11 +15,6 @@
   controller: statistics
   action: loadDashboard
 
-/mailconfirmation:
-  controller: user
-  action: mailconfirmation
-  params: [ token ]
-
 /userdelete:
   controller: user
   action: deleteUser
@@ -216,6 +211,11 @@
   controller: statistics
   action: composereseauxsoc
   middleware : ['auth', 'admin']
+
+/mailconfirmation:
+  controller: user
+  action: confirmMail
+  params: [token]
 
 
 

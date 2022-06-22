@@ -73,8 +73,14 @@ class User{
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
 
-            $unic_email = $this->user->find($_POST['email'],'mail');
-            $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
+
+            $unic_email = Query::from('cmspf_Users')->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")->execute("User");
+            //$unic_email = $this->user->find($_POST['email'],'mail');
+
+            if(!count($unic_email) > 0)
+                $result = Validator::run($this->user->getFormRegister(), $_POST,false);
+            else
+                $result = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
             
             if(empty($result)){
                 //generate confirmKey
@@ -123,6 +129,11 @@ class User{
         }else{
             echo "error in update";
         }
+    }
+
+    public function confirmMail()
+    {
+        echo "mail confirm";
     }
 
 }

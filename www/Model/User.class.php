@@ -280,6 +280,11 @@ class User extends BaseSQL
         return $this->confirmKey;
     }
 
+    public function setConfirmKey()
+    {
+        return $this->confirmKey;
+    }
+
     /**
      * Set the value of confirmKey
      *
