@@ -23,7 +23,6 @@ class Meeting
         $this->rdv = new Rdv();
         $this->user_rdv = new User_rdv();
         $this->mail = new Mail();
-
     }
 
 
