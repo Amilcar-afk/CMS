@@ -1529,6 +1529,17 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       color: var(--main-color); }
     .cta-button--text-no-background:hover {
       color: var(--second-color); }
+  .cta-button--delete {
+    background-color: #de7b7b;
+    font-size: 1.125rem;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: var(--radius, 10px);
+    color: var(--background-color, white); }
+    .cta-button--delete:hover {
+      background-color: #c45b5b; }
   .cta-button--submit {
     font-size: 1.125rem;
     font-weight: 500;

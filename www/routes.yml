@@ -212,6 +212,11 @@
   action: composereseauxsoc
   middleware : ['auth', 'admin']
 
+/social-media/delete:
+  controller: statistics
+  action: deletereseauxsoc
+  middleware : ['auth', 'admin']
+
 /mailconfirmation:
   controller: user
   action: confirmMail

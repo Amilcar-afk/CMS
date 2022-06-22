@@ -137,6 +137,21 @@
 		}
 	}
 
+	&--delete{
+		background-color: $light-red;
+		font-size: rem(18);
+		font-weight: 500;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		border-radius: var(--radius, 10px);
+		color: var(--background-color, white);
+
+		&:hover{
+			background-color: $red;
+		}
+	}
+
 	&--submit{
 		font-size: rem(18);
 		font-weight: 500;
@@ -150,7 +165,6 @@
 		&:hover{
 			background-color: var(--second-color);
 		}
-
 		&--add{
 			margin-bottom: 40px;
 		}

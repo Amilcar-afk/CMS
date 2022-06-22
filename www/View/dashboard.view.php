@@ -182,7 +182,7 @@
                         </div>
                     <?php endif;?>
                     <?php foreach ($reseauxSocs as $reseauxSoc):?>
-                        <div class="edge-container cta-button-a" data-a-target="container-rs-<?= $reseauxSoc->getType() ?>">
+                        <div id="container-rs-<?= $reseauxSoc->getId() ?>" class="edge-container cta-button-a" data-a-target="container-settings-rs-<?= $reseauxSoc->getId() ?>">
                             <div class="edge"><img src='../style/images/<?= $reseauxSoc->getType() ?>.png' /></div>
                             <p>1</p>
                         </div>
@@ -195,8 +195,8 @@
 
     <?php foreach ($reseauxSocs as $reseauxSoc):?>
         <!-- update reseaux Soc form -->
-        <section id="container-rs-<?= $reseauxSoc->getType() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
-            <button id="cta-button-close-container-rs-<?= $reseauxSoc->getType() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-rs-<?= $reseauxSoc->getType() ?>"><span class="material-icons-round">close</span></button>
+        <section id="container-settings-rs-<?= $reseauxSoc->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-rs-<?= $reseauxSoc->getType() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-settings-rs-<?= $reseauxSoc->getId() ?>"><span class="material-icons-round">close</span></button>
             <div class="menu-container">
 
             </div>
@@ -208,6 +208,7 @@
 
                     <article>
                         <?php  $this->includePartial("form", $reseauxSoc->getFormNewReseauxSoc()) ?>
+                        <button class="mt-5 cta-button cta-button--delete col-12 cta-button-delete-reseaux-soc" data-reseaux-soc-id="<?= $reseauxSoc->getId() ?>">Delete</button>
                     </article>
 
                 </div>

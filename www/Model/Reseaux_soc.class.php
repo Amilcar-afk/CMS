@@ -102,6 +102,11 @@ class Reseaux_soc extends BaseSQL
         parent::save();
     }
 
+    public function delete($id)
+    {
+        parent::delete($id);
+    }
+
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);

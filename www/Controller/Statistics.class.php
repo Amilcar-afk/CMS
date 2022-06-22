@@ -112,6 +112,23 @@ class Statistics
         }
     }
 
+    function deleteReseauxSoc()
+    {
+        if( isset($_POST['id']) ) {
+            $reseauxSoc = new Reseaux_soc();
+            $reseauxSoc = $reseauxSoc->find($_POST['id']);
+            if ($reseauxSoc->getId() != null) {
+
+                Query::deleteAll('')->from('cmspf_Stats')->where("reseau_soc_key = " . $_POST['id'] . "")->execute();
+                $reseauxSoc->delete($_POST['id']);
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
     public function composeStats(int $elementId, string $type) {
 
         if (!isset($elementId) && !isset($type))

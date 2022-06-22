@@ -31,6 +31,7 @@ class Pageengine
                     $pageCategorie->delete($pageCategorie->getId());
                 }
                 Query::deleteAll('')->from('cmspf_Stats')->where("page_key = " . $_POST['id'] . "")->execute();
+                $page->delete($_POST['id']);
             }else{
                 http_response_code(500);
             }

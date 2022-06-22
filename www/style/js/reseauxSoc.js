@@ -22,4 +22,26 @@ $(document).ready(function(){
             }
         });
     })
+
+    $(document).on("click", ".cta-button-delete-reseaux-soc", function () {
+        var btn = $(this);
+        $.ajax({
+            url:"/social-media/delete",
+            type:"POST",
+            data:
+                {
+                    id:$(this).attr('data-reseaux-soc-id')
+                },
+            success:function()
+            {
+                $("#cta-button-close-container-rs-"+ $(btn).attr('data-reseaux-soc-id')).click();
+                $("#container-settings-rs-"+ $(btn).attr('data-reseaux-soc-id')).remove();
+                $("#container-rs-"+ $(btn).attr('data-reseaux-soc-id')).remove();
+                alertMessage('Social media deleted!');
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    })
 });
