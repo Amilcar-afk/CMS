@@ -25,7 +25,7 @@ class User{
                 $this->user->setMail($_POST['email']);
                 //$user = $this->user->find($this->user->getMail(), "mail");
                 $user = Query::from('cmspf_Users')
-                    ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0)")
+                    ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
                     ->execute("User");
                 if(!empty($user)){
                     if(password_verify($_POST['password'], $user[0]->getPwd())){
@@ -78,7 +78,7 @@ class User{
 
 
             $unic_email = Query::from('cmspf_Users')
-                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
                             ->execute("User");
             //$unic_email = $this->user->find($_POST['email'],'mail');
 
@@ -89,16 +89,14 @@ class User{
             
             if(empty($result)){
                 //generate confirmKey
-                $this->user->generateToken();
-                $confirmKey = $this->user->getToken();
+                $confirmKey = str_shuffle(md5(uniqid()));
                 $confirmKey .= $_POST['email'];
                 $this->user->setConfirmKey($confirmKey);
+                $this->user->save();
 
                 $mail = new Mail();
                 $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
-                $this->user->save();
-            }
-            else{
+            }else{
                 $view->assign("error_from",$result);
             }
         }
@@ -159,6 +157,59 @@ class User{
         //echo 'hello';
         $view = new View("form-forgot-pwd", "back-sandbox");
         $view->assign("user", $this->user);
+
+        if(!empty($_POST)){
+
+            $user = Query::from('cmspf_Users')
+                ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                ->execute("User");
+
+            if(!empty($user)){
+
+                $this->user->generateToken();
+                $token = $this->user->getToken();
+                $token .= $_POST['email'];
+                $this->user->setId($user[0]->getId());
+                $this->user->save();
+
+                $mail = new Mail();
+                $mail->resetPwdMail($_POST['email'], $_POST['firstname'], $token);
+            }else{
+                echo "nullllll";
+            }
+        }
+
+    }
+
+    public function newPwd()
+    {
+
+        $view = new View("form-forgot-pwd", "back-sandbox");
+        $view->assign("user", $this->user);
+        $view->assign("resetPwd", $this->user);
+
+        if(!empty($_POST)){
+            //$this->user->setPassword($_POST['password']);
+            //$this->user->setMail($_POST['email']);
+
+
+            $user = Query::from('cmspf_Users')
+                ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                ->execute("User");
+
+            if(!count($user) > 0)
+                $result = Validator::run($this->user->getFormNewPwd(), $_POST,false);
+            else
+                $result = Validator::run($this->user->getFormNewPwd(), $_POST,$user);
+
+            //if(empty($result)){}
+        }
+
+    }
+
+    public function updatePwd()
+    {
+        print_r($_GET);
     }
 
 }
