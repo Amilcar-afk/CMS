@@ -217,6 +217,10 @@
   action: confirmMail
   params: [token]
 
+/pwdforgotten:
+  controller: user
+  action: pwdReset
+
 
 
 

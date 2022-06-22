@@ -396,7 +396,8 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Login"
+                "submit"=>"Login",
+                "forgotPwd" => ""
             ],
             "inputs"=>[
                 "email"=>[
@@ -415,6 +416,29 @@ class User extends BaseSQL
                     "class"=>"input",
                     "required"=>true,
                 ]
+            ]
+
+        ];
+    }
+
+    public function getFormResetPwd(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Reset",
+                "forgotPwd" => ""
+            ],
+            "inputs"=>[
+                "email"=>[
+                    "question"=>"Mail",
+                    "type"=>"email",
+                    "placeholder"=>"Your mail",
+                    "name"=>"emailRegister",
+                    "class"=>"input",
+                    "required"=>true,
+                ],
             ]
 
         ];

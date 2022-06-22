@@ -65,6 +65,10 @@
     <?php if (isset($config["config"]["action"])):?>
         <input class="cta-button cta-button--submit col-12" type="submit" value="<?= $config["config"]["submit"]??"Submit" ?>">
     <?php endif;?>
+    <?php if (isset($config["config"]["forgotPwd"])):?>
+        <br>
+        <a href="/pwdforgotten"" style="text-align: center">have you forgotten your password ?</a>
+    <?php endif;?>
 </form>
 <?php if (isset($config["config"]["cta"])):?>
     <button class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Submit" ?></button>

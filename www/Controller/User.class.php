@@ -154,4 +154,11 @@ class User{
 
     }
 
+    public function pwdReset()
+    {
+        //echo 'hello';
+        $view = new View("form-forgot-pwd", "back-sandbox");
+        $view->assign("user", $this->user);
+    }
+
 }
