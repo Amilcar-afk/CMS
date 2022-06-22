@@ -133,7 +133,20 @@ class User{
 
     public function confirmMail()
     {
-        echo "mail confirm";
+
+        $userExist = $this->user->find($_GET['token'], "confirmKey");
+
+        if((!empty($userExist) || $userExist != false) && $userExist->getConfirm() != "1"){
+
+            $this->user->setId($userExist->getId());
+            $this->user->setConfirm(1);
+            $this->user->save();
+            header('location:/login');
+
+        }else{
+            http_response_code(400);
+        }
+
     }
 
 }
