@@ -425,6 +425,7 @@ class User extends BaseSQL
                     "name"=>"emailRegister",
                     "class"=>"input",
                     "required"=>true,
+                    "error"=>''
                 ],
                 "password"=>[
                     "question"=>"Password",
@@ -433,6 +434,8 @@ class User extends BaseSQL
                     "name"=>"pwdRegister",
                     "class"=>"input",
                     "required"=>true,
+                    "error"=>''
+
                 ]
             ]
 

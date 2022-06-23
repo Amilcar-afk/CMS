@@ -19,50 +19,64 @@ class User{
 
     public function login()
     {
-        if( !empty($_POST)){
-            $result = Validator::checkEmail($_POST['email']);
-            if($result){
-                $this->user->setMail($_POST['email']);
-                //$user = $this->user->find($this->user->getMail(), "mail");
-                $user = Query::from('cmspf_Users')
-                    ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
-                    ->execute("User");
-                if(!empty($user)){
-                    if(password_verify($_POST['password'], $user[0]->getPwd())){
-                        session_start();
-                        $_SESSION['Auth']->mail = $user[0]->getMail();
-                        $_SESSION['Auth']->lastname = $user[0]->getLastname();
-                        $_SESSION['Auth']->firstname = $user[0]->getFirstname();
-                        $_SESSION['Auth']->id = $user[0]->getId();
-                        $_SESSION['Auth']->token = $user[0]->getToken();
-                        $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
-                        $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
-                        $_SESSION['Auth']->rank = $user[0]->getRank();
-
-                        if(!isset($_SESSION['redirect_url'])){
-                            header('location:/dashboard');
-                        }else{
-                            header('location:'.$_SESSION['redirect_url']);
-                        }
-                    }else{
-                        echo'mot de passe incorrect';
-                    }
-                }else{
-                    echo'email ou mot passe incorrect';
-                }
-            }else{
-                echo'email incorrect';
-            }
-        }
         $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
+        if( !empty($_POST)){
+            $result = Validator::checkEmail($_POST['email']);
+            
+            if($result){
+                $this->user->setMail($_POST['email']);
+                $user = Query::from('cmspf_Users')
+                ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                ->execute("User");
+                
+                if(empty($user)){
+                    $loginAuth = [
+                        'email' => false,
+                        'pass' => false
+                    ];
+                }else if($user[0]->getMail() != null && password_verify($_POST['password'], $user[0]->getPwd()) === false){
+                    $loginAuth = [
+                        'email' => $user[0]->getMail(),
+                        'pass' => false
+                    ];
+                }else{
+                    $loginAuth = [
+                        'email' => $user[0]->getMail(),
+                        'pass' => $user[0]->getPwd()
+                    ];
+                }
+
+                $config = Validator::run($this->user->getFormLogin(),$_POST,false,$loginAuth );
+
+                if(empty($config)){
+                    session_start();
+                    $_SESSION['Auth']->mail = $user[0]->getMail();
+                    $_SESSION['Auth']->lastname = $user[0]->getLastname();
+                    $_SESSION['Auth']->firstname = $user[0]->getFirstname();
+                    $_SESSION['Auth']->id = $user[0]->getId();
+                    $_SESSION['Auth']->token = $user[0]->getToken();
+                    $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
+                    $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
+                    $_SESSION['Auth']->rank = $user[0]->getRank();
+    
+                    if(!isset($_SESSION['redirect_url'])){
+                        header('location:/dashboard');
+                    }else{
+                        header('location:'.$_SESSION['redirect_url']);
+                    }
+                }else{
+                    $view->assign("error_loginFrom",$config);
+                }
+            }
+        }
     }
 
 
     public function logout()
     {
         session_destroy();
-        echo "Se deco";
+        header('location:/login');
     }
 
 
@@ -78,12 +92,9 @@ class User{
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
 
-
-
             $unic_email = Query::from('cmspf_Users')
                             ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
                             ->execute("User");
-            //$unic_email = $this->user->find($_POST['email'],'mail');
 
             if(!count($unic_email) > 0)
                 $result = Validator::run($this->user->getFormRegister(), $_POST,false);

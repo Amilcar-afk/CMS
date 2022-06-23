@@ -4,6 +4,10 @@
             <figure id="back-office-logo"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></figure>
             <h1 class="title title--main-color">Log In</h1>
         </header>
-        <?php  $this->includePartial("form", $user->getFormLogin()) ?>
+        <?php if(!isset($error_loginFrom)):  ?>
+            <?php $this->includePartial("form", $user->getFormLogin()) ?>
+        <?php elseif(isset($error_loginFrom)):  ?>
+            <?php $this->includePartial("form", $error_loginFrom) ?>
+        <?php endif  ?>
     </section>
 </main>

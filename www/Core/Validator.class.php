@@ -11,7 +11,7 @@ class Validator
 
 
 
-    public static function run($config, $data, $unicity = null)
+    public static function run($config, $data, $unicity = null,$loginAuth = null)
     {
 
         if( count($data) != count($config["inputs"]) ){
@@ -53,6 +53,20 @@ class Validator
             }
             if($input["type"]=="password" && self::checkPassword($data[$name])){
                 $input['error']="";
+            }
+
+            if(isset($loginAuth)){
+                if($loginAuth['email'] == false){
+                    $config['inputs']['email']['error'] = "email incorrect";
+                }
+                if($loginAuth['pass'] == false){
+                    $config['inputs']['password']['error'] = "password incorrect";
+                }
+
+
+
+                // var_dump($config['inputs']['email']['error']);
+
             }
 
             if($input["type"]=="email" ){
@@ -97,6 +111,8 @@ class Validator
 
 
 
+
+
     public static function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $currentDate = DateTime::createFromFormat($format, $date);
@@ -118,7 +134,6 @@ class Validator
      */
     public static function checkPassword($value)
     {
-        echo '<br>';
         //mdp = 8 char dont 1 lettre maj, 1 lettre min et 1 chiffre
         if (strlen($value) > 10
         && preg_match('#[a-z]#', $value)
