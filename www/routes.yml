@@ -226,6 +226,11 @@
   controller: user
   action: pwdReset
 
+/resetpassword:
+  controller: user
+  action: newPwd
+  params: [token]
+
 
 
 

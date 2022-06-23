@@ -35,12 +35,25 @@ class User extends BaseSQL
         return $this->pwd;
     }
 
-    /**
-     * @param mixed $pwd
-     */
-    public function setPwd($pwd): void
+
+    public function getPwd1()
     {
-        $this->pwd = $pwd;
+        return $this->pwd1;
+    }
+
+    public function setPwd1($pwd): void
+    {
+        $this->pwd1 = $pwd;
+    }
+
+    public function getPwd2()
+    {
+        return $this->pwd2;
+    }
+
+    public function setPwd2($pwd): void
+    {
+        $this->pwd2 = $pwd;
     }
 
     /**
@@ -131,6 +144,11 @@ class User extends BaseSQL
     public function getToken(): ?string
     {
         return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
     /**
@@ -450,31 +468,31 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Reset password",
-                "forgotPwd" => ""
+                "submit"=>"Reset password"
             ],
-            "password"=>[
-                "question"=>"Password",
-                "type"=>"password",
-                "placeholder"=>"Your password",
-                "name"=>"pwdRegister",
-                "class"=>"input",
-                "required"=>true,
-                "min"=>12,
-                "max"=>60,
-                "error"=>""
-            ],
-            "passwordConfirm"=>[
-                "question"=>"Confirm password",
-                "type"=>"password",
-                "placeholder"=>"Confirm password",
-                "name"=>"pwdConfirmRegister",
-                "class"=>"input",
-                "required"=>true,
-                "confirm"=>"password",
-                "error"=>""
+            "inputs"=>[
+                "password"=>[
+                    "question"=>"New password",
+                    "type"=>"password",
+                    "placeholder"=>"Your new password",
+                    "name"=>"pwdRegister",
+                    "class"=>"input",
+                    "required"=>true,
+                    "min"=>12,
+                    "max"=>60,
+                    "error"=>""
+                ],
+                "passwordConfirm"=>[
+                    "question"=>"Confirm new password",
+                    "type"=>"password",
+                    "placeholder"=>"Confirm new password",
+                    "name"=>"pwdConfirmRegister",
+                    "class"=>"input",
+                    "required"=>true,
+                    "confirm"=>"password",
+                    "error"=>""
+                ]
             ]
-
         ];
     }
 }

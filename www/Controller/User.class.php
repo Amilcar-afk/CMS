@@ -157,7 +157,7 @@ class User{
 
     public function pwdReset()
     {
-        //echo 'hello';
+
         $view = new View("form-forgot-pwd", "back-sandbox");
         $view->assign("user", $this->user);
 
@@ -171,12 +171,12 @@ class User{
 
                 $this->user->generateToken();
                 $token = $this->user->getToken();
-                $token .= $_POST['email'];
                 $this->user->setId($user[0]->getId());
                 $this->user->save();
 
                 $mail = new Mail();
                 $mail->resetPwdMail($_POST['email'], $_POST['firstname'], $token);
+
             }else{
                 echo "nullllll";
             }
@@ -186,33 +186,43 @@ class User{
 
     public function newPwd()
     {
+        $user = $this->user->find($_GET['token'], "token");
 
-        $view = new View("form-forgot-pwd", "back-sandbox");
-        $view->assign("user", $this->user);
-        $view->assign("resetPwd", $this->user);
+        if((!empty($user) || $user != false) && $user->getConfirm() == "1") {
 
-        if(!empty($_POST)){
-            //$this->user->setPassword($_POST['password']);
-            //$this->user->setMail($_POST['email']);
+            $view = new View("form-forgot-pwd", "back-sandbox");
+            $view->assign("user", $this->user);
+            $view->assign("resetPwd", $this->user);
 
+            if (!empty($_POST)) {
+                $this->user->setPassword($_POST['password']);
 
-            $user = Query::from('cmspf_Users')
-                ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
-                ->execute("User");
+                if (!count($user) > 0)
+                    $result = Validator::run($this->user->getFormNewPwd(), $_POST, false);
+                else
+                    $result = Validator::run($this->user->getFormNewPwd(), $_POST, $user);
 
-            if(!count($user) > 0)
-                $result = Validator::run($this->user->getFormNewPwd(), $_POST,false);
-            else
-                $result = Validator::run($this->user->getFormNewPwd(), $_POST,$user);
+                if (empty($result)) {
 
-            //if(empty($result)){}
+                    $pwd1 = $user->getPwd1();
+                    $pwd = $user->getPwd();
+                    $userId = $user->getId();
+                    $this->user->generateToken();
+
+                    $this->user->setPassword($_POST['password']);
+                    $this->user->setPwd1($pwd);
+                    $this->user->setPwd2($pwd1);
+                    $this->user->setId($userId);
+                    $this->user->save();
+                    header('location:/login');
+
+                }
+            }
+
+        } else {
+            http_response_code(400);
         }
-
     }
 
-    public function updatePwd()
-    {
-        print_r($_GET);
-    }
 
 }
