@@ -38,6 +38,7 @@
                     <li><a href="/dashboard" class="button-menu" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
                     <li><a href="/pages" class="button-menu" data-alt="Sitemap"><span class="material-icons-round">map</span></a></li>
                     <li><a href="/conversations" class="button-menu" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>
+                    <?php echo $_SESSION['Auth']->firstname ?>
                     <li><a href="/settings/style" class="button-menu" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
                 </ul>
             </nav>

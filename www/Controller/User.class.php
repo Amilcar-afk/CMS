@@ -39,8 +39,6 @@ class User{
                         $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                         $_SESSION['Auth']->rank = $user[0]->getRank();
 
-
-                        var_dump($_SESSION['Auth']);
                         if(!isset($_SESSION['redirect_url'])){
                             header('location:/dashboard');
                         }else{

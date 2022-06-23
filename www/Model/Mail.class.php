@@ -55,5 +55,10 @@ class Mail extends BaseSQL
         catch (\Exception $e){
             echo $e->getMessage();
         }
+        
+        $this->mailer->clearAllRecipients();
+
     }
+
+
 }

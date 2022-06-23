@@ -23,14 +23,17 @@ class Mail{
         }
     }
 
-    public function confirmReservation($dataofMail)
+    public function userMailconfirmReservation($dataofMail)
     {
-            $subject = "Confirmation de reservation";
-            $message = //
-            "Bonjour " . $dataofMail['firstname']. ", le rendez-vous ".$dataofMail['title'] ." de ".$dataofMail['start'] ." a ".$dataofMail['end'] . ' à ' .$dataofMail['location']
-            . " et qui a comme description ".$dataofMail['description']. " avec ".
-             $dataofMail['owner_firstname'] .  '  ' . $dataofMail['owner_lastname']. ", est confirmé";
-             $this->mail->sendEmail($dataofMail['email'], $dataofMail['firstname'], $subject, $message);
+
+        $subject = "Confirmation de reservation";
+        $message = 
+        "Bonjour " . $dataofMail['firstname']. ", le rendez-vous ".$dataofMail['title'] ." de ".$dataofMail['start'] ." a ".$dataofMail['end'] . ' à ' .$dataofMail['location']
+        . " et qui a comme description ".$dataofMail['description']. " avec ".
+        $dataofMail['owner_firstname'] .  '  ' . $dataofMail['owner_lastname']. ", est confirmé. un email a été envoyé à ".$dataofMail['owner_firstname'].  ' ' . $dataofMail['owner_lastname'].
+        " pour l'informer sur votre rendez-vous." ;
+
+        $this->mail->sendEmail($dataofMail['email'], $dataofMail['firstname'], $subject, $message);
     }
     
     public function ownerMailConfirmReservation($dataofMail){
@@ -38,7 +41,10 @@ class Mail{
         $ownerMessage = 
         "Bonjour " . $dataofMail['owner_firstname'].  ' ' . $dataofMail['owner_lastname'].  ". Votre rendez-vous ".$dataofMail['title'] ." de ".$dataofMail['start'] ." a ".$dataofMail['end']
         . ' à ' .$dataofMail['location']
-        . " et qui a comme description ".$dataofMail['description'] ." a été choisie par ". $dataofMail['firstname']. ' ' .$dataofMail['lastname'];
+        . " et qui a comme description : ".$dataofMail['description'] .", a été choisie par ". $dataofMail['firstname']. ' ' 
+        .$dataofMail['lastname']. ' vous pouvez le contavtez via son email: '.$dataofMail['email'];
+
+
         $this->mail->sendEmail($dataofMail['owner_email'], $dataofMail['owner_firstname'], $subject, $ownerMessage);
 
             

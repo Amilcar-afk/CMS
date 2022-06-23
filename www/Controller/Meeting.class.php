@@ -244,7 +244,6 @@ class Meeting
             if (empty($config)) {
                 $this->rdv->save();
 
-                var_dump(88);
                 $dataOfMail= [
 
                     "owner_firstname"=>$owner_firstname,
@@ -260,7 +259,9 @@ class Meeting
                     "description"=>$_POST['description'],
                 ];
 
-                $this->mail->confirmReservation($dataOfMail);
+                $this->mail->userMailconfirmReservation($dataOfMail);
+
+                
                 $this->mail->ownerMailConfirmReservation($dataOfMail);
 
 
