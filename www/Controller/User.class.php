@@ -201,10 +201,10 @@ class User{
 
                 if (empty($result)) {
 
-                    $pwd2 = $user->getPwd2();
                     $pwd1 = $user->getPwd1();
                     $pwd = $user->getPwd();
                     $userId = $user->getId();
+                    $this->user->generateToken();
 
                     $this->user->setPassword($_POST['password']);
                     $this->user->setPwd1($pwd);

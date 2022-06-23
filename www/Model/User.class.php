@@ -146,6 +146,11 @@ class User extends BaseSQL
         return $this->token;
     }
 
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
     /**
      * @param null
      * Token char 32
