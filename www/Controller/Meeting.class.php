@@ -31,10 +31,16 @@ class Meeting
     {
         $statusOfUser = $_SESSION['Auth']->rank;
         $rdvs = $this->rdv->find();
+        
         foreach ($rdvs as $row) {
-            // if($statusOfUser != 1 && $row->getStatus() === 'rdv'){
-            //     continue;
-            // }
+            $users = $row->users();
+            foreach($users as $user){
+               $owner_email = $user->getMail();
+               $owner_firstname = $user->getFirstname();
+               $owner_lastname = $user->getLastname();
+
+
+            }
             if ($row->getStatus() === 'slot') {
                 $color = '#32CD32';//GREEN
             } else {
@@ -46,6 +52,11 @@ class Meeting
                 "start" => $row->getStartDate(),
                 "end" => $row->getEndDate(),
                 "rank" => $statusOfUser,
+                "location" => $row->getLocation(),
+                "description" => $row->getDescription(),
+                "owner_email"=>$owner_email,
+                "owner_firstname"=>$owner_firstname,
+                "owner_firstname"=>$owner_lastname,
                 "status" => $row->getStatus(),
                 "color" => $color,
             );
@@ -74,17 +85,31 @@ class Meeting
             array_push($meetings, $rdv);
         }
         $unicMeeting = array_unique($meetings,SORT_REGULAR);
+
         foreach($unicMeeting as $row){
+
             if($row != false){
                 if($row->getStatus() == 'slot'){
                     continue;
+                    
                 }
+                $users = $row->users();
+                foreach($users as $user){
+                    $owner_email = $user->getMail();
+                    $owner_firstname = $user->getFirstname();
+                    $owner_lastname = $user->getLastname();
+                 }
+
                 $allRdvs[] = array(
                     "id" => $row->getId(),
                     "title"=>$row->getTitle(),
                     "start" => $row->getStartDate(),
                     "end" => $row->getEndDate(),
                     "status" => $row->getStatus(),
+                    "location" => $row->getLocation(),
+                    "owner_email"=>$owner_email,
+                    "owner_firstname"=>$owner_firstname,
+                    "owner_firstname"=>$owner_lastname,
                     "color" => '#ff7f00',//ORANGE
                 );
             }
@@ -97,7 +122,7 @@ class Meeting
     public function loadAvailableMeetings(){
 
         $id = $_SESSION['Auth']->id;
-        $myMeetings = Query::from('cmspf_User_rdv')->where("user_key=".$id)->execute('Rdv');
+        $myMeetings = Query::from('cmspf_User_rdv')->where("type='owner'")->execute('Rdv');
         $meetings = [];
         foreach($myMeetings as $e){
             $rdv = $this->rdv->find($e->rdv_key);
@@ -105,11 +130,18 @@ class Meeting
         }
 
        
+       
         foreach($meetings as $row){
             if($row != false){
                 if($row->getStatus() == 'rdv'){
                     continue;
                 }
+                $users = $row->users();
+                foreach($users as $user){
+                    $owner = $user->getMail();
+                    $owner_firstname = $user->getFirstname();
+                    $owner_lastname = $user->getLastname();
+                 }
                 $allRdvs[] = array(
                     "id" => $row->getId(),
                     "title"=>$row->getTitle(),
@@ -117,6 +149,9 @@ class Meeting
                     "end" => $row->getEndDate(),
                     "status" => $row->getStatus(),
                     "location" => $row->getLocation(),
+                    "owner_email"=>$owner,
+                    "owner_firstname"=>$owner_firstname,
+                    "owner_lastname"=>$owner_lastname,
                     "name" => $_SESSION['Auth']->firstname,
                     "color" => '#32CD32',
                 );
@@ -144,6 +179,8 @@ class Meeting
             $this->rdv->setStatus('slot');
             $this->rdv->setTitle('Slot');
             $this->rdv->setDescription('defaultDescription');
+            $this->rdv->setLocation('defaultLocation');
+
 
             if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->rdv->find($_POST['id'])) {
@@ -179,6 +216,21 @@ class Meeting
     public function composeMeeting()
     {
         if (isset($_POST)) {
+            $owner_email = $_POST['owner_email'];
+            $owner_firstname = $_POST['firstname'];
+            $owner_lastname = $_POST['lastname'];
+            $start_date = $_POST['start_date'];
+            $end_date = $_POST['end_date'];
+
+
+            unset($_POST['owner_email']);
+            unset($_POST['firstname']);
+            unset($_POST['lastname']);
+            unset($_POST['start_date']);
+            unset($_POST['end_date']);
+
+
+
             if (!$this->rdv->find($_POST['id'])) {
                 return include "View/Partial/form.partial.php";
             }
@@ -187,12 +239,31 @@ class Meeting
             $this->rdv->setStatus('rdv');
             $this->rdv->setLocation($_POST['location']);
             $this->rdv->setDescription($_POST['description']);
-            //$this->rdv->setRdv_step_key();
             $this->rdv->setId($_POST['id']);
             $config = Validator::run($this->rdv->getFormNewMeeting(),$_POST);
             if (empty($config)) {
                 $this->rdv->save();
-                $this->mail->confirmMail('','','');
+
+                var_dump(88);
+                $dataOfMail= [
+
+                    "owner_firstname"=>$owner_firstname,
+                    "owner_lastname"=>$owner_lastname,
+                    "owner_email"=>$owner_email,
+                    "start"=>$start_date,
+                    "end"=>$end_date,
+                    "email"=> $_SESSION['Auth']->mail,
+                    "firstname"=> $_SESSION['Auth']->firstname,
+                    "lastname"=>$_SESSION['Auth']->lastname,
+                    "title"=>$_POST['title'],
+                    "location"=>$_POST['location'],
+                    "description"=>$_POST['description'],
+                ];
+
+                $this->mail->confirmReservation($dataOfMail);
+                $this->mail->ownerMailConfirmReservation($dataOfMail);
+
+
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
                 if ($lastId) {

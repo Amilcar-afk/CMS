@@ -1,6 +1,6 @@
 <?php
 namespace App\Model;
-
+use App\Model\User;
 use App\Core\BaseSQL;
 
 class Rdv extends BaseSQL
@@ -192,6 +192,11 @@ class Rdv extends BaseSQL
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
+    }
+
+    public function users()
+    {
+        return parent::belongsToMany(User::class, 'cmspf_User_rdv');
     }
 
     public function getFormNewSlot(): array

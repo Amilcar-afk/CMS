@@ -38,6 +38,9 @@ class User{
                         $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
                         $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                         $_SESSION['Auth']->rank = $user[0]->getRank();
+
+
+                        var_dump($_SESSION['Auth']);
                         if(!isset($_SESSION['redirect_url'])){
                             header('location:/dashboard');
                         }else{
@@ -75,6 +78,8 @@ class User{
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
+            $this->user->setRank('user');
+
 
 
             $unic_email = Query::from('cmspf_Users')

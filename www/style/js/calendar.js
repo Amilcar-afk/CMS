@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var rank = [];
   var activeAvailableMeetings = false
+  all_events= [];
   $('#meeting_inputs').hide();
   $('.new_meeting_calendar').hide();
   $( "<div class='main_meeting_calendar col-6 ' id='calendar'></div>" ).prependTo( ".calendar_article1" );
@@ -44,7 +45,6 @@ $(document).ready(function() {
   }
   //il faut supprimer le // a:not([href]) {pointer-events:none// du css pour pouvoir manipuler le calandrier 
 function loadcalendar(id){
-  console.log(activeAvailableMeetings)
   const calendar = id.fullCalendar({   
     lang: 'fr',
     editable:true,
@@ -65,6 +65,7 @@ function loadcalendar(id){
             dataType: 'json',
             success: function(events) {
             callback(events);
+            all_events.push(events)
 
               events.map((e)=>{
                 rank.push(e.rank);
@@ -101,6 +102,13 @@ function loadcalendar(id){
         });
       }
     },  
+    eventRender: function(event, element)
+    { 
+        element.find('.fc-content').append(
+          "<br/> location :" + event.location +
+          "<br/>type :" +event.status +
+          "<br/>owner Email :" +event.owner_email ); 
+    },
     // INSERT EVENTS /////////////////////////////////////////////
     minTime: '09:00:00', 
     maxTime: '21:00:00', 
@@ -199,9 +207,7 @@ function loadcalendar(id){
             showMeetingCalendarMeetings()
           })
           $('.start_end_title').text(event.start._i + '  -  ' + event.end._i);
-          
           $(document).on('click','.cta-button-compose-rdv',function(e){
-
             var id = event.id;
             $.ajax({
               url:"/meeting/compose",
@@ -211,6 +217,11 @@ function loadcalendar(id){
                 title: $('[name="title"]').val(),
                 location: $('[name="location"]').val(),
                 description: $('#description').val(),
+                owner_email:event.owner_email,
+                firstname:event.owner_firstname,
+                lastname:event.owner_lastname,
+                start_date:event.start._i,
+                end_date:event.end._i,
               },
               success:function(answer)
               {
