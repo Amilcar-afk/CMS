@@ -62,11 +62,6 @@ class Validator
                 if($loginAuth['pass'] == false){
                     $config['inputs']['password']['error'] = "password incorrect";
                 }
-
-
-
-                // var_dump($config['inputs']['email']['error']);
-
             }
 
             if($input["type"]=="email" ){

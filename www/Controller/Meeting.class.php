@@ -260,10 +260,8 @@ class Meeting
                 ];
 
                 $this->mail->userMailconfirmReservation($dataOfMail);
-
-                
-                $this->mail->ownerMailConfirmReservation($dataOfMail);
-
+                $mailOwner = new Mail();
+                $mailOwner->ownerMailConfirmReservation($dataOfMail);
 
                 //insert pour la table User_rdv
                 $lastId = $this->rdv->getLastId();
