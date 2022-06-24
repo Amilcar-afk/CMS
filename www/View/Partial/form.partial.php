@@ -58,6 +58,7 @@
                     <?= (isset($input["value"]))?'value="'.$input["value"].'"':'' ?>
                     <?= (isset($input["accept"]))?'accept="'.$input["accept"].'"':'' ?>
                     <?= (isset($input["required"]))?'required="required"':'' ?>
+                    <?= (isset($input["onkeyup"]))?'onkeyup="searchUser()"':'' ?>
                 >
             <?php endif;?>
             <p class="input--error"><?= (isset($input["error"]))?$input["error"]:'' ?></p>

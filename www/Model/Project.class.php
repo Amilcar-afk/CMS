@@ -110,6 +110,7 @@ class Project extends BaseSQL
                     "placeholder"=>"Search user...",
                     "name"=>"lastnameRegister",
                     "class"=>"input",
+                    "onkeyup"=>"searchUser()",
                     "error"=>""
                 ],
             ],
