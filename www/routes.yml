@@ -116,6 +116,10 @@
   action: listMedia
   middleware : ['auth', 'admin']
 
+/settings/test:
+  controller: settings
+  action: test
+
 
 /conversations:
   controller: communication
@@ -230,6 +234,8 @@
   controller: user
   action: newPwd
   params: [token]
+
+
 
 
 
