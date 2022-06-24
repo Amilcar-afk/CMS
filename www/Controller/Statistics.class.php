@@ -71,7 +71,7 @@ class Statistics
         
         $view = new View("dashboard", "back");
         $view->assign("data", $stats);
-        $view->assign("sortedData", $sortedData);
+        //$view->assign("sortedData", $sortedData);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
     }

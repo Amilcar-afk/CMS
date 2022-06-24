@@ -44,7 +44,8 @@ input:focus {
 a {
   text-decoration: none; }
 
-
+a:not([href]) {
+  pointer-events: none; }
 
 span, small {
   font-family: "Montserrat", sans-serif;
@@ -1124,8 +1125,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row; }
-  .card #chartBar {
-    max-width: 100%; }
+  .card #regions_div rect {
+    fill: none; }
   .card #chartDonut {
     margin-bottom: 30px; }
   .card .table-container {
