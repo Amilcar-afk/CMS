@@ -16,6 +16,7 @@
         <!-- MAP -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         
+        <script type="text/javascript" src="../style/js/dashboardChart.js"></script>
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <script type="text/javascript" src="../style/js/wysiwyg.js"></script>
         <script type="text/javascript" src="../style/js/animations.js"></script>

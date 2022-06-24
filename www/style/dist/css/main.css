@@ -1125,8 +1125,10 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row; }
-  .card #regions_div rect {
-    fill: none; }
+  .card #regions_div {
+    width: 100%; }
+    .card #regions_div g rect {
+      fill: none; }
   .card #chartDonut {
     margin-bottom: 30px; }
   .card .table-container {

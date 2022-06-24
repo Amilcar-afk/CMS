@@ -156,9 +156,12 @@
         flex-direction: row;
         //align-items: flex-start;
     }
-    #regions_div rect{
-        fill: none;
-    }
+    #regions_div {
+        width: 100%;
+        & g rect{
+            fill: none;
+        }
+    }       
 
     // charts
 
