@@ -88,7 +88,8 @@ class Project extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Create project"
+                "submit"=>"Create project",
+                "class"=>"form-in-popup"
             ],
             "inputs"=>[
 

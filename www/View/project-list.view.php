@@ -27,10 +27,18 @@
                 <!-- create new project popup -->
                 <div class="overlay" id="overlay">
                     <div id="modal-element" class="popup container-main-content">
-                        <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
-                        <h3>Popup Content</h3>
+                        <section class="container-main-content container-main-content--setup" >
+                            <header>
+                                <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
+                                <figure id="back-office-logo"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></figure>
+                                <h1 class="title title--main-color">Create new project</h1>
+                            </header>
+                            <?php $this->includePartial("form", $user->getFormCreateProject());?>
+                        </section>
                     </div>
                 </div>
+
+
 
             </div>
         </section>
@@ -71,12 +79,18 @@
     }
     .CloseIcon{
         cursor: pointer;
-        text-align: end;
-        margin-right: 20px;
+        align-self: end;
+        position: relative;
+        right: 22px;
+        top: -30px;
     }
 
     .popup {
         opacity: 1;
+    }
+
+    .form-in-popup{
+        width: 100%;
     }
 
 </style>

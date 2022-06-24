@@ -1,6 +1,7 @@
 
 <form method="<?= $config["config"]["method"]??"POST" ?>"
     <?= (isset($config["action"]))?'action="'.$config["config"]["action"].'"':'' ?>
+    <?= (isset($config["config"]["class"]))?'class="'.$config["config"]["class"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
     <?php foreach ($config["inputs"] as $name=>$input):?>
 
