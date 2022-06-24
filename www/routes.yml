@@ -236,6 +236,11 @@
   action: newPwd
   params: [token]
 
+/searchUser:
+  controller: User
+  action: findUsers
+  params: [str]
+
 
 
 

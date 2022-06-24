@@ -233,5 +233,9 @@ class User{
         }
     }
 
+    public function findUsers()
+    {
+        echo "hoooolaaa";
+    }
 
 }
