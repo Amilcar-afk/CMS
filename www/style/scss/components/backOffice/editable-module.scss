@@ -39,6 +39,18 @@
     position: absolute;
     top: -55px;
     transition: all 3ms;
+
+    .input{
+      width: 100%;
+      background-color: #EBEBEB !important;
+      color: var(--text-color, black);
+      transition: all 0.3s;
+      border-radius: var(--radius, 5px);
+      border: none;
+      padding: 10px;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
   }
 
   &--border{

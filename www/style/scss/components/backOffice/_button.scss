@@ -26,8 +26,8 @@
 	&--editor-color{
 
 		&--selected{
-			span {
-				border: solid 3px var(--font-color, black);
+			span, input {
+				border: solid 3px var(--font-color, black)!important;
 			}
 		}
 
@@ -37,6 +37,23 @@
 				background: linear-gradient(45deg, red, yellow, green);
 			}
 		}
+
+
+		& .sp-replacer.sp-active, .sp-replacer:hover {
+			border: none;
+			width: 20px;
+			height: 20px;
+			border-radius: 20px;
+		}
+
+		.sp-replacer{
+			border-radius: 50px!important;
+		}
+
+		& .sp-dd {
+			display: none;
+		}
+
 
 		span{
 			width: 20px;
@@ -210,6 +227,11 @@
 		}
 
 	}
+}
+
+.action-print{
+	font-size: 16px!important;
+	height: 45px;
 }
 
 //mobile

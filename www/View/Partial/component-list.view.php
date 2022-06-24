@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="module-list background-main-color">
+                        <article class="section-module module-list background-main-color col-6">
                             <h2 class="module color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
                         </article>
                     </div>

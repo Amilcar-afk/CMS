@@ -271,30 +271,54 @@ $(document).ready(function(){
         if (moduleBackgroundColor == "unset"){
             selected = "selected";
         }
-        var $ctaUnsetColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update '+selected+'"><span class="material-icons-round">block</span></button>' );
-        $(this).parent().append($ctaUnsetColor);
-        selected = '';
-        if (moduleBackgroundColor == "background-main-color"){
-            selected = "cta-button--editor-color--selected";
-        }
-        var $ctaMainColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-main-color"></span></button>' );
+        var $ctaMainColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="color-main-color"></span></button>' );
         $(this).parent().append($ctaMainColor);
         selected = '';
         if (moduleBackgroundColor == "background-second-color"){
             selected = "cta-button--editor-color--selected";
         }
-        var $ctaSecondColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-second-color"></span></button>' );
+        var $ctaSecondColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="color-second-color"></span></button>' );
         $(this).parent().append($ctaSecondColor);
         selected = '';
         if (moduleBackgroundColor == "background-third-color"){
             selected = "cta-button--editor-color--selected";
         }
-        var $ctaThirdColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="background-third-color"></span></button>' );
+        var $ctaThirdColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color '+selected+'"><span class="color-third-color"></span></button>' );
         $(this).parent().append($ctaThirdColor);
 
-        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color cta-button--editor-color--custom"><span></span></button>' );
+        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-font-color-update cta-button--editor-color cta-button--editor-color--custom"><input class="font-color-picker font-color-picker-input" value=""></button>' );
         $(this).parent().append($ctaCustomColor);
-        document.execCommand('underlined', false, null);
+
+        $($ctaCustomColor.find('.font-color-picker')[0]).spectrum({
+            type: "color",
+            showPalette: false,
+            hideAfterPaletteSelect: true,
+            showInput: true,
+            containerClassName: 'font-color-picker',
+            showInitial: true,
+            preferredFormat: "hex",
+            showAlpha: false,
+            appendTo: $(this)
+        });
+
+    })
+    //font color component
+    $(document).on( "click", ".cta-button-font-color-update", function () {
+        $(this).parent().parent().parent().removeClass('color-white');
+        $(this).parent().parent().parent().removeClass('color-black');
+        $(this).parent().parent().parent().removeClass('color-main-color');
+        $(this).parent().parent().parent().removeClass('color-second-color');
+        $(this).parent().parent().parent().removeClass('color-third-color');
+        $(this).parent().parent().parent().css("color","");
+        $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));
+    })
+    $(document).on( "change", ".font-color-picker-input", function () {
+        $(this).parent().parent().parent().removeClass('color-white');
+        $(this).parent().parent().parent().removeClass('color-black');
+        $(this).parent().parent().parent().parent().removeClass('color-main-color');
+        $(this).parent().parent().parent().parent().removeClass('color-second-color');
+        $(this).parent().parent().parent().parent().removeClass('color-third-color');
+        $(this).parent().parent().parent().parent().css("color",$(this).val());
     })
 
     //background-color menu component
@@ -326,29 +350,35 @@ $(document).ready(function(){
         var $ctaThirdColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color '+selected+'"><span class="background-third-color"></span></button>' );
         $(this).parent().append($ctaThirdColor);
 
-        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color cta-button--editor-color--custom"><span></span></button>' );
+        var $ctaCustomColor = $( '<button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color cta-button--editor-color--custom"><input class="background-color-picker background-color-picker-input" value=""></button>' );
         $(this).parent().append($ctaCustomColor);
+
+        $($ctaCustomColor.find('.background-color-picker')[0]).spectrum({
+            type: "color",
+            showPalette: false,
+            hideAfterPaletteSelect: true,
+            showInput: true,
+            containerClassName: 'background-color-picker',
+            showInitial: true,
+            preferredFormat: "hex",
+            showAlpha: false,
+            appendTo: $(this)
+        });
     })
     //background color component
     $(document).on( "click", ".cta-button-background-color-update", function () {
         $(this).parent().parent().parent().removeClass('background-main-color');
         $(this).parent().parent().parent().removeClass('background-second-color');
         $(this).parent().parent().parent().removeClass('background-third-color');
-        //$(this).parent().parent().parent().style("background-color", "");
-        if ($(this).hasClass("cta-button--editor-color--custom")){
-            var $newComponent = $( "<input value='' />" );
-            $(this).append($newComponent);
-            $newComponent.spectrum({
-                type: "flat",
-                showPalette: false,
-                hideAfterPaletteSelect: true,
-                showInput: true,
-                showInitial: true,
-                showAlpha: false
-            });
-        }else {
-            $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));
-        }
+        $(this).parent().parent().parent().css("background-color","");
+        $(this).parent().parent().parent().addClass($(this).find('span').attr("class"));
+    })
+
+    $(document).on( "change", ".background-color-picker-input", function () {
+        $(this).parent().parent().parent().parent().removeClass('background-main-color');
+        $(this).parent().parent().parent().parent().removeClass('background-second-color');
+        $(this).parent().parent().parent().parent().removeClass('background-third-color');
+        $(this).parent().parent().parent().parent().css("background-color",$(this).val());
     })
 
     //font-size component
@@ -424,8 +454,16 @@ $(document).ready(function(){
     })
 
     //insert-link component
-    $(".cta-button-insert-link").click(function () {
-        document.execCommand('underlined', false, null);
+    //background-color menu component
+    $(document).on( "click", ".cta-button-insert-link", function () {
+        cleanEditToolBar(this);
+
+        var $hrefInput = $( '<input class="input" type="text" placeholder="https://google.com">' );
+        $(this).parent().append($hrefInput);
+
+        var $ctaButtonSubmitLink = $( '<button class="cta-button cta-button--icon"><span class="material-icons-round">send</span></button>' );
+        $(this).parent().append($ctaButtonSubmitLink);
+
     })
 
     //add component

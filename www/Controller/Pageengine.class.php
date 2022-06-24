@@ -9,6 +9,7 @@ use App\Model\Page;
 use App\Model\Option;
 use App\Model\Page_categorie;
 use App\Core\Query;
+use App\Model\Reseaux_soc;
 
 class Pageengine
 {
@@ -52,10 +53,14 @@ class Pageengine
 
             $page->composeStats($page->getId(), "view");
 
+            $reseauxSoc = new Reseaux_soc();
+            $reseauxSocs = $reseauxSoc->find();
+
             $view = new View("load-page", "front");
             $view->assign("page", $page );
             $view->assign("headCode", $headCode);
             $view->assign("footerCode", $footerCode);
+            $view->assign("reseauxSocs", $reseauxSocs);
         }else{
             http_response_code(404);
         }
