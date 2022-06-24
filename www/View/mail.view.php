@@ -1,1 +1,1 @@
-<?php  $this->includePartial("mail", $mail->getMailJson()); ?>
+<?php  $this->includePartial("mail", $mail); ?>

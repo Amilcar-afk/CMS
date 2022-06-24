@@ -61,14 +61,4 @@ class Mail extends BaseSQL
 
     }
 
-    public function getMailJson($json)
-    {
-        return [
-            "jsonString"=>[
-                "json"=>$json
-            ]
-        ];
-    }
-
-
 }
