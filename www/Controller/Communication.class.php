@@ -7,7 +7,7 @@ use App\Model\User;
 
 class Communication
 {
-    public $convresation;
+    public $conversation;
 
     public function __construct()
     {
@@ -16,5 +16,10 @@ class Communication
     public function listConversation()
     {
         $view = new View("conversation-list", "back");
+    }
+
+    public function listProject()
+    {
+        $view = new View("project-list", "back");
     }
 }
