@@ -26,11 +26,10 @@ abstract class BaseSQL
             $envFile= 'env.json';
             $json_data = file_get_contents($envFile);
             $config = json_decode($json_data, true);
-            
             if(self::$bdd === null){
                 
                 try{
-                    self::$bdd = new \PDO( $config['DBDRIVER'].":host=".$config['DBHOST'].";port=".$config['DBPORT'].";dbname=".$config['DBNAME'] ,$config['DBUSER'] ,$config['DBPWD'] );
+                    self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][1]['DBUSER'] ,$config['env'][0]['DBPWD'] );
                     self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 }catch(\Exception $e){
                     die("Erreur SQL".$e->getMessage());

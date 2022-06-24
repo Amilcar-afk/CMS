@@ -6,20 +6,44 @@ $(document).ready(function(){
             type:"POST",
             data:
                 {
-                    host_name:$(this).parent().find('[name=host_name]').val(),
-                    password:$(this).parent().find('[name=password]').val(),
-                    port:$(this).parent().find('[name=port]').val(),
-                    db_name:$(this).parent().find('[name=db_name]').val(),
+                    DBHOST:$(this).parent().find('[name=DBHOST]').val(),
+                    DBPWD:$(this).parent().find('[name=DBPWD]').val(),
+                    DBPORT:$(this).parent().find('[name=DBPORT]').val(),
+                    DBNAME:$(this).parent().find('[name=DBNAME]').val(),
 
                 },
             success:function(answer)
             {
-                if (answer.includes('<section id="back-office-container">')){
-                    $($('main')[0]).html(answer);
-                    alertMessage('Page created!');
-                }else{
-                    $(formContainer).html(answer);
-                }
+                alertMessage('Data updated!');
+              
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    });
+
+    $(document).on("click", ".cta-button-compose-smtp", function () {
+        var formContainer = $(this).parent();
+        $.ajax({
+            url:"/settings/database/compose",
+            type:"POST",
+            data:
+                {
+                    DBUSER:$(this).parent().find('[name=DBUSER]').val(),
+                    MAILPWD:$(this).parent().find('[name=MAILPWD]').val(),
+                    SMTP_HOST:$(this).parent().find('[name=SMTP_HOST]').val(),
+                    SMTP_PORT:$(this).parent().find('[name=SMTP_PORT]').val(),
+
+                    MAILADDR:$(this).parent().find('[name=MAILADDR]').val(),
+                    SMTP_SECURE:$(this).parent().find('[name=SMTP_SECURE]').val(),
+                    SMTP_USERNAME:$(this).parent().find('[name=SMTP_USERNAME]').val(),
+                    SMTP_PASSWORD:$(this).parent().find('[name=SMTP_PASSWORD]').val(),
+
+                },
+            success:function(answer)
+            {
+                alertMessage('Data created!');
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');

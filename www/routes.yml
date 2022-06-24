@@ -101,7 +101,7 @@
   action: listUser
   middleware : ['auth', 'admin']
 
-/settings/database:
+/settings/configuration:
   controller: settings
   action: loadDatabase
   middleware : ['auth', 'admin']
