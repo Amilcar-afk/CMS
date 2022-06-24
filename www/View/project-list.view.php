@@ -17,13 +17,59 @@
 
                 <!--Add project-->
                 <article>
-                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
+                    <button onclick="OpenModal()" class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
                         New project
                     </button>
                     <div id="new-project-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="project-manager-container">
                     </div>
                 </article>
+
+                <!-- create new project popup -->
+                <div class="overlay" id="overlay">
+                    <div class="popup">
+                        <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
+                        <h3>Popup Content</h3>
+                    </div>
+                </div>
+
             </div>
         </section>
     </section>
 </section>
+
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+    .overlay {
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 2;
+    }
+
+    .popup {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 25%;
+        left: 25%;
+        text-align: center;
+        background: white;
+    }
+
+    .popup h3 {
+        font-size: 15px;
+        height: 50px;
+        line-height: 50px;
+        color: black;
+    }
+    .CloseIcon{
+        cursor: pointer;
+    }
+</style>
