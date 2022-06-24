@@ -96,11 +96,6 @@ class Settings
     }
 
 
-    public function test()
-    {
-        include "sitemap.php";
-
-    }
 
 
     public function loadDatabase()

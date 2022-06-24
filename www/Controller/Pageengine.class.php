@@ -21,6 +21,29 @@ class Pageengine
     }
 
 
+
+
+    public function siteMap()
+    {
+        $pages = Query::from('cmspf_Pages')->where("status = 'Public'")->execute('Page');
+        if (isset($_SERVER['HTTPS']) &&
+            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $protocol = 'https://';
+        }
+        else {
+            $protocol = 'http://';
+        }
+        $view = new View("sitemap");
+        $view->assign("pages", $pages);
+        $view->assign("protocol", $protocol);
+
+    }
+
+
+
+
     public function deletePage(){
         if( isset($_POST['id']) ) {
             $page = $this->page->find($_POST['id']);
@@ -99,7 +122,10 @@ class Pageengine
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
             $this->page->setUserKey($_SESSION['Auth']->id);
-            if (isset($_POST['id']) && $_POST['id'] != null) {
+            
+            $this->page->setDateUpdate(date('d-m-y h:i:s'));
+
+            if (isset($_POST['id']) && $_POST['id'] != null) {  
                 if (!$this->page->find($_POST['id'])){
                     return include "View/Partial/form.partial.php";
                 }

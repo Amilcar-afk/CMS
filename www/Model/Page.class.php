@@ -10,7 +10,7 @@ use Categorie;
 class Page extends BaseSQL
 {
     public $id = null;
-    protected $dateUpdate;
+    protected $date_update;
     protected $description;
     protected $title;
     protected $status;
@@ -117,7 +117,7 @@ class Page extends BaseSQL
      */
     public function getDateUpdate()
     {
-        return $this->dateUpdate;
+        return $this->date_update;
     }
 
     /**
@@ -125,7 +125,7 @@ class Page extends BaseSQL
      */
     public function setDateUpdate($dateUpdate): void
     {
-        $this->dateUpdate = $dateUpdate;
+        $this->date_update = $dateUpdate;
     }
 
     /**

@@ -116,9 +116,9 @@
   action: listMedia
   middleware : ['auth', 'admin']
 
-/settings/test:
-  controller: settings
-  action: test
+/sitemap:
+  controller: pageengine
+  action: siteMap
 
 
 /conversations:
