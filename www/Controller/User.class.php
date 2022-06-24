@@ -91,6 +91,7 @@ class User{
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
+            $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
                             ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
@@ -104,8 +105,7 @@ class User{
             if(empty($result)){
                 //generate confirmKey
                 $confirmKey = str_shuffle(md5(uniqid()));
-                $confirmKey .= $_POST['email'];
-                $this->user->setConfirmKey($confirmKey);
+                $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
 
                 $mail = new Mail();
@@ -188,8 +188,6 @@ class User{
                 $mail = new Mail();
                 $mail->resetPwdMail($_POST['email'], $_POST['firstname'], $token);
 
-            }else{
-                echo "nullllll";
             }
         }
 
