@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Model\User;
+use App\Model\Project;
 
 class Communication
 {

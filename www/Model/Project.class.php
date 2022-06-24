@@ -80,4 +80,38 @@ class Project extends BaseSQL
         return parent::delete($id);
 
     }
+
+    public function getFormCreateProject(): array
+    {
+
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "submit"=>"Create project"
+            ],
+            "inputs"=>[
+
+                "title"=>[
+                    "question"=>"title",
+                    "type"=>"text",
+                    "placeholder"=>"Title*",
+                    "value"=> $this->getTitle(),
+                    "name"=>"titleRegister",
+                    "class"=>"input",
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
+                ],
+                "userSearch"=>[
+                    "question"=>"userSearch",
+                    "type"=>"text",
+                    "placeholder"=>"Search user...",
+                    "name"=>"lastnameRegister",
+                    "class"=>"input",
+                    "error"=>""
+                ],
+            ],
+        ];
+    }
 }
