@@ -47,7 +47,29 @@ class Project extends BaseSQL
         $this->id = $id;
         return $this;
     }
-    
+
+    public function getUserKey(): ? int
+    {
+        return $this->user_key;
+    }
+
+    public function setUserKey($id)
+    {
+        $this->user_key = $id;
+        return $this;
+    }
+
+    public function getPageKey(): ? int
+    {
+        return $this->page_key;
+    }
+
+    public function setPageKey($id)
+    {
+        $this->page_key = $id;
+        return $this;
+    }
+
     public function save()
     {
         parent::save();

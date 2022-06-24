@@ -65,6 +65,28 @@ class Step extends BaseSQL
         return $this;
     }
 
+    public function getUserKey(): ? int
+    {
+        return $this->user_key;
+    }
+
+    public function setUserKey($id)
+    {
+        $this->user_key = $id;
+        return $this;
+    }
+
+    public function getProjectKey(): ? int
+    {
+        return $this->project_key;
+    }
+
+    public function setProjectKey($id)
+    {
+        $this->project_key = $id;
+        return $this;
+    }
+
     public function save()
     {
         parent::save();
