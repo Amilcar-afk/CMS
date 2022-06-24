@@ -26,7 +26,7 @@
 
                 <!-- create new project popup -->
                 <div class="overlay" id="overlay">
-                    <div class="popup">
+                    <div id="modal-element" class="popup container-main-content">
                         <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
                         <h3>Popup Content</h3>
                     </div>
@@ -54,7 +54,7 @@
     }
 
     .popup {
-        position: absolute;
+        position: relative;
         width: 50%;
         height: 50%;
         top: 25%;
@@ -71,5 +71,12 @@
     }
     .CloseIcon{
         cursor: pointer;
+        text-align: end;
+        margin-right: 20px;
     }
+
+    .popup {
+        opacity: 1;
+    }
+
 </style>

@@ -1,8 +1,11 @@
+let parentModal = document.getElementById('overlay');
+let modal = document.getElementById('modal-element');
+
 function OpenModal() {
-    let element = document.getElementById('overlay')
-    element.style.display = 'block'
+    parentModal.style.display = 'block';
+    modal.style.transition = 'visibility 0s, opacity 0.5s linear';
+
 }
 function CloseModal() {
-    let element = document.getElementById('overlay')
-    element.style.display = 'none'
+    parentModal.style.display = 'none';
 }
