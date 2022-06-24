@@ -64,6 +64,13 @@ class Settings
         }
     }
 
+
+    public function test()
+    {
+        include "sitemap.php";
+
+    }
+
     public function loadDatabase()
     {
         //recuperer les info du fichier json
