@@ -259,5 +259,5 @@ abstract class BaseSQL
         $queryPrepared->execute($param);
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
-    
+
 }
