@@ -10,6 +10,7 @@ class Query extends BaseSQL
     private static $delete = [];
     private static $from;
     private static $where = [];
+    private static $or = [];
     private static $order;
     private static $limit;
     private static $params = [];
@@ -56,6 +57,12 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function or(string ...$condition): self
+    {
+        self::$or = array_merge(self::$or, $condition);
+        return (new Query);
+    }
+
     public function count(string ...$condition): int
     {
         self::select("COUNT(id)");
@@ -89,6 +96,16 @@ class Query extends BaseSQL
             $parts[] = "WHERE";
             $parts[] = '(' . join(') AND (', self::$where) . ')';
         }
+
+        if (!empty(self::$or)){
+            if(array_search("WHERE", $parts) === false){
+                $parts[] = "WHERE";
+                $parts[] = ' (' . join(' OR ', self::$or) . ')';
+            }else{
+                $parts[] = ' AND (' . join(' OR ', self::$or) . ')';
+            }
+        }
+
         return join(' ', $parts);
     }
 
@@ -116,6 +133,7 @@ class Query extends BaseSQL
         self::$delete = [];
         self::$from = [];
         self::$where = [];
+        self::$or = [];
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }

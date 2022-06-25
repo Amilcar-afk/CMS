@@ -29,7 +29,7 @@ class Settings
 
     public function listUser()
     {
-        $users = Query::from('cmspf_Users')->where("deleted IS NULL OR deleted = 0")->execute("User");
+        $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
         $view = new View("user-manager", "back");
         $view->assign("users", $users);
