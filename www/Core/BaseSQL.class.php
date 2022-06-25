@@ -260,48 +260,4 @@ abstract class BaseSQL
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
     
-
-    /**
-     * @param PDO $db
-     * @param string $sql
-     * @param array $params
-     * @return array|null
-     */
-    function findOneData( string $sql, $params) {
-
-        $statement = self::$bdd->prepare($sql);
-        if($statement) {
-            $success = $statement->execute($params)or die(print_r($statement->errorInfo(), TRUE));
-            if($success) {
-                $res = $statement->fetch(\PDO::FETCH_OBJ);
-                if($res) {
-                    return $res;
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @param PDO $db
-     * @param string $sql
-     * @param array $params
-     * @return array|null
-     */
-
-    function findAllData(string $sql, array $params= null) {
-        $statement = self::$bdd->prepare($sql);
-        if($statement) {
-            $success = $statement->execute($params) or die(print_r($statement->errorInfo(), TRUE));
-            if($success) {
-                $res = $statement->fetchAll(\PDO::FETCH_OBJ);
-                if($res) {
-                    return $res;
-                }
-            }
-        }
-        return null;
-    }
-
-
 }
