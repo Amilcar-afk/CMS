@@ -12,7 +12,7 @@ class Query extends BaseSQL
     private static $where = [];
     private static $or = [];
     private static $order;
-    private static $limit;
+    private static $limit = '';
     private static $params = [];
     private static $class;
 
@@ -60,6 +60,20 @@ class Query extends BaseSQL
     public function or(string ...$condition): self
     {
         self::$or = array_merge(self::$or, $condition);
+        return (new Query);
+    }
+
+    public function limit(string $from, string $to = null): self
+    {
+        if(!empty($to)){
+            if(DBDRIVER === "mysql"){
+                self::$limit = "LIMIT " . $from . ", " . $to;
+            }elseif (DBDRIVER === "pgsql"){
+                self::$limit = "LIMIT " . $from . " OFFSET " . $to;
+            }
+        }
+        self::$limit = $from;
+
         return (new Query);
     }
 
