@@ -114,10 +114,14 @@ class Query extends BaseSQL
         if (!empty(self::$or)){
             if(array_search("WHERE", $parts) === false){
                 $parts[] = "WHERE";
-                $parts[] = ' (' . join(' OR ', self::$or) . ')';
-            }else{
-                $parts[] = ' AND (' . join(' OR ', self::$or) . ')';
             }
+
+            if (!empty(self::$where))
+                $parts[] = ' AND (' . join(' OR ', self::$or) . ')';
+            else
+                $parts[] = ' (' . join(' OR ', self::$or) . ')';
+
+
         }
 
         return join(' ', $parts);
