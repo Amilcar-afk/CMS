@@ -143,22 +143,27 @@
   middleware : ['auth']
 
 /project/compose:
-  controller: project
+  controller: communication
   action: composeProject
   middleware : ['auth', 'admin']
 
 /project/delete:
-  controller: project
+  controller: communication
   action: deleteProject
   middleware: [ 'auth', 'admin' ]
 
+/project:
+  controller: communication
+  action: loadProject
+  middleware: [ 'auth' ]
+
 /step/compose:
-  controller: project
+  controller: communication
   action: composeStep
   middleware : ['auth', 'admin']
 
 /step/delete:
-  controller: project
+  controller: communication
   action: deleteStep
   middleware: [ 'auth', 'admin' ]
 

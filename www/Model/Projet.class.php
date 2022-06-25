@@ -86,13 +86,23 @@ class Projet extends BaseSQL
         return parent::find($id, $attribut);
     }
 
+    public function user()
+    {
+        $users = parent::belongsToMany(User::class, 'cmspf_User_projet');
+        foreach ($users as $user){
+            if($user->getId() != $_SESSION['auth']->id){
+                return $user;
+            }
+        }
+    }
+
     public function getFormCreateProject($users): array
     {
 
         foreach($users as $user){
             $usersList['choices'][] = [
                 "value" => $user->getId(),
-                "label" => $user->getLastname() . $user->getFirstname(),
+                "label" => $user->getLastname() . ' ' . $user->getFirstname(),
                 "class"=>"input"
             ];
         }
@@ -100,27 +110,38 @@ class Projet extends BaseSQL
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
-                "submit"=>"Create project",
-                "class"=>"form-in-popup"
+                "submit"=>"Save",
+                "cta"=>"cta-button-compose-project"
             ],
+
             "inputs"=>[
 
-                "title"=>[
-                    "question"=>"title",
-                    "type"=>"text",
-                    "placeholder"=>"Title*",
-                    "value"=> $this->getTitle(),
-                    "name"=>"titleRegister",
+                "id"=>[
+                    "type"=>"hidden",
+                    "name"=>"id",
                     "class"=>"input",
-                    "min"=>2,
-                    "max"=>50,
+                    "value"=>$this->getId(),
                     "error"=>""
                 ],
+
+                "title"=>[
+                    "question"=>"Title",
+                    "type"=>"text",
+                    "placeholder"=>"Title",
+                    "name"=>"title",
+                    "class"=>"input",
+                    "required"=>true,
+                    "min"=>3,
+                    "max"=>30,
+                    "value"=>$this->getTitle(),
+                    "error"=>""
+                ],
+
                 "user"=>[
                     "question"=>"Assign user",
                     "type"=>"select",
                     "name"=>"user",
+                    "value"=>$this->user(),
                     "class"=>"input",
                     "error"=>"",
                     "idToVerif"=>true,

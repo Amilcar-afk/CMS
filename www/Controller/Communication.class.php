@@ -33,4 +33,9 @@ class Communication
         $view->assign("users", $users);
         $view->assign("projectEmpty", $projectEmpty);
     }
+
+    public function composeProject()
+    {
+
+    }
 }
