@@ -6,7 +6,7 @@ namespace App\Model;
 use App\Core\BaseSQL;
 
 
-class Project extends BaseSQL
+class Projet extends BaseSQL
 {
     protected $id = null;
     protected $user_key = null;
@@ -81,9 +81,22 @@ class Project extends BaseSQL
 
     }
 
-    public function getFormCreateProject(): array
+    public function find($id = null, string $attribut = 'id')
+    {
+        return parent::find($id, $attribut);
+    }
+
+    public function getFormCreateProject($users): array
     {
 
+        foreach($users as $user){
+            $usersList['choices'][] = [
+                "value" => $user->getId(),
+                "label" => $user->getLastname() . $user->getFirstname(),
+                "class"=>"input"
+            ];
+        }
+        
         return [
             "config"=>[
                 "method"=>"POST",
@@ -104,15 +117,14 @@ class Project extends BaseSQL
                     "max"=>50,
                     "error"=>""
                 ],
-                "userSearch"=>[
-                    "question"=>"userSearch",
-                    "type"=>"text",
-                    "placeholder"=>"Search user...",
-                    "name"=>"lastnameRegister",
+                "user"=>[
+                    "question"=>"Assign user",
+                    "type"=>"select",
+                    "name"=>"user",
                     "class"=>"input",
-                    "onkeyup"=>"searchUser()",
-                    "divSearch"=>"divSearch",
-                    "error"=>""
+                    "error"=>"",
+                    "idToVerif"=>true,
+                    "choices"=>$usersList['choices']
                 ],
             ],
         ];

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Model\User;
-use App\Model\Project;
+use App\Model\Projet;
 
 class Communication
 {
@@ -13,7 +13,7 @@ class Communication
 
     public function __construct()
     {
-        $this->project = new Project();
+        $this->project = new Projet();
     }
 
     public function listConversation()
@@ -23,7 +23,14 @@ class Communication
 
     public function listProject()
     {
+        $projectEmpty = $this->project;
+        $projects = $this->project->find();
+        $users = new User();
+        $users = $users->find();
+
         $view = new View("project-list", "back");
-        $view->assign("user", $this->project);
+        $view->assign("projects",$projects);
+        $view->assign("users", $users);
+        $view->assign("projectEmpty", $projectEmpty);
     }
 }

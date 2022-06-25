@@ -252,7 +252,7 @@ class User{
                 echo "</ul>";
 
             }else{
-                echo 'Aucun utilisateur trouvé';
+                echo '<i>Aucun utilisateur trouvé</i>';
             }
         }
 

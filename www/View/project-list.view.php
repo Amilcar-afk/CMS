@@ -3,104 +3,100 @@
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
             <nav>
-                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
+                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
                 <a href="/meetings" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">today</span>Meetings</a>
-                <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="categories-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
-                <a href="/projects" class="cta-button cta-button--menu main-nav-choice" data-wc-target="add-code-container"><span class="material-icons-round">inventory_2</span>Projects</a>
+                <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="projects-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
+                <a href="/projects" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="add-code-container"><span class="material-icons-round">inventory_2</span>Projects</a>
             </nav>
         </div>
         <section class="collapse-parent">
+
             <div id="projects-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                 <header>
-                    <h1 class="title title--black">Projects</h1>
+                    <h1 class="title title--black">PROJECTS</h1>
                 </header>
 
                 <!--Add project-->
                 <article>
-                    <button onclick="OpenModal()" class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
+                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
                         New project
                     </button>
-                    <div id="new-project-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="project-manager-container">
+                    <div id="new-projects-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="project-manager-container">
                     </div>
                 </article>
 
-                <!-- create new project popup -->
-                <div class="overlay" id="overlay">
-                    <div id="modal-element" class="popup container-main-content">
-                        <section class="container-main-content container-main-content--setup" >
-                            <header>
-                                <div onclick="CloseModal()" class="CloseIcon">&#10006;</div>
-                                <figure id="back-office-logo"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></figure>
-                                <h1 class="title title--main-color">Create new project</h1>
-                            </header>
-                            <?php $this->includePartial("form", $user->getFormCreateProject());?>
-                        </section>
+                <article>
+                    <div id="projects-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="project-manager-container" style="opacity: 1">
+                        <table class="table">
+                            <tbody>
+                            <?php foreach ($projects as $project):?>
+                                <tr class="table-line">
+                                    <td>
+                                        <h4><?= ucfirst($project->getTitle()) ?></h4>
+
+                                        <?php foreach ($project->navigations() as $nav):?>
+                                            <?php if ($nav->getType() == "nav"):?>
+                                                <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $nav->getTitle()?></label>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
+
+                                    </td>
+                                    <td>
+                                        <button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a cta-button-delete-project" data-project-id="<?= $project->getId() ?>"><span class="material-icons-round">delete</span></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
+
                     </div>
+                </article>
+
+            </div>
+
+        </section>
+    </section>
+
+    <?php foreach ($projects as $project):?>
+        <!-- update project form -->
+        <section id="container-setting-project-<?=$project->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-setting-project-<?=$project->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">close</span></button>
+            <div class="menu-container">
+
+            </div>
+            <section class="collapse-parent">
+                <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                    <header>
+                        <h1 class="title title--black"><?= ucfirst($project->getTitle()) ?></h1>
+                    </header>
+
+                    <article>
+                        <?php  $this->includePartial("form", $project->getFormCreateProject($users)) ?>
+                    </article>
+
                 </div>
 
+            </section>
+        </section>
+    <?php endforeach;?>
 
+    <!-- add project form -->
+    <section id="container-new-project" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-new-project" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-project"><span class="material-icons-round">close</span></button>
+        <div class="menu-container">
 
+        </div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black">NEW PROJECTS</h1>
+                </header>
+
+                <article>
+                    <?php  $this->includePartial("form", $projectEmpty->getFormCreateProject($users)) ?>
+                </article>
             </div>
         </section>
     </section>
 </section>
-
-<style>
-    html,
-    body {
-        height: 100%;
-    }
-    .overlay {
-        position: absolute;
-        display: none;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 2;
-    }
-
-    .popup {
-        position: relative;
-        width: 50%;
-        height: 50%;
-        top: 25%;
-        left: 25%;
-        text-align: center;
-        background: white;
-    }
-
-    .popup h3 {
-        font-size: 15px;
-        height: 50px;
-        line-height: 50px;
-        color: black;
-    }
-    .CloseIcon{
-        cursor: pointer;
-        align-self: end;
-        position: relative;
-        right: 22px;
-        top: -30px;
-    }
-
-    .popup {
-        opacity: 1;
-    }
-
-    .form-in-popup{
-        width: 100%;
-    }
-
-    .div-search{
-        position: relative;
-    }
-
-    .div-search > ul {
-        position: absolute;
-        list-style: none;
-        width: 100%;
-    }
-
-</style>
