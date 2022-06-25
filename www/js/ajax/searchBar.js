@@ -7,5 +7,6 @@ function searchUser(){
 }
 
 function displayUserSearch(req){
-    alertMessage(req.responseText);
+    let divSearch = document.getElementById("divSearchUsers");
+    divSearch.innerHTML = req.responseText;
 }

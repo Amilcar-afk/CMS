@@ -111,6 +111,7 @@ class Project extends BaseSQL
                     "name"=>"lastnameRegister",
                     "class"=>"input",
                     "onkeyup"=>"searchUser()",
+                    "divSearch"=>"divSearch",
                     "error"=>""
                 ],
             ],

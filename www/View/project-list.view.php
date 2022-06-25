@@ -93,4 +93,14 @@
         width: 100%;
     }
 
+    .div-search{
+        position: relative;
+    }
+
+    .div-search > ul {
+        position: absolute;
+        list-style: none;
+        width: 100%;
+    }
+
 </style>

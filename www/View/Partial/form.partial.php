@@ -61,6 +61,7 @@
                     <?= (isset($input["onkeyup"]))?'onkeyup="searchUser()"':'' ?>
                 >
             <?php endif;?>
+            <?= (isset($input["divSearch"]))?'<div class="div-search" id="divSearchUsers"></div>"':'' ?>
             <p class="input--error"><?= (isset($input["error"]))?$input["error"]:'' ?></p>
         </div>
     <?php endforeach;?>
