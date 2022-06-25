@@ -1,7 +1,3 @@
-
-//import {affiche} from '/httpRequest.js';
-
-const url = location.protocol + "//" + location.host + "/";
 let htmlParent = null;
 
 function deleteUser(parent) {

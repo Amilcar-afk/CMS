@@ -1,3 +1,5 @@
+const url = location.protocol + "//" + location.host + "/";
+
 function ajaxRequest(uri ,method, data, onSuccess, async = true) {
     let request = new XMLHttpRequest();
 
