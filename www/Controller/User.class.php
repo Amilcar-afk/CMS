@@ -235,7 +235,22 @@ class User{
 
     public function findUsers()
     {
-        echo "hoooolaaa";
+        print_r($_GET);
+
+        if (!empty($_GET)) {
+            $user = Query::from('cmspf_Users')
+                ->or("firstname LIKE '%" . $_GET['str'] . "%'")
+                ->or("lastname LIKE '%" . $_GET['str'] . "%'")
+                ->or("mail LIKE '%" . $_GET['str'] . "%'")
+                ->execute("User");
+
+            if(!empty($user)){
+                var_dump($user);
+            }else{
+                echo 'Aucun utilisateur trouvé';
+            }
+        }
+
     }
 
 }
