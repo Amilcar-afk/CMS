@@ -9,23 +9,27 @@ userSelected.addEventListener("change", () => {
     let userSelectedName = userSelected.options[userSelectedIndex].text;
     let listSelectedUsers = document.getElementById("listSelectedUsers");
     let liUser = document.createElement("li");
+    let checkBoxUser = document.createElement("input");
+    checkBoxUser.type = "checkbox";
+    checkBoxUser.name = "check";
+    checkBoxUser.value = userSelectedOption.value;
+    checkBoxUser.className = "user-check";
+    checkBoxUser.checked = true;
 
     liUser.setAttribute("class", "li-user-selected");
     liUser.setAttribute("value", userSelectedOption.value);
     liUser.innerHTML = userSelectedName;
 
     if(listSelectedUsers === null) {
-
         listSelectedUsers = document.createElement("ul");
         listSelectedUsers.setAttribute("id", "listSelectedUsers");
-        listSelectedUsers.appendChild(liUser);
         divUsersSelected.appendChild(listSelectedUsers);
-
-    }else{
-        listSelectedUsers.appendChild(liUser);
     }
 
-    //userSelectedOption.remove();
+    listSelectedUsers.appendChild(liUser);
+    listSelectedUsers.appendChild(checkBoxUser);
+
+    userSelectedOption.remove();
     console.log(userSelectedName);
 }, false);
 
