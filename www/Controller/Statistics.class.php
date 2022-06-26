@@ -70,7 +70,7 @@ class Statistics
 
 
         $country = Query::select("COUNT(country) AS nbr_doublon, country")->from("cmspf_Stats")->groupBy("country")->execute();
-        // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country HAVING COUNT(country) > 0; 
+        // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country;
         
         
         $test = ['FR', 2];
