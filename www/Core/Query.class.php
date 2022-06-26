@@ -166,7 +166,7 @@ class Query extends BaseSQL
         self::$where = [];
         self::$or = [];
         self::$groupBy = [];
-
+        self::$limit = [];
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
