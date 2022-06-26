@@ -22,7 +22,7 @@
 
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select name="<?= $name ?>" class="<?=$input["class"]?>">
+                <select id="<?= $input["id"] ?>" name="<?= $name ?>" class="<?=$input["class"]?>">
                     <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
@@ -33,6 +33,7 @@
                         </option>
                     <?php endforeach;?>
                 </select>
+                <?= (isset($input["div"]))?'<div id="' . $input["div"] .'"></div>':'' ?>
 
             <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>

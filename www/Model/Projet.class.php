@@ -141,10 +141,12 @@ class Projet extends BaseSQL
                     "question"=>"Assign user",
                     "type"=>"select",
                     "name"=>"user",
+                    "id"=>"selectUsers",
                     "value"=>$this->user(),
                     "class"=>"input",
                     "error"=>"",
                     "idToVerif"=>true,
+                    "div"=>"divUserSearch",
                     "choices"=>$usersList['choices']
                 ],
             ],
