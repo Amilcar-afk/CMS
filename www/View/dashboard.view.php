@@ -13,6 +13,11 @@
                     </header>
                 </section>
             </div>
+            <?php 
+                        foreach($data as $d) {
+                            echo $d->getCountry(), '<br>';
+                        }
+                    ?>
             <div class="col-4 col-md-12 col-sm-12">
                 <section id="per-country-container" class="card card--background-main-color">
                     <button class="main-nav-choice" data-wc-target="range-per-country">
@@ -20,7 +25,7 @@
                     </button>
 
                     <!--<canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>-->
-
+                    
                     <div id="range-per-country" class="collapse" data-group-collapse="per-country-container">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
@@ -33,6 +38,13 @@
                         <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
                     <div id="regions_div" style="width: 100%; height: 100%;"></div>
+                    <script src="../style/js/dashboardChart.js">
+                        <?php
+
+
+                        ?>
+                    </script>
+                    
                     <header>
                         <h3>Per country</h3>
                     </header>

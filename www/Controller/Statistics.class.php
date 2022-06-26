@@ -31,29 +31,29 @@ class Statistics
 
         $stats = $this->stats->find();
 
-        foreach($stats as $stat){
-            $sortedData['per-device'][] = [
-                "device" => $stat->getDevice(),
-                "date" => $stat->getDate()
-            ];
-            $sortedData['page-ranking'][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
-            $sortedData['page-ranking'][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
+        // foreach($stats as $stat){
+        //     $sortedData['per-device'][] = [
+        //         "device" => $stat->getDevice(),
+        //         "date" => $stat->getDate()
+        //     ];
+        //     $sortedData['page-ranking'][] = [
+        //         "page_key" => $stat->getPageKey(),
+        //         "page_name" => $stat->page()->getTitle(),
+        //         "date" => $stat->getDate()
+        //     ];
+        //     $sortedData['page-ranking'][] = [
+        //         "page_key" => $stat->getPageKey(),
+        //         "page_name" => $stat->page()->getTitle(),
+        //         "date" => $stat->getDate()
+        //     ];
 
-            $listPage[$stat->getPageKey()][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
+        //     $listPage[$stat->getPageKey()][] = [
+        //         "page_key" => $stat->getPageKey(),
+        //         "page_name" => $stat->page()->getTitle(),
+        //         "date" => $stat->getDate()
+        //     ];
 
-        }
+        // }
 
         /*foreach ($stats as $stat){
             if (isset() && ){
