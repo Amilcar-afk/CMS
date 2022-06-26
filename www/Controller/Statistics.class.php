@@ -69,16 +69,25 @@ class Statistics
         ];*/
 
 
-        $country = Query::select("COUNT(country) AS nbr_doublon, country")->from("cmspf_Stats")->groupBy("country")->execute();
+        $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->groupBy("country")->execute();
         // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country;
+
+        $chartMapData[] = ['Country',["role"=> 'annotation']];
+        foreach($country as $key => $data) {
+            $chartMapData[] = [
+                $data['country'],
+                $toInt = (int)$data['number']
+            ];
+        }
+
+
         
-        
-        $test = ['FR', 2];
         
         
         $view = new View("dashboard", "back");
-        $view->assign("test", $test);
+        //$view->assign("test", $test);
 
+        $view->assign("chartMapData", $chartMapData);
         $view->assign("data", $stats);
         //$view->assign("sortedData", $sortedData);
         $view->assign("reseauxSocs", $reseauxSocs);
