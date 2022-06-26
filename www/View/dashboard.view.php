@@ -19,7 +19,7 @@
                         <span class="material-icons-round">more_vert</span>
                     </button>
 
-                    <canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>
+                    <!--<canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>-->
 
                     <div id="range-per-country" class="collapse" data-group-collapse="per-country-container">
                         <div class="input-container">
@@ -32,9 +32,11 @@
                         </div>
                         <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
+                    <div id="regions_div" style="width: 100%; height: 100%;"></div>
                     <header>
                         <h3>Per country</h3>
                     </header>
+                    
                 </section>
             </div>
 
@@ -240,3 +242,4 @@
     </section>
 
 </section>
+

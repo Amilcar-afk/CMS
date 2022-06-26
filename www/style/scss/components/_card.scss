@@ -156,9 +156,12 @@
         flex-direction: row;
         //align-items: flex-start;
     }
-    #chartBar{
-        max-width: 100%;
-    }
+    #regions_div {
+        width: 100%;
+        & g rect{
+            fill: none;
+        }
+    }       
 
     // charts
 
