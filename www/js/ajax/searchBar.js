@@ -1,6 +1,7 @@
 
 const userSelected = document.getElementById("selectUsers");
 const divUsersSelected = document.getElementById("divUserSearch");
+let userChecked = null;
 
 userSelected.addEventListener("change", () => {
 
@@ -10,11 +11,13 @@ userSelected.addEventListener("change", () => {
     let listSelectedUsers = document.getElementById("listSelectedUsers");
     let liUser = document.createElement("li");
     let checkBoxUser = document.createElement("input");
+
     checkBoxUser.type = "checkbox";
     checkBoxUser.name = "check";
     checkBoxUser.value = userSelectedOption.value;
     checkBoxUser.className = "user-check";
     checkBoxUser.checked = true;
+    checkBoxUser.setAttribute("onchange", "onClickCheckbox(this)")
 
     liUser.setAttribute("class", "li-user-selected");
     liUser.setAttribute("value", userSelectedOption.value);
@@ -26,12 +29,22 @@ userSelected.addEventListener("change", () => {
         divUsersSelected.appendChild(listSelectedUsers);
     }
 
+    liUser.appendChild(checkBoxUser);
     listSelectedUsers.appendChild(liUser);
-    listSelectedUsers.appendChild(checkBoxUser);
+    userChecked = document.getElementsByClassName("user-check");
+    userSelectedOption.hidden = true;
 
-    userSelectedOption.remove();
-    console.log(userSelectedName);
 }, false);
+
+function onClickCheckbox(item){
+    let li = item.parentNode;
+    for (let i = 0; i < userSelected.length; i++){
+        if (userSelected.options[i].value == li.value) {
+            userSelected.options[i].hidden = false;
+        }
+    }
+    li.remove();
+}
 
 function searchUser(){
     let uri = url + "searchUser/";
