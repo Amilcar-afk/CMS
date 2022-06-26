@@ -26,7 +26,8 @@ class Mail{
 
     public function resetPwdMail($mailAddress, $name, $token)
     {
-        new View("");
+        //$view = new View();
+        //$message = $view->includePartial("mail", $pageEmpty->getFormNewPage($categories)); //ajouter le tableau en param
         $uri = $_SERVER["HTTP_HOST"] . "/resetpassword/?token=" . $token;
         if ($token){
             $subject = "Confirmation d'inscription";
