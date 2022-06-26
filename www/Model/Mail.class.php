@@ -42,6 +42,7 @@ class Mail extends BaseSQL
 
     public function sendEmail($to_email, $to_name, $subject, $body)
     {
+
         try {
             $this->mail->addAddress($to_email, $to_name);
             $this->mail->Subject = $subject;
@@ -59,6 +60,5 @@ class Mail extends BaseSQL
         $this->mailer->clearAllRecipients();
 
     }
-
 
 }

@@ -10,6 +10,7 @@ use App\Model\Option;
 use App\Model\Page_categorie;
 use App\Core\Query;
 use App\Model\Reseaux_soc;
+use SimpleXMLElement;
 
 class Pageengine
 {
@@ -20,12 +21,12 @@ class Pageengine
         $this->page = new Page();
     }
 
-
+//simple xml librrairie xml
 
 
     public function siteMap()
     {
-        $pages = Query::from('cmspf_Pages')->where("status = 'Public'")->execute('Page');
+
         if (isset($_SERVER['HTTPS']) &&
             ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
             isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
@@ -35,9 +36,17 @@ class Pageengine
         else {
             $protocol = 'http://';
         }
+        $pages = Query::from('cmspf_Pages')->where("status = 'Public'")->execute('Page');
+        $xml = new SimpleXMLElement("<?xml version='1.0' encoding='UTF-8' ?>\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />');
+        foreach($pages as $page){
+            $url = $xml->addChild('url'); 
+            $url->addChild('loc',$protocol.$_SERVER['SERVER_NAME'].'/'.$page->getSlug() );  
+            $url->addChild('lastmod',$page->getDateUpdate() );  
+        }
+        header("Content-type: application/xml; charset=utf-8");
         $view = new View("sitemap");
-        $view->assign("pages", $pages);
-        $view->assign("protocol", $protocol);
+        $view->assign("xml", $xml);
+        $xml->asXML('./View/sitemap.view.php');
 
     }
 

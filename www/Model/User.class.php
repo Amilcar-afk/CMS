@@ -299,9 +299,9 @@ class User extends BaseSQL
         return $this->confirmKey;
     }
 
-    public function setConfirmKey($confirmKey)
+    public function generateConfirmKey($mail): void
     {
-        $this->confirmKey = $confirmKey;
+        $this->confirmKey = str_shuffle(md5(uniqid())) . $mail;
     }
 
     /**
@@ -448,8 +448,7 @@ class User extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
-                "submit"=>"Validate",
-                "forgotPwd" => ""
+                "submit"=>"Validate"
             ],
             "inputs"=>[
                 "email"=>[

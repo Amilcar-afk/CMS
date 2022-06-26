@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\View;
 use App\Model\Mail as MailModel;
 
 class Mail{
@@ -25,6 +26,7 @@ class Mail{
 
     public function resetPwdMail($mailAddress, $name, $token)
     {
+        new View("");
         $uri = $_SERVER["HTTP_HOST"] . "/resetpassword/?token=" . $token;
         if ($token){
             $subject = "Confirmation d'inscription";
