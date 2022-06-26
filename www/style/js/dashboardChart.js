@@ -106,32 +106,26 @@ function chartDonut1(){
 }
 
 // CHART MAP 
-google.charts.load('current', {'packages':['geochart']});
-google.charts.setOnLoadCallback(drawRegionsMap);
+// google.charts.load('current', {'packages':['geochart']});
+// google.charts.setOnLoadCallback(drawRegionsMap);
 
-function drawRegionsMap(country, populartity) {
-  var data = google.visualization.arrayToDataTable([
-    ['Country', 'Popularity'],
-    ['Germany', 200],
-    ['United States', 300],
-    ['Brazil', 400],
-    ['Canada', 500],
-    ['FR', 600],
-    ['RU', 700],
-    ['Australia', 200]
-  ]);
+// google.charts.load('current', {
+//   'packages':['geochart'],
+// });
+// google.charts.setOnLoadCallback(drawRegionsMap);
 
-  var options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  };
+// function drawRegionsMap(country) {
+//   var data = google.visualization.arrayToDataTable([
+//   ['Country',{role: 'annotation'}],
+//   country
 
-  var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+//   ]);
 
-  chart.draw(data, options);
-}
+//   var options = {
+      
+//   };
+
+//   var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+//   chart.draw(data, options);
+// }

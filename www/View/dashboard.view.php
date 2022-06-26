@@ -13,11 +13,7 @@
                     </header>
                 </section>
             </div>
-            <?php 
-                        foreach($data as $d) {
-                            echo $d->getCountry(), '<br>';
-                        }
-                    ?>
+
             <div class="col-4 col-md-12 col-sm-12">
                 <section id="per-country-container" class="card card--background-main-color">
                     <button class="main-nav-choice" data-wc-target="range-per-country">
@@ -37,14 +33,11 @@
                         </div>
                         <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
-                    <div id="regions_div" style="width: 100%; height: 100%;"></div>
-                    <script src="../style/js/dashboardChart.js">
-                        <?php
+                    <div id="regions_div" style="width: 100%; height: 100%;">
 
-
-                        ?>
-                    </script>
+                    </div>
                     
+
                     <header>
                         <h3>Per country</h3>
                     </header>
@@ -254,4 +247,29 @@
     </section>
 
 </section>
+<script type="text/javascript">
+                        
+                        google.charts.load('current', {'packages':['geochart']});
+                        google.charts.setOnLoadCallback(drawRegionsMap);
 
+                        google.charts.load('current', {
+                        'packages':['geochart'],
+                        });
+                        google.charts.setOnLoadCallback(drawRegionsMap);
+
+                        function drawRegionsMap() {
+                        var data = google.visualization.arrayToDataTable([
+                        ['Country',{role: 'annotation'}],
+                        <?php echo json_encode($test)  ?>
+
+                        ]);
+
+                        var options = {
+                            
+                        };
+
+                        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+                        chart.draw(data, options);
+                        }
+                    </script>
