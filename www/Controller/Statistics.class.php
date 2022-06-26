@@ -68,21 +68,17 @@ class Statistics
             ]
         ];*/
 
-        $array = array(1, "bonjour", 1, "monde", "bonjour");
-        //print_r(array_count_values($array));
 
-        foreach($stats as $stat) {
-            $country[] = $stat->getCountry();
-            
-        }
-        print_r(array_count_values($country));
-        print_r($country);
+        $country = Query::select("COUNT(country) AS nbr_doublon, country")->from("cmspf_Stats")->groupBy("country")->execute();
+        // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country HAVING COUNT(country) > 0; 
+        
+        
         $test = ['FR', 2];
         
         
         $view = new View("dashboard", "back");
         $view->assign("test", $test);
-        $view->assign("county", $country);
+
         $view->assign("data", $stats);
         //$view->assign("sortedData", $sortedData);
         $view->assign("reseauxSocs", $reseauxSocs);

@@ -15,6 +15,7 @@ class Query extends BaseSQL
     private static $limit = '';
     private static $params = [];
     private static $class;
+    private static $groupBy = '';
 
     public function __construct()
     {
@@ -84,6 +85,12 @@ class Query extends BaseSQL
         return self::execute()->fetchColumn();
     }
 
+    public function groupBy(string $columns): self 
+        {
+            self::$groupBy = "GROUP BY ". $columns;
+            return (new Query);
+        }
+
     public function params(array $params): self
     {
         self::$params = $params;
@@ -122,10 +129,12 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
+
             if (!empty(self::$limit))
                 $parts[] = self::$limit ;
-
-
+            
+            if (!empty(self::$groupBy))
+                $parts[] = self::$groupBy ;
         }
 
         return join(' ', $parts);
@@ -156,6 +165,8 @@ class Query extends BaseSQL
         self::$from = [];
         self::$where = [];
         self::$or = [];
+        self::$groupBy = [];
+
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
