@@ -85,9 +85,9 @@ class Query extends BaseSQL
         return self::execute()->fetchColumn();
     }
 
-    public function groupBy(string $columns): self 
+    public function groupBy(string $group): self 
         {
-            self::$groupBy = "GROUP BY ". $columns;
+            self::$groupBy = "GROUP BY ". $group;
             return (new Query);
         }
 
