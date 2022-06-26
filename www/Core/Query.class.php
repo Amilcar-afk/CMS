@@ -67,12 +67,13 @@ class Query extends BaseSQL
     {
         if(!empty($to)){
             if(DBDRIVER === "mysql"){
-                self::$limit = "LIMIT " . $from . ", " . $to;
+                self::$limit = " LIMIT " . $from . ", " . $to;
             }elseif (DBDRIVER === "pgsql"){
-                self::$limit = "LIMIT " . $from . " OFFSET " . $to;
+                self::$limit = " LIMIT " . $from . " OFFSET " . $to;
             }
+        }else {
+            self::$limit = " LIMIT " . $from;
         }
-        self::$limit = $from;
 
         return (new Query);
     }
@@ -120,6 +121,9 @@ class Query extends BaseSQL
                 $parts[] = ' AND (' . join(' OR ', self::$or) . ')';
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
+
+            if (!empty(self::$limit))
+                $parts[] = self::$limit ;
 
 
         }
