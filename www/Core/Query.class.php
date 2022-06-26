@@ -58,6 +58,12 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function groupBy(string $group): self
+    {
+        self::$groupBy = "GROUP BY ". $group;
+        return (new Query);
+    }
+
     public function or(string ...$condition): self
     {
         self::$or = array_merge(self::$or, $condition);
@@ -84,12 +90,6 @@ class Query extends BaseSQL
         self::select("COUNT(id)");
         return self::execute()->fetchColumn();
     }
-
-    public function groupBy(string $group): self 
-        {
-            self::$groupBy = "GROUP BY ". $group;
-            return (new Query);
-        }
 
     public function params(array $params): self
     {
@@ -129,13 +129,13 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
-
-            if (!empty(self::$limit))
-                $parts[] = self::$limit ;
-            
-            if (!empty(self::$groupBy))
-                $parts[] = self::$groupBy ;
         }
+
+        if (!empty(self::$groupBy))
+            $parts[] = self::$groupBy;
+
+        if (!empty(self::$limit))
+            $parts[] = self::$limit;
 
         return join(' ', $parts);
     }
