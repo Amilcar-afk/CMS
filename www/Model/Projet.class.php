@@ -12,6 +12,7 @@ class Projet extends BaseSQL
     protected $user_key = null;
     protected $page_key = null;
     protected $title;
+    protected $description;
 
     /**
      * @return mixed
@@ -27,6 +28,22 @@ class Projet extends BaseSQL
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription(): ? string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
     }
 
     /**

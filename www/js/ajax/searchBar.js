@@ -73,8 +73,6 @@ buttonValidForm.addEventListener("click", () => {
 }*/
 
 function displayUserSearch(req){
-    //let divSearch = document.getElementById("divSearchUsers");
-    //0divSearch.innerHTML = req.responseText;
-    console.log(req.responseText);
+    document.write(req.responseText);
 }
 
