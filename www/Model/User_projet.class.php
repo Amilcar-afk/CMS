@@ -6,12 +6,26 @@ namespace App\Model;
 use App\Core\BaseSQL;
 
 
-class Projet extends BaseSQL
+class User_projet extends BaseSQL
 {
     protected $id = null;
     protected $user_key = null;
     protected $project_key = null;
+    protected $table_name = 'cmspf_User_projet';
     protected $type;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTableName(): string
+    {
+        return $this->table_name;
+    }
 
     /**
      * Get the value of id
@@ -43,7 +57,7 @@ class Projet extends BaseSQL
         return $this;
     }
 
-    public function getType(): ? int
+    public function getType(): ? string
     {
         return $this->type;
     }
@@ -56,12 +70,12 @@ class Projet extends BaseSQL
 
     public function getProjectKey(): ? int
     {
-        return $this->page_key;
+        return $this->project_key;
     }
 
-    public function setProjectKey($id)
+    public function setProjectKey($project_key)
     {
-        $this->page_key = $id;
+        $this->project_key = $project_key;
         return $this;
     }
 

@@ -158,6 +158,7 @@ class Projet extends BaseSQL
 
                 "user"=>[
                     "question"=>"Assign user",
+                    "placeholder"=>"Title",
                     "type"=>"select",
                     "name"=>"user",
                     "id"=>"selectUsers",
@@ -167,6 +168,17 @@ class Projet extends BaseSQL
                     "idToVerif"=>true,
                     "div"=>"divUserSearch",
                     "choices"=>$usersList['choices']
+                ],
+
+                "description"=>[
+                    "question"=>"Project description",
+                    "placeholder"=>"description",
+                    "type"=>"textarea",
+                    "name"=>"description",
+                    "class"=>"input",
+                    "rows"=>16,
+                    "cols"=>"",
+                    "error"=>""
                 ],
             ],
         ];

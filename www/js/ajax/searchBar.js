@@ -51,8 +51,9 @@ buttonValidForm.addEventListener("click", () => {
 
     let uri = url + "project/compose/";
     let titleProject = document.getElementById("title").value;
+    let descProject = document.getElementById("description").value;
     let userInputs = document.getElementsByClassName("user-check");
-    let dataString = `title=` + encodeURIComponent(titleProject) + `&users=`;
+    let dataString = `title=` + encodeURIComponent(titleProject) + `&description=` + encodeURIComponent(descProject) + `&users=`;
 
     for (let i = 0; i < userInputs.length; i++){
         if(i !== 0)
