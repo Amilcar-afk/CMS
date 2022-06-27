@@ -104,9 +104,9 @@ class User{
             
             if(empty($result)){
                 //generate confirmKey
-                $confirmKey = str_shuffle(md5(uniqid()));
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
+                $confirmKey = $this->user->getConfirmKey();
 
                 $mail = new Mail();
                 $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
