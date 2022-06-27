@@ -59,7 +59,6 @@ class Mail{
 
 
         $this->mail->sendEmail($dataofMail['owner_email'], $dataofMail['owner_firstname'], $subject, $ownerMessage);
-
             
             
     }
