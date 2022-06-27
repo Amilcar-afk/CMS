@@ -6,6 +6,7 @@ use App\Core\Validator;
 use App\Model\Categorie as Categorie_model;
 use App\Model\Categorie_categorie;
 use App\Core\Query;
+use App\Model\Page;
 
 class Categorie{
 
@@ -56,6 +57,25 @@ class Categorie{
                 $this->categorie->save();
 
                 $lastId = $this->categorie->getLastId();
+
+                if ($lastId) {
+                    $page = Query::from('cmspf_Pages')
+                        ->where("categorie_key = " . $lastId . "")
+                        ->execute('Page');
+
+                    if (isset($page[0])){
+                        $page = $page[0];
+                    }else {
+                        $page = new Page();
+                        $page->setCategorieKey($lastId);
+                    }
+                    $page->setStatus('Tag');
+                    $page->setSlug($_POST['title']);
+                    $page->setTitle($_POST['title']);
+                    $page->setUserKey($_SESSION['Auth']->id);
+                    $page->setDateUpdate(date('d-m-y h:i:s'));
+                    $page->save();
+                }
 
                 if ($lastId
                     && isset($_POST['navigation'])

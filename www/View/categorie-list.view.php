@@ -43,6 +43,7 @@
 
                                     </td>
                                     <td>
+                                        <a href="/build/<?= $categorie->page()->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-categorie-<?=$categorie->getId() ?>"><span class="material-icons-round">build</span></button>
                                         <button class="cta-button cta-button-a cta-button-delete-categorie" data-categorie-id="<?= $categorie->getId() ?>"><span class="material-icons-round">delete</span></button>
                                     </td>
