@@ -123,10 +123,6 @@ class Settings
     }
 
 
-
-
-
-
     public function listMedia()
     {
         $view = new View("media-library", "back");

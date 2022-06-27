@@ -18,12 +18,15 @@
 
                 <!--Add conversation-->
                 <article>
-                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-conversation">
-                        New conversation
-                    </button>
+                    <input class="select"  placeholder="search conversation"  id="select">
+
+
+
                     <div id="new-conversation-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="conversation-manager-container">
                     </div>
                 </article>
+
+                <?php if(isset($conversations )): ?>
 
                 <article>
                     <div id="conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
@@ -45,30 +48,23 @@
                     </div>
                 </article>
 
-            </div>
-
-        </section>
-    </section>
-
-    <!-- add conversation form -->
-    <section id="container-new-conversation" class="container-main-content container-main-content--menu a-zoom-out-end">
-        <button id="cta-button-close-container-new-conversation" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-conversation"><span class="material-icons-round">close</span></button>
-        <div class="menu-container">
-
-        </div>
-        <section class="collapse-parent">
-            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
-                <header>
-                    <h1 class="title title--black">NEW CONVERSATION</h1>
-                </header>
+                <?php else: ?>
 
                 <article>
-                    <?php  $this->includePartial("form", $conversation->getFormNewCategorie()) ?>
+                    <div id="empty-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                        <h1 class="col-offset-5">Aucune conversations</h1>
+                    </div>
+                    <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                    </div>
+                    <div id="chat-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                        <form>
+                            <textarea name="chat"></textarea>
+                            <button>Envoyer</button>
+                        </form>
+                    </div>
                 </article>
-
+                <?php endif?>
             </div>
-
         </section>
     </section>
-
 </section>

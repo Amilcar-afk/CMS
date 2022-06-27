@@ -55,19 +55,6 @@ class Statistics
 
         }
 
-        /*foreach ($stats as $stat){
-            if (isset() && ){
-                $page[$stat->getPageKey()]["total_views"] = $page[$stat->getPageKey()]["total_views"]++;
-            }
-        }
-
-        $page = [
-            "index_page" => [
-                "page_name" => $stat->getPageKey()
-                "total_views" => $stat->getDate()
-            ]
-        ];*/
-
         
         $view = new View("dashboard", "back");
         $view->assign("data", $stats);
