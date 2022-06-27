@@ -40,8 +40,6 @@ class Communication
 
     public function composeProject()
     {
-        print_r($_POST);
-
         /*$projectEmpty = $this->project;
         $projects = $this->project->find();
         $users = new User();

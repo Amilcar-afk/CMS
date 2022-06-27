@@ -10,9 +10,9 @@ class User_projet extends BaseSQL
 {
     protected $id = null;
     protected $user_key = null;
-    protected $project_key = null;
+    protected $projet_key = null;
     protected $table_name = 'cmspf_User_projet';
-    protected $type;
+    protected $type = "customer";
 
     public function __construct()
     {
@@ -70,12 +70,12 @@ class User_projet extends BaseSQL
 
     public function getProjectKey(): ? int
     {
-        return $this->project_key;
+        return $this->projet_key;
     }
 
-    public function setProjectKey($project_key)
+    public function setProjectKey($projet_key)
     {
-        $this->project_key = $project_key;
+        $this->projet_key = $projet_key;
         return $this;
     }
 
