@@ -7,6 +7,7 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
 use App\Model\Option;
+use App\Model\Categorie;
 use App\Model\Page_categorie;
 use App\Core\Query;
 use App\Model\Reseaux_soc;
@@ -20,9 +21,6 @@ class Pageengine
     {
         $this->page = new Page();
     }
-
-//simple xml librrairie xml
-
 
     public function siteMap()
     {
@@ -78,17 +76,24 @@ class Pageengine
         $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
         $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
-
         $page = $this->page->find($request['slug'], 'slug');
 
-        if (true){
+        if ($page->getId() != null){
 
             $page->composeStats($page->getId(), "view");
 
             $reseauxSoc = new Reseaux_soc();
             $reseauxSocs = $reseauxSoc->find();
 
-            $view = new View("load-page", "front");
+            //load Categorie list if categorie page
+            if ($page->getStatus() == 'Tag'){
+                $categorie = new Categorie();
+                $categorie = $categorie->find($page->getCategorieKey());
+                $view = new View("load-categorie-page", "front");
+                $view->assign("categorie", $categorie);
+            }else{
+                $view = new View("load-page", "front");
+            }
             $view->assign("page", $page );
             $view->assign("headCode", $headCode);
             $view->assign("footerCode", $footerCode);
@@ -141,8 +146,11 @@ class Pageengine
                 $this->page->setId($_POST['id']);
                 $unic_page = Query::from('cmspf_Pages')
                     ->where("slug = '" . $_POST['slug'] . "'")
-                    ->where("id = " . $_POST['id'] . "")
+                    ->where("id != " . $_POST['id'] . "")
                     ->execute('Page');
+                if (!isset($unic_page[0])){
+                    $unic_page = false;
+                }
             }else{
                 $unic_page = $this->page->find($_POST['slug'], 'slug');
             }

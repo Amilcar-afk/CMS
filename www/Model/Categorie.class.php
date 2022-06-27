@@ -86,6 +86,11 @@ class Categorie extends BaseSQL
         return parent::belongsToMany(Page::class, 'cmspf_Page_categorie');
     }
 
+    public function page()
+    {
+        return parent::hasMany(Page::class)[0];
+    }
+
     public function navigations()
     {
         return parent::belongsToMany(Categorie::class, 'cmspf_Categorie_categorie', 'id', 'id', 'categorie_child_key', 'categorie_parent_key');
@@ -137,6 +142,7 @@ class Categorie extends BaseSQL
                     "type"=>"select",
                     "name"=>"navigation",
                     "class"=>"input",
+                    "required"=>true,
                     "error"=>"",
                     "idToVerif"=>true,
                     "choices"=>$navigationsList['choices']
