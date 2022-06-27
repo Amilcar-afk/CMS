@@ -33,7 +33,7 @@ function updateRankAnswer(req) {
 
     if(req.responseText === "rank updated"){
         let rankLine = childHtml[4].children;
-        console.log(rankLine[0].innerHTML);
+
         if(rankLine[0].innerHTML === "user")
             rankLine[0].innerHTML = "admin";
         else

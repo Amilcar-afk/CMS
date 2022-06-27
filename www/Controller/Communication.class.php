@@ -36,6 +36,6 @@ class Communication
 
     public function composeProject()
     {
-
+        var_dump($_POST);
     }
 }

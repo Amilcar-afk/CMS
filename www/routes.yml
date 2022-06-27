@@ -146,6 +146,7 @@
   controller: communication
   action: composeProject
   middleware : ['auth', 'admin']
+  params: [title]
 
 /project/delete:
   controller: communication

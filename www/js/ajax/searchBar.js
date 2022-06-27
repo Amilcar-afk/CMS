@@ -1,6 +1,7 @@
 
 const userSelected = document.getElementById("selectUsers");
 const divUsersSelected = document.getElementById("divUserSearch");
+let buttonValidForm = document.getElementById("buttonSaveProject");
 let userChecked = null;
 
 userSelected.addEventListener("change", () => {
@@ -13,7 +14,7 @@ userSelected.addEventListener("change", () => {
     let checkBoxUser = document.createElement("input");
 
     checkBoxUser.type = "checkbox";
-    checkBoxUser.name = "check";
+    checkBoxUser.name = "check-" + userSelectedOption.value;
     checkBoxUser.value = userSelectedOption.value;
     checkBoxUser.className = "user-check";
     checkBoxUser.checked = true;
@@ -46,15 +47,34 @@ function onClickCheckbox(item){
     li.remove();
 }
 
-function searchUser(){
+buttonValidForm.addEventListener("click", () => {
+
+    let uri = url + "project/compose/";
+    let titleProject = document.getElementById("title").value;
+    let userInputs = document.getElementsByClassName("user-check");
+    let dataString = `title=` + encodeURIComponent(titleProject) + `&users=`;
+
+    for (let i = 0; i < userInputs.length; i++){
+        if(i !== 0)
+            dataString += ",";
+        dataString += encodeURIComponent(userInputs[i].value);
+    }
+
+    ajaxRequest(uri, "POST", dataString, displayUserSearch, true);
+});
+
+/*function createProject(){
+    let data = document.getElementById("formNewProject");
     let uri = url + "searchUser/";
     let inputText = document.getElementById("userSearch").value;
-    let data = '?str='+inputText;
-    ajaxRequest(uri, "GET", data, displayUserSearch, true);
-}
+    let dataForm = new FormData(data);
+    console.log(dataForm);
+    //ajaxRequest(uri, "POST", data, displayUserSearch, true);
+}*/
 
 function displayUserSearch(req){
-    let divSearch = document.getElementById("divSearchUsers");
-    divSearch.innerHTML = req.responseText;
+    //let divSearch = document.getElementById("divSearchUsers");
+    //0divSearch.innerHTML = req.responseText;
+    console.log(req.responseText);
 }
 

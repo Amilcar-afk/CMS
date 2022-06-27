@@ -111,6 +111,8 @@ class Projet extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "submit"=>"Save",
+                "id"=>"formNewProject",
+                "idButton"=>"buttonSaveProject",
                 "cta"=>"cta-button-compose-project"
             ],
 
