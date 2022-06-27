@@ -33,13 +33,7 @@
                                 <tr class="table-line">
                                     <td>
                                         <h4><?= ucfirst($project->getTitle()) ?></h4>
-
-                                        <?php foreach ($project->navigations() as $nav):?>
-                                            <?php if ($nav->getType() == "nav"):?>
-                                                <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $nav->getTitle()?></label>
-                                            <?php endif;?>
-                                        <?php endforeach;?>
-
+                                        <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $project->getDescription()?></label>
                                     </td>
                                     <td>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
