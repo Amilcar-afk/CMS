@@ -1129,8 +1129,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     width: 100%; }
     .card #regions_div g rect {
       fill: none; }
-  .card #chartDonut {
-    margin-bottom: 30px; }
+  .card .chart-container {
+    padding: 20px 50px 50px 50px;
+    display: flex;
+    align-self: center; }
+    .card .chart-container #chart-per-device {
+      width: max-content;
+      height: max-content; }
   .card .table-container {
     margin-top: 6px;
     margin-bottom: 6px;

@@ -105,27 +105,4 @@ function chartDonut1(){
   );
 }
 
-// CHART MAP 
-// google.charts.load('current', {'packages':['geochart']});
-// google.charts.setOnLoadCallback(drawRegionsMap);
 
-// google.charts.load('current', {
-//   'packages':['geochart'],
-// });
-// google.charts.setOnLoadCallback(drawRegionsMap);
-
-// function drawRegionsMap(country) {
-//   var data = google.visualization.arrayToDataTable([
-//   ['Country',{role: 'annotation'}],
-//   country
-
-//   ]);
-
-//   var options = {
-      
-//   };
-
-//   var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-//   chart.draw(data, options);
-// }

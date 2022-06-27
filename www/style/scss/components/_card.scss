@@ -165,10 +165,15 @@
 
     // charts
 
-    & #chartDonut {
-        //height: 88%!important;
-        //width: unset!important;
-        margin-bottom: 30px;
+    & .chart-container {
+        padding: 20px 50px 50px 50px;
+        display: flex;
+        align-self: center;
+
+        & #chart-per-device {
+            width: max-content;
+            height: max-content;
+        }
     }
 
     & .table-container {

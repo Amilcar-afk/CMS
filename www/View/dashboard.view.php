@@ -157,7 +157,9 @@
                         </button>
                     </header>
 
-                    <canvas id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></canvas>
+                    <div class="chart-container">
+                        <canvas id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></canvas>
+                    </div>
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -247,20 +249,20 @@
 
 </section>
 
-<script type="text/javascript">
+<?php  print_r(json_encode($chartDeviceData)); ?>
 
-    google.charts.load('current', {'packages':['geochart']});
-    google.charts.setOnLoadCallback(drawRegionsMap);
 
-    google.charts.load('current', {
+<script>
+google.charts.load('current', {
         'packages':['geochart'],
-    });
-    google.charts.setOnLoadCallback(drawRegionsMap);
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
 
-    function drawRegionsMap() {
-
+      function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(
-            <?php print_r(json_encode($chartMapData)); ?>
+
+            <?php  print_r(json_encode($chartMapData)); ?>
+
         );
 
         var options = {};
@@ -268,7 +270,72 @@
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
         chart.draw(data, options);
-        
-    }
+      }
 
+
+
+</script>
+
+
+
+<script>
+
+const data = {
+    labels: [
+      'Mobile',
+      'Desktop',
+      'Other'
+    ],
+    datasets: [{
+      label: 'My First Dataset',
+      data: [300, 50, 100],
+      backgroundColor: [
+        'rgb(57, 96, 117)',
+        'rgb(57, 96, 117, 0.5)',
+        'rgb(57, 96, 117, 0.2)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+  // margin
+  const legendMargin = {
+    id: 'legendMargin',
+    beforeInit(chart, legend, options) {
+      const fitValue = chart.legend.fit;
+  
+      chart.legend.fit = function fit() {
+        fitValue.bind(chart.legend)();
+        return this.height += 30;
+      }
+    }
+  }
+  const config = {
+    type: 'doughnut',
+    data: data,
+    options: {
+        
+      plugins: {
+        legend: {
+            display: false,
+          position: 'bottom',
+          labels: {
+            align: 'center',
+            boxHeight: 25,
+            boxWidth: 50,
+            padding: 5,
+            borderRadius: 20,
+            font: {
+              size: 18,
+              weight: 'bold',
+            }
+          },
+        },
+      }
+    },
+    plugins: [legendMargin]
+  };
+  const myChartDonut = new Chart(
+    document.getElementById('chart-per-device'),
+    config
+  );
 </script>
