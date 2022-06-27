@@ -39,33 +39,33 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
     for($i=0;$i<=sizeof($parseUrl);$i++){
         array_pop($parseUrl);
         $uri = implode('/',$parseUrl);
-        if(isset($routes[$uri]) ){
-            $url = $_SERVER["REQUEST_URI"]; 
-            $replace = str_replace($uri,'',$url);
-            $param = explode('/',$replace);
-            array_shift($param);
-
-            if(sizeof($routes[$uri]['params']) === sizeof($param)){
-                foreach($routes[$uri]['params'] as $key => $itemParam){
-                    $currentParams = [
-                        $itemParam => $param[$key]
-                    ];
-                }
-            }
-
-
-            if( sizeof($param) != sizeof($routes[$uri]['params']))
-            {
-                die("invalid params");
-            }
-            if(!isset($routes[$uri]['params']))
-            {
-                die("invalid params");
-            }
-            break;
-        }else{
-            die("Page 404");
+        if(!isset($routes[$uri]) ){
+            $uri = "/pageloader";
         }
+
+        $url = $_SERVER["REQUEST_URI"];
+        $replace = str_replace($uri,'',$url);
+        $param = explode('/',$replace);
+        array_shift($param);
+
+        if(sizeof($routes[$uri]['params']) === sizeof($param)){
+            foreach($routes[$uri]['params'] as $key => $itemParam){
+                $currentParams = [
+                    $itemParam => $param[$key]
+                ];
+            }
+        }
+
+
+        if( sizeof($param) != sizeof($routes[$uri]['params']))
+        {
+            http_response_code(404);
+        }
+        if(!isset($routes[$uri]['params']))
+        {
+            http_response_code(404);
+        }
+        break;
     }
 }
 

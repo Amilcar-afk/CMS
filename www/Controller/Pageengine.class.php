@@ -78,7 +78,7 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if ($page->getId() != null){
+        if ($page){
 
             $page->composeStats($page->getId(), "view");
 
