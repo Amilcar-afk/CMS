@@ -36,7 +36,6 @@
                     <div id="regions_div" style="width: 100%; height: 100%;">
 
                     </div>
-                    
 
                     <header>
                         <h3>Per country</h3>
@@ -247,29 +246,29 @@
     </section>
 
 </section>
+
 <script type="text/javascript">
-                        
-                        google.charts.load('current', {'packages':['geochart']});
-                        google.charts.setOnLoadCallback(drawRegionsMap);
 
-                        google.charts.load('current', {
-                        'packages':['geochart'],
-                        });
-                        google.charts.setOnLoadCallback(drawRegionsMap);
+    google.charts.load('current', {'packages':['geochart']});
+    google.charts.setOnLoadCallback(drawRegionsMap);
 
-                        function drawRegionsMap() {
-                        var data = google.visualization.arrayToDataTable([
-                        ['Country',{role: 'annotation'}],
-                        <?php echo json_encode($test)  ?>
+    google.charts.load('current', {
+        'packages':['geochart'],
+    });
+    google.charts.setOnLoadCallback(drawRegionsMap);
 
-                        ]);
+    function drawRegionsMap() {
 
-                        var options = {
-                            
-                        };
+        var data = google.visualization.arrayToDataTable(
+            <?php print_r(json_encode($chartMapData)); ?>
+        );
 
-                        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        var options = {};
 
-                        chart.draw(data, options);
-                        }
-                    </script>
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+        
+    }
+
+</script>

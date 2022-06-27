@@ -16,7 +16,24 @@ class Page extends BaseSQL
     protected $status;
     protected $slug;
     protected $user_key;
+    protected $categorie_key;
     protected $content;
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieKey()
+    {
+        return $this->categorie_key;
+    }
+
+    /**
+     * @param mixed $categorie_key
+     */
+    public function setCategorieKey($categorie_key): void
+    {
+        $this->categorie_key = $categorie_key;
+    }
 
     /**
      * @return mixed
