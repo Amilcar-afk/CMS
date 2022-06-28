@@ -10,9 +10,11 @@ class View
     private $data = [];
     private $array = [];
 
-    public function __construct($view, $template = null)
+    public function __construct($view = null , $template = null)
     {
-        $this->setView($view);
+        if ($view != null) {
+            $this->setView($view);
+        }
         if ($template != null){
             $this->setTemplate($template);
         }
