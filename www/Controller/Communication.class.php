@@ -27,41 +27,78 @@ class Communication
 
     public function listProject()
     {
-        $projectEmpty = $this->project;
-        $projects = $this->project->find();
-        $users = new User();
-        $users = $users->find();
+        $userProject = Query::from('cmspf_Projets')->where('user_key = ' . $_SESSION['Auth']->id)->execute();
+        $usersProject = [];
+
+        if(count($userProject) > 0){
+
+            foreach ($userProject as $key => $project) {
+                $idProject = $userProject[$key]['id'];
+                $this->project->setId($idProject);
+                $usersProject[$key] = $this->project->user();
+            }
+
+        }
 
         $view = new View("project-list", "back");
+
+        $projects = $this->project->find();
         $view->assign("projects",$projects);
+
+        $users = new User();
+        $users = $users->find();
         $view->assign("users", $users);
+
+        $view->assign("usersProject", $usersProject);
+
+        $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
     }
 
     public function composeProject()
     {
-        /*$projectEmpty = $this->project;
-        $projects = $this->project->find();
-        $users = new User();
-        $users = $users->find();*/
-
         if(!empty($_POST)){
-            //$view = new View("project-list", "back");
+
+            $view = new View("project-list", "back");
+            //$result = Validator::run($this->project->getFormCreateProject(), $_POST,false);
+
+            //if(empty($result)){
+
             $this->project->setTitle($_POST['title']);
             $this->project->setDescription($_POST['description']);
             $this->project->setUserKey($_SESSION['Auth']->id);
             $this->project->save();
 
             $idProject = $this->project->getLastId();
+            $users = new User();
+            $users = $users->find();
 
-            $projectUserKeys = explode(",", $_POST['users']);
+            if(!empty($idProject)) {
+                $projectUserKeys = explode(",", $_POST['users']);
 
-            foreach ($projectUserKeys as $userKey){
-                $this->user_project->setUserKey($userKey);
-                $this->user_project->setProjectKey($idProject);
-                $this->user_project->save();
+                foreach ($projectUserKeys as $key => $userKey) {
+                    $this->user_project->setUserKey($userKey);
+                    $this->user_project->setProjectKey($idProject);
+                    $this->user_project->save();
+                }
+
+                $projectEmpty = $this->project;
+                $projects = $this->project->find();
+
+                $view->assign("projects",$projects);
+                $view->assign("users", $users);
+                $view->assign("projectEmpty", $projectEmpty);
+
+            }else{
+                http_response_code(400);
             }
 
+            /*}else{
+                $view->assign("error_from",$result);
+            }*/
+
+        }else{
+            http_response_code(400);
         }
     }
 }
