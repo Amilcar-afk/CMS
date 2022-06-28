@@ -283,24 +283,15 @@ google.charts.load('current', {
 google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+        var data = google.visualization.arrayToDataTable(
+            <?php  print_r(json_encode($chartDeviceData)); ?>
+        );
 
         var options = {
           title: 'My Daily Activities',
           pieHole: 0.6,
           legend: {position: 'none'},
-          color: [
-        'rgb(57, 96, 117)',
-        'rgb(57, 96, 117, 0.5)',
-        'rgb(57, 96, 117, 0.2)'
-      ]
+          
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
