@@ -91,7 +91,6 @@ class Statistics
             ];
         }
         
-        
         $view = new View("dashboard", "back");
         $view->assign("chartDeviceData", $chartDeviceData);
 
@@ -198,12 +197,31 @@ class Statistics
         $date = date("Y-m-d");
 
 
+        
+
         // INSERT STATS
+        
         if ($type == "view") {
             $this->stats->setPageKey($elementId); // OK
+            $attributType = "page_key";
         }elseif ($type == "reseaux_soc") {
             $this->stats->setReseauSocKey($elementId); // OK
+            $attributType = "reseaux_soc_key";
         }
+
+        // GET DATE DIFFERENCE
+        //$dateStat = Query::select("date")->from("cmspf_Stats")->where("ip = ". $externalIp . '" AND "'. $attributType ." = ". $elementId)->execute();
+        $date1 = date("Y-m-d");
+        $date2 = "2022-06-30";
+        $first = strtotime($date1);
+        $second = strtotime($date2);
+        $dateDiff = abs($first - $second);
+        $dif = floor($dateDiff / (60 * 60 * 24));
+        print_r($dif);
+        //echo $dateStat;
+
+
+
         $this->stats->setType($type); // OK
         $this->stats->setIp($externalIp); //OK
         $this->stats->setCountry($countryCode); // OK
