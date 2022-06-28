@@ -291,7 +291,7 @@ google.charts.load("current", {packages:["corechart"]});
           title: 'My Daily Activities',
           pieHole: 0.6,
           legend: {position: 'none'},
-          
+          colors: ['#396075', '#547a8f', '#87949c']
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
