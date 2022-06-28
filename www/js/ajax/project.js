@@ -1,44 +1,58 @@
 const userSelected = document.getElementById("selectUsers");
 const divUsersSelected = document.getElementById("divUserSearch");
-let buttonValidForm = document.getElementById("buttonSaveProject");
+const buttonValidForm = document.getElementById("buttonSaveProject");
+const listSelectedUsers = document.getElementById("listSelectedUsers");
+
+const userSelectedUpdate = document.getElementById("selectUsersUpdate");
+const divUsersSelectedUpdate = document.getElementById("divUserSearchUpdate");
+const buttonValidFormUpdate = document.getElementById("buttonSaveProjectUpdate");
+const listSelectedUsersUpdate = document.getElementById("listSelectedUsers");
+
 let userChecked = null;
 
+//CREATE PROJECT
+selectEvent(userSelected, divUsersSelected, listSelectedUsers);
+validFormProject(buttonValidForm);
+
+//UPDATE PROJECT
+selectEvent(userSelectedUpdate, divUsersSelectedUpdate, listSelectedUsersUpdate);
+validFormProject(buttonValidFormUpdate);
+
 //display selected user
-userSelected.addEventListener("change", () => {
+function selectEvent(userSelected, divUsersSelected, listSelectedUsers) {
+    userSelected.addEventListener("change", () => {
+        let userSelectedIndex = userSelected.selectedIndex;
+        let userSelectedOption = userSelected.options[userSelectedIndex];
+        let userSelectedName = userSelected.options[userSelectedIndex].text;
+        let liUser = document.createElement("li");
+        let checkBoxUser = document.createElement("input");
 
-    let userSelectedIndex = userSelected.selectedIndex;
-    let userSelectedOption = userSelected.options[userSelectedIndex];
-    let userSelectedName = userSelected.options[userSelectedIndex].text;
-    let listSelectedUsers = document.getElementById("listSelectedUsers");
-    let liUser = document.createElement("li");
-    let checkBoxUser = document.createElement("input");
+        checkBoxUser.type = "checkbox";
+        checkBoxUser.name = "check-" + userSelectedOption.value;
+        checkBoxUser.value = userSelectedOption.value;
+        checkBoxUser.className = "user-check";
+        checkBoxUser.checked = true;
+        checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, ${userSelected.id})`);
 
-    checkBoxUser.type = "checkbox";
-    checkBoxUser.name = "check-" + userSelectedOption.value;
-    checkBoxUser.value = userSelectedOption.value;
-    checkBoxUser.className = "user-check";
-    checkBoxUser.checked = true;
-    checkBoxUser.setAttribute("onchange", "onClickCheckbox(this)")
+        liUser.setAttribute("class", "li-user-selected");
+        liUser.setAttribute("value", userSelectedOption.value);
+        liUser.innerHTML = userSelectedName;
 
-    liUser.setAttribute("class", "li-user-selected");
-    liUser.setAttribute("value", userSelectedOption.value);
-    liUser.innerHTML = userSelectedName;
+        if (listSelectedUsers === null) {
+            listSelectedUsers = document.createElement("ul");
+            listSelectedUsers.setAttribute("id", "listSelectedUsers");
+            divUsersSelected.appendChild(listSelectedUsers);
+        }
 
-    if(listSelectedUsers === null) {
-        listSelectedUsers = document.createElement("ul");
-        listSelectedUsers.setAttribute("id", "listSelectedUsers");
-        divUsersSelected.appendChild(listSelectedUsers);
-    }
+        liUser.appendChild(checkBoxUser);
+        listSelectedUsers.appendChild(liUser);
+        userChecked = document.getElementsByClassName("user-check");
+        userSelectedOption.hidden = true;
 
-    liUser.appendChild(checkBoxUser);
-    listSelectedUsers.appendChild(liUser);
-    userChecked = document.getElementsByClassName("user-check");
-    userSelectedOption.hidden = true;
-
-}, false);
-
+    }, false);
+}
 //undisplay user deselected
-function onClickCheckbox(item){
+function onClickCheckbox(item, userSelected){
     let li = item.parentNode;
     for (let i = 0; i < userSelected.length; i++){
         if (userSelected.options[i].value == li.value) {
@@ -48,23 +62,24 @@ function onClickCheckbox(item){
     li.remove();
 }
 
-buttonValidForm.addEventListener("click", () => {
+function validFormProject(buttonValidForm) {
+    buttonValidForm.addEventListener("click", () => {
 
-    let uri = url + "project/compose/";
-    let titleProject = document.getElementById("title").value;
-    let descProject = document.getElementById("description").value;
-    let userInputs = document.getElementsByClassName("user-check");
-    let dataString = `title=` + encodeURIComponent(titleProject) + `&description=` + encodeURIComponent(descProject) + `&users=`;
+        let uri = url + "project/compose/";
+        let titleProject = document.getElementById("title").value;
+        let descProject = document.getElementById("description").value;
+        let userInputs = document.getElementsByClassName("user-check");
+        let dataString = `title=` + encodeURIComponent(titleProject) + `&description=` + encodeURIComponent(descProject) + `&users=`;
 
-    for (let i = 0; i < userInputs.length; i++){
-        if(i !== 0)
-            dataString += ",";
-        dataString += encodeURIComponent(userInputs[i].value);
-    }
+        for (let i = 0; i < userInputs.length; i++) {
+            if (i !== 0)
+                dataString += ",";
+            dataString += encodeURIComponent(userInputs[i].value);
+        }
 
-    ajaxRequest(uri, "POST", dataString, displayUserSearch, true);
-});
-
+        ajaxRequest(uri, "POST", dataString, displayUserSearch, true);
+    });
+}
 function displayUserSearch(req){
     document.write(req.responseText);
 }
