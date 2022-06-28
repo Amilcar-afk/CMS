@@ -157,9 +157,9 @@
                         </button>
                     </header>
 
-                    <div class="chart-container">
-                        <canvas id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></canvas>
-                    </div>
+                    
+                        <div id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
+                    
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -280,62 +280,31 @@ google.charts.load('current', {
 
 <script>
 
-const data = {
-    labels: [
-      'Mobile',
-      'Desktop',
-      'Other'
-    ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [300, 50, 100],
-      backgroundColor: [
+google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          pieHole: 0.6,
+          legend: {position: 'none'},
+          color: [
         'rgb(57, 96, 117)',
         'rgb(57, 96, 117, 0.5)',
         'rgb(57, 96, 117, 0.2)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-  // margin
-  const legendMargin = {
-    id: 'legendMargin',
-    beforeInit(chart, legend, options) {
-      const fitValue = chart.legend.fit;
-  
-      chart.legend.fit = function fit() {
-        fitValue.bind(chart.legend)();
-        return this.height += 30;
+      ]
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
+        chart.draw(data, options);
       }
-    }
-  }
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-        
-      plugins: {
-        legend: {
-            display: false,
-          position: 'bottom',
-          labels: {
-            align: 'center',
-            boxHeight: 25,
-            boxWidth: 50,
-            padding: 5,
-            borderRadius: 20,
-            font: {
-              size: 18,
-              weight: 'bold',
-            }
-          },
-        },
-      }
-    },
-    plugins: [legendMargin]
-  };
-  const myChartDonut = new Chart(
-    document.getElementById('chart-per-device'),
-    config
-  );
+
 </script>

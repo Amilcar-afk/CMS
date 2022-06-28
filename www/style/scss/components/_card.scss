@@ -165,16 +165,17 @@
 
     // charts
 
-    & .chart-container {
-        padding: 20px 50px 50px 50px;
-        display: flex;
-        align-self: center;
-
-        & #chart-per-device {
-            width: max-content;
-            height: max-content;
+    & #chart-per-device {
+        width: 100%;
+        & rect{
+            fill: none;
+            
+        }
+        & rect:nth-child(3) {
+            display: none;
         }
     }
+    
 
     & .table-container {
         margin-top: 6px;

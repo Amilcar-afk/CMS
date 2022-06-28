@@ -83,10 +83,10 @@ class Statistics
 
         $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->groupBy("device")->execute();
         // SELECT COUNT(device) AS number, device FROM cmspf_Stats GROUP BY device;
-        //$chartDeviceData[] = ['Country',["role"=> 'annotation']];
+        $chartDeviceData[] = ['Device',["role"=> 'annotation']];
         foreach($devices as $device) {
             $chartDeviceData[] = [
-                $device['device'].':',
+                $device['device'],
                 $toInt = (int)$device['number']
             ];
         }
