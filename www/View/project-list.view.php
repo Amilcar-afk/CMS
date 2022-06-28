@@ -66,7 +66,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $project->getFormCreateProject($users)) ?>
+                        <?php  $this->includePartial("form", $project->getFormCreateProject($usersProject)) ?>
                     </article>
 
                 </div>
