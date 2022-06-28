@@ -156,17 +156,21 @@ class Statistics
 
     public function composeStats(int $elementId, string $type) {
 
+
         if (!isset($elementId) && !isset($type))
             die();
+
 
         // GET PUBLIC IP
         $externalContent = file_get_contents('http://checkip.dyndns.com/');
         preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
         $externalIp = $m[1];
 
+
         // GET COUNTRY WITH IP
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$externalIp));
         $countryCode = $query['countryCode'];
+
 
         // GET DEVICES
         $detectDevice = $_SERVER['HTTP_USER_AGENT'];
@@ -193,14 +197,12 @@ class Statistics
 
         }
 
+
         // GET DATE
         $date = date("Y-m-d");
-
-
         
 
-        // INSERT STATS
-        
+        //
         if ($type == "view") {
             $this->stats->setPageKey($elementId); // OK
             $attributType = "page_key";
@@ -211,25 +213,26 @@ class Statistics
 
 
 
-        // GET DATE DIFFERENCE
-        $dateStat = Query::select("MAX(date) AS date")->from("cmspf_Stats")->where("ip = '". $externalIp . "' AND ". $attributType ." = ". $elementId)->execute('Stat');
-        //SELECT MAX(date) FROM cmspf_Stats WHERE ip = "176.144.74.169" AND page_key = 1 GROUP BY dateFinal;
-
+        // 1 STAT PER PAGE PER DAY
+        $getLastDate = Query::select("MAX(date) AS date")->from("cmspf_Stats")->where("ip = '". $externalIp . "' AND ". $attributType ." = ". $elementId)->execute('Stat');
 
         $date1 = date("Y-m-d");
-        $date2 = $dateStat[0]->getDate();
+        $date2 = $getLastDate[0]->getDate();
         $first = strtotime($date1);
         $second = strtotime($date2);
         $dateDiff = abs($first - $second);
-        $dif = floor($dateDiff / (60 * 60 * 24));
+        $day = floor($dateDiff / (60 * 60 * 24));
         
-        if ($dif >= 1) {
-            $this->stats->setType($type); // OK
-            $this->stats->setIp($externalIp); //OK
-            $this->stats->setCountry($countryCode); // OK
-            $this->stats->setDate($date); // OK
-            $this->stats->setDevice($device); // OK
+        if ($day >= 1) {
+
+            // INSERT STATS
+            $this->stats->setType($type); 
+            $this->stats->setIp($externalIp); 
+            $this->stats->setCountry($countryCode);
+            $this->stats->setDate($date); 
+            $this->stats->setDevice($device); 
             $this->stats->save();
+
         } else {
             
         }
