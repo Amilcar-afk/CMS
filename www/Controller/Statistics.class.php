@@ -81,11 +81,19 @@ class Statistics
         }
 
 
-        
+        $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->groupBy("device")->execute();
+        // SELECT COUNT(device) AS number, device FROM cmspf_Stats GROUP BY device;
+        $chartDeviceData[] = ['Device',["role"=> 'annotation']];
+        foreach($devices as $device) {
+            $chartDeviceData[] = [
+                $device['device'],
+                $toInt = (int)$device['number']
+            ];
+        }
         
         
         $view = new View("dashboard", "back");
-        //$view->assign("test", $test);
+        $view->assign("chartDeviceData", $chartDeviceData);
 
         $view->assign("chartMapData", $chartMapData);
         $view->assign("data", $stats);

@@ -13,6 +13,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
         <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css" />
+        <!-- CHARTJS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <!-- MAP -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         
@@ -26,6 +28,8 @@
         <script type="text/javascript" src="../style/js/categorie.js"></script>
         <script type="text/javascript" src="../style/js/database.js"></script>
         <script type="text/javascript" src="../style/js/reseauxSoc.js"></script>
+        <script type="text/javascript" src="../style/js/chartMap.js"></script>
+
     </head>
     <div class="background-container-back-office">
         <div></div>
@@ -63,6 +67,7 @@
         <script type="text/javascript" src="../js/ajax/user-manager.js"></script>
         <script type="text/javascript" src="../js/modal.js"></script>
         <script type="text/javascript" src="../js/ajax/project.js"></script>
+        
         
     </body>
 </html>

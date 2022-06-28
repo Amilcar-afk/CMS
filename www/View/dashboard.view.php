@@ -157,7 +157,9 @@
                         </button>
                     </header>
 
-                    <canvas id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></canvas>
+                    
+                        <div id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
+                    
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -247,20 +249,20 @@
 
 </section>
 
-<script type="text/javascript">
+<?php  print_r(json_encode($chartDeviceData)); ?>
 
-    google.charts.load('current', {'packages':['geochart']});
-    google.charts.setOnLoadCallback(drawRegionsMap);
 
-    google.charts.load('current', {
+<script>
+google.charts.load('current', {
         'packages':['geochart'],
-    });
-    google.charts.setOnLoadCallback(drawRegionsMap);
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
 
-    function drawRegionsMap() {
-
+      function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(
-            <?php print_r(json_encode($chartMapData)); ?>
+
+            <?php  print_r(json_encode($chartMapData)); ?>
+
         );
 
         var options = {};
@@ -268,7 +270,32 @@
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
         chart.draw(data, options);
-        
-    }
+      }
+
+
+
+</script>
+
+
+
+<script>
+
+google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+            <?php  print_r(json_encode($chartDeviceData)); ?>
+        );
+
+        var options = {
+          title: 'My Daily Activities',
+          pieHole: 0.6,
+          legend: {position: 'none'},
+          colors: ['#396075', '#547a8f', '#87949c']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
+        chart.draw(data, options);
+      }
 
 </script>
