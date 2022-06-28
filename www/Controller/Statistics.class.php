@@ -209,26 +209,30 @@ class Statistics
             $attributType = "reseaux_soc_key";
         }
 
+
+
         // GET DATE DIFFERENCE
-        //$dateStat = Query::select("date")->from("cmspf_Stats")->where("ip = ". $externalIp . '" AND "'. $attributType ." = ". $elementId)->execute();
+        $dateStat = Query::select("MAX(date) AS date")->from("cmspf_Stats")->where("ip = '". $externalIp . "' AND ". $attributType ." = ". $elementId)->execute('Stat');
+        //SELECT MAX(date) FROM cmspf_Stats WHERE ip = "176.144.74.169" AND page_key = 1 GROUP BY dateFinal;
+
+
         $date1 = date("Y-m-d");
-        $date2 = "2022-06-30";
+        $date2 = $dateStat[0]->getDate();
         $first = strtotime($date1);
         $second = strtotime($date2);
         $dateDiff = abs($first - $second);
         $dif = floor($dateDiff / (60 * 60 * 24));
-        print_r($dif);
-        //echo $dateStat;
-
-
-
-        $this->stats->setType($type); // OK
-        $this->stats->setIp($externalIp); //OK
-        $this->stats->setCountry($countryCode); // OK
-        $this->stats->setDate($date); // OK
-        $this->stats->setDevice($device); // OK
-        $this->stats->save(); 
-
+        
+        if ($dif >= 1) {
+            $this->stats->setType($type); // OK
+            $this->stats->setIp($externalIp); //OK
+            $this->stats->setCountry($countryCode); // OK
+            $this->stats->setDate($date); // OK
+            $this->stats->setDevice($device); // OK
+            $this->stats->save();
+        } else {
+            
+        }
     }
     
 }
