@@ -56,7 +56,6 @@ class User{
                     $_SESSION['Auth']->firstname = $user[0]->getFirstname();
                     $_SESSION['Auth']->id = $user[0]->getId();
                     $_SESSION['Auth']->token = $user[0]->getToken();
-                    $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
     
