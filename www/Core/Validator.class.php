@@ -20,7 +20,7 @@ class Validator
 
         $errors = [];
 
-        if(isset($config['inputs']['slug'])  && $unicity !== false){
+        if(isset($config['inputs']['slug'])  && $unicity == false){
             $config['inputs']['slug']['error']="This slug alreay exist";
         }
 
@@ -67,7 +67,7 @@ class Validator
             if($input["type"]=="email" ){
                 if(!self::checkEmail($data[$name])){
                     $config['inputs']['email']['error'] = "Bad Email";
-                }elseif($unicity !== false){
+                }elseif($unicity == false){
                     $config['inputs']['email']['error']="This email alreay exist";
                 }
             }
