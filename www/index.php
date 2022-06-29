@@ -69,6 +69,8 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
     }
 }
 
+session_start();
+
 if(isset($routes[$uri]["middleware"]) ){
     $authFile = 'Controller/Middleware.class.php';
     include $authFile;
