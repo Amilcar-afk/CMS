@@ -205,6 +205,11 @@ class Page extends BaseSQL
         $header = $header->find(1);
         $categories = $header->categories();
         $pages = $header->pages();
+
+        $logo = Query::from('cmspf_Options')
+            ->where("type = 'logo'")
+            ->execute('Option');
+
         include "View/Partial/header.partial.php";
     }
 
