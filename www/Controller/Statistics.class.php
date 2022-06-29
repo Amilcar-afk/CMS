@@ -69,6 +69,7 @@ class Statistics
         ];*/
 
 
+        // GET COUNTRY STATS
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->groupBy("country")->execute();
         // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country;
 
@@ -81,6 +82,7 @@ class Statistics
         }
 
 
+        // GET DEVICE STATS
         $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->groupBy("device")->execute();
         // SELECT COUNT(device) AS number, device FROM cmspf_Stats GROUP BY device;
         $chartDeviceData[] = ['Device',["role"=> 'annotation']];
@@ -91,6 +93,20 @@ class Statistics
             ];
         }
         
+
+        // GET NEW USERS STATS
+        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->execute("User");
+        //SELECT COUNT(*) FROM cmspf_Users;
+        foreach($newUsers as $users) {
+            foreach($users as $user) {
+                $number = $user;
+            }
+        }
+        print_r($number);
+        
+
+
+
         $view = new View("dashboard", "back");
         $view->assign("chartDeviceData", $chartDeviceData);
 
