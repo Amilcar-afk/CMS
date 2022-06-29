@@ -71,7 +71,6 @@ class Statistics
 
         // GET COUNTRY STATS
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->groupBy("country")->execute();
-        // SELECT COUNT(country) AS nbr_doublon, country FROM cmspf_Stats GROUP BY country;
 
         $chartMapData[] = ['Country',["role"=> 'annotation']];
         foreach($country as $key => $data) {
@@ -84,7 +83,7 @@ class Statistics
 
         // GET DEVICE STATS
         $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->groupBy("device")->execute();
-        // SELECT COUNT(device) AS number, device FROM cmspf_Stats GROUP BY device;
+
         $chartDeviceData[] = ['Device',["role"=> 'annotation']];
         foreach($devices as $device) {
             $chartDeviceData[] = [
@@ -95,24 +94,22 @@ class Statistics
         
 
         // GET NEW USERS STATS
-        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->execute("User");
-        //SELECT COUNT(*) FROM cmspf_Users;
+        $currentMonth = date("m");
+        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute("User");
+
         foreach($newUsers as $users) {
-            foreach($users as $user) {
-                $number = $user;
+            foreach($users as $nbr) {
+                $numberOfUsers = $nbr;
             }
         }
-        print_r($number);
-        
 
 
 
         $view = new View("dashboard", "back");
         $view->assign("chartDeviceData", $chartDeviceData);
-
+        $view->assign("numberOfUsers", $numberOfUsers);
         $view->assign("chartMapData", $chartMapData);
         $view->assign("data", $stats);
-        //$view->assign("sortedData", $sortedData);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
     }

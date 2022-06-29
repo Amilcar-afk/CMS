@@ -8,7 +8,7 @@
             <div class="col-4 col-md-4 col-sm-4">
                 <section class="card card--bottom  card--background-main-color">
                     <header>
-                        <h4>6</h4>
+                        <h4><?php echo $numberOfUsers ?></h4>
                         <h3>New users of the month</h3>
                     </header>
                 </section>
