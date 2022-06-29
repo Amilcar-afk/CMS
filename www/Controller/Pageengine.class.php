@@ -82,9 +82,6 @@ class Pageengine
 
             $page->composeStats($page->getId(), "view");
 
-            $reseauxSoc = new Reseaux_soc();
-            $reseauxSocs = $reseauxSoc->find();
-
             //load Categorie list if categorie page
             if ($page->getStatus() == 'Tag'){
                 $categorie = new Categorie();
@@ -95,9 +92,8 @@ class Pageengine
                 $view = new View("load-page", "front");
             }
             $view->assign("page", $page );
-            $view->assign("headCode", $headCode);
-            $view->assign("footerCode", $footerCode);
-            $view->assign("reseauxSocs", $reseauxSocs);
+            $view->assign("headCode", $headCode[0]->getValue());
+            $view->assign("footerCode", $footerCode[0]->getValue());
         }else{
             http_response_code(404);
         }
@@ -167,6 +163,20 @@ class Pageengine
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {
+
+                    //use categorie template;
+                    if ($this->page->getContent() == null){
+
+                        $categories = Query::from('cmspf_Categories')
+                            ->where("id = " . $_POST['categorie'] . "")
+                            ->execute('Categorie');
+
+                        $page_of_categorie = $categories[0]->page();
+
+                        $this->page->setContent($page_of_categorie->getContent());
+                        $this->page->setId($lastId);
+                        $this->page->save();
+                    }
 
                     $page_categorie = Query::from('cmspf_Page_categorie')
                         ->where("page_key = " . $lastId . "")

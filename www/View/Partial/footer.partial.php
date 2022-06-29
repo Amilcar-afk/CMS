@@ -9,11 +9,12 @@
         </nav>
         <nav class="col-12 navbar">
             <ul class="menu">
-                <li><a class="active" href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Work</a></li>
-                <li><a href="#">Contact</a></li>
+                <?php foreach ($categories as $categorie):?>
+                    <li><a href="<?= $categorie->page()->getSlug() ?>"><?= $categorie->getTitle() ?></a></li>
+                <?php endforeach;?>
+                <?php foreach ($pages as $page):?>
+                    <li><a href="<?= $page->getSlug() ?>"><?= $page->getTitle() ?></a></li>
+                <?php endforeach;?>
             </ul>
         </nav>
     </div>

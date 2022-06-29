@@ -5,7 +5,8 @@ namespace App\Model;
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
 use App\Core\Query;
-use Categorie;
+use App\Model\Categorie;
+use App\Model\Reseaux_soc;
 
 class Page extends BaseSQL
 {
@@ -200,12 +201,24 @@ class Page extends BaseSQL
 
     public function header()
     {
-        return include "View/Partial/header.partial.php";
+        $header = new Categorie();
+        $header = $header->find(1);
+        $categories = $header->categories();
+        $pages = $header->pages();
+        include "View/Partial/header.partial.php";
     }
 
     public function footer()
     {
-        return include "View/Partial/footer.partial.php";
+        $footer = new Categorie();
+        $footer = $footer->find(2);
+        $categories = $footer->categories();
+        $pages = $footer->pages();
+
+        $reseauxSoc = new Reseaux_soc();
+        $reseauxSocs = $reseauxSoc->find();
+
+        include "View/Partial/footer.partial.php";
     }
 
     public function getFormNewPage($categories): array
@@ -297,6 +310,7 @@ class Page extends BaseSQL
                     "name"=>"description",
                     "class"=>"input",
                     "required"=>true,
+                    "rows"=>4,
                     "min"=>3,
                     "max"=>100,
                     "value"=>$this->getDescription(),

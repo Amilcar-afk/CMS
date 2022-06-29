@@ -50,28 +50,28 @@
         </section>
     </section>
 
-    <?php // foreach ($navigations as $navigation):?>
+    <?php foreach ($navigations as $navigation):?>
         <!-- update navigations form -->
-        <!--<section id="container-setting-navigation-<?/*=//$navigation->getId() */?>" class="container-main-content container-main-content--menu a-zoom-out-end">
-            <button id="cta-button-close-container-setting-navigation-<?/*=//$navigation->getId() */?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-navigation-<?/*=//$navigation->getId() */?>"><span class="material-icons-round">close</span></button>
+        <section id="container-setting-navigation-<?=$navigation->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
+            <button id="cta-button-close-container-setting-navigation-<?=$navigation->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-navigation-<?=$navigation->getId() ?>"><span class="material-icons-round">close</span></button>
             <div class="menu-container">
 
             </div>
             <section class="collapse-parent">
                 <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
                     <header>
-                        <h1 class="title title--black"><?/*= //ucfirst($navigation->getTitle()) */?></h1>
+                        <h1 class="title title--black"><?= ucfirst($navigation->getTitle()) ?></h1>
                     </header>
 
                     <article>
-                        <?php /*// $this->includePartial("form", $navigation->getFormNewCategorie()) */?>
+                        <?php $this->includePartial("form", $navigation->getFormNewCategorie()) ?>
                     </article>
 
                 </div>
 
             </section>
-        </section>-->
-    <?php // endforeach;?>
+        </section>
+    <?php endforeach;?>
 
     <!-- add navigations form -->
     <!--<section id="container-new-navigation" class="container-main-content container-main-content--menu a-zoom-out-end">

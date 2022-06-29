@@ -11,10 +11,12 @@
         <link href="../style/dist/css/main.css" rel="stylesheet" />
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <?php  $this->includePartial('design-variables') ?>
+        <?= $headCode; ?>
     </head>
-    <body class="background-background-color">
+    <body class="body background-background-color">
         <?php
             include $this->view.".view.php";
         ?>
     </body>
+    <?= $footerCode; ?>
 </html>

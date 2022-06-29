@@ -1168,6 +1168,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         font-size: 1.25rem;
         line-height: 1.3125rem; } }
 
+.body {
+  position: relative;
+  margin: 0;
+  padding-top: 0rem;
+  padding-bottom: 15rem;
+  min-height: 100%; }
+
 .body-small {
   max-width: 800px;
   margin-left: auto;
@@ -1386,13 +1393,6 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 .module-list--quote-mark-third-color figure blockquote > p:after, .module--quote-mark-third-color figure blockquote > p:after {
   color: var(--third-color); }
 
-a {
-  opacity: 1;
-  text-decoration: none; }
-  a:hover {
-    opacity: 0.85;
-    text-decoration: underline; }
-
 .header {
   padding: 10px 0px;
   position: relative;
@@ -1472,6 +1472,10 @@ a {
         border-bottom: 0; } }
 
 .footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   color: var(--background-color);
   padding: 30px 0; }
   .footer .nav-rs {
