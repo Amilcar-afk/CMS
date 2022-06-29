@@ -87,6 +87,17 @@ $(document).ready(function(){
         });
     })
 
+
+    $('#menu-icon').on('click', function(){
+        $('.navbar').toggleClass('expand');
+        return false;
+    });
+
+    $('ul li a').click(function() {
+        $('.navbar').removeClass('expand');
+    });
+
+
 });
 
 

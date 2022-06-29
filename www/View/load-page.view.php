@@ -1,18 +1,27 @@
-<header class="header">
-    <a id="logo" href="#"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a>
-    <nav>
-        <ul>
-            <li><a href="/dashboard" class="button-menu"><span class="material-icons-round">leaderboard</span></a></li>
-            <li><a href="/pages" class="button-menu"><span class="material-icons-round">map</span></a></li>
-            <li><a href="/conversations" class="button-menu"><span class="material-icons-round">forum</span></a></li>
-            <li><a href="/settings/style" class="button-menu"><span class="material-icons-round">settings</span></a></li>
-        </ul>
-    </nav>
+<header class="header background-main-color">
+
+    <div class="<?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?> background-main-color">
+
+        <h2 class="logo"><a id="logo" href="#"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></h2>
+
+        <a id="menu-icon">&#9776;</a>
+
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a class="active" href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+    </div>
 </header>
 <div class="row"><?=$page->getContent()?></div>
-<footer class="footer">
+<footer class="footer background-main-color">
     <p>Super</p>
-    <nav>
+    <nav class="nav-rs">
         <ul>
             <?php foreach ($reseauxSocs as $reseauxSoc):?>
                 <li><a href="<?= $reseauxSoc->getPath() ?>" target="_blank" class="button-menu"><img src="../style/images/<?= $reseauxSoc->getType() ?>.png"></a></li>
