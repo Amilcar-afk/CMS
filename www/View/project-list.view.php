@@ -52,7 +52,7 @@
         </section>
     </section>
 
-    <?php foreach ($projects as $project):?>
+    <?php foreach ($projects as $key => $project):?>
         <!-- update project form -->
         <section id="container-setting-project-<?=$project->getId() ?>" class="container-main-content container-main-content--menu a-zoom-out-end">
             <button id="cta-button-close-container-setting-project-<?=$project->getId() ?>" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">close</span></button>
@@ -66,7 +66,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $project->getFormCreateProject($users)) ?>
+                        <?php  $this->includePartial("form", $project->getFormProject($usersProject[$key], 'Update')) ?>
                     </article>
 
                 </div>
@@ -88,7 +88,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $projectEmpty->getFormCreateProject($users)) ?>
+                    <?php  $this->includePartial("form", $projectEmpty->getFormProject($users)) ?>
                 </article>
             </div>
         </section>

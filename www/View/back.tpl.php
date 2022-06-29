@@ -66,7 +66,7 @@
         <script type="text/javascript" src="../js/ajax/httpRequest.js"></script>
         <script type="text/javascript" src="../js/ajax/user-manager.js"></script>
         <script type="text/javascript" src="../js/modal.js"></script>
-        <script type="text/javascript" src="../js/ajax/projet.js"></script>
+        <script type="text/javascript" src="../js/ajax/project.js"></script>
         
         
     </body>

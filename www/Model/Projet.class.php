@@ -105,15 +105,11 @@ class Projet extends BaseSQL
 
     public function user()
     {
-        $users = parent::belongsToMany(User::class, 'cmspf_User_projet');
-        foreach ($users as $user){
-            if($user->getId() != $_SESSION['auth']->id){
-                return $user;
-            }
-        }
+        $users = parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        return $users;
     }
 
-    public function getFormCreateProject($users): array
+    public function getFormProject($users, $name = ''): array
     {
 
         foreach($users as $user){
@@ -129,7 +125,7 @@ class Projet extends BaseSQL
                 "method"=>"POST",
                 "submit"=>"Save",
                 "id"=>"formNewProject",
-                "idButton"=>"buttonSaveProject",
+                "idButton"=>"buttonSaveProject".$name,
                 "cta"=>"cta-button-compose-project"
             ],
 
@@ -161,12 +157,12 @@ class Projet extends BaseSQL
                     "placeholder"=>"Title",
                     "type"=>"select",
                     "name"=>"user",
-                    "id"=>"selectUsers",
+                    "id"=>"selectUsers".$name,
                     "value"=>$this->user(),
-                    "class"=>"input",
+                    "class"=>"input inputSelect".$name,
                     "error"=>"",
                     "idToVerif"=>true,
-                    "div"=>"divUserSearch",
+                    "div"=>"divUserSearch".$name,
                     "choices"=>$usersList['choices']
                 ],
 
