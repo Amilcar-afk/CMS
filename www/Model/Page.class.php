@@ -198,6 +198,16 @@ class Page extends BaseSQL
         parent::delete($id);
     }
 
+    public function header()
+    {
+        return include "View/Partial/header.partial.php";
+    }
+
+    public function footer()
+    {
+        return include "View/Partial/footer.partial.php";
+    }
+
     public function getFormNewPage($categories): array
     {
         foreach($categories as $categorie){

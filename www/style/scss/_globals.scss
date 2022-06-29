@@ -8,6 +8,13 @@ html{
 	height: 100vh;
 }
 
+*,*:before, *:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+
 body{
 	font-family: $font1;
 	margin: 0;
