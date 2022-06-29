@@ -85,12 +85,14 @@ class User{
     {
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
+        $date = date("Y-m-d");
         if( !empty($_POST)){
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
+            $this->user->setDateCreation($date);
             $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
@@ -252,7 +254,7 @@ class User{
                 echo "</ul>";
 
             }else{
-                echo '<i>Aucun utilisateur trouvé</i>';
+                echo '<i>Aucun utilisateur trouvï¿½</i>';
             }
         }
 
