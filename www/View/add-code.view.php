@@ -25,11 +25,11 @@
                     <div>
                         <div class="input-container">
                             <h2>Head</h2>
-                            <textarea class="input" id="headCode" placeholder="<head> add code here... </head>" rows="14"><?php if (isset($headCode[0])):?><?= $headCode[0]->getValue()?><?php endif;?></textarea>
+                            <textarea class="input" id="headCode" placeholder="<head> add code here... </head>" rows="14"><?php if (isset($headCode[0]) && $headCode[0]->getValue() != ' '):?><?= $headCode[0]->getValue()?><?php endif;?></textarea>
                         </div>
                         <div class="input-container">
                             <h2>Footer</h2>
-                            <textarea class="input" id="footerCode" placeholder="<footer> add code here... </footer>" rows="14"><?php if (isset($footerCode[0])):?><?= $footerCode[0]->getValue()?><?php endif;?></textarea>
+                            <textarea class="input" id="footerCode" placeholder="<footer> add code here... </footer>" rows="14"><?php if (isset($footerCode[0]) && $footerCode[0]->getValue() != ' '):?><?= $footerCode[0]->getValue()?><?php endif;?></textarea>
                         </div>
                         <button class="cta-button cta-button--submit cta-button-compose-code">
                             Save

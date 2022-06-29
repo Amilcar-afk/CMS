@@ -242,8 +242,8 @@ class Pageengine
         }else{
             $footerCode = $footerCode[0];
         }
-        $footerCode->setValue($_POST['footerCode']);
-        $headCode->setValue($_POST['headCode']);
+        $footerCode->setValue((!empty($_POST['footerCode']))? $_POST['footerCode'] : ' ');
+        $headCode->setValue((!empty($_POST['headCode']))? $_POST['headCode'] : ' ');
         $footerCode->setType('footerCode');
         $headCode->setType('headCode');
         $footerCode->setUserKey($_SESSION['Auth']->id);

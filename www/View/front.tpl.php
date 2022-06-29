@@ -12,12 +12,12 @@
         <link href="../style/dist/css/main.css" rel="stylesheet" />
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <link id="container-favicon" rel="shortcut icon" href="<?= (isset($favicon[0]))? $favicon[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
-        <?= $headCode; ?>
+        <?= (isset($headCode) && $headCode != ' ')? $headCode :''; ?>
     </head>
     <body class="body background-background-color">
         <?php
             include $this->view.".view.php";
         ?>
     </body>
-    <?= $footerCode; ?>
+    <?= (isset($footerCode) && $footerCode != ' ')? $footerCode :''; ?>
 </html>
