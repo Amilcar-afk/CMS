@@ -35,7 +35,7 @@
                                         <h4><?= ucfirst($navigation->getTitle()) ?></h4>
                                     </td>
                                     <td>
-                                        <a href="/build/navigation/<?= $navigation->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
+                                        <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$navigation->getId() ?>"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
@@ -61,10 +61,51 @@
                 <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
                     <header>
                         <h1 class="title title--black"><?= ucfirst($navigation->getTitle()) ?></h1>
+                        <p>Choose the category and the page you want to add to this navigation.</p>
                     </header>
 
+                    <!--Categories-->
                     <article>
-                        <?php $this->includePartial("form", $navigation->getFormNewCategorie()) ?>
+                        <header class="main-nav-choice selected" data-wc-target="categorie-list-elements">
+                            <h2>Categories</h2>
+                            <span class="material-icons-round">more_horiz</span>
+                        </header>
+                        <div id="categorie-list-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="addable-elements-container" style="opacity: 1">
+
+                            <div class="center-left">
+                                <?php foreach ($navigation->categories() as $categorie):?>
+                                    <?php if ($categorie->getType() == 'tag'):?>
+                                        <label class="sticker sticker--cta sticker--cta--selected"><span class="material-icons-round">tag</span><?= $categorie->getTitle()?></label>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                                <?php foreach ($navigation->categoriesNot() as $categorie):?>
+                                    <?php if ($categorie->getType() == 'tag'):?>
+                                        <label class="sticker sticker--cta"><span class="material-icons-round">tag</span><?= $categorie->getTitle()?></label>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!--Pages-->
+                    <article>
+                        <header class="main-nav-choice" data-wc-target="page-list-elements">
+                            <h2>Pages</h2>
+                            <span class="material-icons-round">more_horiz</span>
+                        </header>
+                        <div id="page-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="addable-elements-container">
+
+                            <div class="center-left">
+                                <?php foreach ($navigation->pages() as $page):?>
+                                    <label class="sticker sticker--cta sticker--cta--selected">/<?= $page->getTitle()?></label>
+                                <?php endforeach;?>
+                                <?php foreach ($navigation->pagesNot() as $page):?>
+                                    <label class="sticker sticker--cta">/<?= $page->getTitle()?></label>
+                                <?php endforeach;?>
+                            </div>
+
+                        </div>
                     </article>
 
                 </div>
