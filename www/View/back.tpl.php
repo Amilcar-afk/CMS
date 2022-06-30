@@ -29,19 +29,19 @@
         <script type="text/javascript" src="../style/js/database.js"></script>
         <script type="text/javascript" src="../style/js/reseauxSoc.js"></script>
         <script type="text/javascript" src="../style/js/chartMap.js"></script>
-
+        <script type="text/javascript" src="../style/js/navigations.js"></script>
     </head>
-    <div class="background-container-back-office">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
     <body class="body-back-office">
+        <div class="background-container-back-office">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <header>
             <nav>
                 <ul>
-                    <li><a id="back-office-logo" href="#"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></li>
+                    <li><a id="back-office-logo" href="/"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></li>
                     <li><a href="/dashboard" class="button-menu" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
                     <li><a href="/pages" class="button-menu" data-alt="Sitemap"><span class="material-icons-round">map</span></a></li>
                     <li><a href="/conversations" class="button-menu" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>

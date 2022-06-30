@@ -2283,7 +2283,7 @@ h2 {
   .sticker--slug {
     background-color: #444; }
   .sticker--cta {
-    margin-right: 15px;
+    margin: 15px;
     color: var(--main-color);
     background-color: var(--background-color);
     border: solid 1.5px var(--main-color); }
