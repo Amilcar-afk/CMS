@@ -73,12 +73,12 @@ class Pageengine
 
     public function pageLoader($request){
 
-        $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
-        $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
-
         $page = $this->page->find($request['slug'], 'slug');
 
         if ($page){
+
+            $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+            $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
             $page->composeStats($page->getId(), "view");
 
