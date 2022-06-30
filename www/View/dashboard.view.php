@@ -71,7 +71,7 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
+                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
                         <table class="table table--lite">
                             <tbody>
                             <?php foreach ($viewPerPages as $view): ?>
