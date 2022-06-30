@@ -4,7 +4,6 @@
         <a id="menu-icon">&#9776;</a>
         <nav class="navbar">
             <ul class="menu">
-                <li><a class="active" href="#">Home</a></li>
                 <?php foreach ($categories as $categorie):?>
                     <li><a href="<?= $categorie->page()->getSlug() ?>"><?= $categorie->getTitle() ?></a></li>
                 <?php endforeach;?>

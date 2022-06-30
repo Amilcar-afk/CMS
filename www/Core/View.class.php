@@ -12,6 +12,7 @@ class View
 
     public function __construct($view = null , $template = null)
     {
+
         if ($view != null) {
             $this->setView($view);
         }
