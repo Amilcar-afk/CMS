@@ -128,8 +128,15 @@
 
 /conversations/search-conversations:
   controller: communication
-  action: searchConversation
+  action: searchData
   middleware : ['auth']
+
+/conversations/user-conversations:
+  controller: communication
+  action: userConversation
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
 
 /conversation/compose:
   controller: communication

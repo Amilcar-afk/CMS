@@ -1,4 +1,4 @@
-<section id="back-office-container">
+ <section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
@@ -15,56 +15,78 @@
                 <header>
                     <h1 class="title title--black">CONVERSATIONS</h1>
                 </header>
-
                 <!--Add conversation-->
                 <article>
                     <input class="select"  placeholder="search conversation"  id="select">
-
-
-
                     <div id="new-conversation-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="conversation-manager-container">
                     </div>
                 </article>
-
-                <?php if(isset($conversations )): ?>
-
                 <article>
                     <div id="conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
-                            <?php foreach ($conversations as $conversation):?>
+                                <?php if(isset($conversations)): ?>
+
+
+                                    <?php foreach ($conversations as $conversation):?>
+
+
+                                        <?php  foreach ($conversation->lastMessage() as $message): ?>
+
+                                            <?php //$message->getContent(); ?><br>
+
+                                        <?php  endforeach;?>
+
+
                                 <tr class="table-line">
                                     <td>
-                                        <h4></h4>
+                                        <h4>
+                                            <?php foreach ($conversation->users() as $user): ?>
+
+                                                <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
+                                                    
+                                                    <span id="existingConversation">
+                                                        <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
+                                                    </span>
+
+                                                <?php endif;  ?>
+                                    
+                                             <?php endforeach;?>
+                                    
+                                        </h4>
                                     </td>
                                     <td>
                                         <button class="cta-button cta-button-a" data-a-target="container-setting-conversation-<?=$conversation->getId() ?>"><span class="material-icons-round">build</span></button>
                                     </td>
                                 </tr>
-                            <?php endforeach;?>
+                                <?php endforeach;?>
+                            <?php else: ?>
+                                    <?php foreach ($users as $oneUser):?>
+                                        <tr class="table-line">
+                                            <td>
+                                                <h4>  <?= $oneUser->getFisrtname() . ' ' . $oneUser->getLastname() ?> </h4>
+                                            </td>
+                                            <td>
+                                                <button class="cta-button cta-button-a" data-a-target="container-setting-conversation-<?=$conversation->getId() ?>"><span class="material-icons-round">build</span></button>
+                                            </td>
+                                        </tr>
+                                <?php endforeach;?>
+                            <?php endif; ?>
+
                             </tbody>
                         </table>
 
                     </div>
                 </article>
 
-                <?php else: ?>
 
                 <article>
-                    <div id="empty-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                        <h1 class="col-offset-5">Aucune conversations</h1>
-                    </div>
                     <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
                     </div>
                     <div id="chat-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                        <form>
-                            <textarea name="chat"></textarea>
-                            <button>Envoyer</button>
-                        </form>
                     </div>
                 </article>
-                <?php endif?>
-            </div>
+                </div>
         </section>
     </section>
 </section>

@@ -11,7 +11,7 @@ class Query extends BaseSQL
     private static $from;
     private static $where = [];
     private static $or = [];
-    private static $order;
+    private static $order = [];
     private static $limit = '';
     private static $params = [];
     private static $class;
@@ -54,6 +54,12 @@ class Query extends BaseSQL
     public function where(string ...$condition): self
     {
         self::$where = array_merge(self::$where, $condition);
+        return (new Query);
+    }
+
+    public function order(string ...$condition): self
+    {
+        self::$order = array_merge(self::$order, $condition);
         return (new Query);
     }
 

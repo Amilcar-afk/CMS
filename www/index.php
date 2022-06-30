@@ -53,7 +53,6 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
                 }
             }
 
-
             if( sizeof($param) != sizeof($routes[$uri]['params']))
             {
                 die("invalid params");
