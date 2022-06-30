@@ -85,14 +85,14 @@ class Query extends BaseSQL
 
         return (new Query);
     }
-    public function innerJoin(string $join): self 
+
+    public function innerJoin(string ...$condition): self 
     {
-        $this->join[] = [
-            'type' => 'INNER',
-            'sql'  => trim($join)
-        ];
-        return $this;
+        self::$join = array_merge(self::$join, $condition);
+
+        return (new Query);
     }
+
     public function count(string ...$condition): int
     {
         self::select("COUNT(id)");
@@ -122,6 +122,10 @@ class Query extends BaseSQL
         $parts[] = 'FROM';
         $parts[] = self::constructFrom();
 
+        if (!empty(self::$join)) {
+            $parts[] = "INNER JOIN".join(" ", self::$join);
+        }
+
         if (!empty(self::$where)){
             $parts[] = "WHERE";
             $parts[] = '(' . join(') AND (', self::$where) . ')';
@@ -137,9 +141,7 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
-        }
-        if (!empty(self::$join))
-            $parts[] = self::$join;
+        }     
 
         if (!empty(self::$groupBy))
             $parts[] = self::$groupBy;
