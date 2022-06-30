@@ -16,6 +16,7 @@ class Query extends BaseSQL
     private static $params = [];
     private static $class;
     private static $groupBy = '';
+    private static $join = [];
 
     public function __construct()
     {
@@ -84,7 +85,14 @@ class Query extends BaseSQL
 
         return (new Query);
     }
-
+    public function innerJoin(string $join): self 
+    {
+        $this->join[] = [
+            'type' => 'INNER',
+            'sql'  => trim($join)
+        ];
+        return $this;
+    }
     public function count(string ...$condition): int
     {
         self::select("COUNT(id)");
@@ -130,6 +138,8 @@ class Query extends BaseSQL
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
         }
+        if (!empty(self::$join))
+            $parts[] = self::$join;
 
         if (!empty(self::$groupBy))
             $parts[] = self::$groupBy;
@@ -167,6 +177,7 @@ class Query extends BaseSQL
         self::$or = [];
         self::$groupBy = [];
         self::$limit = [];
+        self::$join = [];
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
