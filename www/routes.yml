@@ -87,6 +87,26 @@
   action: categoriesList
   middleware: [ 'auth', 'admin' ]
 
+/navigation/page/compose:
+  controller: categorie
+  action: composeNavigationPage
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/categorie/compose:
+  controller: categorie
+  action: composeNavigationCategorie
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/page/delete:
+  controller: categorie
+  action: deleteNavigationPage
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/categorie/delete:
+  controller: categorie
+  action: deleteNavigationCategorie
+  middleware: [ 'auth', 'admin' ]
+
 /navigations:
   controller: categorie
   action: navigationsList
