@@ -74,58 +74,13 @@
                     <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
                         <table class="table table--lite">
                             <tbody>
-                            <tr>
-                                <td>home</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>contact</td>
-                                <td>vue 21</td>
-                            </tr>
-                            <tr>
-                                <td>projet</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
+                            <?php foreach ($viewPerPages as $view): ?>
+                                <tr>
+                                    <td><?php print_r($view['title']) ?></td>
+                                    <td>vue : <?php print_r($view['number']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            
                             </tbody>
                         </table>
                         <button class="cta-button--text-no-background">
