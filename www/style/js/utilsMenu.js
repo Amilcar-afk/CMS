@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+    $('#menu-icon').on('click', function(){
+        $('.navbar').toggleClass('expand');
+        return false;
+    });
+
+    $('ul li a').click(function() {
+        $('.navbar').removeClass('expand');
+    });
+
     if ($(".place-menu")){
         let placeMenu = $(".place-menu").text();
         $('[data-alt=' + ucFisrt(placeMenu) + ']').addClass('selected');
@@ -86,17 +95,6 @@ $(document).ready(function(){
             appendTo: $(this)
         });
     })
-
-
-    $('#menu-icon').on('click', function(){
-        $('.navbar').toggleClass('expand');
-        return false;
-    });
-
-    $('ul li a').click(function() {
-        $('.navbar').removeClass('expand');
-    });
-
 
 });
 
