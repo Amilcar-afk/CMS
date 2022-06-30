@@ -4,6 +4,12 @@
   bottom: 0;
   left: 0;
 
+  &--radius{
+    margin: 15px;
+    width: calc(100% - 30px);
+    border-radius: var(--radius-none, 15px)!important;
+  }
+
   color: var(--background-color);
   padding: 30px 0;
 

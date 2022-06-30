@@ -1,5 +1,5 @@
-<header class="header background-main-color">
-    <div class="<?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?> background-main-color">
+<header class="header background-main-color <?= (isset($radius[0]) && $radius[0]->getValue() == 'right_angle' )? '' : 'header--radius' ?>">
+    <div class="body-go background-main-color">
         <a id="logo" href="/"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a>
         <a id="menu-icon">&#9776;</a>
         <nav class="navbar">

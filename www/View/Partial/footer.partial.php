@@ -1,4 +1,4 @@
-<footer class="footer background-main-color">
+<footer class="footer background-main-color <?= (isset($radius[0]) && $radius[0]->getValue() == 'right_angle' )? '' : 'footer--radius' ?>">
     <div class="<?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?> row background-main-color">
         <nav class="col-12 nav-rs">
             <ul>

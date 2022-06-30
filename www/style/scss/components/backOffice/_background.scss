@@ -6,6 +6,10 @@
 	top: 0px;
 	overflow: hidden;
 
+	&--go{
+		position: fixed;
+	}
+
 	& div{
 		position: absolute;
 		width:  1500px;

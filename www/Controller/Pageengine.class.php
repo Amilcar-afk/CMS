@@ -77,9 +77,6 @@ class Pageengine
 
         if ($page){
 
-            $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
-            $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
-
             $page->composeStats($page->getId(), "view");
 
             //load Categorie list if categorie page
@@ -91,6 +88,9 @@ class Pageengine
             }else{
                 $view = new View("load-page", "front");
             }
+
+            $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+            $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
 
             $bessels = Query::from('cmspf_Options')
                 ->where("type = 'bessels'")

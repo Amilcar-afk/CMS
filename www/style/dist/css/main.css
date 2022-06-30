@@ -1190,20 +1190,31 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   width: 100%;
   background-color: var(--background-color); }
 
+.body-go {
+  margin-right: auto;
+  margin-left: auto;
+  background-color: var(--background-color);
+  max-width: calc(100% - 20px); }
+
 .background-main-color {
-  background-color: var(--main-color) !important; }
+  background-color: var(--main-color) !important;
+  border-radius: var(--radius-none, 8px); }
 
 .background-second-color {
-  background-color: var(--second-color) !important; }
+  background-color: var(--second-color) !important;
+  border-radius: var(--radius-none, 8px); }
 
 .background-third-color {
-  background-color: var(--third-color) !important; }
+  background-color: var(--third-color) !important;
+  border-radius: var(--radius-none, 8px); }
 
 .background-font-color {
-  background-color: var(--font-color) !important; }
+  background-color: var(--font-color) !important;
+  border-radius: var(--radius-none, 8px); }
 
 .background-background-color {
-  background-color: var(--background-color) !important; }
+  background-color: var(--background-color) !important;
+  border-radius: var(--radius-none, 8px); }
 
 .light {
   font-weight: 300; }
@@ -1395,7 +1406,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 .header {
   padding: 10px 0px;
   position: relative;
-  width: 100%; }
+  width: 100%;
+  border-radius: 0px;
+  margin: 0px; }
+  .header--radius {
+    margin: 15px;
+    width: calc(100% - 30px);
+    border-radius: var(--radius-none, 15px) !important; }
   .header #logo img {
     width: 50px;
     height: 50px;
@@ -1447,7 +1464,11 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         color: var(--background-color);
         text-align: center;
         padding: 0 0.8em;
-        transition: all 0.2s ease; }
+        transition: all 0.2s ease;
+        font-weight: bold;
+        letter-spacing: 0.025em; }
+        .navbar .menu li a:hover {
+          color: var(--second-color); }
 
 .expand {
   max-height: 20em; }
@@ -1477,6 +1498,10 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   left: 0;
   color: var(--background-color);
   padding: 30px 0; }
+  .footer--radius {
+    margin: 15px;
+    width: calc(100% - 30px);
+    border-radius: var(--radius-none, 15px) !important; }
   .footer .nav-rs {
     display: flex;
     justify-content: center; }
@@ -2092,6 +2117,8 @@ h2 {
   left: 0px;
   top: 0px;
   overflow: hidden; }
+  .background-container-back-office--go {
+    position: fixed; }
   .background-container-back-office div {
     position: absolute;
     width: 1500px;

@@ -2,6 +2,15 @@
   padding: 10px 0px;
   position: relative;
   width: 100%;
+  border-radius: 0px;
+  margin: 0px;
+
+  &--radius{
+    margin: 15px;
+    width: calc(100% - 30px);
+    border-radius: var(--radius-none, 15px)!important;
+  }
+
   #logo {
     img {
       width: 50px;
@@ -68,6 +77,13 @@
         text-align: center;
         padding: 0 0.8em;
         transition : all 0.2s ease;
+
+        font-weight: bold;
+        letter-spacing: 0.025em;
+
+        &:hover{
+          color: var(--second-color);
+        }
       }
     }
   }

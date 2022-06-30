@@ -2,22 +2,27 @@
 //BACKGROUND COLORS
 .background-main-color {
 	background-color:var(--main-color)!important;
+	border-radius: var(--radius-none, 8px);
 }
 
 .background-second-color {
 	background-color: var(--second-color)!important;
+	border-radius: var(--radius-none, 8px);
 }
 
 .background-third-color {
 	background-color:var(--third-color)!important;
+	border-radius: var(--radius-none, 8px);
 }
 
 .background-font-color {
 	background-color:var(--font-color)!important;
+	border-radius: var(--radius-none, 8px);
 }
 
 .background-background-color {
 	background-color:var(--background-color)!important;
+	border-radius: var(--radius-none, 8px);
 }
 
 

@@ -22,3 +22,10 @@
   width: 100%;
   background-color: var(--background-color);
 }
+
+.body-go{
+  margin-right: auto;
+  margin-left: auto;
+  background-color: var(--background-color);
+  max-width: calc(100% - 20px);
+}

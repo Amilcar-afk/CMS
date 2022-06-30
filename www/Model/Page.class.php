@@ -206,6 +206,10 @@ class Page extends BaseSQL
         $categories = $header->categories();
         $pages = $header->pages();
 
+        $radius = Query::from('cmspf_Options')
+            ->where("type = 'radius'")
+            ->execute('Option');
+
         $logo = Query::from('cmspf_Options')
             ->where("type = 'logo'")
             ->execute('Option');
@@ -219,6 +223,10 @@ class Page extends BaseSQL
         $footer = $footer->find(2);
         $categories = $footer->categories();
         $pages = $footer->pages();
+
+        $radius = Query::from('cmspf_Options')
+            ->where("type = 'radius'")
+            ->execute('Option');
 
         $reseauxSoc = new Reseaux_soc();
         $reseauxSocs = $reseauxSoc->find();
