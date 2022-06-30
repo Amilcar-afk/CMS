@@ -69,6 +69,10 @@ class Statistics
         ];*/
 
 
+        //SELECT COUNT(page_key) AS number, title FROM cmspf_Stats INNER JOIN cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id GROUP BY title;
+        $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
+        print_r($viewPerPages);
+
         // GET COUNTRY STATS
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->groupBy("country")->execute();
 
@@ -95,13 +99,8 @@ class Statistics
 
         // GET NEW USERS STATS
         $currentMonth = date("m");
-        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute("User");
-
-        foreach($newUsers as $users) {
-            foreach($users as $nbr) {
-                $numberOfUsers = $nbr;
-            }
-        }
+        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute();
+        $numberOfUsers = $newUsers[0]['number'];
 
 
 
