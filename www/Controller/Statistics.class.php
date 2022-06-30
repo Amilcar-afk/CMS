@@ -71,6 +71,7 @@ class Statistics
 
         //SELECT COUNT(page_key) AS number, title FROM cmspf_Stats INNER JOIN cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id GROUP BY title;
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
+        arsort($viewPerPages);
         // foreach ($viewPerPages as $key=>$v) {
         //     print_r($v['number']);
         //     print_r($v['title']);
