@@ -91,9 +91,15 @@ class Pageengine
             }else{
                 $view = new View("load-page", "front");
             }
+
+            $bessels = Query::from('cmspf_Options')
+                ->where("type = 'bessels'")
+                ->execute('Option');
+
             $view->assign("page", $page );
             $view->assign("headCode", $headCode[0]->getValue());
             $view->assign("footerCode", $footerCode[0]->getValue());
+            $view->assign("bessels", $bessels);
         }else{
             http_response_code(404);
         }
@@ -116,7 +122,8 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if (true){
+        if ($page){
+
             $view = new View("page-editor", "back");
             $view->assign("page", $page);
         }else {
