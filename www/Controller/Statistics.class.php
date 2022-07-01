@@ -28,11 +28,18 @@ class Statistics
         $reseauxSoc = new Reseaux_soc();
         $emptyReseauxSoc = $reseauxSoc;
         $reseauxSocs = $reseauxSoc->find();
-
         $stats = $this->stats->find();
 
-        //var_dump($_POST["since"]);
 
+        if(isset($_POST['since'])){
+            $since = $_POST['since'];
+            $to = $_POST['to'];
+            echo "since : ".$since;
+            echo "<br>";
+            echo "to : ".$to;
+        }
+
+        
         // GET VIEW PER PAGES
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
         arsort($viewPerPages);
