@@ -31,54 +31,12 @@ class Statistics
 
         $stats = $this->stats->find();
 
-        // foreach($stats as $stat){
-        //     $sortedData['per-device'][] = [
-        //         "device" => $stat->getDevice(),
-        //         "date" => $stat->getDate()
-        //     ];
-        //     $sortedData['page-ranking'][] = [
-        //         "page_key" => $stat->getPageKey(),
-        //         "page_name" => $stat->page()->getTitle(),
-        //         "date" => $stat->getDate()
-        //     ];
-        //     $sortedData['page-ranking'][] = [
-        //         "page_key" => $stat->getPageKey(),
-        //         "page_name" => $stat->page()->getTitle(),
-        //         "date" => $stat->getDate()
-        //     ];
+        //var_dump($_POST["since"]);
 
-        //     $listPage[$stat->getPageKey()][] = [
-        //         "page_key" => $stat->getPageKey(),
-        //         "page_name" => $stat->page()->getTitle(),
-        //         "date" => $stat->getDate()
-        //     ];
-
-        // }
-
-        /*foreach ($stats as $stat){
-            if (isset() && ){
-                $page[$stat->getPageKey()]["total_views"] = $page[$stat->getPageKey()]["total_views"]++;
-            }
-        }
-
-        $page = [
-            "index_page" => [
-                "page_name" => $stat->getPageKey()
-                "total_views" => $stat->getDate()
-            ]
-        ];*/
-
-
-        
-
-        //SELECT COUNT(page_key) AS number, title FROM cmspf_Stats INNER JOIN cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id GROUP BY title;
+        // GET VIEW PER PAGES
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
         arsort($viewPerPages);
-        // foreach ($viewPerPages as $key=>$v) {
-        //     print_r($v['number']);
-        //     print_r($v['title']);
-        //     echo '<br>';
-        // }
+
         
         // GET COUNTRY STATS
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->groupBy("country")->execute();
@@ -109,8 +67,7 @@ class Statistics
         $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute();
         $numberOfUsers = $newUsers[0]['number'];
 
-
-
+        // ASSIGN VIEWS
         $view = new View("dashboard", "back");
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);

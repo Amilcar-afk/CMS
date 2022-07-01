@@ -30,6 +30,7 @@
         <script type="text/javascript" src="../style/js/reseauxSoc.js"></script>
         <script type="text/javascript" src="../style/js/chartMap.js"></script>
         <script type="text/javascript" src="../style/js/navigations.js"></script>
+        <script type="text/javascript" src="../style/js/getRange.js"></script>
     </head>
     <body class="body-back-office">
         <div class="background-container-back-office">
