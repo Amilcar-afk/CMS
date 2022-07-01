@@ -97,7 +97,7 @@
                             <label for="toPerPage">To</label>
                             <input id="toPerPage" name="toPerPage" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-page">Submit</button>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
 
                 </section>

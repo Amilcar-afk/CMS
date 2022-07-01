@@ -31,15 +31,15 @@ class Statistics
         $stats = $this->stats->find();
 
 
-        if(isset($_POST['since'])){
-            $since = $_POST['since'];
-            $to = $_POST['to'];
+        if(isset($_POST['sincePerPage'])){
+            $since = $_POST['sincePerPage'];
+            $to = $_POST['toPerPage'];
             echo "since : ".$since;
             echo "<br>";
             echo "to : ".$to;
         }
 
-        
+
         // GET VIEW PER PAGES
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
         arsort($viewPerPages);
@@ -75,7 +75,11 @@ class Statistics
         $numberOfUsers = $newUsers[0]['number'];
 
         // ASSIGN VIEWS
-        $view = new View("dashboard", "back");
+        $tmpl = "back";
+        if (isset($_POST['range'])) {
+            $tmpl= "";
+        }
+        $view = new View("dashboard", $tmpl);
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);
         $view->assign("numberOfUsers", $numberOfUsers);
