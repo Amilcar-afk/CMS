@@ -31,17 +31,23 @@ class Statistics
         $stats = $this->stats->find();
 
 
+        // RANGE
+        $toPerPage = date("Y-m-d");
+        $sincePerPage = date('Y-m-d', strtotime($toPerPage. ' - 1 month'));
+        
         if(isset($_POST['sincePerPage'])){
-            $since = $_POST['sincePerPage'];
-            $to = $_POST['toPerPage'];
-            echo "since : ".$since;
+            $sincePerPage = $_POST['sincePerPage'];
+            $toPerPage = $_POST['toPerPage'];
+
+            echo "since : ".$sincePerPage;
             echo "<br>";
-            echo "to : ".$to;
+            echo "to : ".$toPerPage;
         }
 
 
         // GET VIEW PER PAGES
-        $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->groupBy("title")->execute();
+
+        $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
         arsort($viewPerPages);
 
         

@@ -25,6 +25,13 @@ $(document).ready(function(){
                 {
                     sincePerPage:$(this).parent().find('[name=SincePerPage]').val(),
                     toPerPage:$(this).parent().find('[name=toPerPage]').val(),
+
+                    sincePerCountry:$(this).parent().find('[name=SincePerCountry]').val(),
+                    toPerCountry:$(this).parent().find('[name=toPerCountry]').val(),
+
+                    sincePerDevice:$(this).parent().find('[name=SincePerDevice]').val(),
+                    toPerDevice:$(this).parent().find('[name=toPerDevice]').val(),
+
                     range: true
                 },
             success:function(answer)
