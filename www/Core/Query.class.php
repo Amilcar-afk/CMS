@@ -99,6 +99,50 @@ class Query extends BaseSQL
         return self::execute()->fetchColumn();
     }
 
+    
+
+    function pagination($result_count, callable $format_function=null)
+    {
+        if(!$format_function){
+            $format_function = function($url,$page,$qs){
+                $qs['page'] = $page;
+                return $url.'?'.http_build_query($qs);
+            };
+        }
+
+        $per_page = 5;
+        $total_pages = ceil($result_count / $per_page);
+        $return = [];
+
+        parse_str($_SERVER['QUERY_STRING'],$qs);
+
+        $url = $_SERVER['REQUEST_URI'];
+
+        if($pos = strpos($url,'?')){
+            $url = substr($url,0,$pos);
+        }
+
+        $current_page = isset($qs['page']) ? $qs['page'] : 1;
+        $previous = $current_page -1;
+
+        if ($previous) {
+            $return['previous'] = $format_function($url,$previous,$qs);
+        }
+
+        for($i = max(1,$current_page-5); $i <= min($total_pages,$current_page+5); $i++) {
+            $return["$i"] = $format_function($url,$i,$qs);
+        }
+
+        $next_page = $current_page + 1;
+
+        if ($next_page < $total_pages){
+            $return['next'] = $format_function($url,$next_page,$qs);
+        }
+
+        return $return;
+    }
+
+
     public function params(array $params): self
     {
         self::$params = $params;
