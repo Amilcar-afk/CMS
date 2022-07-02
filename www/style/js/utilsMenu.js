@@ -151,4 +151,8 @@ function alertMessage(message, action){
 
     let alert = $('<div class="alert alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
     $("main").append(alert);
+
+    setTimeout(() => {
+        $('.alert').last().remove();
+    }, 2000);
 }
