@@ -247,14 +247,20 @@ abstract class BaseSQL
         }
 
         $sql = "SELECT * FROM ".$targetTable." WHERE ".$owner_key." = :".$owner_key;
+
+
         
         $param = [
             $owner_key => $foreign_key
         ];
-
+        
+        
         $queryPrepared = self::$bdd->prepare($sql);
-
+        
+        
+        
         $queryPrepared->execute($param);
+        var_dump($foreign_key);
         return $queryPrepared->fetchObject("App\Model\\".$class);
     }
 

@@ -138,6 +138,13 @@
   middleware: [ 'auth', 'admin' ]
 
 
+/conversations/get-all-messages:
+  controller: communication
+  action: messages
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+
 /conversation/compose:
   controller: communication
   action: composeConversation

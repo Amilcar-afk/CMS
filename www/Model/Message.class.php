@@ -169,7 +169,7 @@ class Message extends BaseSQL
 
     public function user()
     {
-       return parent::belongsTo(User::class);
+       return parent::belongsTo(User::class, $this->getUser_key());
     }
     
 

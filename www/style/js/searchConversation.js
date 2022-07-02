@@ -12,17 +12,10 @@ $(document).ready(function(){
             },
             success: function(data){
                 var conversations = JSON.parse(data)
-
                 var div ;
                 if( value.length != 0){
                     $('#conversations-elements').hide();
-
-
                     conversations.forEach(element => {
-                        console.log(1)
-
-                // console.log(element)
-
                         if(element.firstname.indexOf(value) || element.lastname.indexOf(value)  || element.email.indexOf(value)  ){
                             $(".select").on("input", function() {
                                 $('#conversation-founded').show()
@@ -54,23 +47,42 @@ $(document).ready(function(){
      });
 
 
+
+
     $('#sendButton').on('click',function(){
         var currentUserData = {
             id_user:$('#userId').val(),
             message:$('#sendTextarea').val(),
+            id_conversation:$('#conversationId').val(),
         };
         sendMessage(currentUserData);
+        $('#sendTextarea').val('');
     })
 
-    $('#existingConversation').on('click',function(e){
-        console.log(e)
-        // var currentUserData = {
-        //     id_user:$('#userId').val(),
-        //     message:$('#sendTextarea').val(),
-        // };
-        // sendMessage(currentUserData);
-    })
+    var allMessages = [];
+    function getMessages(){
+        setInterval(() => {
+            $.ajax({
+                url: "/conversations/get-all-messages",
+                dataType:"json",
+                type: "POST",
+                data:{
+                    id :$('#conversationId').val(),
+                },
+                success: function(messages){ 
+                    if(messages.length != allMessages.length){
+                        $('#messageDiv').empty()
+                        messages.forEach(message =>{
+                            $('<div>' + message.content + '</div>').prependTo('#messageDiv');
+                        })
+                    }
+                    allMessages = messages
+                }
+            });
+        }, 1000);
+    }
 
+    getMessages()
 
     function sendMessage(data){
         $.ajax({
@@ -81,11 +93,13 @@ $(document).ready(function(){
             {
                 id_user:data.id_user,
                 message:data.message,
-
+                id_conversation:data.id_conversation,
             },
             success: function(data){
             }
         });
     }
+
+
 })
 

@@ -57,9 +57,14 @@ class Query extends BaseSQL
         return (new Query);
     }
 
-    public function order(string ...$condition): self
+    public function orderby(string $key, string $direction): self
     {
-        self::$order = array_merge(self::$order, $condition);
+        $direction = strtoupper($direction);
+        if(!in_array($direction, ['ASC', 'DESC'])){
+            self::$order[] = $key;
+        }else{
+            self::$order[] = "$key $direction";
+        }
         return (new Query);
     }
 
@@ -117,6 +122,14 @@ class Query extends BaseSQL
             $parts[] = '(' . join(') AND (', self::$where) . ')';
         }
 
+        if(!empty(self::$order)){
+            $parts[] = "ORDER BY ".self::$order[0];
+        }
+
+        if(!empty(self::$limit)){
+            $parts[] = "LIMIT ".self::$limit[0];
+        }
+
         if (!empty(self::$or)){
             if(array_search("WHERE", $parts) === false){
                 $parts[] = "WHERE";
@@ -126,7 +139,6 @@ class Query extends BaseSQL
                 $parts[] = ' AND (' . join(' OR ', self::$or) . ')';
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
-
 
         }
 

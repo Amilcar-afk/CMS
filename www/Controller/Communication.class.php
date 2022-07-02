@@ -33,25 +33,14 @@ class Communication
 
     public function listConversation()
     {
-        
-        if (isset($_POST['searchData'])) {
-            // $searchUsers = $_POST['searchData'];
-            // $users = Query::from('cmspf_Users')
-            //     ->or("firstname LIKE '%" . $searchUsers . "%'")
-            //     ->or("lastname LIKE '%" . $searchUsers . "%'")
-            //     ->or("mail LIKE '%" . $searchUsers . "%'")
-            //     ->execute("User");
-                $view = new View("conversation-list", "back");
-                // $view->assign("users",$users);
-                $view->assign("searchData",$_POST['searchData']); 
 
-        }else{
+        $user = new User();
+        $user = $user->find($_SESSION['Auth']->id);
+        $view = new View("conversation-list", "back");
+        $msg = new Message();
+        $view->assign("conversations",$user->conversations());
+        $view->assign("msg",$msg);
 
-            $user = new User();
-            $user = $user->find($_SESSION['Auth']->id);
-            $view = new View("conversation-list", "back");
-            $view->assign("conversations",$user->conversations());
-        }
 
     }
 
@@ -63,7 +52,6 @@ class Communication
             ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
             ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
             ->execute("User");
-           
             $conversation_users = [];
             $user = new User();
             $user = $user->find($_SESSION['Auth']->id);
@@ -72,19 +60,17 @@ class Communication
                     array_push($conversation_users,$user->getId() );
                 } 
             } 
-
             foreach ($users as $user){
                 if(in_array($user->getId(),$conversation_users)){
                     continue;
                 }
-
                 $allUsers [] = array(
                     'id' => $user->getId(),
                     'email' => $user->getMail(),
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
                 );
-                }
+            }
             echo json_encode($allUsers);
         }
 
@@ -96,16 +82,32 @@ class Communication
         $user = $this->user->find($data['id']);
         $view = new View("conversation_user", "back");
         $view->assign("user",$user);
+
+    }
+
+
+    public function messages()
+    {
+        if(isset($_POST['id'])){
+            $conversation = new Conversation();
+            $conversation->setId($_POST['id']);
+            
+            echo json_encode(array_reverse($conversation->messages()));
+        }
     }
 
 
     public function composeConversation()
     {
         if (!empty($_POST)) {
-            // $user = $this->user->find($_POST['id_user']);
-            $this->conversation->setDate(date('Y-m-d H:i:s'));
-            $this->conversation->save();
-            $conversationId =  $this->conversation->getLastId();
+
+            if(!isset($_POST['id_conversation'])){
+                $this->conversation->setDate(date('Y-m-d H:i:s'));
+                $this->conversation->save();
+                $conversationId =  $this->conversation->getLastId();
+            }else{
+                $conversationId = $_POST['id_conversation'];
+            }
 
             $user_conversation = new User_conversation();
             $my_conversation = new User_conversation();

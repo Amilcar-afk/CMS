@@ -22,13 +22,35 @@
                 <article>
                     <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
 
-                    <?= $user->getFirstname() ?>
-                    <?= $user->getLastname() ?>
-                    <?= $user->getMail() ?>
+                        <div class="col-12">
+                        Name: <?= $user->getFirstname() ?>
+                              <?= $user->getLastname() ?> <br> <br>
+                        EMAIL: <?= $user->getMail() ?>
+                        </div>
 
-                    <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
-                    <textarea id='sendTextarea' style='width:100%' name='chat'></textarea>
-                    <button id='sendButton' style='width:100%'>Envoyer</button>
+                        <div class="col-12 mt-5" id="messageDiv">
+                                <?php foreach($user->conversations() as $conversation): ?>
+                                    <?php // foreach($conversation->messages() as $message): ?>
+                                    <?php //$message->getContent() ?><br>
+                                        <!-- envoyé par: 
+                                    <?php //$message->user()->getFirstname()  ?>
+                                    <?php  //$message->user()->getLastname()  ?> -->
+
+
+                                    <?php //endforeach; ?><br><br>
+                                <?php endforeach; ?>
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <?php if(isset($conversation)):?>
+                                <input type="hidden" id="conversationId" value="<?= $conversation->getId() ?>" >
+                            <?php endif; ?>
+                            <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
+                            <textarea id='sendTextarea' style='width:100%' name='chat'></textarea>
+                            <button id='sendButton' style='width:100%'>Envoyer</button>
+                        </div>
 
                     </div>
                 </article>

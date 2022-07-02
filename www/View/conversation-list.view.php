@@ -25,33 +25,27 @@
                     <div id="conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
                         <table>
                             <tbody>
-                                <?php if(isset($conversations)): ?>
+                                <?php
 
 
+                            if(isset($conversations)): ?>
                                     <?php foreach ($conversations as $conversation):?>
-
-
-                                        <?php  foreach ($conversation->lastMessage() as $message): ?>
-
-                                            <?php //$message->getContent(); ?><br>
-
-                                        <?php  endforeach;?>
-
-
+                        
                                 <tr class="table-line">
                                     <td>
                                         <h4>
                                             <?php foreach ($conversation->users() as $user): ?>
-
                                                 <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-                                                    
-                                                    <span id="existingConversation">
-                                                        <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
-                                                    </span>
-
+                                                        <a href="conversations/user-conversations/<?= $user->getId()?>">
+                                                            <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
+                                                        </a>
+                                                        <?php  foreach ($conversation->lastMessage() as $message): ?>
+                                                            <br> dernier Message : <?= $message->getContent(); ?><br>
+                                                        <?php  endforeach;?>
                                                 <?php endif;  ?>
                                     
                                              <?php endforeach;?>
+
                                     
                                         </h4>
                                     </td>
@@ -60,19 +54,7 @@
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
-                            <?php else: ?>
-                                    <?php foreach ($users as $oneUser):?>
-                                        <tr class="table-line">
-                                            <td>
-                                                <h4>  <?= $oneUser->getFisrtname() . ' ' . $oneUser->getLastname() ?> </h4>
-                                            </td>
-                                            <td>
-                                                <button class="cta-button cta-button-a" data-a-target="container-setting-conversation-<?=$conversation->getId() ?>"><span class="material-icons-round">build</span></button>
-                                            </td>
-                                        </tr>
-                                <?php endforeach;?>
                             <?php endif; ?>
-
                             </tbody>
                         </table>
 
