@@ -31,7 +31,8 @@
                             <label for="toPerCountry">To</label>
                             <input id="toPerCountry" name="toPerCountry" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
+
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
                     <div id="regions_div" style="width: 100%; height: 100%;">
 
@@ -125,7 +126,8 @@
                             <label for="toPerDevice">To</label>
                             <input id="toPerDevice" name="toPerDevice" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-device">Submit</button>
+
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
                     </div>
                 </section>
             </div>
