@@ -10,14 +10,31 @@ abstract class BaseSQL
     private $class;
     private $lastInsertId;
     private static $bdd;
+    private static $status = true;
 
     /**
      * @return \PDO
      */
-    public function getPdo(): \PDO
+    public function getPdo()
     {
         return self::$bdd ;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getStatus()
+    {
+        return self::$status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public static function setStatus($status): void
+    {
+        self::$status = $status;
     }
 
     private static function getBdd()
@@ -32,17 +49,22 @@ abstract class BaseSQL
                     self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][1]['DBUSER'] ,$config['env'][0]['DBPWD'] );
                     self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 }catch(\Exception $e){
-                    die("Erreur SQL".$e->getMessage());
+                    self::$status = false;
                 }
                 
             }
         }
-        return self::$bdd;
+        if (self::$status != false) {
+            return self::$bdd;
+        }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
+            header('location:/setup/database');
+        }
     }       
 
     public function __construct()
     {
         self::getBdd();
+
         $class = explode("\\",get_called_class());
         $this->class = end($class);
         if(isset($this->table_name)){

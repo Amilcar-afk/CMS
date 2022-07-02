@@ -1961,7 +1961,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     display: flex;
     flex-direction: column;
     align-items: center; }
+    .container-main-content--setup > .container-main-content--menu-content {
+      max-width: 100%;
+      width: 580px; }
+    .container-main-content--setup .section-config-blocks {
+      display: flex;
+      margin-bottom: 30px; }
     .container-main-content--setup > header {
+      transition: all 0.3s;
       backdrop-filter: blur(60px);
       background-color: rgba(129, 129, 129, 0.3);
       border-radius: var(--radius, 20px) var(--radius, 20px) 0px 0px;
@@ -1970,7 +1977,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 50px;
+      padding-top: 40px;
       padding-bottom: 15px; }
       .container-main-content--setup > header #back-office-logo img {
         border-radius: 300px;
@@ -1979,15 +1986,21 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         object-fit: cover;
         box-shadow: 0px -200px 4px 0px var(--main-color) inset;
         margin-bottom: 25px; }
-    .container-main-content--setup > form {
+    .container-main-content--setup > form, .container-main-content--setup > div {
       background-color: var(--background-color);
       padding: 40px;
       border-radius: 0px 0px var(--radius, 20px) var(--radius, 20px); }
-      .container-main-content--setup > form a {
+      .container-main-content--setup > form a, .container-main-content--setup > div a {
         font-size: 0.8125rem;
         font-weight: 600;
         color: var(--main-color);
         margin-bottom: 25px; }
+      .container-main-content--setup > form .cta-button--submit, .container-main-content--setup > div .cta-button--submit {
+        font-weight: 500;
+        margin-top: 30px;
+        margin-bottom: 0px;
+        background-color: var(--main-color);
+        color: var(--background-color, white); }
 
 #container-editor {
   overflow-y: scroll;
@@ -2076,6 +2089,10 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         .container-main-content--dashboard .row > :nth-child(7) > div {
           height: unset !important;
           flex-grow: 1 !important; }
+    .container-main-content--setup > .container-main-content--menu-content {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 0px; }
     .container-main-content--setup > header {
       border-radius: 0px; }
     .container-main-content--setup > form {

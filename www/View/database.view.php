@@ -21,9 +21,9 @@
                     <div id="user-manager-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                         <article>
                             <?php if(empty($config)):  ?>
-                            <?php $this->includePartial("form", $configuration->dataBaseForm())  ?>
+                                <?php $this->includePartial("form", $configuration->dataBaseForm())  ?>
                             <?php else:  ?>
-                            <?php $this->includePartial("form", $config)  ?>
+                                <?php $this->includePartial("form", $config)  ?>
                             <?php endif?>
                         </article>
                     </div>
@@ -40,10 +40,10 @@
                 <section class="collapse-parent">
                     <div id="user-manager-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                         <article>
-                        <?php if(empty($config)):  ?>
-                            <?php $this->includePartial("form", $configuration->smtpForm())  ?>
+                            <?php if(empty($config)):  ?>
+                                <?php $this->includePartial("form", $configuration->smtpForm())  ?>
                             <?php else:  ?>
-                            <?php $this->includePartial("form", $config)  ?>
+                                <?php $this->includePartial("form", $config)  ?>
                             <?php endif?>
                         </article>
                     </div>
