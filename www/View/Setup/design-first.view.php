@@ -22,7 +22,7 @@
                     <label>Right angle</label>
                 </article>
             </section>
-            <a href="/setup/design/1" class="cta-button cta-button--submit">Next</a>
+            <a href="/setup/design/2" class="cta-button cta-button--submit">Next</a>
         </div>
     </section>
 </main>

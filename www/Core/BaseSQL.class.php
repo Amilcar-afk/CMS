@@ -10,7 +10,7 @@ abstract class BaseSQL
     private $class;
     private $lastInsertId;
     private static $bdd;
-    private static $status = true;
+    private static $dbStatus = true;
 
     /**
      * @return \PDO
@@ -24,17 +24,17 @@ abstract class BaseSQL
     /**
      * @return mixed
      */
-    public static function getStatus()
+    public static function getDStatus()
     {
-        return self::$status;
+        return self::$dbStatus;
     }
 
     /**
-     * @param mixed $status
+     * @param mixed $dbStatus
      */
-    public static function setStatus($status): void
+    public static function setDbStatus($status): void
     {
-        self::$status = $status;
+        self::$dbStatus = $status;
     }
 
     private static function getBdd()
@@ -49,12 +49,12 @@ abstract class BaseSQL
                     self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][1]['DBUSER'] ,$config['env'][0]['DBPWD'] );
                     self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 }catch(\Exception $e){
-                    self::$status = false;
+                    self::setDbStatus(false);
                 }
                 
             }
         }
-        if (self::$status != false) {
+        if (self::getDStatus() != false) {
             return self::$bdd;
         }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
             header('location:/setup/database');

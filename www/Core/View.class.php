@@ -21,22 +21,6 @@ class View extends BaseSQL
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function getDbStatus(): bool
-    {
-        return $this->dbStatus;
-    }
-
-    /**
-     * @param bool $dbStatus
-     */
-    public function setDbStatus(bool $dbStatus): void
-    {
-        $this->dbStatus = $dbStatus;
-    }
-
     
     public function setView($view){
         $this->view = strtolower($view);
@@ -64,7 +48,7 @@ class View extends BaseSQL
             die("partial ".$name." 404");
         }
 
-        if ($name == 'design-variables' && parent::getStatus() != false){
+        if ($name == 'design-variables' && parent::getDStatus() != false){
             $mainColor = Query::from('cmspf_Options')
                 ->where("type = 'main_color'")
                 ->execute('Option');
@@ -103,7 +87,7 @@ class View extends BaseSQL
     public function __destruct()
     {
         extract($this->data);
-        if(parent::getStatus() != false) {
+        if(parent::getDStatus() != false) {
             $logo = Query::from('cmspf_Options')
                 ->where("type = 'logo'")
                 ->execute('Option');
