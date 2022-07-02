@@ -82,8 +82,8 @@ class Conversation extends BaseSQL
     public function lastMessage()
     {
 
-        return Query::from('cmspf_Messages')->where('conversation_key = '.$this->getId())->orderby("id","DESC")->limit('1')->execute('Message');
-
+        $lastMessage = Query::from('cmspf_Messages')->where('conversation_key = '.$this->getId())->orderby("id","DESC")->limit('1')->execute('Message');
+        return $lastMessage[0];
     }
 
 

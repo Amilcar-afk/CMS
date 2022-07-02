@@ -17,48 +17,31 @@
                 </header>
                 <!--Add conversation-->
                 <article>
-                    <input class="select"  placeholder="search conversation"  id="select">
+                    <div class="input-container">
+                        <input class="select input"  placeholder="New conversation"  id="select">
+                    </div>
                     <div id="new-conversation-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="conversation-manager-container">
                     </div>
                 </article>
                 <article>
-                    <div id="conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                        <table>
-                            <tbody>
-                                <?php
-
-
-                            if(isset($conversations)): ?>
-                                    <?php foreach ($conversations as $conversation):?>
-                        
-                                <tr class="table-line">
-                                    <td>
-                                        <h4>
-                                            <?php foreach ($conversation->users() as $user): ?>
-                                                <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-                                                        <a href="conversations/user-conversations/<?= $user->getId()?>">
-                                                            <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
-                                                        </a>
-                                                        <?php  foreach ($conversation->lastMessage() as $message): ?>
-                                                            <br> dernier Message : <?= $message->getContent(); ?><br>
-                                                        <?php  endforeach;?>
-                                                <?php endif;  ?>
-                                    
-                                             <?php endforeach;?>
-
-                                    
-                                        </h4>
-                                    </td>
-                                    <td>
-                                        <button class="cta-button cta-button-a" data-a-target="container-setting-conversation-<?=$conversation->getId() ?>"><span class="material-icons-round">build</span></button>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
-                            <?php endif; ?>
-                            </tbody>
-                        </table>
-
-                    </div>
+                    <?php if(isset($conversations)): ?>
+                        <?php foreach ($conversations as $conversation):?>
+                            <header class="main-nav-choice mb-3"><div>
+                                    <h2>
+                                        <?php foreach ($conversation->users() as $user): ?>
+                                            <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
+                                                <a href="conversations/user-conversations/<?= $user->getId()?>">
+                                                    <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
+                                                </a>
+                                            <?php endif;  ?>
+                                         <?php endforeach;?>
+                                    </h2>
+                                    <div><?= $conversation->lastMessage()->getContent(); ?></div>
+                                </div>
+                                <span class="material-icons-round">more_horiz</span>
+                            </header>
+                        <?php endforeach;?>
+                    <?php endif; ?>
                 </article>
 
 
