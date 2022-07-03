@@ -12,14 +12,31 @@ abstract class BaseSQL
     private static $bdd;
     public $urlData;
 
+    private static $dbStatus = true;
 
     /**
      * @return \PDO
      */
-    public function getPdo(): \PDO
+    public function getPdo()
     {
         return self::$bdd ;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getDStatus()
+    {
+        return self::$dbStatus;
+    }
+
+    /**
+     * @param mixed $dbStatus
+     */
+    public static function setDbStatus($status): void
+    {
+        self::$dbStatus = $status;
     }
 
     private static function getBdd()
@@ -34,17 +51,21 @@ abstract class BaseSQL
                     self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][1]['DBUSER'] ,$config['env'][0]['DBPWD'] );
                     self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 }catch(\Exception $e){
-                    die("Erreur SQL".$e->getMessage());
+                    self::setDbStatus(false);
                 }
-                
             }
         }
-        return self::$bdd;
+        if (self::getDStatus() != false) {
+            return self::$bdd;
+        }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
+            header('location:/setup/database');
+        }
     }       
 
     public function __construct()
     {
         self::getBdd();
+
         $class = explode("\\",get_called_class());
         $this->class = end($class);
         if(isset($this->table_name)){
@@ -272,7 +293,7 @@ abstract class BaseSQL
      * @param string|null $relation_foreign_key
      * @return array|false
      */
-    protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null, string $relation_target_key = null)
+    protected function belongsToMany( $class, string $relationTable = null, string $owner_id_name = "id", string $target_id_name = "id", string $relation_foreign_key = null, string $relation_target_key = null, $negation = '')
     {
         $class = explode("\\", $class);
         $class = end($class);
@@ -290,7 +311,10 @@ abstract class BaseSQL
         }
         
         //$sql = "SELECT * FROM cmspf_Categories WHERE id IN ( SELECT cmspf_Page_categorie.categorie_key FROM cmspf_Page_categorie INNER JOIN cmspf_Pages ON cmspf_Page_categorie.page_key = cmspf_Pages.id WHERE cmspf_Pages.id = 1)"
-        $sql = "SELECT * FROM ".$targetTable." WHERE ".$target_id_name." IN ( SELECT ".$relationTable.".".$relation_target_key." FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_id_name." WHERE ".$this->table.".".$owner_id_name." = :".$owner_id_name.")";
+        if($negation != 'NOT')
+            $sql = "SELECT * FROM ".$targetTable." WHERE ".$target_id_name." IN ( SELECT ".$relationTable.".".$relation_target_key." FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_id_name." WHERE ".$this->table.".".$owner_id_name." = :".$owner_id_name.")";
+        else
+            $sql = "SELECT * FROM ".$targetTable." WHERE ".$target_id_name." NOT IN ( SELECT ".$relationTable.".".$relation_target_key." FROM ".$relationTable." INNER JOIN ".$this->table." ON ".$relationTable.".".$relation_foreign_key." = ".$this->table.".".$owner_id_name." WHERE ".$this->table.".".$owner_id_name." = :".$owner_id_name.")";
         $param = [
             $owner_id_name => $this->id
         ];

@@ -3,8 +3,6 @@ namespace App\Controller;
 
 use App\Core\Query;
 
-session_start();
-
 
 class Middleware{
 

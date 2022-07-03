@@ -2,17 +2,20 @@
 
 namespace App\Core;
 use App\Core\Query;
+use App\Core\BaseSQL;
 
-class View
+class View extends BaseSQL
 {
     private $view;
     private $template = null;
     private $data = [];
     private $array = [];
 
-    public function __construct($view, $template = null)
+    public function __construct($view = null , $template = null)
     {
-        $this->setView($view);
+        if ($view != null) {
+            $this->setView($view);
+        }
         if ($template != null){
             $this->setTemplate($template);
         }
@@ -45,7 +48,7 @@ class View
             die("partial ".$name." 404");
         }
 
-        if ($name == 'design-variables'){
+        if ($name == 'design-variables' && parent::getDStatus() != false){
             $mainColor = Query::from('cmspf_Options')
                 ->where("type = 'main_color'")
                 ->execute('Option');
@@ -84,13 +87,15 @@ class View
     public function __destruct()
     {
         extract($this->data);
-        $logo = Query::from('cmspf_Options')
-            ->where("type = 'logo'")
-            ->execute('Option');
+        if(parent::getDStatus() != false) {
+            $logo = Query::from('cmspf_Options')
+                ->where("type = 'logo'")
+                ->execute('Option');
 
-        $favicon = Query::from('cmspf_Options')
-            ->where("type = 'favicon'")
-            ->execute('Option');
+            $favicon = Query::from('cmspf_Options')
+                ->where("type = 'favicon'")
+                ->execute('Option');
+        }
         if (isset($this->data) && isset($this->template)) {
             include "View/" . $this->template . ".tpl.php";
         }else{

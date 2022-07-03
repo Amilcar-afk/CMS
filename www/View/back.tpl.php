@@ -14,13 +14,18 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
 
         <!-- <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css" /> -->
-
-
         <!-- faut garder celui car qd je passe un id dans l'url le css marche pas -->
         <link rel="stylesheet" type="text/css" href="/style/dist/css/main.css" /> 
         <!-- //du coup faut le laisser celui  -->
 
 
+        <!-- <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css" /> -->
+        <!-- CHARTJS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- MAP -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        
+        <script type="text/javascript" src="../style/js/dashboardChart.js"></script>
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
         <script type="text/javascript" src="../style/js/wysiwyg.js"></script>
         <script type="text/javascript" src="../style/js/animations.js"></script>
@@ -31,18 +36,22 @@
         <script type="text/javascript" src="../style/js/database.js"></script>
         <script type="text/javascript" src="/style/js/searchConversation.js"></script>
         <!-- <script type="text/javascript" src="../style/js/searchConversation.js"></script> -->
+        <script type="text/javascript" src="../style/js/reseauxSoc.js"></script>
+        <script type="text/javascript" src="../style/js/chartMap.js"></script>
+        <script type="text/javascript" src="../style/js/navigations.js"></script>
+        <script type="text/javascript" src="../style/js/getRange.js"></script>
     </head>
-    <div class="background-container-back-office">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
     <body class="body-back-office">
+        <div class="background-container-back-office">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <header>
             <nav>
                 <ul>
-                    <li><a id="back-office-logo" href="#"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></li>
+                    <li><a id="back-office-logo" href="/"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></li>
                     <li><a href="/dashboard" class="button-menu" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
                     <li><a href="/pages" class="button-menu" data-alt="Sitemap"><span class="material-icons-round">map</span></a></li>
                     <li><a href="/conversations" class="button-menu" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>
@@ -68,6 +77,8 @@
         <script type="text/javascript" src="../js/ajax/httpRequest.js"></script>
         <script type="text/javascript" src="../js/ajax/user-manager.js"></script>
         <script type="text/javascript" src="../js/modal.js"></script>
-        <script type="text/javascript" src="../js/ajax/searchBar.js"></script>
+        <script type="text/javascript" src="../js/ajax/project.js"></script>
+        
+        
     </body>
 </html>

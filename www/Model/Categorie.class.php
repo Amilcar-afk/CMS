@@ -86,9 +86,29 @@ class Categorie extends BaseSQL
         return parent::belongsToMany(Page::class, 'cmspf_Page_categorie');
     }
 
+    public function pagesNot()
+    {
+        return parent::belongsToMany(Page::class, 'cmspf_Page_categorie', "id", "id", null, null, 'NOT');
+    }
+
+    public function page()
+    {
+        return parent::hasMany(Page::class)[0];
+    }
+
     public function navigations()
     {
         return parent::belongsToMany(Categorie::class, 'cmspf_Categorie_categorie', 'id', 'id', 'categorie_child_key', 'categorie_parent_key');
+    }
+
+    public function categories()
+    {
+        return parent::belongsToMany(Categorie::class, 'cmspf_Categorie_categorie', 'id', 'id', 'categorie_parent_key', 'categorie_child_key');
+    }
+
+    public function categoriesNot()
+    {
+        return parent::belongsToMany(Categorie::class, 'cmspf_Categorie_categorie', 'id', 'id', 'categorie_parent_key', 'categorie_child_key', 'NOT');
     }
 
     public function find($id = null, string $attribut = 'id')
@@ -137,6 +157,7 @@ class Categorie extends BaseSQL
                     "type"=>"select",
                     "name"=>"navigation",
                     "class"=>"input",
+                    "required"=>true,
                     "error"=>"",
                     "idToVerif"=>true,
                     "choices"=>$navigationsList['choices']

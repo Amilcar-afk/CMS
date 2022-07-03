@@ -87,6 +87,26 @@
   action: categoriesList
   middleware: [ 'auth', 'admin' ]
 
+/navigation/page/compose:
+  controller: categorie
+  action: composeNavigationPage
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/categorie/compose:
+  controller: categorie
+  action: composeNavigationCategorie
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/page/delete:
+  controller: categorie
+  action: deleteNavigationPage
+  middleware: [ 'auth', 'admin' ]
+
+/navigation/categorie/delete:
+  controller: categorie
+  action: deleteNavigationCategorie
+  middleware: [ 'auth', 'admin' ]
+
 /navigations:
   controller: categorie
   action: navigationsList
@@ -164,6 +184,7 @@
   controller: communication
   action: composeProject
   middleware : ['auth', 'admin']
+  params: [title]
 
 /project/delete:
   controller: communication
@@ -263,6 +284,35 @@
   controller: User
   action: findUsers
   params: [str]
+
+
+/setup/database:
+  controller: Setup
+  action: loadDatabase
+
+/setup/smtp:
+  controller: Setup
+  action: loadSmtp
+
+/setup/login:
+  controller: Setup
+  action: loadLogin
+
+/setup/main-images:
+  controller: Setup
+  action: loadMainImages
+
+/setup/main-colors:
+  controller: Setup
+  action: loadMainColors
+
+/setup/design/1:
+  controller: Setup
+  action: loadDesignFirst
+
+/setup/design/2:
+  controller: Setup
+  action: loadDesignSecond
 
 
 

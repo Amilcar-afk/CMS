@@ -1,5 +1,5 @@
 
-<form method="<?= $config["config"]["method"]??"POST" ?>"
+<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?> method="<?= $config["config"]["method"]??"POST" ?>"
     <?= (isset($config["action"]))?'action="'.$config["config"]["action"].'"':'' ?>
     <?= (isset($config["config"]["class"]))?'class="'.$config["config"]["class"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
@@ -22,7 +22,7 @@
 
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select name="<?= $name ?>" class="<?=$input["class"]?>">
+                <select id="<?= $input["id"] ?>" name="<?= $name ?>" class="<?=$input["class"]?>">
                     <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
@@ -33,6 +33,7 @@
                         </option>
                     <?php endforeach;?>
                 </select>
+                <?= (isset($input["div"]))?'<div id="' . $input["div"] .'"></div>':'' ?>
 
             <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>
@@ -74,5 +75,5 @@
     <?php endif;?>
 </form>
 <?php if (isset($config["config"]["cta"])):?>
-    <button class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Submit" ?></button>
+    <button <?=(isset($config["config"]["idButton"]))? 'id="'. $config["config"]["idButton"] . '"': ''?> class="cta-button cta-button--submit col-12 <?= $config["config"]["cta"]??"" ?>"><?= $config["config"]["submit"]??"Submit" ?></button>
 <?php endif;?>

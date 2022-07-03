@@ -28,37 +28,86 @@ class Statistics
         $reseauxSoc = new Reseaux_soc();
         $emptyReseauxSoc = $reseauxSoc;
         $reseauxSocs = $reseauxSoc->find();
-
         $stats = $this->stats->find();
 
-        foreach($stats as $stat){
-            $sortedData['per-device'][] = [
-                "device" => $stat->getDevice(),
-                "date" => $stat->getDate()
-            ];
-            $sortedData['page-ranking'][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
-            $sortedData['page-ranking'][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
 
-            $listPage[$stat->getPageKey()][] = [
-                "page_key" => $stat->getPageKey(),
-                "page_name" => $stat->page()->getTitle(),
-                "date" => $stat->getDate()
-            ];
+        // RANGE
+        $toPerPage = date("Y-m-d");
+        $sincePerPage = date('Y-m-d', strtotime($toPerPage. ' - 1 month'));
+        $toPerCountry = date("Y-m-d");
+        $sincePerCountry = date('Y-m-d', strtotime($toPerCountry. ' - 1 month'));
+        $toPerDevice = date("Y-m-d");
+        $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
+        
+        if(isset($_POST['sincePerPage'])){
+
+            $sincePerPage = $_POST['sincePerPage'];
+            $toPerPage = $_POST['toPerPage'];
+            $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
+
+        }
+        if(isset($_POST['sincePerCountry'])) {
+
+
+            $sincePerCountry = $_POST['sincePerCountry'];
+            $toPerCountry = $_POST['toPerCountry'];
+            $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
+
+        }
+        if(isset($_POST['sincePerDevice'])) {
+
+            $sincePerDevice = $_POST['sincePerDevice'];
+            $toPerDevice = $_POST['toPerDevice'];
+            $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
 
         }
 
+
+        // GET VIEW PER PAGES
+
+        $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
+        arsort($viewPerPages);
+
         
-        $view = new View("dashboard", "back");
+        // GET COUNTRY STATS
+        $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
+
+        $chartMapData[] = ['Country',["role"=> 'annotation']];
+        foreach($country as $key => $data) {
+            $chartMapData[] = [
+                $data['country'],
+                $toInt = (int)$data['number']
+            ];
+        }
+
+
+        // GET DEVICE STATS
+        $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
+
+        $chartDeviceData[] = ['Device',["role"=> 'annotation']];
+        foreach($devices as $device) {
+            $chartDeviceData[] = [
+                $device['device'],
+                $toInt = (int)$device['number']
+            ];
+        }
+
+        // GET NEW USERS STATS
+        $currentMonth = date("m");
+        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute();
+        $numberOfUsers = $newUsers[0]['number'];
+
+        // ASSIGN VIEWS
+        $tmpl = "back";
+        if (isset($_POST['range'])) {
+            $tmpl= "";
+        }
+        $view = new View("dashboard", $tmpl);
+        $view->assign("viewPerPages", $viewPerPages);
+        $view->assign("chartDeviceData", $chartDeviceData);
+        $view->assign("numberOfUsers", $numberOfUsers);
+        $view->assign("chartMapData", $chartMapData);
         $view->assign("data", $stats);
-        $view->assign("sortedData", $sortedData);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
     }
@@ -118,17 +167,21 @@ class Statistics
 
     public function composeStats(int $elementId, string $type) {
 
+
         if (!isset($elementId) && !isset($type))
             die();
+
 
         // GET PUBLIC IP
         $externalContent = file_get_contents('http://checkip.dyndns.com/');
         preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
         $externalIp = $m[1];
 
+
         // GET COUNTRY WITH IP
         $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$externalIp));
         $countryCode = $query['countryCode'];
+
 
         // GET DEVICES
         $detectDevice = $_SERVER['HTTP_USER_AGENT'];
@@ -155,23 +208,45 @@ class Statistics
 
         }
 
+
         // GET DATE
         $date = date("Y-m-d");
+        
 
-
-        // INSERT STATS
+        //
         if ($type == "view") {
             $this->stats->setPageKey($elementId); // OK
+            $attributType = "page_key";
         }elseif ($type == "reseaux_soc") {
             $this->stats->setReseauSocKey($elementId); // OK
+            $attributType = "reseaux_soc_key";
         }
-        $this->stats->setType($type); // OK
-        $this->stats->setIp($externalIp); //OK
-        $this->stats->setCountry($countryCode); // OK
-        $this->stats->setDate($date); // OK
-        $this->stats->setDevice($device); // OK
-        $this->stats->save(); 
 
+
+
+        // 1 STAT PER PAGE PER DAY
+        $getLastDate = Query::select("MAX(date) AS date")->from("cmspf_Stats")->where("ip = '". $externalIp . "' AND ". $attributType ." = ". $elementId)->execute('Stat');
+
+        $date1 = date("Y-m-d");
+        $date2 = $getLastDate[0]->getDate();
+        $first = strtotime($date1);
+        $second = strtotime($date2);
+        $dateDiff = abs($first - $second);
+        $day = floor($dateDiff / (60 * 60 * 24));
+        
+        if ($day >= 1) {
+
+            // INSERT STATS
+            $this->stats->setType($type); 
+            $this->stats->setIp($externalIp); 
+            $this->stats->setCountry($countryCode);
+            $this->stats->setDate($date); 
+            $this->stats->setDevice($device); 
+            $this->stats->save();
+
+        } else {
+            
+        }
     }
     
 }

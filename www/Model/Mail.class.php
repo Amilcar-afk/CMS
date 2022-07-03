@@ -40,13 +40,18 @@ class Mail extends BaseSQL
         $this->mail->setFrom($this->mail->Username, "CMS PORTFOLIO");
     }
 
-    public function sendEmail($to_email, $to_name, $subject, $body)
+    public function sendEmail($to_email, $to_name, $subject, $message)
     {
 
         try {
+            ob_start();
+            $message = $message;
+            include("View/Partial/mail.partial.php");
+            $message = ob_get_contents();
+            ob_end_clean();
             $this->mail->addAddress($to_email, $to_name);
             $this->mail->Subject = $subject;
-            $this->mail->Body = $body;
+            $this->mail->Body = $message;
 
             return $this->mail->send();
 

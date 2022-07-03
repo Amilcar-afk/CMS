@@ -5,7 +5,7 @@ use App\Core\BaseSQL;
 
 class Page_categorie extends BaseSQL
 {
-    protected $id = null;
+    public $id = null;
     protected $table_name = 'cmspf_Page_categorie';
     protected $page_key;
     protected $categorie_key;
@@ -50,7 +50,7 @@ class Page_categorie extends BaseSQL
     /**
      * @return null
      */
-    public function getId()
+    public function getId(): ? int
     {
         return $this->id;
     }

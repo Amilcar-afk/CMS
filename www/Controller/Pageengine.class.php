@@ -7,6 +7,7 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Page;
 use App\Model\Option;
+use App\Model\Categorie;
 use App\Model\Page_categorie;
 use App\Core\Query;
 use App\Model\Reseaux_soc;
@@ -20,9 +21,6 @@ class Pageengine
     {
         $this->page = new Page();
     }
-
-//simple xml librrairie xml
-
 
     public function siteMap()
     {
@@ -75,24 +73,33 @@ class Pageengine
 
     public function pageLoader($request){
 
-        $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
-        $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
-
-
         $page = $this->page->find($request['slug'], 'slug');
 
-        if (true){
+        if ($page){
 
             $page->composeStats($page->getId(), "view");
 
-            $reseauxSoc = new Reseaux_soc();
-            $reseauxSocs = $reseauxSoc->find();
+            //load Categorie list if categorie page
+            if ($page->getStatus() == 'Tag'){
+                $categorie = new Categorie();
+                $categorie = $categorie->find($page->getCategorieKey());
+                $view = new View("load-categorie-page", "front");
+                $view->assign("categorie", $categorie);
+            }else{
+                $view = new View("load-page", "front");
+            }
 
-            $view = new View("load-page", "front");
+            $headCode = Query::from('cmspf_Options')->where("type = 'headCode'")->execute('Option');
+            $footerCode = Query::from('cmspf_Options')->where("type = 'footerCode'")->execute('Option');
+
+            $bessels = Query::from('cmspf_Options')
+                ->where("type = 'bessels'")
+                ->execute('Option');
+
             $view->assign("page", $page );
-            $view->assign("headCode", $headCode);
-            $view->assign("footerCode", $footerCode);
-            $view->assign("reseauxSocs", $reseauxSocs);
+            $view->assign("headCode", $headCode[0]->getValue());
+            $view->assign("footerCode", $footerCode[0]->getValue());
+            $view->assign("bessels", $bessels);
         }else{
             http_response_code(404);
         }
@@ -115,7 +122,8 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if (true){
+        if ($page){
+
             $view = new View("page-editor", "back");
             $view->assign("page", $page);
         }else {
@@ -141,8 +149,11 @@ class Pageengine
                 $this->page->setId($_POST['id']);
                 $unic_page = Query::from('cmspf_Pages')
                     ->where("slug = '" . $_POST['slug'] . "'")
-                    ->where("id = " . $_POST['id'] . "")
+                    ->where("id != " . $_POST['id'] . "")
                     ->execute('Page');
+                if (!isset($unic_page[0])){
+                    $unic_page = false;
+                }
             }else{
                 $unic_page = $this->page->find($_POST['slug'], 'slug');
             }
@@ -159,6 +170,20 @@ class Pageengine
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {
+
+                    //use categorie template;
+                    if ($this->page->getContent() == null){
+
+                        $categories = Query::from('cmspf_Categories')
+                            ->where("id = " . $_POST['categorie'] . "")
+                            ->execute('Categorie');
+
+                        $page_of_categorie = $categories[0]->page();
+
+                        $this->page->setContent($page_of_categorie->getContent());
+                        $this->page->setId($lastId);
+                        $this->page->save();
+                    }
 
                     $page_categorie = Query::from('cmspf_Page_categorie')
                         ->where("page_key = " . $lastId . "")
@@ -224,8 +249,8 @@ class Pageengine
         }else{
             $footerCode = $footerCode[0];
         }
-        $footerCode->setValue($_POST['footerCode']);
-        $headCode->setValue($_POST['headCode']);
+        $footerCode->setValue((!empty($_POST['footerCode']))? $_POST['footerCode'] : ' ');
+        $headCode->setValue((!empty($_POST['headCode']))? $_POST['headCode'] : ' ');
         $footerCode->setType('footerCode');
         $headCode->setType('headCode');
         $footerCode->setUserKey($_SESSION['Auth']->id);

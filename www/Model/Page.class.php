@@ -5,7 +5,8 @@ namespace App\Model;
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
 use App\Core\Query;
-use Categorie;
+use App\Model\Categorie;
+use App\Model\Reseaux_soc;
 
 class Page extends BaseSQL
 {
@@ -16,7 +17,24 @@ class Page extends BaseSQL
     protected $status;
     protected $slug;
     protected $user_key;
+    protected $categorie_key;
     protected $content;
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieKey()
+    {
+        return $this->categorie_key;
+    }
+
+    /**
+     * @param mixed $categorie_key
+     */
+    public function setCategorieKey($categorie_key): void
+    {
+        $this->categorie_key = $categorie_key;
+    }
 
     /**
      * @return mixed
@@ -181,6 +199,41 @@ class Page extends BaseSQL
         parent::delete($id);
     }
 
+    public function header()
+    {
+        $header = new Categorie();
+        $header = $header->find(1);
+        $categories = $header->categories();
+        $pages = $header->pages();
+
+        $radius = Query::from('cmspf_Options')
+            ->where("type = 'radius'")
+            ->execute('Option');
+
+        $logo = Query::from('cmspf_Options')
+            ->where("type = 'logo'")
+            ->execute('Option');
+
+        include "View/Partial/header.partial.php";
+    }
+
+    public function footer()
+    {
+        $footer = new Categorie();
+        $footer = $footer->find(2);
+        $categories = $footer->categories();
+        $pages = $footer->pages();
+
+        $radius = Query::from('cmspf_Options')
+            ->where("type = 'radius'")
+            ->execute('Option');
+
+        $reseauxSoc = new Reseaux_soc();
+        $reseauxSocs = $reseauxSoc->find();
+
+        include "View/Partial/footer.partial.php";
+    }
+
     public function getFormNewPage($categories): array
     {
         foreach($categories as $categorie){
@@ -270,6 +323,7 @@ class Page extends BaseSQL
                     "name"=>"description",
                     "class"=>"input",
                     "required"=>true,
+                    "rows"=>4,
                     "min"=>3,
                     "max"=>100,
                     "value"=>$this->getDescription(),

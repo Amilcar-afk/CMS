@@ -17,20 +17,48 @@ class Mail{
     public function confirmMail($mailAddress, $name, $token)
     {
         $uri = $_SERVER["HTTP_HOST"] . "/mailconfirmation/?token=" . $token;
+
         if ($token){
-            $subject = "Confirmation d'inscription";
-            $message = "Welcome " . $name . ". To confirm your email address <a href='" . $uri . "'>Click here</a>.";
+            $subject = "Registration confirmation";
+            $message = [
+                [
+                    "type"=>'title',
+                    "content"=>'Registration confirmation'
+                ],
+                [
+                    "type"=>'text',
+                    "content"=>"Welcome " . $name . ". To confirm your email address"
+                ],
+                [
+                    "type"=>'button',
+                    "link"=>$uri,
+                    "content"=>'Click here'
+                ]
+            ];
             $this->mail->sendEmail($mailAddress, $name, $subject, $message);
         }
     }
 
     public function resetPwdMail($mailAddress, $name, $token)
     {
-        new View("");
         $uri = $_SERVER["HTTP_HOST"] . "/resetpassword/?token=" . $token;
         if ($token){
-            $subject = "Confirmation d'inscription";
-            $message = "Hello " . $name . " to reset your password <a href='" . $uri . "'>Click here</a>.";
+            $message = [
+                [
+                    "type"=>'title',
+                    "content"=>'Reset Password'
+                ],
+                [
+                    "type"=>'text',
+                    "content"=>"Hello " . $name . " to reset your password"
+                ],
+                [
+                    "type"=>'button',
+                    "link"=>$uri,
+                    "content"=>'Click here'
+                ]
+            ];
+            $subject = "Reset Password";
             $this->mail->sendEmail($mailAddress, $name, $subject, $message);
         }
     }
@@ -38,27 +66,61 @@ class Mail{
     public function userMailconfirmReservation($dataofMail)
     {
 
-        $subject = "Confirmation de reservation";
-        $message = 
-        "Bonjour " . $dataofMail['firstname']. ", le rendez-vous ".$dataofMail['title'] ." de ".$dataofMail['start'] ." a ".$dataofMail['end'] . ' à ' .$dataofMail['location']
-        . " et qui a comme description ".$dataofMail['description']. " avec ".
-        $dataofMail['owner_firstname'] .  '  ' . $dataofMail['owner_lastname']. ", est confirmé. un email a été envoyé à ".$dataofMail['owner_firstname'].  ' ' . $dataofMail['owner_lastname'].
-        " pour l'informer sur votre rendez-vous." ;
+        $subject = "Confirmation of appointment";
+
+        $message = [
+            [
+                "type"=>'title',
+                "content"=>'Confirmation of appointment'
+            ],
+            [
+                "type"=>'text',
+                "content"=>"Hello " . $dataofMail['firstname']. ","
+            ],
+            [
+                "type"=>'text',
+                "content"=>" Your appointemnent with ". $dataofMail['owner_firstname'] . " " . $dataofMail['title'] ."  <b>".$dataofMail['start'] ." - ".$dataofMail['end'] . '</b>  at ' .$dataofMail['location']
+            ],
+            [
+                "type"=>'text',
+                "content"=> $dataofMail['description']
+            ],
+            [
+                "type"=>'text',
+                "content"=> "A email has been send to ".$dataofMail['owner_firstname'].  ' ' . $dataofMail['owner_lastname']. " to inform him."
+            ]
+        ];
 
         $this->mail->sendEmail($dataofMail['email'], $dataofMail['firstname'], $subject, $message);
     }
     
     public function ownerMailConfirmReservation($dataofMail){
-        $subject = "Confirmation de reservation";
-        $ownerMessage = 
-        "Bonjour " . $dataofMail['owner_firstname'].  ' ' . $dataofMail['owner_lastname'].  ". Votre rendez-vous ".$dataofMail['title'] ." de ".$dataofMail['start'] ." a ".$dataofMail['end']
-        . ' à ' .$dataofMail['location']
-        . " et qui a comme description : ".$dataofMail['description'] .", a été choisie par ". $dataofMail['firstname']. ' ' 
-        .$dataofMail['lastname']. ' vous pouvez le contavtez via son email: '.$dataofMail['email'];
+        $subject = "Confirmation of appointment";
 
+        $message = [
+            [
+                "type"=>'title',
+                "content"=>'Confirmation of appointment'
+            ],
+            [
+                "type"=>'text',
+                "content"=>"Hello " . $dataofMail['owner_firstname']. ","
+            ],
+            [
+                "type"=>'text',
+                "content"=>" Your appointemnent with ". $dataofMail['firstname'] . " " . $dataofMail['title'] ."  <b>".$dataofMail['start'] ." - ".$dataofMail['end'] . '</b>  at ' .$dataofMail['location']
+            ],
+            [
+                "type"=>'text',
+                "content"=> $dataofMail['description']
+            ],
+            [
+                "type"=>'text',
+                "content"=> "A email has been send to ".$dataofMail['firstname'].  " to inform him."
+            ]
+        ];
 
-        $this->mail->sendEmail($dataofMail['owner_email'], $dataofMail['owner_firstname'], $subject, $ownerMessage);
-
+        $this->mail->sendEmail($dataofMail['owner_email'], $dataofMail['owner_firstname'], $subject, $message);
             
             
     }

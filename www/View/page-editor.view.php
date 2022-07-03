@@ -7,7 +7,13 @@
         <div>
             <label>
                 <span class="material-icons-round">https</span>
-                <?=$page->getStatus()?> . <?=ucfirst($page->getTitle())?>
+                <?php if ( $page->getStatus() == 'Tag'): ?>
+                    Categorie template
+                <?php else:?>
+                    <?=$page->getStatus()?>
+                <?php endif;?>
+                .
+                <?=ucfirst($page->getTitle())?>
             </label>
             <footer>
                 /<?php if ( empty($page->getSlug())): ?>
@@ -20,9 +26,13 @@
                 <span class="material-icons-round">menu</span>
             </button>
             <nav>
-                <a href="/pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
+                <?php if ( $page->getStatus() != 'Tag'): ?>
+                    <a href="/pageloader/<?= $page->getSlug() ?>" target="_blank" class="cta-button cta-button--text-icon"><span class="material-icons-round">visibility</span>Preview</a>
+                <?php endif;?>
                 <button class="cta-button cta-button--text-icon cta-button-save" data-page-id="<?=$page->getId()?>"><span class="material-icons-round">save</span>Save</button>
-                <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span>Published</a>
+                <?php if ( $page->getStatus() != 'Tag'): ?>
+                    <a href="" class="cta-button cta-button--text-icon"><span class="material-icons-round">send</span>Published</a>
+                <?php endif;?>
             </nav>
         </div>
     </header>

@@ -56,7 +56,6 @@ class User{
                     $_SESSION['Auth']->firstname = $user[0]->getFirstname();
                     $_SESSION['Auth']->id = $user[0]->getId();
                     $_SESSION['Auth']->token = $user[0]->getToken();
-                    $_SESSION['Auth']->creationDate = $user[0]->getCreationDate();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
     
@@ -85,12 +84,14 @@ class User{
     {
         $view = new View("register", "back-sandbox");
         $view->assign("user",$this->user);
+        $date = date("Y-m-d");
         if( !empty($_POST)){
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
+            $this->user->setDateCreation($date);
             $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
@@ -104,9 +105,9 @@ class User{
             
             if(empty($result)){
                 //generate confirmKey
-                $confirmKey = str_shuffle(md5(uniqid()));
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
+                $confirmKey = $this->user->getConfirmKey();
 
                 $mail = new Mail();
                 $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);

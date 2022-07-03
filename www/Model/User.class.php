@@ -15,7 +15,7 @@ class User extends BaseSQL
     protected $pwd;
     protected $pwd1;
     protected $pwd2;
-    protected $creationDate;
+    protected $date_creation;
     protected $updateDate;
     protected $token;
     protected $rank;
@@ -216,9 +216,9 @@ class User extends BaseSQL
     /**
      * Get the value of creationDate
      */ 
-    public function getCreationDate()
+    public function getDateCreation()
     {
-        return $this->creationDate;
+        return $this->date_creation;
     }
 
     /**
@@ -226,9 +226,9 @@ class User extends BaseSQL
      *
      * @return  self
      */ 
-    public function setCreationDate($creationDate)
+    public function setDateCreation($date_creation)
     {
-        $this->creationDate = $creationDate;
+        $this->date_creation = $date_creation;
 
         return $this;
     }

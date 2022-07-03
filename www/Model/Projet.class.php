@@ -12,6 +12,7 @@ class Projet extends BaseSQL
     protected $user_key = null;
     protected $page_key = null;
     protected $title;
+    protected $description;
 
     /**
      * @return mixed
@@ -27,6 +28,22 @@ class Projet extends BaseSQL
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription(): ? string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
     }
 
     /**
@@ -88,15 +105,11 @@ class Projet extends BaseSQL
 
     public function user()
     {
-        $users = parent::belongsToMany(User::class, 'cmspf_User_projet');
-        foreach ($users as $user){
-            if($user->getId() != $_SESSION['auth']->id){
-                return $user;
-            }
-        }
+        $users = parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        return $users;
     }
 
-    public function getFormCreateProject($users): array
+    public function getFormProject($users, $name = ''): array
     {
 
         foreach($users as $user){
@@ -111,6 +124,8 @@ class Projet extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "submit"=>"Save",
+                "id"=>"formNewProject",
+                "idButton"=>"buttonSaveProject".$name,
                 "cta"=>"cta-button-compose-project"
             ],
 
@@ -139,13 +154,27 @@ class Projet extends BaseSQL
 
                 "user"=>[
                     "question"=>"Assign user",
+                    "placeholder"=>"Title",
                     "type"=>"select",
                     "name"=>"user",
+                    "id"=>"selectUsers".$name,
                     "value"=>$this->user(),
-                    "class"=>"input",
+                    "class"=>"input inputSelect".$name,
                     "error"=>"",
                     "idToVerif"=>true,
+                    "div"=>"divUserSearch".$name,
                     "choices"=>$usersList['choices']
+                ],
+
+                "description"=>[
+                    "question"=>"Project description",
+                    "placeholder"=>"description",
+                    "type"=>"textarea",
+                    "name"=>"description",
+                    "class"=>"input",
+                    "rows"=>16,
+                    "cols"=>"",
+                    "error"=>""
                 ],
             ],
         ];
