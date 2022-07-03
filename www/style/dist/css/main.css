@@ -1139,6 +1139,10 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       fill: none; }
     .card #chart-per-device rect:nth-child(3) {
       display: none; }
+  .card #chart-per-week {
+    width: 100%; }
+    .card #chart-per-week g rect {
+      fill: none; }
   .card .table-container {
     margin-top: 6px;
     margin-bottom: 6px;
@@ -2058,6 +2062,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         margin-left: 15px; }
       .container-main-content .section-config-blocks article:nth-child(odd) {
         margin-right: 15px; }
+      .container-main-content .section-config-blocks form .logo {
+        width: unset;
+        max-height: unset;
+        height: 110px; }
+      .container-main-content .section-config-blocks form .favicon {
+        width: unset;
+        max-height: unset;
+        height: 90px; }
     .container-main-content--dashboard .row {
       height: unset; }
       .container-main-content--dashboard .row .card {
@@ -2112,7 +2124,9 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 
 @media (max-width: 768px) {
   .menu-container nav a:nth-child(even) {
-    margin-right: 0px; } }
+    margin-right: 0px; }
+  .body-setup {
+    align-items: unset; } }
 
 .title {
   display: block;

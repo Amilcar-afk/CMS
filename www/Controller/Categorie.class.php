@@ -213,7 +213,7 @@ class Categorie{
             $categorie_categorie = Query::from('cmspf_Categorie_categorie')
                 ->where("categorie_child_key = " . $_POST['categorie'] . "")
                 ->where("categorie_parent_key = " . $_POST['navigation'] . "")
-                ->execute('Page_categorie');
+                ->execute('Categorie_categorie');
 
             if (isset($categorie_categorie[0])){
                 $categorie_categorie[0]->delete($categorie_categorie[0]->getId());

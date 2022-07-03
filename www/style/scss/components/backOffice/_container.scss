@@ -445,6 +445,21 @@
       & article:nth-child(odd) {
         margin-right: 15px;
       }
+
+      & form {
+
+        & .logo {
+          width: unset;
+          max-height: unset;
+          height: 110px;
+        }
+
+        & .favicon {
+          width: unset;
+          max-height: unset;
+          height: 90px;
+        }
+      }
     }
 
     &--dashboard {
@@ -536,5 +551,9 @@
         margin-right: 0px;
       }
     }
+  }
+
+  .body-setup {
+    align-items: unset;
   }
 }

@@ -66,11 +66,11 @@
 
                     <!--Categories-->
                     <article>
-                        <header class="main-nav-choice selected" data-wc-target="categorie-list-elements">
+                        <header class="main-nav-choice selected" data-wc-target="categorie-list-elements-<?=$navigation->getId() ?>">
                             <h2>Categories</h2>
                             <span class="material-icons-round">more_horiz</span>
                         </header>
-                        <div id="categorie-list-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="addable-elements-container" style="opacity: 1">
+                        <div id="categorie-list-elements-<?=$navigation->getId() ?>" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="addable-elements-container-<?=$navigation->getId() ?>" style="opacity: 1">
 
                             <div class="center-left" data-parent="<?=$navigation->getId() ?>">
                                 <section class="center-left elements-in">
@@ -94,21 +94,25 @@
 
                     <!--Pages-->
                     <article>
-                        <header class="main-nav-choice" data-wc-target="page-list-elements">
+                        <header class="main-nav-choice" data-wc-target="page-list-elements-<?=$navigation->getId() ?>">
                             <h2>Pages</h2>
                             <span class="material-icons-round">more_horiz</span>
                         </header>
-                        <div id="page-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="addable-elements-container">
+                        <div id="page-list-elements-<?=$navigation->getId() ?>" class="container-main-content container-main-content--list collapse row" data-group-collapse="addable-elements-container-<?=$navigation->getId() ?>">
 
                             <div class="center-left" data-parent="<?=$navigation->getId() ?>">
                                 <section class="center-left elements-in">
                                     <?php foreach ($navigation->pages() as $page):?>
-                                        <button class="sticker sticker--cta sticker--cta--selected cta-button-delete-navigation-page" data-target="<?= $page->getId() ?>">/<?= $page->getTitle()?></button>
+                                        <?php if ($page->getStatus() != 'Tag'):?>
+                                            <button class="sticker sticker--cta sticker--cta--selected cta-button-delete-navigation-page" data-target="<?= $page->getId() ?>">/<?= $page->getTitle()?></button>
+                                        <?php endif;?>
                                     <?php endforeach;?>
                                 </section>
                                 <section class="center-left elements-out">
                                     <?php foreach ($navigation->pagesNot() as $page):?>
-                                        <button class="sticker sticker--cta cta-button-compose-navigation-page" data-target="<?= $page->getId() ?>">/<?= $page->getTitle()?></button>
+                                        <?php if ($page->getStatus() != 'Tag'):?>
+                                            <button class="sticker sticker--cta cta-button-compose-navigation-page" data-target="<?= $page->getId() ?>">/<?= $page->getTitle()?></button>
+                                        <?php endif;?>
                                     <?php endforeach;?>
                                 </section>
                             </div>
