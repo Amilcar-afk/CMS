@@ -113,9 +113,11 @@
                         </button>
                     </header>
 
+                    <div class="chart-container">
+
                     
-                        <div id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
-                    
+                    <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
+                    </div>
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -137,7 +139,7 @@
                     <header>
                         <h3>Per week</h3>
                     </header>
-                    <div id="chart-per-week" style="width: 100px; height: 300px;"></div>
+                    <!-- <div id="chart-per-week" style="width: 100%; height: 300px;"></div> -->
                 </section>
 
                 <section class="card card--smallcard card--background-color">
@@ -244,11 +246,16 @@ google.charts.load("current", {packages:["corechart"]});
         );
 
         var options = {
-          title: 'My Daily Activities',
           pieHole: 0.6,
-          legend: {position: 'none'},
-          colors: ['#396075', '#547a8f', '#87949c']
+          width: '100%',
+          height: '100%',
+          colors: ['#396075', '#547a8f', '#87949c'],
+          legend: {
+              position : 'none',
+              //alignment: 'start'
+            }
         };
+        
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
         chart.draw(data, options);
@@ -293,3 +300,8 @@ google.charts.load("current", {packages:['corechart']});
       chart.draw(view, options);
   }
 </script>
+
+
+
+
+
