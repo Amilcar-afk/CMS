@@ -164,12 +164,50 @@ class Option{
                     ->execute('Option');
                 return include "View/Partial/design-variables.partial.php";
             }else{
-                echo "ok";
                 http_response_code(500);
             }
         }else{
-            echo 'okkk';
             http_response_code(500);
+        }
+
+    }
+
+    public function composeImg()
+    {
+        if( isset($_FILES) && isset($_FILES['file'])) {
+            if (isset($_FILES["file"]['name'])) {
+                $tailleMax = 2097152;
+
+                $authExt = array('jpg','jpeg','png','svg');
+                $startPath = "/style/medias/images/cust-". date('Ymd-H-m-s');
+
+                if($_FILES["file"]['size'] <= $tailleMax) {
+                    $extensionUpload = strtolower(substr(strrchr($_FILES["file"]['name'], '.'), 1));
+                    if(in_array($extensionUpload, $authExt)) {
+                        $chemin = realpath(dirname(__FILE__))."/..". $startPath . ".".$extensionUpload;
+                        $move = move_uploaded_file($_FILES["file"]["tmp_name"], $chemin);
+                        if ($move) {
+
+                            $this->option->setPath($startPath . ".".$extensionUpload);
+                            $this->option->setType('image');
+                            $this->option->setUserKey($_SESSION['Auth']->id);
+                            $this->option->save();
+
+                            echo $startPath . ".".$extensionUpload;
+                        }else{
+                            echo "Error importing";
+                        }
+                    }else{
+                        echo "Format invalid";
+                    }
+                }else{
+                    echo "Invalid size";
+                }
+            }else{
+                echo "Error1";
+            }
+        }else{
+            echo "Error2";
         }
 
     }

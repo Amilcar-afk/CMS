@@ -1,6 +1,6 @@
 //put the module class in article
 
-.module-list, .module{
+#container-editor, .module-list, .module{
 
 	& h1, h2, h3, h4, h5, h6, p{
 		padding-left: 3px;
@@ -9,11 +9,16 @@
 		margin-bottom: 10px;
 	}
 
-	& iframe{
+	iframe{
 		padding-left: 3px;
 		padding-right: 3px;
 		margin-top: 10px;
 		border-radius: var(--radius, 6px);
+		//height: unset!important;
+	}
+
+	& .cta-button-insert-image{
+		display: none;
 	}
 
 	&--on{
@@ -167,5 +172,19 @@
 				}
 			}
 		}
+	}
+}
+
+.module--iframe {
+	padding-left: 3px;
+	padding-right: 3px;
+	border-radius: var(--radius, 6px);
+	//height: 200px !important;
+}
+
+
+#container-editor{
+	.module--iframe::after{
+		content: '<button class"cta-button">SRC</button>';
 	}
 }

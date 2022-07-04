@@ -67,9 +67,6 @@ $(document).ready(function(){
             $("#editable-module").remove();
         }
 
-        let neededBtns = [];
-        var module = $(this).children(":first");
-
         $('p, h1, h2, h3, h4, h5, h6').each(function() {
             $(this).removeAttr('contenteditable');
             $(this).removeClass("module--on");
@@ -80,39 +77,63 @@ $(document).ready(function(){
 
         $(this).attr('data-a-target', 'editable-module');
 
+        let neededBtns = [];
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-resize">\n' +
+            '                 <span class="material-icons-round">transform</span>\n' +
+            '             </button>\n');
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-tab">\n' +
+            '                 <span class="material-icons-round">keyboard_tab</span>\n' +
+            '             </button>\n');
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-wrap">\n' +
+            '                 <span class="material-icons-round">keyboard_return</span>\n' +
+            '             </button>\n');
+
+        if($(this).is('[class*="fs-"]')) {
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-bold">\n' +
+            '                    <span class="material-icons-round">format_bold</span>\n' +
+            '               </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-size">\n' +
+                '                <span class="material-icons-round">format_size</span>\n' +
+                '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-color">\n' +
+                '                <span class="material-icons-round">color_lens</span>\n' +
+                '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-align">\n' +
+                '                 <span class="material-icons-round">'+getModuleAlign($(this))+'</span>\n' +
+                '            </button>\n');
+        }
+
+        if (typeof $(this).attr('data-media-type') !== typeof undefined
+            && $(this).attr('data-media-type') !== false
+            && ($(this).attr('data-media-type') == 'spotify'
+                || $(this).attr('data-media-type') == 'youtube'
+                || $(this).attr('data-media-type') == 'link')) {
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-insert-link">\n' +
+            '                   <span class="material-icons-round">insert_link</span>\n' +
+            '                </button>\n');
+        }
+
+        if (typeof $(this).attr('data-media-type') !== typeof undefined
+            && $(this).attr('data-media-type') !== false
+            && $(this).attr('data-media-type') == 'img') {
+            neededBtns.push('<form method="POST" encType="multipart/form-data" class="cta-button cta-button--icon">' +
+                '               <input type="file" class="cta-button-insert-image">\n' +
+                '               <span class="cta-button-select-image material-icons-round">add_photo_alternate</span>\n' +
+                '            </form>\n');
+        }
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-background-color">\n' +
+            '                 <span class="material-icons-round">format_paint</span>\n' +
+            '             </button>\n');
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-delete-module">\n' +
+            '                 <span class="material-icons-round">delete</span>\n' +
+            '            </button>\n');
+
         var $editorToolBar = '<div id="editable-module" contenteditable="false" class="editable-module a-zoom-out-end">\n' +
-            '                    <nav class="editable-module--tool-bar">\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-resize">\n' +
-            '                            <span class="material-icons-round">transform</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-tab">\n' +
-            '                            <span class="material-icons-round">keyboard_tab</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-wrap">\n' +
-            '                            <span class="material-icons-round">keyboard_return</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-bold">\n' +
-            '                            <span class="material-icons-round">format_bold</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-font-color">\n' +
-            '                            <span class="material-icons-round">color_lens</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-background-color">\n' +
-            '                            <span class="material-icons-round">format_paint</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-font-size">\n' +
-            '                            <span class="material-icons-round">format_size</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-align">\n' +
-            '                            <span class="material-icons-round">'+getModuleAlign($(this))+'</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-insert-link">\n' +
-            '                            <span class="material-icons-round">insert_link</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-delete-module">\n' +
-            '                            <span class="material-icons-round">delete</span>\n' +
-            '                        </button>\n' +
-            '                    </nav>\n' +
+            '                    <nav class="editable-module--tool-bar">'+neededBtns.join("")+'</nav>\n' +
             '                    <div class="editable-module editable-module--border">\n' +
             '                    </div>\n' +
             '                    <nav class="editable-module--footer-nav">\n' +
@@ -438,7 +459,6 @@ $(document).ready(function(){
         document.execCommand('redo',false,'')
     })
 
-    //insert-link component
     //insert-link menu component
     $(document).on( "click", ".cta-button-insert-link", function () {
         cleanEditToolBar(this);
@@ -459,7 +479,7 @@ $(document).ready(function(){
         let src = $(module).find('[name=link]').val();
         $($(module).find('cta-button-preview-link')[0]).attr('href', src);
 
-        let iframeType = $($(module).find('iframe')[0]).attr('data-media-type');
+        let iframeType = $(module).attr('data-media-type');
         if (iframeType == "spotify"){
             src = src.replace("album/", "embed/album/");
             src = src.replace("track/", "embed/track/");
@@ -472,6 +492,36 @@ $(document).ready(function(){
         }
 
         $($(module).find('iframe')[0]).attr('src', src);
+    })
+
+    $(document).on( "click", ".cta-button-select-image", function () {
+        $($(this).parent().find('input')[0]).click();
+    });
+    //img compose component
+    $(document).on( "change", ".cta-button-insert-image", function () {
+        var module = $($(this).parent().parent().parent().parent());
+        let formData = new FormData();
+        let file = $(this)[0].files[0];
+        formData.append('file', file);
+        $.ajax({
+            url:"/img/compose",
+            type:"POST",
+            contentType: false,
+            processData: false,
+            data:formData,
+            success:function(answer)
+            {
+                if (answer.substr(0, 21) == '/style/medias/images/'){
+                    $($(module).find('img')[0]).attr('src', answer);
+                }else {
+                    alertMessage(answer, 'warning');
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+
     })
 
     //add component
