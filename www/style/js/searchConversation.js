@@ -11,11 +11,12 @@ $(document).ready(function(){
                 searchData:$(this).val(),
             },
             success: function(data){
-                var conversations = JSON.parse(data)
+                var foundedUsers = JSON.parse(data)
+
                 var div ;
                 if( value.length != 0){
                     $('#conversations-elements').hide();
-                    conversations.forEach(element => {
+                    foundedUsers[0].forEach(element => {
                         if(element.firstname.indexOf(value) || element.lastname.indexOf(value)  || element.email.indexOf(value)  ){
                             $(".select").on("input", function() {
                                 $('#conversation-founded').show()
@@ -34,7 +35,15 @@ $(document).ready(function(){
                                 $(div).prependTo('#conversation-founded');
                             } 
                             $('#foundedUser').on('click', function(){
-                                createNewConversation(element.id)
+             
+                            var e =  foundedUsers[1].find(e=>{
+                              return  element.id == e.id
+                            });
+                                if(e == null){
+                                    createNewConversation(element.id)
+                                }else{
+                                    window.location.replace("/conversations/user-conversations/"+e.conversation_id)
+                                }
                             })
                         }
                     })

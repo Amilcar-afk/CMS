@@ -32,15 +32,12 @@ class Communication
 
     public function listConversation()
     {
-
         $user = new User();
         $user = $user->find($_SESSION['Auth']->id);
         $view = new View("conversation-list", "back");
         $msg = new Message();
         $view->assign("conversations",$user->conversations());
         $view->assign("msg",$msg);
-
-
     }
 
     public function searchData()
@@ -51,18 +48,23 @@ class Communication
             ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
             ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
             ->execute("User");
-            $conversation_users = [];
             $user = new User();
             $user = $user->find($_SESSION['Auth']->id);
+
+            $conversation_users = [];
+
             foreach($user->conversations() as $conversation){
-                foreach($conversation->users()as $user){
-                    array_push($conversation_users,$user->getId() );
+                foreach($conversation->users() as $user){
+                    if($user->getId() != $_SESSION['Auth']->id){
+                        $conversation_users[] = array(
+                            'id' => $user->getId(),
+                            'conversation_id' => $conversation->getId()
+                        );
+                    }
                 } 
             } 
+
             foreach ($users as $user){
-                if(in_array($user->getId(),$conversation_users)){
-                    continue;
-                }
                 $allUsers [] = array(
                     'id' => $user->getId(),
                     'email' => $user->getMail(),
@@ -70,7 +72,8 @@ class Communication
                     'lastname' => $user->getLastname(),
                 );
             }
-            echo json_encode($allUsers);
+
+            echo json_encode([$allUsers,$conversation_users] );
         }
     }
 
