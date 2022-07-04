@@ -1,22 +1,22 @@
 const userSelected = document.getElementById("selectUsers");
 const divUsersSelected = document.getElementById("divUserSearch");
-const buttonValidForm = document.getElementById("buttonSaveProject");
 const listSelectedUsers = document.getElementById("listSelectedUsers");
 
 const userSelectedUpdate = document.getElementById("selectUsersUpdate");
 const divUsersSelectedUpdate = document.getElementById("divUserSearchUpdate");
-const buttonValidFormUpdate = document.getElementById("buttonSaveProjectUpdate");
 const listSelectedUsersUpdate = document.getElementById("listSelectedUsers");
 
+
+//const buttonValidForm = document.getElementsByClassName("cta-button-compose-project");
 let userChecked = null;
 
 //CREATE PROJECT
 selectEvent(userSelected, divUsersSelected, listSelectedUsers);
-validFormProject(buttonValidForm);
 
 //UPDATE PROJECT
 selectEvent(userSelectedUpdate, divUsersSelectedUpdate, listSelectedUsersUpdate);
-validFormProject(buttonValidFormUpdate);
+
+//validFormProject(buttonValidForm);
 
 //display selected user
 function selectEvent(userSelected, divUsersSelected, listSelectedUsers) {
@@ -62,7 +62,7 @@ function onClickCheckbox(item, userSelected){
     li.remove();
 }
 
-function validFormProject(buttonValidForm) {
+/*function validFormProject(buttonValidForm) {
     buttonValidForm.addEventListener("click", () => {
 
         let uri = url + "project/compose/";
@@ -80,23 +80,37 @@ function validFormProject(buttonValidForm) {
         ajaxRequest(uri, "POST", dataString, displayUserSearch, true);
     });
 }
+
 function displayUserSearch(req){
     document.write(req.responseText);
-}
+}*/
+
+/*function getUsers(element){
+    let tabId = '';
+    if(element.length > 0){
+        let list = element[0].childNodes;
+        for (let i = 0; i < list.length; i++){
+            if(i != 0)
+                tabId += ',';
+            tabId += list[i].value;
+    }
+   return tabId;
+}*/
 
 
+$(document).ready(function(){
+    $(document).on("click", ".cta-button-compose-project", function () {
 
-/*$(document).ready(function(){
-    $(document).on("click", ".cta-button-compose-projet", function () {
-        var formContainer = $(this).parent();
+        let formContainer = $(this).parent().children(0);
+
         $.ajax({
-            url:"/project/compose",
+            url:"/project/compose/",
             type:"POST",
             data:
                 {
-                    id:$(this).parent().find('[name=id]').val(),
                     title:$(this).parent().find('[name=title]').val(),
-                    user:$(this).parent().find('[name=user]').val()
+                    description:formContainer.find('[name=description]')[0].value
+                    //user: usersId
                 },
             success:function(answer)
             {
@@ -132,4 +146,4 @@ function displayUserSearch(req){
             }
         });
     })
-});*/
+});
