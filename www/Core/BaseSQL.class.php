@@ -127,39 +127,6 @@ abstract class BaseSQL
     {
         return $this->lastInsertId;
     }
-    
-    public function parseUrl()
-    {
-        $uri = $_SERVER["REQUEST_URI"]; 
-        $routeFile = "routes.yml";
-        $routes = yaml_parse_file($routeFile);
-        if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
-            $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
-            for($i=0;$i<=sizeof($parseUrl);$i++){
-                array_pop($parseUrl);
-                $uri = implode('/',$parseUrl);
-                if(isset($routes[$uri]) ){
-                    $url = $_SERVER["REQUEST_URI"]; 
-                    $replace = str_replace($uri,'',$url);
-                    $param = explode('/',$replace);
-                    array_shift($param);
-        
-                    if(sizeof($routes[$uri]['params']) === sizeof($param)){
-                        foreach($routes[$uri]['params'] as $key => $itemParam){
-                            $currentParams = [
-                                $itemParam => $param[$key]
-                            ];
-                            return $currentParams;
-                        }
-                    }
-                    break;
-                }else{
-                    die("Page 404");
-                }
-            }
-        }
-    }
-
 
     /**
      * Delete element by id

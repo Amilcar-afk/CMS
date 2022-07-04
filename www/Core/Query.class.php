@@ -59,7 +59,7 @@ class Query extends BaseSQL
         return (new Query);
     }
 
-    public function orderby(string $key, string $direction): self
+    public function orderby(string $key, string $direction)
     {
         $direction = strtoupper($direction);
         if(!in_array($direction, ['ASC', 'DESC'])){
@@ -67,6 +67,8 @@ class Query extends BaseSQL
         }else{
             self::$order[] = "$key $direction";
         }
+        return (new Query);
+
 
     }
     public function groupBy(string $group): self
@@ -83,6 +85,7 @@ class Query extends BaseSQL
 
     public function limit(string $from, string $to = null): self
     {
+
         if(!empty($to)){
             if(DBDRIVER === "mysql"){
                 self::$limit = " LIMIT " . $from . ", " . $to;
@@ -189,9 +192,7 @@ class Query extends BaseSQL
             $parts[] = "ORDER BY ".self::$order[0];
         }
 
-        if(!empty(self::$limit)){
-            $parts[] = "LIMIT ".self::$limit[0];
-        }
+
 
         if (!empty(self::$or)){
             if(array_search("WHERE", $parts) === false){
@@ -230,6 +231,9 @@ class Query extends BaseSQL
     public function execute($model = null)
     {
         $query = $this->__toString();
+        // echo '<pre>';
+        // var_dump($query);
+        // echo '</pre>';
         $statement = $this->pdo->prepare($query);
         $statement->execute();
 

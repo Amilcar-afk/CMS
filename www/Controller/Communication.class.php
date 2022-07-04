@@ -13,13 +13,10 @@ use App\Model\User_projet;
 
 class Communication
 {
-    public $project;
     public $conversation;
     public $message;
     public $user;
-
     public $currentUser;
-
     protected $project;
     protected $user_project;
 
@@ -75,60 +72,66 @@ class Communication
             }
             echo json_encode($allUsers);
         }
-
     }
 
-    public function userConversation()
+    public function userConversation($dataFromUrl)
     {
-        $data = $this->user->parseUrl();
-        $user = $this->user->find($data['id']);
+        $idConversation = $dataFromUrl['id_conv'];
+        $user_conversation_data = Query::from('cmspf_User_conversation')->where('conversation_key = '.$dataFromUrl['id_conv'])->execute();
+        foreach($user_conversation_data as $conversation){
+            if($conversation['user_key'] != $_SESSION['Auth']->id){
+                $userId = $conversation['user_key'];
+            }
+        } 
+        $user = $this->user->find($userId);
         $view = new View("conversation_user", "back");
         $view->assign("user",$user);
-
+        $view->assign("idConversation",$idConversation);
     }
-
 
     public function messages()
     {
         if(isset($_POST['id'])){
             $conversation = new Conversation();
             $conversation->setId($_POST['id']);
-            
             echo json_encode(array_reverse($conversation->messages()));
         }
+    }
+
+    public function newMessage(){
+        $lastMessage = Query::from('cmspf_Messages')
+        ->where('conversation_key ='.$_POST['id_conv'])
+        ->where('id >='.$_POST['id'])
+        ->execute();
+        echo json_encode(array_reverse($lastMessage));
+    }
+
+    public function newConversation()
+    {
+        $this->conversation->setDate(date('Y-m-d H:i:s'));
+        $this->conversation->save();
+        $conversationId =$this->conversation->getLastId();
+        echo json_encode($this->conversation->getLastId());
+        $user_conversation = new User_conversation();
+        $my_conversation = new User_conversation();
+        $user_conversation->setUser_key($_POST['userId']);
+        $user_conversation->setConversation_key($conversationId);
+        $my_conversation->setUser_key($_SESSION['Auth']->id);
+        $my_conversation->setConversation_key($conversationId);
+        $user_conversation->save();
+        $my_conversation->save();
     }
 
 
     public function composeConversation()
     {
         if (!empty($_POST)) {
-
-            if(!isset($_POST['id_conversation'])){
-                $this->conversation->setDate(date('Y-m-d H:i:s'));
-                $this->conversation->save();
-                $conversationId =  $this->conversation->getLastId();
-            }else{
-                $conversationId = $_POST['id_conversation'];
-            }
-
-            $user_conversation = new User_conversation();
-            $my_conversation = new User_conversation();
-
-            $user_conversation->setUser_key($_POST['id_user']);
-            $user_conversation->setConversation_key($conversationId);
-
-            $my_conversation->setUser_key($_SESSION['Auth']->id);
-            $my_conversation->setConversation_key($conversationId);
-
-            $user_conversation->save();
-            $my_conversation->save();
-
+            $conversationId = $_POST['id_conversation'];
             $this->message->setDate(date('Y-m-d H:i:s'));
             $this->message->setContent($_POST['message']);
             $this->message->setUser_key($_SESSION['Auth']->id);
             $this->message->setConversation_key($conversationId);
             $this->message->save();
-
         }
     }
 

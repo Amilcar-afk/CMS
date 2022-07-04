@@ -30,13 +30,18 @@
                                     <h2>
                                         <?php foreach ($conversation->users() as $user): ?>
                                             <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-                                                <a href="conversations/user-conversations/<?= $user->getId()?>">
+
+
+                                                <a href="conversations/user-conversations/<?= $conversation->getId()?>">
                                                     <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
                                                 </a>
                                             <?php endif;  ?>
                                          <?php endforeach;?>
                                     </h2>
-                                    <div><?= $conversation->lastMessage()->getContent(); ?></div>
+                                    <?php if(!empty($conversation->lastMessage() )):  ?>
+                                        <div><?= $conversation->lastMessage()->getContent(); ?></div>
+                                    <?php endif; ?>
+
                                 </div>
                                 <span class="material-icons-round">more_horiz</span>
                             </header>

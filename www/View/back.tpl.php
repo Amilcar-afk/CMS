@@ -15,6 +15,8 @@
 
         <!-- <link rel="stylesheet" type="text/css" href="../style/dist/css/main.css" /> -->
         <!-- faut garder celui car qd je passe un id dans l'url le css marche pas -->
+
+        
         <link rel="stylesheet" type="text/css" href="/style/dist/css/main.css" /> 
         <!-- //du coup faut le laisser celui  -->
 

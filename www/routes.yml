@@ -154,9 +154,8 @@
 /conversations/user-conversations:
   controller: communication
   action: userConversation
-  params: [ id ]
+  params: [id_conv]
   middleware: [ 'auth', 'admin' ]
-
 
 /conversations/get-all-messages:
   controller: communication
@@ -164,15 +163,24 @@
   params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
-
 /conversation/compose:
   controller: communication
   action: composeConversation
   middleware : ['auth', 'admin']
 
+/conversation/compose-newconversation:
+  controller: communication
+  action: newConversation
+  middleware : ['auth', 'admin']
+
+/conversations/newmessage:
+  controller: communication
+  action: newMessage
+  middleware : ['auth', 'admin']
+
 /conversation/delete:
   controller: communication
-  action: deleteConversation
+  action: newMessage
   middleware: [ 'auth', 'admin' ]
 
 /projects:

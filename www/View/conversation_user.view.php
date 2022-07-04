@@ -18,33 +18,16 @@
 
                 <article>
                     <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-
                         <div class="col-12" id="messageDiv">
-                                <?php foreach($user->conversations() as $conversation): ?>
-                                    <?php // foreach($conversation->messages() as $message): ?>
-                                    <?php //$message->getContent() ?><br>
-                                        <!-- envoyé par:
-                                    <?php //$message->user()->getFirstname()  ?>
-                                    <?php  //$message->user()->getLastname()  ?> -->
-
-
-                                    <?php //endforeach; ?><br><br>
-                                <?php endforeach; ?>
-                        </div>
-
-
-                        <div class="col-12">
-
-                            <?php if(isset($conversation)):?>
-                                <input type="hidden" id="conversationId" value="<?= $conversation->getId() ?>" >
-                            <?php endif; ?>
-                            <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
+                            <div id="chatDiv">
+                            </div>
+                                <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
+                                <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
                             <div class="input-container">
                                 <input id='sendTextarea' class="input" type="text" name='chat' placeholder="Your message">
                                 <button id='sendButton' class="cta-button" >Send</button>
                             </div>
                         </div>
-
                     </div>
                 </article>
             </div>

@@ -44,6 +44,13 @@ class Conversation extends BaseSQL
         parent::save();
     }
 
+
+    public function find($id = null, string $attribut = 'id')
+    {
+        return parent::find($id, $attribut);
+    }
+   
+
     public function getLastId()
     {
         return parent::getLastId();
@@ -81,15 +88,10 @@ class Conversation extends BaseSQL
 
     public function lastMessage()
     {
-
         $lastMessage = Query::from('cmspf_Messages')->where('conversation_key = '.$this->getId())->orderby("id","DESC")->limit('1')->execute('Message');
-        return $lastMessage[0];
+        if(!empty($lastMessage[0])){
+            return $lastMessage[0];
+        }
     }
-
-
-
-    // (SELECT max(id) FROM cmspf_Messages) 
-
-
 
 }
