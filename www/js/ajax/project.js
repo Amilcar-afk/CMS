@@ -1,25 +1,12 @@
-const userSelected = document.getElementById("selectUsers");
-const divUsersSelected = document.getElementById("divUserSearch");
-const listSelectedUsers = document.getElementById("listSelectedUsers");
-
-const userSelectedUpdate = document.getElementById("selectUsersUpdate");
-const divUsersSelectedUpdate = document.getElementById("divUserSearchUpdate");
-const listSelectedUsersUpdate = document.getElementById("listSelectedUsers");
-
-
-//const buttonValidForm = document.getElementsByClassName("cta-button-compose-project");
+const userSelected = document.getElementsByClassName("inputSelect");
 let userChecked = null;
 
-//CREATE PROJECT
-selectEvent(userSelected, divUsersSelected, listSelectedUsers);
-
-//UPDATE PROJECT
-selectEvent(userSelectedUpdate, divUsersSelectedUpdate, listSelectedUsersUpdate);
-
-//validFormProject(buttonValidForm);
+//ADD USERS ON CREATE OR UPDATE PROJECT
+for(let i = 0; i < userSelected.length; i++)
+    selectEvent(userSelected[i], userSelected[i].nextElementSibling, userSelected[i].nextElementSibling.childNodes[0]);
 
 //display selected user
-function selectEvent(userSelected, divUsersSelected, listSelectedUsers) {
+function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
     userSelected.addEventListener("change", () => {
         let userSelectedIndex = userSelected.selectedIndex;
         let userSelectedOption = userSelected.options[userSelectedIndex];
@@ -51,6 +38,7 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers) {
 
     }, false);
 }
+
 //undisplay user deselected
 function onClickCheckbox(item, userSelected){
     let li = item.parentNode;
@@ -62,40 +50,18 @@ function onClickCheckbox(item, userSelected){
     li.remove();
 }
 
-/*function validFormProject(buttonValidForm) {
-    buttonValidForm.addEventListener("click", () => {
-
-        let uri = url + "project/compose/";
-        let titleProject = document.getElementById("title").value;
-        let descProject = document.getElementById("description").value;
-        let userInputs = document.getElementsByClassName("user-check");
-        let dataString = `title=` + encodeURIComponent(titleProject) + `&description=` + encodeURIComponent(descProject) + `&users=`;
-
-        for (let i = 0; i < userInputs.length; i++) {
-            if (i !== 0)
-                dataString += ",";
-            dataString += encodeURIComponent(userInputs[i].value);
-        }
-
-        ajaxRequest(uri, "POST", dataString, displayUserSearch, true);
-    });
-}
-
-function displayUserSearch(req){
-    document.write(req.responseText);
-}*/
-
-/*function getUsers(element){
+function getUsers(element){
     let tabId = '';
     if(element.length > 0){
         let list = element[0].childNodes;
-        for (let i = 0; i < list.length; i++){
-            if(i != 0)
+        for (let i = 0; i < list.length; i++) {
+            if (i != 0)
                 tabId += ',';
             tabId += list[i].value;
+        }
     }
    return tabId;
-}*/
+}
 
 
 $(document).ready(function(){
@@ -108,9 +74,11 @@ $(document).ready(function(){
             type:"POST",
             data:
                 {
+                    id:formContainer[0].parentNode.parentNode.parentNode.parentNode.getAttribute('id').split('-')[3], //get The section of the form
                     title:$(this).parent().find('[name=title]').val(),
-                    description:formContainer.find('[name=description]')[0].value
-                    //user: usersId
+                    description:formContainer.find('[name=description]')[0].value,
+                    users: getUsers(formContainer.find('[id=divUserSearch]').children())
+
                 },
             success:function(answer)
             {
