@@ -134,7 +134,7 @@
 
 /settings/media-library:
   controller: settings
-  action: listMedia
+  action: listImages
   middleware : ['auth', 'admin']
 
 /sitemap:

@@ -87,7 +87,7 @@ class Settings
                 $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
                 $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
 
-                $view = new View("database");
+                $view = new View("configuration");
                 $view->assign("configuration", $this->config);
             }else{
                 return include "View/Partial/form.partial.php";
@@ -118,17 +118,7 @@ class Settings
         $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
         $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
 
-        $view = new View("database", "back");
+        $view = new View("configuration", "back");
         $view->assign("configuration", $this->config);
-    }
-
-
-
-
-
-
-    public function listMedia()
-    {
-        $view = new View("media-library", "back");
     }
 }

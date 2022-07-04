@@ -5,20 +5,21 @@
             <nav>
                 <a href="/settings/user-manager" class="cta-button cta-button--menu main-nav-choice" data-wc-target="user-manager-container"><span class="material-icons-round">supervisor_account</span>User manager</a>
                 <a href="/settings/style" class="cta-button cta-button--menu main-nav-choice" data-wc-target="style-container"><span class="material-icons-round">brush</span>Style</a>
-                <a href="/settings/configuration" class="cta-button cta-button--menu main-nav- selected" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Configuration</a>
+                <a href="/settings/configuration" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="database-container"><span class="material-icons-round">cloud</span>Configuration</a>
                 <a href="/settings/media-library" class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-library-container"><span class="material-icons-round">video_library</span>Media library</a>
             </nav>
         </div>
         <section class="collapse-parent">
             <div id="style-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
-        <article>
-            <header class="main-nav-choice" data-wc-target="main-db-elements">
-                <h2>Data Base</h2>
-                <span class="material-icons-round">more_horiz</span>
-            </header>
-            <div id="main-db-elements" class="container-main-content container-main-content--menu-content collapse row" data-group-collapse="style-manager-container">
-                <section class="collapse-parent">
-                    <div id="user-manager-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
+                <header>
+                    <h1 class="title title--black">CONFIGURATION</h1>
+                </header>
+                <article>
+                    <header class="main-nav-choice selected" data-wc-target="main-db-elements">
+                        <h2>Data Base</h2>
+                        <span class="material-icons-round">more_horiz</span>
+                    </header>
+                    <div id="main-db-elements" class="container-main-content container-main-content--menu-content collapse--open row" data-group-collapse="style-manager-container" style="opacity: 1">
                         <article>
                             <?php if(empty($config)):  ?>
                                 <?php $this->includePartial("form", $configuration->dataBaseForm())  ?>
@@ -27,18 +28,14 @@
                             <?php endif?>
                         </article>
                     </div>
-                </section>
-            </div>
-        </article>
+                </article>
 
-        <article>
-            <header class="main-nav-choice" data-wc-target="main-smtp-elements">
-                <h2>SMTP</h2>
-                <span class="material-icons-round">more_horiz</span>
-            </header>
-            <div id="main-smtp-elements" class="container-main-content container-main-content--menu-content collapse row" data-group-collapse="style-manager-container">
-                <section class="collapse-parent">
-                    <div id="user-manager-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
+                <article>
+                    <header class="main-nav-choice" data-wc-target="main-smtp-elements">
+                        <h2>SMTP</h2>
+                        <span class="material-icons-round">more_horiz</span>
+                    </header>
+                    <div id="main-smtp-elements" class="container-main-content container-main-content--menu-content collapse row" data-group-collapse="style-manager-container">
                         <article>
                             <?php if(empty($config)):  ?>
                                 <?php $this->includePartial("form", $configuration->smtpForm())  ?>
@@ -47,11 +44,9 @@
                             <?php endif?>
                         </article>
                     </div>
-                </section>
-            </div>
-        </article>
-        
-         </div>
+                </article>
+
+             </div>
         </section>
     </section>
 </section>
