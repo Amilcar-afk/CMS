@@ -358,11 +358,28 @@
   }
 }
 
-#container-editor{
+#container-editor, #background-list-elements{
   overflow-y: scroll;
-  padding-top: 60px;
+  padding-top: 20px;
+  position: relative;
+
+  .background-container-back-office {
+    position: absolute;
+    width: 100%;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    left: 10px;
+    top: 10px;
+    overflow: hidden;
+    padding: 10px;
+  }
 }
 
+#background-list-elements{
+  .background-container-back-office {
+    height: 200px;
+  }
+}
 
 //reponsive tablet & mobile
 @media (max-width: 992px){

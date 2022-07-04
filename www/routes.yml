@@ -238,6 +238,11 @@
   action: composeOption
   middleware: ['auth', 'admin']
 
+/img/compose:
+  controller: option
+  action: composeImg
+  middleware: ['auth', 'admin']
+
 /social-media/compose:
   controller: statistics
   action: composereseauxsoc
