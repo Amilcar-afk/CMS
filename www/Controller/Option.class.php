@@ -215,9 +215,9 @@ class Option{
     public function listImages()
     {
         $images = Query::from('cmspf_Options')
-            ->where("type = 'images'")
+            ->where("type = 'image'")
             ->execute('Option');
         $view = new View("media-library", "back");
-        $view->assign("fonts", $images);
+        $view->assign("images", $images);
     }
 }

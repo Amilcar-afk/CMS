@@ -10,41 +10,31 @@
             </nav>
         </div>
         <section class="collapse-parent">
-            <div id="style-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
+            <div id="media-library-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                 <header>
-                    <h1 class="title title--black">CONFIGURATION</h1>
+                    <h1 class="title title--black">MEDIA LIBRARY</h1>
                 </header>
-                <article>
-                    <header class="main-nav-choice selected" data-wc-target="main-db-elements">
-                        <h2>Data Base</h2>
-                        <span class="material-icons-round">more_horiz</span>
-                    </header>
-                    <div id="main-db-elements" class="container-main-content container-main-content--menu-content collapse--open row" data-group-collapse="style-manager-container" style="opacity: 1">
-                        <article>
-                            <?php if(empty($config)):  ?>
-                                <?php $this->includePartial("form", $configuration->dataBaseForm())  ?>
-                            <?php else:  ?>
-                                <?php $this->includePartial("form", $config)  ?>
-                            <?php endif?>
-                        </article>
+                <div id="images-db-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="media-library-manager-container" style="opacity: 1">
+                    <div class="col-6">
+                        <?php for ($i = 0; $i <= ((count($images) - 1) / 2); $i++): ?>
+                            <article class="module-list">
+                                <div class="module col-6" data-media-type="img">
+                                    <img class="module" width="100%" src="<?= $images[$i]->getPath() ?>">
+                                </div>
+                            </article>
+                        <?php endfor;?>
                     </div>
-                </article>
 
-                <article>
-                    <header class="main-nav-choice" data-wc-target="main-smtp-elements">
-                        <h2>SMTP</h2>
-                        <span class="material-icons-round">more_horiz</span>
-                    </header>
-                    <div id="main-smtp-elements" class="container-main-content container-main-content--menu-content collapse row" data-group-collapse="style-manager-container">
-                        <article>
-                            <?php if(empty($config)):  ?>
-                                <?php $this->includePartial("form", $configuration->smtpForm())  ?>
-                            <?php else:  ?>
-                                <?php $this->includePartial("form", $config)  ?>
-                            <?php endif?>
-                        </article>
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i; isset($images[$i]); $i++): ?>
+                            <article class="module-list">
+                                <div class="module col-6" data-media-type="img">
+                                    <img class="module" width="100%" src="<?= $images[$i]->getPath() ?>">
+                                </div>
+                            </article>
+                        <?php endfor;?>
                     </div>
-                </article>
+                </div>
 
              </div>
         </section>

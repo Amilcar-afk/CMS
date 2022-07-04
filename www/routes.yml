@@ -133,7 +133,7 @@
   middleware : ['auth', 'admin']
 
 /settings/media-library:
-  controller: settings
+  controller: option
   action: listImages
   middleware : ['auth', 'admin']
 
