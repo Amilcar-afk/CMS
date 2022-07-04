@@ -78,21 +78,6 @@ $(document).ready(function(){
         $(this).attr('contenteditable', 'true');
         $(this).addClass("module--on");
 
-        /*var classList = $(module).attr('class').split(/\s+/);
-        $.each(classList, function(index, item) {
-            if (item === 'someClass') {
-                if ('^col-'.test(item)){
-
-                }else if ('^col-offset-'.test(item)){
-
-                }else if ('^text-'.test(item)){
-
-                }else if ('^fs-'.test(item)){
-
-                }
-            }
-        });*/
-
         $(this).attr('data-a-target', 'editable-module');
 
         var $editorToolBar = '<div id="editable-module" contenteditable="false" class="editable-module a-zoom-out-end">\n' +
@@ -324,7 +309,7 @@ $(document).ready(function(){
     //background-color menu component
     $(document).on( "click", ".cta-button-background-color", function () {
         cleanEditToolBar(this);
-        let moduleBackgroundColor = getModuleBackgroundColor();
+        let moduleBackgroundColor = getModuleBackgroundColor(this);
         let selected = '';
         if (moduleBackgroundColor == "unset"){
             selected = "selected";
@@ -454,16 +439,39 @@ $(document).ready(function(){
     })
 
     //insert-link component
-    //background-color menu component
+    //insert-link menu component
     $(document).on( "click", ".cta-button-insert-link", function () {
         cleanEditToolBar(this);
+        let actualSrc = getModuleSrc(this);
 
-        var $hrefInput = $( '<input class="input" type="text" placeholder="https://google.com">' );
+        var $hrefInput = $( '<input class="input" name="link" type="text" placeholder="https://google.com" value="'+actualSrc+'">' );
         $(this).parent().append($hrefInput);
 
-        var $ctaButtonSubmitLink = $( '<button class="cta-button cta-button--icon"><span class="material-icons-round">send</span></button>' );
+        var $ctaButtonSubmitLink = $( '<a href="'+actualSrc+'" target="_blank" class="cta-button cta-button--icon cta-button-preview-link"><span class="material-icons-round">open_in_new</span></a>' );
         $(this).parent().append($ctaButtonSubmitLink);
 
+        var $ctaButtonSubmitLink = $( '<button class="cta-button cta-button--icon cta-button-compose-link"><span class="material-icons-round">send</span></button>' );
+        $(this).parent().append($ctaButtonSubmitLink);
+    })
+    //link compose component
+    $(document).on( "click", ".cta-button-compose-link", function () {
+        var module = $($(this).parent().parent().parent());
+        let src = $(module).find('[name=link]').val();
+        $($(module).find('cta-button-preview-link')[0]).attr('href', src);
+
+        let iframeType = $($(module).find('iframe')[0]).attr('data-media-type');
+        if (iframeType == "spotify"){
+            src = src.replace("album/", "embed/album/");
+            src = src.replace("track/", "embed/track/");
+
+            let toBeReplace = src.substr(src.indexOf("?si=") + 4)
+
+            src = src.replace("?si="+toBeReplace, "?utm_source=generator");
+        }else {
+            src = src.replace("watch?v=", "embed/");
+        }
+
+        $($(module).find('iframe')[0]).attr('src', src);
     })
 
     //add component
@@ -667,6 +675,7 @@ function getModuleFontSize(btn){
         return 14;
     }
 }
+
 function getModuleBackgroundColor(btn){
     var module = $(btn).parent().parent().parent();
 
@@ -705,6 +714,20 @@ function getModuleAlign(btn){
         return 'format_align_justify'
     }else{
         return 'format_align_left';
+    }
+}
+
+function getModuleSrc(btn){
+    var module = $(btn).parent().parent().parent();
+
+    if ($($(module).find('iframe')[0])){
+        let iframe = $(module).find('iframe')[0];
+        let actuelSrc = $(iframe).attr('src');
+        return actuelSrc;
+    }else {
+        let img = $($(module).find('img')[0]);
+        let actuelSrc = $(img).attr('src');
+        return actuelSrc;
     }
 }
 
