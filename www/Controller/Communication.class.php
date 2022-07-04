@@ -7,6 +7,7 @@ use App\Core\View;
 use App\Model\User;
 use App\Model\Projet;
 use App\Model\User_projet;
+use App\Core\Validator;
 
 class Communication
 {
@@ -27,29 +28,13 @@ class Communication
 
     public function listProject()
     {
-        $userProject = Query::from('cmspf_Projets')->where('user_key = ' . $_SESSION['Auth']->id)->execute();
-        $usersProject = [];
-
-        if(count($userProject) > 0){
-
-            foreach ($userProject as $key => $project) {
-                $idProject = $userProject[$key]['id'];
-                $this->project->setId($idProject);
-                $usersProject[$key] = $this->project->user();
-            }
-
-        }
-
         $view = new View("project-list", "back");
 
-        $projects = $this->project->find();
-        $view->assign("projects",$projects);
+        $user = new User();
+        $user = $user->find($_SESSION['Auth']->id);
+        $view->assign("projects", $user->projects());
 
-        $users = new User();
-        $users = $users->find();
-        $view->assign("users", $users);
-
-        $view->assign("usersProject", $usersProject);
+        $view->assign("usersProject", $user->find());
 
         $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
@@ -57,14 +42,42 @@ class Communication
 
     public function composeProject()
     {
-        if(!empty($_POST)){
 
-            $view = new View("project-list", "back");
+        //$admin = $this->project->isAdmin();
+        $admin = $_SESSION['Auth']->rank;
+
+        if(!empty($_POST) && $admin === "admin"){
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $projectId = $_POST['id'];
+
+            $result = Validator::run($this->project->getFormProject(), $_POST,false);
+
+            if(!empty($result)) {
+
+                if (isset($title) && !empty($title))
+                    $this->project->setTitle($title);
+
+                if (isset($description) && !empty($description))
+                    $this->project->setDescription($description);
+
+                if (isset($projectId) && !empty($projectId))
+                    $this->project->setId($projectId);
+
+            }else{
+                http_response_code(400);
+            }
+
+        }else{
+            http_response_code(400);
+        }
+
+            //$view = new View("project-list", "back");
             //$result = Validator::run($this->project->getFormCreateProject(), $_POST,false);
 
             //if(empty($result)){
 
-            $this->project->setTitle($_POST['title']);
+            /*$this->project->setTitle($_POST['title']);
             $this->project->setDescription($_POST['description']);
             $this->project->setUserKey($_SESSION['Auth']->id);
             $this->project->save();
@@ -97,8 +110,8 @@ class Communication
                 $view->assign("error_from",$result);
             }*/
 
-        }else{
+        /*}else{
             http_response_code(400);
-        }
+        }*/
     }
 }

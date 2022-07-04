@@ -4,6 +4,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
+use App\Core\Query;
 
 
 class Projet extends BaseSQL
@@ -103,10 +104,27 @@ class Projet extends BaseSQL
         return parent::find($id, $attribut);
     }
 
-    public function user()
+    public function usersNotInProject()
     {
-        $users = parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
-        return $users;
+        return parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+    }
+
+    public function usersInproject()
+    {
+        return parent::belongsToMany(User::class, 'cmspf_User_projet');
+    }
+
+    public function isAdmin()
+    {
+        $req = Query::from('cmspf_User_project')
+            ->where('projet_key = ' . $this->getId())
+            ->where('user_key = ' . $_SESSION['Auth']->id)
+            ->where('type = "owner"')
+            ->execute('User_projet');
+
+        if(!empty($req[0]))
+            return true;
+        return false;
     }
 
     public function getFormProject($users, $name = ''): array
@@ -158,11 +176,11 @@ class Projet extends BaseSQL
                     "type"=>"select",
                     "name"=>"user",
                     "id"=>"selectUsers".$name,
-                    "value"=>$this->user(),
-                    "class"=>"input inputSelect".$name,
+                    "value"=>$this->usersInproject(),
+                    "class"=>"input inputSelect",
                     "error"=>"",
                     "idToVerif"=>true,
-                    "div"=>"divUserSearch".$name,
+                    "div"=>"divUserSearch",
                     "choices"=>$usersList['choices']
                 ],
 

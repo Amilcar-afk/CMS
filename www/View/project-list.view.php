@@ -66,7 +66,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $project->getFormProject($usersProject[$key], 'Update')) ?>
+                        <?php  $this->includePartial("form", $project->getFormProject($project->usersNotInProject(), 'Update')) ?>
                     </article>
 
                 </div>
@@ -88,7 +88,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $projectEmpty->getFormProject($users)) ?>
+                    <?php  $this->includePartial("form", $projectEmpty->getFormProject($usersProject)) ?>
                 </article>
             </div>
         </section>
