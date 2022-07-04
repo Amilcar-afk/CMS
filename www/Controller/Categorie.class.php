@@ -7,6 +7,7 @@ use App\Model\Categorie as Categorie_model;
 use App\Model\Categorie_categorie;
 use App\Core\Query;
 use App\Model\Page;
+use App\Model\Page_categorie;
 
 class Categorie{
 
@@ -69,7 +70,7 @@ class Categorie{
                         $page = new Page();
                         $page->setCategorieKey($lastId);
                     }
-                    $page->setStatus('Tag');
+                    $page->setStatus('tag');
                     $page->setSlug($_POST['title']);
                     $page->setTitle($_POST['title']);
                     $page->setUserKey($_SESSION['Auth']->id);
@@ -116,7 +117,7 @@ class Categorie{
     {
         if( isset($_POST['id']) ) {
             $categorie = $this->categorie->find($_POST['id']);
-            if ($categorie->getId() != null) {
+            if ($categorie->getId() != null && $categorie->getType() == 'tag') {
 
                 $categorieCategories = Query::from('cmspf_Categorie_categorie')->where("categorie_child_key = " . $_POST['id'] . "")->execute('Categorie_categorie');
                 foreach ($categorieCategories as $categorieCategorie)
@@ -132,4 +133,93 @@ class Categorie{
         }
     }
 
+    public function composeNavigationPage()
+    {
+        if( isset($_POST['page']) && isset($_POST['navigation']) ) {
+            $page = new Page();
+            $page = $page->find($_POST['page']);
+
+            $navigation = new Categorie_model();
+            $navigation = $navigation->find($_POST['navigation']);
+
+            if ($navigation->getId() != null && $page->getId() != null){
+                $page_categorie = Query::from('cmspf_Page_categorie')
+                    ->where("page_key = " . $_POST['page'] . "")
+                    ->where("categorie_key = " . $_POST['navigation'] . "")
+                    ->execute('Page_categorie');
+
+                if (!isset($page_categorie[0])){
+                    $page_categorie = new Page_categorie();
+                    $page_categorie->setPagekey($_POST['page']);
+                    $page_categorie->setCategorieKey($_POST['navigation']);
+                    $page_categorie->save();
+                }
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function deleteNavigationPage()
+    {
+        if( isset($_POST['page']) && isset($_POST['navigation']) ) {
+            $page_categorie = Query::from('cmspf_Page_categorie')
+                ->where("page_key = " . $_POST['page'] . "")
+                ->where("categorie_key = " . $_POST['navigation'] . "")
+                ->execute('Page_categorie');
+
+            if (isset($page_categorie[0])){
+                $page_categorie[0]->delete($page_categorie[0]->getId());
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function composeNavigationCategorie()
+    {
+        if( isset($_POST['categorie']) && isset($_POST['navigation']) ) {
+            $categorie = new Categorie_model();
+            $categorie = $categorie->find($_POST['categorie']);
+
+            $navigation = new Categorie_model();
+            $navigation = $navigation->find($_POST['navigation']);
+
+            if ($navigation->getId() != null && $categorie->getId() != null){
+                $categorie_categorie = Query::from('cmspf_Categorie_categorie')
+                    ->where("categorie_child_key = " . $_POST['categorie'] . "")
+                    ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                    ->execute('Categorie_categorie');
+
+                if (!isset($categorie_categorie[0])){
+                    $categorie_categorie = new Categorie_categorie();
+                    $categorie_categorie->setCategorieChildKey($_POST['categorie']);
+                    $categorie_categorie->setCategorieParentKey($_POST['navigation']);
+                    $categorie_categorie->save();
+                }
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function deleteNavigationCategorie()
+    {
+        if( isset($_POST['categorie']) && isset($_POST['navigation']) ) {
+            $categorie_categorie = Query::from('cmspf_Categorie_categorie')
+                ->where("categorie_child_key = " . $_POST['categorie'] . "")
+                ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                ->execute('Categorie_categorie');
+
+            if (isset($categorie_categorie[0])){
+                $categorie_categorie[0]->delete($categorie_categorie[0]->getId());
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
 }

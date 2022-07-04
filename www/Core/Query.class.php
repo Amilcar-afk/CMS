@@ -16,6 +16,7 @@ class Query extends BaseSQL
     private static $params = [];
     private static $class;
     private static $groupBy = '';
+    private static $join = [];
 
     public function __construct()
     {
@@ -85,11 +86,62 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function innerJoin(string ...$condition): self 
+    {
+        self::$join = array_merge(self::$join, $condition);
+
+        return (new Query);
+    }
+
     public function count(string ...$condition): int
     {
         self::select("COUNT(id)");
         return self::execute()->fetchColumn();
     }
+
+    
+
+    function pagination($result_count, callable $format_function=null)
+    {
+        if(!$format_function){
+            $format_function = function($url,$page,$qs){
+                $qs['page'] = $page;
+                return $url.'?'.http_build_query($qs);
+            };
+        }
+
+        $per_page = 5;
+        $total_pages = ceil($result_count / $per_page);
+        $return = [];
+
+        parse_str($_SERVER['QUERY_STRING'],$qs);
+
+        $url = $_SERVER['REQUEST_URI'];
+
+        if($pos = strpos($url,'?')){
+            $url = substr($url,0,$pos);
+        }
+
+        $current_page = isset($qs['page']) ? $qs['page'] : 1;
+        $previous = $current_page -1;
+
+        if ($previous) {
+            $return['previous'] = $format_function($url,$previous,$qs);
+        }
+
+        for($i = max(1,$current_page-5); $i <= min($total_pages,$current_page+5); $i++) {
+            $return["$i"] = $format_function($url,$i,$qs);
+        }
+
+        $next_page = $current_page + 1;
+
+        if ($next_page < $total_pages){
+            $return['next'] = $format_function($url,$next_page,$qs);
+        }
+
+        return $return;
+    }
+
 
     public function params(array $params): self
     {
@@ -114,6 +166,10 @@ class Query extends BaseSQL
         $parts[] = 'FROM';
         $parts[] = self::constructFrom();
 
+        if (!empty(self::$join)) {
+            $parts[] = "INNER JOIN".join(" ", self::$join);
+        }
+
         if (!empty(self::$where)){
             $parts[] = "WHERE";
             $parts[] = '(' . join(') AND (', self::$where) . ')';
@@ -129,7 +185,7 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
-        }
+        }     
 
         if (!empty(self::$groupBy))
             $parts[] = self::$groupBy;
@@ -167,6 +223,7 @@ class Query extends BaseSQL
         self::$or = [];
         self::$groupBy = [];
         self::$limit = [];
+        self::$join = [];
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }

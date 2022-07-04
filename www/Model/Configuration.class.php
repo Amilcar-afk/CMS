@@ -115,7 +115,7 @@ class Configuration extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "cta"=>"cta-button-compose-database",
-                "submit"=>"SAVE",
+                "submit"=>"Save",
             ],
             "inputs"=>[
                 "DBHOST"=>[
@@ -184,7 +184,7 @@ class Configuration extends BaseSQL
             "config"=>[
                 "method"=>"POST",
                 "cta"=>"cta-button-compose-smtp",
-                "submit"=>"SAVE",
+                "submit"=>"Save",
             ],
             "inputs"=>[
 

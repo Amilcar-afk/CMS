@@ -20,6 +20,6 @@
     --background-color: <?= (isset($backgroundColor[0]) )? $backgroundColor[0]->getValue() :'white' ?>;
     --text-color: <?= (isset($textColor[0]) )? $textColor[0]->getValue() :'black' ?>;
 
-    <?= (isset($radius[0]) && $radius[0]->getValue() == 'right_angle' )? '--radius: 5px;' : '' ?>
+    <?= (isset($radius[0]) && $radius[0]->getValue() == 'right_angle' )? '--radius: 5px; --radius-none: 0px' : '' ?>
     }
 </style>

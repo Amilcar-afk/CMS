@@ -31,7 +31,8 @@
                             <label for="toPerCountry">To</label>
                             <input id="toPerCountry" name="toPerCountry" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-country">Submit</button>
+
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
                     <div id="regions_div" style="width: 100%; height: 100%;">
 
@@ -71,61 +72,16 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1">
+                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
                         <table class="table table--lite">
                             <tbody>
-                            <tr>
-                                <td>home</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>contact</td>
-                                <td>vue 21</td>
-                            </tr>
-                            <tr>
-                                <td>projet</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
-                            <tr>
-                                <td>logout</td>
-                                <td>vue 12</td>
-                            </tr>
-                            <tr>
-                                <td>login</td>
-                                <td>vue 24</td>
-                            </tr>
-                            <tr>
-                                <td>avis</td>
-                                <td>vue 17</td>
-                            </tr>
+                            <?php foreach ($viewPerPages as $view): ?>
+                                <tr>
+                                    <td><?php print_r($view['title']) ?></td>
+                                    <td>vue : <?php print_r($view['number']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            
                             </tbody>
                         </table>
                         <button class="cta-button--text-no-background">
@@ -142,7 +98,7 @@
                             <label for="toPerPage">To</label>
                             <input id="toPerPage" name="toPerPage" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-page">Submit</button>
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
 
                 </section>
@@ -170,7 +126,8 @@
                             <label for="toPerDevice">To</label>
                             <input id="toPerDevice" name="toPerDevice" type="date" class="input">
                         </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit selected" data-wc-target="chart-per-device">Submit</button>
+
+                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
                     </div>
                 </section>
             </div>
@@ -180,7 +137,7 @@
                     <header>
                         <h3>Per week</h3>
                     </header>
-                    <canvas id="chartBar"></canvas>
+                    <div id="chart-per-week" style="width: 100px; height: 300px;"></div>
                 </section>
 
                 <section class="card card--smallcard card--background-color">
@@ -297,4 +254,42 @@ google.charts.load("current", {packages:["corechart"]});
         chart.draw(data, options);
       }
 
+</script>
+
+
+
+
+
+<script>
+
+
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Copper", 8.94, "#b87333"],
+        ["Silver", 10.49, "silver"],
+        ["Gold", 19.30, "gold"],
+        ["Platinum", 21.45, "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Density of Precious Metals, in g/cm^3",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("chart-per-week"));
+      chart.draw(view, options);
+  }
 </script>

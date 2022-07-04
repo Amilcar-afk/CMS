@@ -48,22 +48,18 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         $param = explode('/',$replace);
         array_shift($param);
 
-        if(sizeof($routes[$uri]['params']) === sizeof($param)){
-            foreach($routes[$uri]['params'] as $key => $itemParam){
-                $currentParams = [
-                    $itemParam => $param[$key]
-                ];
+        if(isset($routes[$uri]['params']))
+        {
+            if(sizeof($routes[$uri]['params']) === sizeof($param)){
+                foreach($routes[$uri]['params'] as $key => $itemParam){
+                    $currentParams = [
+                        $itemParam => $param[$key]
+                    ];
+                }
+            }else{
+                http_response_code(404);
+                die();
             }
-        }
-
-
-        if( sizeof($param) != sizeof($routes[$uri]['params']))
-        {
-            http_response_code(404);
-        }
-        if(!isset($routes[$uri]['params']))
-        {
-            http_response_code(404);
         }
         break;
     }

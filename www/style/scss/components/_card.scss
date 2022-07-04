@@ -163,7 +163,7 @@
         }
     }       
 
-    // charts
+    // CHARTS
 
     & #chart-per-device {
         width: 100%;
@@ -173,6 +173,13 @@
         }
         & rect:nth-child(3) {
             display: none;
+        }
+    }
+
+    & #chart-per-week {
+        width: 100%;
+        & g rect{
+            fill: none;
         }
     }
     
