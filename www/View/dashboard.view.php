@@ -241,11 +241,17 @@ google.charts.load("current", {packages:["corechart"]});
             <?php  print_r(json_encode($chartDeviceData)); ?>
         );
 
+        var root = document.querySelector(':root') ;
+        var rootStyles = getComputedStyle(root) ;
+        var mainColor = rootStyles.getPropertyValue('--main-color');
+        var secondColor = rootStyles.getPropertyValue('--second-color');
+        var thirdColor = rootStyles.getPropertyValue('--third-color');
+
         var options = {
           pieHole: 0.6,
           width: '100%',
           height: '100%',
-          colors: ['#396075', '#547a8f', '#87949c'],
+          colors: [mainColor, secondColor, thirdColor],
           legend: {
               position : 'none',
               //alignment: 'start'
@@ -277,10 +283,15 @@ google.charts.load('current', {'packages':['bar']});
           ['Sun', 5,5]
         ]);
 
+        
+        var root = document.querySelector(':root') ;
+        var rootStyles = getComputedStyle(root) ;
+        var mainColor = rootStyles.getPropertyValue('--main-color') ;
+
         var options = {
           
           legend: { position: 'none' },
-          colors: ['#396075', '#547a8f', '#87949c'],
+          colors: [mainColor],
           axes: {
             x: {
               0: { side: 'bottom', label: ''} // Top x-axis.

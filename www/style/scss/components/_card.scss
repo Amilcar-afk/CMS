@@ -146,7 +146,7 @@
             justify-content: space-between !important;
             align-self: stretch !important;
             & h3, .material-icons-round {
-                color: #396075 !important;
+                color: var(--main-color) !important;
             }
         }
     }
