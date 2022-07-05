@@ -1125,7 +1125,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       justify-content: space-between !important;
       align-self: stretch !important; }
       .card--bigcard header h3, .card--bigcard header .material-icons-round {
-        color: #396075 !important; }
+        color: var(--main-color) !important; }
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row; }
@@ -1139,6 +1139,11 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     height: 100%; }
     .card #chart-per-device rect {
       height: 100%;
+      fill: none; }
+  .card #chart-per-week {
+    height: 170px;
+    width: 100%; }
+    .card #chart-per-week g:nth-child(2) rect {
       fill: none; }
   .card .table-container {
     margin-top: 6px;

@@ -43,8 +43,10 @@
             <nav>
                 <ul>
                     <li><a id="back-office-logo" href="/"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></a></li>
-                    <li><a href="/dashboard" class="button-menu" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
-                    <li><a href="/pages" class="button-menu" data-alt="Sitemap"><span class="material-icons-round">map</span></a></li>
+                    <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
+                        <li><a href="/dashboard" class="button-menu" data-alt="Dashboard"><span class="material-icons-round">leaderboard</span></a></li>
+                        <li><a href="/pages" class="button-menu" data-alt="Sitemap"><span class="material-icons-round">map</span></a></li>
+                    <?php endif;?>
                     <li><a href="/conversations" class="button-menu" data-alt="Communication"><span class="material-icons-round">forum</span></a></li>
                     <li><a href="/settings/style" class="button-menu" data-alt="Settings"><span class="material-icons-round">settings</span></a></li>
                 </ul>
