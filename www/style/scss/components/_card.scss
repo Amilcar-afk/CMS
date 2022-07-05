@@ -156,40 +156,28 @@
         flex-direction: row;
         //align-items: flex-start;
     }
-    #regions_div {
+
+
+    // CHARTS
+    & #chart-per-country {
         width: 100%;
+        height: 100%;
         & g rect{
             fill: none;
         }
     }       
-
-    // CHARTS
-& .chart-container {
-    position: relative;
-    padding-bottom: 70%;
-    height: 0;
-    overflow:hidden;
-
     & #chart-per-device {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width:100%;
-        height:100%;
-
-        & rect{
+        width: 100%;
+        height: 100%;
+        & rect {
+            height: 100%;
             fill: none;
-        
         }
-        
     }
-}
-    
-
     & #chart-per-week {
-        //width: max-content;
-        & div {
-            width: max-content;
+        width: 100%;
+        & rect {
+            //fill: none;
         }
     }
     

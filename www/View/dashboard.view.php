@@ -34,9 +34,8 @@
 
                         <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
-                    <div id="regions_div" style="width: 100%; height: 100%;">
 
-                    </div>
+                        <div id="chart-per-country"></div>
 
                     <header>
                         <h3>Per country</h3>
@@ -113,11 +112,7 @@
                         </button>
                     </header>
 
-                    <div class="chart-container">
-
-                    
-                    <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
-                    </div>
+                        <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1;"></div>
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -134,12 +129,13 @@
                 </section>
             </div>
 
+
             <div class="col-4 col-md-12 col-sm-12">
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>
                     </header>
-                    <!-- <div id="chart-per-week" style="width: 100%; height: 300px;"></div> -->
+                    <div id="chart-per-week"></div>
                 </section>
 
                 <section class="card card--smallcard card--background-color">
@@ -225,7 +221,7 @@ google.charts.load('current', {
 
         var options = {};
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        var chart = new google.visualization.GeoChart(document.getElementById('chart-per-country'));
 
         chart.draw(data, options);
       }
@@ -270,35 +266,94 @@ google.charts.load("current", {packages:["corechart"]});
 <script>
 
 
-google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Copper", 8.94, "#b87333"],
-        ["Silver", 10.49, "silver"],
-        ["Gold", 19.30, "gold"],
-        ["Platinum", 21.45, "color: #e5e4e2"]
-      ]);
+google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Move', 'Percentage'],
+          ["King's pawn (e4)", 44],
+          ["Queen's pawn (d4)", 31],
+          ["Knight to King 3 (Nf3)", 12],
+          ["Queen's bishop pawn (c4)", 10],
+          ['Other', 3]
+        ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+        var options = {
 
-      var options = {
-        title: "Density of Precious Metals, in g/cm^3",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+          legend: { position: 'none' },
+          
+
+          axes: {
+            x: {
+              0: { side: 'bottom', label: ''}
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("chart-per-week"));
-      chart.draw(view, options);
-  }
+
+</script>
+<script>
+    Chart.types.Bar.extend({
+    name: "BarAlt",
+    initialize: function (data) {
+        Chart.types.Bar.prototype.initialize.apply(this, arguments);
+        
+        if (this.options.curvature !== undefined && this.options.curvature <= 1) {
+            var rectangleDraw = this.datasets[0].bars[0].draw;
+            var self = this;
+            var radius = this.datasets[0].bars[0].width * this.options.curvature * 0.5;
+            
+            // override the rectangle draw with ours
+            this.datasets.forEach(function (dataset) {
+                dataset.bars.forEach(function (bar) {
+                    bar.draw = function () {
+                        // draw the original bar a little down (so that our curve brings it to its original position)
+                        var y = bar.y;
+                        // the min is required so animation does not start from below the axes
+                        bar.y = Math.min(bar.y + radius, self.scale.endPoint - 1);
+                        // adjust the bar radius depending on how much of a curve we can draw
+                        var barRadius = (bar.y - y);
+                        rectangleDraw.apply(bar, arguments);
+                        
+                        // draw a rounded rectangle on top
+                        Chart.helpers.drawRoundedRectangle(self.chart.ctx, bar.x - bar.width / 2, bar.y - barRadius + 1, bar.width, bar.height, barRadius);
+                        ctx.fill();
+                        
+                        // restore the y value
+                        bar.y = y;
+                    }
+                })
+            })
+        }
+    }
+});
+
+var lineChartData = {
+    labels: ["January", "February", "March", "April", "May", "June"],
+    datasets: [
+        {
+            fillColor: "#79D1CF",
+            strokeColor: "#79D1CF",
+            data: [60, 80, 81, 56, 55, 40]
+        },
+        {
+            fillColor: "#D1CF79",
+            strokeColor: "#D1CF79",
+            data: [4, 5, 10, 1, 2, 3]
+        }
+    ]
+};
+
+var ctx = document.getElementById("myChart").getContext("2d");
+var myLine = new Chart(ctx).BarAlt(lineChartData, {
+    // 0 (flat) to 1 (more curvy)
+    curvature: 1
+});
 </script>
 
 
