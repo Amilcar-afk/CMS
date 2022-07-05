@@ -780,13 +780,3 @@ function getModuleSrc(btn){
         return actuelSrc;
     }
 }
-
-function alertMessage(message, action){
-    let icon = "<span class=\"material-icons-round\">info</span>";
-    if (action == 'warning'){
-        icon = "<span class=\"material-icons-round\">warning</span>";
-    }
-
-    let alert = $('<div class="alert alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
-    $("main").append(alert);
-}

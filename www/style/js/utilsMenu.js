@@ -149,10 +149,10 @@ function alertMessage(message, action){
         icon = "<span class=\"material-icons-round\">warning</span>";
     }
 
-    let alert = $('<div class="alert alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
-    $("main").append(alert);
+    let alertM = $('<div class="alert a-zoom-in alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
+    $("main").append(alertM);
 
     setTimeout(() => {
-        $('.alert').last().remove();
-    }, 2000);
+        $(alertM).remove();
+    }, 5000);
 }

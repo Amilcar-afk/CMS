@@ -1129,25 +1129,17 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card--smallcard {
     background: rgba(57, 96, 117, 0.5) !important;
     flex-direction: row; }
-  .card #regions_div {
-    width: 100%; }
-    .card #regions_div g rect {
+  .card #chart-per-country {
+    width: 100%;
+    height: 100%; }
+    .card #chart-per-country g rect {
       fill: none; }
-  .card .chart-container {
-    position: relative;
-    padding-bottom: 70%;
-    height: 0;
-    overflow: hidden; }
-    .card .chart-container #chart-per-device {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; }
-      .card .chart-container #chart-per-device rect {
-        fill: none; }
-  .card #chart-per-week div {
-    width: max-content; }
+  .card #chart-per-device {
+    width: 100%;
+    height: 100%; }
+    .card #chart-per-device rect {
+      height: 100%;
+      fill: none; }
   .card .table-container {
     margin-top: 6px;
     margin-bottom: 6px;
@@ -1772,6 +1764,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     .cta-button--menu.selected {
       background-color: var(--main-color);
       color: #AFBCC3; }
+      .cta-button--menu.selected .material-icons-round {
+        color: #AFBCC3; }
       .cta-button--menu.selected:hover {
         background-color: var(--main-color); }
     .cta-button--menu:hover {
@@ -2465,22 +2459,37 @@ h2 {
   border-radius: var(--radius, 5px);
   font-size: 1.25rem;
   color: var(--main-color);
-  background: rgba(129, 129, 129, 0.6);
-  box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(60px);
   position: absolute;
   left: 50%;
-  transform: translateY(-50%);
-  bottom: 50px; }
+  animation: zoom-in 0.2s;
+  bottom: 50px;
+  transition: all 0.2s ease; }
   .alert p {
     min-width: 300px;
     padding: 10px 60px;
     font-size: 1.25rem;
     align-items: center;
-    display: flex; }
+    background: rgba(129, 129, 129, 0.6);
+    transform: translateX(-50%);
+    box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(60px);
+    display: flex;
+    transition: all 0.2s; }
   .alert span {
     font-size: 1.25rem;
     padding-right: 20px; }
+
+@media (max-width: 992px) {
+  .alert {
+    left: unset;
+    right: unset;
+    width: 100%;
+    bottom: 93.59px;
+    border-radius: 0; }
+    .alert p {
+      transform: unset;
+      width: 100%;
+      padding: 10px 40px; } }
 
 .fullCalendar .fc th, .fullCalendar .fc td {
   border-style: unset !important;

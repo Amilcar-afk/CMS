@@ -7,23 +7,42 @@
 	border-radius: var(--radius, 5px);
 	font-size: rem(20);
 	color: var(--main-color);
-	background: rgba(129, 129, 129, 0.6);
-	box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
-	backdrop-filter: blur(60px);
 	position: absolute;
 	left: 50%;
-	transform: translateY(-50%);
+	animation: zoom-in 0.2s;
 	bottom: 50px;
+	transition: all 0.2s ease;
 
 	p{
 		min-width: 300px;
 		padding: 10px 60px;
 		font-size: rem(20);
 		align-items: center;
+		background: rgba(129, 129, 129, 0.6);
+		transform: translateX(-50%);
+		box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.55);
+		backdrop-filter: blur(60px);
 		display: flex;
+		transition: all 0.2s;
 	}
 	span{
 		font-size: rem(20);
 		padding-right: 20px;
+	}
+}
+
+//reponsive tablet & mobile
+@media (max-width: 992px){
+	.alert {
+		left: unset;
+		right: unset;
+		width: 100%;
+		bottom: 93.59px;
+		border-radius: 0;
+		p {
+			transform:unset;
+			width: 100%;
+			padding: 10px 40px;
+		}
 	}
 }
