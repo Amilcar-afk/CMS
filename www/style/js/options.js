@@ -93,6 +93,8 @@ $(document).ready(function(){
         let formData = new FormData();
         let file = $(this)[0].files[0];
         let type = $(this).attr('data-type');
+        let fileName = $(this)[0].files[0].name;
+        fileName = fileName.split('.').shift().toLowerCase();
         formData.append('file', file);
         formData.append('type', type);
 
@@ -104,33 +106,33 @@ $(document).ready(function(){
             data:formData,
             success: function (answer) {
                 alertMessage('Font added!');
-
-                let $newFont = '<article class="cta-button-a" data-a-target="container-setting-font-' + answer.id +'">\n' +
-                    '                                    <span class="input-block" style="font-family: \''+answer.value+'\'">\n' +
+                $($('style')[0]).replaceWith(answer);
+                let $newFont = '<article class="cta-button-a" data-a-target="container-setting-font-' + newFontId +'">\n' +
+                    '                                    <span class="input-block" style="font-family: '+fileName+'">\n' +
                     '                                        aA\n' +
                     '                                    </span>\n' +
-                    '                                    <label>'+answer.value+'</label>\n' +
+                    '                                    <label>'+fileName+'</label>\n' +
                     '                                </article>'
 
-                let $newFontUpdate = '<section id="container-setting-font-'+answer.id+'" class="container-main-content container-main-content--menu a-zoom-out-end">\n' +
-                    '            <button id="cta-button-close-container-setting-font-'+answer.id+'" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-font-'+answer.id+'"><span class="material-icons-round">close</span></button>\n' +
+                let $newFontUpdate = '<section id="container-setting-font-'+newFontId+'" class="container-main-content container-main-content--menu a-zoom-out-end">\n' +
+                    '            <button id="cta-button-close-container-setting-font-'+newFontId+'" class="cta-button cta-button--icon cta-button-a" data-a-target="container-setting-font-'+newFontId+'"><span class="material-icons-round">close</span></button>\n' +
                     '            <div class="menu-container">\n' +
                     '            </div>\n' +
                     '            <section class="collapse-parent">\n' +
                     '                <div id="font-element-container" class="collapse--open" data-group-collapse="fonts-elements-conatiner">\n' +
                     '                    <header>\n' +
-                    '                        <h1 class="title title--black">'+answer.value+'</h1>\n' +
+                    '                        <h1 class="title title--black">'+fileName+'</h1>\n' +
                     '                    </header>\n' +
                     '                    <article>\n' +
-                    '                        <p class="input-block fs-40" style="font-family: \'<?= $font->getValue()?>\'">\n' +
+                    '                        <p class="input-block fs-40" style="font-family: '+fileName+'">\n' +
                     '                             a b c d e f g h i j k l m n o p q r s t u v w x y z\n' +
                     '                        </p>\n' +
                     '                        <br>\n' +
-                    '                        <p class="input-block fs-36" style="font-family: \'<?= $font->getValue()?>\'">\n' +
+                    '                        <p class="input-block fs-36" style="font-family: '+fileName+'">\n' +
                     '                             0 1 2 3 4 5 6 7 8 9\n' +
                     '                        </p>\n' +
                     '                        <br>\n' +
-                    '                        <p class="input-block fs-36" style="font-family: \'<?= $font->getValue()?>\'">\n' +
+                    '                        <p class="input-block fs-36" style="font-family: '+fileName+'">\n' +
                     '                            $ € £ ! " \' # % & ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~\n' +
                     '                        </p>\n' +
                     '                    </article>\n' +

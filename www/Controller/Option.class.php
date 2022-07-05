@@ -135,6 +135,10 @@ class Option{
                 $this->option->setUserKey($_SESSION['Auth']->id);
                 $this->option->save();
 
+                if($_POST['type'] == 'font'){
+                    $newFontId = $this->option->getLastId();
+                }
+
                 $fonts = Query::from('cmspf_Options')
                     ->where("type = 'font'")
                     ->execute('Option');
@@ -204,10 +208,10 @@ class Option{
                     echo "Invalid size";
                 }
             }else{
-                echo "Error1";
+                echo "Error";
             }
         }else{
-            echo "Error2";
+            echo "Error";
         }
 
     }

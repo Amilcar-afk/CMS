@@ -358,6 +358,10 @@
   }
 }
 
+#container-list-fonts{
+  flex-wrap: wrap;
+}
+
 #container-editor, #background-list-elements{
   overflow-y: scroll;
   padding-top: 20px;
