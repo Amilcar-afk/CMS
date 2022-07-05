@@ -187,48 +187,6 @@ class Configuration extends BaseSQL
                 "submit"=>"Save",
             ],
             "inputs"=>[
-
-                "DBUSER"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Data Base User...",
-                    "name"=>"DBUSER",
-                    "question"=>"Data Base User",
-                    "id"=>"db_user",
-                    "class"=>"input",
-                    "value"=> $this->getDb_user(),
-                    "min"=>2,
-                    "max"=>50,
-                    "error"=>""
-                    ],
-                "MAILADDR"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Mail Adresse...",
-                    "name"=>"MAILADDR",
-                    "id"=>"mail_addresse",
-                    "class"=>"input",
-                    "question"=>"Mail Adresse",
-                    "value"=> $this->getMail_adresse(),
-                    "required"=>true,
-                    "min"=>2,
-                    "max"=>50,
-                    "error"=>""
-
-                    ],
-
-                "MAILPWD"=>[
-                    "type"=>"password",
-                    "placeholder"=>"Mail Password ...",
-                    "name"=>"MAILPWD",
-                    "question"=>"Mail Password ",
-                    "id"=>"mail_password",
-                    "class"=>"input",
-                    "required"=>true,
-                    "value"=> $this->getMail_pwd(),
-                    "min"=>2,
-                    "max"=>50,
-                    "error"=>""
-                    ],
-
                 "SMTP_HOST"=>[
                     "type"=>"text",
                     "placeholder"=>"SMTP Host ...",
@@ -271,7 +229,7 @@ class Configuration extends BaseSQL
 
                 "SMTP_USERNAME"=>[
                     "type"=>"text",
-                    "placeholder"=>"SMTP Username ...",
+                    "placeholder"=>"SMTP Email ...",
                     "name"=>"SMTP_USERNAME",
                     "question"=>"SMTP Username",
                     "id"=>"smtp_username",

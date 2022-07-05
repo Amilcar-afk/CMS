@@ -19,14 +19,18 @@ class Mail extends BaseSQL
 
     public function __construct()
     {
+        $envFile= 'env.json';
+        $json_data = file_get_contents($envFile);
+        $config = json_decode($json_data, true);
+
         $this->mail = new PHPMailer(TRUE);
         $this->mail->isSMTP();
-        $this->mail->Host = 'smtp.gmail.com';
-        $this->mail->SMTPAuth = TRUE;
-        $this->mail->SMTPSecure = 'tls';
-        $this->mail->Username = MAILADDR;
-        $this->mail->Password = MAILPWD;
-        $this->mail->Port = 587;
+        $this->mail->Host = $config['env'][1]['SMTP_HOST'];
+        $this->mail->SMTPAuth = $config['env'][1]['MAILADDR'];
+        $this->mail->SMTPSecure = $config['env'][1]['SMTP_SECURE'];
+        $this->mail->Username = $config['env'][1]['SMTP_USERNAME'];
+        $this->mail->Password = $config['env'][1]['SMTP_PASSWORD'];
+        $this->mail->Port = $config['env'][1]['SMTP_PORT'];
         $this->mail->IsHTML(true);
 
         $this->mail->SMTPOptions = array(
