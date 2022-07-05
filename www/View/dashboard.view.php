@@ -136,7 +136,6 @@
                         <h3>Per week</h3>
                     </header>
                     <div id="chart-per-week"></div>
-                    
                 </section>
 
                 <section class="card card--smallcard card--background-color">
@@ -261,38 +260,41 @@ google.charts.load("current", {packages:["corechart"]});
 </script>
 
 
-
-
-
 <script>
 
+google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
 
-google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Element', 'Density', { role: 'style' }, { role: 'annotation' } ],
-         ['Copper', 12, '#b87333', 'Cu' ],
-         ['Silver', 10.49, 'silver', 'Ag' ],
-         ['Gold', 19.30, 'gold', 'Au' ],
-         ['Platinum', 21.45, 'color: #e5e4e2', 'Pt' ]
-      ]);
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Day', '', { role: 'annotation' }],
+          ["Mon", 4, 4],
+          ["Thu", 2, 2],
+          ["Wen", 1, 1],
+          ["Thi", 0,0],
+          ['Fri', 2,2],
+          ["Sat", 4,4],
+          ['Sun', 5,5]
+        ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+        var options = {
+          
+          legend: { position: 'none' },
+          colors: ['#396075', '#547a8f', '#87949c'],
+          axes: {
+            x: {
+              0: { side: 'bottom', label: ''} // Top x-axis.
+            },
+          },
+          bar: { groupWidth: "80%" },
+          backgroundColor: '#E4E4E4'
+        };
 
-      var options = {
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("chart-per-week"));
-      chart.draw(view, options);
-  }
 
+
+
+		
 </script>
-
