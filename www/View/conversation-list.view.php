@@ -41,7 +41,9 @@
                             <?php endforeach;?>
                             </tbody>
                         </table>
-
+                        <?php if (!isset($conversations[0])):?>
+                            <p class="title title--small">No conversation</p>
+                        <?php endif;?>
                     </div>
                 </article>
 

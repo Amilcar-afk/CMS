@@ -43,7 +43,9 @@
                             <?php endforeach;?>
                             </tbody>
                         </table>
-
+                        <?php if (!isset($projects[0])):?>
+                            <p class="title title--small">No project</p>
+                        <?php endif;?>
                     </div>
                 </article>
 

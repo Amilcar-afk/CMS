@@ -35,7 +35,9 @@
                         <?php endfor;?>
                     </div>
                 </div>
-
+                <?php if (!isset($images[0])):?>
+                    <p class="title title--small">No image</p>
+                <?php endif;?>
              </div>
         </section>
     </section>
