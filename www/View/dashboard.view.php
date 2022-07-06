@@ -111,8 +111,8 @@
                             <span class="material-icons-round">more_vert</span>
                         </button>
                     </header>
-
-                        <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1;"></div>
+                    
+                    <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1;"></div>
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
                         <div class="input-container">
@@ -247,26 +247,21 @@ google.charts.load("current", {packages:["corechart"]});
         var secondColor = rootStyles.getPropertyValue('--second-color');
         var thirdColor = rootStyles.getPropertyValue('--third-color');
 
-        var red = parseInt(thirdColor[1]+thirdColor[2],16);
-        var green = parseInt(thirdColor[3]+thirdColor[4],16);
-        var blue = parseInt(thirdColor[5]+thirdColor[6],16);
-
-        var rgb = "(" + red + ", " + green + ", " + blue + ")";
-        console.log(rgb);
-
+        
         var options = {
           pieHole: 0.6,
           width: '100%',
           height: '100%',
           colors: [mainColor, secondColor, thirdColor],
+          
           legend: {
               position : 'none',
               //alignment: 'start'
             }
         };
-        
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
+
         chart.draw(data, options);
       }
 
@@ -284,7 +279,7 @@ google.charts.load('current', {'packages':['bar']});
           ["Mon", 4, 4],
           ["Thu", 2, 2],
           ["Wen", 1, 1],
-          ["Thi", 0,0],
+          ["Thi", 3,3],
           ['Fri', 2,2],
           ["Sat", 4,4],
           ['Sun', 5,5]
@@ -316,3 +311,4 @@ google.charts.load('current', {'packages':['bar']});
 
 		
 </script>
+

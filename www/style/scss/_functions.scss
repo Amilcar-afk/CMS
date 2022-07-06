@@ -3,6 +3,11 @@
   @return ($pxVal / $base) * 1rem;
 }
 
+// @mixin background-opacity($color, $opacity: 0.3) {
+//   background: $color; /* The Fallback */
+//   background: rgba($color, $opacity);
+// }
+
 // @mixin cover-bg(){
 // 	background-position: center;
 // 	background-size: cover;
