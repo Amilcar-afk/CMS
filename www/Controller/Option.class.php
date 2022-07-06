@@ -38,6 +38,15 @@ class Option{
             ->execute('Option');
 
         $view = new View("style", "back");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Style',
+            "description" => 'Change your webstite style',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+            ],
+        ]);
         $view->assign("fonts", $fonts);
 
         foreach($options as $option){
@@ -223,5 +232,9 @@ class Option{
             ->execute('Option');
         $view = new View("media-library", "back");
         $view->assign("images", $images);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Media Library',
+            "description" => 'List of all webstie images',
+        ]);
     }
 }

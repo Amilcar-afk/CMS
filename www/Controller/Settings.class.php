@@ -21,18 +21,22 @@ class Settings
 
     }
 
-    public function listStyle()
-    {
-
-        $view = new View("style", "back");
-    }
-
     public function listUser()
     {
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
         $view = new View("user-manager", "back");
         $view->assign("users", $users);
+        $view->assign("metaData", $metaData = [
+            "title" => 'User manager',
+            "description" => 'Manage your users here',
+            "src" => [
+                ["type" => "js", "path" => "https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"],
+                ["type" => "css", "path" => "https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"],
+                ["type" => "js", "path" => "../js/ajax/user-manager.js"],
+                ["type" => "js", "path" => "../js/ajax/httpRequest.js"],
+            ],
+        ]);
     }
 
     public function composeDatabase()
@@ -108,8 +112,6 @@ class Settings
         $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
         $this->config->setDb_user($data_base_env['env'][0]['DBUSER']);
 
-        $this->config->setMail_adresse($data_base_env['env'][1]['MAILADDR']);
-        $this->config->setMail_pwd($data_base_env['env'][1]['MAILPWD']);
         $this->config->setSmtp_host($data_base_env['env'][1]['SMTP_HOST']);
         $this->config->setSmtp_port($data_base_env['env'][1]['SMTP_PORT']);
 
@@ -119,5 +121,12 @@ class Settings
 
         $view = new View("configuration", "back");
         $view->assign("configuration", $this->config);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Configuration',
+            "description" => 'Change your webstite configuration here. Database & SMTP configuration',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/database.js"],
+            ],
+        ]);
     }
 }

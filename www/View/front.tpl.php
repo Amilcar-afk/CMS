@@ -11,7 +11,17 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <link href="../style/dist/css/main.css" rel="stylesheet" />
         <script type="text/javascript" src="../style/js/utilsMenu.js"></script>
+        <script type="text/javascript" src="../style/js/animations.js"></script>
         <link id="container-favicon" rel="shortcut icon" href="<?= (isset($favicon[0]))? $favicon[0]->getPath() :'/style/images/logo_myfolio.png'  ?>">
+        <?php if(isset($metaData['src'][0])): ?>
+            <?php foreach ($metaData['src'] as $src):?>
+                <?php if($src['type'] == 'css'): ?>
+                <link rel="stylesheet" type="text/css" href="<?= $src['path'] ?>" />
+                <?php elseif($src['type'] == 'js'): ?>
+                    <script type="text/javascript" src="<?= $src['path'] ?>"></script>
+                <?php endif; ?>
+            <?php endforeach;?>
+        <?php endif; ?>
         <?= (isset($headCode) && $headCode != ' ')? $headCode :''; ?>
     </head>
     <body class="body background-background-color">

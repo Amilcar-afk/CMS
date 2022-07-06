@@ -21,6 +21,13 @@ class Setup{
 
         $view = new View("Setup/database", "back-sandbox");
         $view->assign("configuration", $config);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup Database',
+            "description" => 'Database configuration',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/database.js"],
+            ],
+        ]);
     }
 
     public function loadSmtp()
@@ -38,6 +45,13 @@ class Setup{
 
         $view = new View("Setup/smtp", "back-sandbox");
         $view->assign("configuration", $config);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup Smtp',
+            "description" => 'Smtp configuration',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/database.js"],
+            ],
+        ]);
     }
 
     public function loadLogin()
@@ -48,20 +62,50 @@ class Setup{
     public function loadMainImages()
     {
         $view = new View("Setup/main-images", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup main images',
+            "description" => 'main images',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+            ],
+        ]);
     }
 
     public function loadMainColors()
     {
         $view = new View("Setup/main-colors", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup main colors',
+            "description" => 'main colors',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+            ],
+        ]);
     }
 
     public function loadDesignFirst()
     {
         $view = new View("Setup/design-first", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup design 1/2',
+            "description" => 'Design',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+            ],
+        ]);
     }
 
     public function loadDesignSecond()
     {
         $view = new View("Setup/design-second", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Setup design 2/2',
+            "description" => 'Design',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+            ],
+        ]);
     }
 }

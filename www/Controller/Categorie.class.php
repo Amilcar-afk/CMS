@@ -28,6 +28,13 @@ class Categorie{
         $view->assign("categories",$categories);
         $view->assign("navigations", $navigations);
         $view->assign("categorieEmpty", $categorieEmpty);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Categories',
+            "description" => 'List of all categories',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/categorie.js"],
+            ],
+        ]);
     }
 
     public function navigationsList()
@@ -35,6 +42,13 @@ class Categorie{
         $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("navigation-list", "back");
         $view->assign("navigations",$navigations);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Categories',
+            "description" => 'List of all categories',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/navigations.js"],
+            ],
+        ]);
     }
 
 
