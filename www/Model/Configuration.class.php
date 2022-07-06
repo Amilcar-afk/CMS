@@ -6,15 +6,12 @@ use App\Core\BaseSQL;
 class Configuration extends BaseSQL
 {
     protected $id = null;
-    protected $host_name;
-    protected $password;
-    protected $port;
-    protected $db_name;
-    protected $db_user;
+    protected $host_name = null;
+    protected $password= null;
+    protected $port = null;
+    protected $db_name = null;
+    protected $db_user = null;
 
-    
-    protected $mail_adresse;
-    protected $mail_pwd;
     protected $smtp_host;
     protected $smtp_auth;
     protected $smtp_secure;
@@ -109,6 +106,166 @@ class Configuration extends BaseSQL
         return $this;
     }
 
+    /**
+     * Get the value of db_name
+     */
+    public function getDb_name()
+    {
+        return $this->db_name;
+    }
+
+    /**
+     * Set the value of db_name
+     *
+     * @return  self
+     */
+    public function setDb_name($db_name)
+    {
+        $this->db_name = $db_name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_host
+     */
+    public function getSmtp_host()
+    {
+        return $this->smtp_host;
+    }
+
+    /**
+     * Set the value of smtp_host
+     *
+     * @return  self
+     */
+    public function setSmtp_host($smtp_host)
+    {
+        $this->smtp_host = $smtp_host;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_auth
+     */
+    public function getSmtp_auth()
+    {
+        return $this->smtp_auth;
+    }
+
+    /**
+     * Set the value of smtp_auth
+     *
+     * @return  self
+     */
+    public function setSmtp_auth($smtp_auth)
+    {
+        $this->smtp_auth = $smtp_auth;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_secure
+     */
+    public function getSmtp_secure()
+    {
+        return $this->smtp_secure;
+    }
+
+    /**
+     * Set the value of smtp_secure
+     *
+     * @return  self
+     */
+    public function setSmtp_secure($smtp_secure)
+    {
+        $this->smtp_secure = $smtp_secure;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_username
+     */
+    public function getSmtp_username()
+    {
+        return $this->smtp_username;
+    }
+
+    /**
+     * Set the value of smtp_username
+     *
+     * @return  self
+     */
+    public function setSmtp_username($smtp_username)
+    {
+        $this->smtp_username = $smtp_username;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_password
+     */
+    public function getSmtp_password()
+    {
+        return $this->smtp_password;
+    }
+
+    /**
+     * Set the value of smtp_password
+     *
+     * @return  self
+     */
+    public function setSmtp_password($smtp_password)
+    {
+        $this->smtp_password = $smtp_password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smtp_port
+     */
+    public function getSmtp_port()
+    {
+        return $this->smtp_port;
+    }
+
+    /**
+     * Set the value of smtp_port
+     *
+     * @return  self
+     */
+    public function setSmtp_port($smtp_port)
+    {
+        $this->smtp_port = $smtp_port;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of root
+     */
+    public function getDb_user()
+    {
+        return $this->db_user;
+    }
+
+    /**
+     * Set the value of root
+     *
+     * @return  self
+     */
+    public function setDb_user($db_user)
+    {
+        $this->db_user = $db_user;
+
+        return $this;
+    }
+
     public function dataBaseForm(): array
     {
         return [
@@ -146,6 +303,20 @@ class Configuration extends BaseSQL
                     "max"=>50,
                     "error"=>""
                     ],
+
+                "DBUSER"=>[
+                    "type"=>"text",
+                    "placeholder"=>"User...",
+                    "name"=>"DBUSER",
+                    "question"=>"User",
+                    "id"=>"db_user",
+                    "class"=>"input",
+                    "value"=> $this->getDb_user(),
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
+                ],
 
                 "DBPWD"=>[
                     "type"=>"password",
@@ -256,206 +427,5 @@ class Configuration extends BaseSQL
             ],
             
         ];
-    }
-
-
-    /**
-     * Get the value of db_name
-     */ 
-    public function getDb_name()
-    {
-        return $this->db_name;
-    }
-
-    /**
-     * Set the value of db_name
-     *
-     * @return  self
-     */ 
-    public function setDb_name($db_name)
-    {
-        $this->db_name = $db_name;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of mail_pwd
-     */ 
-    public function getMail_pwd()
-    {
-        return $this->mail_pwd;
-    }
-
-    /**
-     * Set the value of mail_pwd
-     *
-     * @return  self
-     */ 
-    public function setMail_pwd($mail_pwd)
-    {
-        $this->mail_pwd = $mail_pwd;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_host
-     */ 
-    public function getSmtp_host()
-    {
-        return $this->smtp_host;
-    }
-
-    /**
-     * Set the value of smtp_host
-     *
-     * @return  self
-     */ 
-    public function setSmtp_host($smtp_host)
-    {
-        $this->smtp_host = $smtp_host;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_auth
-     */ 
-    public function getSmtp_auth()
-    {
-        return $this->smtp_auth;
-    }
-
-    /**
-     * Set the value of smtp_auth
-     *
-     * @return  self
-     */ 
-    public function setSmtp_auth($smtp_auth)
-    {
-        $this->smtp_auth = $smtp_auth;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_secure
-     */ 
-    public function getSmtp_secure()
-    {
-        return $this->smtp_secure;
-    }
-
-    /**
-     * Set the value of smtp_secure
-     *
-     * @return  self
-     */ 
-    public function setSmtp_secure($smtp_secure)
-    {
-        $this->smtp_secure = $smtp_secure;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_username
-     */ 
-    public function getSmtp_username()
-    {
-        return $this->smtp_username;
-    }
-
-    /**
-     * Set the value of smtp_username
-     *
-     * @return  self
-     */ 
-    public function setSmtp_username($smtp_username)
-    {
-        $this->smtp_username = $smtp_username;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_password
-     */ 
-    public function getSmtp_password()
-    {
-        return $this->smtp_password;
-    }
-
-    /**
-     * Set the value of smtp_password
-     *
-     * @return  self
-     */ 
-    public function setSmtp_password($smtp_password)
-    {
-        $this->smtp_password = $smtp_password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smtp_port
-     */ 
-    public function getSmtp_port()
-    {
-        return $this->smtp_port;
-    }
-
-    /**
-     * Set the value of smtp_port
-     *
-     * @return  self
-     */ 
-    public function setSmtp_port($smtp_port)
-    {
-        $this->smtp_port = $smtp_port;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of mail_adresse
-     */ 
-    public function getMail_adresse()
-    {
-        return $this->mail_adresse;
-    }
-
-    /**
-     * Set the value of mail_adresse
-     *
-     * @return  self
-     */ 
-    public function setMail_adresse($mail_adresse)
-    {
-        $this->mail_adresse = $mail_adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of root
-     */ 
-    public function getDb_user()
-    {
-        return $this->db_user;
-    }
-
-    /**
-     * Set the value of root
-     *
-     * @return  self
-     */ 
-    public function setDb_user($db_user)
-    {
-        $this->db_user = $db_user;
-
-        return $this;
     }
 }
