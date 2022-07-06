@@ -1180,6 +1180,11 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   padding-bottom: 15rem;
   min-height: 100%; }
 
+.body-small .background-container-back-office, .body-medium .background-container-back-office, .body-big .background-container-back-office {
+  z-index: -0;
+  top: -10px;
+  width: 100%; }
+
 .body-small {
   max-width: 800px;
   margin-left: auto;
@@ -1425,7 +1430,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   position: relative;
   width: 100%;
   border-radius: 0px;
-  margin: 0px; }
+  margin: 0px;
+  z-index: 1; }
   .header--radius {
     margin: 15px;
     width: calc(100% - 30px);

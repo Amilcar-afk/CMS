@@ -534,8 +534,6 @@ $(document).ready(function(){
 
     //add component
     $(".module-list").click(function () {
-        /*var $newComponent = $( "<article class='module'>"+$(this).html()+"</article>" );
-        $newComponent.addClass($(this).attr("class"));*/
 
         if ($(this).hasClass('section-module')) {
             var $newComponent = $("<article>" + $(this).html() + "</article>");
@@ -549,10 +547,15 @@ $(document).ready(function(){
         }else {
             var $newComponent = $( $(this).html() );
         }
-        $newComponent.removeClass('module-list');
-        $newComponent.addClass('col-6');
+
+        if($newComponent.hasClass('background-container-back-office')){
+            $('#container-editor').prepend($newComponent);
+        }else {
+            $newComponent.removeClass('module-list');
+            $newComponent.addClass('col-6');
+            $("#editable-module").parent().after($newComponent);
+        }
         $($newComponent.find('.module--hover')[0]).remove();
-        $("#editable-module").parent().after($newComponent);
         $("#cta-button-close-list-component").click();
     })
 

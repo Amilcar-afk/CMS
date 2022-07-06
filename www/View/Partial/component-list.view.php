@@ -595,11 +595,11 @@
                     <h2>Background</h2>
                     <span class="material-icons-round">more_horiz</span>
                 </header>
-                <div id="background-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+                <div id="background-list-elements" style="overflow: hidden;" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="section-module module-list">
+                        <article class="module-list" style="height: 220px;">
                             <div class="background-container-back-office">
                                 <div></div>
                                 <div></div>

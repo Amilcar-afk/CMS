@@ -6,6 +6,14 @@
   min-height: 100%;
 }
 
+.body-small, .body-medium, .body-big{
+  & .background-container-back-office{
+    z-index: -0;
+    top: -10px;
+    width: 100%;
+  }
+}
+
 .body-small{
   max-width: 800px;
   margin-left: auto;
