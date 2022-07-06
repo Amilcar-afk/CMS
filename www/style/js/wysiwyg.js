@@ -2,6 +2,14 @@ $(document).ready(function(){
     const fontSizeSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 20, 22, 24, 26, 28, 32, 34, 36, 38, 40, 42, 46, 48, 50, 64];
     //editor.document.designMode = "on";
 
+    $("#container-editor").find('a').each(function() {
+        var ahref = $(this).attr('href');
+        var aclass = $(this).attr('class');
+        var aid = $(this).attr('id');
+        var atext = $(this).text();
+        $(this).replaceWith('<ahref href="'+ ahref +'" class="'+ aclass +'" id="'+ aid+'">'+ atext +'</ahref>');
+    })
+
     //EDITOR BAR FOR SECTION MODULE
     $(document).on( "click", ".section-module-ok",function(e) {
 
@@ -67,7 +75,7 @@ $(document).ready(function(){
             $("#editable-module").remove();
         }
 
-        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+        $('p, h1, h2, h3, h4, h5, h6, ahref').each(function() {
             $(this).removeAttr('contenteditable');
             $(this).removeClass("module--on");
         });
@@ -556,10 +564,19 @@ $(document).ready(function(){
             $($('.module[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
             $("#editable-module").remove();
         }
-        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+        $('p, h1, h2, h3, h4, h5, h6, ahref').each(function() {
             $(this).removeAttr('contenteditable');
             $(this).removeClass("module--on");
         });
+
+        $("#container-editor").find('ahref').each(function() {
+            var ahref = $(this).attr('href');
+            var aclass = $(this).attr('class');
+            var aid = $(this).attr('id');
+            var atext = $(this).text();
+            $(this).replaceWith('<a href="'+ ahref +'" class="'+ aclass +'" id="'+ aid+'">'+ atext +'</a>');
+        })
+
         $.ajax({
             url:"/build/save",
             type:"POST",

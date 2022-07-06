@@ -5,7 +5,7 @@
         <nav>
             <button class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="text-elements-container"><span class="material-icons-round">text_fields</span>Text elements</button>
             <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-elements-container"><span class="material-icons-round">play_circle_filled</span>Medias</button>
-            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="form-elements-container"><span class="material-icons-round">assignment</span>Forms</button>
+            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="btn-elements-container"><span class="material-icons-round">ads_click</span>Buttons</button>
             <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="other-elements-container"><span class="material-icons-round">format_shapes</span>More</button>
         </nav>
     </div>
@@ -525,10 +525,63 @@
             </article>
 
         </div>
-        <div id="form-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
+
+        <div id="btn-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
             <header>
-                <h1 class="title title--black">Form</h1>
+                <h1 class="title title--black">Buttons</h1>
             </header>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-page-list-elements">
+                    <h2>Pages</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-page-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i = 0; $i <= ((count($pages) - 1) / 2); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $pages[$i]->getSlug() ?>"><?= $pages[$i]->getTitle() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i; isset($pages[$i]); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $pages[$i]->getSlug() ?>"><?= $pages[$i]->getTitle() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                </div>
+            </article>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-categorie-list-elements">
+                    <h2>Categories</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-categorie-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i = 0; $i <= ((count($categories) - 1) / 2); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $categories[$i]->getSlug() ?>"><?= $categories[$i]->getSlug() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i; isset($categories[$i]); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $categories[$i]->getSlug() ?>"><?= $categories[$i]->getSlug() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                </div>
+            </article>
 
         </div>
 

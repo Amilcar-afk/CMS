@@ -119,13 +119,16 @@ class Pageengine
     }
 
     public function buildPage($request){
-
+        $categories = Query::from('cmspf_Pages')->where("status = 'Tag'")->execute('Page');
+        $pages = Query::from('cmspf_Pages')->where("status = 'Public'")->execute('Page');
         $page = $this->page->find($request['slug'], 'slug');
 
         if ($page){
 
             $view = new View("page-editor", "back");
             $view->assign("page", $page);
+            $view->assign("pages", $pages);
+            $view->assign("categories", $categories);
         }else {
             http_response_code(404);;
         }
