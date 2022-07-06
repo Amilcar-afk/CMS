@@ -62,6 +62,13 @@ class Statistics
         }
 
 
+        // GET VIEW PER DAY FOR A WEEK
+        // SELECT page_key, date FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() );
+        $currentDate = date("Y-m-d");
+        $viewPerWeek = Query::select("page_key, date")->from("cmspf_Stats")->where("YEAR(date) = YEAR(".$currentDate.") AND WEEK(date) = WEEK(".$currentDate.")")->execute("Stat");
+        print_r($viewPerWeek);
+
+
         // GET VIEW PER PAGES
 
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();

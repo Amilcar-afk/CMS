@@ -111,7 +111,7 @@
                             <span class="material-icons-round">more_vert</span>
                         </button>
                     </header>
-                    
+
                     <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1;"></div>
 
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
@@ -294,6 +294,14 @@ google.charts.load('current', {'packages':['bar']});
           
           legend: { position: 'none' },
           colors: [mainColor],
+          hAxis: {textStyle: {
+            color: 'black', 
+            fontSize: 16,
+            fontWidth: 'bold'
+            }},
+            vAxis: {
+                textPosition: 'none',
+            },
           axes: {
             x: {
               0: { side: 'bottom', label: ''} // Top x-axis.
