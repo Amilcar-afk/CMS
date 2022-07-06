@@ -65,8 +65,20 @@ class Statistics
         // GET VIEW PER DAY FOR A WEEK
         // SELECT page_key, date FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() );
         $currentDate = date("Y-m-d");
-        $viewPerWeek = Query::select("page_key, date")->from("cmspf_Stats")->where("YEAR(date) = YEAR(".$currentDate.") AND WEEK(date) = WEEK(".$currentDate.")")->execute("Stat");
-        print_r($viewPerWeek);
+
+        $currentDay = date('D', strtotime($currentDate));
+
+        $chartWeekData[] = ['Day', '', [ "role" => 'annotation' ]];
+        $viewPerWeek = Query::select("page_key, date")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$currentDate."') AND WEEK(date) = WEEK('".$currentDate."')")->execute("Stat");
+        foreach($viewPerWeek as $data) {
+            $chartWeekData[] = [
+                $data->getDate(),
+                $data->getPageKey()
+            ];
+        }
+        echo '<pre>';
+        print_r($chartWeekData);
+        echo '</pre>';
 
 
         // GET VIEW PER PAGES
@@ -117,6 +129,16 @@ class Statistics
         $view->assign("data", $stats);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
+
+        $view->assign("metaData", $metaData = [
+            "title" => 'Style',
+            "description" => 'Change your webstite style',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/getRange.js"],
+                ["type" => "js", "path" => "https://www.gstatic.com/charts/loader.js"],
+                ["type" => "js", "path" => "../style/js/reseauxSoc.js"],
+            ],
+        ]);
     }
 
     public function composeReseauxSoc() {
