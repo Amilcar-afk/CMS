@@ -247,6 +247,13 @@ google.charts.load("current", {packages:["corechart"]});
         var secondColor = rootStyles.getPropertyValue('--second-color');
         var thirdColor = rootStyles.getPropertyValue('--third-color');
 
+        var red = parseInt(thirdColor[1]+thirdColor[2],16);
+        var green = parseInt(thirdColor[3]+thirdColor[4],16);
+        var blue = parseInt(thirdColor[5]+thirdColor[6],16);
+
+        var rgb = "(" + red + ", " + green + ", " + blue + ")";
+        console.log(rgb);
+
         var options = {
           pieHole: 0.6,
           width: '100%',
