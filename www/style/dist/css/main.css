@@ -2403,9 +2403,13 @@ h2 {
     color: var(--main-color);
     background-color: var(--background-color);
     border: solid 1.5px var(--main-color); }
+    .sticker--cta .material-icons-round {
+      color: var(--main-color); }
     .sticker--cta--selected {
       color: var(--background-color);
       background-color: var(--main-color); }
+      .sticker--cta--selected .material-icons-round {
+        color: var(--background-color); }
 
 @media (max-width: 992px) {
   .sticker {
