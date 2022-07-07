@@ -72,25 +72,25 @@ class Statistics
         foreach($viewPerWeek as $key => $value){
 
             if ($value['day'] == "1") {
-                $viewPerWeek[$key]['day'] = "Mon";
+                $viewPerWeek[$key]['day'] = "Sun";
             }
             if ($value['day'] == "2") {
-                $viewPerWeek[$key]['day'] = "Thu";
+                $viewPerWeek[$key]['day'] = "Mon";
             }
             if ($value['day'] == "3") {
-                $viewPerWeek[$key]['day'] = "Wed";
+                $viewPerWeek[$key]['day'] = "Tue";
             }
             if ($value['day'] == "4") {
-                $viewPerWeek[$key]['day'] = "Thi";
+                $viewPerWeek[$key]['day'] = "Wed";
             }
             if ($value['day'] == "5") {
-                $viewPerWeek[$key]['day'] = "Fri";
+                $viewPerWeek[$key]['day'] = "Thu";
             }
             if ($value['day'] == "6") {
-                $viewPerWeek[$key]['day'] = "Sat";
+                $viewPerWeek[$key]['day'] = "Fri";
             }
             if ($value['day'] == "7") {
-                $viewPerWeek[$key]['day'] = "Sun";
+                $viewPerWeek[$key]['day'] = "Sat";
             }
 
         }
