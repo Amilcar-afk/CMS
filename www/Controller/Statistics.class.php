@@ -63,26 +63,50 @@ class Statistics
 
 
         // GET VIEW PER DAY FOR A WEEK
-        // SELECT page_key, date FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() );
+        // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
         $currentDate = date("Y-m-d");
-
         $currentDay = date('D', strtotime($currentDate));
+        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$currentDate."') AND WEEK(date) = WEEK('".$currentDate."')")->groupBy("day")->execute();
+        $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
 
-        $chartWeekData[] = ['Day', '', [ "role" => 'annotation' ]];
-        $viewPerWeek = Query::select("page_key, date")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$currentDate."') AND WEEK(date) = WEEK('".$currentDate."')")->execute("Stat");
-        foreach($viewPerWeek as $data) {
+        foreach($viewPerWeek as $key => $value){
+
+            if ($value['day'] == "1") {
+                $viewPerWeek[$key]['day'] = "Mon";
+            }
+            if ($value['day'] == "2") {
+                $viewPerWeek[$key]['day'] = "Thu";
+            }
+            if ($value['day'] == "3") {
+                $viewPerWeek[$key]['day'] = "Wed";
+            }
+            if ($value['day'] == "4") {
+                $viewPerWeek[$key]['day'] = "Thi";
+            }
+            if ($value['day'] == "5") {
+                $viewPerWeek[$key]['day'] = "Fri";
+            }
+            if ($value['day'] == "6") {
+                $viewPerWeek[$key]['day'] = "Sat";
+            }
+            if ($value['day'] == "7") {
+                $viewPerWeek[$key]['day'] = "Sun";
+            }
+
+        }
+        
+
+        foreach($viewPerWeek as $key => $data) {
             $chartWeekData[] = [
-                $data->getDate(),
-                $data->getPageKey()
+                $data['day'],
+                $toInt = (int)$data['number'],
+                $toInt = (int)$data['number']
             ];
         }
-        echo '<pre>';
-        print_r($chartWeekData);
-        echo '</pre>';
+
 
 
         // GET VIEW PER PAGES
-
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
         arsort($viewPerPages);
 
@@ -91,12 +115,14 @@ class Statistics
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
 
         $chartMapData[] = ['Country',["role"=> 'annotation']];
+
         foreach($country as $key => $data) {
             $chartMapData[] = [
                 $data['country'],
                 $toInt = (int)$data['number']
             ];
         }
+        
 
 
         // GET DEVICE STATS
@@ -122,6 +148,7 @@ class Statistics
             $tmpl= "";
         }
         $view = new View("dashboard", $tmpl);
+        $view->assign("chartWeekData", $chartWeekData);
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);
         $view->assign("numberOfUsers", $numberOfUsers);

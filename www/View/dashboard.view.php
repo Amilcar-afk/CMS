@@ -274,16 +274,9 @@ google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawStuff);
 
       function drawStuff() {
-        var data = new google.visualization.arrayToDataTable([
-          ['Day', '', { role: 'annotation' }],
-          ["Mon", 4, 4],
-          ["Thu", 2, 2],
-          ["Wen", 1, 1],
-          ["Thi", 3,3],
-          ['Fri', 2,2],
-          ["Sat", 4,4],
-          ['Sun', 5,5]
-        ]);
+        var data = new google.visualization.arrayToDataTable(
+            <?php  print_r(json_encode($chartWeekData)); ?>
+        );
 
         
         var root = document.querySelector(':root') ;
