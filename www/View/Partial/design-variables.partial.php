@@ -8,9 +8,9 @@
     <?php endforeach;?>
     ];
 
-    let mainColor = <?= (isset($mainColor[0]))? $mainColor[0]->getValue() :'#396075' ?>;
-    let secondColor = <?= (isset($secondColor[0]) )? $secondColor[0]->getValue() :'#55A6D3' ?>;
-    let thirdColor = <?= (isset($thirdColor[0]) )? $thirdColor[0]->getValue() :'#b2def7' ?>;
+    let mainColor = <?= (isset($mainColor[0]))? '"'.$mainColor[0]->getValue().'"' :'#396075' ?>;
+    let secondColor = <?= (isset($secondColor[0]) )? '"'.$secondColor[0]->getValue().'"' :'#55A6D3' ?>;
+    let thirdColor = <?= (isset($thirdColor[0]) )? '"'.$thirdColor[0]->getValue().'"' :'#b2def7' ?>;
 
 </script>
 <style>
