@@ -289,10 +289,6 @@ google.charts.load('current', {'packages':['bar']});
             <?php  print_r(json_encode($chartWeekData)); ?>
         );
 
-        
-        var root = document.querySelector(':root') ;
-        var rootStyles = getComputedStyle(root) ;
-        var mainColor = rootStyles.getPropertyValue('--main-color') ;
 
         var options = {
           
