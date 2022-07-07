@@ -134,6 +134,17 @@
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>
+                        <div class="navigation-container">
+                            <button class="main-nav-choice">
+                                <span class="material-icons-round">navigate_before</span>
+                            </button>
+
+                            <p>Month</p>
+
+                            <button class="main-nav-choice">
+                                <span class="material-icons-round">navigate_next</span>
+                            </button>
+                        </div>
                     </header>
                     <div id="chart-per-week"></div>
                 </section>

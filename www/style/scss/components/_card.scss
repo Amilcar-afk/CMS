@@ -87,6 +87,15 @@
             letter-spacing: 0.005em;
             color: var(--background-color, white);
         }
+        & .navigation-container {
+            display: flex;
+            align-items: center;
+            width: max-content;
+
+            & .material-icons-round {
+                font-size: rem(38);
+            }
+        }
     }
     & .edge-container {
         width: 75px;
