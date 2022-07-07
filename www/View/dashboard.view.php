@@ -135,13 +135,13 @@
                     <header>
                         <h3>Per week</h3>
                         <div class="navigation-container">
-                            <button class="main-nav-choice">
+                            <button class="main-nav-choice cta-button--before" data-attr-before=<?php ?>>
                                 <span class="material-icons-round">navigate_before</span>
                             </button>
 
-                            <p>Month</p>
+                            <p><?php echo $monthName; ?></p>
 
-                            <button class="main-nav-choice">
+                            <button class="main-nav-choice cta-button--next" data-attr-next=<?php ?>>
                                 <span class="material-icons-round">navigate_next</span>
                             </button>
                         </div>
@@ -252,11 +252,11 @@ google.charts.load("current", {packages:["corechart"]});
             <?php  print_r(json_encode($chartDeviceData)); ?>
         );
 
-        var root = document.querySelector(':root') ;
-        var rootStyles = getComputedStyle(root) ;
-        var mainColor = rootStyles.getPropertyValue('--main-color');
-        var secondColor = rootStyles.getPropertyValue('--second-color');
-        var thirdColor = rootStyles.getPropertyValue('--third-color');
+        // var root = document.querySelector(':root') ;
+        // var rootStyles = getComputedStyle(root) ;
+        // var mainColor = rootStyles.getPropertyValue('--main-color');
+        // var secondColor = rootStyles.getPropertyValue('--second-color');
+        // var thirdColor = rootStyles.getPropertyValue('--third-color');
 
         
         var options = {

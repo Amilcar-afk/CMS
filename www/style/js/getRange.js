@@ -15,6 +15,8 @@ $(document).ready(function(){
                     sincePerDevice:$(this).parent().find('[name=SincePerDevice]').val(),
                     toPerDevice:$(this).parent().find('[name=toPerDevice]').val(),
 
+                    before:$(this).attr(''),
+
                     range: true
                 },
             success:function(answer)
@@ -29,3 +31,6 @@ $(document).ready(function(){
         });
     })
 })
+
+
+
