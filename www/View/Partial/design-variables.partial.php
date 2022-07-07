@@ -1,6 +1,13 @@
 <?php if(isset($newFontId)):?>
 <script>let newFontId = <?= $newFontId ?>;</script>
 <?php endif;?>
+<script>
+    let fonts = [
+    <?php foreach ($fonts as $font):?>
+         '<?= $font->getValue() ?>',
+    <?php endforeach;?>
+    ];
+</script>
 <style>
     <?php foreach ($fonts as $font):?>
     @font-face {

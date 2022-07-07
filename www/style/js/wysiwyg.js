@@ -106,6 +106,9 @@ $(document).ready(function(){
             neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-size">\n' +
                 '                <span class="material-icons-round">format_size</span>\n' +
                 '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-family">\n' +
+                '                 <span class="material-icons-round">font_download</span>\n' +
+                '            </button>\n');
             neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-color">\n' +
                 '                <span class="material-icons-round">color_lens</span>\n' +
                 '            </button>\n');
@@ -181,6 +184,7 @@ $(document).ready(function(){
                 || $($($elements)[i]).hasClass('cta-button-delete-module')
                 || $($($elements)[i]).hasClass('cta-button-font-size')
                 || $($($elements)[i]).hasClass('cta-button-resize')
+                || $($($elements)[i]).hasClass('cta-button-font-family')
             ){
                 if($($($elements)[i]).hasClass('selected')){
                     $($($elements)[i]).removeClass('selected');
@@ -333,6 +337,33 @@ $(document).ready(function(){
         $(this).parent().parent().parent().parent().removeClass('color-second-color');
         $(this).parent().parent().parent().parent().removeClass('color-third-color');
         $(this).parent().parent().parent().parent().css("color",$(this).val());
+    })
+
+    //font family menu component
+    $(document).on( "click", ".cta-button-font-family", function () {
+        cleanEditToolBar(this);
+        let options = '';
+        let fontFamily = getModuleFontFamily(this);
+        fontFamily = fontFamily.replaceAll('"','');
+        fonts.forEach(font => {
+            if (fontFamily == font){
+                options += "<option class='fs-18' style=\"font-family:'"+ font +"' \" value='"+ font +"' selected>"+ font +"</option>";
+            }else {
+                console.log(font);
+                options += "<option class='fs-18' style=\"font-family:'" + font + "' \" value='" + font + "'>" + font + "</option>";
+            }
+        })
+
+        if(fontFamily == 'unset'){
+            options = "<option class='fs-18' style=\"font-family:'Roboto'\" value='Roboto' hidden selected>Roboto</option>" + options;
+        }
+
+        var $ctaFontsFamily = $( '<select class="input cta-button-change-font-family">'+ options +'</select>' );
+        $(this).parent().append($ctaFontsFamily)
+    })
+    //font-family update component
+    $(document).on( "click", ".cta-button-change-font-family", function () {
+        $(this).parent().parent().parent().css("font-family",$(this).val());
     })
 
     //background-color menu component
@@ -799,4 +830,15 @@ function getModuleSrc(btn){
         let actuelSrc = $(img).attr('src');
         return actuelSrc;
     }
+}
+
+//get module font family
+function getModuleFontFamily(btn){
+    var module = $(btn).parent().parent().parent();
+
+    let fontFamily = $(module).css( "font-family" );
+    if (fontFamily == undefined){
+        return 'unset';
+    }
+    return fontFamily;
 }
