@@ -23,6 +23,9 @@
                             </div>
                                 <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
                                 <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
+                                <input type="hidden" id="seen" value="<?= $seen ?>" >
+                                <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id ?>" >
+
                             <div class="input-container">
                                 <input id='sendTextarea' class="input" type="text" name='chat' placeholder="Your message">
                                 <button id='sendButton' class="cta-button" >Send</button>

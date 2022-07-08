@@ -48,18 +48,20 @@
             <div class="col-2 col-md-4 col-sm-4">
                 <section class="card card--bottom card--background-main-color">
                     <header>
-                        <h4>2</h4>
-                        <h3>Messages</h3>
+                        <a href="/conversations">
+                            <h4><?= $conversations ?></h4>
+                            <h3>Messages</h3>
+                        </a>    
                     </header>
                 </section>
             </div>
 
             <div class="col-2 col-md-4 col-sm-4">
                 <section class="card card--bottom card--background-main-color">
-                    <header>
-                        <span class="material-icons-round">edit</span>
-                        <h3>Newsletter</h3>
-                    </header>
+                        <header>
+                            <span class="material-icons-round">edit</span>
+                            <h3>Newsletter</h3>
+                        </header>
                 </section>
             </div>
 

@@ -1,8 +1,18 @@
 $(document).ready(function(){
 
-    function myf(){
-        console.log(1)
+ 
+    if(window.location.href.indexOf("/conversations/user-conversations/") > -1) {
+        var data = {
+            id_user:$('#userId').val(),
+            myId:$('#myId').val(),
+            conversation_user_id:$('#conversationId').val(),
+            seenValue:$('#seen').val(),
+        };
+        setTimeout(() => {
+            changeSeenStatus(data)
+        }, 1000);
     }
+
     $('#chat-conversations-elements').hide();
     $(".select").on("input", function() {
         var value = $(this).val()     

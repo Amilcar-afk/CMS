@@ -94,16 +94,21 @@ class Communication
             ->execute();
     
             foreach($user_conversation_data as $conversation){
-
                 if($conversation['user_key'] != $_SESSION['Auth']->id){
                     $userId = $conversation['user_key'];
+                }else{
+                    $seen = $conversation['seen'];
                 }
             } 
+            
             
             $user = $this->user->find($userId);
             $view = new View("conversation_user", "back");
             $view->assign("user",$user);
             $view->assign("idConversation",$idConversation);
+            $view->assign("seen",$seen);
+            $view->assign("idConversation",$idConversation);
+
         }
     }
 
@@ -160,10 +165,21 @@ class Communication
             ->where('conversation_key='.$conversationId)
             ->where('user_key='.$_POST['id_user'])
             ->execute();
+
+            $my_conversation = Query::from('cmspf_User_conversation')
+            ->where('conversation_key='.$conversationId)
+            ->where('user_key='.$_SESSION['Auth']->id)
+            ->execute();
+            
             $user_conv = new User_conversation();
             $user_conv->setId($user_conversation[0]['id']);
             $user_conv->setSeen(1);
             $user_conv->save();
+
+            $my_conv = new User_conversation();
+            $my_conv->setId($my_conversation[0]['id']);
+            $my_conv->setSeen(1);
+            $my_conv->save();
 
             $this->message->setDate(date('Y-m-d H:i:s'));
             $this->message->setContent($_POST['message']);
