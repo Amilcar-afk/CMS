@@ -19,6 +19,7 @@ class Communication
     public $currentUser;
     protected $project;
     protected $user_project;
+    public $conversation_user;
 
     public function __construct()
     {
@@ -27,6 +28,8 @@ class Communication
         $this->message = new Message();
         $this->user = new User();
         $this->user_project = new User_projet();
+        $this->conversation_user = new User_conversation();
+
     }
 
 
@@ -36,9 +39,13 @@ class Communication
         $user = $user->find($_SESSION['Auth']->id);
         $view = new View("conversation-list", "back");
         $msg = new Message();
+        $userConversation = new User_conversation();
+
         $view->assign("conversations",$user->conversations());
         $view->assign("msg",$msg);
+        $view->assign("userConversation",$userConversation);
     }
+
 
     public function searchData()
     {
@@ -79,17 +86,35 @@ class Communication
 
     public function userConversation($dataFromUrl)
     {
-        $idConversation = $dataFromUrl['id_conv'];
-        $user_conversation_data = Query::from('cmspf_User_conversation')->where('conversation_key = '.$dataFromUrl['id_conv'])->execute();
-        foreach($user_conversation_data as $conversation){
-            if($conversation['user_key'] != $_SESSION['Auth']->id){
-                $userId = $conversation['user_key'];
-            }
-        } 
-        $user = $this->user->find($userId);
-        $view = new View("conversation_user", "back");
-        $view->assign("user",$user);
-        $view->assign("idConversation",$idConversation);
+        if($dataFromUrl['id_conv']){
+
+            $idConversation = $dataFromUrl['id_conv'];
+            $user_conversation_data = Query::from('cmspf_User_conversation')
+            ->where('conversation_key = '.$dataFromUrl['id_conv'])
+            ->execute();
+    
+            foreach($user_conversation_data as $conversation){
+
+                if($conversation['user_key'] != $_SESSION['Auth']->id){
+                    $userId = $conversation['user_key'];
+                }
+            } 
+            
+            $user = $this->user->find($userId);
+            $view = new View("conversation_user", "back");
+            $view->assign("user",$user);
+            $view->assign("idConversation",$idConversation);
+        }
+    }
+
+    public function updateSeenStatus()
+    {
+        if($_POST['conversation_user_id']){
+           $user_conv= $this->conversation_user->find($_POST['conversation_user_id']);
+           $this->conversation_user->setId($_POST['conversation_user_id']);
+           $this->conversation_user->setSeen($_POST['seenValue']);
+           $this->conversation_user->save();
+        }
     }
 
     public function messages()
@@ -130,6 +155,16 @@ class Communication
     {
         if (!empty($_POST)) {
             $conversationId = $_POST['id_conversation'];
+
+            $user_conversation = Query::from('cmspf_User_conversation')
+            ->where('conversation_key='.$conversationId)
+            ->where('user_key='.$_POST['id_user'])
+            ->execute();
+            $user_conv = new User_conversation();
+            $user_conv->setId($user_conversation[0]['id']);
+            $user_conv->setSeen(1);
+            $user_conv->save();
+
             $this->message->setDate(date('Y-m-d H:i:s'));
             $this->message->setContent($_POST['message']);
             $this->message->setUser_key($_SESSION['Auth']->id);
@@ -142,15 +177,12 @@ class Communication
     {
         $userProject = Query::from('cmspf_Projets')->where('user_key = ' . $_SESSION['Auth']->id)->execute();
         $usersProject = [];
-
         if(count($userProject) > 0){
-
             foreach ($userProject as $key => $project) {
                 $idProject = $userProject[$key]['id'];
                 $this->project->setId($idProject);
                 $usersProject[$key] = $this->project->user();
             }
-
         }
 
         $view = new View("project-list", "back");

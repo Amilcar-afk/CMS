@@ -16,6 +16,8 @@ class Message extends BaseSQL
     public $user_key;
     public $conversation_key;
 
+
+
     public function __construct()
     {
         parent::__construct();
@@ -172,6 +174,7 @@ class Message extends BaseSQL
        return parent::belongsTo(User::class, $this->getUser_key());
     }
     
+
 
 
 

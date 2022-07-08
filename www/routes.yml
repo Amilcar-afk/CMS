@@ -173,6 +173,11 @@
   action: newConversation
   middleware : ['auth', 'admin']
 
+/conversations/updateseen:
+  controller: communication
+  action: updateSeenStatus
+  middleware : ['auth', 'admin']
+
 /conversations/newmessage:
   controller: communication
   action: newMessage

@@ -18,7 +18,7 @@
 
                 <article>
                     <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                        <div class="col-12" id="messageDiv">
+                        <div class="col-12" id="messageDiv" >
                             <div id="chatDiv">
                             </div>
                                 <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >

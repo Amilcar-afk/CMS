@@ -19,8 +19,14 @@ class User{
 
     public function login()
     {
+        if(!empty($_SESSION)){
+            session_destroy();
+        }
+        
         $view = new View("login", "back-sandbox");
         $view->assign("user",$this->user);
+        
+        
         if( !empty($_POST)){
             $result = Validator::checkEmail($_POST['email']);
             
@@ -30,16 +36,19 @@ class User{
                 ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
                 ->execute("User");
                 
+                
                 if(empty($user)){
                     $loginAuth = [
                         'email' => false,
                         'pass' => false
                     ];
+                
                 }else if($user[0]->getMail() != null && password_verify($_POST['password'], $user[0]->getPwd()) === false){
                     $loginAuth = [
                         'email' => $user[0]->getMail(),
                         'pass' => false
                     ];
+
                 }else{
                     $loginAuth = [
                         'email' => $user[0]->getMail(),
@@ -49,6 +58,7 @@ class User{
 
                 $config = Validator::run($this->user->getFormLogin(),$_POST,false,$loginAuth );
 
+                
                 if(empty($config)){
                     session_start();
                     $_SESSION['Auth']->mail = $user[0]->getMail();
@@ -58,13 +68,14 @@ class User{
                     $_SESSION['Auth']->token = $user[0]->getToken();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
-    
                     if(!isset($_SESSION['redirect_url'])){
                         header('location:/dashboard');
                     }else{
+
                         header('location:'.$_SESSION['redirect_url']);
                     }
                 }else{
+
                     $view->assign("error_loginFrom",$config);
                 }
             }

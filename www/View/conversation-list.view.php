@@ -25,31 +25,40 @@
                 </article>
                 <article>
                     <?php if(isset($conversations)): ?>
-                        <?php foreach ($conversations as $conversation):?>
+                        <?php foreach (array_reverse($conversations)  as $conversation):?>
                             <header class="main-nav-choice mb-3"><div>
-                                    <h2>
+                                    <h2 id="conversation_title">
                                         <?php foreach ($conversation->users() as $user): ?>
                                             <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-
-
-                                                <a href="conversations/user-conversations/<?= $conversation->getId()?>">
+                                                <a href="conversations/user-conversations/<?=$conversation->getId()?>">
                                                     <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
+                                                    <input type="hidden" id="user" value="<?= $user->getId() ?>" >
                                                 </a>
                                             <?php endif;  ?>
+
                                          <?php endforeach;?>
                                     </h2>
                                     <?php if(!empty($conversation->lastMessage() )):  ?>
-                                        <div><?= $conversation->lastMessage()->getContent(); ?></div>
-                                    <?php endif; ?>
+                                        <?php foreach ($userConversation->getUser_Conversation($conversation->getId()) as $user_conv): ?>
 
+                                            <input type="hidden" id="userConversationId" value="<?= $user_conv->getId() ?>" >
+                                            <input type="hidden" id="seenValue" value="<?= $user_conv->getSeen()?>" >
+                                            <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id?>" >
+
+                                            
+                                            <?php if($user_conv->getSeen() == 1 ):  ?>
+                                                <div><?= $conversation->lastMessage()->getContent();?></div>
+                                            <?php else: ?>
+                                                <div style="opacity: 0.6;"><?= $conversation->lastMessage()->getContent();?></div>
+                                            <?php endif; ?>
+                                        <?php endforeach;?>
+                                    <?php endif; ?>
                                 </div>
                                 <span class="material-icons-round">more_horiz</span>
                             </header>
                         <?php endforeach;?>
                     <?php endif; ?>
                 </article>
-
-
                 <article>
                     <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
                     </div>

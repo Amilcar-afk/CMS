@@ -79,8 +79,10 @@ abstract class BaseSQL
     protected function save()
     {
         $columns  = get_object_vars($this);
+        
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
+        
         foreach($columns as $column => $value ){
             $table_name = 'table_name';
             if(isset($table_name )){
@@ -90,7 +92,10 @@ abstract class BaseSQL
                 echo 'introuvable';
             }
         }
+
         $columns = array_filter($columns);
+
+
 
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
@@ -104,7 +109,6 @@ abstract class BaseSQL
             VALUES (:".implode(",:", array_keys($columns)).")";
 
         }
-
         $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute($columns);
 

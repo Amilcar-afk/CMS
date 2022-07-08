@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    function myf(){
+        console.log(1)
+    }
     $('#chat-conversations-elements').hide();
     $(".select").on("input", function() {
         var value = $(this).val()     
@@ -35,7 +39,6 @@ $(document).ready(function(){
                                 $(div).prependTo('#conversation-founded');
                             } 
                             $('#foundedUser').on('click', function(){
-             
                             var e =  foundedUsers[1].find(e=>{
                               return  element.id == e.id
                             });
@@ -55,8 +58,6 @@ $(document).ready(function(){
         });
      });
 
-
-
     $('#sendButton').on('click',function(){
         if($('#sendTextarea').val() != ''){
             var currentUserData = {
@@ -64,6 +65,15 @@ $(document).ready(function(){
                 message:$('#sendTextarea').val(),
                 id_conversation:$('#conversationId').val(),
             };
+
+            var data = {
+                id_user:$('#user').val(),
+                myId:$('#myId').val(),
+                conversation_user_id:$('#conversationId').val(),
+                seenValue:$('#seenValue').val(),
+            };
+            changeSeenStatus(data)
+
 
             $.ajax({
                 url: "/conversation/compose",
@@ -96,11 +106,38 @@ $(document).ready(function(){
                 window.location.replace("/conversations/user-conversations/"+conversationId)
             }
         });
+    }
+
+    $('#conversation_title').on('click',function(){
+        var data = {
+            conversation_user_id:$('#userConversationId').val(),
+            seenValue: 2,
+            id_user:$('#user').val(),
+            myId:$('#myId').val(),
+        };
+        changeSeenStatus(data)
+    })
+
+    function changeSeenStatus(data){
+        $.ajax({
+            url: "/conversations/updateseen",
+            dataType:"html",
+            type: "POST",
+            data:
+            {
+                conversation_user_id: data.conversation_user_id,
+                seenValue: data.seenValue,
+                id_user: data.id_user,
+                myId:data.myId,
+            },
+            success: function(data){
+            }
+        });
 
     }
 
     var allMessages = [];
-
+//recupere tous les messages
     function getMessages(){
         setInterval(() => {
             $.ajax({
@@ -116,14 +153,14 @@ $(document).ready(function(){
                             id :messages[0]['id'] ,
                             id_conv :$('#conversationId').val(),
                         }
-                    gertNewMessage(data)
+                    getNewMessage(data)
                 }
             });
         }, 1000);
     }
 
-    
-    function gertNewMessage(data){
+//recupere le dernier messag
+    function getNewMessage(data){
         setTimeout(() => {
             $.ajax({
                 url: "/conversations/newmessage",
@@ -136,14 +173,10 @@ $(document).ready(function(){
                 success: function(messages){ 
                     $('#chatDiv').empty();
                     allMessages.forEach(message =>{
-                        
                         date = new Date( message.date)
                         const current = date.getHours()+ ':' + date.getMinutes();
-
                     $('<div>' + message.content + ''+ current +'</div>').prependTo('#chatDiv');
                 })
-
-              
             }
         });
         }, 400);

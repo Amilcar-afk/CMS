@@ -4,7 +4,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
-
+use App\Core\Query;
 
 class User_conversation extends BaseSQL
 {
@@ -12,6 +12,8 @@ class User_conversation extends BaseSQL
     protected $table_name = 'cmspf_User_conversation';
     public $user_key = null;
     public $conversation_key = null;
+    public $seen;
+
 
     public function __construct()
     {
@@ -87,6 +89,37 @@ class User_conversation extends BaseSQL
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
+    }
+
+
+    /**
+     * Get the value of seen
+     */ 
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * Set the value of seen
+     *
+     * @return  self
+     */ 
+    public function setSeen($seen)
+    {
+        $this->seen = $seen;
+
+        return $this;
+    }
+
+
+    public function getUser_Conversation($id)
+    {
+        $getUser_Conversation = Query::from('cmspf_User_conversation')
+        ->where('conversation_key = '.$id)
+        ->where('user_key = '.$_SESSION['Auth']->id)
+        ->execute('User_conversation');
+        return $getUser_Conversation ;
     }
 
 
