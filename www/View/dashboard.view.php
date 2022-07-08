@@ -135,13 +135,13 @@
                     <header>
                         <h3>Per week</h3>
                         <div class="navigation-container">
-                            <button class="main-nav-choice cta-button--before" data-attr-before=<?php ?>>
+                            <button class="main-nav-choice cta-button--range" data-before="<?php $date ?>">
                                 <span class="material-icons-round">navigate_before</span>
                             </button>
 
                             <p><?php echo $monthName; ?></p>
 
-                            <button class="main-nav-choice cta-button--next" data-attr-next=<?php ?>>
+                            <button class="main-nav-choice cta-button--range" data-next="<?php $date ?>">
                                 <span class="material-icons-round">navigate_next</span>
                             </button>
                         </div>
