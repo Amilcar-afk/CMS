@@ -20,7 +20,7 @@ class Validator
 
         $errors = [];
 
-        if(isset($config['inputs']['slug'])  && $unicity == false){
+        if(isset($config['inputs']['slug'])  && $unicity != false){
             $config['inputs']['slug']['error']="This slug alreay exist";
         }
 

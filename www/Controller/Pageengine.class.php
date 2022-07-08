@@ -176,6 +176,8 @@ class Pageengine
                     ->execute('Page');
                 if (!isset($unic_page[0])){
                     $unic_page = false;
+                }else{
+                    $unic_page = true;
                 }
             }else{
                 $unic_page = $this->page->find($_POST['slug'], 'slug');
@@ -190,6 +192,7 @@ class Pageengine
 
                 if ($lastId
                     && isset($_POST['categorie'])
+                    && is_int($_POST['categorie'])
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {
