@@ -19,10 +19,8 @@
                     <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
                     </button>
-
-                    <!--<canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>-->
                     
-                    <div id="range-per-country" class="collapse" data-group-collapse="per-country-container">
+                    <div id="range-per-country" class="collapse" data-group-collapse="per-country-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
                             <input id="SincePerCountry" name="SincePerCountry" type="date" class="input">
@@ -32,10 +30,10 @@
                             <input id="toPerCountry" name="toPerCountry" type="date" class="input">
                         </div>
 
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
 
-                        <div id="chart-per-country"></div>
+                    <div id="chart-per-country"></div>
 
                     <header>
                         <h3>Per country</h3>
@@ -71,7 +69,19 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
+                    <div id="range-per-page" class="collapse" data-group-collapse="per-page-container" style="width: 100%;">
+                        <div class="input-container">
+                            <label for="SincePerPage">Since</label>
+                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
+                        </div>
+                        <div class="input-container">
+                            <label for="toPerPage">To</label>
+                            <input id="toPerPage" name="toPerPage" type="date" class="input">
+                        </div>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
+                    </div>
+                    
+                    <div id="chart-per-page" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
                         <table class="table table--lite">
                             <tbody>
                             <?php foreach ($viewPerPages as $view): ?>
@@ -88,17 +98,7 @@
                         </button>
                     </div>
 
-                    <div id="range-per-page" class="collapse" data-group-collapse="per-page-container">
-                        <div class="input-container">
-                            <label for="SincePerPage">Since</label>
-                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
-                        </div>
-                        <div class="input-container">
-                            <label for="toPerPage">To</label>
-                            <input id="toPerPage" name="toPerPage" type="date" class="input">
-                        </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
-                    </div>
+                    
 
                 </section>
             </div>
@@ -112,9 +112,7 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-device" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1;"></div>
-
-                    <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
+                    <div id="range-per-device" class="collapse" data-group-collapse="per-device-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerDevice">Since</label>
                             <input id="SincePerDevice" name="SincePerDevice" type="date" class="input">
@@ -124,8 +122,11 @@
                             <input id="toPerDevice" name="toPerDevice" type="date" class="input">
                         </div>
 
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
                     </div>
+                    
+                    <div id="chart-per-device" ></div>
+
                 </section>
             </div>
             
