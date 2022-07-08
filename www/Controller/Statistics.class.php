@@ -104,9 +104,17 @@ class Statistics
         }
         
         $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
-        
-        foreach($viewPerWeek as $key => $value){
+        $chartWeekData[] = ['Mon', 0, 0];
+        $chartWeekData[] = ['Tue', 0, 0];
+        $chartWeekData[] = ['Wed', 0, 0];
+        $chartWeekData[] = ['Thu', 0, 0];
+        $chartWeekData[] = ['Fri', 0, 0];
+        $chartWeekData[] = ['Sat', 0, 0];
+        $chartWeekData[] = ['Sun', 0, 0];
 
+
+        foreach($viewPerWeek as $key => $value){
+            
             if ($value['day'] == "1") {
                 $viewPerWeek[$key]['day'] = "Sun";
             }
@@ -132,13 +140,56 @@ class Statistics
         }
         
         foreach($viewPerWeek as $key => $data) {
-            $chartWeekData[] = [
-                $data['day'],
-                $toInt = (int)$data['number'],
-                $toInt = (int)$data['number']
-            ];
+            if ($data['day'] == "Mon"){
+                $chartWeekData[1] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Tue"){
+                $chartWeekData[2] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Wed"){
+                $chartWeekData[3] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Thu"){
+                $chartWeekData[4] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Fri"){
+                $chartWeekData[5] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Sat"){
+                $chartWeekData[6] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "Sun"){
+                $chartWeekData[7] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
         }
-        
 
 
         // GET VIEW PER PAGES
