@@ -97,6 +97,11 @@
   action: composeNavigationCategorie
   middleware: [ 'auth', 'admin' ]
 
+/navigation/option/compose:
+  controller: categorie
+  action: composeNavigationOption
+  middleware: [ 'auth', 'admin' ]
+
 /navigation/page/delete:
   controller: categorie
   action: deleteNavigationPage

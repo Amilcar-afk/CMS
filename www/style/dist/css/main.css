@@ -1023,28 +1023,26 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   padding: 20px;
   overflow: hidden;
   margin: 19px; }
-  .card div {
-    width: 100%; }
-    .card div .cta-button {
-      color: var(--main-color);
-      cursor: pointer;
-      transition: all 0.3s;
-      border-radius: var(--radius, 10px);
-      border: none;
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      background-color: unset;
-      font-size: 1.125rem;
-      font-weight: 500;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      border-radius: var(--radius, 10px);
-      background-color: var(--main-color);
-      color: white; }
-      .card div .cta-button:hover {
-        background-color: var(--second-color); }
+  .card div .cta-button {
+    color: var(--main-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: var(--radius, 10px);
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: unset;
+    font-size: 1.125rem;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: var(--radius, 10px);
+    background-color: var(--main-color);
+    color: white; }
+    .card div .cta-button:hover {
+      background-color: var(--second-color); }
   .card--bottom {
     display: flex;
     justify-content: end; }
@@ -1138,7 +1136,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card #chart-per-country {
     width: 100%;
     height: 100%; }
-    .card #chart-per-country g rect {
+    .card #chart-per-country svg g rect {
       fill: none; }
   .card #chart-per-device {
     width: 100%;
@@ -1428,6 +1426,9 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   padding-right: 3px;
   border-radius: var(--radius, 6px); }
 
+.module {
+  height: min-content; }
+
 #container-editor .module--iframe::after {
   content: '<button class"cta-button">SRC</button>'; }
 
@@ -1462,7 +1463,6 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   position: absolute;
   top: 0;
   right: 10px;
-  color: var(--background-color);
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
@@ -1496,14 +1496,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       .navbar .menu li a {
         display: block;
         text-decoration: none;
-        color: var(--background-color);
         text-align: center;
         padding: 0 0.8em;
         transition: all 0.2s ease;
         font-weight: bold;
         letter-spacing: 0.025em; }
         .navbar .menu li a:hover {
-          color: var(--second-color); }
+          color: var(--second-color) !important; }
 
 .expand {
   max-height: 20em;
@@ -1674,7 +1673,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       position: relative;
       left: 50px; }
   .cta-button--editor-color--selected span, .cta-button--editor-color--selected input {
-    border: solid 3px var(--font-color, black) !important; }
+    border: solid 3px var(--font-color, black) !important;
+    border-radius: 50px; }
   .cta-button--editor-color--custom {
     position: relative; }
     .cta-button--editor-color--custom span {
@@ -1804,6 +1804,9 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     padding: 19px;
     background-color: var(--background-color);
     height: calc(100% - 73px - 1.25rem); }
+  .container-main-content--quit-settings .container-main-content--menu-content {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important; }
   .container-main-content--menu-content {
     padding-top: 30px;
     padding: 15px;
@@ -2344,6 +2347,8 @@ h2 {
     width: 45px;
     display: flex;
     justify-content: center; }
+  .editable-module .action-print {
+    color: var(--main-color); }
   .editable-module--tool-bar {
     background: rgba(129, 129, 129, 0.3);
     box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
@@ -2354,6 +2359,11 @@ h2 {
     position: absolute;
     top: -55px;
     transition: all 3ms; }
+    .editable-module--tool-bar .sp-replacer {
+      border: none;
+      width: 20px !important;
+      height: 20px !important;
+      border-radius: 20px; }
     .editable-module--tool-bar .input {
       width: 100%;
       background-color: #EBEBEB !important;

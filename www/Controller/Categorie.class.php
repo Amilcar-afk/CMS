@@ -47,6 +47,8 @@ class Categorie{
             "description" => 'List of all categories',
             "src" => [
                 ["type" => "js", "path" => "../style/js/navigations.js"],
+                ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
             ],
         ]);
     }
@@ -171,6 +173,32 @@ class Categorie{
             }else{
                 http_response_code(500);
             }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function composeNavigationOption()
+    {
+        if( isset($_POST['type']) && isset($_POST['value']) && isset($_POST['navigation']) ) {
+
+            if (!$this->categorie->find($_POST['navigation'])){
+                return http_response_code(500);
+            }
+
+            if ($_POST['type'] == 'backgroundColor'){
+                $this->categorie->setBackgroundColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnColor'){
+                $this->categorie->setBtnColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnTextColor'){
+                $this->categorie->setBtnTextColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnTextHoverColor'){
+                $this->categorie->setBtnTextHoverColor($_POST['value']);
+            }
+            $this->categorie->setId($_POST['navigation']);
+
+            $this->categorie->save();
+
         }else{
             http_response_code(500);
         }

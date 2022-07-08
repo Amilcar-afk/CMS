@@ -29,6 +29,10 @@
     justify-content: center;
   }
 
+  & .action-print{
+    color: var(--main-color);
+  }
+
   &--tool-bar{
     background: rgba(129, 129, 129, 0.3);
     box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);
@@ -39,6 +43,13 @@
     position: absolute;
     top: -55px;
     transition: all 3ms;
+
+    & .sp-replacer {
+      border: none;
+      width: 20px!important;
+      height: 20px!important;
+      border-radius: 20px;
+    }
 
     .input{
       width: 100%;

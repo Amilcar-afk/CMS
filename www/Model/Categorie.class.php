@@ -13,6 +13,74 @@ class Categorie extends BaseSQL
     public $id = null;
     protected $type;
     protected $title;
+    protected $backgroundColor;
+    protected $btnColor;
+    protected $btnTextHoverColor;
+    protected $btnTextColor;
+
+    /**
+     * @return mixed
+     */
+    public function getBackgroundColor()
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
+     * @param mixed $backgroundColor
+     */
+    public function setBackgroundColor($backgroundColor): void
+    {
+        $this->backgroundColor = $backgroundColor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBtnColor()
+    {
+        return $this->btnColor;
+    }
+
+    /**
+     * @param mixed $btnColor
+     */
+    public function setBtnColor($btnColor): void
+    {
+        $this->btnColor = $btnColor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBtnTextHoverColor()
+    {
+        return $this->btnTextHoverColor;
+    }
+
+    /**
+     * @param mixed $btnTextHoverColor
+     */
+    public function setBtnTextHoverColor($btnTextHoverColor): void
+    {
+        $this->btnTextHoverColor = $btnTextHoverColor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBtnTextColor()
+    {
+        return $this->btnTextColor;
+    }
+
+    /**
+     * @param mixed $btnTextColor
+     */
+    public function setBtnTextColor($btnTextColor): void
+    {
+        $this->btnTextColor = $btnTextColor;
+    }
 
     /**
      * @return mixed

@@ -9,6 +9,13 @@
     height: calc(100% - 73px - 1.25rem);
   }
 
+  &--quit-settings{
+    & .container-main-content--menu-content {
+      padding-top: 15px!important;
+      padding-bottom: 15px!important;
+    }
+  }
+
   &--menu-content{
     padding-top: 30px;
     padding: 15px;

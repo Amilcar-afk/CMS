@@ -28,6 +28,7 @@
 		&--selected{
 			span, input {
 				border: solid 3px var(--font-color, black)!important;
+				border-radius: 50px;
 			}
 		}
 

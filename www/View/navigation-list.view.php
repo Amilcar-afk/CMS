@@ -64,6 +64,47 @@
                         <p>Choose the category and the page you want to add to this navigation.</p>
                     </header>
 
+                    <!--Colors-->
+                    <article class="container-main-content--quit-settings">
+                        <header class="main-nav-choice selected" data-wc-target="colors-list-elements-<?=$navigation->getId() ?>">
+                            <h2>Colors</h2>
+                            <span class="material-icons-round">more_horiz</span>
+                        </header>
+                        <div id="colors-list-elements-<?=$navigation->getId() ?>" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="addable-elements-container-<?=$navigation->getId() ?>" style="opacity: 1">
+
+                            <div class="container-main-content--menu-content" data-parent="<?=$navigation->getId() ?>">
+                                <header class="main-nav-choice">
+                                    <h2>Background color</h2>
+                                </header>
+                                <section class="section-config-blocks center-left elements-in" data-parent="<?=$navigation->getId() ?>">
+                                    <nav class="editable-module--tool-bar" data-option-type="backgroundColor" style="position: unset">
+                                        <button data-option-value="unset" class="cta-button cta-button--icon cta-button-background-color-update <?= ($navigation->getBackgroundColor() != null && $navigation->getBackgroundColor() == 'unset')?'cta-button--editor-color--selected':'' ?>"><span class="material-icons-round">block</span></button>
+                                        <button data-option-value="main-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBackgroundColor() != null && $navigation->getBackgroundColor() == 'main-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-main-color"></span></button>
+                                        <button data-option-value="second-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBackgroundColor() != null && $navigation->getBackgroundColor() == 'second-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-second-color"></span></button>
+                                        <button data-option-value="third-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBackgroundColor() != null && $navigation->getBackgroundColor() == 'third-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-third-color"></span></button>
+                                        <button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color cta-button--editor-color--custom"><input class="background-color-picker background-color-picker-input" value="<?= ($navigation->getBackgroundColor() != null && $navigation->getBackgroundColor() != 'unset' && $navigation->getBackgroundColor() != 'main-color' && $navigation->getBackgroundColor() != 'second-color' && $navigation->getBackgroundColor() != 'third-color')? $navigation->getBackgroundColor() :'' ?>"></button>
+                                    </nav>
+                                </section>
+                            </div>
+
+                            <div class="container-main-content--menu-content" data-parent="<?=$navigation->getId() ?>">
+                                <header class="main-nav-choice">
+                                    <h2>Text buttons color</h2>
+                                </header>
+                                <section class="section-config-blocks center-left elements-in" data-parent="<?=$navigation->getId() ?>">
+                                    <nav class="editable-module--tool-bar" data-option-type="btnTextColor" style="position: unset">
+                                        <button data-option-value="unset" class="cta-button cta-button--icon cta-button-background-color-update <?= ($navigation->getBtnTextColor() != null && $navigation->getBtnTextColor() == 'unset')?'cta-button--editor-color--selected':'' ?>"><span class="material-icons-round">block</span></button>
+                                        <button data-option-value="main-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBtnTextColor() != null && $navigation->getBtnTextColor() == 'main-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-main-color"></span></button>
+                                        <button data-option-value="second-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBtnTextColor() != null && $navigation->getBtnTextColor() == 'second-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-second-color"></span></button>
+                                        <button data-option-value="third-color" class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color <?= ($navigation->getBtnTextColor() != null && $navigation->getBtnTextColor() == 'third-color')?'cta-button--editor-color--selected':'' ?>"><span class="background-third-color"></span></button>
+                                        <button class="cta-button cta-button--icon cta-button-background-color-update cta-button--editor-color cta-button--editor-color--custom"><input class="background-color-picker background-color-picker-input" value="<?= ($navigation->getBtnTextColor() != null && $navigation->getBtnTextColor() != 'unset' && $navigation->getBtnTextColor() != 'main-color' && $navigation->getBtnTextColor() != 'second-color' && $navigation->getBtnTextColor() != 'third-color')? $navigation->getBtnTextColor() :'' ?>"></button>
+                                    </nav>
+                                </section>
+                            </div>
+
+                        </div>
+                    </article>
+
                     <!--Categories-->
                     <article>
                         <header class="main-nav-choice selected" data-wc-target="categorie-list-elements-<?=$navigation->getId() ?>">
