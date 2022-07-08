@@ -7,6 +7,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Stat;
 use App\Model\Reseaux_soc;
+use App\Model\User_conversation;
+
 use function MongoDB\BSON\fromJSON;
 
 class Statistics
@@ -19,6 +21,7 @@ class Statistics
     public function __construct()
     {
         $this->stats = new Stat;
+        $this->conversation_user = new User_conversation();
     }
 
 
@@ -30,6 +33,14 @@ class Statistics
         $reseauxSocs = $reseauxSoc->find();
         $stats = $this->stats->find();
 
+
+
+        $conversation = Query::from("cmspf_Conversations")
+        ->innerJoin(" cmspf_User_conversation ON cmspf_User_conversation.conversation_key = cmspf_Conversations.id")
+        ->where("cmspf_User_conversation.seen = 1")
+        ->where("cmspf_User_conversation.user_key = ".$_SESSION['Auth']->id)
+        ->execute();
+        
 
         // RANGE
         $toPerPage = date("Y-m-d");
@@ -47,6 +58,7 @@ class Statistics
 
         }
         if(isset($_POST['sincePerCountry'])) {
+
 
             $sincePerCountry = $_POST['sincePerCountry'];
             $toPerCountry = $_POST['toPerCountry'];
@@ -202,7 +214,6 @@ class Statistics
                 $toInt = (int)$device['number']
             ];
         }
-        
 
         // GET NEW USERS STATS
         $currentMonth = date("m");
@@ -227,7 +238,6 @@ class Statistics
         $view->assign("data", $stats);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
-
         $view->assign("metaData", $metaData = [
             "title" => 'Style',
             "description" => 'Change your webstite style',
@@ -237,6 +247,8 @@ class Statistics
                 ["type" => "js", "path" => "../style/js/reseauxSoc.js"],
             ],
         ]);
+        $view->assign("conversations", count($conversation));
+
     }
 
     public function composeReseauxSoc() {

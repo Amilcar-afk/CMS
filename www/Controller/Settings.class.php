@@ -121,6 +121,7 @@ class Settings
 
         $view = new View("configuration", "back");
         $view->assign("configuration", $this->config);
+<<<<<<< HEAD
         $view->assign("metaData", $metaData = [
             "title" => 'Configuration',
             "description" => 'Change your webstite configuration here. Database & SMTP configuration',
@@ -128,5 +129,13 @@ class Settings
                 ["type" => "js", "path" => "../style/js/database.js"],
             ],
         ]);
+=======
+    }
+
+
+    public function listMedia()
+    {
+        $view = new View("media-library", "back");
+>>>>>>> feature/messageire
     }
 }

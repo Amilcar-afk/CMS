@@ -11,7 +11,7 @@ class Query extends BaseSQL
     private static $from;
     private static $where = [];
     private static $or = [];
-    private static $order;
+    private static $order = [];
     private static $limit = '';
     private static $params = [];
     private static $class;
@@ -59,6 +59,18 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function orderby(string $key, string $direction)
+    {
+        $direction = strtoupper($direction);
+        if(!in_array($direction, ['ASC', 'DESC'])){
+            self::$order[] = $key;
+        }else{
+            self::$order[] = "$key $direction";
+        }
+        return (new Query);
+
+
+    }
     public function groupBy(string $group): self
     {
         self::$groupBy = "GROUP BY ". $group;
@@ -73,6 +85,7 @@ class Query extends BaseSQL
 
     public function limit(string $from, string $to = null): self
     {
+
         if(!empty($to)){
             if(DBDRIVER === "mysql"){
                 self::$limit = " LIMIT " . $from . ", " . $to;
@@ -175,6 +188,12 @@ class Query extends BaseSQL
             $parts[] = '(' . join(') AND (', self::$where) . ')';
         }
 
+        if(!empty(self::$order)){
+            $parts[] = "ORDER BY ".self::$order[0];
+        }
+
+
+
         if (!empty(self::$or)){
             if(array_search("WHERE", $parts) === false){
                 $parts[] = "WHERE";
@@ -185,7 +204,7 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
-        }     
+        }
 
         if (!empty(self::$groupBy))
             $parts[] = self::$groupBy;
@@ -212,6 +231,9 @@ class Query extends BaseSQL
     public function execute($model = null)
     {
         $query = $this->__toString();
+        // echo '<pre>';
+        // var_dump($query);
+        // echo '</pre>';
         $statement = $this->pdo->prepare($query);
         $statement->execute();
 

@@ -146,20 +146,51 @@
   controller: pageengine
   action: siteMap
 
-
 /conversations:
   controller: communication
   action: listConversation
   middleware : ['auth']
+
+/conversations/search-conversations:
+  controller: communication
+  action: searchData
+  middleware : ['auth']
+
+/conversations/user-conversations:
+  controller: communication
+  action: userConversation
+  params: [id_conv]
+  middleware: [ 'auth', 'admin' ]
+
+/conversations/get-all-messages:
+  controller: communication
+  action: messages
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
 
 /conversation/compose:
   controller: communication
   action: composeConversation
   middleware : ['auth', 'admin']
 
+/conversation/compose-newconversation:
+  controller: communication
+  action: newConversation
+  middleware : ['auth', 'admin']
+
+/conversations/updateseen:
+  controller: communication
+  action: updateSeenStatus
+  middleware : ['auth', 'admin']
+
+/conversations/newmessage:
+  controller: communication
+  action: newMessage
+  middleware : ['auth', 'admin']
+
 /conversation/delete:
   controller: communication
-  action: deleteConversation
+  action: newMessage
   middleware: [ 'auth', 'admin' ]
 
 /projects:
