@@ -113,76 +113,84 @@ class Statistics
         $chartWeekData[] = ['Sun', 0, 0];
 
 
-        foreach($viewPerWeek as $key => $value){
+        // foreach($viewPerWeek as $key => $value){
             
-            if ($value['day'] == "1") {
-                $viewPerWeek[$key]['day'] = "Sun";
-            }
-            if ($value['day'] == "2") {
-                $viewPerWeek[$key]['day'] = "Mon";
-            }
-            if ($value['day'] == "3") {
-                $viewPerWeek[$key]['day'] = "Tue";
-            }
-            if ($value['day'] == "4") {
-                $viewPerWeek[$key]['day'] = "Wed";
-            }
-            if ($value['day'] == "5") {
-                $viewPerWeek[$key]['day'] = "Thu";
-            }
-            if ($value['day'] == "6") {
-                $viewPerWeek[$key]['day'] = "Fri";
-            }
-            if ($value['day'] == "7") {
-                $viewPerWeek[$key]['day'] = "Sat";
-            }
+        //     if ($value['day'] == "1") {
+        //         $viewPerWeek[$key]['day'] = "Sun";
+        //     }
+        //     if ($value['day'] == "2") {
+        //         $viewPerWeek[$key]['day'] = "Mon";
+        //     }
+        //     if ($value['day'] == "3") {
+        //         $viewPerWeek[$key]['day'] = "Tue";
+        //     }
+        //     if ($value['day'] == "4") {
+        //         $viewPerWeek[$key]['day'] = "Wed";
+        //     }
+        //     if ($value['day'] == "5") {
+        //         $viewPerWeek[$key]['day'] = "Thu";
+        //     }
+        //     if ($value['day'] == "6") {
+        //         $viewPerWeek[$key]['day'] = "Fri";
+        //     }
+        //     if ($value['day'] == "7") {
+        //         $viewPerWeek[$key]['day'] = "Sat";
+        //     }
 
-        }
+        // }
         
         foreach($viewPerWeek as $key => $data) {
-            if ($data['day'] == "Mon"){
+
+            if ($data['day'] == "2"){
+                $data['day'] = "Mon";
                 $chartWeekData[1] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Tue"){
+            if ($data['day'] == "3"){
+                $data['day'] = "Tue";
                 $chartWeekData[2] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Wed"){
+            if ($data['day'] == "4"){
+                $data['day'] = "Wed";
                 $chartWeekData[3] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Thu"){
+            if ($data['day'] == "5"){
+                $data['day'] = "Thu";
                 $chartWeekData[4] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Fri"){
+            if ($data['day'] == "6"){
+                $data['day'] = "Fri";
                 $chartWeekData[5] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Sat"){
+            if ($data['day'] == "7"){
+                $data['day'] = "Sat";
                 $chartWeekData[6] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
                     $toInt = (int)$data['number']
                 ];
             }
-            if ($data['day'] == "Sun"){
+            if ($data['day'] == "1"){
+                $data['day'] = "Sun";
                 $chartWeekData[7] = [
                     $data['day'],
                     $toInt = (int)$data['number'],
