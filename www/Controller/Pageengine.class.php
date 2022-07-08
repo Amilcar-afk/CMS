@@ -146,7 +146,7 @@ class Pageengine
                 "src" => [
                     ["type" => "js", "path" => "../style/js/wysiwyg.js"],
                     ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
-                    ["type" => "js", "css" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+                    ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
                 ],
             ]);
         }else {
