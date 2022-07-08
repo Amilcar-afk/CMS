@@ -23,6 +23,21 @@
 		}
 	}
 
+	&-font-color-update{
+		.color-main-color{
+			background-color:var(--main-color);
+		}
+
+		.color-second-color{
+			background-color:var(--second-color);
+		}
+
+		.color-third-color{
+			background-color:var(--third-color);
+		}
+
+	}
+
 	&--editor-color{
 
 		&--selected{

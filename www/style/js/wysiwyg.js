@@ -586,7 +586,7 @@ $(document).ready(function(){
             $newComponent.addClass('col-6');
             $("#editable-module").parent().after($newComponent);
         }
-        $($newComponent.find('.module--hover')[0]).remove();
+        $($('.module--hover')[0]).remove();
         $("#cta-button-close-list-component").click();
     })
 

@@ -182,6 +182,10 @@
 	//height: 200px !important;
 }
 
+.module{
+	height: min-content;
+}
+
 
 #container-editor{
 	.module--iframe::after{

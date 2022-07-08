@@ -73,11 +73,9 @@
   }
 
   &--footer-nav{
-    display: flex;
-    justify-content: center;
-    bottom: 60px;
-    bottom: calc(-100% + -1px);
-    position: relative;
+    position: absolute;
+    left: calc(50% - 22.5px);
+    top: 100%;
 
     button{
       background: rgba(129, 129, 129, 0.3);

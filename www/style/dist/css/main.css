@@ -1672,6 +1672,12 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     .cta-button--mains-color--custom .sp-container.sp-flat {
       position: relative;
       left: 50px; }
+  .cta-button-font-color-update .color-main-color {
+    background-color: var(--main-color); }
+  .cta-button-font-color-update .color-second-color {
+    background-color: var(--second-color); }
+  .cta-button-font-color-update .color-third-color {
+    background-color: var(--third-color); }
   .cta-button--editor-color--selected span, .cta-button--editor-color--selected input {
     border: solid 3px var(--font-color, black) !important;
     border-radius: 50px; }
@@ -2381,11 +2387,9 @@ h2 {
     height: 100%;
     width: 100%; }
   .editable-module--footer-nav {
-    display: flex;
-    justify-content: center;
-    bottom: 60px;
-    bottom: calc(-100% + -1px);
-    position: relative; }
+    position: absolute;
+    left: calc(50% - 22.5px);
+    top: 100%; }
     .editable-module--footer-nav button {
       background: rgba(129, 129, 129, 0.3);
       box-shadow: inset 0px 0px 250px rgba(255, 255, 255, 0.25);

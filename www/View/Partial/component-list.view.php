@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="section-module module-list background-main-color col-6">
+                        <article class="module-list section-module background-main-color col-6">
                             <h2 class="module color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
                         </article>
                     </div>
@@ -394,8 +394,8 @@
                         </article>
 
                         <article class="section-module module-list">
-                            <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module color-main-color fs-14 medium">tv gango sphere</h4>
+                            <h3 class="col-12 module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module color-main-color fs-14 medium">tv gango sphere</h4>
                             <div class="module col-12" data-media-type="spotify">
                                 <iframe class="module module--iframe" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -406,8 +406,8 @@
                     <div class="col-6 col-md-12 col-sm-12">
 
                         <article class="section-module module-list">
-                            <h3 class="module highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                            <h3 class="col-12 module highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module fs-14 color-main-color medium">tv gango sphere</h4>
                             <div class="module col-12" data-media-type="spotify">
                                 <iframe class="module module--iframe" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -415,9 +415,9 @@
                         </article>
 
                         <article class="section-module module-list background-main-color">
-                            <div class="left-border color-white">
-                                <h3 class="module color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                <h4 class="module color-background-color fs-14 medium">tv gango sphere</h4>
+                            <div class="left-border color-white col-12">
+                                <h3 class="col-12 module color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                <h4 class="col-12 module color-background-color fs-14 medium">tv gango sphere</h4>
                                 <div class="module col-12" data-media-type="spotify">
                                     <iframe class="module module--iframe" src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
                                         frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -457,21 +457,17 @@
                             </div>
                         </article>
 
-                        <article class="module-list">
-                            <div class="section-module row">
-                                <div class="col-4">
-                                    <h3 class="module color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
-                                    <p class="module color-main-color fs-14 medium">
-                                        Lorem ipsum ibra
-                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
-                                    </p>
-                                </div>
-                                <div class="module col-8 container-16-9" data-media-type="youtube">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
-                                </div>
+                        <article class="section-module module-list">
+                            <h3 class="module col-12 color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module col-12 fs-14 color-main-color medium">tv gango sphere</h4>
+                            <p class="module col-12 color-main-color fs-14 medium">
+                                Lorem ipsum ibra
+                                tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                            </p>
+                            <div class="module col-12 container-16-9" data-media-type="youtube">
+                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
                             </div>
                         </article>
 
@@ -486,8 +482,8 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list">
-                            <div class="section-module left-border row">
+                        <article class="section-module module-list">
+                            <div class="left-border row">
                                 <div class="col-4">
                                     <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
                                     <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
@@ -505,14 +501,14 @@
                         </article>
 
                         <article class="section-module background-main-color module-list">
-                            <h3 class="module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module fs-14 color-white medium">tv gango sphere</h4>
-                            <p class="module color-white fs-14 medium">
+                            <h3 class="col-12 module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module fs-14 color-white medium">tv gango sphere</h4>
+                            <p class="col-12 module color-white fs-14 medium">
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
 
-                            <div class="module container-16-9 col-12"  data-media-type="youtube">
+                            <div class="col-12 module container-16-9 col-12"  data-media-type="youtube">
                                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
