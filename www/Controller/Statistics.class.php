@@ -111,33 +111,6 @@ class Statistics
         $chartWeekData[] = ['Fri', 0, 0];
         $chartWeekData[] = ['Sat', 0, 0];
         $chartWeekData[] = ['Sun', 0, 0];
-
-
-        // foreach($viewPerWeek as $key => $value){
-            
-        //     if ($value['day'] == "1") {
-        //         $viewPerWeek[$key]['day'] = "Sun";
-        //     }
-        //     if ($value['day'] == "2") {
-        //         $viewPerWeek[$key]['day'] = "Mon";
-        //     }
-        //     if ($value['day'] == "3") {
-        //         $viewPerWeek[$key]['day'] = "Tue";
-        //     }
-        //     if ($value['day'] == "4") {
-        //         $viewPerWeek[$key]['day'] = "Wed";
-        //     }
-        //     if ($value['day'] == "5") {
-        //         $viewPerWeek[$key]['day'] = "Thu";
-        //     }
-        //     if ($value['day'] == "6") {
-        //         $viewPerWeek[$key]['day'] = "Fri";
-        //     }
-        //     if ($value['day'] == "7") {
-        //         $viewPerWeek[$key]['day'] = "Sat";
-        //     }
-
-        // }
         
         foreach($viewPerWeek as $key => $data) {
 

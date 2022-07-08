@@ -71,7 +71,7 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
+                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
                         <table class="table table--lite">
                             <tbody>
                             <?php foreach ($viewPerPages as $view): ?>
@@ -212,6 +212,7 @@
 
         </section>
     </section>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
 
 </section>
 
@@ -230,7 +231,9 @@ google.charts.load('current', {
 
         );
 
-        var options = {};
+        var options = {
+            
+        };
 
         var chart = new google.visualization.GeoChart(document.getElementById('chart-per-country'));
 
@@ -251,24 +254,19 @@ google.charts.load("current", {packages:["corechart"]});
         var data = google.visualization.arrayToDataTable(
             <?php  print_r(json_encode($chartDeviceData)); ?>
         );
-
-        // var root = document.querySelector(':root') ;
-        // var rootStyles = getComputedStyle(root) ;
-        // var mainColor = rootStyles.getPropertyValue('--main-color');
-        // var secondColor = rootStyles.getPropertyValue('--second-color');
-        // var thirdColor = rootStyles.getPropertyValue('--third-color');
-
         
         var options = {
+            
           pieHole: 0.6,
           width: '100%',
           height: '100%',
           colors: [mainColor, secondColor, thirdColor],
           
           legend: {
-              position : 'none',
-              //alignment: 'start'
+              position : 'bottom',
+              alignment: 'center',
             }
+            
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
@@ -319,4 +317,6 @@ google.charts.load('current', {'packages':['bar']});
 
 		
 </script>
+
+
 

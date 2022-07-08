@@ -10,8 +10,7 @@
     overflow: hidden;
     margin: 19px;
 
-    & div{
-        width: 100%;
+    & div {
 
         & .cta-button {
             color: var(--main-color);
@@ -181,6 +180,7 @@
         & rect {
             height: 100%;
             fill: none;
+            
         }
     }
     & #chart-per-week {
