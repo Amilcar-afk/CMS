@@ -25,7 +25,7 @@ class Setup{
             "title" => 'Setup Database',
             "description" => 'Database configuration',
             "src" => [
-                ["type" => "js", "path" => "../style/js/database.js"],
+                ["type" => "js", "path" => "/style/js/database.js"],
             ],
         ]);
     }
@@ -49,7 +49,7 @@ class Setup{
             "title" => 'Setup Smtp',
             "description" => 'Smtp configuration',
             "src" => [
-                ["type" => "js", "path" => "../style/js/database.js"],
+                ["type" => "js", "path" => "/style/js/database.js"],
             ],
         ]);
     }
@@ -66,7 +66,7 @@ class Setup{
             "title" => 'Setup main images',
             "description" => 'main images',
             "src" => [
-                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "/style/js/options.js"],
             ],
         ]);
     }
@@ -78,7 +78,7 @@ class Setup{
             "title" => 'Setup main colors',
             "description" => 'main colors',
             "src" => [
-                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "/style/js/options.js"],
                 ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
                 ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
             ],
@@ -92,7 +92,7 @@ class Setup{
             "title" => 'Setup design 1/2',
             "description" => 'Design',
             "src" => [
-                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "/style/js/options.js"],
             ],
         ]);
     }
@@ -104,7 +104,7 @@ class Setup{
             "title" => 'Setup design 2/2',
             "description" => 'Design',
             "src" => [
-                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "/style/js/options.js"],
             ],
         ]);
     }

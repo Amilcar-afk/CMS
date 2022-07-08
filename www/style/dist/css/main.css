@@ -1082,6 +1082,12 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       align-items: center;
       letter-spacing: 0.005em;
       color: var(--background-color, white); }
+    .card header .navigation-container {
+      display: flex;
+      align-items: center;
+      width: max-content; }
+      .card header .navigation-container .material-icons-round {
+        font-size: 2.375rem; }
   .card .edge-container {
     width: 75px;
     height: 97px;

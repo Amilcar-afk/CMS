@@ -9,10 +9,10 @@ $(document).ready(function(){
         $('.navbar').removeClass('expand');
     });
 
-    if ($(".place-menu")){
+    /*if ($(".place-menu")){
         let placeMenu = $(".place-menu").text();
         $('[data-alt=' + ucFisrt(placeMenu) + ']').addClass('selected');
-    }
+    }*/
 
     //ALT BUBBLE
     $(".button-menu").mouseover(function (){

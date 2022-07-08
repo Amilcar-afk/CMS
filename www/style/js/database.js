@@ -50,7 +50,7 @@ $(document).ready(function(){
                 alertMessage('Data updated!');
                 let pathname = window.location.pathname;
                 if (pathname == "/setup/smtp"){
-                    window.location.href = "/dashboard";
+                    window.location.href = "/setup/main-colors";
                 }
             },
             error: function (data, textStatus, errorThrown) {
