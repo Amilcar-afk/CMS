@@ -170,8 +170,13 @@
     & #chart-per-country {
         width: 100%;
         height: 100%;
-        & g rect{
-            fill: none;
+        & svg g {
+            & rect {
+                fill: none;
+            }
+            & g:nth-child(3) {
+                // display: none;
+            }
         }
     }       
     & #chart-per-device {
@@ -180,7 +185,6 @@
         & rect {
             height: 100%;
             fill: none;
-            
         }
     }
     & #chart-per-week {

@@ -212,13 +212,14 @@
 
         </section>
     </section>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
 
 </section>
 
 
 
 <script>
+    
 google.charts.load('current', {
         'packages':['geochart'],
       });
@@ -226,12 +227,14 @@ google.charts.load('current', {
 
       function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(
-
             <?php  print_r(json_encode($chartMapData)); ?>
-
         );
 
         var options = {
+            colorAxis: {
+                colors: ["green", "red"]
+            },
+            legend: 'none',
             
         };
 
@@ -239,7 +242,6 @@ google.charts.load('current', {
 
         chart.draw(data, options);
       }
-
 
 
 </script>
@@ -261,7 +263,7 @@ google.charts.load("current", {packages:["corechart"]});
           width: '100%',
           height: '100%',
           colors: [mainColor, secondColor, thirdColor],
-          
+          pieSliceText: "none",
           legend: {
               position : 'bottom',
               alignment: 'center',
@@ -317,6 +319,7 @@ google.charts.load('current', {'packages':['bar']});
 
 		
 </script>
+
 
 
 
