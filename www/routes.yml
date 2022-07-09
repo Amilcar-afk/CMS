@@ -284,6 +284,11 @@
   action: composereseauxsoc
   middleware : ['auth', 'admin']
 
+/social-media/stat/compose:
+  controller: statistics
+  action: composestatreseauxsoc
+  middleware : ['auth', 'admin']
+
 /social-media/delete:
   controller: statistics
   action: deletereseauxsoc

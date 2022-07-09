@@ -4,7 +4,7 @@
         <nav class="col-12 nav-rs">
             <ul>
                 <?php foreach ($reseauxSocs as $reseauxSoc):?>
-                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="<?= $reseauxSoc->getPath() ?>" target="_blank" class="button-menu"><img src="../style/images/<?= $reseauxSoc->getType() ?>.png"></a></li>
+                    <li><a class="cta-button-compose-stat-reseaux-soc <?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="<?= $reseauxSoc->getPath() ?>" data-reseaux-soc="<?= $reseauxSoc->getId() ?>" target="_blank" class="button-menu"><img src="../style/images/<?= $reseauxSoc->getType() ?>.png"></a></li>
                 <?php endforeach;?>
             </ul>
         </nav>

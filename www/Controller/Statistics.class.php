@@ -304,6 +304,22 @@ class Statistics
         }
     }
 
+    function composestatreseauxsoc()
+    {
+        if( isset($_POST['id']) ) {
+            $reseauxSoc = new Reseaux_soc();
+            $reseauxSoc = $reseauxSoc->find($_POST['id']);
+            if ($reseauxSoc->getId() != null) {
+                $reseauxSoc->composeStats($_POST['id'], "reseaux_soc");
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
+
+
     public function composeStats(int $elementId, string $type) {
 
 
@@ -358,7 +374,7 @@ class Statistics
             $attributType = "page_key";
         }elseif ($type == "reseaux_soc") {
             $this->stats->setReseauSocKey($elementId); // OK
-            $attributType = "reseaux_soc_key";
+            $attributType = "reseau_soc_key";
         }
 
 

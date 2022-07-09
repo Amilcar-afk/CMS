@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Controller\Statistics;
 use App\Core\BaseSQL;
 
 class Reseaux_soc extends BaseSQL
@@ -110,6 +111,12 @@ class Reseaux_soc extends BaseSQL
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
+    }
+
+    public function composeStats(int $elementId, string $type)
+    {
+        $stat = new Statistics();
+        $stat->composeStats($elementId, $type);
     }
 
     public function getFormNewReseauxSoc(): array

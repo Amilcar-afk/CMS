@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+    $(document).on("click", ".cta-button-compose-stat-reseaux-soc", function () {
+        $.ajax({
+            url:"/social-media/stat/compose",
+            type:"POST",
+            data:
+                {
+                    id:$(this).attr('data-reseaux-soc'),
+                },
+            success:function(answer) {},
+            error: function (data, textStatus, errorThrown) {}
+        });
+    })
+
     $('#menu-icon').on('click', function(){
         $('.navbar').toggleClass('expand');
         return false;
@@ -9,10 +22,10 @@ $(document).ready(function(){
         $('.navbar').removeClass('expand');
     });
 
-    /*if ($(".place-menu")){
+    if ($(".place-menu")){
         let placeMenu = $(".place-menu").text();
         $('[data-alt=' + ucFisrt(placeMenu) + ']').addClass('selected');
-    }*/
+    }
 
     //ALT BUBBLE
     $(".button-menu").mouseover(function (){
