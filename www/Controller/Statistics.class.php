@@ -241,8 +241,8 @@ class Statistics
         $view->assign("conversations", count($conversation));
 
         $view->assign("metaData", $metaData = [
-            "title" => 'Style',
-            "description" => 'Change your webstite style',
+            "title" => 'Dashboard',
+            "description" => 'This is the dashboard website',
             "src" => [
                 ["type" => "js", "path" => "../style/js/getRange.js"],
                 ["type" => "js", "path" => "https://www.gstatic.com/charts/loader.js"],

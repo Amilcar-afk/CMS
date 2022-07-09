@@ -44,6 +44,13 @@ class Communication
         $view->assign("conversations",$user->conversations());
         $view->assign("msg",$msg);
         $view->assign("userConversation",$userConversation);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Conversations',
+            "description" => 'Your conversations',
+            "src" => [
+                ["type" => "js", "path" => "/style/js/searchConversation.js"],
+            ],
+        ]);
     }
 
 
@@ -108,6 +115,13 @@ class Communication
             $view->assign("idConversation",$idConversation);
             $view->assign("seen",$seen);
             $view->assign("idConversation",$idConversation);
+            $view->assign("metaData", $metaData = [
+                "title" => 'Conversation',
+                "description" => 'Your conversation',
+                "src" => [
+                    ["type" => "js", "path" => "/style/js/searchConversation.js"],
+                ],
+            ]);
 
         }
     }
