@@ -1,4 +1,4 @@
- <section id="back-office-container">
+<section id="back-office-container">
     <section class="container-main-content container-main-content--menu">
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
@@ -17,59 +17,62 @@
                 <header>
                     <h1 class="title title--black">CONVERSATIONS</h1>
                 </header>
+
                 <!--Add conversation-->
                 <article>
-                    <div class="input-container">
-                        <input class="select input"  placeholder="New conversation"  id="select">
-                    </div>
+                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-conversation">
+                        New conversation
+                    </button>
                     <div id="new-conversation-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="conversation-manager-container">
                     </div>
                 </article>
+
                 <article>
-              
-                </article>
-                    <?php if(isset($conversations)): ?>
-                        <?php foreach (array_reverse($conversations)  as $conversation):?>
-                            <header class="main-nav-choice mb-3"><div>
-                                    <h2 id="conversation_title">
-                                        <?php foreach ($conversation->users() as $user): ?>
-                                            <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-                                                <a href="conversations/user-conversations/<?=$conversation->getId()?>">
-                                                    <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
-                                                    <input type="hidden" id="user" value="<?= $user->getId() ?>" >
-                                                </a>
-                                            <?php endif;  ?>
-
-                                         <?php endforeach;?>
-                                    </h2>
-                                    <?php if(!empty($conversation->lastMessage() )):  ?>
-                                        <?php foreach ($userConversation->getUser_Conversation($conversation->getId()) as $user_conv): ?>
-
-                                            <input type="hidden" id="userConversationId" value="<?= $user_conv->getId() ?>" >
-                                            <input type="hidden" id="seenValue" value="<?= $user_conv->getSeen()?>" >
-                                            <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id?>" >
-
-                                            
-                                            <?php if($user_conv->getSeen() == 1 ):  ?>
-                                                <div><?= $conversation->lastMessage()->getContent();?></div>
-                                            <?php else: ?>
-                                                <div style="opacity: 0.6;"><?= $conversation->lastMessage()->getContent();?></div>
-                                            <?php endif; ?>
-                                        <?php endforeach;?>
-                                    <?php endif; ?>
-                                </div>
-                                <span class="material-icons-round">more_horiz</span>
-                            </header>
-                        <?php endforeach;?>
-                    <?php endif; ?>
-                </article>
-                <article>
-                    <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                    </div>
-                    <div id="chat-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                    <div id="conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                        <table>
+                            <tbody>
+                            <?php foreach ($conversations as $conversation):?>
+                                <tr class="table-line">
+                                    <td>
+                                        <h4></h4>
+                                    </td>
+                                    <td>
+                                        <button class="cta-button cta-button-a" data-a-target="container-setting-conversation-<?=$conversation->getId() ?>"><span class="material-icons-round">build</span></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
+                        <?php if (!isset($conversations[0])):?>
+                            <p class="title title--small">No conversation</p>
+                        <?php endif;?>
                     </div>
                 </article>
-                </div>
+
+            </div>
+
         </section>
     </section>
+
+    <!-- add conversation form -->
+    <section id="container-new-conversation" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-new-conversation" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-conversation"><span class="material-icons-round">close</span></button>
+        <div class="menu-container">
+
+        </div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black">NEW CONVERSATION</h1>
+                </header>
+
+                <article>
+                    <?php  $this->includePartial("form", $conversation->getFormNewCategorie()) ?>
+                </article>
+
+            </div>
+
+        </section>
+    </section>
+
 </section>

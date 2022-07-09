@@ -4,204 +4,30 @@ namespace App\Controller;
 
 use App\Core\Query;
 use App\Core\View;
-use App\Model\Conversation;
-use App\Model\Message;
 use App\Model\User;
 use App\Model\Projet;
-use App\Model\User_conversation;
 use App\Model\User_projet;
 use App\Core\Validator;
 
 class Communication
 {
     public $conversation;
-    public $message;
-    public $user;
-    public $currentUser;
     protected $project;
     protected $user_project;
-    public $conversation_user;
 
     public function __construct()
     {
         $this->project = new Projet();
-        $this->conversation = new Conversation();
-        $this->message = new Message();
-        $this->user = new User();
         $this->user_project = new User_projet();
-        $this->conversation_user = new User_conversation();
-
     }
-
 
     public function listConversation()
     {
-        $user = new User();
-        $user = $user->find($_SESSION['Auth']->id);
         $view = new View("conversation-list", "back");
-        $msg = new Message();
-        $userConversation = new User_conversation();
-
-        $view->assign("conversations",$user->conversations());
-        $view->assign("msg",$msg);
-        $view->assign("userConversation",$userConversation);
-    }
-
-
-    public function searchData()
-    {
-        if (isset($_POST['searchData'])) {
-            $users = Query::from('cmspf_Users')
-            ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
-            ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
-            ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
-            ->execute("User");
-            $user = new User();
-            $user = $user->find($_SESSION['Auth']->id);
-
-            $conversation_users = [];
-
-            foreach($user->conversations() as $conversation){
-                foreach($conversation->users() as $user){
-                    if($user->getId() != $_SESSION['Auth']->id){
-                        $conversation_users[] = array(
-                            'id' => $user->getId(),
-                            'conversation_id' => $conversation->getId()
-                        );
-                    }
-                } 
-            } 
-
-            foreach ($users as $user){
-                $allUsers [] = array(
-                    'id' => $user->getId(),
-                    'email' => $user->getMail(),
-                    'firstname' => $user->getFirstname(),
-                    'lastname' => $user->getLastname(),
-                );
-            }
-
-            echo json_encode([$allUsers,$conversation_users] );
-        }
-    }
-
-    public function userConversation($dataFromUrl)
-    {
-        if($dataFromUrl['id_conv']){
-
-            $idConversation = $dataFromUrl['id_conv'];
-            $user_conversation_data = Query::from('cmspf_User_conversation')
-            ->where('conversation_key = '.$dataFromUrl['id_conv'])
-            ->execute();
-    
-            foreach($user_conversation_data as $conversation){
-                if($conversation['user_key'] != $_SESSION['Auth']->id){
-                    $userId = $conversation['user_key'];
-                }else{
-                    $seen = $conversation['seen'];
-                }
-            } 
-            
-            
-            $user = $this->user->find($userId);
-            $view = new View("conversation_user", "back");
-            $view->assign("user",$user);
-            $view->assign("idConversation",$idConversation);
-            $view->assign("seen",$seen);
-            $view->assign("idConversation",$idConversation);
-
-        }
-    }
-
-    public function updateSeenStatus()
-    {
-        if($_POST['conversation_user_id']){
-           $user_conv= $this->conversation_user->find($_POST['conversation_user_id']);
-           $this->conversation_user->setId($_POST['conversation_user_id']);
-           $this->conversation_user->setSeen($_POST['seenValue']);
-           $this->conversation_user->save();
-        }
-    }
-
-    public function messages()
-    {
-        if(isset($_POST['id'])){
-            $conversation = new Conversation();
-            $conversation->setId($_POST['id']);
-            echo json_encode(array_reverse($conversation->messages()));
-        }
-    }
-
-    public function newMessage(){
-        $lastMessage = Query::from('cmspf_Messages')
-        ->where('conversation_key ='.$_POST['id_conv'])
-        ->where('id >='.$_POST['id'])
-        ->execute();
-        echo json_encode(array_reverse($lastMessage));
-    }
-
-    public function newConversation()
-    {
-        $this->conversation->setDate(date('Y-m-d H:i:s'));
-        $this->conversation->save();
-        $conversationId =$this->conversation->getLastId();
-        echo json_encode($this->conversation->getLastId());
-        $user_conversation = new User_conversation();
-        $my_conversation = new User_conversation();
-        $user_conversation->setUser_key($_POST['userId']);
-        $user_conversation->setConversation_key($conversationId);
-        $my_conversation->setUser_key($_SESSION['Auth']->id);
-        $my_conversation->setConversation_key($conversationId);
-        $user_conversation->save();
-        $my_conversation->save();
-    }
-
-
-    public function composeConversation()
-    {
-        if (!empty($_POST)) {
-            $conversationId = $_POST['id_conversation'];
-
-            $user_conversation = Query::from('cmspf_User_conversation')
-            ->where('conversation_key='.$conversationId)
-            ->where('user_key='.$_POST['id_user'])
-            ->execute();
-
-            $my_conversation = Query::from('cmspf_User_conversation')
-            ->where('conversation_key='.$conversationId)
-            ->where('user_key='.$_SESSION['Auth']->id)
-            ->execute();
-            
-            $user_conv = new User_conversation();
-            $user_conv->setId($user_conversation[0]['id']);
-            $user_conv->setSeen(1);
-            $user_conv->save();
-
-            $my_conv = new User_conversation();
-            $my_conv->setId($my_conversation[0]['id']);
-            $my_conv->setSeen(1);
-            $my_conv->save();
-
-            $this->message->setDate(date('Y-m-d H:i:s'));
-            $this->message->setContent($_POST['message']);
-            $this->message->setUser_key($_SESSION['Auth']->id);
-            $this->message->setConversation_key($conversationId);
-            $this->message->save();
-        }
     }
 
     public function listProject()
     {
-        $userProject = Query::from('cmspf_Projets')->where('user_key = ' . $_SESSION['Auth']->id)->execute();
-        $usersProject = [];
-        if(count($userProject) > 0){
-            foreach ($userProject as $key => $project) {
-                $idProject = $userProject[$key]['id'];
-                $this->project->setId($idProject);
-                $usersProject[$key] = $this->project->user();
-            }
-        }
-
         $view = new View("project-list", "back");
 
         $user = new User();
@@ -213,7 +39,6 @@ class Communication
         $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
     }
-
 
     public function composeProject()
     {

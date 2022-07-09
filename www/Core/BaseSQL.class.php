@@ -10,8 +10,6 @@ abstract class BaseSQL
     private $class;
     private $lastInsertId;
     private static $bdd;
-    public $urlData;
-
     private static $dbStatus = true;
 
     /**
@@ -54,6 +52,7 @@ abstract class BaseSQL
                 }catch(\Exception $e){
                     self::setDbStatus(false);
                 }
+                
             }
         }
         if (self::getDStatus() != false) {
@@ -80,10 +79,8 @@ abstract class BaseSQL
     protected function save()
     {
         $columns  = get_object_vars($this);
-        
         $varsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $varsToExclude);
-        
         foreach($columns as $column => $value ){
             $table_name = 'table_name';
             if(isset($table_name )){
@@ -93,10 +90,7 @@ abstract class BaseSQL
                 echo 'introuvable';
             }
         }
-
         $columns = array_filter($columns);
-
-
 
         if( !is_null($this->getId()) ){
             foreach ($columns as $key=>$value){
@@ -110,6 +104,7 @@ abstract class BaseSQL
             VALUES (:".implode(",:", array_keys($columns)).")";
 
         }
+
         $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute($columns);
 
@@ -132,6 +127,14 @@ abstract class BaseSQL
     {
         return $this->lastInsertId;
     }
+    
+    public function parseUrl()
+    {
+        $routeFile = "routes.yml";
+        $routes = yaml_parse_file($routeFile);
+        return $routes;
+    }
+
 
     /**
      * Delete element by id
@@ -139,6 +142,7 @@ abstract class BaseSQL
      */
     protected function delete($id)
     {
+        var_dump($id);
         if( !is_null($this->getId()) ){
             $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = self::$bdd->prepare($sql);
@@ -182,8 +186,6 @@ abstract class BaseSQL
      */
     protected function hasMany( $class, string $foreign_key = null)
     {
-        $class = explode("\\", $class);
-        $class = end($class);
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{
@@ -195,7 +197,6 @@ abstract class BaseSQL
             $foreign_key = lcfirst(end($classExploded))."_key";
         }
 
-
         $sql = "SELECT * FROM ".$targetTable." WHERE ".$foreign_key." = :".$foreign_key;
         $param = [
             $foreign_key => $this->id
@@ -204,7 +205,6 @@ abstract class BaseSQL
         $queryPrepared = self::$bdd->prepare($sql);
 
         $queryPrepared->execute($param);
-
         return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, "App\Model\\".$class);
     }
 
@@ -225,35 +225,24 @@ abstract class BaseSQL
      */
     protected function belongsTo( $class, string $foreign_key = null, string $owner_key = "id")
     {
-
-        $class = explode("\\", $class);
-        $class = end($class);
         if(isset($class->table_name)){
             $targetTable = $class->table_name;
         }else{
             $targetTable = DBPREFIXE.($class).'s';
         }
-        
 
         if (!isset($foreign_key)){
             $foreign_key = lcfirst($class)."_key";
         }
 
         $sql = "SELECT * FROM ".$targetTable." WHERE ".$owner_key." = :".$owner_key;
-
-
-        
         $param = [
-            $owner_key => $foreign_key
+            $owner_key => $this->$foreign_key
         ];
-        
-        
+
         $queryPrepared = self::$bdd->prepare($sql);
-        
-        
-        
+
         $queryPrepared->execute($param);
-        var_dump($foreign_key);
         return $queryPrepared->fetchObject("App\Model\\".$class);
     }
 
@@ -298,6 +287,3 @@ abstract class BaseSQL
     }
 
 }
-
-
-// SELECT * FROM cmspf_Conversations WHERE id IN ( SELECT cmspf_User_conversation.id FROM cmspf_User_conversation INNER JOIN cmspf_Users ON cmspf_User_conversation.id = cmspf_Users.id WHERE cmspf_Users.id = 1)
