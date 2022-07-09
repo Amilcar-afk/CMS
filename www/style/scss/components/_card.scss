@@ -10,8 +10,7 @@
     overflow: hidden;
     margin: 19px;
 
-    & div{
-        width: 100%;
+    & div {
 
         & .cta-button {
             color: var(--main-color);
@@ -87,6 +86,15 @@
             letter-spacing: 0.005em;
             color: var(--background-color, white);
         }
+        & .navigation-container {
+            display: flex;
+            align-items: center;
+            width: max-content;
+
+            & .material-icons-round {
+                font-size: rem(38);
+            }
+        }
     }
     & .edge-container {
         width: 75px;
@@ -146,7 +154,7 @@
             justify-content: space-between !important;
             align-self: stretch !important;
             & h3, .material-icons-round {
-                color: #396075 !important;
+                color: var(--main-color) !important;
             }
         }
     }
@@ -156,32 +164,37 @@
         flex-direction: row;
         //align-items: flex-start;
     }
-    #regions_div {
-        width: 100%;
-        & g rect{
-            fill: none;
-        }
-    }       
+
 
     // CHARTS
-
+    & #chart-per-country {
+        width: 100%;
+        height: 100%;
+        & svg g {
+            & rect {
+                fill: none;
+            }
+            & g:nth-child(3) {
+                // display: none;
+            }
+        }
+    }       
     & #chart-per-device {
         width: 100%;
-        & rect{
+        height: 100%;
+        & rect {
+            height: 100%;
             fill: none;
-            
-        }
-        & rect:nth-child(3) {
-            display: none;
         }
     }
-
     & #chart-per-week {
+        height: 170px;
         width: 100%;
-        & g rect{
+        & g:nth-child(2) rect {
             fill: none;
         }
     }
+    
     
 
     & .table-container {

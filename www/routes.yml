@@ -97,6 +97,11 @@
   action: composeNavigationCategorie
   middleware: [ 'auth', 'admin' ]
 
+/navigation/option/compose:
+  controller: categorie
+  action: composeNavigationOption
+  middleware: [ 'auth', 'admin' ]
+
 /navigation/page/delete:
   controller: categorie
   action: deleteNavigationPage
@@ -133,8 +138,8 @@
   middleware : ['auth', 'admin']
 
 /settings/media-library:
-  controller: settings
-  action: listMedia
+  controller: option
+  action: listImages
   middleware : ['auth', 'admin']
 
 /sitemap:
@@ -267,6 +272,11 @@
 /option/compose:
   controller: option
   action: composeOption
+  middleware: ['auth', 'admin']
+
+/img/compose:
+  controller: option
+  action: composeImg
   middleware: ['auth', 'admin']
 
 /social-media/compose:

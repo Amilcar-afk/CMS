@@ -335,17 +335,23 @@ class User extends BaseSQL
 
     public function delete($id)
     {
-        parent::delete($id); 
+        parent::delete($id);
     }
 
     public function parseUrl()
     {
-       return  parent::parseUrl(); 
+       return  parent::parseUrl();
     }
 
     public function conversations()
     {
         return parent::belongsToMany(Conversation::class, 'cmspf_User_conversation');
+    }
+
+
+    public function projects()
+    {
+        return parent::belongsToMany(Projet::class, 'cmspf_User_projet');
     }
 
 

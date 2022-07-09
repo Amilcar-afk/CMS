@@ -58,7 +58,6 @@ class Categorie_categorie extends BaseSQL
     public function delete($id)
     {
         return parent::delete($id);
-
     }
 
     /**

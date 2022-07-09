@@ -23,11 +23,27 @@
 		}
 	}
 
+	&-font-color-update{
+		.color-main-color{
+			background-color:var(--main-color);
+		}
+
+		.color-second-color{
+			background-color:var(--second-color);
+		}
+
+		.color-third-color{
+			background-color:var(--third-color);
+		}
+
+	}
+
 	&--editor-color{
 
 		&--selected{
 			span, input {
 				border: solid 3px var(--font-color, black)!important;
+				border-radius: 50px;
 			}
 		}
 
@@ -215,6 +231,10 @@
 			&.selected{
 				background-color: var(--main-color);
 				color: #AFBCC3;
+
+				& .material-icons-round{
+					color: #AFBCC3;
+				}
 
 				&:hover{
 					background-color: var(--main-color);

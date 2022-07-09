@@ -40,7 +40,7 @@ class Statistics
         ->where("cmspf_User_conversation.seen = 1")
         ->where("cmspf_User_conversation.user_key = ".$_SESSION['Auth']->id)
         ->execute();
-        
+
 
         // RANGE
         $toPerPage = date("Y-m-d");
@@ -74,8 +74,118 @@ class Statistics
         }
 
 
-        // GET VIEW PER PAGES
+        // GET VIEW PER DAY FOR A WEEK
+        // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
 
+
+        $currentDate = date("Y-m-d");
+
+        if(isset($_POST['before'])){
+
+            $date = date('Y-m-d', strtotime($currentDate. ' - 7 days'));
+            $currentDate = $date;
+
+            $currentMonth = date('m',strtotime($date));
+            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+
+            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
+            echo $date;
+
+        }
+
+        if(isset($_POST['next'])){
+
+            $date = date('Y-m-d', strtotime($currentDate. ' + 7 days'));
+            $currentDate = $date;
+
+            $currentMonth = date('m',strtotime($date));
+            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+
+            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
+            echo $date;
+
+        }
+
+        if(!isset($_POST['next']) && !isset($_POST['before'])) {
+
+            $date = date("Y-m-d");
+            $currentMonth = date('m',strtotime($date));
+            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
+
+        }
+
+        $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
+        $chartWeekData[] = ['Mon', 0, 0];
+        $chartWeekData[] = ['Tue', 0, 0];
+        $chartWeekData[] = ['Wed', 0, 0];
+        $chartWeekData[] = ['Thu', 0, 0];
+        $chartWeekData[] = ['Fri', 0, 0];
+        $chartWeekData[] = ['Sat', 0, 0];
+        $chartWeekData[] = ['Sun', 0, 0];
+
+        foreach($viewPerWeek as $key => $data) {
+
+            if ($data['day'] == "2"){
+                $data['day'] = "Mon";
+                $chartWeekData[1] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "3"){
+                $data['day'] = "Tue";
+                $chartWeekData[2] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "4"){
+                $data['day'] = "Wed";
+                $chartWeekData[3] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "5"){
+                $data['day'] = "Thu";
+                $chartWeekData[4] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "6"){
+                $data['day'] = "Fri";
+                $chartWeekData[5] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "7"){
+                $data['day'] = "Sat";
+                $chartWeekData[6] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+            if ($data['day'] == "1"){
+                $data['day'] = "Sun";
+                $chartWeekData[7] = [
+                    $data['day'],
+                    $toInt = (int)$data['number'],
+                    $toInt = (int)$data['number']
+                ];
+            }
+        }
+
+
+        // GET VIEW PER PAGES
         $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
         arsort($viewPerPages);
 
@@ -84,12 +194,14 @@ class Statistics
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
 
         $chartMapData[] = ['Country',["role"=> 'annotation']];
+
         foreach($country as $key => $data) {
             $chartMapData[] = [
                 $data['country'],
                 $toInt = (int)$data['number']
             ];
         }
+
 
 
         // GET DEVICE STATS
@@ -114,6 +226,11 @@ class Statistics
             $tmpl= "";
         }
         $view = new View("dashboard", $tmpl);
+        $view->assign("chartWeekData", $chartWeekData);
+
+        $view->assign("date", $date);
+
+        $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);
         $view->assign("numberOfUsers", $numberOfUsers);
@@ -123,6 +240,15 @@ class Statistics
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
         $view->assign("conversations", count($conversation));
 
+        $view->assign("metaData", $metaData = [
+            "title" => 'Style',
+            "description" => 'Change your webstite style',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/getRange.js"],
+                ["type" => "js", "path" => "https://www.gstatic.com/charts/loader.js"],
+                ["type" => "js", "path" => "../style/js/reseauxSoc.js"],
+            ],
+        ]);
     }
 
     public function composeReseauxSoc() {

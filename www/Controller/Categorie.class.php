@@ -28,6 +28,13 @@ class Categorie{
         $view->assign("categories",$categories);
         $view->assign("navigations", $navigations);
         $view->assign("categorieEmpty", $categorieEmpty);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Categories',
+            "description" => 'List of all categories',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/categorie.js"],
+            ],
+        ]);
     }
 
     public function navigationsList()
@@ -35,6 +42,15 @@ class Categorie{
         $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("navigation-list", "back");
         $view->assign("navigations",$navigations);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Categories',
+            "description" => 'List of all categories',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/navigations.js"],
+                ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+            ],
+        ]);
     }
 
 
@@ -162,6 +178,32 @@ class Categorie{
         }
     }
 
+    public function composeNavigationOption()
+    {
+        if( isset($_POST['type']) && isset($_POST['value']) && isset($_POST['navigation']) ) {
+
+            if (!$this->categorie->find($_POST['navigation'])){
+                return http_response_code(500);
+            }
+
+            if ($_POST['type'] == 'backgroundColor'){
+                $this->categorie->setBackgroundColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnColor'){
+                $this->categorie->setBtnColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnTextColor'){
+                $this->categorie->setBtnTextColor($_POST['value']);
+            }elseif ($_POST['type'] == 'btnTextHoverColor'){
+                $this->categorie->setBtnTextHoverColor($_POST['value']);
+            }
+            $this->categorie->setId($_POST['navigation']);
+
+            $this->categorie->save();
+
+        }else{
+            http_response_code(500);
+        }
+    }
+
     public function deleteNavigationPage()
     {
         if( isset($_POST['page']) && isset($_POST['navigation']) ) {
@@ -213,7 +255,7 @@ class Categorie{
             $categorie_categorie = Query::from('cmspf_Categorie_categorie')
                 ->where("categorie_child_key = " . $_POST['categorie'] . "")
                 ->where("categorie_parent_key = " . $_POST['navigation'] . "")
-                ->execute('Page_categorie');
+                ->execute('Categorie_categorie');
 
             if (isset($categorie_categorie[0])){
                 $categorie_categorie[0]->delete($categorie_categorie[0]->getId());

@@ -45,7 +45,7 @@
                                             <input type="hidden" id="seenValue" value="<?= $user_conv->getSeen()?>" >
                                             <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id?>" >
 
-                                            
+
                                             <?php if($user_conv->getSeen() == 1 ):  ?>
                                                 <div><?= $conversation->lastMessage()->getContent();?></div>
                                             <?php else: ?>
@@ -68,4 +68,5 @@
                 </div>
         </section>
     </section>
+
 </section>

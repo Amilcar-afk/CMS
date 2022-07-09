@@ -2,6 +2,14 @@ $(document).ready(function(){
     const fontSizeSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 20, 22, 24, 26, 28, 32, 34, 36, 38, 40, 42, 46, 48, 50, 64];
     //editor.document.designMode = "on";
 
+    $("#container-editor").find('a').each(function() {
+        var ahref = $(this).attr('href');
+        var aclass = $(this).attr('class');
+        var aid = $(this).attr('id');
+        var atext = $(this).text();
+        $(this).replaceWith('<ahref href="'+ ahref +'" class="'+ aclass +'" id="'+ aid+'">'+ atext +'</ahref>');
+    })
+
     //EDITOR BAR FOR SECTION MODULE
     $(document).on( "click", ".section-module-ok",function(e) {
 
@@ -67,10 +75,7 @@ $(document).ready(function(){
             $("#editable-module").remove();
         }
 
-        let neededBtns = [];
-        var module = $(this).children(":first");
-
-        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+        $('p, h1, h2, h3, h4, h5, h6, ahref').each(function() {
             $(this).removeAttr('contenteditable');
             $(this).removeClass("module--on");
         });
@@ -78,56 +83,68 @@ $(document).ready(function(){
         $(this).attr('contenteditable', 'true');
         $(this).addClass("module--on");
 
-        /*var classList = $(module).attr('class').split(/\s+/);
-        $.each(classList, function(index, item) {
-            if (item === 'someClass') {
-                if ('^col-'.test(item)){
-
-                }else if ('^col-offset-'.test(item)){
-
-                }else if ('^text-'.test(item)){
-
-                }else if ('^fs-'.test(item)){
-
-                }
-            }
-        });*/
-
         $(this).attr('data-a-target', 'editable-module');
 
+        let neededBtns = [];
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-resize">\n' +
+            '                 <span class="material-icons-round">transform</span>\n' +
+            '             </button>\n');
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-tab">\n' +
+            '                 <span class="material-icons-round">keyboard_tab</span>\n' +
+            '             </button>\n');
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-wrap">\n' +
+            '                 <span class="material-icons-round">keyboard_return</span>\n' +
+            '             </button>\n');
+
+        if($(this).is('[class*="fs-"]')) {
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-bold">\n' +
+            '                    <span class="material-icons-round">format_bold</span>\n' +
+            '               </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-size">\n' +
+                '                <span class="material-icons-round">format_size</span>\n' +
+                '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-family">\n' +
+                '                 <span class="material-icons-round">font_download</span>\n' +
+                '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-font-color">\n' +
+                '                <span class="material-icons-round">color_lens</span>\n' +
+                '            </button>\n');
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-align">\n' +
+                '                 <span class="material-icons-round">'+getModuleAlign($(this))+'</span>\n' +
+                '            </button>\n');
+        }
+
+        if (typeof $(this).attr('data-media-type') !== typeof undefined
+            && $(this).attr('data-media-type') !== false
+            && ($(this).attr('data-media-type') == 'spotify'
+                || $(this).attr('data-media-type') == 'youtube'
+                || $(this).attr('data-media-type') == 'link')) {
+            neededBtns.push('<button class="cta-button cta-button--icon cta-button-insert-link">\n' +
+            '                   <span class="material-icons-round">insert_link</span>\n' +
+            '                </button>\n');
+        }
+
+        if (typeof $(this).attr('data-media-type') !== typeof undefined
+            && $(this).attr('data-media-type') !== false
+            && $(this).attr('data-media-type') == 'img') {
+            neededBtns.push('<form method="POST" encType="multipart/form-data" class="cta-button cta-button--icon">' +
+                '               <input type="file" class="cta-button-insert-image">\n' +
+                '               <span class="cta-button-select-image material-icons-round">add_photo_alternate</span>\n' +
+                '            </form>\n');
+        }
+
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-background-color">\n' +
+            '                 <span class="material-icons-round">format_paint</span>\n' +
+            '             </button>\n');
+        neededBtns.push('<button class="cta-button cta-button--icon cta-button-delete-module">\n' +
+            '                 <span class="material-icons-round">delete</span>\n' +
+            '            </button>\n');
+
         var $editorToolBar = '<div id="editable-module" contenteditable="false" class="editable-module a-zoom-out-end">\n' +
-            '                    <nav class="editable-module--tool-bar">\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-resize">\n' +
-            '                            <span class="material-icons-round">transform</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-tab">\n' +
-            '                            <span class="material-icons-round">keyboard_tab</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-wrap">\n' +
-            '                            <span class="material-icons-round">keyboard_return</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-bold">\n' +
-            '                            <span class="material-icons-round">format_bold</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-font-color">\n' +
-            '                            <span class="material-icons-round">color_lens</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-background-color">\n' +
-            '                            <span class="material-icons-round">format_paint</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-font-size">\n' +
-            '                            <span class="material-icons-round">format_size</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-align">\n' +
-            '                            <span class="material-icons-round">'+getModuleAlign($(this))+'</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-insert-link">\n' +
-            '                            <span class="material-icons-round">insert_link</span>\n' +
-            '                        </button>\n' +
-            '                        <button class="cta-button cta-button--icon cta-button-delete-module">\n' +
-            '                            <span class="material-icons-round">delete</span>\n' +
-            '                        </button>\n' +
-            '                    </nav>\n' +
+            '                    <nav class="editable-module--tool-bar">'+neededBtns.join("")+'</nav>\n' +
             '                    <div class="editable-module editable-module--border">\n' +
             '                    </div>\n' +
             '                    <nav class="editable-module--footer-nav">\n' +
@@ -167,6 +184,7 @@ $(document).ready(function(){
                 || $($($elements)[i]).hasClass('cta-button-delete-module')
                 || $($($elements)[i]).hasClass('cta-button-font-size')
                 || $($($elements)[i]).hasClass('cta-button-resize')
+                || $($($elements)[i]).hasClass('cta-button-font-family')
             ){
                 if($($($elements)[i]).hasClass('selected')){
                     $($($elements)[i]).removeClass('selected');
@@ -321,10 +339,37 @@ $(document).ready(function(){
         $(this).parent().parent().parent().parent().css("color",$(this).val());
     })
 
+    //font family menu component
+    $(document).on( "click", ".cta-button-font-family", function () {
+        cleanEditToolBar(this);
+        let options = '';
+        let fontFamily = getModuleFontFamily(this);
+        fontFamily = fontFamily.replaceAll('"','');
+        fonts.forEach(font => {
+            if (fontFamily == font){
+                options += "<option class='fs-18' style=\"font-family:'"+ font +"' \" value='"+ font +"' selected>"+ font +"</option>";
+            }else {
+                console.log(font);
+                options += "<option class='fs-18' style=\"font-family:'" + font + "' \" value='" + font + "'>" + font + "</option>";
+            }
+        })
+
+        if(fontFamily == 'unset'){
+            options = "<option class='fs-18' style=\"font-family:'Roboto'\" value='Roboto' hidden selected>Roboto</option>" + options;
+        }
+
+        var $ctaFontsFamily = $( '<select class="input cta-button-change-font-family">'+ options +'</select>' );
+        $(this).parent().append($ctaFontsFamily)
+    })
+    //font-family update component
+    $(document).on( "click", ".cta-button-change-font-family", function () {
+        $(this).parent().parent().parent().css("font-family",$(this).val());
+    })
+
     //background-color menu component
     $(document).on( "click", ".cta-button-background-color", function () {
         cleanEditToolBar(this);
-        let moduleBackgroundColor = getModuleBackgroundColor();
+        let moduleBackgroundColor = getModuleBackgroundColor(this);
         let selected = '';
         if (moduleBackgroundColor == "unset"){
             selected = "selected";
@@ -453,23 +498,73 @@ $(document).ready(function(){
         document.execCommand('redo',false,'')
     })
 
-    //insert-link component
-    //background-color menu component
+    //insert-link menu component
     $(document).on( "click", ".cta-button-insert-link", function () {
         cleanEditToolBar(this);
+        let actualSrc = getModuleSrc(this);
 
-        var $hrefInput = $( '<input class="input" type="text" placeholder="https://google.com">' );
+        var $hrefInput = $( '<input class="input" name="link" type="text" placeholder="https://google.com" value="'+actualSrc+'">' );
         $(this).parent().append($hrefInput);
 
-        var $ctaButtonSubmitLink = $( '<button class="cta-button cta-button--icon"><span class="material-icons-round">send</span></button>' );
+        var $ctaButtonSubmitLink = $( '<a href="'+actualSrc+'" target="_blank" class="cta-button cta-button--icon cta-button-preview-link"><span class="material-icons-round">open_in_new</span></a>' );
         $(this).parent().append($ctaButtonSubmitLink);
+
+        var $ctaButtonSubmitLink = $( '<button class="cta-button cta-button--icon cta-button-compose-link"><span class="material-icons-round">send</span></button>' );
+        $(this).parent().append($ctaButtonSubmitLink);
+    })
+    //link compose component
+    $(document).on( "click", ".cta-button-compose-link", function () {
+        var module = $($(this).parent().parent().parent());
+        let src = $(module).find('[name=link]').val();
+        $($(module).find('cta-button-preview-link')[0]).attr('href', src);
+
+        let iframeType = $(module).attr('data-media-type');
+        if (iframeType == "spotify"){
+            src = src.replace("album/", "embed/album/");
+            src = src.replace("track/", "embed/track/");
+
+            let toBeReplace = src.substr(src.indexOf("?si=") + 4)
+
+            src = src.replace("?si="+toBeReplace, "?utm_source=generator");
+        }else {
+            src = src.replace("watch?v=", "embed/");
+        }
+
+        $($(module).find('iframe')[0]).attr('src', src);
+    })
+
+    $(document).on( "click", ".cta-button-select-image", function () {
+        $($(this).parent().find('input')[0]).click();
+    });
+    //img compose component
+    $(document).on( "change", ".cta-button-insert-image", function () {
+        var module = $($(this).parent().parent().parent().parent());
+        let formData = new FormData();
+        let file = $(this)[0].files[0];
+        formData.append('file', file);
+        $.ajax({
+            url:"/img/compose",
+            type:"POST",
+            contentType: false,
+            processData: false,
+            data:formData,
+            success:function(answer)
+            {
+                if (answer.substr(0, 21) == '/style/medias/images/'){
+                    $($(module).find('img')[0]).attr('src', answer);
+                }else {
+                    alertMessage(answer, 'warning');
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
 
     })
 
     //add component
     $(".module-list").click(function () {
-        /*var $newComponent = $( "<article class='module'>"+$(this).html()+"</article>" );
-        $newComponent.addClass($(this).attr("class"));*/
 
         if ($(this).hasClass('section-module')) {
             var $newComponent = $("<article>" + $(this).html() + "</article>");
@@ -483,10 +578,15 @@ $(document).ready(function(){
         }else {
             var $newComponent = $( $(this).html() );
         }
-        $newComponent.removeClass('module-list');
-        $newComponent.addClass('col-6');
-        $($newComponent.find('.module--hover')[0]).remove();
-        $("#editable-module").parent().after($newComponent);
+
+        if($newComponent.hasClass('background-container-back-office')){
+            $('#container-editor').prepend($newComponent);
+        }else {
+            $newComponent.removeClass('module-list');
+            $newComponent.addClass('col-6');
+            $("#editable-module").parent().after($newComponent);
+        }
+        $($('.module--hover')[0]).remove();
         $("#cta-button-close-list-component").click();
     })
 
@@ -498,10 +598,19 @@ $(document).ready(function(){
             $($('.module[data-a-target="editable-module"]')[0]).removeAttr('data-a-target');
             $("#editable-module").remove();
         }
-        $('p, h1, h2, h3, h4, h5, h6').each(function() {
+        $('p, h1, h2, h3, h4, h5, h6, ahref').each(function() {
             $(this).removeAttr('contenteditable');
             $(this).removeClass("module--on");
         });
+
+        $("#container-editor").find('ahref').each(function() {
+            var ahref = $(this).attr('href');
+            var aclass = $(this).attr('class');
+            var aid = $(this).attr('id');
+            var atext = $(this).text();
+            $(this).replaceWith('<a href="'+ ahref +'" class="'+ aclass +'" id="'+ aid+'">'+ atext +'</a>');
+        })
+
         $.ajax({
             url:"/build/save",
             type:"POST",
@@ -667,6 +776,7 @@ function getModuleFontSize(btn){
         return 14;
     }
 }
+
 function getModuleBackgroundColor(btn){
     var module = $(btn).parent().parent().parent();
 
@@ -708,12 +818,27 @@ function getModuleAlign(btn){
     }
 }
 
-function alertMessage(message, action){
-    let icon = "<span class=\"material-icons-round\">info</span>";
-    if (action == 'warning'){
-        icon = "<span class=\"material-icons-round\">warning</span>";
-    }
+function getModuleSrc(btn){
+    var module = $(btn).parent().parent().parent();
 
-    let alert = $('<div class="alert alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
-    $("main").append(alert);
+    if ($($(module).find('iframe')[0])){
+        let iframe = $(module).find('iframe')[0];
+        let actuelSrc = $(iframe).attr('src');
+        return actuelSrc;
+    }else {
+        let img = $($(module).find('img')[0]);
+        let actuelSrc = $(img).attr('src');
+        return actuelSrc;
+    }
+}
+
+//get module font family
+function getModuleFontFamily(btn){
+    var module = $(btn).parent().parent().parent();
+
+    let fontFamily = $(module).css( "font-family" );
+    if (fontFamily == undefined){
+        return 'unset';
+    }
+    return fontFamily;
 }

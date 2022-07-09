@@ -1,4 +1,60 @@
 $(document).ready(function(){
+    $.each($('.background-color-picker'), function (index,value) {
+        $(value).spectrum({
+            type: "color",
+            showPalette: false,
+            hideAfterPaletteSelect: true,
+            showInput: true,
+            containerClassName: 'background-color-picker',
+            showInitial: true,
+            preferredFormat: "hex",
+            showAlpha: false,
+            appendTo: $(value).parent()
+        });
+    });
+
+    $(document).on( "click", ".cta-button-background-color-update", function () {
+
+        $.ajax({
+            url:"/navigation/option/compose",
+            type:"POST",
+            data:
+                {
+                    type:$(this).parent().attr('data-option-type'),
+                    value:$(this).attr('data-option-value'),
+                    navigation:$(this).parent().parent().attr('data-parent')
+                },
+            success:function()
+            {
+                alertMessage('Color updated!');
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    })
+
+    $(document).on( "change", ".background-color-picker-input", function () {
+
+        $.ajax({
+            url:"/navigation/option/compose",
+            type:"POST",
+            data:
+                {
+                    type:$(this).parent().parent().attr('data-option-type'),
+                    value:$(this).val(),
+                    navigation:$(this).parent().parent().parent().attr('data-parent')
+                },
+            success:function()
+            {
+                alertMessage('Color updated!');
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    })
+
     $(document).on("click", ".cta-button-compose-navigation-page", function () {
         var btn = $(this);
         var pageKey = $(this).attr('data-target');

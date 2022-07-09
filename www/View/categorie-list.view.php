@@ -51,7 +51,9 @@
                             <?php endforeach;?>
                             </tbody>
                         </table>
-
+                        <?php if (!isset($categories[0])):?>
+                            <p class="title title--small">No categorie</p>
+                        <?php endif;?>
                     </div>
                 </article>
 

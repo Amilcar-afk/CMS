@@ -19,10 +19,8 @@
                     <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
                     </button>
-
-                    <!--<canvas id="chart-per-country" class="collapse--open" data-group-collapse="per-country-container" style="opacity: 1"></canvas>-->
                     
-                    <div id="range-per-country" class="collapse" data-group-collapse="per-country-container">
+                    <div id="range-per-country" class="collapse" data-group-collapse="per-country-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
                             <input id="SincePerCountry" name="SincePerCountry" type="date" class="input">
@@ -32,11 +30,10 @@
                             <input id="toPerCountry" name="toPerCountry" type="date" class="input">
                         </div>
 
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
-                    <div id="regions_div" style="width: 100%; height: 100%;">
 
-                    </div>
+                    <div id="chart-per-country"></div>
 
                     <header>
                         <h3>Per country</h3>
@@ -74,7 +71,19 @@
                         </button>
                     </header>
 
-                    <div id="chart-per-page" class="collapse--open" data-group-collapse="per-page-container" style="opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
+                    <div id="range-per-page" class="collapse" data-group-collapse="per-page-container" style="width: 100%;">
+                        <div class="input-container">
+                            <label for="SincePerPage">Since</label>
+                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
+                        </div>
+                        <div class="input-container">
+                            <label for="toPerPage">To</label>
+                            <input id="toPerPage" name="toPerPage" type="date" class="input">
+                        </div>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
+                    </div>
+                    
+                    <div id="chart-per-page" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
                         <table class="table table--lite">
                             <tbody>
                             <?php foreach ($viewPerPages as $view): ?>
@@ -91,17 +100,7 @@
                         </button>
                     </div>
 
-                    <div id="range-per-page" class="collapse" data-group-collapse="per-page-container">
-                        <div class="input-container">
-                            <label for="SincePerPage">Since</label>
-                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
-                        </div>
-                        <div class="input-container">
-                            <label for="toPerPage">To</label>
-                            <input id="toPerPage" name="toPerPage" type="date" class="input">
-                        </div>
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
-                    </div>
+                    
 
                 </section>
             </div>
@@ -115,11 +114,7 @@
                         </button>
                     </header>
 
-                    
-                        <div id="chart-per-device" width="100px" height="100px" class="collapse--open" data-group-collapse="per-device-container" style="opacity: 1"></div>
-                    
-
-                    <div id="range-per-device" class="collapse" data-group-collapse="per-device-container">
+                    <div id="range-per-device" class="collapse" data-group-collapse="per-device-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerDevice">Since</label>
                             <input id="SincePerDevice" name="SincePerDevice" type="date" class="input">
@@ -129,17 +124,32 @@
                             <input id="toPerDevice" name="toPerDevice" type="date" class="input">
                         </div>
 
-                        <button class="main-nav-choice cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
                     </div>
+                    
+                    <div id="chart-per-device" ></div>
+
                 </section>
             </div>
+            
 
             <div class="col-4 col-md-12 col-sm-12">
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>
+                        <div class="navigation-container">
+                            <button class="main-nav-choice cta-button--range" data-before="<?php $date ?>">
+                                <span class="material-icons-round">navigate_before</span>
+                            </button>
+
+                            <p><?php echo $monthName; ?></p>
+
+                            <button class="main-nav-choice cta-button--range" data-next="<?php $date ?>">
+                                <span class="material-icons-round">navigate_next</span>
+                            </button>
+                        </div>
                     </header>
-                    <div id="chart-per-week" style="width: 100px; height: 300px;"></div>
+                    <div id="chart-per-week"></div>
                 </section>
 
                 <section class="card card--smallcard card--background-color">
@@ -206,11 +216,13 @@
         </section>
     </section>
 
+
 </section>
 
 
 
 <script>
+    
 google.charts.load('current', {
         'packages':['geochart'],
       });
@@ -218,18 +230,21 @@ google.charts.load('current', {
 
       function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(
-
             <?php  print_r(json_encode($chartMapData)); ?>
-
         );
 
-        var options = {};
+        var options = {
+            colorAxis: {
+                colors: ["green", "red"]
+            },
+            legend: 'none',
+            
+        };
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        var chart = new google.visualization.GeoChart(document.getElementById('chart-per-country'));
 
         chart.draw(data, options);
       }
-
 
 
 </script>
@@ -244,54 +259,70 @@ google.charts.load("current", {packages:["corechart"]});
         var data = google.visualization.arrayToDataTable(
             <?php  print_r(json_encode($chartDeviceData)); ?>
         );
-
+        
         var options = {
-          title: 'My Daily Activities',
+            
           pieHole: 0.6,
-          legend: {position: 'none'},
-          colors: ['#396075', '#547a8f', '#87949c']
+          width: '100%',
+          height: '100%',
+          colors: [mainColor, secondColor, thirdColor],
+          pieSliceText: "none",
+          legend: {
+              position : 'bottom',
+              alignment: 'center',
+            }
+            
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
+
         chart.draw(data, options);
       }
 
 </script>
 
 
-
-
-
 <script>
 
+google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
 
-google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["Copper", 8.94, "#b87333"],
-        ["Silver", 10.49, "silver"],
-        ["Gold", 19.30, "gold"],
-        ["Platinum", 21.45, "color: #e5e4e2"]
-      ]);
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable(
+            <?php  print_r(json_encode($chartWeekData)); ?>
+        );
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
 
-      var options = {
-        title: "Density of Precious Metals, in g/cm^3",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        var options = {
+          
+          legend: { position: 'none' },
+          colors: [mainColor],
+          hAxis: {textStyle: {
+            color: 'black', 
+            fontSize: 16,
+            fontWidth: 'bold'
+            }},
+            vAxis: {
+                textPosition: 'none',
+            },
+          axes: {
+            x: {
+              0: { side: 'bottom', label: ''} // Top x-axis.
+            },
+          },
+          bar: { groupWidth: "80%" },
+          backgroundColor: '#E4E4E4'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("chart-per-week"));
-      chart.draw(view, options);
-  }
+
+
+
+		
 </script>
+
+
+
+

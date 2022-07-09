@@ -15,6 +15,9 @@ $(document).ready(function(){
                     sincePerDevice:$(this).parent().find('[name=SincePerDevice]').val(),
                     toPerDevice:$(this).parent().find('[name=toPerDevice]').val(),
 
+                    before:$(this).attr('data-before'),
+                    next:$(this).attr('data-next'),
+
                     range: true
                 },
             success:function(answer)
@@ -22,6 +25,7 @@ $(document).ready(function(){
                 if (answer.includes('<section id="back-office-container">')){
                     $($('main')[0]).html(answer);
                 }
+                console.log(answer);
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');
@@ -29,3 +33,6 @@ $(document).ready(function(){
         });
     })
 })
+
+
+

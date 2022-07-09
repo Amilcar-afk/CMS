@@ -23,9 +23,17 @@
     background-color: var(--background-color);
     border: solid 1.5px var(--main-color);
 
+    & .material-icons-round{
+      color: var(--main-color);
+    }
+
     &--selected{
       color: var(--background-color);
       background-color: var(--main-color);
+
+      & .material-icons-round{
+        color: var(--background-color);
+      }
     }
   }
 }

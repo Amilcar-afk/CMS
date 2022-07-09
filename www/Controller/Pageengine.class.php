@@ -100,6 +100,10 @@ class Pageengine
             $view->assign("headCode", $headCode[0]->getValue());
             $view->assign("footerCode", $footerCode[0]->getValue());
             $view->assign("bessels", $bessels);
+            $view->assign("metaData", $metaData = [
+                "title" => $page->getTitle(),
+                "description" => $page->getDescription()
+            ]);
         }else{
             http_response_code(404);
         }
@@ -116,18 +120,37 @@ class Pageengine
         $view->assign("pages", $pages);
         $view->assign("categories", $categories);
         $view->assign("pageEmpty", $pageEmpty);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Pages',
+            "description" => 'List of pages',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/pages.js"],
+            ],
+        ]);
     }
 
     public function buildPage($request){
-
+        $categories = Query::from('cmspf_Pages')->where("status = 'Tag'")->execute('Page');
+        $pages = Query::from('cmspf_Pages')->where("status = 'Public'")->execute('Page');
         $page = $this->page->find($request['slug'], 'slug');
 
         if ($page){
 
             $view = new View("page-editor", "back");
             $view->assign("page", $page);
+            $view->assign("pages", $pages);
+            $view->assign("categories", $categories);
+            $view->assign("metaData", $metaData = [
+                "title" => 'Page builder',
+                "description" => 'Page builder',
+                "src" => [
+                    ["type" => "js", "path" => "../style/js/wysiwyg.js"],
+                    ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                    ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+                ],
+            ]);
         }else {
-            http_response_code(404);;
+            http_response_code(404);
         }
     }
 
@@ -153,6 +176,8 @@ class Pageengine
                     ->execute('Page');
                 if (!isset($unic_page[0])){
                     $unic_page = false;
+                }else{
+                    $unic_page = true;
                 }
             }else{
                 $unic_page = $this->page->find($_POST['slug'], 'slug');
@@ -167,6 +192,7 @@ class Pageengine
 
                 if ($lastId
                     && isset($_POST['categorie'])
+                    && is_int($_POST['categorie'])
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {
@@ -233,6 +259,13 @@ class Pageengine
         $view = new View("add-code", "back");
         $view->assign("headCode", $headCode);
         $view->assign("footerCode", $footerCode);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Add code',
+            "description" => 'Add js or css code in your website',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/addCode.js"],
+            ],
+        ]);
     }
 
     public function composeAddCode(){

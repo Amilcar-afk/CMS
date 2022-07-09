@@ -4,6 +4,7 @@
   width: 100%;
   border-radius: 0px;
   margin: 0px;
+  z-index: 1;
 
   &--radius{
     margin: 15px;
@@ -38,7 +39,6 @@
   position: absolute;
   top: 0;
   right: 10px;
-  color: var(--background-color);
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
@@ -81,7 +81,6 @@
       a {
         display: block;
         text-decoration: none;
-        color: var(--background-color);
         text-align: center;
         padding: 0 0.8em;
         transition : all 0.2s ease;
@@ -90,7 +89,7 @@
         letter-spacing: 0.025em;
 
         &:hover{
-          color: var(--second-color);
+          color: var(--second-color)!important;
         }
       }
     }

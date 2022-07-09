@@ -71,7 +71,19 @@ class Meeting
         $view = new View("meeting-list", "back");
         $view->assign("rdvEmpty", $rdvEmpty);
         $view->assign("rdv", $this->rdv);
-
+        $view->assign("metaData", $metaData = [
+            "title" => 'My Meetings',
+            "description" => 'List of all your meetings',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/calendar.js"],
+                ["type" => "css", "path" => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/moment.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery-ui.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.js"],
+                ["type" => "js", "path" => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/af.min.js"],
+            ],
+        ]);
     }
 
     public function loadMeetings(){
@@ -163,6 +175,19 @@ class Meeting
     public function listSlot()
     {
         $view = new View("slot-list", "back");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Slots',
+            "description" => 'List of all slots',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/calendar.js"],
+                ["type" => "css", "path" => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/moment.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery-ui.min.js"],
+                ["type" => "js", "path" => "https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.js"],
+                ["type" => "js", "path" => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/af.min.js"],
+            ],
+        ]);
     }
 
 

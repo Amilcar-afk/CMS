@@ -8,6 +8,14 @@
 	font-weight: unset;
 	margin: 0;
 
+	&--small{
+		font-weight: bold;
+		font-size: rem(15);
+		text-align: center;
+		color: $grey;
+		width: 100%;
+	}
+
 	&--main-color{
 		color: var(--main-color);
 	}
@@ -39,3 +47,4 @@ h2{
 	font-weight: 800!important;
 	display: inline;
 }
+

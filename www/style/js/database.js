@@ -10,11 +10,15 @@ $(document).ready(function(){
                     DBPWD:$(this).parent().find('[name=DBPWD]').val(),
                     DBPORT:$(this).parent().find('[name=DBPORT]').val(),
                     DBNAME:$(this).parent().find('[name=DBNAME]').val(),
-
+                    DBUSER:$(this).parent().find('[name=DBUSER]').val(),
                 },
             success:function(answer)
             {
                 alertMessage('Data updated!');
+                let pathname = window.location.pathname;
+                if (pathname == "/setup/database"){
+                    window.location.href = "/setup/smtp";
+                }
               
             },
             error: function (data, textStatus, errorThrown) {
@@ -43,7 +47,11 @@ $(document).ready(function(){
                 },
             success:function(answer)
             {
-                alertMessage('Data created!');
+                alertMessage('Data updated!');
+                let pathname = window.location.pathname;
+                if (pathname == "/setup/smtp"){
+                    window.location.href = "/setup/main-colors";
+                }
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');

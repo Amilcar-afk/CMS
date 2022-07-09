@@ -5,8 +5,8 @@
         <nav>
             <button class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="text-elements-container"><span class="material-icons-round">text_fields</span>Text elements</button>
             <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="media-elements-container"><span class="material-icons-round">play_circle_filled</span>Medias</button>
-            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="form-elements-container"><span class="material-icons-round">assignment</span>Forms</button>
-            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="form-elements-container"><span class="material-icons-round">format_shapes</span>More</button>
+            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="btn-elements-container"><span class="material-icons-round">ads_click</span>Buttons</button>
+            <button class="cta-button cta-button--menu main-nav-choice" data-wc-target="other-elements-container"><span class="material-icons-round">format_shapes</span>More</button>
         </nav>
     </div>
     <section class="collapse-parent">
@@ -25,7 +25,7 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
                         <article class="module-list">
-                            <h3 class="module highlight background-second-color color-white text-center fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h3 class="module highlight background-second-color color-white text-left fs-36 medium">Lorem ipsum dolor sit amet consectetur.</h3>
                         </article>
                         <article class="module-list">
                             <h4 class="module color-main-color text-center fs-26 bold">Lorem ipsum dolor sit amet consectetur.</h4>
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="section-module module-list background-main-color col-6">
+                        <article class="module-list section-module background-main-color col-6">
                             <h2 class="module color-white text-center fs-48 bold">Lorem ipsum dolor sit amet consectetur.</h2>
                         </article>
                     </div>
@@ -208,47 +208,89 @@
 
             <!--Image-->
             <article>
-                <header class="main-nav-choice" data-wc-target="image-list-elements">
-                    <h2>Image</h2>
+                <header class="main-nav-choice" data-wc-target="picture-list-elements">
+                    <h2>Pictures</h2>
                     <span class="material-icons-round">more_horiz</span>
                 </header>
-                <div id="image-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+                <div id="picture-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
 
                     <div class="col-6 col-md-12 col-sm-12">
-                        <article class="background-second-color module-list">
-                            <h3 class="color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="color-white text-center fs-14 medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
-                                    width="100%"
-                                    height="200"
-                                    frameBorder="0"
-                                    allowfullscreen=""
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+                        <article class="section-module background-second-color module-list">
+                            <h3 class="module col-12 color-background-color text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module col-12 color-background-color text-center fs-14 medium">tv gango sphere</h4>
+                            <div class="module col-12" data-media-type="img">
+                                <img class="module" width="100%" src="https://images.pexels.com/photos/1581554/pexels-photo-1581554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                            </div>
                         </article>
 
                         <article class="module-list">
-                            <h3 class="color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="color-main-color fs-14 medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
-                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            <div class="section-module row">
+                                <div class="col-4">
+                                    <h3 class="module color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                                    <p class="module color-main-color fs-14 medium">
+                                        Lorem ipsum ibra
+                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                                    </p>
+                                </div>
+                                <div class="module col-8" data-media-type="img">
+                                    <img class="module" width="100%" src="https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="module-list">
+                            <div class="module col-6" data-media-type="img">
+                                <img class="module" width="100%" src="https://images.pexels.com/photos/157197/pexels-photo-157197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                            </div>
                         </article>
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
 
                         <article class="module-list">
-                            <h3 class="highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="fs-14 color-main-color medium">tv gango sphere</h4>
-                            <iframe src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
-                                    frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            <div class="section-module left-border row">
+                                <div class="col-4">
+                                    <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
+                                    <p class="module color-main-color fs-14 medium">
+                                        Lorem ipsum ibra
+                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                                    </p>
+                                </div>
+                                <div class="module col-8" data-media-type="img">
+                                    <img class="module" width="100%" src="https://images.pexels.com/photos/12656616/pexels-photo-12656616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                                </div>
+                            </div>
                         </article>
 
-                        <article class="module-list background-main-color">
-                            <div class="left-border color-white">
-                                <h3 class="fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                <h4 class="fs-14 medium">tv gango sphere</h4>
-                                <iframe src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
-                                        frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                        <article class="section-module background-main-color module-list">
+                            <h3 class="module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module fs-14 color-white medium">tv gango sphere</h4>
+                            <p class="module color-white fs-14 medium">
+                                Lorem ipsum ibra
+                                tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                            </p>
+                            <div class="module col-12" data-media-type="img">
+                                <img class="module" width="100%" src="https://images.pexels.com/photos/744318/pexels-photo-744318.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                            </div>
+                        </article>
+
+                        <article class="section-module background-main-color module-list">
+                            <div class="section-module">
+                                <h3 class="module color-background-color col-12 fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                <div class="col-12 row">
+                                    <div class="module col-3" data-media-type="img">
+                                        <img class="module" width="100%" src="https://images.squarespace-cdn.com/content/v1/597f95c95016e1c15418019d/1502705665366-MJSPWXCYFZ6724JDP638/Wild1.jpg?format=1000w">
+                                    </div>
+                                    <div class="module col-3 col-offset-1" data-media-type="img">
+                                        <img class="module" width="100%" src="https://images.squarespace-cdn.com/content/v1/597f95c95016e1c15418019d/1502705847096-FGD973QFNSJ1UETL6CJM/Wild7.jpg?format=1000w">
+                                    </div>
+                                    <div class="module col-3 col-offset-1" data-media-type="img">
+                                        <img class="module" width="100%" src="https://images.squarespace-cdn.com/content/v1/597f95c95016e1c15418019d/1502705704129-HLIBZ60ES3AEMEGHE161/Wild3.jpg?format=1000w">
+                                    </div>
+                                </div>
                             </div>
                         </article>
 
@@ -272,7 +314,7 @@
                                 <blockquote cite="">
                                     <p>Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
                             </figure>
                         </article>
 
@@ -289,7 +331,7 @@
                                 <blockquote cite="">
                                     <p>Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
                             </figure>
                         </article>
 
@@ -320,7 +362,7 @@
                                 <blockquote cite="">
                                     <p class="background-background-color highlight color-main-color">Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
+                                <figcaption class="color-background-color">, Author, <time class="color-background-color" datetime="12-12-2000">12/12/2000</time></figcaption>
                             </figure>
                         </article>
 
@@ -339,38 +381,53 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
                         <article class="section-module background-second-color module-list">
-                            <h3 class="module color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module color-white text-center fs-14 medium">tv gango sphere</h4>
-                            <iframe class="module" src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
-                                    width="100%"
-                                    height="200"
-                                    frameBorder="0"
-                                    allowfullscreen=""
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            <h3 class="module col-12 color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module col-12 color-white text-center fs-14 medium">tv gango sphere</h4>
+                            <div class="module col-12" data-media-type="spotify">
+                                <iframe class="module" src="https://open.spotify.com/embed/album/0Wd9loAJUFFGJ6mGyTL00I?utm_source=generator"
+                                        width="100%"
+                                        height="200"
+                                        frameBorder="0"
+                                        allowfullscreen=""
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            </div>
                         </article>
 
                         <article class="section-module module-list">
-                            <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module color-main-color fs-14 medium">tv gango sphere</h4>
-                            <iframe class="module" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                            <h3 class="col-12 module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module color-main-color fs-14 medium">tv gango sphere</h4>
+                            <div class="module col-12" data-media-type="spotify">
+                                <iframe class="module module--iframe" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            </div>
                         </article>
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
 
                         <article class="section-module module-list">
-                            <h3 class="module highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
-                            <iframe class="module" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
+                            <h3 class="col-12 module highlight background-main-color color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module fs-14 color-main-color medium">tv gango sphere</h4>
+                            <div class="module col-12" data-media-type="spotify">
+                                <iframe class="module module--iframe" src="https://open.spotify.com/embed/album/4zMhr0zJkbSVubSnKzD7UM?utm_source=generator" width="100%" height="180"
                                     frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                            </div>
                         </article>
 
                         <article class="section-module module-list background-main-color">
-                            <div class="left-border color-white">
-                                <h3 class="module fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                <h4 class="module fs-14 medium">tv gango sphere</h4>
-                                <iframe class="module" src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
+                            <div class="left-border color-white col-12">
+                                <h3 class="col-12 module color-background-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                                <h4 class="col-12 module color-background-color fs-14 medium">tv gango sphere</h4>
+                                <div class="module col-12" data-media-type="spotify">
+                                    <iframe class="module module--iframe" src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
+                                        frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="module-list">
+                            <div class="module col-6" data-media-type="spotify">
+                                <iframe class="module module--iframe" src="https://open.spotify.com/embed/track/1oHh0DAi8nJDORn90H97QA?utm_source=generator" width="100%" height="100"
                                         frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                             </div>
                         </article>
@@ -391,41 +448,42 @@
                     <div class="col-6 col-md-12 col-sm-12">
 
                         <article class="section-module background-second-color module-list">
-                            <h3 class="module color-white text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module color-white text-center fs-14 medium">tv gango sphere</h4>
-                            <div class="module container-16-9">
+                            <h3 class="module col-12 color-background-color text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module col-12 color-background-color text-center fs-14 medium">tv gango sphere</h4>
+                            <div class="module col-12 container-16-9" data-media-type="youtube">
                                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
                             </div>
                         </article>
 
-                        <article class="module-list">
-                            <div class="section-module row">
-                                <div class="col-4">
-                                    <h3 class="module color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                                    <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
-                                    <p class="module color-main-color fs-14 medium">
-                                        Lorem ipsum ibra
-                                        tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
-                                    </p>
-                                </div>
-                                <div class="col-8">
-                                    <div class="module container-16-9">
-                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe>
-                                    </div>
-                                </div>
+                        <article class="section-module module-list">
+                            <h3 class="module col-12 color-white background-main-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="module col-12 fs-14 color-main-color medium">tv gango sphere</h4>
+                            <p class="module col-12 color-main-color fs-14 medium">
+                                Lorem ipsum ibra
+                                tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
+                            </p>
+                            <div class="module col-12 container-16-9" data-media-type="youtube">
+                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
                             </div>
                         </article>
 
+                        <article class="module-list">
+                            <div class="module container-16-9 col-6"  data-media-type="youtube">
+                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
+                            </div>
+                        </article>
                     </div>
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list">
-                            <div class="section-module left-border row">
+                        <article class="section-module module-list">
+                            <div class="left-border row">
                                 <div class="col-4">
                                     <h3 class="module color-main-color fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
                                     <h4 class="module fs-14 color-main-color medium">tv gango sphere</h4>
@@ -434,25 +492,23 @@
                                         tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                                     </p>
                                 </div>
-                                <div class="col-8">
-                                    <div class="module container-16-9">
-                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                        </iframe>
-                                    </div>
+                                <div class="module col-8 container-16-9" data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
                                 </div>
                             </div>
                         </article>
 
                         <article class="section-module background-main-color module-list">
-                            <h3 class="module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
-                            <h4 class="module fs-14 color-white medium">tv gango sphere</h4>
-                            <p class="module color-white fs-14 medium">
+                            <h3 class="col-12 module color-main-color background-background-color highlight fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
+                            <h4 class="col-12 module fs-14 color-white medium">tv gango sphere</h4>
+                            <p class="col-12 module color-white fs-14 medium">
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
 
-                            <div class="module container-16-9">
+                            <div class="col-12 module container-16-9 col-12"  data-media-type="youtube">
                                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
                                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                 </iframe>
@@ -465,11 +521,93 @@
             </article>
 
         </div>
-        <div id="form-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
+
+        <div id="btn-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
             <header>
-                <h1 class="title title--black">Form</h1>
+                <h1 class="title title--black">Buttons</h1>
             </header>
 
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-page-list-elements">
+                    <h2>Pages</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-page-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i = 0; $i <= ((count($pages) - 1) / 2); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $pages[$i]->getSlug() ?>"><?= $pages[$i]->getTitle() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i; isset($pages[$i]); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $pages[$i]->getSlug() ?>"><?= $pages[$i]->getTitle() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                </div>
+            </article>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-categorie-list-elements">
+                    <h2>Categories</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-categorie-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i = 0; $i <= ((count($categories) - 1) / 2); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $categories[$i]->getSlug() ?>"><?= $categories[$i]->getSlug() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <?php for ($i; isset($categories[$i]); $i++): ?>
+                            <article class="module-list">
+                                <ahref class="module cta-button fs-14 cta-button--submit" href="/<?= $categories[$i]->getSlug() ?>"><?= $categories[$i]->getSlug() ?></ahref>
+                            </article>
+                        <?php endfor;?>
+                    </div>
+
+                </div>
+            </article>
+
+        </div>
+
+        <div id="other-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
+            <header>
+                <h1 class="title title--black">More</h1>
+            </header>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="background-list-elements">
+                    <h2>Background</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="background-list-elements" style="overflow: hidden;" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+
+                        <article class="module-list" style="height: 220px;">
+                            <div class="background-container-back-office">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+            </article>
         </div>
     </section>
 </section>

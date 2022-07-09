@@ -112,7 +112,9 @@
 
                     </div>
                 </article>
-
+                <?php if (!isset($pages[0])):?>
+                    <p class="title title--small">No page</p>
+                <?php endif;?>
             </div>
         </section>
     </section>

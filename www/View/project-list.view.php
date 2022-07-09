@@ -43,7 +43,9 @@
                             <?php endforeach;?>
                             </tbody>
                         </table>
-
+                        <?php if (!isset($projects[0])):?>
+                            <p class="title title--small">No project</p>
+                        <?php endif;?>
                     </div>
                 </article>
 
@@ -66,7 +68,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $project->getFormProject($usersProject[$key], 'Update')) ?>
+                        <?php  $this->includePartial("form", $project->getFormProject($project->usersNotInProject(), 'Update')) ?>
                     </article>
 
                 </div>
@@ -88,7 +90,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $projectEmpty->getFormProject($users)) ?>
+                    <?php  $this->includePartial("form", $projectEmpty->getFormProject($usersProject)) ?>
                 </article>
             </div>
         </section>

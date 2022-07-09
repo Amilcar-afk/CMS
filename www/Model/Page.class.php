@@ -206,6 +206,36 @@ class Page extends BaseSQL
         $categories = $header->categories();
         $pages = $header->pages();
 
+        $backgroundColor = $header->getBackgroundColor();
+        if ($backgroundColor != null || $backgroundColor != 'unset') {
+            if ($backgroundColor == 'main-color') {
+                $backgroundColor = 'background-main-color';
+            }elseif ($backgroundColor == 'second-color') {
+                $backgroundColor = 'background-second-color';
+            }elseif ($backgroundColor == 'third-color') {
+                $backgroundColor = 'background-third-color';
+            }else{
+                $backgroundColor = $backgroundColor;
+            }
+        }else{
+            $backgroundColor = null;
+        }
+
+        $btnTextColor = $header->getBtnTextColor();
+        if ($btnTextColor != null || $btnTextColor != 'unset') {
+            if ($btnTextColor == 'main-color') {
+                $btnTextColor = 'color-main-color';
+            }elseif ($btnTextColor == 'second-color') {
+                $btnTextColor = 'color-second-color';
+            }elseif ($btnTextColor == 'third-color') {
+                $btnTextColor = 'color-third-color';
+            }else{
+                $btnTextColor = $btnTextColor;
+            }
+        }else{
+            $btnTextColor = null;
+        }
+
         $radius = Query::from('cmspf_Options')
             ->where("type = 'radius'")
             ->execute('Option');
@@ -223,6 +253,36 @@ class Page extends BaseSQL
         $footer = $footer->find(2);
         $categories = $footer->categories();
         $pages = $footer->pages();
+
+        $backgroundColor = $footer->getBackgroundColor();
+        if ($backgroundColor != null || $backgroundColor != 'unset') {
+            if ($backgroundColor == 'main-color') {
+                $backgroundColor = 'background-main-color';
+            }elseif ($backgroundColor == 'second-color') {
+                $backgroundColor = 'background-second-color';
+            }elseif ($backgroundColor == 'third-color') {
+                $backgroundColor = 'background-third-color';
+            }else{
+                $backgroundColor = $backgroundColor;
+            }
+        }else{
+            $backgroundColor = null;
+        }
+
+        $btnTextColor = $footer->getBtnTextColor();
+        if ($btnTextColor != null || $btnTextColor != 'unset') {
+            if ($btnTextColor == 'main-color') {
+                $btnTextColor = 'color-main-color';
+            }elseif ($btnTextColor == 'second-color') {
+                $btnTextColor = 'color-second-color';
+            }elseif ($btnTextColor == 'third-color') {
+                $btnTextColor = 'color-third-color';
+            }else{
+                $btnTextColor = $btnTextColor;
+            }
+        }else{
+            $btnTextColor = null;
+        }
 
         $radius = Query::from('cmspf_Options')
             ->where("type = 'radius'")

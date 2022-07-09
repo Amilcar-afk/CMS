@@ -21,18 +21,22 @@ class Settings
 
     }
 
-    public function listStyle()
-    {
-
-        $view = new View("style", "back");
-    }
-
     public function listUser()
     {
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
         $view = new View("user-manager", "back");
         $view->assign("users", $users);
+        $view->assign("metaData", $metaData = [
+            "title" => 'User manager',
+            "description" => 'Manage your users here',
+            "src" => [
+                ["type" => "js", "path" => "https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"],
+                ["type" => "css", "path" => "https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"],
+                ["type" => "js", "path" => "../js/ajax/user-manager.js"],
+                ["type" => "js", "path" => "../js/ajax/httpRequest.js"],
+            ],
+        ]);
     }
 
     public function composeDatabase()
@@ -52,11 +56,12 @@ class Settings
                     $env_file = 'env.json';
                     $data_base_env = yaml_parse_file($env_file);
 
-                    foreach($_POST as $key => $data){
-                        if(count($_POST) == 4){
-                            $data_base_env['env'][0]=$_POST;
+                    echo "total".count($_POST);
+                    print_r($_POST);
 
-                            echo count($_POST);
+                    foreach($_POST as $key => $data){
+                        if(isset($_POST['DBHOST'])){
+                            $data_base_env['env'][0]=$_POST;
                         }else{
                             $data_base_env['env'][1]=$_POST;
 
@@ -70,24 +75,22 @@ class Settings
                     fclose($filename);
                 }
                 $env_file = 'env.json';
-                $data_base_env = yaml_parse_file($env_file[]);
+                $data_base_env = yaml_parse_file($env_file);
                 
                 $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
                 $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
                 $this->config->setPort($data_base_env['env'][0]['DBPORT']);
                 $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
+                $this->config->setDb_user($data_base_env['env'][0]['DBUSER']);
 
-                $this->config->setMail_adresse($data_base_env['env'][1]['MAILADDR']);
-                $this->config->setMail_pwd($data_base_env['env'][1]['MAILPWD']);
                 $this->config->setSmtp_host($data_base_env['env'][1]['SMTP_HOST']);
                 $this->config->setSmtp_port($data_base_env['env'][1]['SMTP_PORT']);
-        
-                $this->config->setDb_user($data_base_env['env'][1]['DBUSER']);
+
                 $this->config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
                 $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
                 $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
 
-                $view = new View("database");
+                $view = new View("configuration");
                 $view->assign("configuration", $this->config);
             }else{
                 return include "View/Partial/form.partial.php";
@@ -107,24 +110,23 @@ class Settings
         $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
         $this->config->setPort($data_base_env['env'][0]['DBPORT']);
         $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
+        $this->config->setDb_user($data_base_env['env'][0]['DBUSER']);
 
-        $this->config->setMail_adresse($data_base_env['env'][1]['MAILADDR']);
-        $this->config->setMail_pwd($data_base_env['env'][1]['MAILPWD']);
         $this->config->setSmtp_host($data_base_env['env'][1]['SMTP_HOST']);
         $this->config->setSmtp_port($data_base_env['env'][1]['SMTP_PORT']);
 
-        $this->config->setDb_user($data_base_env['env'][1]['DBUSER']);
         $this->config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
         $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
         $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
 
-        $view = new View("database", "back");
+        $view = new View("configuration", "back");
         $view->assign("configuration", $this->config);
-    }
-
-
-    public function listMedia()
-    {
-        $view = new View("media-library", "back");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Configuration',
+            "description" => 'Change your webstite configuration here. Database & SMTP configuration',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/database.js"],
+            ],
+        ]);
     }
 }

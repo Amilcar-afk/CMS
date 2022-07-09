@@ -38,6 +38,15 @@ class Option{
             ->execute('Option');
 
         $view = new View("style", "back");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Style',
+            "description" => 'Change your webstite style',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/options.js"],
+                ["type" => "js", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"],
+                ["type" => "css", "path" => "https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"],
+            ],
+        ]);
         $view->assign("fonts", $fonts);
 
         foreach($options as $option){
@@ -135,6 +144,10 @@ class Option{
                 $this->option->setUserKey($_SESSION['Auth']->id);
                 $this->option->save();
 
+                if($_POST['type'] == 'font'){
+                    $newFontId = $this->option->getLastId();
+                }
+
                 $fonts = Query::from('cmspf_Options')
                     ->where("type = 'font'")
                     ->execute('Option');
@@ -164,13 +177,64 @@ class Option{
                     ->execute('Option');
                 return include "View/Partial/design-variables.partial.php";
             }else{
-                echo "ok";
                 http_response_code(500);
             }
         }else{
-            echo 'okkk';
             http_response_code(500);
         }
 
+    }
+
+    public function composeImg()
+    {
+        if( isset($_FILES) && isset($_FILES['file'])) {
+            if (isset($_FILES["file"]['name'])) {
+                $tailleMax = 2097152;
+
+                $authExt = array('jpg','jpeg','png','svg');
+                $startPath = "/style/medias/images/cust-". date('Ymd-H-m-s');
+
+                if($_FILES["file"]['size'] <= $tailleMax) {
+                    $extensionUpload = strtolower(substr(strrchr($_FILES["file"]['name'], '.'), 1));
+                    if(in_array($extensionUpload, $authExt)) {
+                        $chemin = realpath(dirname(__FILE__))."/..". $startPath . ".".$extensionUpload;
+                        $move = move_uploaded_file($_FILES["file"]["tmp_name"], $chemin);
+                        if ($move) {
+
+                            $this->option->setPath($startPath . ".".$extensionUpload);
+                            $this->option->setType('image');
+                            $this->option->setUserKey($_SESSION['Auth']->id);
+                            $this->option->save();
+
+                            echo $startPath . ".".$extensionUpload;
+                        }else{
+                            echo "Error importing";
+                        }
+                    }else{
+                        echo "Format invalid";
+                    }
+                }else{
+                    echo "Invalid size";
+                }
+            }else{
+                echo "Error";
+            }
+        }else{
+            echo "Error";
+        }
+
+    }
+
+    public function listImages()
+    {
+        $images = Query::from('cmspf_Options')
+            ->where("type = 'image'")
+            ->execute('Option');
+        $view = new View("media-library", "back");
+        $view->assign("images", $images);
+        $view->assign("metaData", $metaData = [
+            "title" => 'Media Library',
+            "description" => 'List of all webstie images',
+        ]);
     }
 }
