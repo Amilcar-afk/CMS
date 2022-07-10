@@ -2535,6 +2535,9 @@ h2 {
       width: 100%;
       padding: 10px 40px; } }
 
+.fullCalendar a:not([href]) {
+  pointer-events: initial; }
+
 .fullCalendar .fc th, .fullCalendar .fc td {
   border-style: unset !important;
   border-width: unset !important; }

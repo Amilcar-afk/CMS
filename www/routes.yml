@@ -343,6 +343,40 @@
   action: loadDesignSecond
 
 
+/newsletterloader:
+  controller: newsletterengine
+  action: newsletterLoader
+  params: [ slug ]
+
+/newsletters:
+  controller: newsletterengine
+  action: listnewsletter
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/newsletter/build:
+  controller: newsletterengine
+  action: buildnewsletter
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/newsletter/build/save:
+  controller: newsletterengine
+  action: saveContentnewsletter
+  middleware : ['auth', 'admin']
+
+/newsletter/compose:
+  controller: newsletterengine
+  action: composenewsletter
+  params: [id]
+  middleware : ['auth', 'admin']
+
+/newsletter/delete:
+  controller: newsletterengine
+  action: deletenewsletter
+  middleware: [ 'auth', 'admin' ]
+
+
 
 
 
