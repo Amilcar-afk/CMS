@@ -266,6 +266,11 @@ class Configuration extends BaseSQL
         return $this;
     }
 
+    public function insertDatabase()
+    {
+        parent::insertDatabase();
+    }
+
     public function dataBaseForm(): array
     {
         return [

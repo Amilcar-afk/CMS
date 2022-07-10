@@ -329,18 +329,22 @@
 /setup/main-images:
   controller: Setup
   action: loadMainImages
+  middleware: [ 'auth', 'admin' ]
 
 /setup/main-colors:
   controller: Setup
   action: loadMainColors
+  middleware: [ 'auth', 'admin' ]
 
 /setup/design/1:
   controller: Setup
   action: loadDesignFirst
+  middleware: [ 'auth', 'admin' ]
 
 /setup/design/2:
   controller: Setup
   action: loadDesignSecond
+  middleware: [ 'auth', 'admin' ]
 
 /newsletters:
   controller: newsletterengine
