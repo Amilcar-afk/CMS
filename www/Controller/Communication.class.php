@@ -4,39 +4,24 @@ namespace App\Controller;
 
 use App\Core\Query;
 use App\Core\View;
-use App\Model\Conversation;
-use App\Model\Message;
 use App\Model\User;
 use App\Model\Projet;
-use App\Model\User_conversation;
 use App\Model\User_projet;
 
 class Communication
 {
     public $conversation;
-    public $message;
-    public $user;
-    public $currentUser;
     protected $project;
     protected $user_project;
-    public $conversation_user;
 
     public function __construct()
     {
         $this->project = new Projet();
-        $this->conversation = new Conversation();
-        $this->message = new Message();
-        $this->user = new User();
         $this->user_project = new User_projet();
-        $this->conversation_user = new User_conversation();
-
     }
-
 
     public function listConversation()
     {
-        $user = new User();
-        $user = $user->find($_SESSION['Auth']->id);
         $view = new View("conversation-list", "back");
         $msg = new Message();
         $userConversation = new User_conversation();
@@ -201,6 +186,7 @@ class Communication
             $this->message->setConversation_key($conversationId);
             $this->message->save();
         }
+
     }
 
     public function listProject()
@@ -229,7 +215,6 @@ class Communication
         $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
     }
-
 
     public function composeProject()
     {
