@@ -342,12 +342,6 @@
   controller: Setup
   action: loadDesignSecond
 
-
-/newsletterloader:
-  controller: newsletterengine
-  action: newsletterLoader
-  params: [ id ]
-
 /newsletters:
   controller: newsletterengine
   action: listnewsletter
