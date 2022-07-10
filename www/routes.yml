@@ -346,7 +346,7 @@
 /newsletterloader:
   controller: newsletterengine
   action: newsletterLoader
-  params: [ slug ]
+  params: [ id ]
 
 /newsletters:
   controller: newsletterengine

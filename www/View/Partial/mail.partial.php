@@ -236,7 +236,7 @@
                                                                     <?php elseif ($element["type"] == "text"):?>
                                                                         <tr>
                                                                             <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#637381;"><?= $element['content'] ?></div>
+                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:24px;text-align:left;"><?= $element['content'] ?></div>
                                                                             </td>
                                                                         </tr>
                                                                     <?php elseif ($element["type"] == "button"):?>

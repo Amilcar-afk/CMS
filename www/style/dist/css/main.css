@@ -2001,12 +2001,16 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     display: flex;
     flex-direction: column;
     align-items: center; }
+    .container-main-content--setup .editable-module--footer-nav {
+      left: calc(50% - 70px); }
     .container-main-content--setup > .container-main-content--menu-content {
       max-width: 100%;
       width: 580px; }
     .container-main-content--setup .section-config-blocks {
       display: flex;
       margin-bottom: 30px; }
+    .container-main-content--setup .module button {
+      z-index: 0; }
     .container-main-content--setup > header {
       transition: all 0.3s;
       backdrop-filter: blur(60px);

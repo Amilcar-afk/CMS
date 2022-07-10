@@ -310,6 +310,10 @@
     flex-direction: column;
     align-items: center;
 
+    .editable-module--footer-nav {
+      left: calc(50% - 70px);
+    }
+
     & > .container-main-content--menu-content {
       max-width: 100%;
       width: 580px;
@@ -318,6 +322,10 @@
     .section-config-blocks {
       display: flex;
       margin-bottom: 30px;
+    }
+
+    .module button{
+      z-index: 0;
     }
 
     & > header{

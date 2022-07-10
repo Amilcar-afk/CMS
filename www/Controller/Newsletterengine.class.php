@@ -31,24 +31,6 @@ class Newsletterengine
         }
     }
 
-    public function newsletterLoader($request){
-
-        $newsletter = $this->newsletter->find($request['id'], 'slug');
-
-        if ($newsletter){
-
-            $view = new View("load-newsletter", "front");
-
-            $view->assign("newsletter", $newsletter );
-            $view->assign("metaData", $metaData = [
-                "title" => $newsletter->getTitle()
-            ]);
-        }else{
-            http_response_code(404);
-        }
-
-    }
-
     public function listNewsletter(){
         $newsletterEmpty = $this->newsletter;
         $newsletters = $this->newsletter->find();
@@ -66,19 +48,44 @@ class Newsletterengine
     }
 
     public function buildNewsletter($request){
-        $newsletter = $this->newsletter->find($request['id']);
+        if (isset($request['id'])){
+            $newsletter = $this->newsletter->find($request['id']);
 
-        if ($newsletter){
+            if ($newsletter){
 
-            $view = new View("newsletter-editor", "back");
-            $view->assign("newsletter", $newsletter);
-            $view->assign("metaData", $metaData = [
-                "title" => 'Newsletter builder',
-                "description" => 'Newsletter builder',
-                "src" => [
-                    ["type" => "js", "path" => "../style/js/wysiwyg.js"],
-                ],
-            ]);
+                if ($newsletter->getContent() != null){
+                    $message = $newsletter->getContent();
+                }else{
+                    $message = [
+                        [
+                            "type"=>'title',
+                            "content"=>'Title'
+                        ],
+                        [
+                            "type"=>'text',
+                            "content"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo ante non pellentesque egestas. Phasellus elementum, augue vel facilisis blandit, odio odio vestibulum purus, ac venenatis lacus odio non metus. Morbi porttitor elit sem, in auctor massa sollicitudin et. Integer non magna vel nulla molestie viverra nec vel ligula. Sed rhoncus a neque eget laoreet. Ut eu ante eget ex consectetur congue. Maecenas placerat non risus eget tempus. Sed quis risus feugiat, tincidunt turpis in, feugiat dolor. Maecenas venenatis turpis et iaculis dictum."
+                        ],
+                        [
+                            "type"=>'button',
+                            "link"=>'http://www.google.com',
+                            "content"=>'Button'
+                        ]
+                    ];
+                }
+
+                $view = new View("newsletter-editor", "back");
+                $view->assign("newsletter", $newsletter);
+                $view->assign("message", $message);
+                $view->assign("metaData", $metaData = [
+                    "title" => 'Newsletter builder',
+                    "description" => 'Newsletter builder',
+                    "src" => [
+                        ["type" => "js", "path" => "/style/js/wysiwygNewsletter.js"],
+                    ],
+                ]);
+            }else {
+                http_response_code(404);
+            }
         }else {
             http_response_code(404);
         }
@@ -119,12 +126,29 @@ class Newsletterengine
 
     public function saveContentNewsletter()
     {
-        if( isset($_POST)
-            && isset($_POST['id'])
-            && isset($_POST['content']) )
+        if (isset($_POST['id']) && isset($_POST['content']) && isset($_POST['status'])){
+            $newsletter = $this->newsletter->find($_POST['id']);
 
-            $this->newsletter->setId($_POST['id']);
-            $this->newsletter->setContent($_POST['content']);
-            $this->newsletter->save();
+            if ($newsletter){
+
+                if ($_POST['status'] == 'Public'){
+                    $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
+
+
+                    //set a observer to send the newsletter to the subscribers
+                    //$this->newsletter->addObserver(new Query());
+                    //$this->newsletter->notify();
+                }
+
+                $this->newsletter->setId($_POST['id']);
+                $this->newsletter->setStatus($_POST['status']);
+                $this->newsletter->setContent($_POST['content']);
+                $this->newsletter->save();
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
     }
 }

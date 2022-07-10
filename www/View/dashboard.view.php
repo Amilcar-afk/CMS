@@ -43,23 +43,25 @@
             </div>
 
             <div class="col-2 col-md-4 col-sm-4">
-                <section class="card card--bottom card--background-main-color">
-                    <header>
-                        <a href="/conversations">
+                <a href="/conversations">
+                    <section class="card card--bottom card--background-main-color">
+                        <header>
                             <h4><?= $conversations ?></h4>
                             <h3>Messages</h3>
-                        </a>    
-                    </header>
-                </section>
+                        </header>
+                    </section>
+                </a>
             </div>
 
             <div class="col-2 col-md-4 col-sm-4">
-                <section class="card card--bottom card--background-main-color">
+                <a href="/newsletters">
+                    <section class="card card--bottom card--background-main-color">
                         <header>
                             <span class="material-icons-round">edit</span>
                             <h3>Newsletter</h3>
                         </header>
-                </section>
+                    </section>
+                </a>
             </div>
 
             <div class="col-4 col-md-12 col-sm-12">

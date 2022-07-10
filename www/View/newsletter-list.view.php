@@ -21,7 +21,7 @@
 
                 <!--Draft-->
                 <article>
-                    <header class="main-nav-choice" data-wc-target="draft-newsletters-elements">
+                    <header class="main-nav-choice selected" data-wc-target="draft-newsletters-elements">
                         <h2>Draft</h2>
                         <span class="material-icons-round">more_horiz</span>
                     </header>
@@ -37,7 +37,6 @@
                                             <label class="sticker"><?= $newsletter->getDateUpdate() ?></label>
                                         </td>
                                         <td>
-                                            <a href="newsletterloader/<?= $newsletter->getId() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
                                             <a href="newsletter/build/<?= $newsletter->getId() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
                                             <button class="cta-button cta-button-a" data-a-target="container-setting-newsletter-<?=$newsletter->getId() ?>"><span class="material-icons-round">build</span></button>
                                             <button class="cta-button cta-button-a cta-button-delete-newsletter" data-newsletter-id="<?= $newsletter->getId() ?>"><span class="material-icons-round">delete</span></button>
@@ -53,11 +52,11 @@
 
                 <!--Public-->
                 <article>
-                    <header class="main-nav-choice selected" data-wc-target="public-newsletters-elements">
+                    <header class="main-nav-choice" data-wc-target="public-newsletters-elements">
                         <h2>Public</h2>
                         <span class="material-icons-round">more_horiz</span>
                     </header>
-                    <div id="public-newsletters-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="newsletter-manager-container" style="opacity: 1">
+                    <div id="public-newsletters-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="newsletter-manager-container">
                         <table class="table">
                             <tbody>
                             <?php foreach ($newsletters as $newsletter):?>
@@ -68,7 +67,7 @@
                                             <label class="sticker sticker--slug"><?= $newsletter->getDateRelease() ?></label>
                                         </td>
                                         <td>
-                                            <a href="newsletterloader/<?= $newsletter->getId() ?>" target="_blank" class="cta-button"><span class="material-icons-round">open_in_new</span></a>
+                                            <a href="newsletter/build/<?= $newsletter->getId() ?>" class="cta-button"><span class="material-icons-round">visibility</span></a>
                                             <button class="cta-button cta-button-a" data-a-target="container-setting-newsletter-<?=$newsletter->getId() ?>"><span class="material-icons-round">build</span></button>
                                             <button class="cta-button cta-button-a cta-button-delete-newsletter" data-newsletter-id="<?= $newsletter->getId() ?>"><span class="material-icons-round">delete</span></button>
                                         </td>

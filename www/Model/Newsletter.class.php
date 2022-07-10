@@ -23,7 +23,7 @@ class Newsletter extends BaseSQL
      */
     public function getContent()
     {
-        return $this->content;
+        return json_decode($this->content, true);
     }
 
     /**
