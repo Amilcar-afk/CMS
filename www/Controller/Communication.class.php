@@ -58,9 +58,8 @@ class Communication
     public function searchData()
     {
         if (isset($_POST['searchData'])) {
-
-            
             if($_SESSION['Auth']->rank == 'admin'){
+
                 $users = Query::from('cmspf_Users')
                 ->where("confirm =". 1)
                 ->where("deleted IS NULL")
@@ -77,7 +76,6 @@ class Communication
                 ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
                 ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
                 ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
-                
                 ->execute("User");
             }
 

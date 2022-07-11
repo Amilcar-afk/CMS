@@ -21,26 +21,14 @@
                             <div class="col-12" id="messageDiv" >
                                 <div id="chatDiv">
                                     <?php foreach($conversation as $message): ?>
-
-                                        <?php if($message->getUser_key() == $_SESSION['Auth']->id): ?>
-
-                                            <article class="message">
+                                            <article class="message 
+                                                 <?= ($message->getUser_key() == $_SESSION['Auth']->id )? "": "message--mind" ?>">
                                                 <p><?= $message->getContent()?></p> 
                                                 <time datetime="<?= $message->getDate() ?>">
                                                     <?= $message->getDate() ?>
                                                 </time>
                                             </article> 
-                                            
-                                            <?php else:; ?>
-
-                                            <article class="message message--mind">
-                                                <p> <?= $message->getContent()?></p>  
-                                                <time datetime="<?= $message->getDate() ?>">
-                                                    <?= $message->getDate() ?>
-                                                </time>
-                                            </article> 
-
-                                        <?php endif; ?>
+                                      
 
                                     <?php endforeach; ?>
                                 </div>
