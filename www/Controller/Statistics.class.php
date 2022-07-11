@@ -97,42 +97,18 @@ class Statistics
         // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
 
 
-        $currentDate = date("Y-m-d");
-
-        if(isset($_POST['before'])){
-
-            $date = date('Y-m-d', strtotime($currentDate. ' - 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-
-        }
+        $perViewDate = date("Y-m-d");
 
         if(isset($_POST['next'])){
-
-            $date = date('Y-m-d', strtotime($currentDate. ' + 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-
+            $perViewDate = $_POST['next'];
+        }elseif (isset($_POST['before'])) {
+            $perViewDate = $_POST['before'];
         }
 
-        if(!isset($_POST['next']) && !isset($_POST['before'])) {
+        $currentMonth = date('m',strtotime($perViewDate));
+        $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$perViewDate."') AND WEEK(date) = WEEK('".$perViewDate."')")->groupBy("day")->execute();
 
-            $date = date("Y-m-d");
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-
-        }
 
         $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
         $chartWeekData[] = ['Mon', 0, 0];
@@ -247,7 +223,7 @@ class Statistics
         $view = new View("dashboard", $tmpl);
         $view->assign("chartWeekData", $chartWeekData);
 
-        $view->assign("date", $date);
+        $view->assign("perViewDate", $perViewDate);
 
         $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
