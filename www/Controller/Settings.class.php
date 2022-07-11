@@ -129,9 +129,12 @@ class Settings
                 $this->config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
                 $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
                 $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
+                $this->config->insertDatabase();
 
                 $view = new View("configuration");
                 $view->assign("configuration", $this->config);
+
+
             }else{
                 return include "View/Partial/form.partial.php";
             }

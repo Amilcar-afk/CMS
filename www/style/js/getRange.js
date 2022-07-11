@@ -1,22 +1,33 @@
 $(document).ready(function(){
     $(document).on("click", ".cta-button--range", function () {
-        var formContainer = $(this).parent();
+        let perWeekDate = "";
+        if ($(this).attr('id') == "SincePerWeek"){
+            perWeekDate = $('#SincePerWeek').attr('data-before');
+        }else if($(this).attr('id') == "toPerWeek"){
+            perWeekDate = $('#toPerWeek').attr('data-next');
+        }else {
+            perWeekDate = $('#currentPerWeek').attr('data-current');
+        }
+
+        console.log($('#currentPerWeek').attr('data-current'));
+        console.log($('#toPerDevice').attr('data-next'));
+        console.log($('#SincePerDevice').attr('data-before'));
+
         $.ajax({
             url:"/dashboard",
             type:"POST",
             data:
                 {
-                    sincePerPage:$(this).parent().find('[name=SincePerPage]').val(),
-                    toPerPage:$(this).parent().find('[name=toPerPage]').val(),
+                    sincePerPage:$('#SincePerPage').val(),
+                    toPerPage:$('#toPerPage').val(),
 
-                    sincePerCountry:$(this).parent().find('[name=SincePerCountry]').val(),
-                    toPerCountry:$(this).parent().find('[name=toPerCountry]').val(),
+                    sincePerCountry:$('#SincePerCountry').val(),
+                    toPerCountry:$('#toPerCountry').val(),
 
-                    sincePerDevice:$(this).parent().find('[name=SincePerDevice]').val(),
-                    toPerDevice:$(this).parent().find('[name=toPerDevice]').val(),
+                    sincePerDevice:$('#SincePerDevice').val(),
+                    toPerDevice:$('#toPerDevice').val(),
 
-                    before:$(this).attr('data-before'),
-                    next:$(this).attr('data-next'),
+                    perWeekDate:perWeekDate,
 
                     range: true
                 },
@@ -25,7 +36,6 @@ $(document).ready(function(){
                 if (answer.includes('<section id="back-office-container">')){
                     $($('main')[0]).html(answer);
                 }
-                console.log(answer);
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');

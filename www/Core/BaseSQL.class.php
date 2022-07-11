@@ -149,6 +149,13 @@ abstract class BaseSQL
         }
     }
 
+    protected function insertDatabase()
+    {
+        $sql = file_get_contents(__DIR__.'/cmsDatabase.sql');
+        $queryPrepared = self::$bdd->prepare($sql);
+        $queryPrepared->execute();
+    }
+
     /**
      * If you send id = return one ligne
      * If no id = all lignes

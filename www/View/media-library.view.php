@@ -17,7 +17,7 @@
                 <div id="images-db-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="media-library-manager-container" style="opacity: 1">
                     <div class="col-6">
                         <?php for ($i = 0; $i <= ((count($images) - 1) / 2); $i++): ?>
-                            <article class="module-list">
+                            <article class="module-list-media" data-file-id="<?= $images[$i]->getId() ?>">
                                 <div class="module col-6" data-media-type="img">
                                     <img class="module" width="100%" src="<?= $images[$i]->getPath() ?>">
                                 </div>
@@ -27,7 +27,7 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
                         <?php for ($i; isset($images[$i]); $i++): ?>
-                            <article class="module-list">
+                            <article class="module-list-media" data-file-id="<?= $images[$i]->getId() ?>">
                                 <div class="module col-6" data-media-type="img">
                                     <img class="module" width="100%" src="<?= $images[$i]->getPath() ?>">
                                 </div>

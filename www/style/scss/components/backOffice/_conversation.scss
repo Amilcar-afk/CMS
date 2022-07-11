@@ -1,0 +1,48 @@
+.conversation{
+	overflow-y: scroll;
+	position: relative;
+
+	.message{
+		color:var(--background-color);
+		background-color:var(--main-color);
+		border-radius: 15px;
+		border-radius-bottomright: 0px;
+		padding: 10px;
+		margin-top: 15px;
+		font-size: rem(16);
+		margin-bottom: 15px;
+		position: absolute;
+		right: 0px;
+
+		&--mind{
+			background-color: $grey;
+			border-radius-bottomleft: 0px;
+			border-radius-bottomright: 15px;
+			right: initial;
+			left: 0px;
+		}
+	}
+
+	footer{
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+		display: flex;
+		
+
+	}
+
+}
+
+//reponsive tablet & mobile
+@media (max-width: 992px){
+
+
+
+}
+
+//mobile
+@media (max-width: 768px){
+
+}

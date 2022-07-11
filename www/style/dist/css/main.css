@@ -1311,26 +1311,26 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   border-left: 4px solid;
   padding-left: -10px; }
 
-#container-editor h1, #container-editor h2, #container-editor h3, #container-editor h4, #container-editor h5, #container-editor h6, #container-editor p, .module-list h1, .module-list h2, .module-list h3, .module-list h4, .module-list h5, .module-list h6, .module-list p, .module h1, .module h2, .module h3, .module h4, .module h5, .module h6, .module p {
+#container-editor h1, #container-editor h2, #container-editor h3, #container-editor h4, #container-editor h5, #container-editor h6, #container-editor p, .module-list h1, .module-list h2, .module-list h3, .module-list h4, .module-list h5, .module-list h6, .module-list p, .module h1, .module h2, .module h3, .module h4, .module h5, .module h6, .module p, .module-list-media h1, .module-list-media h2, .module-list-media h3, .module-list-media h4, .module-list-media h5, .module-list-media h6, .module-list-media p {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 10px;
   margin-bottom: 10px; }
 
-#container-editor iframe, .module-list iframe, .module iframe {
+#container-editor iframe, .module-list iframe, .module iframe, .module-list-media iframe {
   padding-left: 3px;
   padding-right: 3px;
   margin-top: 10px;
   border-radius: var(--radius, 6px); }
 
-#container-editor .cta-button-insert-image, .module-list .cta-button-insert-image, .module .cta-button-insert-image {
+#container-editor .cta-button-insert-image, .module-list .cta-button-insert-image, .module .cta-button-insert-image, .module-list-media .cta-button-insert-image {
   display: none; }
 
-#container-editor--on, .module-list--on, .module--on {
+#container-editor--on, .module-list--on, .module--on, .module-list-media--on {
   z-index: 2;
   position: inherit; }
 
-#container-editor--hover, .module-list--hover, .module--hover {
+#container-editor--hover, .module-list--hover, .module--hover, .module-list-media--hover {
   border-radius: var(--radius, 5px);
   top: 0;
   right: 0;
@@ -1345,45 +1345,64 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   height: 100%;
   cursor: pointer;
   opacity: 0; }
-  #container-editor--hover .material-icons-round, .module-list--hover .material-icons-round, .module--hover .material-icons-round {
+  #container-editor--hover .material-icons-round, .module-list--hover .material-icons-round, .module--hover .material-icons-round, .module-list-media--hover .material-icons-round {
     font-size: 5.625rem;
     color: #E3E3E3; }
 
-#container-editor--quote-basic figure, .module-list--quote-basic figure, .module--quote-basic figure {
+#container-editor--hover, .module-list--hover, .module--hover, .module-list-media--hover {
+  border-radius: var(--radius, 5px);
+  top: 0;
+  right: 0;
+  font-size: 2.5rem;
+  background: rgba(211, 18, 18, 0.3);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0; }
+  #container-editor--hover .material-icons-round, .module-list--hover .material-icons-round, .module--hover .material-icons-round, .module-list-media--hover .material-icons-round {
+    font-size: 5.625rem;
+    color: #c45b5b; }
+
+#container-editor--quote-basic figure, .module-list--quote-basic figure, .module--quote-basic figure, .module-list-media--quote-basic figure {
   display: inline; }
-  #container-editor--quote-basic figure blockquote, .module-list--quote-basic figure blockquote, .module--quote-basic figure blockquote {
+  #container-editor--quote-basic figure blockquote, .module-list--quote-basic figure blockquote, .module--quote-basic figure blockquote, .module-list-media--quote-basic figure blockquote {
     display: inline;
     margin: 0; }
-    #container-editor--quote-basic figure blockquote > p, .module-list--quote-basic figure blockquote > p, .module--quote-basic figure blockquote > p {
+    #container-editor--quote-basic figure blockquote > p, .module-list--quote-basic figure blockquote > p, .module--quote-basic figure blockquote > p, .module-list-media--quote-basic figure blockquote > p {
       display: inline;
       font-size: 1.125rem;
       font-weight: 800; }
-  #container-editor--quote-basic figure figcaption, .module-list--quote-basic figure figcaption, .module--quote-basic figure figcaption {
+  #container-editor--quote-basic figure figcaption, .module-list--quote-basic figure figcaption, .module--quote-basic figure figcaption, .module-list-media--quote-basic figure figcaption {
     display: inline;
     font-size: 0.8125rem;
     font-weight: 400; }
 
-#container-editor--quote-wrap figure blockquote, .module-list--quote-wrap figure blockquote, .module--quote-wrap figure blockquote {
+#container-editor--quote-wrap figure blockquote, .module-list--quote-wrap figure blockquote, .module--quote-wrap figure blockquote, .module-list-media--quote-wrap figure blockquote {
   margin: 0; }
-  #container-editor--quote-wrap figure blockquote > p, .module-list--quote-wrap figure blockquote > p, .module--quote-wrap figure blockquote > p {
+  #container-editor--quote-wrap figure blockquote > p, .module-list--quote-wrap figure blockquote > p, .module--quote-wrap figure blockquote > p, .module-list-media--quote-wrap figure blockquote > p {
     font-size: 1.125rem;
     font-weight: 800;
     margin: 0; }
 
-#container-editor--quote-wrap figure figcaption, .module-list--quote-wrap figure figcaption, .module--quote-wrap figure figcaption {
+#container-editor--quote-wrap figure figcaption, .module-list--quote-wrap figure figcaption, .module--quote-wrap figure figcaption, .module-list-media--quote-wrap figure figcaption {
   font-size: 0.8125rem;
   font-weight: 400; }
 
-#container-editor--quote-mark figure blockquote, .module-list--quote-mark figure blockquote, .module--quote-mark figure blockquote {
+#container-editor--quote-mark figure blockquote, .module-list--quote-mark figure blockquote, .module--quote-mark figure blockquote, .module-list-media--quote-mark figure blockquote {
   position: relative; }
-  #container-editor--quote-mark figure blockquote > p:before, .module-list--quote-mark figure blockquote > p:before, .module--quote-mark figure blockquote > p:before {
+  #container-editor--quote-mark figure blockquote > p:before, .module-list--quote-mark figure blockquote > p:before, .module--quote-mark figure blockquote > p:before, .module-list-media--quote-mark figure blockquote > p:before {
     position: absolute;
     content: '"';
     font-weight: 800;
     top: -10px;
     font-size: 5rem;
     left: -20px; }
-  #container-editor--quote-mark figure blockquote > p:after, .module-list--quote-mark figure blockquote > p:after, .module--quote-mark figure blockquote > p:after {
+  #container-editor--quote-mark figure blockquote > p:after, .module-list--quote-mark figure blockquote > p:after, .module--quote-mark figure blockquote > p:after, .module-list-media--quote-mark figure blockquote > p:after {
     position: absolute;
     bottom: -40px;
     right: -20px;
@@ -1391,34 +1410,34 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     font-weight: 800;
     content: '"'; }
 
-#container-editor--quote-mark-font-color figure blockquote > p:before, .module-list--quote-mark-font-color figure blockquote > p:before, .module--quote-mark-font-color figure blockquote > p:before {
+#container-editor--quote-mark-font-color figure blockquote > p:before, .module-list--quote-mark-font-color figure blockquote > p:before, .module--quote-mark-font-color figure blockquote > p:before, .module-list-media--quote-mark-font-color figure blockquote > p:before {
   color: var(--font-color); }
 
-#container-editor--quote-mark-font-color figure blockquote > p:after, .module-list--quote-mark-font-color figure blockquote > p:after, .module--quote-mark-font-color figure blockquote > p:after {
+#container-editor--quote-mark-font-color figure blockquote > p:after, .module-list--quote-mark-font-color figure blockquote > p:after, .module--quote-mark-font-color figure blockquote > p:after, .module-list-media--quote-mark-font-color figure blockquote > p:after {
   color: var(--font-color); }
 
-#container-editor--quote-mark-background-color figure blockquote > p:before, .module-list--quote-mark-background-color figure blockquote > p:before, .module--quote-mark-background-color figure blockquote > p:before {
+#container-editor--quote-mark-background-color figure blockquote > p:before, .module-list--quote-mark-background-color figure blockquote > p:before, .module--quote-mark-background-color figure blockquote > p:before, .module-list-media--quote-mark-background-color figure blockquote > p:before {
   color: var(--background-color); }
 
-#container-editor--quote-mark-background-color figure blockquote > p:after, .module-list--quote-mark-background-color figure blockquote > p:after, .module--quote-mark-background-color figure blockquote > p:after {
+#container-editor--quote-mark-background-color figure blockquote > p:after, .module-list--quote-mark-background-color figure blockquote > p:after, .module--quote-mark-background-color figure blockquote > p:after, .module-list-media--quote-mark-background-color figure blockquote > p:after {
   color: var(--background-color); }
 
-#container-editor--quote-mark-main-color figure blockquote > p:before, .module-list--quote-mark-main-color figure blockquote > p:before, .module--quote-mark-main-color figure blockquote > p:before {
+#container-editor--quote-mark-main-color figure blockquote > p:before, .module-list--quote-mark-main-color figure blockquote > p:before, .module--quote-mark-main-color figure blockquote > p:before, .module-list-media--quote-mark-main-color figure blockquote > p:before {
   color: var(--main-color); }
 
-#container-editor--quote-mark-main-color figure blockquote > p:after, .module-list--quote-mark-main-color figure blockquote > p:after, .module--quote-mark-main-color figure blockquote > p:after {
+#container-editor--quote-mark-main-color figure blockquote > p:after, .module-list--quote-mark-main-color figure blockquote > p:after, .module--quote-mark-main-color figure blockquote > p:after, .module-list-media--quote-mark-main-color figure blockquote > p:after {
   color: var(--main-color); }
 
-#container-editor--quote-mark-second-color figure blockquote > p:before, .module-list--quote-mark-second-color figure blockquote > p:before, .module--quote-mark-second-color figure blockquote > p:before {
+#container-editor--quote-mark-second-color figure blockquote > p:before, .module-list--quote-mark-second-color figure blockquote > p:before, .module--quote-mark-second-color figure blockquote > p:before, .module-list-media--quote-mark-second-color figure blockquote > p:before {
   color: var(--second-color); }
 
-#container-editor--quote-mark-second-color figure blockquote > p:after, .module-list--quote-mark-second-color figure blockquote > p:after, .module--quote-mark-second-color figure blockquote > p:after {
+#container-editor--quote-mark-second-color figure blockquote > p:after, .module-list--quote-mark-second-color figure blockquote > p:after, .module--quote-mark-second-color figure blockquote > p:after, .module-list-media--quote-mark-second-color figure blockquote > p:after {
   color: var(--second-color); }
 
-#container-editor--quote-mark-third-color figure blockquote > p:before, .module-list--quote-mark-third-color figure blockquote > p:before, .module--quote-mark-third-color figure blockquote > p:before {
+#container-editor--quote-mark-third-color figure blockquote > p:before, .module-list--quote-mark-third-color figure blockquote > p:before, .module--quote-mark-third-color figure blockquote > p:before, .module-list-media--quote-mark-third-color figure blockquote > p:before {
   color: var(--third-color); }
 
-#container-editor--quote-mark-third-color figure blockquote > p:after, .module-list--quote-mark-third-color figure blockquote > p:after, .module--quote-mark-third-color figure blockquote > p:after {
+#container-editor--quote-mark-third-color figure blockquote > p:after, .module-list--quote-mark-third-color figure blockquote > p:after, .module--quote-mark-third-color figure blockquote > p:after, .module-list-media--quote-mark-third-color figure blockquote > p:after {
   color: var(--third-color); }
 
 .module--iframe {

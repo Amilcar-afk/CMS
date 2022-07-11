@@ -134,7 +134,7 @@
                                 <label>Add font</label>
                             </article>
                             <?php foreach ($fonts as $font):?>
-                                <article class="cta-button-a" data-a-target="container-setting-font-<?=$font->getId() ?>">
+                                <article id="container-font-<?=$font->getId() ?>" class="cta-button-a" data-a-target="container-setting-font-<?=$font->getId() ?>">
                                     <span class="input-block" style="font-family: '<?= $font->getValue()?>'">
                                         aA
                                     </span>
@@ -224,6 +224,7 @@
                         <p class="input-block fs-36" style="font-family: '<?= $font->getValue()?>'">
                             $ € £ ! " ' # % & ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
                         </p>
+                        <button class="mt-5 cta-button cta-button--delete delete-font" data-file-id="<?=$font->getId() ?>">Delete</button>
                     </article>
                 </div>
             </section>

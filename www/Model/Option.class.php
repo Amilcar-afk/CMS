@@ -106,6 +106,11 @@ class Option extends BaseSQL
         return parent::find($id, $attribut);
     }
 
+    public function delete($id)
+    {
+        parent::delete($id);
+    }
+
     public function getFormNewFont(): array
     {
 

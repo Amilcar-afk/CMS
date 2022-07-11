@@ -50,22 +50,41 @@ class Statistics
         $toPerDevice = date("Y-m-d");
         $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
         
-        if(isset($_POST['sincePerPage'])){
+        if(!empty($_POST['sincePerPage']) && empty($_POST['toPerPage'])){
+
+            $sincePerPage = $_POST['sincePerPage'];
+            $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
+
+        }
+        if(!empty($_POST['sincePerPage']) && !empty($_POST['toPerPage'])){
 
             $sincePerPage = $_POST['sincePerPage'];
             $toPerPage = $_POST['toPerPage'];
             $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
 
         }
-        if(isset($_POST['sincePerCountry'])) {
 
+        if(!empty($_POST['sincePerCountry']) && empty($_POST['toPerCountry'])) {
+
+            $sincePerCountry = $_POST['sincePerCountry'];
+            $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
+
+        }
+        if(!empty($_POST['sincePerCountry']) && !empty($_POST['toPerCountry'])) {
 
             $sincePerCountry = $_POST['sincePerCountry'];
             $toPerCountry = $_POST['toPerCountry'];
             $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
 
         }
-        if(isset($_POST['sincePerDevice'])) {
+
+        if(!empty($_POST['sincePerDevice']) && empty($_POST['toPerDevice'])) {
+
+            $sincePerDevice = $_POST['sincePerDevice'];
+            $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
+
+        }
+        if(!empty($_POST['sincePerDevice']) && !empty($_POST['toPerDevice'])) {
 
             $sincePerDevice = $_POST['sincePerDevice'];
             $toPerDevice = $_POST['toPerDevice'];
@@ -78,42 +97,16 @@ class Statistics
         // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
 
 
-        $currentDate = date("Y-m-d");
+        $perWeekDate = date("Y-m-d");
 
-        if(isset($_POST['before'])){
-
-            $date = date('Y-m-d', strtotime($currentDate. ' - 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-
+        if(isset($_POST['perWeekDate'])){
+            $perWeekDate = $_POST['perWeekDate'];
         }
 
-        if(isset($_POST['next'])){
+        $currentMonth = date('m',strtotime($perWeekDate));
+        $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$perWeekDate."') AND WEEK(date) = WEEK('".$perWeekDate."')")->groupBy("day")->execute();
 
-            $date = date('Y-m-d', strtotime($currentDate. ' + 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-
-        }
-
-        if(!isset($_POST['next']) && !isset($_POST['before'])) {
-
-            $date = date("Y-m-d");
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-
-        }
 
         $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
         $chartWeekData[] = ['Mon', 0, 0];
@@ -228,7 +221,7 @@ class Statistics
         $view = new View("dashboard", $tmpl);
         $view->assign("chartWeekData", $chartWeekData);
 
-        $view->assign("date", $date);
+        $view->assign("perWeekDate", $perWeekDate);
 
         $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
