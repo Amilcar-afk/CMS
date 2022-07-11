@@ -62,15 +62,18 @@ class Communication
             
             if($_SESSION['Auth']->rank == 'admin'){
                 $users = Query::from('cmspf_Users')
+                ->where("confirm =". 1)
+                ->where("deleted IS NULL")
                 ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
                 ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
                 ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
                 ->execute("User");
 
             }else{
-                
                 $users = Query::from('cmspf_Users')
                 ->where("rank = 'admin'")
+                ->where("confirm =". 1)
+                ->where("deleted IS NULL")
                 ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
                 ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
                 ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
@@ -177,6 +180,7 @@ class Communication
 
     public function newConversation()
     {
+        
         $this->conversation->setDate(date('Y-m-d H:i:s'));
         $this->conversation->save();
         $conversationId =$this->conversation->getLastId();

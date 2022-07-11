@@ -60,12 +60,11 @@
                         <?php endforeach;?>
                     <?php endif; ?>
                 </article>
-                <article>
-                    <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                    </div>
-                    <div id="chat-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                    </div>
+                <article id="conversation-founded" >
                 </article>
+                <!-- <div id="chat-conversations-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                </div> -->
+               
                 </div>
         </section>
     </section>

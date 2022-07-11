@@ -2,13 +2,20 @@ $(document).ready(function(){
 
  
     if(window.location.href.indexOf("/conversations/user-conversations/") > -1) {
+
         var data = {
             id_user:$('#userId').val(),
             myId:$('#myId').val(),
             conversation_user_id:$('#conversationUser').val(),
             seenValue:$('#seen').val(),
         };
+        setInterval(() => {
+            getMessages()
             changeSeenStatus(data)
+        }, 1000);
+
+
+
     }
 
     $('#chat-conversations-elements').hide();
@@ -38,13 +45,11 @@ $(document).ready(function(){
                             if(element.firstname != value){
                                 $('#chat-conversations-elements').hide();   
                                 $('').prependTo('#conversation-founded');
-                                div = '<header class="main-nav-choice mb-3" id="foundedUser">'+
+                                div = '<header class="main-nav-choice mb-3">'+
                                 '<div><h2 id="conversation_title">'
                                 + element.firstname  
                                 + element.lastname +'<br>' 
-                                + element.email +'<h2> </div></header> <br>';
-                                $('#foundedUser').css('width','100%');
-                                $('#foundedUser').css('margin-top','2%');
+                                + element.email +'<h2> </div><span class="material-icons-round">more_horiz</span></header>';
                                 $(div).prependTo('#conversation-founded');
                             } 
                             $('#foundedUser').on('click', function(){
@@ -69,7 +74,6 @@ $(document).ready(function(){
 
     $('#sendButton').on('click',function(){
         
-        getMessages()
         if($('#sendTextarea').val() != ''){
             var currentUserData = {
                 id_user:$('#userId').val(),
@@ -149,42 +153,27 @@ $(document).ready(function(){
 
     var allMessages = [];
 
-//recupere tous les messages
     function getMessages(){
-            $.ajax({
-                url: "/conversations/get-all-messages",
-                dataType:"json",
-                type: "POST",
-                data:{
-                    id :$('#conversationId').val(),
-                },
-                success: function(messages){ 
-                    console.log(messages)
-                    allMessages = messages
-                    data = {
-                            id :messages[0]['id'] ,
-                            id_conv :$('#conversationId').val(),
-                        }
-                    getNewMessage(data)
+        $.ajax({
+            url: "/conversations/get-all-messages",
+            dataType:"json",
+            type: "POST",
+            data:{
+                id :$('#conversationId').val(),
+            },
+            success: function(messages){ 
+                if($( "#chatDiv > article >p" ).length != messages.length ){
+                    $( "#chatDiv" ).append(
+                        '<article class="message"><p>'
+                        +messages[0]['content']+
+                        '</p><time datetime="'+ messages[0]['date'] 
+                        +'">'+
+                        messages[0]['date']+'</time></article>'
+                        
+                        )
                 }
-            });
-    }
-
-//recupere le dernier messag
-    function getNewMessage(data){
-            $.ajax({
-                url: "/conversations/newmessage",
-                dataType:"json",
-                type: "POST",
-                data:{
-                    id :data.id,
-                    id_conv :data.id_conv,
-                },
-                success: function(messages){ 
-                    $( "#chatDiv" ).append(messages[0]['content'])
-                }
+            }
         });
     }
-
 })
 

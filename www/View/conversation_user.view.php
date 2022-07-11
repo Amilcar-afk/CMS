@@ -20,10 +20,30 @@
                         <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
                             <div class="col-12" id="messageDiv" >
                                 <div id="chatDiv">
-                                <?php foreach($conversation as $message): ?>
-                                <?= $message->getContent()?><br>
-                                <?php endforeach; ?>
-                            </div>
+                                    <?php foreach($conversation as $message): ?>
+
+                                        <?php if($message->getUser_key() == $_SESSION['Auth']->id): ?>
+
+                                            <article class="message">
+                                                <p><?= $message->getContent()?></p> 
+                                                <time datetime="<?= $message->getDate() ?>">
+                                                    <?= $message->getDate() ?>
+                                                </time>
+                                            </article> 
+                                            
+                                            <?php else:; ?>
+
+                                            <article class="message message--mind">
+                                                <p> <?= $message->getContent()?></p>  
+                                                <time datetime="<?= $message->getDate() ?>">
+                                                    <?= $message->getDate() ?>
+                                                </time>
+                                            </article> 
+
+                                        <?php endif; ?>
+
+                                    <?php endforeach; ?>
+                                </div>
                                 <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
                                 <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
                                 <input type="hidden" id="seen" value="<?= $seen ?>" >
