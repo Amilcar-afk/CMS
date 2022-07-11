@@ -64,13 +64,13 @@ class Statistics
 
         }
 
-        if(!empty($_POST['sincePerCountry']) && empty($_POST('toPerCountry'))) {
+        if(!empty($_POST['sincePerCountry']) && empty($_POST['toPerCountry'])) {
 
             $sincePerCountry = $_POST['sincePerCountry'];
             $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
 
         }
-        if(!empty($_POST['sincePerCountry']) && !empty($_POST('toPerCountry'))) {
+        if(!empty($_POST['sincePerCountry']) && !empty($_POST['toPerCountry'])) {
 
             $sincePerCountry = $_POST['sincePerCountry'];
             $toPerCountry = $_POST['toPerCountry'];
@@ -78,13 +78,13 @@ class Statistics
 
         }
 
-        if(!empty($_POST['sincePerDevice']) && empty($_POST('toPerDevice'))) {
+        if(!empty($_POST['sincePerDevice']) && empty($_POST['toPerDevice'])) {
 
             $sincePerDevice = $_POST['sincePerDevice'];
             $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
 
         }
-        if(!empty($_POST['sincePerDevice']) && !empty($_POST('toPerDevice'))) {
+        if(!empty($_POST['sincePerDevice']) && !empty($_POST['toPerDevice'])) {
 
             $sincePerDevice = $_POST['sincePerDevice'];
             $toPerDevice = $_POST['toPerDevice'];
