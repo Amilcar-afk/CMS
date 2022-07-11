@@ -107,6 +107,7 @@
             <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
                 <header>
                     <h1 class="title title--black">NEW USER</h1>
+                    <p>Until that the account is not confirmed by email it will not be visible</p>
                 </header>
 
                 <article class="fullCalendar calendar_article2 col-6">

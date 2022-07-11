@@ -69,6 +69,9 @@ class Settings
             if(empty($config)){
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
+
+                echo 1;
+
             }else{
                 return include "View/Partial/form.partial.php";
             }

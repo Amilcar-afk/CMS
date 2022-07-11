@@ -15,9 +15,10 @@ $(document).ready(function(){
                 },
             success:function(answer)
             {
-                if (answer.includes('<section id="back-office-container">')){
-                    $($('main')[0]).html(answer);
-                    alertMessage('Page created!');
+
+                if (answer == '1'){
+                    alertMessage('User created!');
+                    $('#cta-button-close-container-new-user').click()
                 }else{
                     $(formContainer).html(answer);
                 }
