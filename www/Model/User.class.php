@@ -361,9 +361,79 @@ class User extends BaseSQL
             return [
                 "config"=>[
                     "method"=>"POST",
-                    "action"=>"",
                     "submit"=>"S'inscrire",
-                    "selectename"=>"pays"
+                    "cta"=>"cta-button-compose-categorie"
+
+                ],
+                "inputs"=>[
+                        "email"=>[
+                            "question"=>"Email",
+                            "type"=>"email",
+                            "placeholder"=>"Your email",
+                            "value"=> $this->getMail(),
+                            "name"=>"emailRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "unicity"=>true,
+                            "min"=>10,
+                            "max"=>255,
+                            "error"=>""
+                        ],
+                        "password"=>[
+                            "question"=>"Password",
+                            "type"=>"password",
+                            "placeholder"=>"Your password",
+                            "name"=>"pwdRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "min"=>12,
+                            "max"=>60,
+                            "error"=>""
+                        ],
+                        "passwordConfirm"=>[
+                            "question"=>"Confirm password",
+                            "type"=>"password",
+                            "placeholder"=>"Confirm password",
+                            "name"=>"pwdConfirmRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "confirm"=>"password",
+                            "error"=>""
+                        ],
+                        "firstname"=>[
+                            "question"=>"Fisrtname",
+                            "type"=>"text",
+                            "placeholder"=>"your Fisrtname",
+                            "value"=> $this->getFirstname(),
+                            "name"=>"firstnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>50,
+                            "error"=>""
+                        ],
+                        "lastname"=>[
+                            "question"=>"Lastname",
+                            "type"=>"text",
+                            "placeholder"=>"Your lastname",
+                            "value"=> $this->getLastname(),
+                            "name"=>"lastnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>100,
+                            "error"=>""
+                        ],
+                    ],
+            ];
+    }
+
+    public function userCompose(): array
+    {
+
+            return [
+                "config"=>[
+                    "method"=>"POST",
+                    "submit"=>"S'inscrire",
+                    "cta"=>"cta-button-compose-categorie"
                 ],
                 "inputs"=>[
                         "email"=>[

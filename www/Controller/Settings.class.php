@@ -6,8 +6,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Configuration;
 use App\Model\User;
-use App\Model\Option;
 use App\Core\Query;
+
 
 
 class Settings
@@ -23,10 +23,13 @@ class Settings
 
     public function listUser()
     {
+        $view = new View("user-manager", "back");
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
-        $view = new View("user-manager", "back");
+        $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
         $view->assign("users", $users);
+        $view->assign("newuser", $this->user);
+
         $view->assign("metaData", $metaData = [
             "title" => 'User manager',
             "description" => 'Manage your users here',
@@ -39,10 +42,47 @@ class Settings
         ]);
     }
 
+    public function userCompose()
+    {
+
+        if( !empty($_POST)){
+            $date = date("Y-m-d");
+            $this->user->setFirstname($_POST['firstname']);
+            $this->user->setLastname($_POST['lastname']);
+            $this->user->setPassword($_POST['password']);
+            $this->user->setMail($_POST['email']);
+            $this->user->setRank('user');
+            $this->user->setConfirm(1);
+            $this->user->setDateCreation($date);
+            $this->user->generateToken();
+
+            $unic_email = Query::from('cmspf_Users')
+                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                            ->execute("User");
+
+            if(!count($unic_email) > 0){
+                $config = Validator::run($this->user->getFormRegister(), $_POST,false);
+            }else{
+                $config = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
+            }
+            
+            if(empty($config)){
+                $this->user->generateConfirmKey($_POST['email']);
+                $this->user->save();
+
+                echo 1;
+
+            }else{
+                return include "View/Partial/form.partial.php";
+            }
+        }
+
+
+    }
+
     public function composeDatabase()
     {
         if($_POST){
-
             if(isset($_POST['DBHOST'])){
                 $config = Validator::run($this->config->dataBaseForm(),$_POST);
             }else{

@@ -1,8 +1,9 @@
 
-<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?> method="<?= $config["config"]["method"]??"POST" ?>"
-    <?= (isset($config["action"]))?'action="'.$config["config"]["action"].'"':'' ?>
+<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?> 
+    method="<?= $config["config"]["method"]??"POST" ?>"
     <?= (isset($config["config"]["class"]))?'class="'.$config["config"]["class"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
+
     <?php foreach ($config["inputs"] as $name=>$input):?>
 
         <div  <?= (isset($input["type"]) && $input["type"] == "hidden")?'':'class="input-container"' ?>>

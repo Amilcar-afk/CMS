@@ -102,6 +102,7 @@ class User{
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
+            $this->user->setConfirm(1);
             $this->user->setDateCreation($date);
             $this->user->generateToken();
 

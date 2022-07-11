@@ -14,6 +14,7 @@ class Validator
     public static function run($config, $data, $unicity = null,$loginAuth = null)
     {
 
+
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
         }
@@ -94,13 +95,12 @@ class Validator
                 unset($errors[$error]);
             }
         }
+        
         if(empty($errors)){
             return ;
         }else{
             return $config;
         }
-     
-
     }
 
 
