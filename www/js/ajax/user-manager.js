@@ -40,3 +40,4 @@ function updateRankAnswer(req) {
             rankLine[0].innerHTML = "user";
     }
 }
+

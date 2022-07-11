@@ -11,6 +11,12 @@
   controller: user
   action: register
 
+/user/compose:
+  controller: Settings
+  action: userCompose
+  middleware: [ 'auth', 'admin' ]
+
+
 /dashboard:
   controller: statistics
   action: loadDashboard

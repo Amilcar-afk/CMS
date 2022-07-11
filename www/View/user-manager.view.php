@@ -16,6 +16,14 @@
                     <h1 class="title title--black">USER MANAGER</h1>
                 </header>
 
+                <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-user">
+                        New User
+                </button>
+
+                
+
+
+
                 <article>
                     <table id="usersTab" class="table display">
                         <thead>
@@ -69,8 +77,8 @@
                                 </td>
                             </tr>
                         <?php endforeach;?>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
 
                     <script>
                         $(document).ready(function () {
@@ -81,6 +89,30 @@
 
             </div>
 
+        </section>
+
+
+        <div id="addUser-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
+
+
+
+        </div>
+
+        
+    </section>
+    <section id="container-new-user" class="container-main-content container-main-content--menu a-zoom-out-end">
+        <button id="cta-button-close-container-new-user" class="cta-button cta-button--icon cta-button-a" data-a-target="container-new-user"><span class="material-icons-round">close</span></button>
+        <div class="menu-container"></div>
+        <section class="collapse-parent">
+            <div id="text-elements-container" class="collapse--open" data-group-collapse="add-elements-conatiner">
+                <header>
+                    <h1 class="title title--black">NEW USER</h1>
+                </header>
+
+                <article class="fullCalendar calendar_article2 col-6">
+                        <?php $this->includePartial("form", $newuser->getFormRegister()) ?>
+                </article>
+            </div>
         </section>
     </section>
 
