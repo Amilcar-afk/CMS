@@ -318,7 +318,7 @@ class User extends BaseSQL
         return $this;
     }
 
-    public function getDeleted($deleted)
+    public function getDeleted()
     {
         return $this->deleted;
     }

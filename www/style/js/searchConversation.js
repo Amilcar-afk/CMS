@@ -45,7 +45,7 @@ $(document).ready(function(){
                             if(element.firstname != value){
                                 $('#chat-conversations-elements').hide();   
                                 $('').prependTo('#conversation-founded');
-                                div = '<header class="main-nav-choice mb-3">'+
+                                div = '<header class="main-nav-choice mb-3" id="foundedUser">'+
                                 '<div><h2 id="conversation_title">'
                                 + element.firstname  
                                 + element.lastname +'<br>' 

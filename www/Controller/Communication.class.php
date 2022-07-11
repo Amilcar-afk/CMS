@@ -180,19 +180,24 @@ class Communication
 
     public function newConversation()
     {
+        $user = new User();
+        $currentUser = $user->find($_POST['userId']);
+     
+        if($currentUser->getConfirm() == 1 &&  $currentUser->getDeleted() != 1){
+            $this->conversation->setDate(date('Y-m-d H:i:s'));
+            $this->conversation->save();
+            $conversationId =$this->conversation->getLastId();
+            echo json_encode($this->conversation->getLastId());
+            $user_conversation = new User_conversation();
+            $my_conversation = new User_conversation();
+            $user_conversation->setUser_key($_POST['userId']);
+            $user_conversation->setConversation_key($conversationId);
+            $my_conversation->setUser_key($_SESSION['Auth']->id);
+            $my_conversation->setConversation_key($conversationId);
+            $user_conversation->save();
+            $my_conversation->save();
+        }
         
-        $this->conversation->setDate(date('Y-m-d H:i:s'));
-        $this->conversation->save();
-        $conversationId =$this->conversation->getLastId();
-        echo json_encode($this->conversation->getLastId());
-        $user_conversation = new User_conversation();
-        $my_conversation = new User_conversation();
-        $user_conversation->setUser_key($_POST['userId']);
-        $user_conversation->setConversation_key($conversationId);
-        $my_conversation->setUser_key($_SESSION['Auth']->id);
-        $my_conversation->setConversation_key($conversationId);
-        $user_conversation->save();
-        $my_conversation->save();
     }
 
 
