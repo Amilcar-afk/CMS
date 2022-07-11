@@ -136,8 +136,6 @@ class Newsletterengine
 
 
                     //set a observer to send the newsletter to the subscribers
-                    //$this->newsletter->addObserver(new Query());
-                    //$this->newsletter->notify();
                 }
 
                 $this->newsletter->setId($_POST['id']);

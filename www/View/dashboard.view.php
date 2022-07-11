@@ -139,14 +139,14 @@
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>
-                        <div class="navigation-container">
-                            <button class="main-nav-choice cta-button--range" data-before="<?= date('Y-m-d', strtotime($perViewDate. ' - 7 days')) ?>">
+                        <div id="navigation-container" class="navigation-container">
+                            <button id="SincePerWeek" class="main-nav-choice cta-button--range" data-before="<?= date('Y-m-d', strtotime($perWeekDate. ' - 7 days')) ?>">
                                 <span class="material-icons-round">navigate_before</span>
                             </button>
 
-                            <p><?php echo $monthName; ?></p>
+                            <p id="currentPerWeek" data-current="<?= $perWeekDate ?>"><?= $monthName; ?></p>
 
-                            <button class="main-nav-choice cta-button--range" data-next="<?= date('Y-m-d', strtotime($perViewDate. ' + 7 days')) ?>">
+                            <button id="toPerWeek" class="main-nav-choice cta-button--range" data-next="<?= date('Y-m-d', strtotime($perWeekDate. ' + 7 days')) ?>">
                                 <span class="material-icons-round">navigate_next</span>
                             </button>
                         </div>

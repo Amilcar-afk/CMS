@@ -97,17 +97,15 @@ class Statistics
         // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
 
 
-        $perViewDate = date("Y-m-d");
+        $perWeekDate = date("Y-m-d");
 
-        if(isset($_POST['next'])){
-            $perViewDate = $_POST['next'];
-        }elseif (isset($_POST['before'])) {
-            $perViewDate = $_POST['before'];
+        if(isset($_POST['perWeekDate'])){
+            $perWeekDate = $_POST['perWeekDate'];
         }
 
-        $currentMonth = date('m',strtotime($perViewDate));
+        $currentMonth = date('m',strtotime($perWeekDate));
         $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$perViewDate."') AND WEEK(date) = WEEK('".$perViewDate."')")->groupBy("day")->execute();
+        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$perWeekDate."') AND WEEK(date) = WEEK('".$perWeekDate."')")->groupBy("day")->execute();
 
 
         $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
@@ -223,7 +221,7 @@ class Statistics
         $view = new View("dashboard", $tmpl);
         $view->assign("chartWeekData", $chartWeekData);
 
-        $view->assign("perViewDate", $perViewDate);
+        $view->assign("perWeekDate", $perWeekDate);
 
         $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
