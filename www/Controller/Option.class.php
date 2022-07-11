@@ -235,6 +235,25 @@ class Option{
         $view->assign("metaData", $metaData = [
             "title" => 'Media Library',
             "description" => 'List of all webstie images',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/mediaLibrary.js"],
+            ]
         ]);
+    }
+
+    public function deleteImg()
+    {
+        if (isset($_POST['id'])) {
+            $option = $this->option->find($_POST['id']);
+
+            if ($option) {
+                unlink(__DIR__."/..".$option->getPath());
+                $option->delete($_POST['id']);
+            } else {
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
     }
 }
