@@ -241,7 +241,7 @@ class Option{
         ]);
     }
 
-    public function deleteImg()
+    public function deleteOption()
     {
         if (isset($_POST['id'])) {
             $option = $this->option->find($_POST['id']);

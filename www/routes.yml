@@ -274,6 +274,11 @@
   action: composeOption
   middleware: ['auth', 'admin']
 
+/option/delete:
+  controller: option
+  action: deleteOption
+  middleware: ['auth', 'admin']
+
 /img/compose:
   controller: option
   action: composeImg
@@ -281,7 +286,7 @@
 
 /img/delete:
   controller: option
-  action: deleteImg
+  action: deleteOption
   middleware: ['auth', 'admin']
 
 /social-media/compose:
