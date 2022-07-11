@@ -35,6 +35,7 @@ class Communication
 
     public function listConversation()
     {
+
         $user = new User();
         $user = $user->find($_SESSION['Auth']->id);
         $view = new View("conversation-list", "back");
@@ -57,11 +58,26 @@ class Communication
     public function searchData()
     {
         if (isset($_POST['searchData'])) {
-            $users = Query::from('cmspf_Users')
-            ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
-            ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
-            ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
-            ->execute("User");
+
+            
+            if($_SESSION['Auth']->rank == 'admin'){
+                $users = Query::from('cmspf_Users')
+                ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
+                ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
+                ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
+                ->execute("User");
+
+            }else{
+                
+                $users = Query::from('cmspf_Users')
+                ->where("rank = 'admin'")
+                ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
+                ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
+                ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
+                
+                ->execute("User");
+            }
+
             $user = new User();
             $user = $user->find($_SESSION['Auth']->id);
 
@@ -103,18 +119,25 @@ class Communication
             foreach($user_conversation_data as $conversation){
                 if($conversation['user_key'] != $_SESSION['Auth']->id){
                     $userId = $conversation['user_key'];
+                    $conversation_user = $user_conversation_data[0]['id'] ;
                 }else{
                     $seen = $conversation['seen'];
+                    $conversation_user = $user_conversation_data[1]['id'] ;
                 }
             } 
-            
+
+            $conversations = new Conversation();
+            $conversations->setId($dataFromUrl['id_conv']);
             
             $user = $this->user->find($userId);
             $view = new View("conversation_user", "back");
             $view->assign("user",$user);
-            $view->assign("idConversation",$idConversation);
+            $view->assign("conversation",$conversations->messages());
             $view->assign("seen",$seen);
             $view->assign("idConversation",$idConversation);
+            $view->assign("conversation_user",$conversation_user);
+
+
             $view->assign("metaData", $metaData = [
                 "title" => 'Conversation',
                 "description" => 'Your conversation',
@@ -129,10 +152,9 @@ class Communication
     public function updateSeenStatus()
     {
         if($_POST['conversation_user_id']){
-           $user_conv= $this->conversation_user->find($_POST['conversation_user_id']);
-           $this->conversation_user->setId($_POST['conversation_user_id']);
-           $this->conversation_user->setSeen($_POST['seenValue']);
-           $this->conversation_user->save();
+            $this->conversation_user->setId($_POST['conversation_user_id']);
+            $this->conversation_user->setSeen(2);
+            $this->conversation_user->save();
         }
     }
 
@@ -187,12 +209,14 @@ class Communication
             
             $user_conv = new User_conversation();
             $user_conv->setId($user_conversation[0]['id']);
+            $user_conv->setUser_key($user_conversation[0]['user_key']);
             $user_conv->setSeen(1);
             $user_conv->save();
 
             $my_conv = new User_conversation();
             $my_conv->setId($my_conversation[0]['id']);
-            $my_conv->setSeen(1);
+            $my_conv->setUser_key($_SESSION['Auth']->id);
+            $my_conv->setSeen(2);
             $my_conv->save();
 
             $this->message->setDate(date('Y-m-d H:i:s'));

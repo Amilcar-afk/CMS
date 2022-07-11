@@ -17,15 +17,18 @@
                 </header>
 
                 <article>
-                    <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                        <div class="col-12" id="messageDiv" >
-                            <div id="chatDiv">
+                        <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
+                            <div class="col-12" id="messageDiv" >
+                                <div id="chatDiv">
+                                <?php foreach($conversation as $message): ?>
+                                <?= $message->getContent()?><br>
+                                <?php endforeach; ?>
                             </div>
                                 <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
                                 <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
                                 <input type="hidden" id="seen" value="<?= $seen ?>" >
                                 <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id ?>" >
-
+                                <input type="hidden" id="conversationUser" value="<?= $conversation_user?>" >
                             <div class="input-container">
                                 <input id='sendTextarea' class="input" type="text" name='chat' placeholder="Your message">
                                 <button id='sendButton' class="cta-button" >Send</button>

@@ -5,12 +5,10 @@ $(document).ready(function(){
         var data = {
             id_user:$('#userId').val(),
             myId:$('#myId').val(),
-            conversation_user_id:$('#conversationId').val(),
+            conversation_user_id:$('#conversationUser').val(),
             seenValue:$('#seen').val(),
         };
-        setTimeout(() => {
             changeSeenStatus(data)
-        }, 1000);
     }
 
     $('#chat-conversations-elements').hide();
@@ -40,12 +38,13 @@ $(document).ready(function(){
                             if(element.firstname != value){
                                 $('#chat-conversations-elements').hide();   
                                 $('').prependTo('#conversation-founded');
-                                div = '<p id="foundedUser"  >'
-                                    + element.firstname  +'<br>' 
-                                    + element.lastname +'<br>' 
-                                    + element.email +' </p> <br><br>';
-                                    $('#foundedUser').css('width','100%');
-                                    $('#foundedUser').css('margin-top','2%');
+                                div = '<header class="main-nav-choice mb-3" id="foundedUser">'+
+                                '<div><h2 id="conversation_title">'
+                                + element.firstname  
+                                + element.lastname +'<br>' 
+                                + element.email +'<h2> </div></header> <br>';
+                                $('#foundedUser').css('width','100%');
+                                $('#foundedUser').css('margin-top','2%');
                                 $(div).prependTo('#conversation-founded');
                             } 
                             $('#foundedUser').on('click', function(){
@@ -69,6 +68,8 @@ $(document).ready(function(){
      });
 
     $('#sendButton').on('click',function(){
+        
+        getMessages()
         if($('#sendTextarea').val() != ''){
             var currentUserData = {
                 id_user:$('#userId').val(),
@@ -147,9 +148,9 @@ $(document).ready(function(){
     }
 
     var allMessages = [];
+
 //recupere tous les messages
     function getMessages(){
-        setInterval(() => {
             $.ajax({
                 url: "/conversations/get-all-messages",
                 dataType:"json",
@@ -158,6 +159,7 @@ $(document).ready(function(){
                     id :$('#conversationId').val(),
                 },
                 success: function(messages){ 
+                    console.log(messages)
                     allMessages = messages
                     data = {
                             id :messages[0]['id'] ,
@@ -166,12 +168,10 @@ $(document).ready(function(){
                     getNewMessage(data)
                 }
             });
-        }, 1000);
     }
 
 //recupere le dernier messag
     function getNewMessage(data){
-        setTimeout(() => {
             $.ajax({
                 url: "/conversations/newmessage",
                 dataType:"json",
@@ -181,18 +181,10 @@ $(document).ready(function(){
                     id_conv :data.id_conv,
                 },
                 success: function(messages){ 
-                    $('#chatDiv').empty();
-                    allMessages.forEach(message =>{
-                        date = new Date( message.date)
-                        const current = date.getHours()+ ':' + date.getMinutes();
-                    $('<div>' + message.content + ''+ current +'</div>').prependTo('#chatDiv');
-                })
-            }
+                    $( "#chatDiv" ).append(messages[0]['content'])
+                }
         });
-        }, 400);
     }
-    
-    
-    getMessages()
+
 })
 

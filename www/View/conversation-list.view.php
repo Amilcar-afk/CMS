@@ -23,10 +23,11 @@
                     <div id="new-conversation-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="conversation-manager-container">
                     </div>
                 </article>
-                <article>
+                <article id="conversations-elements" >
                     <?php if(isset($conversations)): ?>
                         <?php foreach (array_reverse($conversations)  as $conversation):?>
-                            <header class="main-nav-choice mb-3"><div>
+                            <header class="main-nav-choice mb-3">
+                                <div>
                                     <h2 id="conversation_title">
                                         <?php foreach ($conversation->users() as $user): ?>
                                             <?php if($user->getId() != $_SESSION['Auth']->id):  ?>

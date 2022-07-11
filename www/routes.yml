@@ -14,7 +14,7 @@
 /dashboard:
   controller: statistics
   action: loadDashboard
-  middleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth']
 
 /userdelete:
   controller: user
@@ -160,38 +160,38 @@
   controller: communication
   action: userConversation
   params: [id_conv]
-  middleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth']
 
 /conversations/get-all-messages:
   controller: communication
   action: messages
   params: [ id ]
-  middleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth']
 
 /conversation/compose:
   controller: communication
   action: composeConversation
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /conversation/compose-newconversation:
   controller: communication
   action: newConversation
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /conversations/updateseen:
   controller: communication
   action: updateSeenStatus
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /conversations/newmessage:
   controller: communication
   action: newMessage
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /conversation/delete:
   controller: communication
   action: newMessage
-  middleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth']
 
 /projects:
   controller: communication
