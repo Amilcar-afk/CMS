@@ -1,5 +1,5 @@
 <section id="back-office-container">
-    <section class="container-main-content container-main-content--menu">
+    <section class="container-main-content container-main-content--menu container-main-content--menu--conversation">
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
             <nav>
@@ -16,34 +16,28 @@
                     <h1 class="title title--black"><?= $user->getFirstname() ." ". $user->getLastname() ?></h1>
                 </header>
 
-                <article>
-                        <div id="conversation-founded" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="conversation-manager-container" style="opacity: 1">
-                            <div class="col-12" id="messageDiv" >
-                                <div id="chatDiv">
-                                    <?php foreach($conversation as $message): ?>
-                                            <article class="message 
-                                                 <?= ($message->getUser_key() == $_SESSION['Auth']->id )? "": "message--mind" ?>">
-                                                <p><?= $message->getContent()?></p> 
-                                                <time datetime="<?= $message->getDate() ?>">
-                                                    <?= $message->getDate() ?>
-                                                </time>
-                                            </article> 
-                                      
-
-                                    <?php endforeach; ?>
-                                </div>
-                                <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
-                                <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
-                                <input type="hidden" id="seen" value="<?= $seen ?>" >
-                                <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id ?>" >
-                                <input type="hidden" id="conversationUser" value="<?= $conversation_user?>" >
-                            <div class="input-container">
-                                <input id='sendTextarea' class="input" type="text" name='chat' placeholder="Your message">
-                                <button id='sendButton' class="cta-button" >Send</button>
-                            </div>
-                        </div>
+                <div class="col-12 conversation" id="messageDiv">
+                    <div id="chatDiv">
+                        <?php foreach($conversation as $message): ?>
+                            <article class="message <?= ($message->getUser_key() != $_SESSION['Auth']->id )? "": "message--mind" ?>">
+                                <p><?= $message->getContent()?></p>
+                                <time datetime="<?= $message->getDate() ?>">
+                                    <?= $message->getDate() ?>
+                                </time>
+                            </article>
+                        <?php endforeach; ?>
                     </div>
-                </article>
+                    <input type="hidden" id="conversationId" value="<?= $idConversation ?>" >
+                    <input type="hidden" id="userId" value="<?= $user->getId() ?>" >
+                    <input type="hidden" id="seen" value="<?= $seen ?>" >
+                    <input type="hidden" id="myId" value="<?= $_SESSION['Auth']->id ?>" >
+                    <input type="hidden" id="conversationUser" value="<?= $conversation_user?>" >
+                    <footer class="input-container">
+                        <input id='sendTextarea' class="input" type="text" name='chat' placeholder="Your message">
+                        <button id='sendButton' class="cta-button cta-button--icon"><span class="material-icons-round">send</span></button>
+                    </footer>
+                </div>
+
             </div>
         </section>
     </section>
