@@ -2,11 +2,14 @@ const userSelected = document.getElementsByClassName("inputSelect");
 let userChecked = null;
 
 //ADD USERS ON CREATE OR UPDATE PROJECT
-for(let i = 0; i < userSelected.length; i++)
-    selectEvent(userSelected[i], userSelected[i].nextElementSibling, userSelected[i].nextElementSibling.childNodes[0]);
+window.onload = function (){
+    for(let i = 0; i < userSelected.length; i++)
+        selectEvent(userSelected[i], userSelected[i].nextElementSibling, userSelected[i].nextElementSibling.childNodes[i]);
+}
 
 //display selected user
 function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
+
     userSelected.addEventListener("change", () => {
         let userSelectedIndex = userSelected.selectedIndex;
         let userSelectedOption = userSelected.options[userSelectedIndex];
