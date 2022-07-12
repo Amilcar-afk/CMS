@@ -237,7 +237,7 @@ google.charts.load('current', {
 
         var options = {
             colorAxis: {
-                colors: ["green", "red"]
+                colors: [secondColor, thirdColor]
             },
             legend: 'none',
             
