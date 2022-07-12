@@ -254,7 +254,19 @@
 
         & > div > header{
           position:  absolute;
+          z-index: 3;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin: -30px -50px;
+          padding: 30px 50px;
+          backdrop-filter: blur(60px);
+          background-color: var(--background-color)4C;
+          border-radius: 0px var(--radius, 20px) 0px 0px;
         }
+      }
+      & > section{
+        overflow-y: unset!important;
       }
     }
 
@@ -438,6 +450,15 @@
       display: flex;
       flex-direction: column;
 
+      &--conversation{
+        & > section{
+
+          & > div > header{
+            margin: -30px -40px;
+            border-radius: 0px;
+          }
+        }
+        }
 
       & .menu-container {
         backdrop-filter: blur(60px);

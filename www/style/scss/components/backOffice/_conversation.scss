@@ -4,9 +4,37 @@
 	& > #chatDiv {
 		overflow-y: scroll;
 		height: 100%;
+		padding-top: 55px;
+		padding-bottom: 45px;
+
+		&::-webkit-scrollbar-track {
+			background: unset!important;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: $grey;
+		}
+
+		& .date-container{
+			display: flex;
+			align-items: center;
+			& span{
+				font-size: rem(15);
+				font-weight: 600;
+				color: $grey;
+				margin: 0px 10px;
+			}
+			& hr{
+				width: 10%;
+				flex-grow: 1;
+				margin: 0px 10px;
+				border: 1.5px solid $grey;
+			}
+		}
+
 		& > .message {
 			max-width: 80%;
-			background-color: $grey;
+			background-color: $light-grey-second;
 			border-radius: 0px 15px 15px 15px;
 			padding: 10px;
 			margin-top: 15px;
@@ -51,6 +79,7 @@
 		flex-direction: row;
 		background-color: $grey;
 		font-size: 18px;
+		margin-bottom: 0px;
 		> button{
 			.material-icons-round{
 				font-size: 25px!important;

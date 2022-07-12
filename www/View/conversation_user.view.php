@@ -14,16 +14,23 @@
             <div id="conversations-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                 <header>
                     <h1 class="title title--black"><?= $user->getFirstname() ." ". $user->getLastname() ?></h1>
+                    <a href="/conversations" class="cta-button cta-button--icon"><span class="material-icons-round">close</span></a>
                 </header>
 
                 <div class="col-12 conversation" id="messageDiv">
                     <div id="chatDiv">
+                        <?php $currentDate = "" ?>
                         <?php foreach($conversation as $message): ?>
+                            <?php if($currentDate != $message->getDate()): ?>
+                                <?php $currentDate = $message->getDate() ?>
+                                <div class="date-container">
+                                    <hr>
+                                    <span class="date-container__date"><?= date_format(date_create($currentDate), 'l jS F Y') ?></span>
+                                    <hr>
+                                </div>
+                            <?php endif; ?>
                             <article class="message <?= ($message->getUser_key() != $_SESSION['Auth']->id )? "": "message--mind" ?>">
                                 <p><?= $message->getContent()?></p>
-                                <time datetime="<?= $message->getDate() ?>">
-                                    <?= $message->getDate() ?>
-                                </time>
                             </article>
                         <?php endforeach; ?>
                     </div>
