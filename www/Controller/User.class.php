@@ -24,6 +24,10 @@ class User{
         }
         
         $view = new View("login", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Login',
+            "description" => 'Login'
+        ]);
         $view->assign("user",$this->user);
         
         
@@ -94,6 +98,10 @@ class User{
     public function register()
     {
         $view = new View("register", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Register',
+            "description" => 'Register page'
+        ]);
         $view->assign("user",$this->user);
         $date = date("Y-m-d");
         if( !empty($_POST)){
@@ -183,6 +191,11 @@ class User{
     {
 
         $view = new View("form-forgot-pwd", "back-sandbox");
+        $view->assign("metaData", $metaData = [
+            "title" => 'Forgot password',
+            "description" => 'Forgot password page'
+        ]);
+
         $view->assign("user", $this->user);
 
         if(!empty($_POST)){
@@ -213,6 +226,10 @@ class User{
         if((!empty($user) || $user != false) && $user->getConfirm() == "1") {
 
             $view = new View("form-forgot-pwd", "back-sandbox");
+            $view->assign("metaData", $metaData = [
+                "title" => 'Change password',
+                "description" => 'Change password page'
+            ]);
             $view->assign("user", $this->user);
             $view->assign("resetPwd", $this->user);
 
