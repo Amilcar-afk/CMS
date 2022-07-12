@@ -20,7 +20,7 @@
 /dashboard:
   controller: statistics
   action: loadDashboard
-  middleware: [ 'auth']
+  middleware: [ 'auth', 'admin']
 
 /userdelete:
   controller: user
