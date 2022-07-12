@@ -58,17 +58,17 @@ class Validator
 
             if(isset($loginAuth)){
                 if($loginAuth['email'] == false){
-                    $config['inputs']['email']['error'] = "email incorrect";
+                    $config['inputs']['email']['error'] = "Bad email";
                 }
                 if($loginAuth['pass'] == false){
-                    $config['inputs']['password']['error'] = "password incorrect";
+                    $config['inputs']['password']['error'] = "Bad password";
                 }
             }
 
             if($input["type"]=="email" ){
                 if(!self::checkEmail($data[$name])){
                     $config['inputs']['email']['error'] = "Bad Email";
-                }elseif($unicity !== false){
+                }elseif($unicity != false && $config['inputs']['email']["unicity"] == true){
                     $config['inputs']['email']['error']="This email alreay exist";
                 }
             }
