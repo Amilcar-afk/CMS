@@ -1090,7 +1090,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card .edge-container {
     width: 75px;
     height: 97px;
-    background: rgba(57, 96, 117, 0.5);
+    background: rgba(248, 248, 248, 0.18);
     border-radius: 20px; }
     .card .edge-container p {
       margin: 0;
@@ -1102,7 +1102,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card .edge {
     width: 75px;
     height: 75px;
-    background-color: var(--main-color, #396075);
+    background-color: rgba(248, 248, 248, 0.37);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -1132,7 +1132,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       .card--bigcard header h3, .card--bigcard header .material-icons-round {
         color: var(--main-color) !important; }
   .card--smallcard {
-    background: rgba(57, 96, 117, 0.5) !important;
+    background: var(--main-color) !important;
     flex-direction: row; }
   .card #chart-per-country {
     width: 100%;
