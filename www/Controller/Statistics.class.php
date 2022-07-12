@@ -223,6 +223,13 @@ class Statistics
 
         $view->assign("perWeekDate", $perWeekDate);
 
+        $view->assign("sincePerPage", $sincePerPage);
+        $view->assign("toPerPage", $toPerPage);
+        $view->assign("sincePerCountry", $sincePerCountry);
+        $view->assign("toPerCountry", $toPerCountry);
+        $view->assign("sincePerDevice", $sincePerDevice);
+        $view->assign("toPerDevice", $toPerDevice);
+
         $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);

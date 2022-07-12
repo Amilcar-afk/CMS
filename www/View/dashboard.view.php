@@ -23,11 +23,11 @@
                     <div id="range-per-country" class="collapse" data-group-collapse="per-country-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
-                            <input id="SincePerCountry" name="SincePerCountry" type="date" class="input">
+                            <input id="SincePerCountry" name="SincePerCountry" type="date" class="input" value="<?= $sincePerCountry ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerCountry">To</label>
-                            <input id="toPerCountry" name="toPerCountry" type="date" class="input">
+                            <input id="toPerCountry" name="toPerCountry" type="date" class="input" value="<?= $toPerCountry ?>">
                         </div>
 
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
@@ -76,11 +76,11 @@
                     <div id="range-per-page" class="collapse" data-group-collapse="per-page-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerPage">Since</label>
-                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
+                            <input id="SincePerPage" name="SincePerPage" type="date" class="input" value="<?= $sincePerPage ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerPage">To</label>
-                            <input id="toPerPage" name="toPerPage" type="date" class="input">
+                            <input id="toPerPage" name="toPerPage" type="date" class="input" value="<?= $toPerPage ?>">
                         </div>
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
@@ -119,11 +119,11 @@
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerDevice">Since</label>
-                            <input id="SincePerDevice" name="SincePerDevice" type="date" class="input">
+                            <input id="SincePerDevice" name="SincePerDevice" type="date" class="input" value="<?= $sincePerDevice ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerDevice">To</label>
-                            <input id="toPerDevice" name="toPerDevice" type="date" class="input">
+                            <input id="toPerDevice" name="toPerDevice" type="date" class="input" value="<?= $toPerDevice ?>">
                         </div>
 
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
