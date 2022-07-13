@@ -6,7 +6,7 @@
 
     <?php foreach ($config["inputs"] as $name=>$input):?>
 
-        <li  <?= (isset($input["type"]) && $input["type"] == "hidden")?'':'class="input-container"' ?>>
+        <div  <?= (isset($input["type"]) && $input["type"] == "hidden")?'':'class="input-container"' ?>>
             <?php if ($input["type"] == "radio" || $input["type"] == "checkbox"):?>
                 <p><?=$input["question"]?></p>
                 <?php foreach ($input["choices"] as $choice):?>
@@ -22,9 +22,6 @@
                 <?php endforeach;?>
 
             <?php elseif ($input["type"] == "select"):?>
-                <?php if ($input["searchBox"] === true):?>
-                    <input type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling.nextElementSibling)">
-                <?php endif;?>
                 <label><?=$input["question"]?></label>
                 <select id="<?= $input["id"] ?>" name="<?= $name ?>" class="<?=$input["class"]?>">
                     <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
@@ -37,19 +34,7 @@
                         </option>
                     <?php endforeach;?>
                 </select>
-                <?php if (isset($input["div"])){
-                    echo '<div id="' . $input["div"] .'">';
-                    if (isset($input["usersInProject"]) && !empty($input["usersInProject"])){
-                        echo '<ul id="listSelectedUsers">';
-                        foreach ($input["usersInProject"] as $users){
-                            echo '<li  value="' . $users['value'] . '"class="li-user-selected">'. $users['label'] .
-                                '<input type="checkbox" checked name="check-'. $users['value'] .'" value="'. $users['value'] .'" class="user-check" onchange="onClickCheckboxUserOfProject(this, this.parentElement.parentElement.parentElement.previousElementSibling)"></li>';
-                        }
-                        echo '</ul>';
-                    }
-                    echo '</div>';
-                }
-                ?>
+                <?= (isset($input["div"]))?'<div id="' . $input["div"] .'"></div>':'' ?>
 
             <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>
