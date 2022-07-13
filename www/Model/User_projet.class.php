@@ -4,6 +4,7 @@
 namespace App\Model;
 
 use App\Core\BaseSQL;
+use App\Core\Query;
 
 
 class User_projet extends BaseSQL
@@ -93,6 +94,33 @@ class User_projet extends BaseSQL
     public function find($id = null, string $attribut = 'id')
     {
         return parent::find($id, $attribut);
+    }
+
+    public function addUsersToProject(array $usersid)
+    {
+        $project_user = Query::from('cmspf_User_projet')
+            ->where('projet_key = ' . $this->getProjectKey())
+            ->execute('User_projet');
+
+        foreach ($project_user as $res){
+            $val = array_search($res->getUserKey(), $usersid);
+            $id = $res->getId();
+
+            if($val === false)
+                $this->delete($id);
+        }
+
+        foreach ($usersid as $id) {
+                $req = Query::from('cmspf_User_projet')
+                ->where('user_key = ' . $id)
+                ->where('projet_key = ' . $this->getProjectKey())
+                ->execute('User_projet');
+
+            if(empty($req[0])){
+                $this->setUserKey($id);
+                $this->save();
+            }
+        }
     }
 
 
