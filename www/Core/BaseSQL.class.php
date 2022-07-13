@@ -57,6 +57,7 @@ abstract class BaseSQL
             }
         }
         if (self::getDStatus() != false) {
+            self::insertDatabase();
             return self::$bdd;
         }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
             header('location:/setup/database');
