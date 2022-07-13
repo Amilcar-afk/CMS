@@ -84,17 +84,16 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-compose-project", function () {
 
         let formContainer = $(this).parent().children(0);
-        let title = $(this).parent().parent().find('[name=title]');
-        console.log(formContainer.parent().parent().find('[id=divUserSearch]').children());
+
         $.ajax({
             url:"/project/compose/",
             type:"POST",
             data:
                 {
                     id:formContainer[0].parentNode.parentNode.parentNode.parentNode.getAttribute('id').split('-')[3], //get The section of the form
-                    title:title[0].value,
-                    description:formContainer[1].value,
-                    users: getUsers(formContainer.parent().parent().find('[id=divUserSearch]').children())
+                    title:$(this).parent().find('[name=title]').val(),
+                    description:formContainer.find('[name=description]')[0].value,
+                    users: getUsers(formContainer.find('[id=divUserSearch]').children())
 
                 },
             success:function(answer)
