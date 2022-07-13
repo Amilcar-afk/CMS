@@ -1,10 +1,10 @@
-const userSelected = document.getElementsByClassName("inputSelect");
+let userSelect = document.getElementsByClassName("inputSelect");
 let userChecked = null;
 
 //ADD USERS ON CREATE OR UPDATE PROJECT
 window.onload = function (){
-    for(let i = 0; i < userSelected.length; i++)
-        selectEvent(userSelected[i], userSelected[i].nextElementSibling, userSelected[i].nextElementSibling.childNodes[i]);
+    for(let i = 0; i < userSelect.length; i++)
+        selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[i]);
 }
 
 //display selected user
@@ -22,7 +22,8 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
         checkBoxUser.value = userSelectedOption.value;
         checkBoxUser.className = "user-check";
         checkBoxUser.checked = true;
-        checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, ${userSelected.id})`);
+        console.log(`${userSelected.id}`);
+        checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, this.parentElement.parentElement.parentElement.previousElementSibling)`);
 
         liUser.setAttribute("class", "li-user-selected");
         liUser.setAttribute("value", userSelectedOption.value);
@@ -45,11 +46,23 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
 //undisplay user deselected
 function onClickCheckbox(item, userSelected){
     let li = item.parentNode;
+    console.log(li);
+    console.log(item);
     for (let i = 0; i < userSelected.length; i++){
         if (userSelected.options[i].value == li.value) {
             userSelected.options[i].hidden = false;
         }
     }
+    li.remove();
+}
+
+function onClickCheckboxUserOfProject(item, userSelected){
+    let li = item.parentNode;
+    let newOption = document.createElement('option');
+    newOption.value = item.value;
+    newOption.className = 'input';
+    newOption.innerHTML = li.innerHTML;
+    userSelected.appendChild(newOption);
     li.remove();
 }
 
