@@ -53,18 +53,20 @@ class Settings
     {
 
         if( !empty($_POST)){
+
+            print_r($_POST);
             $date = date("Y-m-d");
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
-            $this->user->setConfirm(1);
+            // $this->user->setConfirm(1);
             $this->user->setDateCreation($date);
             $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
-                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
                             ->execute("User");
 
             if(!count($unic_email) > 0){
@@ -76,7 +78,6 @@ class Settings
             if(empty($config)){
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
-
                 echo 1;
 
             }else{
