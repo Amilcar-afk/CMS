@@ -16,11 +16,20 @@
   action: userCompose
   middleware: [ 'auth', 'admin' ]
 
+/user/user-instance:
+  controller: Settings
+  action: userInstance
+  middleware: ['auth']
+
+/user/profile-update:
+  controller: Settings
+  action: updateProfile
+  middleware: ['admin' ]
 
 /dashboard:
   controller: statistics
   action: loadDashboard
-  middleware: [ 'auth', 'admin']
+  middleware: [ 'auth']
 
 /userdelete:
   controller: user
@@ -131,7 +140,7 @@
 /settings/user-manager:
   controller: settings
   action: listUser
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /settings/configuration:
   controller: settings

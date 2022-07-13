@@ -110,12 +110,11 @@ class User{
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
-            $this->user->setConfirm(1);
             $this->user->setDateCreation($date);
             $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
-                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
                             ->execute("User");
 
             if(!count($unic_email) > 0)

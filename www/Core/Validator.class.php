@@ -11,7 +11,7 @@ class Validator
 
 
 
-    public static function run($config, $data, $unicity = null,$loginAuth = null)
+    public static function run($config, $data, $unicity = null,$loginAuth = null,$unicpwd = null)
     {
 
 
@@ -31,7 +31,20 @@ class Validator
             $config['inputs']['password']['error'] = "Passwords does not match";
         }
 
+        if(isset($config['inputs']['newPassword'])
+            && isset($config['inputs']['passwordConfirm'])
+            && self::valueEquality($data['newPassword'], $data['passwordConfirm'])){
+
+            $config['inputs']['passwordConfirm']['error'] = "Passwords does not match";
+        }
+
+        if(isset($config['inputs']['currentPassword']) && $unicpwd == true){
+
+            $config['inputs']['currentPassword']['error'] = "Passwords does not exist";
+        }
+
         foreach ($config["inputs"] as $name => $input){
+
 
             if(isset($input["name"]) &&  $input["name"] == "id"){
                 continue;
@@ -44,6 +57,7 @@ class Validator
 
 
             if(!isset($data[$name])){
+
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }
 
