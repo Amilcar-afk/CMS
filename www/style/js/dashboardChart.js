@@ -1,108 +1,88 @@
-// ChartJS BAR
-function chartBar1 () {
+function PerCountry() {
 
-  const ctx = document.getElementById('chartBar');
-  const chartBar = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Mon', 'Thu', 'Wen', 'Thi', 'Fri', 'Sat', 'Sun'],  
-      datasets: [{
-        borderRadius: 20,
-        borderSkipped: false,
-        label: '',
-        data: [12, 19, 3, 5, 2, 3, 9],
-        backgroundColor: [
-          'rgb(57, 96, 117)',
-          'rgb(57, 96, 117, 0.5)',
-          'rgb(57, 96, 117, 0.2)'
-        ],
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false
+  google.charts.load('current', {
+    'packages':['geochart'],
+  });
+  google.charts.setOnLoadCallback(drawRegionsMap);
+
+  function drawRegionsMap() {
+    var data = google.visualization.arrayToDataTable(
+        // <?php  print_r(json_encode($chartMapData)); ?>
+    );
+
+    var options = {
+        colorAxis: {
+            colors: ["green", "red"]
         },
-        datalabels: {
-          display: true,
-          anchor: 'end'
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false
-          }
-        },
-        y: {
-          display: false,
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
-  })
+        legend: 'none',
+        
+    };
+
+    var chart = new google.visualization.GeoChart(document.getElementById('chart-per-country'));
+
+    chart.draw(data, options);
+  }
+
 }
 
-// ChartJS DONUT
-function chartDonut1(){
-  const data = {
-    labels: [
-      'Mobile',
-      'Desktop',
-      'Other'
-    ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [300, 50, 100],
-      backgroundColor: [
-        'rgb(57, 96, 117)',
-        'rgb(57, 96, 117, 0.5)',
-        'rgb(57, 96, 117, 0.2)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-  // margin
-  const legendMargin = {
-    id: 'legendMargin',
-    beforeInit(chart, legend, options) {
-      const fitValue = chart.legend.fit;
-  
-      chart.legend.fit = function fit() {
-        fitValue.bind(chart.legend)();
-        return this.height += 80;
-      }
-    }
+function PerDevice() {
+
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(
+      // <?php  print_r(json_encode($chartDeviceData)); ?>
+    );
+        
+    var options = { 
+      pieHole: 0.6,
+      width: '100%',
+      height: '100%',
+      colors: [mainColor, secondColor, thirdColor],
+      pieSliceText: "none",
+      legend: {
+        position : 'bottom',
+        alignment: 'center',
+      }  
+    };
+    
+    var chart = new google.visualization.PieChart(document.getElementById('chart-per-device'));
+
+    chart.draw(data, options);
   }
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-      plugins: {
-        legend: {
-          position: 'top',
-          labels: {
-            align: 'center',
-            boxHeight: 35,
-            boxWidth: 90,
-            padding: 5,
-            borderRadius: 20,
-            font: {
-              size: 20,
-              weight: 'bold',
-            }
+
+  function PerWeek() {
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+      var data = new google.visualization.arrayToDataTable(
+        // <?php  print_r(json_encode($chartWeekData)); ?>
+      );
+
+      var options = {
+        legend: { position: 'none' },
+        colors: [mainColor],
+        hAxis: {textStyle: {
+          color: 'black', 
+          fontSize: 16,
+          fontWidth: 'bold'
+        }},
+        vAxis: {
+          textPosition: 'none',
+        },
+        axes: {
+          x: {
+            0: { side: 'bottom', label: ''} // Top x-axis.
           },
         },
-      }
-    },
-    plugins: [legendMargin]
-  };
-  const myChartDonut = new Chart(
-    document.getElementById('chartDonut'),
-    config
-  );
+        bar: { groupWidth: "80%" },
+        backgroundColor: '#E4E4E4'
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    };
+  }
+
 }
-
-

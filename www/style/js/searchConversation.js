@@ -166,9 +166,7 @@ $(document).ready(function(){
                     $( "#chatDiv" ).append(
                         '<article class="message"><p>'
                         +messages[0]['content']+
-                        '</p><time datetime="'+ messages[0]['date'] 
-                        +'">'+
-                        messages[0]['date']+'</time></article>'
+                        '</p></article>'
                         
                         )
                 }

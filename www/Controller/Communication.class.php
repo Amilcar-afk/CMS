@@ -236,29 +236,24 @@ class Communication
 
     public function listProject()
     {
-        $userProject = Query::from('cmspf_Projets')->where('user_key = ' . $_SESSION['Auth']->id)->execute();
-        $usersProject = [];
-        if(count($userProject) > 0){
-            foreach ($userProject as $key => $project) {
-                $idProject = $userProject[$key]['id'];
-                $this->project->setId($idProject);
-                $usersProject[$key] = $this->project->user();
-            }
-        }
-
         $view = new View("project-list", "back");
 
-        $projects = $this->project->find();
-        $view->assign("projects",$projects);
+        $user = new User();
+        $user = $user->find($_SESSION['Auth']->id);
+        $view->assign("projects", $user->projects());
 
-        $users = new User();
-        $users = $users->find();
-        $view->assign("users", $users);
-
-        $view->assign("usersProject", $usersProject);
+        $view->assign("usersProject", $user->find());
 
         $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
+
+        $view->assign("metaData", $metaData = [
+            "title" => 'projects',
+            "description" => 'Your projects',
+            "src" => [
+                ["type" => "js", "path" => "../js/ajax/project.js"],
+            ],
+        ]);
     }
 
 

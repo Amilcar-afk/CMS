@@ -15,7 +15,8 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-  margin: 0; }
+  margin: 0;
+  overflow-x: hidden; }
 
 figure {
   margin: 0; }
@@ -1089,7 +1090,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card .edge-container {
     width: 75px;
     height: 97px;
-    background: rgba(57, 96, 117, 0.5);
+    background: rgba(248, 248, 248, 0.18);
     border-radius: 20px; }
     .card .edge-container p {
       margin: 0;
@@ -1101,7 +1102,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .card .edge {
     width: 75px;
     height: 75px;
-    background-color: var(--main-color, #396075);
+    background-color: rgba(248, 248, 248, 0.37);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -1131,7 +1132,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       .card--bigcard header h3, .card--bigcard header .material-icons-round {
         color: var(--main-color) !important; }
   .card--smallcard {
-    background: rgba(57, 96, 117, 0.5) !important;
+    background: var(--main-color) !important;
     flex-direction: row; }
   .card #chart-per-country {
     width: 100%;
@@ -1186,7 +1187,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 
 .body-small .background-container-back-office, .body-medium .background-container-back-office, .body-big .background-container-back-office {
   z-index: -0;
-  top: -10px;
+  top: -15px;
   width: 100%; }
 
 .body-small {
@@ -1971,6 +1972,26 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     left: 0;
     display: flex;
     height: 100%; }
+    .container-main-content--menu--conversation > section {
+      overflow-y: unset;
+      height: 100%; }
+      .container-main-content--menu--conversation > section > div {
+        height: 100%; }
+        .container-main-content--menu--conversation > section > div > div {
+          height: 100%; }
+      .container-main-content--menu--conversation > section > div > header {
+        position: absolute;
+        z-index: 3;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: -30px -50px;
+        padding: 30px 50px;
+        backdrop-filter: blur(60px);
+        background-color: var(--background-color) 4C;
+        border-radius: 0px var(--radius, 20px) 0px 0px; }
+    .container-main-content--menu--conversation > section {
+      overflow-y: unset !important; }
     .container-main-content--menu .menu-container {
       backdrop-filter: blur(60px);
       background-color: rgba(129, 129, 129, 0.3);
@@ -2099,6 +2120,9 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       let: 0;
       display: flex;
       flex-direction: column; }
+      .container-main-content--menu--conversation > section > div > header {
+        margin: -30px -40px;
+        border-radius: 0px; }
       .container-main-content--menu .menu-container {
         backdrop-filter: blur(60px);
         background-color: rgba(129, 129, 129, 0.3);
@@ -2738,3 +2762,69 @@ h2 {
       color: var(--main-color); }
     .body-back-office > header .bubble-alt {
       display: none; } }
+
+.conversation {
+  position: relative; }
+  .conversation > #chatDiv {
+    overflow-y: scroll;
+    height: 100%;
+    padding-top: 55px;
+    padding-bottom: 45px; }
+    .conversation > #chatDiv::-webkit-scrollbar-track {
+      background: unset !important; }
+    .conversation > #chatDiv::-webkit-scrollbar-thumb {
+      background: #E3E3E3; }
+    .conversation > #chatDiv .date-container {
+      display: flex;
+      align-items: center; }
+      .conversation > #chatDiv .date-container span {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #E3E3E3;
+        margin: 0px 10px; }
+      .conversation > #chatDiv .date-container hr {
+        width: 10%;
+        flex-grow: 1;
+        margin: 0px 10px;
+        border: 1.5px solid #E3E3E3; }
+    .conversation > #chatDiv > .message {
+      max-width: 80%;
+      background-color: #afafaf;
+      border-radius: 0px 15px 15px 15px;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      width: fit-content;
+      right: 0px; }
+      .conversation > #chatDiv > .message > p, .conversation > #chatDiv > .message time {
+        color: var(--background-color); }
+      .conversation > #chatDiv > .message > time {
+        font-size: 0.6875rem; }
+      .conversation > #chatDiv > .message--mind {
+        background-color: var(--main-color);
+        border-radius: 15px 0px 15px 15px;
+        margin-left: auto;
+        right: initial;
+        left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: end; }
+        .conversation > #chatDiv > .message--mind > p, .conversation > #chatDiv > .message--mind time {
+          text-align: end; }
+  .conversation > footer {
+    position: absolute;
+    border-radius: 5px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #E3E3E3;
+    font-size: 18px;
+    margin-bottom: 0px; }
+    .conversation > footer > button .material-icons-round {
+      font-size: 25px !important; }
+    .conversation > footer > #sendTextarea {
+      width: calc(100% - 40px);
+      font-size: 16px !important; }

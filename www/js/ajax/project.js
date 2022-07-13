@@ -1,12 +1,15 @@
-const userSelected = document.getElementsByClassName("inputSelect");
+let userSelect = document.getElementsByClassName("inputSelect");
 let userChecked = null;
 
 //ADD USERS ON CREATE OR UPDATE PROJECT
-for(let i = 0; i < userSelected.length; i++)
-    selectEvent(userSelected[i], userSelected[i].nextElementSibling, userSelected[i].nextElementSibling.childNodes[0]);
+window.onload = function (){
+    for(let i = 0; i < userSelect.length; i++)
+        selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[i]);
+}
 
 //display selected user
 function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
+
     userSelected.addEventListener("change", () => {
         let userSelectedIndex = userSelected.selectedIndex;
         let userSelectedOption = userSelected.options[userSelectedIndex];
@@ -19,7 +22,8 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
         checkBoxUser.value = userSelectedOption.value;
         checkBoxUser.className = "user-check";
         checkBoxUser.checked = true;
-        checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, ${userSelected.id})`);
+        console.log(`${userSelected.id}`);
+        checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, this.parentElement.parentElement.parentElement.previousElementSibling)`);
 
         liUser.setAttribute("class", "li-user-selected");
         liUser.setAttribute("value", userSelectedOption.value);
@@ -42,11 +46,23 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
 //undisplay user deselected
 function onClickCheckbox(item, userSelected){
     let li = item.parentNode;
+    console.log(li);
+    console.log(item);
     for (let i = 0; i < userSelected.length; i++){
         if (userSelected.options[i].value == li.value) {
             userSelected.options[i].hidden = false;
         }
     }
+    li.remove();
+}
+
+function onClickCheckboxUserOfProject(item, userSelected){
+    let li = item.parentNode;
+    let newOption = document.createElement('option');
+    newOption.value = item.value;
+    newOption.className = 'input';
+    newOption.innerHTML = li.innerHTML;
+    userSelected.appendChild(newOption);
     li.remove();
 }
 
@@ -68,16 +84,17 @@ $(document).ready(function(){
     $(document).on("click", ".cta-button-compose-project", function () {
 
         let formContainer = $(this).parent().children(0);
-
+        let title = $(this).parent().parent().find('[name=title]');
+        console.log(formContainer.parent().parent().find('[id=divUserSearch]').children());
         $.ajax({
             url:"/project/compose/",
             type:"POST",
             data:
                 {
                     id:formContainer[0].parentNode.parentNode.parentNode.parentNode.getAttribute('id').split('-')[3], //get The section of the form
-                    title:$(this).parent().find('[name=title]').val(),
-                    description:formContainer.find('[name=description]')[0].value,
-                    users: getUsers(formContainer.find('[id=divUserSearch]').children())
+                    title:title[0].value,
+                    description:formContainer[1].value,
+                    users: getUsers(formContainer.parent().parent().find('[id=divUserSearch]').children())
 
                 },
             success:function(answer)

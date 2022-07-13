@@ -99,7 +99,7 @@
     & .edge-container {
         width: 75px;
         height: 97px;
-        background: rgba(57, 96, 117, 0.5);
+        background: rgba(248, 248, 248, 0.18);
         border-radius: 20px;
         & p {
             margin: 0;
@@ -113,7 +113,7 @@
     & .edge {
         width: 75px;
         height: 75px;
-        background-color: var(--main-color, #396075);
+        background-color: rgba(248, 248, 248, 0.37);
         border-radius: 20px;
         display: flex;
         align-items: center;
@@ -160,7 +160,7 @@
     }
     &--smallcard {
         //height: 152px !important;
-        background: rgba(57, 96, 117, 0.5) !important;
+        background: var(--main-color)!important;
         flex-direction: row;
         //align-items: flex-start;
     }

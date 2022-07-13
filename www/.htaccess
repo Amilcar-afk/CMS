@@ -1,10 +1,19 @@
 RewriteEngine on
+Options -Indexes +FollowSymLinks
+
+#ErrorDocument 403 /error.php
+#ErrorDocument 500 /error.php
+#ErrorDocument 503 /error.php
+#ErrorDocument 500 /error.php
+#ErrorDocument 504 /error.php
+
+
+#ErrorDocument 404 /View/error404.view.php
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule . index.php [L]
-
 
 <Files ~ "\.sql$">
     Order allow,deny
