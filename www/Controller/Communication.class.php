@@ -252,6 +252,7 @@ class Communication
             "description" => 'Your projects',
             "src" => [
                 ["type" => "js", "path" => "../js/ajax/project.js"],
+                ["type" => "js", "path" => "../js/searchSelect.js"],
             ],
         ]);
     }
@@ -259,47 +260,36 @@ class Communication
 
     public function composeProject()
     {
-        if(!empty($_POST)){
+        $admin = $_SESSION['Auth']->rank;
 
-            $view = new View("project-list", "back");
-            //$result = Validator::run($this->project->getFormCreateProject(), $_POST,false);
+        if (!empty($_POST) && $admin === "admin" && isset($_POST['id']) && !empty($_POST['id'])) {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $projectId = $_POST['id'];
+            $users = explode(",", $_POST['users']);
 
-            //if(empty($result)){
+            //$result = Validator::run($this->project->getFormProject(), $_POST,false);
 
-            $this->project->setTitle($_POST['title']);
-            $this->project->setDescription($_POST['description']);
-            $this->project->setUserKey($_SESSION['Auth']->id);
-            $this->project->save();
+            //if(!empty($result)) {
 
-            $idProject = $this->project->getLastId();
-            $users = new User();
-            $users = $users->find();
+            if (isset($title) && !empty($title))
+                $this->project->setTitle($title);
 
-            if(!empty($idProject)) {
-                $projectUserKeys = explode(",", $_POST['users']);
+            if (isset($description) && !empty($description))
+                $this->project->setDescription($description);
 
-                foreach ($projectUserKeys as $key => $userKey) {
-                    $this->user_project->setUserKey($userKey);
-                    $this->user_project->setProjectKey($idProject);
-                    $this->user_project->save();
-                }
+            if (isset($projectId) && !empty($projectId))
+                $this->project->setId($projectId);
 
-                $projectEmpty = $this->project;
-                $projects = $this->project->find();
+            $this->user_project->setProjectKey($projectId);
+            $this->user_project->addUsersToProject($users);
 
-                $view->assign("projects",$projects);
-                $view->assign("users", $users);
-                $view->assign("projectEmpty", $projectEmpty);
+            //}else{
+            //http_response_code(400);
+            //}
+            $this->listProject();
 
-            }else{
-                http_response_code(400);
-            }
-
-            /*}else{
-                $view->assign("error_from",$result);
-            }*/
-
-        }else{
+        } else {
             http_response_code(400);
         }
     }

@@ -1,6 +1,6 @@
-
-<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?> 
-    method="<?= $config["config"]["method"]??"POST" ?>"
+<!-- bonne version-->
+<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?>
+        method="<?= $config["config"]["method"]??"POST" ?>"
     <?= (isset($config["config"]["class"]))?'class="'.$config["config"]["class"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
 
@@ -29,7 +29,7 @@
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  class="<?= $choice['class'] ?>"
-                                <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
+                            <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
                             <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
@@ -44,9 +44,9 @@
                           id="<?= $name ?>"
                           class="<?= $input["class"] ?>"
                           <?= (isset($input["placeholder"]))?'placeholder="'.$input["placeholder"].'"':'' ?>
-                          <?= (isset($input["min"]))?'minlenght="'. $input["min"] .'"':'' ?>
-                          <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
-                          <?= (isset($input["required"]))?'required="required"':'' ?>
+                    <?= (isset($input["min"]))?'minlenght="'. $input["min"] .'"':'' ?>
+                    <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
+                    <?= (isset($input["required"]))?'required="required"':'' ?>
                 ><?= (isset($input["value"]))? $input["value"] :'' ?></textarea>
             <?php else:?>
                 <?php if (isset($input["question"])):?>

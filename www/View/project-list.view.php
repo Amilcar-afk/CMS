@@ -36,8 +36,8 @@
                                         <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $project->getDescription()?></label>
                                     </td>
                                     <td>
-                                        <button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
-                                        <button class="cta-button cta-button-a cta-button-delete-project" data-project-id="<?= $project->getId() ?>"><span class="material-icons-round">delete</span></button>
+                                        <?php if($_SESSION['Auth']->rank === "admin") :?><button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a cta-button-delete-project" data-project-id="<?= $project->getId() ?>"><span class="material-icons-round">delete</span></button><?php endif;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
