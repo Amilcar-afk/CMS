@@ -23,6 +23,13 @@ class Settings
 
     public function listUser()
     {
+        $user = $this->user->find($_SESSION['Auth']->id);
+        // $this->user->setId($user->getId());
+        // $this->user->setFirstname($user->getFirstname());
+        // $this->user->setLastname($user->getLastname());
+        // $this->user->setMail($user->getMail());
+        // $this->user->setPassword($user->getPassword());
+
         $view = new View("user-manager", "back");
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
@@ -61,9 +68,9 @@ class Settings
                             ->execute("User");
 
             if(!count($unic_email) > 0){
-                $config = Validator::run($this->user->getFormRegister(), $_POST,false);
+                $config = Validator::run($this->user->userCompose(), $_POST,false);
             }else{
-                $config = Validator::run($this->user->getFormRegister(), $_POST,$unic_email);
+                $config = Validator::run($this->user->userCompose(), $_POST,$unic_email);
             }
             
             if(empty($config)){
@@ -139,6 +146,11 @@ class Settings
                 return include "View/Partial/form.partial.php";
             }
         }
+    }
+
+    public function updateProfile()
+    {
+        var_dump($_POST);
     }
 
 

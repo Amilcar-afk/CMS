@@ -338,10 +338,6 @@ class User extends BaseSQL
         parent::delete($id);
     }
 
-    public function parseUrl()
-    {
-       return  parent::parseUrl();
-    }
 
     public function conversations()
     {
@@ -359,12 +355,13 @@ class User extends BaseSQL
     {
 
             return [
+
                 "config"=>[
                     "method"=>"POST",
+                    "action"=>"",
                     "submit"=>"S'inscrire",
-                    "cta"=>"cta-button-compose-categorie"
-
                 ],
+
                 "inputs"=>[
                         "email"=>[
                             "question"=>"Email",
@@ -425,16 +422,19 @@ class User extends BaseSQL
                     ],
             ];
     }
-
-    public function userCompose(): array
+    public function userCompose($class = null): array
     {
 
             return [
+
                 "config"=>[
                     "method"=>"POST",
                     "submit"=>"S'inscrire",
-                    "cta"=>"cta-button-compose-categorie"
+                    // "cta"=>"cta-button-compose-user"
+                    "cta"=>"$class"
+                    
                 ],
+
                 "inputs"=>[
                         "email"=>[
                             "question"=>"Email",
@@ -495,6 +495,8 @@ class User extends BaseSQL
                     ],
             ];
     }
+
+
 
 
     public function getFormLogin(): array
