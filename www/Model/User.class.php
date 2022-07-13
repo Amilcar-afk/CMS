@@ -359,7 +359,7 @@ class User extends BaseSQL
                 "config"=>[
                     "method"=>"POST",
                     "action"=>"",
-                    "submit"=>"S'inscrire",
+                    "submit"=>"Sign up",
                 ],
 
                 "inputs"=>[
@@ -429,18 +429,36 @@ class User extends BaseSQL
 
                 "config"=>[
                     "method"=>"POST",
-                    "submit"=>"S'inscrire",
+                    "submit"=>"Sign up",
                     // "cta"=>"cta-button-compose-user"
                     "cta"=>"$class"
-                    
                 ],
 
                 "inputs"=>[
+                        "firstname"=>[
+                            "question"=>"Fisrtname",
+                            "type"=>"text",
+                            "placeholder"=>"your Fisrtname",
+                            "name"=>"firstnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>50,
+                            "error"=>""
+                        ],
+                        "lastname"=>[
+                            "question"=>"Lastname",
+                            "type"=>"text",
+                            "placeholder"=>"Your lastname",
+                            "name"=>"lastnameRegister",
+                            "class"=>"input",
+                            "min"=>2,
+                            "max"=>100,
+                            "error"=>""
+                        ],
                         "email"=>[
                             "question"=>"Email",
                             "type"=>"email",
                             "placeholder"=>"Your email",
-                            "value"=> $this->getMail(),
                             "name"=>"emailRegister",
                             "class"=>"input",
                             "required"=>true,
@@ -470,6 +488,23 @@ class User extends BaseSQL
                             "confirm"=>"password",
                             "error"=>""
                         ],
+               
+                    ],
+            ];
+    }
+
+    public function updateUser(): array
+    {
+
+            return [
+
+                "config"=>[
+                    "method"=>"POST",
+                    "submit"=>"Update",
+                    "cta"=>"cta-button-update-profile"
+                ],
+
+                "inputs"=>[
                         "firstname"=>[
                             "question"=>"Fisrtname",
                             "type"=>"text",
@@ -492,6 +527,39 @@ class User extends BaseSQL
                             "max"=>100,
                             "error"=>""
                         ],
+                        "currentPassword"=>[
+                            "question"=>"Current Password",
+                            "type"=>"password",
+                            "placeholder"=>"Your Current Password",
+                            "name"=>"currentpwdRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "min"=>12,
+                            "max"=>60,
+                            "error"=>""
+                        ],
+                        "newPassword"=>[
+                            "question"=>" new Password",
+                            "type"=>"password",
+                            "placeholder"=>"Your New Password",
+                            "name"=>"newpwdRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "min"=>12,
+                            "max"=>60,
+                            "error"=>""
+                        ],
+                        "passwordConfirm"=>[
+                            "question"=>"Confirm password",
+                            "type"=>"password",
+                            "placeholder"=>"Confirm password",
+                            "name"=>"pwdConfirmRegister",
+                            "class"=>"input",
+                            "required"=>true,
+                            "confirm"=>"newPassword",
+                            "error"=>""
+                        ],
+               
                     ],
             ];
     }

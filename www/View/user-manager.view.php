@@ -18,14 +18,12 @@
                     <h1 class="title title--black">USER MANAGER</h1>
                 </header>
 
-                
-                <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-my-profile">
-                    My Profil
+                <button class="cta-button-user-update-class cta-button cta-button-a cta-button--submit cta-button--submit--add " data-a-target="container-my-profile">
+                    My Profile
                 </button>
 
                 <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
-
-                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-user">
+                    <button class="cta-button-user-compose-class cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-user">
                             New User
                     </button>
                     <article>
@@ -107,13 +105,12 @@
                         <p>Until that the account is not confirmed by email it will not be visible</p>
                     </header>
 
-                    <article class="fullCalendar calendar_article2 col-6">
+                    <article class="composeUser_class calendar_article2 col-6">
                             <?php $this->includePartial("form", $newuser->userCompose('cta-button-compose-user')) ?>
                     </article>
                 </div>
             </section>
         </section>
-
     <?php endif;?>
 
 
@@ -126,9 +123,8 @@
                     <h1 class="title title--black">MY PROFILE</h1>
                 </header>
 
-                <article class="fullCalendar calendar_article2 col-6">
-                    
-                        <?php $this->includePartial("form", $newuser->userCompose('cta-button-update-profile')) ?>
+                <article class="composeUpdate_class calendar_article2 col-6">
+                        <?php $this->includePartial("form", $newuser->updateUser()) ?>
                 </article>
             </div>
         </section>

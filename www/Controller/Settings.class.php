@@ -13,6 +13,7 @@ use App\Core\Query;
 class Settings
 {
     public $user;
+    public $isUserInstantiated = false;
 
     public function __construct()
     {
@@ -23,12 +24,14 @@ class Settings
 
     public function listUser()
     {
+
         $user = $this->user->find($_SESSION['Auth']->id);
-        // $this->user->setId($user->getId());
-        // $this->user->setFirstname($user->getFirstname());
-        // $this->user->setLastname($user->getLastname());
-        // $this->user->setMail($user->getMail());
-        // $this->user->setPassword($user->getPassword());
+        $this->user->setId($user->getId());
+        $this->user->setFirstname($user->getFirstname());
+        $this->user->setLastname($user->getLastname());
+        $this->user->setMail($user->getMail());
+        $this->user->setPassword($user->getPassword());
+      
 
         $view = new View("user-manager", "back");
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
@@ -51,10 +54,8 @@ class Settings
 
     public function userCompose()
     {
-
         if( !empty($_POST)){
 
-            print_r($_POST);
             $date = date("Y-m-d");
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
@@ -84,9 +85,8 @@ class Settings
                 return include "View/Partial/form.partial.php";
             }
         }
-
-
     }
+
 
     public function composeDatabase()
     {
@@ -151,7 +151,25 @@ class Settings
 
     public function updateProfile()
     {
-        var_dump($_POST);
+        $user = $this->user->find($_SESSION['Auth']->id);
+        
+        if(password_verify($_POST['currentPassword'], $user->getPwd()) ){
+            $config =  Validator::run($this->user->updateUser(),$_POST,false);
+        }else{
+            $config =  Validator::run($this->user->updateUser(),$_POST,false,null,true);
+        }
+        
+        if(empty($config)){
+            $this->user->setId($_SESSION['Auth']->id);
+            $this->user->setFirstname($_POST['firstname']);
+            $this->user->setLastname($_POST['lastname']);
+            $this->user->setPassword($_POST['newPassword']);
+            $this->user->save();
+            echo 1;
+        }else{
+            return include "View/Partial/form.partial.php";
+        }
+
     }
 
 

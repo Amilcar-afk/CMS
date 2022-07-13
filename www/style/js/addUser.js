@@ -1,4 +1,16 @@
 $(document).ready(function(){
+
+    $(document).on("click", ".cta-button-user-update-class", function () {
+        $('.composeUser_class').hide()
+        $('.composeUpdate_class').show()
+    })
+
+    $(document).on("click", ".cta-button-user-compose-class", function () {
+        $('.composeUser_class').show()
+        $('.composeUpdate_class').hide()
+    })
+
+
     $(document).on("click", ".cta-button-compose-user", function () {
         var formContainer = $(this).parent();
         $.ajax({
@@ -15,7 +27,6 @@ $(document).ready(function(){
                 },
             success:function(answer)
             {
-
                 if (answer == '1'){
                     alertMessage('User created!');
                     $('#cta-button-close-container-new-user').click()
@@ -30,14 +41,16 @@ $(document).ready(function(){
     })
 
     $(document).on("click", ".cta-button-update-profile", function () {
-        var formContainer = $(this).parent();
+
+        var updateformContainer = $(this).parent();
+
         $.ajax({
             url:"/user/profile-update",
             type:"POST",
             data:
                 {
-                    email:$(this).parent().find('[name=email]').val(),
-                    password:$(this).parent().find('[name=password]').val(),
+                    currentPassword:$(this).parent().find('[name=currentPassword]').val(),
+                    newPassword:$(this).parent().find('[name=newPassword]').val(),
                     passwordConfirm:$(this).parent().find('[name=passwordConfirm]').val(),
                     firstname:$(this).parent().find('[name=firstname]').val(),
                     lastname:$(this).parent().find('[name=lastname]').val()
@@ -45,13 +58,15 @@ $(document).ready(function(){
                 },
             success:function(answer)
             {
+                if (answer == '1'){
+                    alertMessage('User created!');
+                    $('#cta-button-close-container-my-profile').click()
+                    window.location.replace("/settings/user-manager")
 
-                // if (answer == '1'){
-                //     alertMessage('User created!');
-                //     $('#cta-button-close-container-new-user').click()
-                // }else{
-                //     $(formContainer).html(answer);
-                // }
+                    
+                }else{
+                    $(updateformContainer).html(answer);
+                }
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');
