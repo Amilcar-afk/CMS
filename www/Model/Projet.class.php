@@ -127,7 +127,7 @@ class Projet extends BaseSQL
         return false;
     }
 
-    public function getFormProject($users,$usersOfProject = null, $name = ''): array
+    public function getFormProject($users, $name = ''): array
     {
 
         foreach($users as $user){
@@ -136,18 +136,6 @@ class Projet extends BaseSQL
                 "label" => $user->getLastname() . ' ' . $user->getFirstname(),
                 "class"=>"input"
             ];
-        }
-
-        if($usersOfProject !== null){
-            foreach($usersOfProject as $user) {
-                $usersProjectList['choices'][] = [
-                    "value" => $user->getId(),
-                    "label" => $user->getLastname() . ' ' . $user->getFirstname(),
-                    "class" => "input"
-                ];
-            }
-        }else{
-            $usersProjectList = null;
         }
         
         return [
@@ -193,9 +181,7 @@ class Projet extends BaseSQL
                     "error"=>"",
                     "idToVerif"=>true,
                     "div"=>"divUserSearch",
-                    "choices"=>$usersList['choices'],
-                    "searchBox"=>true,
-                    "usersInProject"=>$usersProjectList['choices']
+                    "choices"=>$usersList['choices']
                 ],
 
                 "description"=>[
