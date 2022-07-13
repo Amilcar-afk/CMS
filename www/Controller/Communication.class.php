@@ -267,19 +267,30 @@ class Communication
             $description = $_POST['description'];
             $projectId = $_POST['id'];
             $users = explode(",", $_POST['users']);
+            $count = 0;
 
             //$result = Validator::run($this->project->getFormProject(), $_POST,false);
 
             //if(!empty($result)) {
 
-            if (isset($title) && !empty($title))
+            if (isset($title) && !empty($title)){
                 $this->project->setTitle($title);
+                $count++;
+            }
 
-            if (isset($description) && !empty($description))
+            if (isset($description) && !empty($description)) {
                 $this->project->setDescription($description);
+                $count++;
+            }
 
-            if (isset($projectId) && !empty($projectId))
+            if (isset($projectId) && !empty($projectId)) {
                 $this->project->setId($projectId);
+                $count++;
+            }
+
+            if($count != 0){
+                $this->project->save();
+            }
 
             $this->user_project->setProjectKey($projectId);
             $this->user_project->addUsersToProject($users);

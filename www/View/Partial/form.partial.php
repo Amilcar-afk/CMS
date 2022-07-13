@@ -34,7 +34,19 @@
                         </option>
                     <?php endforeach;?>
                 </select>
-                <?= (isset($input["div"]))?'<div id="' . $input["div"] .'"></div>':'' ?>
+                <?php if (isset($input["div"])){
+                    echo '<div id="' . $input["div"] .'">';
+                    if (isset($input["usersInProject"]) && !empty($input["usersInProject"])){
+                        echo '<ul id="listSelectedUsers">';
+                        foreach ($input["usersInProject"] as $users){
+                            echo '<li  value="' . $users['value'] . '"class="li-user-selected">'. $users['label'] .
+                                '<input type="checkbox" checked name="check-'. $users['value'] .'" value="'. $users['value'] .'" class="user-check" onchange="onClickCheckboxUserOfProject(this, this.parentElement.parentElement.parentElement.previousElementSibling)"></li>';
+                        }
+                        echo '</ul>';
+                    }
+                    echo '</div>';
+                }
+                ?>
 
             <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>

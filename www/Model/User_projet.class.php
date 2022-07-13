@@ -118,7 +118,7 @@ class User_projet extends BaseSQL
 
             if(empty($req[0])){
                 $this->setUserKey($id);
-                //$this->save();
+                $this->save();
             }
         }
     }
