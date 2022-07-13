@@ -22,7 +22,7 @@
                 <?php endforeach;?>
 
             <?php elseif ($input["type"] == "select"):?>
-                <?php if (isset($input["searchBox"]) && $input["searchBox"] === true):?>
+                <?php if ($input["searchBox"] === true):?>
                     <input type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling.nextElementSibling)">
                 <?php endif;?>
                 <label><?=$input["question"]?></label>
