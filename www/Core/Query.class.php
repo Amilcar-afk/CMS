@@ -231,6 +231,9 @@ class Query extends BaseSQL
     public function execute($model = null)
     {
         $query = $this->__toString();
+
+        
+
         $statement = $this->pdo->prepare($query);
         if (self::$params) {
             $statement->execute(self::$params);
@@ -240,7 +243,6 @@ class Query extends BaseSQL
 
         self::$params = [];
         self::$select = [];
-        self::$delete = [];
         self::$from = [];
         self::$where = [];
         self::$or = [];
@@ -250,8 +252,11 @@ class Query extends BaseSQL
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
-        if (!isset(self::$delete)) {
+        if (!isset(self::$delete) || empty(self::$delete)) {
+            self::$delete = [];
             return $statement->fetchAll();
+        }else{
+            self::$delete = [];
         }
     }
 

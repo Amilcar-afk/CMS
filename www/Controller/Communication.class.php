@@ -110,12 +110,18 @@ class Communication
 
     public function userConversation($dataFromUrl)
     {
-        if($dataFromUrl['id_conv']){
 
+
+        
+        if($dataFromUrl['id_conv']){
+            
             $idConversation = $dataFromUrl['id_conv'];
+
             $user_conversation_data = Query::from('cmspf_User_conversation')
             ->where('conversation_key = '.$dataFromUrl['id_conv'])
             ->execute();
+
+            // var_dump($user_conversation_data);
     
             foreach($user_conversation_data as $conversation){
                 if($conversation['user_key'] != $_SESSION['Auth']->id){
