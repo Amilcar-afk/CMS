@@ -57,6 +57,7 @@ abstract class BaseSQL
             }
         }
         if (self::getDStatus() != false) {
+            self::insertDatabase();
             return self::$bdd;
         }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
             header('location:/setup/database');
@@ -151,7 +152,7 @@ abstract class BaseSQL
 
     protected function insertDatabase()
     {
-        $sql = file_get_contents(__DIR__.'/cmsDatabase.sql');
+        $sql = file_get_contents(__DIR__ . '/cmsdatabase.sql');
         $queryPrepared = self::$bdd->prepare($sql);
         $queryPrepared->execute();
     }

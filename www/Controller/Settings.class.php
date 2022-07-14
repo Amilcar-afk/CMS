@@ -104,8 +104,6 @@ class Settings
                     $env_file = 'env.json';
                     $data_base_env = yaml_parse_file($env_file);
 
-                    echo "total".count($_POST);
-                    print_r($_POST);
 
                     foreach($_POST as $key => $data){
                         if(isset($_POST['DBHOST'])){
@@ -137,7 +135,7 @@ class Settings
                 $this->config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
                 $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
                 $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
-                $this->config->insertDatabase();
+                //$this->config->insertDatabase();
 
                 $view = new View("configuration");
                 $view->assign("configuration", $this->config);

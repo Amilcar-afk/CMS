@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Controller\Mail;
 use App\Core\Validator;
 use App\Core\View;
 use App\Model\User as UserModel;
-use App\Controller\Mail;
 use App\Core\Query;
 
 class User{
@@ -37,7 +37,8 @@ class User{
             if($result){
                 $this->user->setMail($_POST['email']);
                 $user = Query::from('cmspf_Users')
-                ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                ->where("mail = :mail AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                ->params(['mail'=> $this->user->getMail()])
                 ->execute("User");
                 
                 
@@ -72,10 +73,29 @@ class User{
                     $_SESSION['Auth']->token = $user[0]->getToken();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
-                    if(!isset($_SESSION['redirect_url'])){
-                        header('location:/dashboard');
+// <<<<<<< HEAD
+//                     if(!isset($_SESSION['redirect_url'])){
+//                         header('location:/dashboard');
+//                     }else{
+//                         header('location:'.$_SESSION['redirect_url']);
+// =======
+
+                    $users = Query::from('cmspf_Users')
+                        ->execute("User");
+
+                    if (sizeof($users) == 1){
+                        header('location:/setup/smtp');
                     }else{
-                        header('location:'.$_SESSION['redirect_url']);
+                        if(!isset($_SESSION['redirect_url'])){
+                            if ($user[0]->getRank() == 'admin') {
+                                header('location:/dashboard');
+                            }else{
+                                header('location:/');
+                            }
+                        }else{
+
+                            header('location:'.$_SESSION['redirect_url']);
+                        }
                     }
                 }else{
 
@@ -112,6 +132,14 @@ class User{
             $this->user->setDateCreation($date);
             $this->user->generateToken();
 
+            $users = Query::from('cmspf_Users')
+                ->execute("User");
+
+            if (sizeof($users) == 0){
+                $this->user->setRank('admin');
+                $this->user->setConfirm(1);
+            }
+
             $unic_email = Query::from('cmspf_Users')
                             ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
                             ->execute("User");
@@ -125,10 +153,15 @@ class User{
                 //generate confirmKey
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
-                $confirmKey = $this->user->getConfirmKey();
 
-                $mail = new Mail();
-                $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+                if (sizeof($users) == 0){
+                    header('location:/setup/login');
+                }else{
+
+                    $confirmKey = $this->user->getConfirmKey();
+                    $mail = new Mail();
+                    $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+                }
             }else{
                 $view->assign("error_from",$result);
             }
@@ -141,9 +174,9 @@ class User{
             $this->user->setDeleted(1);
             $this->user->setId($_GET['id']);
             $this->user->save();
-            echo "user deleted successfully";
+            echo "User deleted successfully";
         }else{
-            echo "user not deleted";
+            echo "User not deleted";
         }
     }
 
@@ -160,10 +193,10 @@ class User{
 
             $this->user->setId($_POST['id']);
             $this->user->save();
-            echo "rank updated";
+            echo "Rank updated";
 
         }else{
-            echo "error in update";
+            echo "Error in update";
         }
     }
 
@@ -276,7 +309,7 @@ class User{
                 }
                 echo "</ul>";
             }else{
-                echo '<i>Aucun utilisateur trouv�</i>';
+                echo '<i>No user</i>';
             }
         }
 

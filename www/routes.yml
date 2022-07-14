@@ -29,7 +29,7 @@
 /dashboard:
   controller: statistics
   action: loadDashboard
-  middleware: [ 'auth']
+  middleware: [ 'auth', 'admin']
 
 /userdelete:
   controller: user
@@ -346,10 +346,15 @@
 /setup/smtp:
   controller: Setup
   action: loadSmtp
+  middleware: [ 'auth', 'admin' ]
 
 /setup/login:
-  controller: Setup
-  action: loadLogin
+  controller: user
+  action: login
+
+/setup/register:
+  controller: user
+  action: register
 
 /setup/main-images:
   controller: Setup
