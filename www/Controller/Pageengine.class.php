@@ -52,7 +52,7 @@ class Pageengine
 
 
     public function deletePage(){
-        if( isset($_POST['id']) ) {
+        if( isset($_POST['id']) && $_POST['id'] != 1 ) {
             $page = $this->page->find($_POST['id']);
             if ($page->getId() != null) {
 
@@ -189,10 +189,8 @@ class Pageengine
                 $this->page->save();
 
                 $lastId = $this->page->getLastId();
-
                 if ($lastId
                     && isset($_POST['categorie'])
-                    && is_int($_POST['categorie'])
                     && Query::from('cmspf_Categories')
                         ->where("id = " . $_POST['categorie'] . "")
                         ->execute('Categorie')) {

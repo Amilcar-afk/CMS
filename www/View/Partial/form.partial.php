@@ -23,8 +23,8 @@
 
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select id="<?= $input["id"] ?>" name="<?= $name ?>" class="<?=$input["class"]?>">
-                    <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
+                <select <?= (isset($input["id"]))?'id="'.$input["id"].'"':'' ?> name="<?= $name ?>" class="<?=$input["class"]?>">
+                    <?= (isset($input["question"]) && (!isset($input["value"]) || empty($input["value"])))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"

@@ -250,7 +250,9 @@ class Query extends BaseSQL
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
-        return $statement->fetchAll();
+        if (!isset(self::$delete)) {
+            return $statement->fetchAll();
+        }
     }
 
 }
