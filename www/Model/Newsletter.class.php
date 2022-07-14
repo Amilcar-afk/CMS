@@ -152,29 +152,6 @@ class Newsletter extends BaseSQL
     }
 
 
-
-
-
-    public function subscribe(Newsletter_subscriber $client)
-    {
-        $this->subscribedClients[ $client->id ] = $client;
-    }
-
-    public function unsubscribe(Newsletter_subscriber $client)
-    {
-        unset( $this->subscribedClients[ $client->id ] ); 
-    }
-    public function notify()
-    {
-        foreach ($this->subscribedClients as $client) {
-            $client->update($this);
-        }
-    }
-
-
-
-
-
     public function getFormNewNewsletter(): array
     {
 
