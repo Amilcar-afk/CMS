@@ -130,13 +130,13 @@ class Newsletterengine
 
 
     public function subscribe() {
-        echo "test";
+        
         if (isset($_POST['email'])) {
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 
                 $newsletterSubscribe = new Newsletter_subscriber();
-                $newsletterSubscribe = $newsletterSubscribe->find($_POST['email'], "email");
-                if ($newsletterSubscribe) {
+                $isSubscribe = $newsletterSubscribe->find($_POST['email'], "email");
+                if ($isSubscribe) {
                     echo "You are already subscribe";
                 } else {
                     $newsletterSubscribe->setEmail($_POST['email']);
@@ -152,25 +152,38 @@ class Newsletterengine
 
     }
 
-    public function unsubscribe($client)
+    public function unsubscribe($request)
     {
-        unset( $this->subscribedClients[ $client->id ] ); 
+        if(isset($request['email']) && isset($request['idSubscribe'])) {
+            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->where("id = :idSubscribe")->execute()->params(['email' => $request['email'], 'idSubscribe' => $request['idSubscribe']]);
+            if (isset($newsletterSubscribe[0])) {
+                $newsletterSubscribe[0]->delete($request['idSubscribe']);
+                $view = new View("message", 'back-sandbox');
+                $view->assign("metaData", $metaData = [
+                    "title" => 'newsletter unsubscribe',
+                    "description" => 'This is the newsletter unsubscribe',
+                ]);
+                $view->assign("message", "you have been unsubscribe");
+            } else {
+                http_response_code(500);
+            }
+        }
     }
 
     public function notify()
     {
-        foreach ($this->subscribedClients as $client) {
-            $client->update($this);
+        $newsletterSubscribes = new Newsletter_subscriber();
+        $newsletterSubscribes = $newsletterSubscribes->find();
+        foreach ($newsletterSubscribes as $subscribe) {
+            $this->update($subscribe->getEmail());
         }
     }
 
-    public function update(Newsletter $newsletter) 
+    public function update($email) 
         {
 
-            // SELECT firstname FROM cmspf_Users INNER JOIN cmspf_Newsletter_subscribers ON cmspf_Users.id = cmspf_Newsletter_subscribers.user_key; 
-            $firstname = Query::select("firstname ")->from("cmspf_Users")->innerJoin(" cmspf_Newsletter_subscribers ON cmspf_Users.id = cmspf_Newsletter_subscribers.user_key")->execute();
             $mail = new MailModel();
-            $mail->sendEmail(, $firstname, $this->$newsletter->getTitle(), $this->$newsletter->getContent());
+            $mail->sendEmail($email, "", $this->$newsletter->getTitle(), $this->$newsletter->getContent());
 
         }
 
@@ -186,7 +199,7 @@ class Newsletterengine
 
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
                     
-                    
+                    $this->notify();
 
                 }
 

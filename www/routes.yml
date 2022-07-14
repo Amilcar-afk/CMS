@@ -416,6 +416,7 @@
 /newsletter/unsubscribe:
   controller: newsletterengine
   action: unsubscribe
+  params: [ 'email', 'idSubscribe']
 
 
 
