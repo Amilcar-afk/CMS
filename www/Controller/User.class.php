@@ -79,17 +79,17 @@ class User{
 
                     if (sizeof($users) == 1){
                         header('location:/setup/smtp');
-                    }
-
-                    if(!isset($_SESSION['redirect_url'])){
-                        if ($user[0]->getRank() == 'admin') {
-                            header('location:/dashboard');
-                        }else{
-                            header('location:/');
-                        }
                     }else{
+                        if(!isset($_SESSION['redirect_url'])){
+                            if ($user[0]->getRank() == 'admin') {
+                                header('location:/dashboard');
+                            }else{
+                                header('location:/');
+                            }
+                        }else{
 
-                        header('location:'.$_SESSION['redirect_url']);
+                            header('location:'.$_SESSION['redirect_url']);
+                        }
                     }
                 }else{
 
