@@ -409,6 +409,14 @@
   action: deletenewsletter
   middleware: [ 'auth', 'admin' ]
 
+/newsletter/subscribe:
+  controller: newsletterengine
+  action: subscribe
+
+/newsletter/unsubscribe:
+  controller: newsletterengine
+  action: unsubscribe
+
 
 
 
