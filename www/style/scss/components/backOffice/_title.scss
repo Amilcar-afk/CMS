@@ -48,3 +48,11 @@ h2{
 	display: inline;
 }
 
+@media (max-width: 768px){
+	h1{
+		font-size: rem(18);
+	}
+	h2{
+		font-size: rem(16);
+	}
+}

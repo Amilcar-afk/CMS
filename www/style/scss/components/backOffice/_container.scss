@@ -474,6 +474,11 @@
 
           & a{
             margin-right: 20px;
+            font-size: rem(13);
+          }
+
+          & .material-icons-round{
+            font-size: rem(14);
           }
 
           &:last-child {
@@ -621,6 +626,12 @@
 
 
 @media (max-width: 768px) {
+  #back-office-container{
+    > .content-header{
+      align-items: center;
+    }
+  }
+
   & .menu-container {
     & nav {
       & a:nth-child(even) {
@@ -631,5 +642,21 @@
 
   .body-setup {
     align-items: unset;
+
+    main{
+      width: 100%;
+
+      > section > div{
+        width: 100%;
+      }
+
+      > section > section{
+        width: 100%;
+      }
+
+      > section > form{
+        width: 100%;
+      }
+    }
   }
 }

@@ -62,3 +62,16 @@
         }
     }
 }
+
+@media (max-width: 768px){
+    .table {
+        padding: 13px;
+        & tr {
+            padding: 5px;
+
+            .cta-button {
+                padding: 5px;
+            }
+        }
+    }
+}

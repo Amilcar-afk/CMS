@@ -1014,6 +1014,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       border-right: solid 4px #E2E2E2;
       border-left: solid 4px #E2E2E2; }
 
+@media (max-width: 768px) {
+  .table {
+    padding: 13px; }
+    .table tr {
+      padding: 5px; }
+      .table tr .cta-button {
+        padding: 5px; } }
+
 .card {
   background-color: #E3E3E3;
   border-radius: var(--radius, 20px);
@@ -1171,12 +1179,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       align-self: flex-start; }
       .card header h4, .card header .material-icons-round {
         margin: 0;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         line-height: 1.3125rem; }
       .card header h3, .card header .material-icons-round {
         margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.3125rem; } }
+        font-size: 1.1rem;
+        line-height: 1.3125rem; }
+    .card--smallcard {
+      margin-top: 20px; } }
 
 .body {
   position: relative;
@@ -1820,7 +1830,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 
 @media (max-width: 768px) {
   .cta-button--menu {
-    width: 140px; } }
+    width: calc(50% - 10px); }
+  .cta-button--submit {
+    font-size: 1rem; }
+  .cta-button--delete {
+    font-size: 1rem; }
+  .cta-button--text-no-background {
+    font-size: 1rem; } }
 
 .container-main-content {
   transition: all 0.3s;
@@ -2134,7 +2150,10 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
           justify-content: space-between;
           flex-wrap: wrap; }
           .container-main-content--menu .menu-container nav a {
-            margin-right: 20px; }
+            margin-right: 20px;
+            font-size: 0.8125rem; }
+          .container-main-content--menu .menu-container nav .material-icons-round {
+            font-size: 0.875rem; }
           .container-main-content--menu .menu-container nav:last-child {
             margin-left: 0px; }
           .container-main-content--menu .menu-container nav button:nth-child(odd) {
@@ -2222,10 +2241,20 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     margin-top: 0px; }
 
 @media (max-width: 768px) {
+  #back-office-container > .content-header {
+    align-items: center; }
   .menu-container nav a:nth-child(even) {
     margin-right: 0px; }
   .body-setup {
-    align-items: unset; } }
+    align-items: unset; }
+    .body-setup main {
+      width: 100%; }
+      .body-setup main > section > div {
+        width: 100%; }
+      .body-setup main > section > section {
+        width: 100%; }
+      .body-setup main > section > form {
+        width: 100%; } }
 
 .title {
   display: block;
@@ -2261,6 +2290,12 @@ h2 {
   font-size: 1.125rem;
   font-weight: 800 !important;
   display: inline; }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.125rem; }
+  h2 {
+    font-size: 1rem; } }
 
 .background-container-back-office {
   position: absolute;

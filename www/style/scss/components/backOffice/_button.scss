@@ -259,7 +259,17 @@
 	.cta-button {
 
 		&--menu {
-			width: 140px;
+			width: calc(50% - 10px);
+		}
+
+		&--submit {
+			font-size: rem(16);
+		}
+		&--delete{
+			font-size: rem(16);
+		}
+		&--text-no-background {
+			font-size: rem(16);
 		}
 	}
 }
