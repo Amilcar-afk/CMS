@@ -2438,6 +2438,14 @@ h2 {
 
 .module {
   position: relative; }
+  .module.compose-subscibe-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #d9d9d9;
+    border-radius: var(--radius, 5px);
+    width: 100%; }
+    .module.compose-subscibe-container > input {
+      width: calc(100% - 40px); }
 
 .section-module {
   position: relative;
