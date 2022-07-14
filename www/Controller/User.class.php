@@ -37,7 +37,8 @@ class User{
             if($result){
                 $this->user->setMail($_POST['email']);
                 $user = Query::from('cmspf_Users')
-                ->where("mail = '" . $this->user->getMail() . "' AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                ->where("mail = :mail AND (deleted IS NULL OR deleted = 0) AND confirm = 1")
+                ->params(['mail'=> $this->user->getMail()])
                 ->execute("User");
                 
                 
@@ -73,7 +74,11 @@ class User{
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
                     if(!isset($_SESSION['redirect_url'])){
-                        header('location:/'. (isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin')?'dashboard':'');
+                        if ($user[0]->getRank() == 'admin') {
+                            header('location:/dashboard');
+                        }else{
+                            header('location:/');
+                        }
                     }else{
 
                         header('location:'.$_SESSION['redirect_url']);

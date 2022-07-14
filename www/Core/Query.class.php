@@ -231,11 +231,12 @@ class Query extends BaseSQL
     public function execute($model = null)
     {
         $query = $this->__toString();
-        // echo '<pre>';
-        // var_dump($query);
-        // echo '</pre>';
         $statement = $this->pdo->prepare($query);
-        $statement->execute();
+        if (self::$params) {
+            $statement->execute(self::$params);
+        }else{
+            $statement->execute();
+        }
 
         self::$params = [];
         self::$select = [];
