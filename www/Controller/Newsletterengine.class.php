@@ -7,6 +7,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Newsletter;
 use App\Core\Query;
+use App\Model\Mail as MailModel;
+use App\Model\Newsletter_subscriber;
 
 class Newsletterengine
 {
@@ -126,6 +128,46 @@ class Newsletterengine
 
 
 
+
+    public function subscribe($client) {
+        if (isset($_POST['email'])) {
+            if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                
+                $newsletterSubscribe = new Newsletter_subscriber();
+                $newsletterSubscribe->save();
+                echo "You have been subscribe !";
+                
+            } else {
+                echo "Bad email";    
+            }
+        } else {
+            echo "Bad request";
+        }
+    }
+
+    public function unsubscribe($client)
+    {
+        unset( $this->subscribedClients[ $client->id ] ); 
+    }
+
+    public function notify()
+    {
+        foreach ($this->subscribedClients as $client) {
+            $client->update($this);
+        }
+    }
+
+    public function update(Newsletter $newsletter) 
+        {
+
+            // SELECT firstname FROM cmspf_Users INNER JOIN cmspf_Newsletter_subscribers ON cmspf_Users.id = cmspf_Newsletter_subscribers.user_key; 
+            $firstname = Query::select("firstname ")->from("cmspf_Users")->innerJoin(" cmspf_Newsletter_subscribers ON cmspf_Users.id = cmspf_Newsletter_subscribers.user_key")->execute();
+            $mail = new MailModel();
+            $mail->sendEmail(, $firstname, $this->$newsletter->getTitle(), $this->$newsletter->getContent());
+
+        }
+
+
     public function saveContentNewsletter()
     {
         if (isset($_POST['id']) && isset($_POST['content']) && isset($_POST['status'])){
@@ -138,8 +180,6 @@ class Newsletterengine
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
                     
                     
-                    // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->newsletter->getTitle(), $this->newsletter->getContent());
-
 
                 }
 
