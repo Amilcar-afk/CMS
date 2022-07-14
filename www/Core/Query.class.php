@@ -232,8 +232,6 @@ class Query extends BaseSQL
     {
         $query = $this->__toString();
 
-        
-
         $statement = $this->pdo->prepare($query);
         if (self::$params) {
             $statement->execute(self::$params);

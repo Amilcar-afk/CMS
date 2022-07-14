@@ -7,6 +7,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Newsletter;
 use App\Core\Query;
+use App\Model\Mail as MailModel;
+use App\Model\Newsletter_subscriber;
 
 class Newsletterengine
 {
@@ -126,6 +128,73 @@ class Newsletterengine
 
 
 
+
+    public function subscribe() {
+        
+        if (isset($_POST['email'])) {
+            if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                
+                $newsletterSubscribe = new Newsletter_subscriber();
+                $isSubscribe = $newsletterSubscribe->find($_POST['email'], "email");
+                if ($isSubscribe) {
+                    echo "You are already subscribe";
+                } else {
+                    $newsletterSubscribe->setEmail($_POST['email']);
+                    $newsletterSubscribe->save();
+                    echo "You have been subscribe !";
+                }
+            } else {
+                echo "Bad email";    
+            }
+        } else {
+            echo "Bad request";
+        }
+
+    }
+
+    public function unsubscribe($request)
+    {
+        if(isset($request['email'])) {
+            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->params(['email' => $request['email']])->execute();
+            if (isset($newsletterSubscribe[0])) {
+                //$newsletterSubscribe[0]->delete($request['email']);
+                Query::deleteAll('')->from('cmspf_Newsletter_subscribers')->where("email = :email")->params(['email' => $request['email']])->execute();
+                $view = new View("message", 'back-sandbox');
+                $view->assign("metaData", $metaData = [
+                    "title" => 'newsletter unsubscribe',
+                    "description" => 'This is the newsletter unsubscribe',
+                ]);
+                $view->assign("message", "you have been unsubscribe");
+            } else {
+                http_response_code(500);
+            }
+        } 
+    }
+
+    public function notify()
+    {
+        $newsletterSubscribes = new Newsletter_subscriber();
+        $newsletterSubscribes = $newsletterSubscribes->find();
+        foreach ($newsletterSubscribes as $subscribe) {
+            $this->update($subscribe);
+        }
+    }
+
+    public function update($subscribe) 
+        {
+
+            $mail = new MailModel();
+            $test = $this->newsletter->getContent();
+
+            array_push($test, [
+                "type"=>"newsletter",
+                "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()
+            ]);
+            $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $test);
+
+        }
+
+
     public function saveContentNewsletter()
     {
         if (isset($_POST['id']) && isset($_POST['content']) && isset($_POST['status'])){
@@ -133,19 +202,17 @@ class Newsletterengine
 
             if ($newsletter){
 
+                $this->newsletter->setId($_POST['id']);
+                $this->newsletter->setStatus($_POST['status']);
+                $this->newsletter->setContent($_POST['content']);
+
                 if ($_POST['status'] == 'Public'){
 
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
                     
-                    
-                    // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->newsletter->getTitle(), $this->newsletter->getContent());
-
+                    $this->notify();
 
                 }
-
-                $this->newsletter->setId($_POST['id']);
-                $this->newsletter->setStatus($_POST['status']);
-                $this->newsletter->setContent($_POST['content']);
                 $this->newsletter->save();
             }else{
                 http_response_code(500);

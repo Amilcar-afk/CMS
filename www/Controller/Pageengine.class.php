@@ -102,7 +102,10 @@ class Pageengine
             $view->assign("bessels", $bessels);
             $view->assign("metaData", $metaData = [
                 "title" => $page->getTitle(),
-                "description" => $page->getDescription()
+                "description" => $page->getDescription(),
+                "src" => [
+                    ["type" => "js", "path" => "/style/js/subscribe.js"],
+                ],
             ]);
         }else{
             http_response_code(404);

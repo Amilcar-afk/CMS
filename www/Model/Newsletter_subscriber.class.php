@@ -64,10 +64,19 @@ class Newsletter_subscriber extends BaseSQL
         $this->user_key = $user_key;
     }
 
-    public function update(Newsletter $newsletter) 
-        {
-            echo "test";
-            // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->$newsletter->getTitle(), $this->$newsletter->getContent());
-        }
+    public function delete($id)
+    {
+        parent::delete($id);
+    }
+
+    public function save()
+    {
+        parent::save();
+    }
+
+    public function find($id = null, string $attribut = 'id')
+    {
+        return parent::find($id, $attribut);
+    }
 
 }
