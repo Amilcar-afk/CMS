@@ -124,6 +124,8 @@ class Newsletterengine
         }
     }
 
+
+
     public function saveContentNewsletter()
     {
         if (isset($_POST['id']) && isset($_POST['content']) && isset($_POST['status'])){
@@ -132,10 +134,13 @@ class Newsletterengine
             if ($newsletter){
 
                 if ($_POST['status'] == 'Public'){
+
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
+                    
+                    
+                    // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->newsletter->getTitle(), $this->newsletter->getContent());
 
 
-                    //set a observer to send the newsletter to the subscribers
                 }
 
                 $this->newsletter->setId($_POST['id']);

@@ -194,6 +194,25 @@
             fill: none;
         }
     }
+    & #chart-per-page {
+        width: 100%;
+        opacity: 1;
+        height: 90%;
+        max-height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow-y: scroll !important;
+        &::-webkit-scrollbar-thumb {
+            width: 0px;
+            background: $light-grey-second;
+        }
+
+        &::-webkit-scrollbar-track {
+            width: 0px;
+        }
+    }
     
     
 
@@ -213,6 +232,20 @@
         padding: 15px;
         border-radius: var(--radius, 15px);
         min-height: 120px;
+
+        & #chart-per-page {
+            max-height: unset;
+            height: unset;
+            overflow-y: unset!important;
+            &::-webkit-scrollbar-thumb {
+                width: 0px;
+                background: $light-grey-second;
+            }
+
+            &::-webkit-scrollbar-track {
+                width: 0px;
+            }
+        }
 
         & .material-icons-round {
             color: #FFFFFF;

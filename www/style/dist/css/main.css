@@ -1158,6 +1158,21 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     width: 100%; }
     .card #chart-per-week g:nth-child(2) rect {
       fill: none; }
+  .card #chart-per-page {
+    width: 100%;
+    opacity: 1;
+    height: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: scroll !important; }
+    .card #chart-per-page::-webkit-scrollbar-thumb {
+      width: 0px;
+      background: #afafaf; }
+    .card #chart-per-page::-webkit-scrollbar-track {
+      width: 0px; }
   .card .table-container {
     margin-top: 6px;
     margin-bottom: 6px;
@@ -1170,6 +1185,15 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     padding: 15px;
     border-radius: var(--radius, 15px);
     min-height: 120px; }
+    .card #chart-per-page {
+      max-height: unset;
+      height: unset;
+      overflow-y: unset !important; }
+      .card #chart-per-page::-webkit-scrollbar-thumb {
+        width: 0px;
+        background: #afafaf; }
+      .card #chart-per-page::-webkit-scrollbar-track {
+        width: 0px; }
     .card .material-icons-round {
       color: #FFFFFF;
       font-size: 1.25rem; }
@@ -2414,6 +2438,14 @@ h2 {
 
 .module {
   position: relative; }
+  .module.compose-subscibe-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #d9d9d9;
+    border-radius: var(--radius, 5px);
+    width: 100%; }
+    .module.compose-subscibe-container > input {
+      width: calc(100% - 40px); }
 
 .section-module {
   position: relative;

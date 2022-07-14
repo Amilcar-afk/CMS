@@ -579,6 +579,21 @@
                 </div>
             </article>
 
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-empty-list-elements">
+                    <h2>Empty</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-empty-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <article class="module-list">
+                            <ahref class="module cta-button fs-14 cta-button--submit" data-media-type="link" href="https://google.fr">Button</ahref>
+                        </article>
+                    </div>
+                </div>
+            </article>
+
         </div>
 
         <div id="other-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
@@ -604,6 +619,28 @@
                             </div>
                         </article>
 
+                    </div>
+
+                </div>
+            </article>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="newsletter-list-elements">
+                    <h2>Newsletter</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="newsletter-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+
+                        <article class="section-module background-second-color module-list">
+                            <h3 class="module col-12 color-background-color text-left fs-26 bold">Newsletter.</h3>
+                            <h4 class="module col-12 color-background-color text-left fs-14 medium">Subscribe to my newsltter to stay informed of my news.</h4>
+                            <div class="module col-12 input-container compose-subscibe-container">
+                                <input class="input" name="subscriberEmail" type="text" placeholder="Your email">
+                                <button class="cta-button cta-button--icon cta-button-compose-subscriber"><span class="material-icons-round">send</span></button>
+                            </div>
+                        </article>
                     </div>
 
                 </div>

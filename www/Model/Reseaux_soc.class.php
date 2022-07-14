@@ -3,6 +3,7 @@ namespace App\Model;
 
 use App\Controller\Statistics;
 use App\Core\BaseSQL;
+use App\Core\Query;
 
 class Reseaux_soc extends BaseSQL
 {
@@ -117,6 +118,12 @@ class Reseaux_soc extends BaseSQL
     {
         $stat = new Statistics();
         $stat->composeStats($elementId, $type);
+    }
+    public function getStats()
+    {
+
+        return Query::select("COUNT(reseau_soc_key) AS number")->from("cmspf_Stats")->where(" reseau_soc_key = ".$this->getId())->execute()[0]['number'];
+    
     }
 
     public function getFormNewReseauxSoc(): array
