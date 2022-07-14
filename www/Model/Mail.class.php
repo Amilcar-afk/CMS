@@ -23,12 +23,12 @@ class Mail extends BaseSQL
         $json_data = file_get_contents($envFile);
         $config = json_decode($json_data, true);
 
-        if (empty($data_base_env['env'][1]['SMTP_HOST'])
-            && empty($data_base_env['env'][1]['SMTP_PORT'])
-            && empty($data_base_env['env'][1]['SMTP_SECURE'])
-            && empty($data_base_env['env'][1]['SMTP_USERNAME'])
-            && empty($data_base_env['env'][1]['SMTP_PASSWORD'])){
-            http_response_code(404);
+        if (empty($config['env'][1]['SMTP_HOST'])
+            && empty($config['env'][1]['SMTP_PORT'])
+            && empty($config['env'][1]['SMTP_SECURE'])
+            && empty($config['env'][1]['SMTP_USERNAME'])
+            && empty($config['env'][1]['SMTP_PASSWORD'])){
+            // http_response_code(404);
             die();
         }
 

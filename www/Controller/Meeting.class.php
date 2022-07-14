@@ -22,7 +22,6 @@ class Meeting
     {
         $this->rdv = new Rdv();
         $this->user_rdv = new User_rdv();
-        $this->mail = new Mail();
     }
 
 
@@ -281,9 +280,13 @@ class Meeting
                     "title"=>$_POST['title'],
                     "location"=>$_POST['location'],
                     "description"=>$_POST['description'],
+
+
                 ];
 
-                $this->mail->userMailconfirmReservation($dataOfMail);
+                $mailuser = new Mail();
+                $mailuser->userMailconfirmReservation($dataOfMail);
+
                 $mailOwner = new Mail();
                 $mailOwner->ownerMailConfirmReservation($dataOfMail);
 

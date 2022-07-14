@@ -156,6 +156,12 @@ class Communication
         }
     }
 
+
+    public function test ()
+    {
+        echo '12';
+    }
+
     public function updateSeenStatus()
     {
         if($_POST['conversation_user_id']){

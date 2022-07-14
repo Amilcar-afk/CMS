@@ -13,9 +13,6 @@ $(document).ready(function(){
             getMessages()
             changeSeenStatus(data)
         }, 1000);
-
-
-
     }
 
     $('#chat-conversations-elements').hide();
@@ -151,8 +148,6 @@ $(document).ready(function(){
 
     }
 
-    var allMessages = [];
-
     function getMessages(){
         $.ajax({
             url: "/conversations/get-all-messages",
@@ -163,12 +158,23 @@ $(document).ready(function(){
             },
             success: function(messages){ 
                 if($( "#chatDiv > article >p" ).length != messages.length ){
-                    $( "#chatDiv" ).append(
-                        '<article class="message"><p>'
-                        +messages[0]['content']+
-                        '</p></article>'
-                        
+
+                    console.log(messages[0].user_key)
+
+                    if(messages[0].user_key == $('#myId').val()){
+                        $( "#chatDiv" ).append(
+                            '<article class="message message--mind"><p>'
+                            +messages[0]['content']+
+                            '</p></article>'
                         )
+                    }else{
+                        $( "#chatDiv" ).append(
+                            '<article class="message "><p>'
+                            +messages[0]['content']+
+                            '</p></article>'
+                        )
+                    }
+
                 }
             }
         });

@@ -244,6 +244,11 @@
   action: listRdv
   middleware : ['auth']
 
+
+/bobo:
+  controller: meeting
+  action: test
+
 /load/slots:
   controller: meeting
   action: loadslot
