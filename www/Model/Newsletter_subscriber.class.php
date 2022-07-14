@@ -5,9 +5,9 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 use App\Core\Query;
+use App\Model\Newsletter;
 
-
-class Newsletter extends BaseSQL
+class Newsletter_subscriber extends BaseSQL
 {
     public $id = null;
     protected $email;
@@ -63,5 +63,11 @@ class Newsletter extends BaseSQL
     {
         $this->user_key = $user_key;
     }
+
+    public function update(Newsletter $newsletter) 
+        {
+            echo "ca fonctionne ". $newsletter;
+            // Mail send logic
+        }
 
 }
