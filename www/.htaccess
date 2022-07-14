@@ -1,11 +1,12 @@
 RewriteEngine on
 Options -Indexes +FollowSymLinks
 
-#ErrorDocument 403 /error.php
-#ErrorDocument 500 /error.php
-#ErrorDocument 503 /error.php
-#ErrorDocument 500 /error.php
-#ErrorDocument 504 /error.php
+ErrorDocument 403 /error.php?te=0
+ErrorDocument 404 /error.php?te=0
+ErrorDocument 500 /error.php?te=0
+ErrorDocument 503 /error.php?te=0
+ErrorDocument 500 /error.php?te=0
+ErrorDocument 504 /error.php?te=0
 
 
 #ErrorDocument 404 /View/error404.view.php
