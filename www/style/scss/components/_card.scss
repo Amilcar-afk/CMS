@@ -225,14 +225,17 @@
             align-self: flex-start;
             &  h4, .material-icons-round {
                 margin: 0;
-                font-size: rem(20);
+                font-size: 1.1rem;
                 line-height: rem(21);
             }
             & h3, .material-icons-round {
                 margin: 0;
-                font-size: rem(20);
+                font-size: 1.1rem;
                 line-height: rem(21);
             }
+        }
+        &--smallcard {
+            margin-top: 20px;
         }
     }
 }
