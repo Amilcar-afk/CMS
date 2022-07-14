@@ -91,6 +91,7 @@ class Settings
     public function composeDatabase()
     {
         if($_POST){
+
             if(isset($_POST['DBHOST'])){
                 $config = Validator::run($this->config->dataBaseForm(),$_POST);
             }else{
@@ -122,8 +123,12 @@ class Settings
                 }
                 $env_file = 'env.json';
                 $data_base_env = yaml_parse_file($env_file);
+
+                var_dump($data_base_env['env'][0]);
                 
                 $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
+                $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
+
                 $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
                 $this->config->setPort($data_base_env['env'][0]['DBPORT']);
                 $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
@@ -135,7 +140,6 @@ class Settings
                 $this->config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
                 $this->config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
                 $this->config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
-                //$this->config->insertDatabase();
 
                 $view = new View("configuration");
                 $view->assign("configuration", $this->config);
@@ -171,8 +175,6 @@ class Settings
     }
 
 
-
-
     public function loadDatabase()
     {
         //recuperer les info du fichier json
@@ -180,6 +182,7 @@ class Settings
         $data_base_env = yaml_parse_file($env_file);
         $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
         $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
+        $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
         $this->config->setPort($data_base_env['env'][0]['DBPORT']);
         $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
         $this->config->setDb_user($data_base_env['env'][0]['DBUSER']);
