@@ -154,13 +154,11 @@ class Newsletterengine
 
     public function unsubscribe($request)
     {
-        echo "lol";
-        if(isset($request['email']) && isset($request['idSubscribe'])) {
-            echo "gg";
-            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->where("id = :idSubscribe")->execute()->params(['email' => $request['email'], 'idSubscribe' => $request['idSubscribe']]);
+        if(isset($request['email'])) {
+            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->params(['email' => $request['email']])->execute();
             if (isset($newsletterSubscribe[0])) {
-                echo "salut";
-                $newsletterSubscribe[0]->delete($request['idSubscribe']);
+                //$newsletterSubscribe[0]->delete($request['email']);
+                Query::deleteAll('')->from('cmspf_Newsletter_subscribers')->where("email = :email")->params(['email' => $request['email']])->execute();
                 $view = new View("message", 'back-sandbox');
                 $view->assign("metaData", $metaData = [
                     "title" => 'newsletter unsubscribe',
@@ -170,7 +168,7 @@ class Newsletterengine
             } else {
                 http_response_code(500);
             }
-        }
+        } 
     }
 
     public function notify()
@@ -190,7 +188,7 @@ class Newsletterengine
 
             array_push($test, [
                 "type"=>"newsletter",
-                "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()."/".$subscribe->getId()."/"
+                "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()
             ]);
             $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $test);
 
