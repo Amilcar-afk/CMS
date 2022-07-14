@@ -8,6 +8,7 @@ $(document).ready(function(){
                 {
                     DBHOST:$(this).parent().find('[name=DBHOST]').val(),
                     DBPWD:$(this).parent().find('[name=DBPWD]').val(),
+                    SITENAME:$(this).parent().find('[name=SITENAME]').val(),
                     DBPORT:$(this).parent().find('[name=DBPORT]').val(),
                     DBNAME:$(this).parent().find('[name=DBNAME]').val(),
                     DBUSER:$(this).parent().find('[name=DBUSER]').val(),
