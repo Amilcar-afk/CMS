@@ -149,6 +149,13 @@ class Newsletter extends BaseSQL
         $this->date_release = $date_release;
     }
 
+    public function notify()
+        {
+            foreach ($this->subscribedClients as $client) {
+                $client->update($this);
+            }
+        }
+
     public function getFormNewNewsletter(): array
     {
 
