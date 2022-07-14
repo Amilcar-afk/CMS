@@ -18,6 +18,7 @@ class Newsletter extends BaseSQL
     protected $status;
     protected $user_key;
     protected $content;
+    private $subscribedClients;
 
     /**
      * @return mixed
@@ -173,7 +174,7 @@ class Newsletter extends BaseSQL
 
 
 
-    
+
     public function getFormNewNewsletter(): array
     {
 

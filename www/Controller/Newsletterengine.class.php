@@ -138,8 +138,6 @@ class Newsletterengine
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
 
 
-                    $this->$newsletter->notify();
-
 
 
                 }
