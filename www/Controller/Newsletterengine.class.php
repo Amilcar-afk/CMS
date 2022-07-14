@@ -124,7 +124,7 @@ class Newsletterengine
         }
     }
 
-    
+
 
     public function saveContentNewsletter()
     {
@@ -138,7 +138,7 @@ class Newsletterengine
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
 
 
-                    //set a observer to send the newsletter to the subscribers
+                    $this->$newsletter->notify();
 
 
 
