@@ -82,8 +82,8 @@ class Setup{
             ->where("type = 'favicon'")
             ->execute('Option');
 
-        if ($logo[0]->getType() == null
-            || $favicon[0]->getType() == null){
+        if (isset($logo[0])
+            || isset($favicon[0])){
             header("Location: /setup/design/1");
         }
 
@@ -119,11 +119,11 @@ class Setup{
             ->where("type = 'text_color'")
             ->execute('Option');
 
-        if ($mainColor[0]->getValue() == null
-            || $secondColor[0]->getValue() == null
-            || $thirdColor[0]->getValue() == null
-            || $backgroundColor[0]->getValue() == null
-            || $textColor[0]->getValue() == null){
+        if (isset($mainColor[0])
+            || isset($secondColor[0])
+            || isset($thirdColor[0])
+            || isset($backgroundColor[0])
+            || isset($textColor[0])){
             header("Location: /setup/main-images");
         }
 
@@ -145,7 +145,7 @@ class Setup{
             ->where("type = 'radius'")
             ->execute('Option');
 
-        if ($radius[0]->getType() == null){
+        if (isset($radius[0])){
             header("Location: /setup/design/2");
         }
 
@@ -165,7 +165,7 @@ class Setup{
             ->where("type = 'bessels'")
             ->execute('Option');
 
-        if ($bessels[0]->getType() == null){
+        if (isset($bessels[0])){
             header("Location: /dashboard");
         }
         $view = new View("setup/design-second", "back-sandbox");
