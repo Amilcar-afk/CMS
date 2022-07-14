@@ -183,7 +183,7 @@ class Newsletterengine
         {
 
             $mail = new MailModel();
-            $mail->sendEmail($email, "", $this->$newsletter->getTitle(), $this->$newsletter->getContent());
+            $mail->sendEmail($email, " ", $this->newsletter->getTitle(), $this->newsletter->getContent());
 
         }
 
@@ -195,6 +195,10 @@ class Newsletterengine
 
             if ($newsletter){
 
+                $this->newsletter->setId($_POST['id']);
+                $this->newsletter->setStatus($_POST['status']);
+                $this->newsletter->setContent($_POST['content']);
+
                 if ($_POST['status'] == 'Public'){
 
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
@@ -202,10 +206,6 @@ class Newsletterengine
                     $this->notify();
 
                 }
-
-                $this->newsletter->setId($_POST['id']);
-                $this->newsletter->setStatus($_POST['status']);
-                $this->newsletter->setContent($_POST['content']);
                 $this->newsletter->save();
             }else{
                 http_response_code(500);
