@@ -165,7 +165,7 @@ class Settings
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['newPassword']);
             $this->user->save();
-            echo 1;
+            echo '1';
         }else{
             return include "View/Partial/form.partial.php";
         }

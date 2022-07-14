@@ -533,7 +533,6 @@ class User extends BaseSQL
                             "placeholder"=>"Your Current Password",
                             "name"=>"currentpwdRegister",
                             "class"=>"input",
-                            "required"=>true,
                             "min"=>12,
                             "max"=>60,
                             "error"=>""
@@ -544,18 +543,16 @@ class User extends BaseSQL
                             "placeholder"=>"Your New Password",
                             "name"=>"newpwdRegister",
                             "class"=>"input",
-                            "required"=>true,
                             "min"=>12,
                             "max"=>60,
                             "error"=>""
                         ],
-                        "passwordConfirm"=>[
+                        "newpasswordConfirm"=>[
                             "question"=>"Confirm password",
                             "type"=>"password",
                             "placeholder"=>"Confirm password",
                             "name"=>"pwdConfirmRegister",
                             "class"=>"input",
-                            "required"=>true,
                             "confirm"=>"newPassword",
                             "error"=>""
                         ],

@@ -51,7 +51,7 @@ $(document).ready(function(){
                 {
                     currentPassword:$(this).parent().find('[name=currentPassword]').val(),
                     newPassword:$(this).parent().find('[name=newPassword]').val(),
-                    passwordConfirm:$(this).parent().find('[name=passwordConfirm]').val(),
+                    newpasswordConfirm:$(this).parent().find('[name=newpasswordConfirm]').val(),
                     firstname:$(this).parent().find('[name=firstname]').val(),
                     lastname:$(this).parent().find('[name=lastname]').val()
 
@@ -59,11 +59,8 @@ $(document).ready(function(){
             success:function(answer)
             {
                 if (answer == '1'){
-                    alertMessage('User created!');
+                    alertMessage('User Updated!');
                     $('#cta-button-close-container-my-profile').click()
-                    window.location.replace("/settings/user-manager")
-
-                    
                 }else{
                     $(updateformContainer).html(answer);
                 }

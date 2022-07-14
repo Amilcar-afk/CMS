@@ -24,7 +24,7 @@
 /user/profile-update:
   controller: Settings
   action: updateProfile
-  middleware: ['admin' ]
+  middleware: ['auth' ]
 
 /dashboard:
   controller: statistics

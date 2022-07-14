@@ -75,7 +75,6 @@ class User{
                     if(!isset($_SESSION['redirect_url'])){
                         header('location:/dashboard');
                     }else{
-
                         header('location:'.$_SESSION['redirect_url']);
                     }
                 }else{

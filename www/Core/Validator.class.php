@@ -33,9 +33,9 @@ class Validator
 
         if(isset($config['inputs']['newPassword'])
             && isset($config['inputs']['passwordConfirm'])
-            && self::valueEquality($data['newPassword'], $data['passwordConfirm'])){
+            && self::valueEquality($data['newPassword'], $data['newpasswordConfirm'])){
 
-            $config['inputs']['passwordConfirm']['error'] = "Passwords does not match";
+            $config['inputs']['newpasswordConfirm']['error'] = "Passwords does not match";
         }
 
         if(isset($config['inputs']['currentPassword']) && $unicpwd == true){
@@ -43,8 +43,25 @@ class Validator
             $config['inputs']['currentPassword']['error'] = "Passwords does not exist";
         }
 
+      
+
+
+
+        
+
+        
         foreach ($config["inputs"] as $name => $input){
 
+            if(isset($config['inputs']['newPassword']) && isset($config['inputs']['currentPassword']) ){
+
+                if(empty($data['newPassword']) && empty($data['currentPassword'])){
+                    continue;
+                }
+
+                if(!empty($data['newPassword']) && empty($data['currentPassword'])){
+                    $config['inputs']['currentPassword']['error'] = "Insert your current passord";
+                }
+            }
 
             if(isset($input["name"]) &&  $input["name"] == "id"){
                 continue;
