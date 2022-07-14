@@ -7,6 +7,7 @@ use App\Core\BaseSQL;
 use App\Core\Query;
 use App\Model\Categorie;
 use App\Model\Reseaux_soc;
+use App\Model\Newsletter_subscriber;
 
 class Newsletter extends BaseSQL
 {
@@ -17,6 +18,7 @@ class Newsletter extends BaseSQL
     protected $status;
     protected $user_key;
     protected $content;
+    private $subscribedClients;
 
     /**
      * @return mixed
@@ -149,12 +151,29 @@ class Newsletter extends BaseSQL
         $this->date_release = $date_release;
     }
 
+
+
+
+
+    public function subscribe(Newsletter_subscriber $client)
+    {
+        $this->subscribedClients[ $client->id ] = $client;
+    }
+
+    public function unsubscribe(Newsletter_subscriber $client)
+    {
+        unset( $this->subscribedClients[ $client->id ] ); 
+    }
     public function notify()
-        {
-            foreach ($this->subscribedClients as $client) {
-                $client->update($this);
-            }
+    {
+        foreach ($this->subscribedClients as $client) {
+            $client->update($this);
         }
+    }
+
+
+
+
 
     public function getFormNewNewsletter(): array
     {
