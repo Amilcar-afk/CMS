@@ -11,6 +11,8 @@ class Configuration extends BaseSQL
     protected $port = null;
     protected $db_name = null;
     protected $db_user = null;
+    protected $site_name = null;
+
 
     protected $smtp_host;
     protected $smtp_auth;
@@ -45,6 +47,27 @@ class Configuration extends BaseSQL
 
         return $this;
     }
+
+     /**
+     * Get the value of site_name
+     */ 
+    public function getSite_name()
+    {
+        return $this->site_name;
+    }
+
+    /**
+     * Set the value of site_name
+     *
+     * @return  self
+     */ 
+    public function setSite_name($site_name)
+    {
+        $this->site_name = $site_name;
+
+        return $this;
+    }
+
 
     /**
      * Get the value of host_name
@@ -280,6 +303,7 @@ class Configuration extends BaseSQL
                 "submit"=>"Save",
             ],
             "inputs"=>[
+
                 "DBHOST"=>[
                     "type"=>"text",
                     "placeholder"=>"Host Name ...",
@@ -292,7 +316,20 @@ class Configuration extends BaseSQL
                     "min"=>2,
                     "max"=>50,
                     "error"=>""
-
+                    ],
+                    
+                "SITENAME"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Site Name ...",
+                    "name"=>"SITENAME",
+                    "id"=>"site_name",
+                    "class"=>"input",
+                    "question"=>"Site Name",
+                    "value"=> $this->getSite_name(),
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
                     ],
 
                 "DBNAME"=>[

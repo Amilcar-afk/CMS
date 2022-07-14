@@ -268,7 +268,6 @@ class Meeting
                 $this->rdv->save();
 
                 $dataOfMail= [
-
                     "owner_firstname"=>$owner_firstname,
                     "owner_lastname"=>$owner_lastname,
                     "owner_email"=>$owner_email,
@@ -280,8 +279,6 @@ class Meeting
                     "title"=>$_POST['title'],
                     "location"=>$_POST['location'],
                     "description"=>$_POST['description'],
-
-
                 ];
 
                 $mailuser = new Mail();
