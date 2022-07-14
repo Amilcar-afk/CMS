@@ -154,9 +154,12 @@ class Newsletterengine
 
     public function unsubscribe($request)
     {
+        echo "lol";
         if(isset($request['email']) && isset($request['idSubscribe'])) {
+            echo "gg";
             $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->where("id = :idSubscribe")->execute()->params(['email' => $request['email'], 'idSubscribe' => $request['idSubscribe']]);
             if (isset($newsletterSubscribe[0])) {
+                echo "salut";
                 $newsletterSubscribe[0]->delete($request['idSubscribe']);
                 $view = new View("message", 'back-sandbox');
                 $view->assign("metaData", $metaData = [
@@ -175,15 +178,21 @@ class Newsletterengine
         $newsletterSubscribes = new Newsletter_subscriber();
         $newsletterSubscribes = $newsletterSubscribes->find();
         foreach ($newsletterSubscribes as $subscribe) {
-            $this->update($subscribe->getEmail());
+            $this->update($subscribe);
         }
     }
 
-    public function update($email) 
+    public function update($subscribe) 
         {
 
             $mail = new MailModel();
-            $mail->sendEmail($email, " ", $this->newsletter->getTitle(), $this->newsletter->getContent());
+            $test = $this->newsletter->getContent();
+
+            array_push($test, [
+                "type"=>"newsletter",
+                "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()."/".$subscribe->getId()."/"
+            ]);
+            $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $test);
 
         }
 
