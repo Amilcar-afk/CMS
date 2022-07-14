@@ -23,10 +23,8 @@ class Categorie{
     {
         $categorieEmpty = $this->categorie;
         $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
-        $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("categorie-list", "back");
         $view->assign("categories",$categories);
-        $view->assign("navigations", $navigations);
         $view->assign("categorieEmpty", $categorieEmpty);
         $view->assign("metaData", $metaData = [
             "title" => 'Categories',
@@ -67,8 +65,7 @@ class Categorie{
                 }
                 $this->categorie->setId($_POST['id']);
             }
-            $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
-            $config = Validator::run($this->categorie->getFormNewCategorie($navigations), $_POST);
+            $config = Validator::run($this->categorie->getFormNewCategorie(), $_POST);
 
             if (empty($config)) {
                 $this->categorie->save();

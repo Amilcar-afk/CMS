@@ -34,13 +34,13 @@
                                 <tr class="table-line">
                                     <td>
                                         <h4><?= ucfirst($categorie->getTitle()) ?></h4>
-
-                                        <?php foreach ($categorie->navigations() as $nav):?>
-                                            <?php if ($nav->getType() == "nav"):?>
-                                                <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $nav->getTitle()?></label>
-                                            <?php endif;?>
-                                        <?php endforeach;?>
-
+                                        <?php if (isset($categorie->navigations()[0])): ?>
+                                            <?php foreach ($categorie->navigations() as $nav):?>
+                                                <?php if ($nav->getType() == "nav"):?>
+                                                    <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $nav->getTitle()?></label>
+                                                <?php endif;?>
+                                            <?php endforeach;?>
+                                        <?php endif;?>
                                     </td>
                                     <td>
                                         <a href="/build/<?= $categorie->page()->getSlug() ?>" class="cta-button"><span class="material-icons-round">mode</span></a>
@@ -76,7 +76,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $categorie->getFormNewCategorie($navigations)) ?>
+                        <?php  $this->includePartial("form", $categorie->getFormNewCategorie()) ?>
                     </article>
 
                 </div>
@@ -98,7 +98,7 @@
                 </header>
 
                 <article>
-                    <?php  $this->includePartial("form", $categorieEmpty->getFormNewCategorie($navigations)) ?>
+                    <?php  $this->includePartial("form", $categorieEmpty->getFormNewCategorie()) ?>
                 </article>
             </div>
         </section>
