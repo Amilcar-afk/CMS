@@ -579,6 +579,21 @@
                 </div>
             </article>
 
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-empty-list-elements">
+                    <h2>Empty</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-empty-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <article class="module-list">
+                            <ahref class="module cta-button fs-14 cta-button--submit" data-media-type="link" href="https://google.fr">Button</ahref>
+                        </article>
+                    </div>
+                </div>
+            </article>
+
         </div>
 
         <div id="other-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
