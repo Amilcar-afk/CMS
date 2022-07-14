@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(document).on("click", ".cta-button-compose-subscriber", function () {
         $.ajax({
-            url:"/newsletter/subscibe",
+            url:"/newsletter/subscribe",
             type:"POST",
             data:
                 {

@@ -129,20 +129,27 @@ class Newsletterengine
 
 
 
-    public function subscribe($client) {
+    public function subscribe() {
+        echo "test";
         if (isset($_POST['email'])) {
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 
                 $newsletterSubscribe = new Newsletter_subscriber();
-                $newsletterSubscribe->save();
-                echo "You have been subscribe !";
-                
+                $newsletterSubscribe = $newsletterSubscribe->find($_POST['email'], "email");
+                if ($newsletterSubscribe) {
+                    echo "You are already subscribe";
+                } else {
+                    $newsletterSubscribe->setEmail($_POST['email']);
+                    $newsletterSubscribe->save();
+                    echo "You have been subscribe !";
+                }
             } else {
                 echo "Bad email";    
             }
         } else {
             echo "Bad request";
         }
+
     }
 
     public function unsubscribe($client)
