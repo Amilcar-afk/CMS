@@ -243,7 +243,7 @@ class User{
                 $this->user->save();
 
                 $mail = new Mail();
-                $mail->resetPwdMail($_POST['email'], $_POST['firstname'], $token);
+                $mail->resetPwdMail($_POST['email'], '', $token);
 
             }
         }

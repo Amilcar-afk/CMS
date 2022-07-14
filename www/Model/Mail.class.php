@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer as PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Core\BaseSQL;
+use App\Core\Query;
 
 require_once('vendor/phpmailer/phpmailer/src/PHPMailer.php');
 require_once('vendor/phpmailer/phpmailer/src/SMTP.php');
@@ -50,7 +51,9 @@ class Mail extends BaseSQL
             )
         );
 
-        $this->mail->setFrom($this->mail->Username, "CMS PORTFOLIO");
+        $env_file = 'env.json';
+        $data_base_env = yaml_parse_file($env_file);
+        $this->mail->setFrom($this->mail->Username, $data_base_env['env'][0]['SITENAME']);
     }
 
     public function sendEmail($to_email, $to_name, $subject, $message)
@@ -59,6 +62,17 @@ class Mail extends BaseSQL
         try {
             ob_start();
             $message = $message;
+
+            $logodata = Query::from('cmspf_Options')
+            ->where("type = 'logo'")
+            ->execute('Option');
+
+            if(isset($logodata[0])){
+                $logo = $_SERVER["HTTP_HOST"].$logodata[0]->getPath();
+            }else{
+                $logo =  $_SERVER["HTTP_HOST"].'/style/images/logo_myfolio.png';
+            }
+
             include("View/Partial/mail.partial.php");
             $message = ob_get_contents();
             ob_end_clean();

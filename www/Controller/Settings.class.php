@@ -123,11 +123,10 @@ class Settings
                 }
                 $env_file = 'env.json';
                 $data_base_env = yaml_parse_file($env_file);
-
-                var_dump($data_base_env['env'][0]);
                 
-                $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
+                
                 $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
+                $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
 
                 $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
                 $this->config->setPort($data_base_env['env'][0]['DBPORT']);

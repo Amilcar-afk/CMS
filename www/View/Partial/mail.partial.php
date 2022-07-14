@@ -190,7 +190,8 @@
                                                                                     <tbody>
                                                                                     <tr>
                                                                                         <td style="width:100px;">
-                                                                                            <img alt height="auto" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/crofts-white.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="100">
+                                                                                                <img src="<?= $logo ?>" alt="logo">
+                                                                                            <!-- <img alt height="auto" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/crofts-white.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="100"> -->
                                                                                         </td>
                                                                                     </tr>
                                                                                     </tbody>
@@ -199,7 +200,13 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td align="center" style="font-size:0px;padding:10px 25px;padding-top:30px;word-break:break-word;">
-                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;text-transform:uppercase;color:var(--main-color, #396075);">Austin, TX rajouter le nom du site</div>
+                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;text-transform:uppercase;color:var(--main-color, #396075);">
+                                                                                <?php
+                                                                                $env_file = 'env.json';
+                                                                                $data_base_env = yaml_parse_file($env_file);
+                                                                                echo $data_base_env['env'][0]['SITENAME'];
+                                                                                ?>
+                                                                            </div>
                                                                             </td>
                                                                         </tr>
                                                                         </tbody>
