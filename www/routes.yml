@@ -349,12 +349,12 @@
   middleware: [ 'auth', 'admin' ]
 
 /setup/login:
-  controller: Setup
-  action: loadLogin
+  controller: user
+  action: login
 
 /setup/register:
-  controller: Setup
-  action: loadRegister
+  controller: user
+  action: register
 
 /setup/main-images:
   controller: Setup
