@@ -117,65 +117,68 @@ class Statistics
         $chartWeekData[] = ['Sat', 0, 0];
         $chartWeekData[] = ['Sun', 0, 0];
 
-        foreach($viewPerWeek as $key => $data) {
+        if (is_array($viewPerWeek) || is_object($viewPerWeek)) {
+            foreach($viewPerWeek as $key => $data) {
 
-            if ($data['day'] == "2"){
-                $data['day'] = "Mon";
-                $chartWeekData[1] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "3"){
-                $data['day'] = "Tue";
-                $chartWeekData[2] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "4"){
-                $data['day'] = "Wed";
-                $chartWeekData[3] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "5"){
-                $data['day'] = "Thu";
-                $chartWeekData[4] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "6"){
-                $data['day'] = "Fri";
-                $chartWeekData[5] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "7"){
-                $data['day'] = "Sat";
-                $chartWeekData[6] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "1"){
-                $data['day'] = "Sun";
-                $chartWeekData[7] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
+                if ($data['day'] == "2"){
+                    $data['day'] = "Mon";
+                    $chartWeekData[1] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "3"){
+                    $data['day'] = "Tue";
+                    $chartWeekData[2] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "4"){
+                    $data['day'] = "Wed";
+                    $chartWeekData[3] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "5"){
+                    $data['day'] = "Thu";
+                    $chartWeekData[4] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "6"){
+                    $data['day'] = "Fri";
+                    $chartWeekData[5] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "7"){
+                    $data['day'] = "Sat";
+                    $chartWeekData[6] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "1"){
+                    $data['day'] = "Sun";
+                    $chartWeekData[7] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
             }
         }
+        
 
 
         // GET VIEW PER PAGES
@@ -183,17 +186,20 @@ class Statistics
         arsort($viewPerPages);
 
         
+        
         // GET COUNTRY STATS
         $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
 
         $chartMapData[] = ['Country',["role"=> 'annotation']];
-
-        foreach($country as $key => $data) {
-            $chartMapData[] = [
-                $data['country'],
-                $toInt = (int)$data['number']
-            ];
+        if (is_array($country) || is_object($country)) {
+            foreach($country as $data) {
+                $chartMapData[] = [
+                    $data['country'],
+                    $toInt = (int)$data['number']
+                ];
+            }
         }
+        
 
 
 
@@ -201,12 +207,15 @@ class Statistics
         $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
 
         $chartDeviceData[] = ['Device',["role"=> 'annotation']];
-        foreach($devices as $device) {
-            $chartDeviceData[] = [
-                $device['device'],
-                $toInt = (int)$device['number']
-            ];
+        if (is_array($devices) || is_object($devices)) {
+            foreach($devices as $device) {
+                $chartDeviceData[] = [
+                    $device['device'],
+                    $toInt = (int)$device['number']
+                ];
+            }
         }
+        
 
         // GET NEW USERS STATS
         $currentMonth = date("m");
