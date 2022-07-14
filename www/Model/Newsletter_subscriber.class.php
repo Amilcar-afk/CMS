@@ -66,8 +66,8 @@ class Newsletter_subscriber extends BaseSQL
 
     public function update(Newsletter $newsletter) 
         {
-            echo "ca fonctionne ". $newsletter;
-            // Mail send logic
+            echo "test";
+            // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->$newsletter->getTitle(), $this->$newsletter->getContent());
         }
 
 }

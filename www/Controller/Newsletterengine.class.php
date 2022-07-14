@@ -136,8 +136,9 @@ class Newsletterengine
                 if ($_POST['status'] == 'Public'){
 
                     $this->newsletter->setDateRelease(date('d-m-y h:i:s'));
-
-
+                    
+                    
+                    // sendEmail($dataofMail['email'], $dataofMail['firstname'], $this->newsletter->getTitle(), $this->newsletter->getContent());
 
 
                 }
