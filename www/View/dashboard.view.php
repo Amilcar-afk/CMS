@@ -94,15 +94,6 @@
                                         <td><?php print_r($view['title']) ?></td>
                                         <td>vue : <?php print_r($view['number']) ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>test</td>
-                                    </tr>
-                                    <tr>
-                                        <td>test</td>
-                                    </tr>
-                                    <tr>
-                                        <td>test</td>
-                                    </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                             </tbody>
