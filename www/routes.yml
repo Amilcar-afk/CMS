@@ -346,10 +346,15 @@
 /setup/smtp:
   controller: Setup
   action: loadSmtp
+  middleware: [ 'auth', 'admin' ]
 
 /setup/login:
   controller: Setup
   action: loadLogin
+
+/setup/register:
+  controller: Setup
+  action: loadRegister
 
 /setup/main-images:
   controller: Setup

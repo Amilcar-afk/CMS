@@ -104,8 +104,6 @@ class Settings
                     $env_file = 'env.json';
                     $data_base_env = yaml_parse_file($env_file);
 
-                    echo "total".count($_POST);
-                    print_r($_POST);
 
                     foreach($_POST as $key => $data){
                         if(isset($_POST['DBHOST'])){

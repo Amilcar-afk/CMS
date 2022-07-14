@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Controller\Mail;
 use App\Core\Validator;
 use App\Core\View;
 use App\Model\User as UserModel;
-use App\Controller\Mail;
 use App\Core\Query;
 
 class User{
@@ -73,6 +73,14 @@ class User{
                     $_SESSION['Auth']->token = $user[0]->getToken();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
+
+                    $users = Query::from('cmspf_Users')
+                        ->execute("User");
+
+                    if (sizeof($users) == 1){
+                        header('location:/setup/smtp');
+                    }
+
                     if(!isset($_SESSION['redirect_url'])){
                         if ($user[0]->getRank() == 'admin') {
                             header('location:/dashboard');
@@ -118,6 +126,14 @@ class User{
             $this->user->setDateCreation($date);
             $this->user->generateToken();
 
+            $users = Query::from('cmspf_Users')
+                ->execute("User");
+
+            if (sizeof($users) == 0){
+                $this->user->setRank('admin');
+                $this->user->setConfirm(1);
+            }
+
             $unic_email = Query::from('cmspf_Users')
                             ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
                             ->execute("User");
@@ -131,10 +147,15 @@ class User{
                 //generate confirmKey
                 $this->user->generateConfirmKey($_POST['email']);
                 $this->user->save();
-                $confirmKey = $this->user->getConfirmKey();
 
-                $mail = new Mail();
-                $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+                if (sizeof($users) == 0){
+                    header('location:/setup/login');
+                }else{
+
+                    $confirmKey = $this->user->getConfirmKey();
+                    $mail = new Mail();
+                    $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+                }
             }else{
                 $view->assign("error_from",$result);
             }
