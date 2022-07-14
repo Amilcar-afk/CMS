@@ -14,11 +14,11 @@
                 <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="/conversations">Contact</a></li>
                 <li> </li>
                 <?php if(isset($_SESSION['Auth']->lastname) && $_SESSION['Auth']->firstname): ?>
-                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="dashboard"><?= $_SESSION['Auth']->lastname . " " . $_SESSION['Auth']->firstname ?></a></li>
+                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="/<?= (isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin')?'dashboard':'conversation' ?>"><?= $_SESSION['Auth']->lastname . " " . $_SESSION['Auth']->firstname ?></a></li>
                 <?php else: ?>
-                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="login">Login</a></li>
+                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="/login">Login</a></li>
                     <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> > | </a></li>
-                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="register">Sign in</a></li>
+                    <li><a class="<?= (isset($btnTextColor) && !preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? $btnTextColor :'' ?>" <?= (isset($btnTextColor) && preg_match('/^#[a-f0-9]{6}$/i', $btnTextColor)) ? "style='color:".$btnTextColor."'" :'' ?> href="/register">Sign up</a></li>
                 <?php endif;?>
             </ul>
         </nav>

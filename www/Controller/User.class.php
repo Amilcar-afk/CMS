@@ -73,7 +73,7 @@ class User{
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
                     if(!isset($_SESSION['redirect_url'])){
-                        header('location:/dashboard');
+                        header('location:/'. (isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin')?'dashboard':'');
                     }else{
 
                         header('location:'.$_SESSION['redirect_url']);
@@ -142,9 +142,9 @@ class User{
             $this->user->setDeleted(1);
             $this->user->setId($_GET['id']);
             $this->user->save();
-            echo "user deleted successfully";
+            echo "User deleted successfully";
         }else{
-            echo "user not deleted";
+            echo "User not deleted";
         }
     }
 
@@ -161,10 +161,10 @@ class User{
 
             $this->user->setId($_POST['id']);
             $this->user->save();
-            echo "rank updated";
+            echo "Rank updated";
 
         }else{
-            echo "error in update";
+            echo "Error in update";
         }
     }
 
@@ -277,7 +277,7 @@ class User{
                 }
                 echo "</ul>";
             }else{
-                echo '<i>Aucun utilisateur trouv�</i>';
+                echo '<i>No user</i>';
             }
         }
 
