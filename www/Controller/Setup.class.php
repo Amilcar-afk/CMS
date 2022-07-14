@@ -5,6 +5,7 @@ use App\Core\View;
 use App\Core\Validator;
 use App\Core\Query;
 use App\Model\Configuration;
+use App\Model\User;
 
 class Setup{
 
@@ -48,20 +49,25 @@ class Setup{
             header("Location: /setup/login");
         }
 
+        $user = new User();
+
         $view = new View("register", "back-sandbox");
         $view->assign("metaData", $metaData = [
             "title" => 'Register',
             "description" => 'Register page'
         ]);
+        $view->assign("user",$user);
     }
 
     public function loadLogin()
     {
+        $user = new User();
         $view = new View("login", "back-sandbox");
         $view->assign("metaData", $metaData = [
             "title" => 'Login',
             "description" => 'Login'
         ]);
+        $view->assign("user",$user);
     }
 
     public function loadSmtp()

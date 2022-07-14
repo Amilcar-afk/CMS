@@ -17,7 +17,7 @@ $(document).ready(function(){
                 alertMessage('Data updated!');
                 let pathname = window.location.pathname;
                 if (pathname == "/setup/database"){
-                    window.location.href = "/setup/smtp";
+                    window.location.href = "/setup/register";
                 }
               
             },
