@@ -85,7 +85,7 @@
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
                     
-                    <div id="chart-per-page" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
+                    <div id="chart-per-page" data-group-collapse="per-page-container">
                         <table class="table table--lite">
                             <tbody>
                             <?php if(is_array($viewPerPages) || is_object($viewPerPages)): ?>
@@ -94,13 +94,19 @@
                                         <td><?php print_r($view['title']) ?></td>
                                         <td>vue : <?php print_r($view['number']) ?></td>
                                     </tr>
+                                    <tr>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test</td>
+                                    </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                             </tbody>
                         </table>
-                        <button class="cta-button--text-no-background">
-                            Show More
-                        </button>
                     </div>
 
                     
