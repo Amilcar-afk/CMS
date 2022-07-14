@@ -23,6 +23,15 @@ class Mail extends BaseSQL
         $json_data = file_get_contents($envFile);
         $config = json_decode($json_data, true);
 
+        if (empty($data_base_env['env'][1]['SMTP_HOST'])
+            && empty($data_base_env['env'][1]['SMTP_PORT'])
+            && empty($data_base_env['env'][1]['SMTP_SECURE'])
+            && empty($data_base_env['env'][1]['SMTP_USERNAME'])
+            && empty($data_base_env['env'][1]['SMTP_PASSWORD'])){
+            http_response_code(404);
+            die();
+        }
+
         $this->mail = new PHPMailer(TRUE);
         $this->mail->isSMTP();
         $this->mail->Host = $config['env'][1]['SMTP_HOST'];
