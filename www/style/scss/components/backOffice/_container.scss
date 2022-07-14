@@ -463,7 +463,7 @@
       & .menu-container {
         backdrop-filter: blur(60px);
         background-color: rgba(129, 129, 129, 0.3);
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         min-width: unset;
 
@@ -497,7 +497,7 @@
       }
 
       & > section {
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         padding-bottom: calc(1.875rem + 90px);
       }

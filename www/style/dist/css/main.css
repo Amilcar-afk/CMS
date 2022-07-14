@@ -2126,7 +2126,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       .container-main-content--menu .menu-container {
         backdrop-filter: blur(60px);
         background-color: rgba(129, 129, 129, 0.3);
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         min-width: unset; }
         .container-main-content--menu .menu-container nav {
@@ -2146,7 +2146,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         top: 27px;
         right: 40px; }
       .container-main-content--menu > section {
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         padding-bottom: calc(1.875rem + 90px); }
     .container-main-content .section-config-blocks {
