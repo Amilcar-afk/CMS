@@ -75,7 +75,7 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if ($page){
+        if ($page && $page->getStatus() == 'Public') {
 
             $page->composeStats($page->getId(), "view");
 
@@ -245,11 +245,24 @@ class Pageengine
     {
         if( isset($_POST)
             && isset($_POST['id'])
-            && isset($_POST['content']) )
+            && isset($_POST['content']) ){
 
-            $this->page->setId($_POST['id']);
-            $this->page->setContent($_POST['content']);
-            $this->page->save();
+            if ($this->page->find($_POST['id'])){
+
+                if(isset($_POST['status']) && $_POST['status'] == 'Public'){
+                    $this->page->setStatus($_POST['status']);
+                }
+
+                $this->page->setId($_POST['id']);
+                $this->page->setContent($_POST['content']);
+                $this->page->save();
+            }else{
+                http_response_code(500);
+            }
+        }else{
+            http_response_code(500);
+        }
+
     }
 
     public function listAddCode(){

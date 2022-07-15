@@ -593,7 +593,7 @@ $(document).ready(function(){
         $("#cta-button-close-list-component").click();
     })
 
-    $(".cta-button-save").click(function () {
+    $(document).on( "click", ".cta-button-save", function () {
         if ($(this).attr('data-page-id') == null || $("#container-editor") == undefined){
             return;
         }
@@ -621,6 +621,7 @@ $(document).ready(function(){
                 {
                     id:$(this).attr('data-page-id'),
                     content:$("#container-editor").html(),
+                    status:$(this).attr('data-page-status'),
                 },
             success:function()
             {
