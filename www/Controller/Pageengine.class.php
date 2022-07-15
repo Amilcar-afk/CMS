@@ -195,14 +195,14 @@ class Pageengine
                 if ($lastId
                     && isset($_POST['categorie'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = " . $_POST['categorie'] . "")
-                        ->execute('Categorie')) {
+                        ->where("id = :id")->params(['id'=>$_POST['categorie']])
+                        ->execute('Categorie')){
 
                     //use categorie template;
                     if ($this->page->getContent() == null){
 
                         $categories = Query::from('cmspf_Categories')
-                            ->where("id = " . $_POST['categorie'] . "")
+                            ->where("id = :id")->params(['id'=>$_POST['categorie']])
                             ->execute('Categorie');
 
                         $page_of_categorie = $categories[0]->page();
