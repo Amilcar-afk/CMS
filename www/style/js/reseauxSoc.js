@@ -12,7 +12,7 @@ $(document).ready(function(){
             {
                 if (answer.includes('<section id="back-office-container">')){
                     $($('main')[0]).html(answer);
-                    alertMessage('Page created!');
+                    alertMessage('Social media created!');
                 }else{
                     $(formContainer).html(answer);
                 }

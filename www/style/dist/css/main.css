@@ -1185,6 +1185,13 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     padding: 15px;
     border-radius: var(--radius, 15px);
     min-height: 120px; }
+    .card .edge-container {
+      width: 50px; }
+    .card .edge {
+      width: 50px; }
+      .card .edge img {
+        width: 35px;
+        height: 35px; }
     .card #chart-per-page {
       max-height: unset;
       height: unset;
@@ -1203,12 +1210,16 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       align-self: flex-start; }
       .card header h4, .card header .material-icons-round {
         margin: 0;
-        font-size: 1.1rem;
-        line-height: 1.3125rem; }
+        font-size: 2rem;
+        line-height: 1.75rem; }
       .card header h3, .card header .material-icons-round {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1rem;
         line-height: 1.3125rem; }
+    .card--bottom header .material-icons-round {
+      margin: 0;
+      font-size: 2rem !important;
+      line-height: 1.75rem !important; }
     .card--smallcard {
       margin-top: 20px; } }
 

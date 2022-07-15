@@ -8,7 +8,7 @@
             <div class="col-4 col-md-4 col-sm-4">
                 <section class="card card--bottom  card--background-main-color">
                     <header>
-                        <h4><?php echo $numberOfUsers ?></h4>
+                        <h4><?= $numberOfUsers ?></h4>
                         <h3>New users of the month</h3>
                     </header>
                 </section>
@@ -19,7 +19,7 @@
                     <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
                     </button>
-                    
+
                     <div id="range-per-country" class="collapse" data-group-collapse="per-country-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
@@ -33,7 +33,7 @@
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
 
-                    <div id="chart-per-country"></div>
+                    <div id="chart-per-country" data-group-collapse="per-country-container"></div>
 
                     <header>
                         <h3>Per country</h3>
