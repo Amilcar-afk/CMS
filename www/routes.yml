@@ -229,6 +229,12 @@
   action: loadProject
   middleware: [ 'auth' ]
 
+/steps:
+  controller: communication
+  action: listSteps
+  middleware : ['auth']
+  params: [id]
+
 /step/compose:
   controller: communication
   action: composeStep

@@ -5,6 +5,7 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 use App\Core\Query;
+use App\Model\Step;
 
 
 class Projet extends BaseSQL
@@ -111,7 +112,13 @@ class Projet extends BaseSQL
 
     public function usersInproject()
     {
-        return parent::belongsToMany(User::class, 'cmspf_User_projet');
+        $users =  parent::belongsToMany(User::class, 'cmspf_User_projet');
+        foreach ($users as $key => $user){
+            if($user->getId() == $_SESSION['Auth']->id){
+                unset($users[$key]);
+            }
+        }
+        return $users;
     }
 
     public function isAdmin()
@@ -125,6 +132,11 @@ class Projet extends BaseSQL
         if(!empty($req[0]))
             return true;
         return false;
+    }
+
+    public function getSteps()
+    {
+        return parent::hasMany(Step::class, 'projet_key');
     }
 
     public function getFormProject($users,$usersOfProject = null, $name = ''): array
@@ -195,7 +207,7 @@ class Projet extends BaseSQL
                     "div"=>"divUserSearch",
                     "choices"=>$usersList['choices'],
                     "searchBox"=>true,
-                    "usersInProject"=>$usersProjectList['choices']
+                    "usersInProject"=>isset($usersProjectList['choices']) ? $usersProjectList['choices'] : null
                 ],
 
                 "description"=>[
@@ -203,6 +215,7 @@ class Projet extends BaseSQL
                     "placeholder"=>"description",
                     "type"=>"textarea",
                     "name"=>"description",
+                    "value"=>$this->getDescription(),
                     "class"=>"input",
                     "rows"=>16,
                     "cols"=>"",

@@ -25,13 +25,14 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
         console.log(`${userSelected.id}`);
         checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, this.parentElement.parentElement.parentElement.previousElementSibling)`);
 
-        liUser.setAttribute("class", "li-user-selected");
+        liUser.setAttribute("class", "li-user-selected sticker sticker--cta sticker--cta--selected li-user-selected");
         liUser.setAttribute("value", userSelectedOption.value);
         liUser.innerHTML = userSelectedName;
 
         if (listSelectedUsers === null) {
             listSelectedUsers = document.createElement("ul");
             listSelectedUsers.setAttribute("id", "listSelectedUsers");
+            listSelectedUsers.setAttribute("class", "center-left elements-in");
             divUsersSelected.appendChild(listSelectedUsers);
         }
 
@@ -85,16 +86,16 @@ $(document).ready(function(){
 
         let formContainer = $(this).parent().children(0);
         let title = $(this).parent().parent().find('[name=title]');
-        console.log(formContainer);
+        console.log(title[0].value);
         $.ajax({
             url:"/project/compose/",
             type:"POST",
             data:
                 {
-                    id:formContainer[0].parentElement.parentElement.parentElement.getAttribute('id').split('-')[3], //get The section of the form
+                    id:formContainer[0].parentNode.parentNode.parentNode.parentNode.getAttribute('id').split('-')[3], //get The section of the form
                     title:title[0].value,
-                    description:formContainer[1].value,
-                    users: getUsers(formContainer.parent().parent().find('[id=divUserSearch]').children())
+                    users: getUsers(formContainer.parent().parent().find('[id=divUserSearch]').children()),
+                    description:formContainer[0][formContainer[0].length - 1].value
 
                 },
             success:function(answer)
@@ -112,14 +113,14 @@ $(document).ready(function(){
         });
     })
 
-    $(document).on("click", ".cta-button-delete-projet", function () {
+    $(document).on("click", ".cta-button-delete-project", function () {
         var projetContainer = $(this);
         $.ajax({
             url:"/project/delete",
             type:"POST",
             data:
                 {
-                    id:$(this).attr('data-projet-id')
+                    id:$(this)[0].getAttribute('data-project-id')
                 },
             success:function()
             {

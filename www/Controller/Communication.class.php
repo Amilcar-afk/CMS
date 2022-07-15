@@ -6,6 +6,7 @@ use App\Core\Query;
 use App\Core\View;
 use App\Model\Conversation;
 use App\Model\Message;
+use App\Model\Step;
 use App\Model\User;
 use App\Model\Projet;
 use App\Model\User_conversation;
@@ -19,6 +20,7 @@ class Communication
     public $currentUser;
     protected $project;
     protected $user_project;
+    protected $step;
     public $conversation_user;
 
     public function __construct()
@@ -28,6 +30,7 @@ class Communication
         $this->message = new Message();
         $this->user = new User();
         $this->user_project = new User_projet();
+        $this->step = new Step();
         $this->conversation_user = new User_conversation();
 
     }
@@ -249,12 +252,18 @@ class Communication
     public function listProject()
     {
         $view = new View("project-list", "back");
-
         $user = new User();
         $user = $user->find($_SESSION['Auth']->id);
         $view->assign("projects", $user->projects());
 
-        $view->assign("usersProject", $user->find());
+        $view->assign(
+            "usersProject",
+            Query::from('cmspf_Users')
+                ->where("deleted IS NULL")
+                ->where("id != " . $_SESSION['Auth']->id)
+                ->where("confirm = 1")
+                ->execute("User")
+        );
 
         $projectEmpty = $this->project;
         $view->assign("projectEmpty", $projectEmpty);
@@ -274,12 +283,12 @@ class Communication
     {
         $admin = $_SESSION['Auth']->rank;
 
-        if (!empty($_POST) && $admin === "admin" && isset($_POST['id']) && !empty($_POST['id'])) {
+        if (!empty($_POST) && $admin === "admin") {
             $title = $_POST['title'];
             $description = $_POST['description'];
             $projectId = $_POST['id'];
             $users = explode(",", $_POST['users']);
-            $count = 0;
+            $userId = $_SESSION['Auth']->id;
 
             //$result = Validator::run($this->project->getFormProject(), $_POST,false);
 
@@ -287,25 +296,20 @@ class Communication
 
             if (isset($title) && !empty($title)){
                 $this->project->setTitle($title);
-                $count++;
             }
 
             if (isset($description) && !empty($description)) {
                 $this->project->setDescription($description);
-                $count++;
             }
 
             if (isset($projectId) && !empty($projectId)) {
                 $this->project->setId($projectId);
-                $count++;
+                $this->user_project->setProjectKey($projectId);
             }
 
-            if($count != 0){
-                $this->project->save();
-            }
-
-            $this->user_project->setProjectKey($projectId);
-            $this->user_project->addUsersToProject($users);
+            $this->project->setUserKey($userId);
+            $this->project->save();
+            $this->user_project->addUsersToProject($users, $this->project->getLastId());
 
             //}else{
             //http_response_code(400);
@@ -314,6 +318,118 @@ class Communication
 
         } else {
             http_response_code(400);
+        }
+    }
+
+    public function deleteProject()
+    {
+        $admin = $_SESSION['Auth']->rank;
+        $id = $_POST['id'];
+
+        if (!empty($id) && $admin === "admin") {
+            $this->project->setId($id);
+            $this->project->delete($id);
+        }
+    }
+
+    public function listSteps($request)
+    {
+        if(isset($request['id']) && !empty($request['id'])) {
+
+            $project = new Projet();
+            $project = $project->find($request['id']);
+
+            if($project) {
+                $view = new View("step-list", "back");
+                $this->step->setProjectKey($request['id']);
+                $view->assign("step", $this->step);
+
+                $view->assign("project", $project);
+
+                $view->assign("metaData", $metaData = [
+                    "title" => 'steps',
+                    "description" => 'Your steps',
+                    "src" => [
+                        ["type" => "js", "path" => "../js/ajax/step.js"],
+                    ],
+                ]);
+            }else{
+                http_response_code(500);
+            }
+
+        }else{
+            http_response_code(500);
+        }
+    }
+
+    public function composeStep()
+    {
+        $admin = $_SESSION['Auth']->rank;
+
+        if ($admin === "admin") {
+
+            if (isset($_POST['project'])){
+
+                $project = new Projet();
+                $project = $project->find($_POST['project']);
+
+                if($project) {
+                    $title = $_POST['title'];
+                    $description = $_POST['description'];
+                    $projectId = isset($_POST['project']) ? $_POST['project'] : null;
+                    $idStep = isset($_POST['id']) ? $_POST['id'] : null;
+                    $userId = $_SESSION['Auth']->id;
+
+                    //$result = Validator::run($this->project->getFormProject(), $_POST,false);
+
+                    //if(!empty($result)) {
+
+                    if (isset($title) && !empty($title)) {
+                        $this->step->setTitle($title);
+                    }
+
+                    if (isset($description) && !empty($description)) {
+                        $this->step->setDescription($description);
+                    }
+
+                    if (isset($idStep) && !empty($idStep)) {
+                        $this->step->setId($idStep);
+                    }
+
+                    $this->step->setDate(date("Y-m-d H:i:s"));
+                    $this->step->setProjectKey($projectId);
+                    $this->step->setUserKey($userId);
+                    $this->step->save();
+                    //$this->user_project->addUsersToProject($users, $this->project->getLastId());
+
+                    //}else{
+                    //http_response_code(400);
+                    //}
+                    $view = new View("step-list");
+                    $this->step->setProjectKey($_POST['project']);
+                    $view->assign("step", $this->step);
+
+                    $view->assign("project", $project);
+                }else{
+                    http_response_code(500);
+                }
+
+            }else{
+                http_response_code(500);
+            }
+        } else {
+            http_response_code(300);
+        }
+    }
+
+    public function deleteStep()
+    {
+        $admin = $_SESSION['Auth']->rank;
+        $id = $_POST['id'];
+
+        if (!empty($id) && $admin === "admin") {
+            $this->step->setId($id);
+            $this->step->delete($id);
         }
     }
 }

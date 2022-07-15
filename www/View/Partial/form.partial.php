@@ -22,6 +22,9 @@
                 <?php endforeach;?>
 
             <?php elseif ($input["type"] == "select"):?>
+                <?php if (isset($input["searchBox"]) && $input["searchBox"] === true):?>
+                    <input type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling.nextElementSibling)">
+                <?php endif;?>
                 <label><?=$input["question"]?></label>
                 <select <?= (isset($input["id"]))?'id="'.$input["id"].'"':'' ?> name="<?= $name ?>" class="<?=$input["class"]?>">
                     <?= (isset($input["question"]) && (!isset($input["value"]) || empty($input["value"])))?'<option hidden>'.$input["question"].'</option>':'' ?>
@@ -37,9 +40,9 @@
                 <?php if (isset($input["div"])){
                     echo '<div id="' . $input["div"] .'">';
                     if (isset($input["usersInProject"]) && !empty($input["usersInProject"])){
-                        echo '<ul id="listSelectedUsers">';
+                        echo '<ul class="center-left elements-in" id="listSelectedUsers">';
                         foreach ($input["usersInProject"] as $users){
-                            echo '<li  value="' . $users['value'] . '"class="li-user-selected">'. $users['label'] .
+                            echo '<li  value="' . $users['value'] . '"class="sticker sticker--cta sticker--cta--selected li-user-selected">'. $users['label'] .
                                 '<input type="checkbox" checked name="check-'. $users['value'] .'" value="'. $users['value'] .'" class="user-check" onchange="onClickCheckboxUserOfProject(this, this.parentElement.parentElement.parentElement.previousElementSibling)"></li>';
                         }
                         echo '</ul>';

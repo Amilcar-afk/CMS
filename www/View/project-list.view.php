@@ -32,7 +32,7 @@
                             <?php foreach ($projects as $project):?>
                                 <tr class="table-line">
                                     <td>
-                                        <h4><?= ucfirst($project->getTitle()) ?></h4>
+                                        <h4> <a href="/steps/<?=$project->getId()?>"> <?= ucfirst($project->getTitle()) ?></a></h4>
                                         <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $project->getDescription()?></label>
                                     </td>
                                     <td>

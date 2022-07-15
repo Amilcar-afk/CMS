@@ -74,9 +74,9 @@ class User_projet extends BaseSQL
         return $this->projet_key;
     }
 
-    public function setProjectKey($projet_key)
+    public function setProjectKey($id)
     {
-        $this->projet_key = $projet_key;
+        $this->projet_key = $id;
         return $this;
     }
 
@@ -96,27 +96,40 @@ class User_projet extends BaseSQL
         return parent::find($id, $attribut);
     }
 
-    public function addUsersToProject(array $usersid)
+    public function addUsersToProject(array $usersid, $projectId = null)
     {
-        $project_user = Query::from('cmspf_User_projet')
-            ->where('projet_key = ' . $this->getProjectKey())
-            ->execute('User_projet');
-
-        foreach ($project_user as $res){
-            $val = array_search($res->getUserKey(), $usersid);
-            $id = $res->getId();
-
-            if($val === false)
-                $this->delete($id);
-        }
-
-        foreach ($usersid as $id) {
-                $req = Query::from('cmspf_User_projet')
-                ->where('user_key = ' . $id)
+        if($this->getProjectKey()) {
+            $project_user = Query::from('cmspf_User_projet')
                 ->where('projet_key = ' . $this->getProjectKey())
+                ->where('user_key != ' . $_SESSION['Auth']->id)
                 ->execute('User_projet');
 
-            if(empty($req[0])){
+            foreach ($project_user as $res) {
+                $val = array_search($res->getUserKey(), $usersid);
+                $id = $res->getId();
+
+                if ($val === false) {
+                    $this->setId($id);
+                    $this->delete($id);
+                }
+            }
+
+            foreach ($usersid as $id) {
+                $req = Query::from('cmspf_User_projet')
+                    ->where('user_key = ' . $id)
+                    ->where('projet_key = ' . $this->getProjectKey())
+                    ->execute('User_projet');
+
+                if(empty($req[0])){
+                    $this->setUserKey($id);
+                    $this->save();
+                }
+            }
+        }else{
+            $this->setProjectKey($projectId);
+            $this->setUserKey($_SESSION['Auth']->id);
+            $this->save();
+            foreach ($usersid as $id) {
                 $this->setUserKey($id);
                 $this->save();
             }
