@@ -125,4 +125,31 @@ class Mail{
             
     }
 
+    public function confirmUserInProject($mailAddress, $name, $id)
+    {
+        $uri = $_SERVER["HTTP_HOST"] . "/steps/" . $id;
+
+        if ($id){
+            $subject = "Registration confirmation";
+            $message = [
+                [
+                    "type"=>'title',
+                    "content"=>'You have been added to a project'
+                ],
+                [
+                    "type"=>'text',
+                    "content"=>"hey " . $name . ". you are part of a new project "
+                ],
+                [
+                    "type"=>'button',
+                    "link"=>$uri,
+                    "content"=>'See project'
+                ]
+            ];
+            $this->mail->sendEmail($mailAddress, $name, $subject, $message);
+        }
+    }
+
+
+
 }

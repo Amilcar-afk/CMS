@@ -107,7 +107,14 @@ class Projet extends BaseSQL
 
     public function usersNotInProject()
     {
-        return parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        $users = parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        foreach ($users as $key => $user){
+            if($user->getDeleted() === "1"){
+                unset($users[$key]);
+            }
+        }
+        return $users;
+        return users;
     }
 
     public function usersInproject()
@@ -119,6 +126,16 @@ class Projet extends BaseSQL
             }
         }
         return $users;
+    }
+
+    public function checkUserExist($usersFind, $usersId)
+    {
+        foreach ($usersId as $id){
+            if($usersFind->find($id) === false){
+                return false;
+            }
+        }
+        return true;
     }
 
     public function isAdmin()
@@ -136,7 +153,7 @@ class Projet extends BaseSQL
 
     public function getSteps()
     {
-        return parent::hasMany(Step::class, 'projet_key');
+        return array_reverse(parent::hasMany(Step::class, 'projet_key'));
     }
 
     public function getFormProject($users,$usersOfProject = null, $name = ''): array

@@ -9,14 +9,21 @@ class Middleware{
     public static function auth(){
         if(!empty($_SESSION['Auth']->token) && !empty($_SESSION['Auth']->id)){
 
-            $tokenVerif = Query::from('cmspf_Users')
-                ->where("token = '" . $_SESSION['Auth']->token . "'")
+            $user = Query::from('cmspf_Users')
+                ->where("id = '" . $_SESSION['Auth']->id . "'")
                 ->where("confirm = '1'")
-                ->execute("User");
+                ->where("deleted IS NULL")
+                ->execute("User")[0];
 
-            if (!count($tokenVerif) > 0){
+            if ($user->getId() == null){
                 header('location:/login');
             }
+
+            if($user->getToken() != $_SESSION['Auth']->token){
+                header('location:/login');
+            }
+
+            $_SESSION['Auth']->rank = $user->getRank();
         }
 
         if(!isset($_SESSION['Auth']->rank)){

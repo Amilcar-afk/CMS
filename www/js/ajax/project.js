@@ -4,7 +4,7 @@ let userChecked = null;
 //ADD USERS ON CREATE OR UPDATE PROJECT
 window.onload = function (){
     for(let i = 0; i < userSelect.length; i++)
-        selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[i]);
+        selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[0]);
 }
 
 //display selected user
