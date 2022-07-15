@@ -2161,7 +2161,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .container-main-content {
     border-radius: 0px; }
     .container-main-content--padding {
-      padding: 5px;
+      padding: 0px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
       padding-bottom: calc(1.875rem + 90px); }
