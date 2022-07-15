@@ -116,11 +116,11 @@ $(document).ready(function(){
 
         var $newComponent = '';
         if ($(this).attr('data-add-module') == 'title') {
-            $newComponent = '<div class="module" data-module-type="title" style="padding:0px;margin:30px;width:100%;font-size:20px;font-weight:bold;line-height:24px;text-align:left;">Title</div>';
+            $newComponent = '<div class="module" data-module-type="title" style="padding:0px;margin-bottom:30px;margin-top:30px;width:100%;font-size:20px;font-weight:bold;line-height:24px;text-align:left;">Title</div>';
         }else if ($(this).attr('data-add-module') == 'text') {
-            $newComponent = '<div class="module" data-module-type="text" style="padding:0px;margin:30px;width:100%;font-size:16px;font-weight:400;line-height:24px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo ante non pellentesque egestas. Phasellus elementum, augue vel facilisis blandit, odio odio vestibulum purus, ac venenatis lacus odio non metus. Morbi porttitor elit sem, in auctor massa sollicitudin et. Integer non magna vel nulla molestie viverra nec vel ligula. Sed rhoncus a neque eget laoreet. Ut eu ante eget ex consectetur congue. Maecenas placerat non risus eget tempus. Sed quis risus feugiat, tincidunt turpis in, feugiat dolor. Maecenas venenatis turpis et iaculis dictum.</div>';
+            $newComponent = '<div class="module" data-module-type="text" style="padding:0px;width:100%;font-size:16px;font-weight:400;line-height:24px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo ante non pellentesque egestas. Phasellus elementum, augue vel facilisis blandit, odio odio vestibulum purus, ac venenatis lacus odio non metus. Morbi porttitor elit sem, in auctor massa sollicitudin et. Integer non magna vel nulla molestie viverra nec vel ligula. Sed rhoncus a neque eget laoreet. Ut eu ante eget ex consectetur congue. Maecenas placerat non risus eget tempus. Sed quis risus feugiat, tincidunt turpis in, feugiat dolor. Maecenas venenatis turpis et iaculis dictum.</div>';
         }else if ($(this).attr('data-add-module') == 'button') {
-            $newComponent = '<button data-module-type="button" href="<?= $element[\'link\'] ?>" style="margin:30px;width: 100%" class="module cta-button cta-button--submit" target="_blank">Button</button>';
+            $newComponent = '<button data-module-type="button" href="<?= $element[\'link\'] ?>" style="width: 100%" class="module cta-button cta-button--submit" target="_blank">Button</button>';
         }
         $("#editable-module").parent().after($newComponent);
         $("#cta-button-close-list-component").click();
@@ -173,6 +173,7 @@ $(document).ready(function(){
             success:function()
             {
                 alertMessage('Newsletter saved!');
+
             }
         });
     })

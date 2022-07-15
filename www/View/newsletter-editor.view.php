@@ -31,16 +31,16 @@
                 <section class="container-main-content container-main-content--setup" >
                     <header>
                         <figure id="back-office-logo"><img src="<?= (isset($logo[0])) ? $logo[0]->getPath() :'/style/images/logo_myfolio.png'  ?>" alt="logo"></figure>
-                        <h1 class="title title--main-color">Log In</h1>
+                        <h1 class="title title--main-color"><?= (isset($siteName)) ? $siteName : "" ?></h1>
                     </header>
                     <div style="width: 100%">
                         <?php foreach ($message as $element):?>
                             <?php if ($element["type"] == "title"):?>
-                                <div class="module" data-module-type="title" style="padding:0px;margin:30px;width:100%;font-size:20px;font-weight:bold;line-height:24px;text-align:left;"><?= $element['content'] ?></div>
+                                <div class="module" data-module-type="title" style="padding:0px;margin-bottom:30px;margin-top:30px;width:100%;font-size:20px;font-weight:bold;line-height:24px;text-align:left;"><?= $element['content'] ?></div>
                             <?php elseif ($element["type"] == "text"):?>
-                                <div class="module" data-module-type="text" style="padding:0px;margin:30px;width:100%;font-size:16px;font-weight:400;line-height:24px;"><?= $element['content'] ?></div>
+                                <div class="module" data-module-type="text" style="padding:0px;width:100%;font-size:16px;font-weight:400;line-height:24px;"><?= $element['content'] ?></div>
                             <?php elseif ($element["type"] == "button"):?>
-                                <button data-module-type="button" href="<?= $element['link'] ?>" style="margin:30px;width: 100%" class="module cta-button cta-button--submit" target="_blank"> <?= $element['content'] ?> </button>
+                                <button data-module-type="button" href="<?= $element['link'] ?>" style="width: 100%" class="module cta-button cta-button--submit" target="_blank"> <?= $element['content'] ?> </button>
                             <?php endif;?>
                         <?php endforeach;?>
                     </div>

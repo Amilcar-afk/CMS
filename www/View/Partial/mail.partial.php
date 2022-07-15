@@ -200,7 +200,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td align="center" style="font-size:0px;padding:10px 25px;padding-top:30px;word-break:break-word;">
-                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;text-transform:uppercase;color:var(--main-color, #396075);">
+                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;color:var(--main-color, #396075);">
                                                                                 <?php
                                                                                 $env_file = 'env.json';
                                                                                 $data_base_env = yaml_parse_file($env_file);

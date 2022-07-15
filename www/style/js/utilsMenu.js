@@ -163,7 +163,7 @@ function alertMessage(message, action){
     }
 
     let alertM = $('<div class="alert a-zoom-in alert--'+action+'"><p>'+icon+' '+message+'</p></div>');
-    $("main").append(alertM);
+    $($("main")[0]).append(alertM);
 
     setTimeout(() => {
         $(alertM).remove();

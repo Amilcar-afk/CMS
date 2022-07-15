@@ -78,6 +78,12 @@ class Newsletterengine
                 $view = new View("newsletter-editor", "back");
                 $view->assign("newsletter", $newsletter);
                 $view->assign("message", $message);
+
+                $env_file = 'env.json';
+                $data_base_env = yaml_parse_file($env_file);
+
+                $view->assign("siteName", $data_base_env['env'][0]['SITENAME']);
+
                 $view->assign("metaData", $metaData = [
                     "title" => 'Newsletter builder',
                     "description" => 'Newsletter builder',
