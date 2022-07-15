@@ -155,16 +155,16 @@ class Newsletterengine
     public function unsubscribe($request)
     {
         if(isset($request['email'])) {
-            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->params(['email' => $request['email']])->execute();
+            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->params(['email' => $request['email']])->execute("Newsletter_subscriber");
             if (isset($newsletterSubscribe[0])) {
-                //$newsletterSubscribe[0]->delete($request['email']);
-                Query::deleteAll('')->from('cmspf_Newsletter_subscribers')->where("email = :email")->params(['email' => $request['email']])->execute();
+                $newsletterSubscribe[0]->delete($newsletterSubscribe[0]->getId());
+                //Query::deleteAll('')->from('cmspf_Newsletter_subscribers')->where("email = :email")->params(['email' => $request['email']])->execute();
                 $view = new View("message", 'back-sandbox');
                 $view->assign("metaData", $metaData = [
-                    "title" => 'newsletter unsubscribe',
-                    "description" => 'This is the newsletter unsubscribe',
+                    "title" => 'Newsletter unsubscribe',
+                    "description" => 'Newsletter unsubscribe',
                 ]);
-                $view->assign("message", "you have been unsubscribe");
+                $view->assign("message", "You have been unsubscribe.");
             } else {
                 http_response_code(500);
             }
@@ -184,13 +184,13 @@ class Newsletterengine
         {
 
             $mail = new MailModel();
-            $test = $this->newsletter->getContent();
+            $message = $this->newsletter->getContent();
 
-            array_push($test, [
+            array_push($message, [
                 "type"=>"newsletter",
                 "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()
             ]);
-            $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $test);
+            $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $message);
 
         }
 
