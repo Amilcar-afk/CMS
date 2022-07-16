@@ -66,6 +66,8 @@ class User{
                 
                 if(empty($config)){
                     session_start();
+                    $user[0]->generateToken();
+                    $user[0]->save();
                     $_SESSION['Auth']->mail = $user[0]->getMail();
                     $_SESSION['Auth']->lastname = $user[0]->getLastname();
                     $_SESSION['Auth']->firstname = $user[0]->getFirstname();

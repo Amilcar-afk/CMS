@@ -5,7 +5,9 @@
             <nav>
                 <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
                 <a href="/meetings" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">today</span>Meetings</a>
-                <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="projects-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
+                <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
+                    <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="categories-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
+                <?php endif; ?>
                 <a href="/projects" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="add-code-container"><span class="material-icons-round">inventory_2</span>Projects</a>
             </nav>
         </div>
@@ -13,7 +15,8 @@
 
             <div id="steps-container" class="collapse--open" data-group-collapse="section-container" style="opacity: 1">
                 <header>
-                    <h1 class="title title--black">Steps</h1>
+                    <h1 class="title title--black"><?= $project->getTitle() ?></h1>
+                    <p><?= $project->getDescription() ?></p>
                 </header>
 
                 <article>
