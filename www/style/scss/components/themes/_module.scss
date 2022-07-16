@@ -79,14 +79,10 @@
 
 				& > p {
 					display: inline;
-					font-size: rem(18);
-					font-weight: 800;
 				}
 			}
 			& figcaption{
 				display: inline;
-				font-size: rem(13);
-				font-weight: 400;
 			}
 		}
 	}
@@ -97,14 +93,10 @@
 			& blockquote{
 				margin: 0;
 				& > p {
-					font-size: rem(18);
-					font-weight: 800;
 					margin: 0;
 				}
 			}
 			& figcaption{
-				font-size: rem(13);
-				font-weight: 400;
 			}
 		}
 	}

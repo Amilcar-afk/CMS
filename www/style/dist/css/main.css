@@ -1427,24 +1427,14 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     display: inline;
     margin: 0; }
     #container-editor--quote-basic figure blockquote > p, .module-list--quote-basic figure blockquote > p, .module--quote-basic figure blockquote > p, .module-list-media--quote-basic figure blockquote > p {
-      display: inline;
-      font-size: 1.125rem;
-      font-weight: 800; }
+      display: inline; }
   #container-editor--quote-basic figure figcaption, .module-list--quote-basic figure figcaption, .module--quote-basic figure figcaption, .module-list-media--quote-basic figure figcaption {
-    display: inline;
-    font-size: 0.8125rem;
-    font-weight: 400; }
+    display: inline; }
 
 #container-editor--quote-wrap figure blockquote, .module-list--quote-wrap figure blockquote, .module--quote-wrap figure blockquote, .module-list-media--quote-wrap figure blockquote {
   margin: 0; }
   #container-editor--quote-wrap figure blockquote > p, .module-list--quote-wrap figure blockquote > p, .module--quote-wrap figure blockquote > p, .module-list-media--quote-wrap figure blockquote > p {
-    font-size: 1.125rem;
-    font-weight: 800;
     margin: 0; }
-
-#container-editor--quote-wrap figure figcaption, .module-list--quote-wrap figure figcaption, .module--quote-wrap figure figcaption, .module-list-media--quote-wrap figure figcaption {
-  font-size: 0.8125rem;
-  font-weight: 400; }
 
 #container-editor--quote-mark figure blockquote, .module-list--quote-mark figure blockquote, .module--quote-mark figure blockquote, .module-list-media--quote-mark figure blockquote {
   position: relative; }

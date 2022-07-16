@@ -315,9 +315,9 @@
                         </article>
 
                         <article class="section-module center background-main-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-background-color">
-                            <figure class="color-white module">
+                            <figure class="color-white section-module">
                                 <blockquote cite="">
-                                    <p class="module highlight background-second-color color-white fs-16">Lorem ipsum ibra tv gango sphere</p>
+                                    <p class="module highlight background-second-color bold color-white fs-16">Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
                             </figure>
                         </article>
@@ -339,8 +339,12 @@
                         </article>
 
                         <article class="section-module background-second-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-main-color">
-                            <p class="module center col-12 bold fs-20 highlight background-background-color color-second-color">Lorem ipsum ibra tv gango sphere</p>
-                            <p class="module fs-14 col-12">, Author, 12/12/2000</p>
+                            <figure class="color-second-color center col-12 section-module">
+                                <blockquote cite="">
+                                    <p class="module highlight background-background-color color-second-color bold fs-20">Lorem ipsum ibra tv gango sphere</p>
+                                </blockquote>
+                            </figure>
+                            <p class="module center color-background-color fs-14 col-12">, Author, 12/12/2000</p>
                         </article>
 
                         <article class="section-module background-main-color module-list module-list--quote-basic">
