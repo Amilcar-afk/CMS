@@ -3,7 +3,7 @@
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
             <nav>
-                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
+                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>Conversations</a>
                 <a href="/meetings" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="meetings-container"><span class="material-icons-round">today</span>Meetings</a>
                 <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
                     <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="slots-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
