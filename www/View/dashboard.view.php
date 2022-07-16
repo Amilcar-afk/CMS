@@ -9,7 +9,7 @@
                 <section class="card card--bottom  card--background-main-color">
                     <header>
                         <h4><?= $numberOfUsers ?></h4>
-                        <h3>New users of the month</h3>
+                        <h3>c</h3>
                     </header>
                 </section>
             </div>
@@ -47,7 +47,7 @@
                     <section class="card card--bottom card--background-main-color">
                         <header>
                             <h4><?= $conversations ?></h4>
-                            <h3>Messages</h3>
+                            <h3>c</h3>
                         </header>
                     </section>
                 </a>
@@ -58,7 +58,7 @@
                     <section class="card card--bottom card--background-main-color">
                         <header>
                             <span class="material-icons-round">edit</span>
-                            <h3>Newsletter</h3>
+                            <h3>c</h3>
                         </header>
                     </section>
                 </a>
