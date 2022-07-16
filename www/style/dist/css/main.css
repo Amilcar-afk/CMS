@@ -2278,6 +2278,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     align-items: center; }
   .menu-container nav a:nth-child(even) {
     margin-right: 0px; }
+  .container-main-content--menu > section {
+    overflow-y: unset; }
   .body-setup {
     align-items: unset; }
     .body-setup main {

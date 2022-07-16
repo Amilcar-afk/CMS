@@ -641,6 +641,14 @@
     }
   }
 
+  .container-main-content {
+    &--menu {
+      & > section {
+        overflow-y: unset;
+      }
+    }
+  }
+
   .body-setup {
     align-items: unset;
 
