@@ -75,12 +75,6 @@ class User{
                     $_SESSION['Auth']->token = $user[0]->getToken();
                     $_SESSION['Auth']->updateDate = $user[0]->getUpdateDate();
                     $_SESSION['Auth']->rank = $user[0]->getRank();
-// <<<<<<< HEAD
-//                     if(!isset($_SESSION['redirect_url'])){
-//                         header('location:/dashboard');
-//                     }else{
-//                         header('location:'.$_SESSION['redirect_url']);
-// =======
 
                     $users = Query::from('cmspf_Users')
                         ->execute("User");
@@ -107,14 +101,11 @@ class User{
         }
     }
 
-
     public function logout()
     {
         session_destroy();
         header('location:/login');
     }
-
-
 
     public function register()
     {
@@ -184,19 +175,16 @@ class User{
 
     public function updateRank()
     {
-        if(!empty($_POST['id'])){
-            $infos = Query::from('cmspf_Users')->where("id=" . $_POST['id'])->execute("User");
-            $rank = $infos[0]->getRank();
+        if(isset($_POST['id']) && isset($_POST['rank']) && ($_POST['rank'] == 'admin' || $_POST['rank'] == 'user')){
+            $this->user = $this->user->find($_POST['id']);
 
-            if($rank === "admin" || empty($rank))
-                $this->user->setRank("user");
-            else
-                $this->user->setRank("admin");
-
-            $this->user->setId($_POST['id']);
-            $this->user->save();
-            echo "Rank updated";
-
+            if($this->user->getId() != null){
+                $this->user->setRank($_POST['rank']);
+                $this->user->save();
+                echo "Rank updated";
+            }else{
+                echo "Error in update";
+            }
         }else{
             echo "Error in update";
         }
@@ -204,7 +192,6 @@ class User{
 
     public function confirmMail()
     {
-
         $userExist = $this->user->find($_GET['token'], "confirmKey");
 
         if((!empty($userExist) || $userExist != false) && $userExist->getConfirm() != "1"){
@@ -212,7 +199,12 @@ class User{
             $this->user->setId($userExist->getId());
             $this->user->setConfirm(1);
             $this->user->save();
-            header('location:/login');
+            $view = new View("message", 'back-sandbox');
+            $view->assign("metaData", $metaData = [
+                "title" => 'Account confirmed',
+                "description" => 'Your account has been verified.',
+            ]);
+            $view->assign("message", "Your account has been verified. You can now connect.");
 
         }else{
             http_response_code(400);
@@ -286,7 +278,12 @@ class User{
                     $this->user->setPwd2($pwd1);
                     $this->user->setId($userId);
                     $this->user->save();
-                    header('location:/login');
+                    $view = new View("message", 'back-sandbox');
+                    $view->assign("metaData", $metaData = [
+                        "title" => 'Changed password',
+                        "description" => 'Your password has been changed.',
+                    ]);
+                    $view->assign("message", "Your password has been changed. You can now connect.");
 
                 }
             }
@@ -311,7 +308,7 @@ class User{
                 }
                 echo "</ul>";
             }else{
-                echo '<i>No user</i>';
+                echo '<i><p class="title title--small">No step</p></i>';
             }
         }
 

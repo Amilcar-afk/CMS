@@ -134,9 +134,14 @@ table.dataTable.no-footer {
   border-radius: var(--radius, 10px);
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px !important;
   font-size: 1rem;
   background-color: unset; }
+
+#usersTab {
+  padding: 0px !important; }
+  #usersTab .input-container {
+    margin-bottom: 0px !important; }
 
 table.dataTable thead th, table.dataTable thead td {
   padding: 0px !important;
@@ -181,7 +186,9 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 @media (max-width: 992px) {
   .body-back-office {
     position: relative;
-    padding: 0; } }
+    padding: 0; }
+  #usersTab .to-hide {
+    display: none; } }
 
 .a-zoom-in {
   animation: zoom-in 0.3s; }
@@ -2266,7 +2273,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
 .container-16-9 {
   position: relative;
   padding-bottom: 56.25%;
-  margin-top: 10px; }
+  margin-top: 10px;
+  margin: -20px; }
   .container-16-9 > iframe {
     position: absolute;
     top: 0;

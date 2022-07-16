@@ -151,9 +151,17 @@ table.dataTable.no-footer {
 	border-radius: var(--radius, 10px);
 	display: flex;
 	align-items: center;
-	padding: 10px;
+	padding: 10px!important;
 	font-size: rem(16);
 	background-color: unset;
+}
+
+#usersTab{
+	padding: 0px!important;
+
+	.input-container{
+		margin-bottom: 0px!important;
+	}
 }
 
 table.dataTable thead th, table.dataTable thead td {
@@ -217,5 +225,11 @@ table.dataTable.stripe>tbody>tr.odd>*, table.dataTable.display>tbody>tr.odd>* {
 	.body-back-office{
 		position: relative;
 		padding: 0;
+	}
+
+	#usersTab{
+		.to-hide{
+			display: none;
+		}
 	}
 }

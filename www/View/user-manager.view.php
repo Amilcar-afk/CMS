@@ -30,49 +30,42 @@
                         <table id="usersTab" class="table display">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="to-hide">
                                         Fisrtname
                                     </th>
-                                    <th>
+                                    <th class="to-hide">
                                         Lastname
                                     </th>
                                     <th>
                                         Email
                                     </th>
                                     <th>
-                                        Creation date
-                                    </th>
-                                    <th>
                                         Rank
                                     </th>
                                     <th>
+                                        Delete
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($users as $user):?>
                                     <tr>
-                                        <td>
+                                        <td class="to-hide">
                                             <?=$user->getFirstname()?>
                                         </td>
-                                        <td>
+                                        <td class="to-hide">
                                             <?=$user->getLastname()?>
                                         </td>
                                         <td>
                                             <?=$user->getMail()?>
                                         </td>
                                         <td>
-
-                                        </td>
-                                        <td>
-                                            <span style="font-size: 1rem"><?=$user->getRank()?></span>
-                                            <?php
-                                                if($user->getRank() === "admin"){
-                                                    echo '<button data-id-user='.$user->getId().' style="margin-left: 5px" onclick="updateRank(this)">User</button>';
-                                                }else{
-                                                    echo '<button data-id-user='.$user->getId().' style="margin-left: 5px" onclick="updateRank(this)">Admin</button>';
-                                                }
-                                            ?>
+                                            <div class="input-container">
+                                                <select data-id-user='<?= $user->getId()?>' class="input" onchange="updateRank(this)">
+                                                    <option value="admin" <?= ($user->getRank() == "admin")? "selected":"" ?> value="admin">Admin</option>
+                                                    <option value="user" <?= ($user->getRank() != "admin")? "selected":"" ?> value="user">User</option>
+                                                </select>
+                                            </div>
                                         </td>
                                         <td>
                                             <button class="cta-button cta-button-a" data-a-target="container-setting-navigation-<?=$user->getId() ?>" data-id-user="<?=$user->getId()?>"><span class="material-icons-round" onclick="deleteUser(this.parentNode)">delete</span></button>

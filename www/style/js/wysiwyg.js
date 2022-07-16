@@ -520,6 +520,13 @@ $(document).ready(function(){
 
         let iframeType = $(module).attr('data-media-type');
         if (iframeType == "spotify"){
+
+            if (src.match(/track\//)) {
+                $($(module).find('iframe')[0]).attr('style', "height:80px!important");
+            } else {
+                $($(module).find('iframe')[0]).attr('style', "height:200px!important");
+            }
+
             src = src.replace("album/", "embed/album/");
             src = src.replace("track/", "embed/track/");
 

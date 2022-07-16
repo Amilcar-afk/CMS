@@ -450,10 +450,12 @@
                         <article class="section-module background-second-color module-list">
                             <h3 class="module col-12 color-background-color text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
                             <h4 class="module col-12 color-background-color text-center fs-14 medium">tv gango sphere</h4>
-                            <div class="module col-12 container-16-9" data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9" data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 
@@ -464,18 +466,22 @@
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
-                            <div class="module col-12 container-16-9" data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9" data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 
                         <article class="module-list">
-                            <div class="module container-16-9 col-6"  data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-6">
+                                <div class="module container-16-9"  data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -492,10 +498,12 @@
                                         tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                                     </p>
                                 </div>
-                                <div class="module col-8 container-16-9" data-media-type="youtube">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
+                                <div class="section-module col-8">
+                                    <div class="module container-16-9" data-media-type="youtube">
+                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -507,11 +515,12 @@
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
-
-                            <div class="col-12 module container-16-9 col-12"  data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9"  data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 

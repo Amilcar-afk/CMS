@@ -13,7 +13,7 @@ function deleteUser(parent) {
 function updateRank(parent) {
     let uri = url + "updaterank/";
     let id = parent.getAttribute("data-id-user");
-    let data = `id=` + encodeURIComponent(id);
+    let data = `id=` + encodeURIComponent(id) + '&rank=' + parent.value;
 
     htmlParent = parent.parentNode.parentNode; //get the <tr> line of the user
 
