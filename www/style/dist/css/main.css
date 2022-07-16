@@ -1221,8 +1221,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
         line-height: 1.75rem; }
       .card header h3, .card header .material-icons-round {
         margin: 0;
-        font-size: 1rem;
-        line-height: 1.3125rem;
+        font-size: 0.85rem;
+        line-height: 1.25rem;
         word-break: break-word; }
     .card--bottom header .material-icons-round {
       margin: 0;
