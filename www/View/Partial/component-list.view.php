@@ -309,29 +309,23 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list module-list--quote-basic">
-                            <figure class="color-main-color">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="module-list section-module module-list--quote-basic">
+                            <p class="module col-12 color-main-color bold fs-22">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="module col-12 color-main-color fs-13">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="center background-main-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-background-color">
-                            <figure class="color-white">
+                        <article class="section-module center background-main-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-background-color">
+                            <figure class="color-white module">
                                 <blockquote cite="">
-                                    <p class="highlight background-second-color color-white">Lorem ipsum ibra tv gango sphere</p>
+                                    <p class="module highlight background-second-color color-white fs-16">Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
                             </figure>
                         </article>
 
                         <article class="module-list module-list--quote-wrap">
-                            <figure class="color-main-color left-border">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
+                            <figure class="section-module color-main-color section-module left-border">
+                                <p class="module color-main-color col-12 fs-20">Lorem ipsum ibra tv gango sphere</p>
+                                <p class="module color-main-color col-12 fs-12">, Author, 12/12/2000</p>
                             </figure>
                         </article>
 
@@ -339,31 +333,19 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="background-second-color module-list module-list--quote-wrap">
-                            <figure class="color-white text-center">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="section-module background-second-color module-list module-list--quote-wrap">
+                            <p class="col-12 module fs-20 center bold">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="col-12 center fs-12 module">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="center background-second-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-main-color">
-                            <figure class="color-white">
-                                <blockquote cite="">
-                                    <p class="highlight background-background-color color-second-color">Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="section-module background-second-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-main-color">
+                            <p class="module center col-12 bold fs-20 highlight background-background-color color-second-color">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="module fs-14 col-12">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="background-main-color module-list module-list--quote-basic">
-                            <figure class="color-white">
-                                <blockquote cite="">
-                                    <p class="background-background-color highlight color-main-color">Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-background-color">, Author, <time class="color-background-color" datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="section-module background-main-color module-list module-list--quote-basic">
+                            <p class="background-background-color highlight color-main-color module">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="module fs-10 color-background-color">, Author, 12/12/2000</p>
                         </article>
 
                     </div>

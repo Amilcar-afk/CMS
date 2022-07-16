@@ -2168,7 +2168,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .container-main-content {
     border-radius: 0px; }
     .container-main-content--padding {
-      padding: 5px;
+      padding: 0px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
       padding-bottom: calc(1.875rem + 90px); }
@@ -2179,7 +2179,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
       display: flex;
       flex-direction: column; }
       .container-main-content--menu--conversation > section > div > header {
-        margin: -30px -40px;
+        margin: -30px -25px;
         border-radius: 0px; }
       .container-main-content--menu .menu-container {
         backdrop-filter: blur(60px);

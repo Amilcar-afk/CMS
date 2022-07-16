@@ -437,7 +437,7 @@
     border-radius: 0px;
 
     &--padding{
-      padding: 5px;
+      padding: 0px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
       padding-bottom: calc(1.875rem + 90px);
@@ -454,7 +454,7 @@
         & > section{
 
           & > div > header{
-            margin: -30px -40px;
+            margin: -30px -25px;
             border-radius: 0px;
           }
         }
