@@ -261,10 +261,7 @@ class User{
             if (!empty($_POST)) {
                 $this->user->setPassword($_POST['password']);
 
-                if (!count($user) > 0)
-                    $result = Validator::run($this->user->getFormNewPwd(), $_POST, false);
-                else
-                    $result = Validator::run($this->user->getFormNewPwd(), $_POST, $user);
+                $result = Validator::run($this->user->getFormNewPwd(), $_POST);
 
                 if (empty($result)) {
 
