@@ -24,10 +24,6 @@ class Pageengine
 
     public function siteMap()
     {
-        echo "<pre>";
-        print_r($_SERVER);
-        echo "</pre>";
-
         if (isset($_SERVER['HTTPS']) &&
             ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
             isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
