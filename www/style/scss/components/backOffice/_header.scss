@@ -186,3 +186,9 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .body-back-office > header {
+    padding: 18px 30px;
+  }
+}

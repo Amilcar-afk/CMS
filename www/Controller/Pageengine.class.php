@@ -96,8 +96,8 @@ class Pageengine
                 ->execute('Option');
 
             $view->assign("page", $page );
-            $view->assign("headCode", $headCode[0]->getValue());
-            $view->assign("footerCode", $footerCode[0]->getValue());
+            $view->assign("headCode", (isset($headCode[0]) && $headCode[0]->getValue() != null)?$headCode[0]->getValue():"");
+            $view->assign("footerCode", (isset($footerCode[0]) && $footerCode[0]->getValue() != null)?$footerCode[0]->getValue():"");
             $view->assign("bessels", $bessels);
             $view->assign("metaData", $metaData = [
                 "title" => $page->getTitle(),

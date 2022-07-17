@@ -590,7 +590,7 @@ $(document).ready(function(){
         }
 
         if($newComponent.hasClass('background-container-back-office')){
-            $('#container-editor').prepend($newComponent);
+            $('#container-editor-content').prepend($newComponent);
         }else {
             $newComponent.removeClass('module-list');
             $newComponent.addClass('col-6');
@@ -627,7 +627,7 @@ $(document).ready(function(){
             data:
                 {
                     id:$(this).attr('data-page-id'),
-                    content:$("#container-editor").html(),
+                    content:$("#container-editor-content").html(),
                     status:$(this).attr('data-page-status'),
                 },
             success:function()

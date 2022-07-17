@@ -38,7 +38,7 @@
         </div>
     </header>
     <section id="container-editor" class="container-main-content container-main-content--padding" >
-        <div class="row <?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?>">
+        <div id="container-editor-content" class="row <?= (isset($bessels[0]) && $bessels[0]->getValue() != null )? $bessels[0]->getValue() : 'body-medium' ?>">
             <?php if( $page->getContent() == null ):?>
                 <article class="module col-6 col-offset-1">
                     <h4 class="color-main-color text-center fs-26 bold col-12">Lorem ipsum dolor sit amet consectetur.</h4>
