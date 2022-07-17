@@ -104,7 +104,6 @@ $(document).ready(function(){
     $(document).on( "click", ".cta-button-compose-link", function () {
         var module = $($(this).parent().parent().parent());
         let src = $(module).find('[name=link]').val();
-        alert(src);
         $($(module).find('cta-button-preview-link')[0]).attr('href', src);
 
         $(module).attr('href', src);
