@@ -155,7 +155,6 @@
     <div></div>
     <div></div>
 </div>
-<div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;"> Pre-header Text </div>
 <div class="body-content">
     <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:500px;" width="500" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     <div style="margin:0px auto;max-width:500px;">
@@ -190,7 +189,7 @@
                                                                                     <tbody>
                                                                                     <tr>
                                                                                         <td style="width:100px;">
-                                                                                                <img src="<?= $logo ?>" alt="logo">
+                                                                                                <img src="<?= $protocol . $logo ?>" alt="logo">
                                                                                             <!-- <img alt height="auto" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/crofts-white.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="100"> -->
                                                                                         </td>
                                                                                     </tr>
@@ -252,7 +251,7 @@
                                                                                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;width:100%;line-height:100%;">
                                                                                     <tr>
                                                                                         <td align="center" bgcolor="var(--main-color, #396075)" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:var(--main-color, #396075);" valign="middle">
-                                                                                            <a href="<?= $element['link'] ?>" style="display:inline-block;width:250px;background:var(--main-color, #396075);color:var(--background-color, #ffffff);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"> <?= $element['content'] ?> </a>
+                                                                                            <a href="<?= $protocol . $element['link'] ?>" style="display:inline-block;width:250px;background:var(--main-color, #396075);color:var(--background-color, #ffffff);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"> <?= $element['content'] ?> </a>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -343,7 +342,7 @@
                                                                                             <?php foreach ($message as $element): ?>
                                                                                                 <?php if($element['type'] == 'newsletter'): ?>
                                                                                                     <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                                                                        <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:11px;font-weight:bold;line-height:16px;text-align:center;color:#445566;"><a class="footer-link" href="<?= $element['content'] ?>" style="color: #888888;">Unsubscribe</a></div>
+                                                                                                        <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:11px;font-weight:bold;line-height:16px;text-align:center;color:#445566;"><a class="footer-link" href="<?= $protocol . $element['content'] ?>" style="color: #888888;">Unsubscribe</a></div>
                                                                                                     </td>
                                                                                                 <?php endif; ?>
                                                                                             <?php endforeach; ?>
