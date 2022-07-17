@@ -36,7 +36,7 @@ class Mail extends BaseSQL
         $this->mail = new PHPMailer(TRUE);
         $this->mail->isSMTP();
         $this->mail->Host = $config['env'][1]['SMTP_HOST'];
-        $this->mail->SMTPAuth = TRUE;
+        $this->mail->SMTPAuth = true;
         $this->mail->SMTPSecure = $config['env'][1]['SMTP_SECURE'];
         $this->mail->Username = $config['env'][1]['SMTP_USERNAME'];
         $this->mail->Password = $config['env'][1]['SMTP_PASSWORD'];
