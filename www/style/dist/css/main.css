@@ -2149,7 +2149,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     left: 10px;
     top: 10px;
     overflow: hidden;
-    padding: 10px; }
+    padding: 10px;
+    z-index: -0; }
 
 #background-list-elements .background-container-back-office {
   height: 200px; }
