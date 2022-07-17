@@ -2853,6 +2853,10 @@ h2 {
     .body-back-office > header .bubble-alt {
       display: none; } }
 
+@media (max-width: 768px) {
+  .body-back-office > header {
+    padding: 18px 30px; } }
+
 .conversation {
   position: relative; }
   .conversation > #chatDiv {
