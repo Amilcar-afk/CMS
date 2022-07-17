@@ -38,7 +38,7 @@ class Pageengine
         $xml = new SimpleXMLElement("<?xml version='1.0' encoding='UTF-8' ?>\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />');
         foreach($pages as $page){
             $url = $xml->addChild('url'); 
-            $url->addChild('loc',$protocol.$_SERVER['SERVER_NAME'].'/'.$page->getSlug() );  
+            $url->addChild('loc',$protocol.$_SERVER['HTTP_HOST'].'/'.$page->getSlug() );
             $url->addChild('lastmod',$page->getDateUpdate() );  
         }
         header("Content-type: application/xml; charset=utf-8");
