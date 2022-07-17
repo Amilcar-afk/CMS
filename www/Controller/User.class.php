@@ -109,14 +109,10 @@ class User{
 
     public function register()
     {
-        $view = new View("register", "back-sandbox");
-        $view->assign("metaData", $metaData = [
-            "title" => 'Register',
-            "description" => 'Register page'
-        ]);
-        $view->assign("user",$this->user);
-        $date = date("Y-m-d");
+
+
         if( !empty($_POST)){
+            $date = date("Y-m-d");
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
             $this->user->setPassword($_POST['password']);
@@ -154,10 +150,30 @@ class User{
                     $confirmKey = $this->user->getConfirmKey();
                     $mail = new Mail();
                     $mail->confirmMail($_POST['email'], $_POST['firstname'], $confirmKey);
+
+                    $view = new View("message", 'back-sandbox');
+                    $view->assign("metaData", $metaData = [
+                        "title" => 'Account successfully created',
+                        "description" => 'Account successfully created.',
+                    ]);
+                    $view->assign("message", "Your account has been successfully created. You will recive a email to confirm this account.");
                 }
             }else{
+                $view = new View("register", "back-sandbox");
+                $view->assign("metaData", $metaData = [
+                    "title" => 'Register',
+                    "description" => 'Register page'
+                ]);
+                $view->assign("user",$this->user);
                 $view->assign("error_from",$result);
             }
+        }else{
+            $view = new View("register", "back-sandbox");
+            $view->assign("metaData", $metaData = [
+                "title" => 'Register',
+                "description" => 'Register page'
+            ]);
+            $view->assign("user",$this->user);
         }
     }
 
@@ -215,18 +231,13 @@ class User{
     public function pwdReset()
     {
 
-        $view = new View("form-forgot-pwd", "back-sandbox");
-        $view->assign("metaData", $metaData = [
-            "title" => 'Forgot password',
-            "description" => 'Forgot password page'
-        ]);
-
-        $view->assign("user", $this->user);
-
         if(!empty($_POST)){
 
             $user = Query::from('cmspf_Users')
-                ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                ->where("mail = :mail AND (deleted IS NULL OR deleted = 0)")
+                ->params([
+                    'mail' => $_POST['email']
+                ])
                 ->execute("User");
 
             if(!empty($user)){
@@ -240,6 +251,22 @@ class User{
                 $mail->resetPwdMail($_POST['email'], '', $token);
 
             }
+
+            $view = new View("message", 'back-sandbox');
+            $view->assign("metaData", $metaData = [
+                "title" => 'Changed password',
+                "description" => 'Request for password change.',
+            ]);
+            $view->assign("message", "If the email that you send to us correspond to a account, you will recive a email for reset your password.");
+
+        }else{
+            $view = new View("form-forgot-pwd", "back-sandbox");
+            $view->assign("metaData", $metaData = [
+                "title" => 'Forgot password',
+                "description" => 'Forgot password page'
+            ]);
+
+            $view->assign("user", $this->user);
         }
 
     }
@@ -249,14 +276,6 @@ class User{
         $user = $this->user->find($_GET['token'], "token");
 
         if((!empty($user) || $user != false) && $user->getConfirm() == "1") {
-
-            $view = new View("form-forgot-pwd", "back-sandbox");
-            $view->assign("metaData", $metaData = [
-                "title" => 'Change password',
-                "description" => 'Change password page'
-            ]);
-            $view->assign("user", $this->user);
-            $view->assign("resetPwd", $this->user);
 
             if (!empty($_POST)) {
                 $this->user->setPassword($_POST['password']);
@@ -283,6 +302,14 @@ class User{
                     $view->assign("message", "Your password has been changed. You can now connect.");
 
                 }
+            }else{
+                $view = new View("form-forgot-pwd", "back-sandbox");
+                $view->assign("metaData", $metaData = [
+                    "title" => 'Change password',
+                    "description" => 'Change password page'
+                ]);
+                $view->assign("user", $this->user);
+                $view->assign("resetPwd", $this->user);
             }
 
         } else {
