@@ -628,6 +628,19 @@
 
 
 @media (max-width: 768px) {
+  #container-editor, #background-list-elements{
+    .background-container-back-office {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: unset;
+      top: 0px;
+      overflow: hidden;
+      padding: 10px;
+      height: 100vh;
+    }
+  }
+
   #back-office-container{
     > .content-header{
       align-items: center;
