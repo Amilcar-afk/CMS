@@ -633,6 +633,7 @@
 
 
 @media (max-width: 768px) {
+
   #container-editor, #background-list-elements{
     .background-container-back-office {
       position: absolute;
@@ -664,6 +665,21 @@
     &--menu {
       & > section {
         overflow-y: unset;
+        padding: 25px 20px;
+      }
+
+      &--conversation {
+        & > section {
+          & > div {
+            & > header {
+              padding: 25px 20px;
+            }
+          }
+        }
+      }
+
+      & .menu-container {
+        padding: 25px 20px;
       }
     }
   }

@@ -2294,7 +2294,12 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
   .menu-container nav a:nth-child(even) {
     margin-right: 0px; }
   .container-main-content--menu > section {
-    overflow-y: unset; }
+    overflow-y: unset;
+    padding: 25px 20px; }
+  .container-main-content--menu--conversation > section > div > header {
+    padding: 25px 20px; }
+  .container-main-content--menu .menu-container {
+    padding: 25px 20px; }
   .body-setup {
     align-items: unset; }
     .body-setup main {
