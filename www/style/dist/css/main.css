@@ -2297,7 +2297,7 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     overflow-y: unset;
     padding: 25px 20px; }
   .container-main-content--menu--conversation > section > div > header {
-    padding: 25px 20px; }
+    padding: 25px 25px; }
   .container-main-content--menu .menu-container {
     padding: 25px 20px; }
   .body-setup {
