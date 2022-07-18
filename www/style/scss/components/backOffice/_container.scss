@@ -434,6 +434,11 @@
 
 //reponsive tablet & mobile
 @media (max-width: 992px){
+
+  .container-main-content.container-main-content--menu.a-zoom-in{
+    position: fixed;
+  }
+
   .container-main-content {
     border-radius: 0px;
 
