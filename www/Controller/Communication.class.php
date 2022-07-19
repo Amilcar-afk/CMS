@@ -186,7 +186,7 @@ class Communication
                 if ($conversation->getId() != null) {
                     $userConversationUser = Query::from('cmspf_User_conversation')
                         ->where('user_key = :user_key')
-                        ->where('user_conversation = :user_conversation')
+                        ->where('id = :user_conversation')
                         ->params(['user_key' => $_SESSION['Auth']->id, 'user_conversation' => $userConversation->getConversation_key()])
                         ->execute('User_conversation');
                     if ($userConversationUser[0]->getId() != null){

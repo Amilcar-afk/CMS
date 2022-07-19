@@ -101,7 +101,6 @@ class Meeting
             if($row != false){
                 if($row->getStatus() == 'slot'){
                     continue;
-                    
                 }
                 $users = $row->users();
                 foreach($users as $user){
