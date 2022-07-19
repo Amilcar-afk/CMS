@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Core\Query;
+use App\Core\View;
 
 
 class Middleware{
@@ -36,7 +37,15 @@ class Middleware{
 
     public static function admin(){
         if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank != 'admin'){
-            header('location:/login');
+            http_response_code(403);
+            $view = new View("error", 'back-sandbox');
+            $view->assign("metaData", $metaData = [
+                "title" => 'Error',
+                "description" => 'Error',
+            ]);
+
+            die();
+            //header('location:/login');
         }
     }
 

@@ -451,6 +451,7 @@ class Statistics
 
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }else{
             http_response_code(500);

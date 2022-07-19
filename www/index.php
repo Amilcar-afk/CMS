@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Core\View;
+
 require "conf.inc.php";
 require 'vendor/autoload.php';
 
@@ -58,6 +60,11 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
                 }
             }else{
                 http_response_code(404);
+                $view = new View("error", 'back-sandbox');
+                $view->assign("metaData", $metaData = [
+                    "title" => 'Error',
+                    "description" => 'Error',
+                ]);
                 die();
             }
         }

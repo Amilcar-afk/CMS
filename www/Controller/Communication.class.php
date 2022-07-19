@@ -159,12 +159,6 @@ class Communication
         }
     }
 
-
-    public function test ()
-    {
-        echo '12';
-    }
-
     public function updateSeenStatus()
     {
         if($_POST['conversation_user_id']){
@@ -209,6 +203,8 @@ class Communication
             $my_conversation->setConversation_key($conversationId);
             $user_conversation->save();
             $my_conversation->save();
+        }else{
+            http_response_code(422);
         }
         
     }

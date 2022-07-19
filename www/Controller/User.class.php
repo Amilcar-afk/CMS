@@ -87,10 +87,12 @@ class User{
                                 header('location:/dashboard');
                             }else{
                                 header('location:/');
+                                http_response_code(308);
                             }
                         }else{
 
                             header('location:'.$_SESSION['redirect_url']);
+                            http_response_code(308);
                         }
                     }
                 }else{
@@ -166,6 +168,7 @@ class User{
                 ]);
                 $view->assign("user",$this->user);
                 $view->assign("error_from",$result);
+                http_response_code(422);
             }
         }else{
             $view = new View("register", "back-sandbox");
@@ -184,8 +187,10 @@ class User{
             $this->user->setId($_GET['id']);
             $this->user->save();
             echo "User deleted successfully";
+            http_response_code(202);
         }else{
             echo "User not deleted";
+            http_response_code(304);
         }
     }
 
@@ -198,11 +203,14 @@ class User{
                 $this->user->setRank($_POST['rank']);
                 $this->user->save();
                 echo "Rank updated";
+                http_response_code(201);
             }else{
                 echo "Error in update";
+                http_response_code(304);
             }
         }else{
             echo "Error in update";
+            http_response_code(304);
         }
     }
 
@@ -301,6 +309,8 @@ class User{
                     ]);
                     $view->assign("message", "Your password has been changed. You can now connect.");
 
+                }else{
+                    http_response_code(422);
                 }
             }else{
                 $view = new View("form-forgot-pwd", "back-sandbox");

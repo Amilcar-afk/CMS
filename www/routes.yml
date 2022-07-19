@@ -206,7 +206,7 @@
 /conversation/delete:
   controller: communication
   action: newMessage
-  middleware: [ 'auth']
+  middleware: [ 'auth', 'admin']
 
 /projects:
   controller: communication

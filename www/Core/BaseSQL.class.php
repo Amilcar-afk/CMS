@@ -144,7 +144,7 @@ abstract class BaseSQL
             $sql = "DELETE  FROM ".$this->table." WHERE id=".$this->getId();
             $queryPrepared = self::$bdd->prepare($sql);
             $queryPrepared->execute();
-
+            http_response_code(200);
         }else{
             http_response_code(400);
         }
