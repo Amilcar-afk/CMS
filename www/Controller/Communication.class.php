@@ -285,7 +285,7 @@ class Communication
             $conversationId = $_POST['id_conversation'];
 
             $this->conversation = $this->conversation->find($conversationId);
-            if ($this-conversation->getId() != null){
+            if ($this->conversation->getId() != null){
 
                 $user_conversation = Query::from('cmspf_User_conversation')
                 ->where('conversation_key= :conversation_key')
@@ -365,7 +365,7 @@ class Communication
         if (!empty($_POST) && $admin === "admin") {
             $users = explode(",", $_POST['users']);
 
-                if($this->project->checkUserExist($this->user, $users) !== false) {
+                if($this->project->checkUserExist($this->user, $users) != false) {
 
                     $title = $_POST['title'];
                     $description = $_POST['description'];
@@ -386,7 +386,7 @@ class Communication
                     }
 
                     $this->project->setUserKey($userId);
-                    $config = Validator::run($this->page->getFormProject(), $_POST);
+                    $config = Validator::run($this->project->getFormProject(), $_POST);
                     if (empty($config)) {
                         $this->project->save();
                         $this->user_project->addUsersToProject($users, $this->project->getLastId());
