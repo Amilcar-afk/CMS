@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Query;
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Conversation;
 use App\Model\Message;
@@ -66,9 +67,10 @@ class Communication
                 $users = Query::from('cmspf_Users')
                 ->where("confirm =". 1)
                 ->where("deleted IS NULL")
-                ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
-                ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
-                ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
+                ->or("firstname LIKE '% :firstnameSearchData %'")
+                ->or("lastname LIKE '% :lastnameSearchData %'")
+                ->or("mail LIKE '% :mailSearchData %'")
+                ->params(['firstnameSearchData' => $_POST['searchData'], 'lastnameSearchData' => $_POST['searchData'], 'mailSearchData' => $_POST['searchData']])
                 ->execute("User");
 
             }else{
@@ -76,9 +78,10 @@ class Communication
                 ->where("rank = 'admin'")
                 ->where("confirm =". 1)
                 ->where("deleted IS NULL")
-                ->or("firstname LIKE '%" . $_POST['searchData'] . "%'")
-                ->or("lastname LIKE '%" . $_POST['searchData']. "%'")
-                ->or("mail LIKE '%" . $_POST['searchData'] . "%'")
+                ->or("firstname LIKE '% :firstnameSearchData %'")
+                ->or("lastname LIKE '% :lastnameSearchData %'")
+                ->or("mail LIKE '% :mailSearchData %'")
+                ->params(['firstnameSearchData' => $_POST['searchData'], 'lastnameSearchData' => $_POST['searchData'], 'mailSearchData' => $_POST['searchData']])
                 ->execute("User");
             }
 
@@ -114,57 +117,94 @@ class Communication
     public function userConversation($dataFromUrl)
     {
 
-
-        
         if($dataFromUrl['id_conv']){
             
             $idConversation = $dataFromUrl['id_conv'];
 
-            $user_conversation_data = Query::from('cmspf_User_conversation')
-            ->where('conversation_key = '.$dataFromUrl['id_conv'])
-            ->execute();
+            $conversation = new Conversation();
+            $conversation = $conversation->find($dataFromUrl['id_conv']);
 
-            // var_dump($user_conversation_data);
-    
-            foreach($user_conversation_data as $conversation){
-                if($conversation['user_key'] != $_SESSION['Auth']->id){
-                    $userId = $conversation['user_key'];
-                    $conversation_user = $user_conversation_data[0]['id'] ;
-                }else{
-                    $seen = $conversation['seen'];
-                    $conversation_user = $user_conversation_data[1]['id'] ;
+            if ($conversation->getId() != null){
+                $user_conversation_data = Query::from('cmspf_User_conversation')
+                ->where('conversation_key = :conversation_key')
+                ->params(['conversation_key' => $dataFromUrl['id_conv']])
+                ->execute();
+
+                foreach($user_conversation_data as $conversation){
+                    if($conversation['user_key'] != $_SESSION['Auth']->id){
+                        $userId = $conversation['user_key'];
+                        $conversation_user = $user_conversation_data[0]['id'] ;
+                    }else{
+                        $yours = true;
+                        $seen = $conversation['seen'];
+                        $conversation_user = $user_conversation_data[1]['id'] ;
+                    }
                 }
-            } 
 
-            $conversations = new Conversation();
-            $conversations->setId($dataFromUrl['id_conv']);
-            
-            $user = $this->user->find($userId);
-            $view = new View("conversation_user", "back");
-            $view->assign("user",$user);
-            $view->assign("conversation",$conversations->messages());
-            $view->assign("seen",$seen);
-            $view->assign("idConversation",$idConversation);
-            $view->assign("conversation_user",$conversation_user);
+                if (isset($yours) && $yours == true) {
+                    $conversations = new Conversation();
+                    $conversations->setId($dataFromUrl['id_conv']);
+
+                    $user = $this->user->find($userId);
+                    $view = new View("conversation_user", "back");
+                    $view->assign("user", $user);
+                    $view->assign("conversation", $conversations->messages());
+                    $view->assign("seen", $seen);
+                    $view->assign("idConversation", $idConversation);
+                    $view->assign("conversation_user", $conversation_user);
 
 
-            $view->assign("metaData", $metaData = [
-                "title" => 'Conversation',
-                "description" => 'Your conversation',
-                "src" => [
-                    ["type" => "js", "path" => "/style/js/searchConversation.js"],
-                ],
-            ]);
-
+                    $view->assign("metaData", $metaData = [
+                        "title" => 'Conversation',
+                        "description" => 'Your conversation',
+                        "src" => [
+                            ["type" => "js", "path" => "/style/js/searchConversation.js"],
+                        ],
+                    ]);
+                }else{
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
         }
     }
 
     public function updateSeenStatus()
     {
         if($_POST['conversation_user_id']){
-            $this->conversation_user->setId($_POST['conversation_user_id']);
-            $this->conversation_user->setSeen(2);
-            $this->conversation_user->save();
+
+            $userConversation = new User_conversation();
+            $userConversation = $userConversation->find($_POST['conversation_user_id']);
+
+            if ($userConversation->getId() != null){
+
+                $conversation = new Conversation();
+                $conversation = $conversation->find($userConversation->getConversation_key());
+                if ($conversation->getId() != null) {
+                    $userConversationUser = Query::from('cmspf_User_conversation')
+                        ->where('user_key = :user_key')
+                        ->where('id = :user_conversation')
+                        ->params(['user_key' => $_SESSION['Auth']->id, 'user_conversation' => $userConversation->getConversation_key()])
+                        ->execute('User_conversation');
+                    if ($userConversationUser[0]->getId() != null){
+
+                        $this->conversation_user->setId($_POST['conversation_user_id']);
+                        $this->conversation_user->setSeen(2);
+                        $this->conversation_user->save();
+                    }else {
+                        http_response_code(422);
+                    }
+                }else {
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
         }
     }
 
@@ -178,70 +218,113 @@ class Communication
     }
 
     public function newMessage(){
-        $lastMessage = Query::from('cmspf_Messages')
-        ->where('conversation_key ='.$_POST['id_conv'])
-        ->where('id >='.$_POST['id'])
-        ->execute();
-        echo json_encode(array_reverse($lastMessage));
+        if (isset($_POST['id_conv']) && isset($_POST['id'])) {
+
+            $this->conversation = $this->conversation->find($_POST['id_conv']);
+            if ($this->conversation->getId() != null){
+
+                $userConversation = Query::from('cmspf_User_conversation')
+                    ->where('user_key = :user_key')
+                    ->params(['user_key' => $_SESSION['Auth']->id])
+                    ->execute('User_conversation');
+
+                if ($userConversation[0]->getId() != null) {
+                    $lastMessage = Query::from('cmspf_Messages')
+                        ->where('conversation_key = :conversation_key')
+                        ->where('id >= :id')
+                        ->params(['conversation_key' => $_POST['id_conv'], 'id' => $_POST['id']])
+                        ->execute();
+                    echo json_encode(array_reverse($lastMessage));
+                }else{
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
+        }
     }
 
     public function newConversation()
     {
-        $user = new User();
-        $currentUser = $user->find($_POST['userId']);
-     
-        if($currentUser->getConfirm() == 1 &&  $currentUser->getDeleted() != 1){
-            $this->conversation->setDate(date('Y-m-d H:i:s'));
-            $this->conversation->save();
-            $conversationId =$this->conversation->getLastId();
-            echo json_encode($this->conversation->getLastId());
-            $user_conversation = new User_conversation();
-            $my_conversation = new User_conversation();
-            $user_conversation->setUser_key($_POST['userId']);
-            $user_conversation->setConversation_key($conversationId);
-            $my_conversation->setUser_key($_SESSION['Auth']->id);
-            $my_conversation->setConversation_key($conversationId);
-            $user_conversation->save();
-            $my_conversation->save();
+        if(isset($_POST['userId'])){
+            $user = new User();
+            $currentUser = $user->find($_POST['userId']);
+
+            if ($currentUser->getId() != $_SESSION['Auth']->id) {
+
+                if ($currentUser->getConfirm() == 1 && $currentUser->getDeleted() != 1) {
+                    $this->conversation->setDate(date('Y-m-d H:i:s'));
+                    $this->conversation->save();
+                    $conversationId = $this->conversation->getLastId();
+                    echo json_encode($this->conversation->getLastId());
+                    $user_conversation = new User_conversation();
+                    $my_conversation = new User_conversation();
+                    $user_conversation->setUser_key($_POST['userId']);
+                    $user_conversation->setConversation_key($conversationId);
+                    $my_conversation->setUser_key($_SESSION['Auth']->id);
+                    $my_conversation->setConversation_key($conversationId);
+                    $user_conversation->save();
+                    $my_conversation->save();
+                } else {
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(406);
+            }
         }else{
             http_response_code(422);
         }
-        
     }
 
 
     public function composeConversation()
     {
-        if (!empty($_POST)) {
+        if (isset($_POST)) {
             $conversationId = $_POST['id_conversation'];
 
-            $user_conversation = Query::from('cmspf_User_conversation')
-            ->where('conversation_key='.$conversationId)
-            ->where('user_key='.$_POST['id_user'])
-            ->execute();
+            $this->conversation = $this->conversation->find($conversationId);
+            if ($this->conversation->getId() != null){
 
-            $my_conversation = Query::from('cmspf_User_conversation')
-            ->where('conversation_key='.$conversationId)
-            ->where('user_key='.$_SESSION['Auth']->id)
-            ->execute();
-            
-            $user_conv = new User_conversation();
-            $user_conv->setId($user_conversation[0]['id']);
-            $user_conv->setUser_key($user_conversation[0]['user_key']);
-            $user_conv->setSeen(1);
-            $user_conv->save();
+                $user_conversation = Query::from('cmspf_User_conversation')
+                ->where('conversation_key= :conversation_key')
+                ->where('user_key= :user_key')
+                ->params(['conversation_key' => $conversationId, 'user_key' => $_POST['id_user']])
+                ->execute();
 
-            $my_conv = new User_conversation();
-            $my_conv->setId($my_conversation[0]['id']);
-            $my_conv->setUser_key($_SESSION['Auth']->id);
-            $my_conv->setSeen(2);
-            $my_conv->save();
+                $my_conversation = Query::from('cmspf_User_conversation')
+                ->where('conversation_key= :conversation_key')
+                ->where('user_key= :user_key')
+                ->params(['conversation_key' => $conversationId, 'user_key' => $_SESSION['Auth']->id])
+                ->execute();
 
-            $this->message->setDate(date('Y-m-d H:i:s'));
-            $this->message->setContent($_POST['message']);
-            $this->message->setUser_key($_SESSION['Auth']->id);
-            $this->message->setConversation_key($conversationId);
-            $this->message->save();
+                if (isset($user_conversation[0]['id']) && isset($my_conversation[0]['id']) && !empty($user_conversation[0]['id']) && !empty($my_conversation[0]['id'])){
+                    $user_conv = new User_conversation();
+                    $user_conv->setId($user_conversation[0]['id']);
+                    $user_conv->setUser_key($user_conversation[0]['user_key']);
+                    $user_conv->setSeen(1);
+                    $user_conv->save();
+
+                    $my_conv = new User_conversation();
+                    $my_conv->setId($my_conversation[0]['id']);
+                    $my_conv->setUser_key($_SESSION['Auth']->id);
+                    $my_conv->setSeen(2);
+                    $my_conv->save();
+
+                    $this->message->setDate(date('Y-m-d H:i:s'));
+                    $this->message->setContent(strip_tags($_POST['message']));
+                    $this->message->setUser_key($_SESSION['Auth']->id);
+                    $this->message->setConversation_key($conversationId);
+                    $this->message->save();
+                }else{
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
         }
     }
 
@@ -282,7 +365,7 @@ class Communication
         if (!empty($_POST) && $admin === "admin") {
             $users = explode(",", $_POST['users']);
 
-                if($this->project->checkUserExist($this->user, $users) !== false) {
+                if($this->project->checkUserExist($this->user, $users) != false) {
 
                     $title = $_POST['title'];
                     $description = $_POST['description'];
@@ -303,26 +386,31 @@ class Communication
                     }
 
                     $this->project->setUserKey($userId);
-                    $this->project->save();
-                    $this->user_project->addUsersToProject($users, $this->project->getLastId());
+                    $config = Validator::run($this->project->getFormProject(), $_POST);
+                    if (empty($config)) {
+                        $this->project->save();
+                        $this->user_project->addUsersToProject($users, $this->project->getLastId());
 
-                    $view = new View("project-list");
-                    $user = new User();
-                    $user = $user->find($_SESSION['Auth']->id);
-                    $view->assign("projects", $user->projects());
+                        $view = new View("project-list");
+                        $user = new User();
+                        $user = $user->find($_SESSION['Auth']->id);
+                        $view->assign("projects", $user->projects());
 
-                    $view->assign(
-                        "usersProject",
-                        Query::from('cmspf_Users')
-                            ->where("deleted IS NULL")
-                            ->where("id != " . $_SESSION['Auth']->id)
-                            ->where("confirm = 1")
-                            ->execute("User")
-                    );
+                        $view->assign(
+                            "usersProject",
+                            Query::from('cmspf_Users')
+                                ->where("deleted IS NULL")
+                                ->where("id != " . $_SESSION['Auth']->id)
+                                ->where("confirm = 1")
+                                ->execute("User")
+                        );
 
-                    $projectEmpty = $this->project;
-                    $view->assign("projectEmpty", $projectEmpty);
-
+                        $projectEmpty = $this->project;
+                        $view->assign("projectEmpty", $projectEmpty);
+                    } else {
+                        return include "View/Partial/form.partial.php";
+                        http_response_code(422);
+                    }
                 }else{
                     http_response_code(422);
                 }
@@ -410,29 +498,28 @@ class Communication
                         $idStep = isset($_POST['id']) ? $_POST['id'] : null;
                         $userId = $_SESSION['Auth']->id;
 
+                        $this->step->setTitle($title);
+                        $this->step->setDescription($description);
+                        $config = Validator::run($this->step->getFormStep(), $_POST);
+                        if (empty($config)) {
+                            if (isset($idStep) && !empty($idStep)) {
+                                $this->step->setId($idStep);
+                            }
 
-                        if (isset($title) && !empty($title)) {
-                            $this->step->setTitle($title);
+                            $this->step->setDate(date("Y-m-d H:i:s"));
+                            $this->step->setProjectKey($projectId);
+                            $this->step->setUserKey($userId);
+                            $this->step->save();
+
+                            $view = new View("step-list");
+                            $this->step->setProjectKey($_POST['project']);
+                            $view->assign("step", $this->step);
+
+                            $view->assign("project", $project);
+                        } else {
+                            return include "View/Partial/form.partial.php";
+                            http_response_code(422);
                         }
-
-                        if (isset($description) && !empty($description)) {
-                            $this->step->setDescription($description);
-                        }
-
-                        if (isset($idStep) && !empty($idStep)) {
-                            $this->step->setId($idStep);
-                        }
-
-                        $this->step->setDate(date("Y-m-d H:i:s"));
-                        $this->step->setProjectKey($projectId);
-                        $this->step->setUserKey($userId);
-                        $this->step->save();
-
-                        $view = new View("step-list");
-                        $this->step->setProjectKey($_POST['project']);
-                        $view->assign("step", $this->step);
-
-                        $view->assign("project", $project);
                     }else{
                         http_response_code(422);
                     }
