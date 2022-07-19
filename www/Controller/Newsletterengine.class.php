@@ -26,10 +26,10 @@ class Newsletterengine
 
                 $newsletter->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -53,7 +53,7 @@ class Newsletterengine
         if (isset($request['id'])){
             $newsletter = $this->newsletter->find($request['id']);
 
-            if ($newsletter){
+            if ($newsletter->getId() != null){
 
                 if ($newsletter->getContent() != null){
                     $message = $newsletter->getContent();
@@ -92,10 +92,10 @@ class Newsletterengine
                     ],
                 ]);
             }else {
-                http_response_code(404);
+                http_response_code(422);
             }
         }else {
-            http_response_code(404);
+            http_response_code(422);
         }
     }
 
@@ -109,6 +109,7 @@ class Newsletterengine
 
             if (isset($_POST['id']) && $_POST['id'] != null) {  
                 if (!$this->newsletter->find($_POST['id'])){
+                    http_response_code(422);
                     return include "View/Partial/form.partial.php";
                 }
                 $this->newsletter->setId($_POST['id']);
@@ -129,7 +130,7 @@ class Newsletterengine
                 http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -222,10 +223,10 @@ class Newsletterengine
                 }
                 $this->newsletter->save();
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 }

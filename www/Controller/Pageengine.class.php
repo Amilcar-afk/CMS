@@ -63,10 +63,10 @@ class Pageengine
                 Query::deleteAll('')->from('cmspf_Stats')->where("page_key = " . $_POST['id'] . "")->execute();
                 $page->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -158,7 +158,7 @@ class Pageengine
                 ],
             ]);
         }else {
-            http_response_code(404);
+            http_response_code(422);
         }
     }
 
@@ -175,6 +175,7 @@ class Pageengine
 
             if (isset($_POST['id']) && $_POST['id'] != null) {  
                 if (!$this->page->find($_POST['id'])){
+                    http_response_code(422);
                     return include "View/Partial/form.partial.php";
                 }
                 $this->page->setId($_POST['id']);
@@ -243,7 +244,7 @@ class Pageengine
                 http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -263,10 +264,10 @@ class Pageengine
                 $this->page->setContent($_POST['content']);
                 $this->page->save();
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
 
     }

@@ -324,7 +324,7 @@ class Communication
                     $view->assign("projectEmpty", $projectEmpty);
 
                 }else{
-                    http_response_code(500);
+                    http_response_code(422);
                 }
 
         } else {
@@ -373,14 +373,14 @@ class Communication
                     ],
                 ]);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
             http_response_code(403);
         }
 
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -434,11 +434,11 @@ class Communication
 
                         $view->assign("project", $project);
                     }else{
-                        http_response_code(500);
+                        http_response_code(422);
                     }
 
                 }else{
-                    http_response_code(500);
+                    http_response_code(422);
                 }
             } else {
                 http_response_code(300);

@@ -177,10 +177,10 @@ class Option{
                     ->execute('Option');
                 return include "View/Partial/design-variables.partial.php";
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
 
     }
@@ -250,10 +250,10 @@ class Option{
                 unlink(__DIR__."/..".$option->getPath());
                 $option->delete($_POST['id']);
             } else {
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 }

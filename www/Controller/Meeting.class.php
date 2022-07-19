@@ -207,6 +207,7 @@ class Meeting
 
             if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->rdv->find($_POST['id'])) {
+                    http_response_code(422);
                     return include "View/Partial/form.partial.php";
                 }
                 $this->rdv->setId($_POST['id']);
@@ -257,6 +258,7 @@ class Meeting
 
 
             if (!$this->rdv->find($_POST['id'])) {
+                http_response_code(422);
                 return include "View/Partial/form.partial.php";
             }
             //insert pour la table Rdvs
@@ -300,6 +302,8 @@ class Meeting
                     $view->assign("rdv", $this->rdv);
                     $rdvEmpty = new Rdv();
                     $view->assign("rdvEmpty", $rdvEmpty);
+                }else{
+                    http_response_code(422);
                 }
             } else {
                 return include "View/Partial/form.partial.php";

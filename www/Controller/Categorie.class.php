@@ -62,6 +62,7 @@ class Categorie{
             if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->categorie->find($_POST['id'])){
                     return include "View/Partial/form.partial.php";
+                    http_response_code(422);
                 }
                 $this->categorie->setId($_POST['id']);
             }
@@ -123,7 +124,7 @@ class Categorie{
                 http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -141,10 +142,10 @@ class Categorie{
                 Query::deleteAll('')->from('cmspf_Page_categorie')->where("categorie_key = " . $_POST['id'] . "")->execute();
                 $categorie->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -170,10 +171,10 @@ class Categorie{
                     $page_categorie->save();
                 }
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -182,7 +183,7 @@ class Categorie{
         if( isset($_POST['type']) && isset($_POST['value']) && isset($_POST['navigation']) ) {
 
             if (!$this->categorie->find($_POST['navigation'])){
-                return http_response_code(500);
+                return http_response_code(422);
             }
 
             if ($_POST['type'] == 'backgroundColor'){
@@ -199,7 +200,7 @@ class Categorie{
             $this->categorie->save();
 
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -215,7 +216,7 @@ class Categorie{
                 $page_categorie[0]->delete($page_categorie[0]->getId());
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -241,10 +242,10 @@ class Categorie{
                     $categorie_categorie->save();
                 }
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -252,15 +253,18 @@ class Categorie{
     {
         if( isset($_POST['categorie']) && isset($_POST['navigation']) ) {
             $categorie_categorie = Query::from('cmspf_Categorie_categorie')
-                ->where("categorie_child_key = " . $_POST['categorie'] . "")
-                ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                ->where("categorie_child_key = :categorie_child_key")
+                ->where("categorie_parent_key = :categorie_parent_key")
+                ->params(array('categorie_child_key' => $_POST['categorie'], 'categorie_parent_key' => $_POST['navigation']))
                 ->execute('Categorie_categorie');
 
             if (isset($categorie_categorie[0])){
                 $categorie_categorie[0]->delete($categorie_categorie[0]->getId());
+            }else{
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 }
