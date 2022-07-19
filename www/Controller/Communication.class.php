@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Query;
+use App\Core\Validator;
 use App\Core\View;
 use App\Model\Conversation;
 use App\Model\Message;
@@ -385,26 +386,31 @@ class Communication
                     }
 
                     $this->project->setUserKey($userId);
-                    $this->project->save();
-                    $this->user_project->addUsersToProject($users, $this->project->getLastId());
+                    $config = Validator::run($this->page->getFormProject(), $_POST);
+                    if (empty($config)) {
+                        $this->project->save();
+                        $this->user_project->addUsersToProject($users, $this->project->getLastId());
 
-                    $view = new View("project-list");
-                    $user = new User();
-                    $user = $user->find($_SESSION['Auth']->id);
-                    $view->assign("projects", $user->projects());
+                        $view = new View("project-list");
+                        $user = new User();
+                        $user = $user->find($_SESSION['Auth']->id);
+                        $view->assign("projects", $user->projects());
 
-                    $view->assign(
-                        "usersProject",
-                        Query::from('cmspf_Users')
-                            ->where("deleted IS NULL")
-                            ->where("id != " . $_SESSION['Auth']->id)
-                            ->where("confirm = 1")
-                            ->execute("User")
-                    );
+                        $view->assign(
+                            "usersProject",
+                            Query::from('cmspf_Users')
+                                ->where("deleted IS NULL")
+                                ->where("id != " . $_SESSION['Auth']->id)
+                                ->where("confirm = 1")
+                                ->execute("User")
+                        );
 
-                    $projectEmpty = $this->project;
-                    $view->assign("projectEmpty", $projectEmpty);
-
+                        $projectEmpty = $this->project;
+                        $view->assign("projectEmpty", $projectEmpty);
+                    } else {
+                        return include "View/Partial/form.partial.php";
+                        http_response_code(422);
+                    }
                 }else{
                     http_response_code(422);
                 }
@@ -492,29 +498,28 @@ class Communication
                         $idStep = isset($_POST['id']) ? $_POST['id'] : null;
                         $userId = $_SESSION['Auth']->id;
 
+                        $this->step->setTitle($title);
+                        $this->step->setDescription($description);
+                        $config = Validator::run($this->step->getFormStep(), $_POST);
+                        if (empty($config)) {
+                            if (isset($idStep) && !empty($idStep)) {
+                                $this->step->setId($idStep);
+                            }
 
-                        if (isset($title) && !empty($title)) {
-                            $this->step->setTitle($title);
+                            $this->step->setDate(date("Y-m-d H:i:s"));
+                            $this->step->setProjectKey($projectId);
+                            $this->step->setUserKey($userId);
+                            $this->step->save();
+
+                            $view = new View("step-list");
+                            $this->step->setProjectKey($_POST['project']);
+                            $view->assign("step", $this->step);
+
+                            $view->assign("project", $project);
+                        } else {
+                            return include "View/Partial/form.partial.php";
+                            http_response_code(422);
                         }
-
-                        if (isset($description) && !empty($description)) {
-                            $this->step->setDescription($description);
-                        }
-
-                        if (isset($idStep) && !empty($idStep)) {
-                            $this->step->setId($idStep);
-                        }
-
-                        $this->step->setDate(date("Y-m-d H:i:s"));
-                        $this->step->setProjectKey($projectId);
-                        $this->step->setUserKey($userId);
-                        $this->step->save();
-
-                        $view = new View("step-list");
-                        $this->step->setProjectKey($_POST['project']);
-                        $view->assign("step", $this->step);
-
-                        $view->assign("project", $project);
                     }else{
                         http_response_code(422);
                     }

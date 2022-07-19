@@ -154,23 +154,6 @@ class Step extends BaseSQL
                     "value"=>$this->getTitle(),
                     "error"=>""
                 ],
-
-                /*"user"=>[
-                    "question"=>"Assign user",
-                    "placeholder"=>"Title",
-                    "type"=>"select",
-                    "name"=>"user",
-                    "id"=>"selectUsers".$name,
-                    "value"=>$this->usersInproject(),
-                    "class"=>"input inputSelect",
-                    "error"=>"",
-                    "idToVerif"=>true,
-                    "div"=>"divUserSearch",
-                    "choices"=>$usersList['choices'],
-                    "searchBox"=>true,
-                    "usersInProject"=>isset($usersProjectList['choices']) ? $usersProjectList['choices'] : null
-                ],*/
-
                 "description"=>[
                     "question"=>"step description",
                     "placeholder"=>"description",
