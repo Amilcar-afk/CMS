@@ -108,6 +108,12 @@ class Pageengine
             ]);
         }else{
             http_response_code(404);
+            $view = new View("error", 'back-sandbox');
+            $view->assign("metaData", $metaData = [
+                "title" => 'Error',
+                "description" => 'Error',
+            ]);
+            die();
         }
 
     }
@@ -234,6 +240,7 @@ class Pageengine
                 $view->assign("pageEmpty", $pageEmpty);
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }else{
             http_response_code(500);

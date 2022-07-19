@@ -83,6 +83,7 @@ class Settings
 
             }else{
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }
     }
@@ -146,6 +147,7 @@ class Settings
 
             }else{
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }
     }
@@ -169,6 +171,7 @@ class Settings
             echo '1';
         }else{
             return include "View/Partial/form.partial.php";
+            http_response_code(422);
         }
 
     }

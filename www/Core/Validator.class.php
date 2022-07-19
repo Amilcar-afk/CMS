@@ -52,6 +52,10 @@ class Validator
         
         foreach ($config["inputs"] as $name => $input){
 
+            if($input["type"] != "password" && $data[$name] != strip_tags($data[$name])){
+                $config['inputs'][$name]['error'] = "Inccorect value";
+            }
+
             if(isset($config['inputs']['newPassword']) && isset($config['inputs']['currentPassword']) ){
 
                 if(empty($data['newPassword']) && empty($data['currentPassword'])){
@@ -128,8 +132,9 @@ class Validator
         }
         
         if(empty($errors)){
-            return ;
+            return;
         }else{
+            //http_response_code(422);
             return $config;
         }
     }

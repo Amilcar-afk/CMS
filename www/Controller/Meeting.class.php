@@ -224,6 +224,8 @@ class Meeting
                     $this->user_rdv->setRdv_key($lastId);
                     $this->user_rdv->save();
                 }
+            }else{
+                http_response_code(422);
             }
         }
     }
@@ -301,6 +303,7 @@ class Meeting
                 }
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }
     }
