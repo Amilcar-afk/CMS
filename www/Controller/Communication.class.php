@@ -313,7 +313,7 @@ class Communication
                     $my_conv->save();
 
                     $this->message->setDate(date('Y-m-d H:i:s'));
-                    $this->message->setContent($_POST['message']);
+                    $this->message->setContent(strip_tags($_POST['message']));
                     $this->message->setUser_key($_SESSION['Auth']->id);
                     $this->message->setConversation_key($conversationId);
                     $this->message->save();
