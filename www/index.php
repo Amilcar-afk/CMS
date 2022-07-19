@@ -21,8 +21,7 @@ function myAutoloader($class){
 
 spl_autoload_register("App\myAutoloader");
 
-
-$uri = $_SERVER["REQUEST_URI"]; // => " / "
+$uri = $_SERVER["REQUEST_URI"];
 
 $routeFile = "routes.yml";
 
