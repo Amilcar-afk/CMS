@@ -324,7 +324,7 @@ class Communication
                     $view->assign("projectEmpty", $projectEmpty);
 
                 }else{
-                    http_response_code(500);
+                    http_response_code(422);
                 }
 
         } else {
@@ -347,6 +347,14 @@ class Communication
     {
         if(isset($request['id']) && !empty($request['id'])) {
 
+            $req = Query::from('cmspf_User_projet')
+                ->where("user_key = :user_key")
+                ->where("projet_key = :projet_key")
+                ->params(['user_key'=> $_SESSION['Auth']->id, 'projet_key'=> $request['id']])
+                ->execute("projet");
+
+        if(!empty($req[0])){
+
             $project = new Projet();
             $project = $project->find($request['id']);
 
@@ -365,11 +373,14 @@ class Communication
                     ],
                 ]);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
+        }else{
+            http_response_code(403);
+        }
 
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -377,52 +388,63 @@ class Communication
     {
         $admin = $_SESSION['Auth']->rank;
 
-        if ($admin === "admin") {
+        $req = Query::from('cmspf_User_projet')
+                ->where("user_key = :user_key")
+                ->where("projet_key = :projet_key")
+                ->params(['user_key'=> $_SESSION['Auth']->id, 'projet_key'=> $_POST['project']])
+                ->execute("projet");
 
-            if (isset($_POST['project'])){
+        if(!empty($req[0])){
 
-                $project = new Projet();
-                $project = $project->find($_POST['project']);
+            if ($admin === "admin") {
 
-                if($project) {
-                    $title = $_POST['title'];
-                    $description = $_POST['description'];
-                    $projectId = isset($_POST['project']) ? $_POST['project'] : null;
-                    $idStep = isset($_POST['id']) ? $_POST['id'] : null;
-                    $userId = $_SESSION['Auth']->id;
+                if (isset($_POST['project'])){
+
+                    $project = new Projet();
+                    $project = $project->find($_POST['project']);
+
+                    if($project) {
+                        $title = $_POST['title'];
+                        $description = $_POST['description'];
+                        $projectId = isset($_POST['project']) ? $_POST['project'] : null;
+                        $idStep = isset($_POST['id']) ? $_POST['id'] : null;
+                        $userId = $_SESSION['Auth']->id;
 
 
-                    if (isset($title) && !empty($title)) {
-                        $this->step->setTitle($title);
+                        if (isset($title) && !empty($title)) {
+                            $this->step->setTitle($title);
+                        }
+
+                        if (isset($description) && !empty($description)) {
+                            $this->step->setDescription($description);
+                        }
+
+                        if (isset($idStep) && !empty($idStep)) {
+                            $this->step->setId($idStep);
+                        }
+
+                        $this->step->setDate(date("Y-m-d H:i:s"));
+                        $this->step->setProjectKey($projectId);
+                        $this->step->setUserKey($userId);
+                        $this->step->save();
+
+                        $view = new View("step-list");
+                        $this->step->setProjectKey($_POST['project']);
+                        $view->assign("step", $this->step);
+
+                        $view->assign("project", $project);
+                    }else{
+                        http_response_code(422);
                     }
 
-                    if (isset($description) && !empty($description)) {
-                        $this->step->setDescription($description);
-                    }
-
-                    if (isset($idStep) && !empty($idStep)) {
-                        $this->step->setId($idStep);
-                    }
-
-                    $this->step->setDate(date("Y-m-d H:i:s"));
-                    $this->step->setProjectKey($projectId);
-                    $this->step->setUserKey($userId);
-                    $this->step->save();
-
-                    $view = new View("step-list");
-                    $this->step->setProjectKey($_POST['project']);
-                    $view->assign("step", $this->step);
-
-                    $view->assign("project", $project);
                 }else{
-                    http_response_code(500);
+                    http_response_code(422);
                 }
-
-            }else{
-                http_response_code(500);
+            } else {
+                http_response_code(300);
             }
-        } else {
-            http_response_code(300);
+        }else{
+            http_response_code(422);
         }
     }
 

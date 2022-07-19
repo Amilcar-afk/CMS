@@ -454,7 +454,7 @@ class Statistics
                 http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -468,10 +468,10 @@ class Statistics
                 Query::deleteAll('')->from('cmspf_Stats')->where("reseau_soc_key = " . $_POST['id'] . "")->execute();
                 $reseauxSoc->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -483,10 +483,10 @@ class Statistics
             if ($reseauxSoc->getId() != null) {
                 $reseauxSoc->composeStats($_POST['id'], "reseaux_soc");
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -570,8 +570,6 @@ class Statistics
             $this->stats->setDevice($device); 
             $this->stats->save();
 
-        } else {
-            
         }
     }
     
