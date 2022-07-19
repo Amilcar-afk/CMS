@@ -74,7 +74,7 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if ($page && $page->getStatus() == 'Public') {
+        if ($page && ($page->getStatus() == 'Public' || $page->getStatus() == 'Tag')) {
 
             $page->composeStats($page->getId(), "view");
 
