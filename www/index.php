@@ -50,10 +50,6 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
         $param = explode('/',$replace);
         array_shift($param);
 
-        if ($uri == "/pageloader" && empty($param[0])){
-            $param[0] = "home";
-        }
-
         if(isset($routes[$uri]['params']))
         {
             if(sizeof($routes[$uri]['params']) === sizeof($param)){
