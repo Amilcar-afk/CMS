@@ -2,15 +2,15 @@ let userSelect = document.getElementsByClassName("inputSelect");
 let userChecked = null;
 
 //ADD USERS ON CREATE OR UPDATE PROJECT
-window.onload = function (){
+window.onload = function (e){
     for(let i = 0; i < userSelect.length; i++)
         selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[0]);
 }
 
 //display selected user
 function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
-
-    userSelected.addEventListener("change", () => {
+    userSelected.addEventListener("change", function (e){
+        userSelected = e.target;
         let userSelectedIndex = userSelected.selectedIndex;
         let userSelectedOption = userSelected.options[userSelectedIndex];
         let userSelectedName = userSelected.options[userSelectedIndex].text;
@@ -22,7 +22,6 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
         checkBoxUser.value = userSelectedOption.value;
         checkBoxUser.className = "user-check";
         checkBoxUser.checked = true;
-        console.log(`${userSelected.id}`);
         checkBoxUser.setAttribute("onchange", `onClickCheckbox(this, this.parentElement.parentElement.parentElement.previousElementSibling)`);
 
         liUser.setAttribute("class", "li-user-selected sticker sticker--cta sticker--cta--selected li-user-selected");
@@ -47,8 +46,6 @@ function selectEvent(userSelected, divUsersSelected, listSelectedUsers = null) {
 //undisplay user deselected
 function onClickCheckbox(item, userSelected){
     let li = item.parentNode;
-    console.log(li);
-    console.log(item);
     for (let i = 0; i < userSelected.length; i++){
         if (userSelected.options[i].value == li.value) {
             userSelected.options[i].hidden = false;
@@ -100,6 +97,8 @@ $(document).ready(function(){
                 if (answer.includes('<section id="back-office-container">')){
                     $($('main')[0]).html(answer);
                     alertMessage('Project saved!');
+                    for(let i = 0; i < userSelect.length; i++)
+                        selectEvent(userSelect[i], userSelect[i].nextElementSibling, userSelect[i].nextElementSibling.childNodes[0]);
                 }else{
                     $(formContainer).html(answer);
                 }
