@@ -45,8 +45,8 @@ class Statistics
         $sincePerCountry = date('Y-m-d', strtotime($toPerCountry. ' - 1 month'));
         $toPerDevice = date("Y-m-d");
         $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
-        
-        if(!empty($_POST['sincePerPage']) && empty($_POST['toPerPage'])){
+
+        if(!empty($_POST['sincePerPage']) && !empty($_POST['toPerPage'])){
             $sincePerPage = $_POST['sincePerPage'];
             $toPerPage = $_POST['toPerPage'];
         }
@@ -60,7 +60,6 @@ class Statistics
         }
 
         // GET VIEW PER DAY FOR A WEEK
-        // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
 
         $perWeekDate = date("Y-m-d");
         if(isset($_POST['perWeekDate'])){

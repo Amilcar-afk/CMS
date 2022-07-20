@@ -26,14 +26,14 @@
                     </div>
                 </article>
                 <article id="conversations-elements" >
-                    <?php if(isset($conversations)): ?>
+                    <?php if(isset($conversations[0])): ?>
                         <?php foreach (array_reverse($conversations)  as $conversation):?>
                             <header class="main-nav-choice mb-3">
                                 <div>
                                     <h2 id="conversation_title">
                                         <?php foreach ($conversation->users() as $user): ?>
                                             <?php if($user->getId() != $_SESSION['Auth']->id):  ?>
-                                                <a href="conversations/user-conversations/<?=$conversation->getId()?>">
+                                                <a href="/conversations/user-conversations/<?=$conversation->getId()?>">
                                                     <?= $user->getFirstname() . ' ' . $user->getLastname() ?>
                                                     <input type="hidden" id="user" value="<?= $user->getId() ?>" >
                                                 </a>
@@ -60,7 +60,11 @@
                                 <span class="material-icons-round">more_horiz</span>
                             </header>
                         <?php endforeach;?>
+
+                    <?php else: ?>
+                        <p class="title title--small">No conversation</p>
                     <?php endif; ?>
+
                 </article>
                 <article id="conversation-founded" >
                 </article>

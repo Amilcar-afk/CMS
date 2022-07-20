@@ -27,8 +27,11 @@ class Meeting
 
     public function loadslot ()
     {
+
         $statusOfUser = $_SESSION['Auth']->rank;
-        $rdvs = $this->rdv->find();
+        $rdvs = Query::from('cmspf_Rdvs')
+            ->where('status = "slot"')
+            ->execute('rdv');
         
         foreach ($rdvs as $row) {
             $users = $row->users();

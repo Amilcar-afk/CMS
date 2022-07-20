@@ -96,6 +96,7 @@ class View extends BaseSQL
                 ->where("type = 'favicon'")
                 ->execute('Option');
         }
+
         if (isset($this->data) && isset($this->template)) {
             include "View/" . $this->template . ".tpl.php";
         }else{

@@ -119,3 +119,14 @@ if(sizeof($currentParams)!=0){
 }else{
     $objectController->$action();
 }
+
+if(http_response_code()
+    && (http_response_code() == 404
+        || http_response_code() == 422
+        || http_response_code() == 500)){
+    $view = new View("error", 'back-sandbox');
+    $view->assign("metaData", $metaData = [
+        "title" => 'Error',
+        "description" => 'Error',
+    ]);
+}

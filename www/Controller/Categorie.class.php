@@ -84,8 +84,9 @@ class Categorie{
                         $page = new Page();
                         $page->setCategorieKey($lastId);
                     }
+
                     $page->setStatus('tag');
-                    $page->setSlug($_POST['title']);
+                    $page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['title'])))));
                     $page->setTitle($_POST['title']);
                     $page->setUserKey($_SESSION['Auth']->id);
                     $page->setDateUpdate(date('d-m-y h:i:s'));
@@ -95,7 +96,10 @@ class Categorie{
                 if ($lastId
                     && isset($_POST['navigation'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = " . $_POST['navigation'] . "")
+                        ->where("id = :id")
+                        ->params([
+                            'id' => $_POST['navigation'],
+                        ])
                         ->execute('Categorie')) {
 
                     $categorie_categorie = Query::from('cmspf_Categorie_categorie')

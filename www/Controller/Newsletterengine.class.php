@@ -192,18 +192,18 @@ class Newsletterengine
     }
 
     public function update($subscribe) 
-        {
+    {
 
-            $mail = new MailModel();
-            $message = $this->newsletter->getContent();
+        $mail = new MailModel();
+        $message = $this->newsletter->getContent();
 
-            array_push($message, [
-                "type"=>"newsletter",
-                "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()
-            ]);
-            $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $message);
+        array_push($message, [
+            "type"=>"newsletter",
+            "content"=>$_SERVER["HTTP_HOST"] . "/newsletter/unsubscribe/".$subscribe->getEmail()
+        ]);
+        $mail->sendEmail($subscribe->getEmail(), " ", $this->newsletter->getTitle(), $message);
 
-        }
+    }
 
 
     public function saveContentNewsletter()
