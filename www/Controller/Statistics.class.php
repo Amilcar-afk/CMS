@@ -427,12 +427,7 @@ class Statistics
                     ->execute();
                 $numberOfUsers = $newUsers[0]['number'];
 
-                // ASSIGN VIEWS
-                $tmpl = "back";
-                if (isset($_POST['range'])) {
-                    $tmpl= "";
-                }
-                $view = new View("dashboard", $tmpl);
+                $view = new View("dashboard");
                 $view->assign("chartWeekData", $chartWeekData);
 
                 $view->assign("perWeekDate", $perWeekDate);
