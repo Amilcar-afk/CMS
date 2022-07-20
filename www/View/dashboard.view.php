@@ -317,10 +317,6 @@ google.charts.load('current', {'packages':['bar']});
         var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
-
-
-
-		
 </script>
 
 
