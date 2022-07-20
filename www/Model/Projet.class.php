@@ -114,7 +114,6 @@ class Projet extends BaseSQL
             }
         }
         return $users;
-        return users;
     }
 
     public function usersInproject()
@@ -211,18 +210,17 @@ class Projet extends BaseSQL
                     "error"=>""
                 ],
 
-                "user"=>[
+                "userOfProject"=>[
                     "question"=>"Assign user",
                     "placeholder"=>"Title",
                     "type"=>"select",
-                    "name"=>"user",
+                    "name"=>"userOfProject",
                     "id"=>"selectUsers".$name,
                     "value"=>$this->usersInproject(),
                     "class"=>"input inputSelect",
                     "error"=>"",
-                    "idToVerif"=>true,
                     "div"=>"divUserSearch",
-                    "choices"=>$usersList['choices'],
+                    "choices"=>isset($usersList['choices']) ? $usersList['choices'] : null,
                     "searchBox"=>true,
                     "usersInProject"=>isset($usersProjectList['choices']) ? $usersProjectList['choices'] : null
                 ],
@@ -235,7 +233,8 @@ class Projet extends BaseSQL
                     "value"=>$this->getDescription(),
                     "class"=>"input",
                     "rows"=>16,
-                    "cols"=>"",
+                    "min"=>3,
+                    "max"=>100,
                     "error"=>""
                 ],
             ],

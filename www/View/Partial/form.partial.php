@@ -55,7 +55,7 @@
                 <label for="<?=$name?>"><?=$input["question"]?></label>
                 <textarea name="<?= $name ?>"
                           rows="<?= $input["rows"] ?>"
-                          cols="<?= $input["cols"] ?>"
+                        <?= (isset($input["cols"]))?'cols="'.$input['cols'].'"':'' ?>
                           id="<?= $name ?>"
                           class="<?= $input["class"] ?>"
                           <?= (isset($input["placeholder"]))?'placeholder="'.$input["placeholder"].'"':'' ?>
