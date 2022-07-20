@@ -2294,7 +2294,8 @@ table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > t
     margin-right: 0px; }
   .container-main-content--menu > section {
     overflow-y: unset;
-    padding: 25px 20px; }
+    padding: 25px 20px;
+    padding-bottom: 100px !important; }
   .container-main-content--menu--conversation > section > div > header {
     padding: 25px 25px; }
   .container-main-content--menu .menu-container {
@@ -2672,8 +2673,9 @@ h2 {
     left: unset;
     right: unset;
     width: 100%;
-    bottom: 93.59px;
-    border-radius: 0; }
+    bottom: 90px;
+    border-radius: 0;
+    position: fixed; }
     .alert p {
       transform: unset;
       width: 100%;
@@ -2929,3 +2931,30 @@ h2 {
     .conversation > footer > #sendTextarea {
       width: calc(100% - 40px);
       font-size: 16px !important; }
+
+.item {
+  padding: 20px;
+  background-color: #e8e8e8;
+  border-radius: var(--radius, 8px);
+  margin: 10px;
+  transition: all 0.3s;
+  margin-bottom: 40px;
+  font-size: 1.875rem;
+  font-weight: 600;
+  cursor: pointer; }
+  .item label {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--main-color);
+    font-weight: bold;
+    border: unset;
+    background: unset;
+    padding: 0; }
+  .item:hover {
+    background-color: #afafaf; }
+    .item:hover label {
+      color: var(--second-color); }
+  .item p {
+    margin-top: 8px;
+    font-size: 1rem;
+    font-weight: 400; }

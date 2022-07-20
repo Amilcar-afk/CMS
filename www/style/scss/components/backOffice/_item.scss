@@ -1,0 +1,35 @@
+.item{
+	padding: 20px;
+	background-color: #e8e8e8;
+	border-radius: var(--radius, 8px);
+	margin:10px;
+	transition: all 0.3s;
+	margin-bottom: 40px;
+	font-size: rem(30);
+	font-weight: 600;
+	cursor: pointer;
+
+	& label{
+		margin-top: 8px;
+		font-size: rem(14);
+		color: var(--main-color);
+		font-weight: bold;
+		border: unset;
+		background: unset;
+		padding: 0;
+	}
+
+	&:hover{
+		background-color: $light-grey-second;
+
+		& label{
+			color: var(--second-color);
+		}
+	}
+
+	& p{
+		margin-top: 8px;
+		font-size: rem(16);
+		font-weight: 400;
+	}
+}
