@@ -181,12 +181,15 @@ class Pageengine
                     return http_response_code(422);
                 }
                 $this->page->setId($_POST['id']);
+
+                if($_POST['id'] == 1){
+                    $this->page->setStatus('');
+                }
+
                 $unic_page = Query::from('cmspf_Pages')
                     ->where("slug = :slug")
-                    ->where("id != :id")
                     ->params([
-                        'slug' => urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug'])))),
-                        'id' => $_POST['id']
+                        'slug' => urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug']))))
                     ])
                     ->execute('Page');
                 if (!isset($unic_page[0])){

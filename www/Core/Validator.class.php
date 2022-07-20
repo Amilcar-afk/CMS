@@ -73,6 +73,9 @@ class Validator
                 continue;
             }
 
+            if(isset($input["name"]) &&  $input["name"] == "slug" && isset($data['id']) && $data['id'] == 1){
+                continue;
+            }
 
             if(!isset($data[$name])){
 

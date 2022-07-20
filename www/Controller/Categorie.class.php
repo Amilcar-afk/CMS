@@ -84,7 +84,7 @@ class Categorie{
                         $page = new Page();
                         $page->setCategorieKey($lastId);
                     }
-                    
+
                     $page->setStatus('tag');
                     $page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['title'])))));
                     $page->setTitle($_POST['title']);
