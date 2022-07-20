@@ -383,60 +383,62 @@ class Communication
     public function composeProject()
     {
 
-        if (isset($_POST) && empty($_POST['id'])) {
+        if (isset($_POST['id']) && !empty($_POST['id'])) {
+            $this->project = $this->project->find($_POST['id']);
 
-            if (isset($_POST['id']) && !empty($_POST['id'])) {
-                $this->project = $this->project->find($_POST['id']);
-
-                $userInProject = Query::from('cmspf_User_projet')
-                    ->where("user_key = :user_key")
-                    ->where("projet_key = :projet_key")
-                    ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $this->project->getId()])
-                    ->execute("User_Projet");
-
-                if (!isset($userInProject[0])) {
-                    http_response_code(422);
-                    return;
-                }
-            }
-
-            $this->project->setTitle($_POST['title']);
-            $this->project->setDescription($_POST['description']);
-
-            $config = Validator::run($this->project->getFormProject($this->project->usersNotInProject(), $this->project->usersInProject(), 'Update'), $_POST);
-
-            if (empty($config)) {
-                $users[] = explode(",", $_POST['users']);
-                if ($this->project->checkUserExist($this->user, $users) === false) {
-                    http_response_code(422);
-                    return;
-                }
-
-                $this->project->save();
-
-                $this->user_project->addUsersToProject($users, $this->project->getLastId());
-
-                $view = new View("project-list");
-                $user = new User();
-                $user = $user->find($_SESSION['Auth']->id);
-                $view->assign("projects", $user->projects());
-
-                $view->assign(
-                    "usersProject",
-                    Query::from('cmspf_Users')
-                        ->where("deleted IS NULL")
-                        ->where("id != " . $_SESSION['Auth']->id)
-                        ->where("confirm = 1")
-                        ->execute("User")
-                );
-
-                $projectEmpty = $this->project;
-                $view->assign("projectEmpty", $projectEmpty);
-            } else {
-                return include "View/Partial/form.partial.php";
+            if(!$this->project->getId()){
                 http_response_code(422);
             }
+
+            $this->user_project->setProjectKey($_POST['id']);
+
+            $userInProject = Query::from('cmspf_User_projet')
+                ->where("user_key = :user_key")
+                ->where("projet_key = :projet_key")
+                ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $this->project->getId()])
+                ->execute("User_Projet");
+
+            if (!isset($userInProject[0])) {
+                http_response_code(422);
+                return;
+            }
+        }
+
+        $this->project->setTitle($_POST['title']);
+        $this->project->setDescription($_POST['description']);
+
+        $config = Validator::run($this->project->getFormProject($this->project->usersNotInProject(), $this->project->usersInProject(), 'Update'), $_POST);
+
+        if (empty($config)) {
+            $users = explode(",", $_POST['users']);
+            if ($this->project->checkUserExist($this->user, $users) === false) {
+                http_response_code(422);
+                return;
+            }
+
+            $this->project->save();
+
+            $this->user_project->addUsersToProject($users, $this->project->getLastId());
+
+            $view = new View("project-list");
+            $user = new User();
+            $user = $user->find($_SESSION['Auth']->id);
+            $view->assign("projects", $user->projects());
+
+            $view->assign(
+                "usersProject",
+                Query::from('cmspf_Users')
+                    ->where("deleted IS NULL")
+                    ->where("id != " . $_SESSION['Auth']->id)
+                    ->where("confirm = 1")
+                    ->execute("User")
+            );
+
+            $projectEmpty = $this->project;
+            $view->assign("projectEmpty", $projectEmpty);
         } else {
+            return include "View/Partial/form.partial.php";
+            echo "402 1";
             http_response_code(422);
         }
     }
@@ -446,18 +448,17 @@ class Communication
         $req = Query::from('cmspf_User_projet')
             ->where("user_key = :user_key")
             ->where("projet_key = :projet_key")
-            ->params(['user_key'=> $_SESSION['Auth']->id, 'projet_key'=> $request['id']])
+            ->params(['user_key'=> $_SESSION['Auth']->id, 'projet_key'=> $_POST['id']])
             ->execute("User_projet");
 
         if(!empty($req[0])) {
 
-            $admin = $_SESSION['Auth']->rank;
             $id = $_POST['id'];
+            $this->project->setId($id);
+            $this->project->delete($id);
 
-            if (!empty($id) && $admin === "admin") {
-                $this->project->setId($id);
-                $this->project->delete($id);
-            }
+        }else{
+            http_response_code(422);
         }
     }
 

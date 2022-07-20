@@ -107,10 +107,14 @@ class User_projet extends BaseSQL
 
             foreach ($project_user as $res) {
                 $val = array_search($res->getUserKey(), $usersid);
+                $id = $res->getId();
 
-                if ($val !== false) {
-                    unset($usersid[$val]);
+                if ($val === false) {
+                    $this->setId($id);
+                    $this->delete($id);
+                    //unset($usersid[$val]);
                 }
+
             }
 
             foreach ($usersid as $id) {

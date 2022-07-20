@@ -24,7 +24,7 @@
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
                 <?php if (isset($input["searchBox"]) && $input["searchBox"] === true):?>
-                    <input placeholder="search user..." class="input" type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling.nextElementSibling)">
+                    <input placeholder="search user..." class="input" type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling)">
                 <?php endif;?>
                 <select <?= (isset($input["id"]))?'id="'.$input["id"].'"':'' ?> name="<?= $name ?>" class="<?=$input["class"]?>">
                     <?= (isset($input["question"]) && (!isset($input["value"]) || empty($input["value"])))?'<option hidden>'.$input["question"].'</option>':'' ?>
