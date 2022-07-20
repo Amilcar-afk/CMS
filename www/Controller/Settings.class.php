@@ -67,7 +67,8 @@ class Settings
             $this->user->generateToken();
 
             $unic_email = Query::from('cmspf_Users')
-                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                            ->where("mail = :mail AND (deleted IS NULL OR deleted = 0)")
+                            ->params(["mail" => $_POST['email']])
                             ->execute("User");
 
             if(!count($unic_email) > 0){

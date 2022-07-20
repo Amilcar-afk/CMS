@@ -134,7 +134,10 @@ class Categorie{
             $categorie = $this->categorie->find($_POST['id']);
             if (isset($categorie) && $categorie->getId() != null && $categorie->getType() == 'tag') {
 
-                $categorieCategories = Query::from('cmspf_Categorie_categorie')->where("categorie_child_key = " . $_POST['id'] . "")->execute('Categorie_categorie');
+                $categorieCategories = Query::from('cmspf_Categorie_categorie')
+                    ->where("categorie_child_key = :categorie_child_key")
+                    ->params(['categorie_child_key' => $_POST['id']])
+                    ->execute('Categorie_categorie');
                 foreach ($categorieCategories as $categorieCategorie)
                 {
                     $categorieCategorie->delete($categorieCategorie->getId());
@@ -160,8 +163,9 @@ class Categorie{
 
             if ($navigation->getId() != null && $page->getId() != null){
                 $page_categorie = Query::from('cmspf_Page_categorie')
-                    ->where("page_key = " . $_POST['page'] . "")
-                    ->where("categorie_key = " . $_POST['navigation'] . "")
+                    ->where("page_key = :page_key")
+                    ->where("categorie_key = :categorie_key")
+                    ->params(['page_key' => $_POST['page'], 'categorie_key' => $_POST['navigation']])
                     ->execute('Page_categorie');
 
                 if (!isset($page_categorie[0])){
@@ -208,8 +212,9 @@ class Categorie{
     {
         if( isset($_POST['page']) && isset($_POST['navigation']) ) {
             $page_categorie = Query::from('cmspf_Page_categorie')
-                ->where("page_key = " . $_POST['page'] . "")
-                ->where("categorie_key = " . $_POST['navigation'] . "")
+                ->where("page_key = :page_key")
+                ->where("categorie_key = :categorie_key")
+                ->params(['page_key' => $_POST['page'], 'categorie_key' => $_POST['navigation']])
                 ->execute('Page_categorie');
 
             if (isset($page_categorie[0])){
@@ -231,8 +236,9 @@ class Categorie{
 
             if ($navigation->getId() != null && $categorie->getId() != null){
                 $categorie_categorie = Query::from('cmspf_Categorie_categorie')
-                    ->where("categorie_child_key = " . $_POST['categorie'] . "")
-                    ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                    ->where("categorie_child_key = :categorie_child_key")
+                    ->where("categorie_parent_key = :categorie_parent_key")
+                    ->params(['categorie_child_key' => $_POST['categorie'], 'categorie_parent_key' => $_POST['navigation']])
                     ->execute('Categorie_categorie');
 
                 if (!isset($categorie_categorie[0])){

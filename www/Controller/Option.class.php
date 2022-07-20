@@ -88,7 +88,8 @@ class Option{
 
             if ($_POST['type'] != 'font') {
                 $option = Query::from('cmspf_Options')
-                    ->where("type = '" . $_POST['type'] . "'")
+                    ->where("type = :type")
+                    ->params(["type" => $_POST['type']])
                     ->execute('Option');
             }
             if(isset($_FILES) && in_array($_POST['type'], ['logo', 'favicon', 'font']) ){
