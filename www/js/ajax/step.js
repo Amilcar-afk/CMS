@@ -1,18 +1,16 @@
 $(document).ready(function(){
     $(document).on("click", ".cta-button-compose-step", function () {
 
-        let formContainer = $(this).parent().children(0);
-        let title = $(this).parent().parent().find('[name=title]');
-        console.log(formContainer);
+        let formContainer = $(this).parent();
         $.ajax({
             url:"/step/compose/",
             type:"POST",
             data:
                 {
                     id:$(this).parent().parent().find('[name=id]').val(),
-                    project:formContainer[0].parentElement.getAttribute('data-project-id'),
-                    title:title[0].value,
-                    description:formContainer[0][formContainer[0].length - 1].value
+                    project:$(this).parent().children(0)[0].parentElement.getAttribute('data-project-id'),
+                    title:$(this).parent().parent().find('[name=title]').val(),
+                    description:$(this).parent().parent().find('[name=description]').val()
 
                 },
             success:function(answer)
@@ -41,7 +39,7 @@ $(document).ready(function(){
                 },
             success:function()
             {
-                $(projetContainer).parent().parent().remove();
+                $(projetContainer).parent().parent().parent().remove();
                 alertMessage('Step deleted!');
             },
             error: function (data, textStatus, errorThrown) {

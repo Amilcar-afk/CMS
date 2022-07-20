@@ -526,6 +526,7 @@ class Communication
                         $title = $_POST['title'];
                         $description = $_POST['description'];
                         $projectId = isset($_POST['project']) ? $_POST['project'] : null;
+                        unset($_POST['project']);
                         $idStep = isset($_POST['id']) ? $_POST['id'] : null;
                         $userId = $_SESSION['Auth']->id;
 
@@ -543,7 +544,6 @@ class Communication
                             $this->step->save();
 
                             $view = new View("step-list");
-                            $this->step->setProjectKey($_POST['project']);
                             $view->assign("step", $this->step);
 
                             $view->assign("project", $project);

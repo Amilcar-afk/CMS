@@ -162,6 +162,8 @@ class Step extends BaseSQL
                     "value"=>$this->getDescription(),
                     "class"=>"input",
                     "rows"=>16,
+                    "min"=>3,
+                    "max"=>140,
                     "cols"=>"",
                     "error"=>""
                 ],
