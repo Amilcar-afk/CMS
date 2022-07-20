@@ -2,8 +2,6 @@ function findDataInSelect(input, element){
     let searchBox = input;
     let users = element;
 
-    console.log(searchBox);
-    console.log(users);
     var when = "keyup"; //You can change this to keydown, keypress or change
 
     searchBox.addEventListener("keyup", function (e) {

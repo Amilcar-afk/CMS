@@ -194,7 +194,7 @@ class Meeting
 
         
         if (isset($_POST)) {
-            var_dump($_POST);
+            //var_dump($_POST);
             //insert pour la table Rdvs
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
