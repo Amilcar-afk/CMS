@@ -84,8 +84,9 @@ class Categorie{
                         $page = new Page();
                         $page->setCategorieKey($lastId);
                     }
+                    
                     $page->setStatus('tag');
-                    $page->setSlug($_POST['title']);
+                    $page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['title'])))));
                     $page->setTitle($_POST['title']);
                     $page->setUserKey($_SESSION['Auth']->id);
                     $page->setDateUpdate(date('d-m-y h:i:s'));

@@ -169,24 +169,23 @@ class Pageengine
     {
         if( isset($_POST) ) {
             $this->page->setTitle($_POST['title']);
-            $this->page->setSlug(str_replace(' ', '-', strtolower(trim($_POST['slug']))));
+            $this->page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug'])))));
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
             $this->page->setUserKey($_SESSION['Auth']->id);
             
             $this->page->setDateUpdate(date('d-m-y h:i:s'));
 
-            if (isset($_POST['id']) && $_POST['id'] != null) {  
+            if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->page->find($_POST['id'])){
-                    http_response_code(422);
-                    return include "View/Partial/form.partial.php";
+                    return http_response_code(422);
                 }
                 $this->page->setId($_POST['id']);
                 $unic_page = Query::from('cmspf_Pages')
                     ->where("slug = :slug")
                     ->where("id != :id")
                     ->params([
-                        'slug' => $_POST['slug'],
+                        'slug' => urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug'])))),
                         'id' => $_POST['id']
                     ])
                     ->execute('Page');
@@ -210,7 +209,7 @@ class Pageengine
                     && Query::from('cmspf_Categories')
                         ->where("id = :id")
                         ->params(['id'=>$_POST['categorie']])
-                        ->execute('Categorie')){
+                        ->execute('Categorie')[0]){
 
                     //use categorie template;
                     if ($this->page->getContent() == null){
