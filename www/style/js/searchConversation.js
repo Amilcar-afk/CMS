@@ -17,7 +17,8 @@ $(document).ready(function(){
 
     $('#chat-conversations-elements').hide();
     $(".select").on("input", function() {
-        var value = $(this).val()     
+        var value = $(this).val()
+
         $.ajax({
             url: "conversations/search-conversations",
             dataType:"html",
@@ -27,50 +28,56 @@ $(document).ready(function(){
                 searchData:$(this).val(),
             },
             success: function(data){
-                var foundedUsers = JSON.parse(data)
 
-                var div ;
-                if( value.length != 0){
+                if(data == undefined) {
+
+                    $('#conversation-founded').html('');
+                    $('#conversations-elements').show();
+                    return;
+                }
+
+                var div = "";
+                if( data != ''){
+
+                    var foundedUsers = JSON.parse(data);
+
                     $('#conversations-elements').hide();
+                    $('#conversation-founded').show();
+
                     foundedUsers[0].forEach(element => {
-                        if(element.firstname.indexOf(value) || element.lastname.indexOf(value)  || element.email.indexOf(value)  ){
-                            $(".select").on("input", function() {
-                                $('#conversation-founded').show()
-                                document.getElementById('conversation-founded').innerHTML = "";
-                                document.getElementById('chat-conversations-elements').innerHTML = "";
-                            })
-                            if(element.firstname != value){
-                                $('#chat-conversations-elements').hide();   
-                                $('').prependTo('#conversation-founded');
-                                div = '<header class="main-nav-choice mb-3" id="foundedUser">'+
-                                '<div><h2 id="conversation_title">'
-                                + element.firstname  
-                                + element.lastname +'<br>' 
-                                + element.email +'<h2> </div><span class="material-icons-round">more_horiz</span></header>';
-                                $(div).prependTo('#conversation-founded');
-                            } 
-                            $('#foundedUser').on('click', function(){
-                            var e =  foundedUsers[1].find(e=>{
-                              return  element.id == e.id
-                            });
-                                if(e == null){
-                                    createNewConversation(element.id)
-                                }else{
-                                    window.location.replace("/conversations/user-conversations/"+e.conversation_id)
-                                }
-                            })
+                        if (element.firstname && element.lastname && element.email) {
+
+                            div = '<header class="main-nav-choice mb-3 foundedUser" data-id="'+element.id+'">' +
+                                '<div>' +
+                                '<h2 id="conversation_title">' + element.firstname + ' ' + element.lastname + '<br>' + element.email + '<h2>' +
+                                '</div>' +
+                                '<span class="material-icons-round">more_horiz</span>' +
+                                '</header>' + div;
                         }
                     })
+
+                    $(document).on( "click", ".foundedUser", function () {
+                        var e =  foundedUsers[1].find(e=>{
+                            return  $(this).attr('data-id') == e.id
+                        });
+                        if(e == null){
+                            createNewConversation($(this).attr('data-id'))
+                        }else{
+                            window.location.replace("/conversations/user-conversations/"+e.conversation_id)
+                        }
+                    });
+
+                    $('#conversation-founded').html(div);
                 }else{
-                    document.getElementById('conversation-founded').innerHTML = "";
+                    $('#conversation-founded').html('');
                     $('#conversations-elements').show();
                 }
             }
         });
+
      });
 
     $('#sendButton').on('click',function(){
-        
         if($('#sendTextarea').val() != ''){
             var currentUserData = {
                 id_user:$('#userId').val(),
@@ -158,8 +165,6 @@ $(document).ready(function(){
             },
             success: function(messages){ 
                 if($( "#chatDiv > article >p" ).length != messages.length ){
-
-                    console.log(messages[0].user_key)
 
                     if(messages[0].user_key == $('#myId').val()){
                         $( "#chatDiv" ).append(

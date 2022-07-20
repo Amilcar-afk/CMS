@@ -95,7 +95,10 @@ class Categorie{
                 if ($lastId
                     && isset($_POST['navigation'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = " . $_POST['navigation'] . "")
+                        ->where("id = :id")
+                        ->params([
+                            'id' => $_POST['navigation'],
+                        ])
                         ->execute('Categorie')) {
 
                     $categorie_categorie = Query::from('cmspf_Categorie_categorie')

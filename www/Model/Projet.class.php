@@ -210,11 +210,11 @@ class Projet extends BaseSQL
                     "error"=>""
                 ],
 
-                "userOfProject"=>[
+                "user"=>[
                     "question"=>"Assign user",
                     "placeholder"=>"Title",
                     "type"=>"select",
-                    "name"=>"userOfProject",
+                    "name"=>"user",
                     "id"=>"selectUsers".$name,
                     "value"=>$this->usersInproject(),
                     "class"=>"input inputSelect",

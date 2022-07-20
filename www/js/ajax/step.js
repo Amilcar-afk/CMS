@@ -9,7 +9,7 @@ $(document).ready(function(){
             type:"POST",
             data:
                 {
-                    id:formContainer[0].parentElement.parentElement.parentElement.parentElement.getAttribute('id').split('-')[3],
+                    id:$(this).parent().parent().find('[name=id]').val(),
                     project:formContainer[0].parentElement.getAttribute('data-project-id'),
                     title:title[0].value,
                     description:formContainer[0][formContainer[0].length - 1].value

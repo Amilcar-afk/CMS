@@ -61,27 +61,29 @@ class Communication
 
     public function searchData()
     {
-        if (isset($_POST['searchData'])) {
+        if (isset($_POST['searchData']) && !empty($_POST['searchData'])) {
             if($_SESSION['Auth']->rank == 'admin'){
 
                 $users = Query::from('cmspf_Users')
-                ->where("confirm =". 1)
+                ->where("confirm =1")
                 ->where("deleted IS NULL")
-                ->or("firstname LIKE '% :firstnameSearchData %'")
-                ->or("lastname LIKE '% :lastnameSearchData %'")
-                ->or("mail LIKE '% :mailSearchData %'")
-                ->params(['firstnameSearchData' => $_POST['searchData'], 'lastnameSearchData' => $_POST['searchData'], 'mailSearchData' => $_POST['searchData']])
+                ->where("id != " . $_SESSION['Auth']->id)
+                ->or("firstname LIKE :firstnameSearchData")
+                ->or("lastname LIKE :lastnameSearchData")
+                ->or("mail LIKE :mailSearchData")
+                ->params(['firstnameSearchData' => '%'.$_POST['searchData'].'%', 'lastnameSearchData' => '%'.$_POST['searchData'].'%', 'mailSearchData' => '%'.$_POST['searchData'].'%'])
                 ->execute("User");
 
             }else{
                 $users = Query::from('cmspf_Users')
                 ->where("rank = 'admin'")
-                ->where("confirm =". 1)
+                ->where("confirm = 1")
                 ->where("deleted IS NULL")
-                ->or("firstname LIKE '% :firstnameSearchData %'")
-                ->or("lastname LIKE '% :lastnameSearchData %'")
-                ->or("mail LIKE '% :mailSearchData %'")
-                ->params(['firstnameSearchData' => $_POST['searchData'], 'lastnameSearchData' => $_POST['searchData'], 'mailSearchData' => $_POST['searchData']])
+                ->where("id != " . $_SESSION['Auth']->id)
+                ->or("firstname LIKE :firstnameSearchData")
+                ->or("lastname LIKE :lastnameSearchData")
+                ->or("mail LIKE :mailSearchData")
+                ->params(['firstnameSearchData' => '%'.$_POST['searchData'].'%', 'lastnameSearchData' => '%'.$_POST['searchData'].'%', 'mailSearchData' => '%'.$_POST['searchData'].'%'])
                 ->execute("User");
             }
 
@@ -116,9 +118,6 @@ class Communication
 
     public function userConversation($dataFromUrl)
     {
-
-
-        
         if($dataFromUrl['id_conv']){
             
             $idConversation = $dataFromUrl['id_conv'];
@@ -126,7 +125,7 @@ class Communication
             $conversation = new Conversation();
             $conversation = $conversation->find($dataFromUrl['id_conv']);
 
-            if ($conversation->getId() != null){
+            if ($conversation){
                 $user_conversation_data = Query::from('cmspf_User_conversation')
                 ->where('conversation_key = :conversation_key')
                 ->params(['conversation_key' => $dataFromUrl['id_conv']])
@@ -181,17 +180,17 @@ class Communication
             $userConversation = new User_conversation();
             $userConversation = $userConversation->find($_POST['conversation_user_id']);
 
-            if ($userConversation->getId() != null){
+            if ($userConversation){
 
                 $conversation = new Conversation();
                 $conversation = $conversation->find($userConversation->getConversation_key());
-                if ($conversation->getId() != null) {
+                if ($conversation) {
                     $userConversationUser = Query::from('cmspf_User_conversation')
                         ->where('user_key = :user_key')
                         ->where('id = :user_conversation')
                         ->params(['user_key' => $_SESSION['Auth']->id, 'user_conversation' => $userConversation->getConversation_key()])
                         ->execute('User_conversation');
-                    if ($userConversationUser[0]->getId() != null){
+                    if ($userConversationUser[0]){
 
                         $this->conversation_user->setId($_POST['conversation_user_id']);
                         $this->conversation_user->setSeen(2);
@@ -212,10 +211,29 @@ class Communication
 
     public function messages()
     {
-        if(isset($_POST['id'])){
-            $conversation = new Conversation();
-            $conversation->setId($_POST['id']);
-            echo json_encode(array_reverse($conversation->messages()));
+        if (isset($_POST['id'])) {
+            $this->conversation = $this->conversation->find($_POST['id']);
+            if ($this->conversation){
+
+                $userConversation = Query::from('cmspf_User_conversation')
+                    ->where('user_key = :user_key')
+                    ->where('conversation_key = :conversation_key')
+                    ->params(['user_key' => $_SESSION['Auth']->id, 'conversation_key' => $_POST['id']])
+                    ->execute('User_conversation');
+                if ($userConversation[0]) {
+                    if (isset($_POST['id'])) {
+                        $conversation = new Conversation();
+                        $conversation->setId($_POST['id']);
+                        echo json_encode(array_reverse($conversation->messages()));
+                    }
+                }else{
+                    http_response_code(422);
+                }
+            }else{
+                http_response_code(422);
+            }
+        } else {
+            http_response_code(422);
         }
     }
 
@@ -223,14 +241,15 @@ class Communication
         if (isset($_POST['id_conv']) && isset($_POST['id'])) {
 
             $this->conversation = $this->conversation->find($_POST['id_conv']);
-            if ($this->conversation->getId() != null){
+            if ($this->conversation){
 
                 $userConversation = Query::from('cmspf_User_conversation')
                     ->where('user_key = :user_key')
-                    ->params(['user_key' => $_SESSION['Auth']->id])
+                    ->where('conversation_key = :conversation_key')
+                    ->params(['user_key' => $_SESSION['Auth']->id, 'conversation_key' => $_POST['id_conv']])
                     ->execute('User_conversation');
 
-                if ($userConversation[0]->getId() != null) {
+                if ($userConversation[0]) {
                     $lastMessage = Query::from('cmspf_Messages')
                         ->where('conversation_key = :conversation_key')
                         ->where('id >= :id')
@@ -288,7 +307,7 @@ class Communication
             $conversationId = $_POST['id_conversation'];
 
             $this->conversation = $this->conversation->find($conversationId);
-            if ($this->conversation->getId() != null){
+            if ($this->conversation){
 
                 $user_conversation = Query::from('cmspf_User_conversation')
                 ->where('conversation_key= :conversation_key')
@@ -363,110 +382,62 @@ class Communication
 
     public function composeProject()
     {
-        $admin = $_SESSION['Auth']->rank;
 
-        if (!empty($_POST) && $admin === "admin") {
+        if (isset($_POST) && empty($_POST['id'])) {
 
-            $users = explode(",", $_POST['users']);
+            if (isset($_POST['id']) && !empty($_POST['id'])) {
+                $this->project = $this->project->find($_POST['id']);
 
-            if ($this->project->checkUserExist($this->user, $users) !== false) {
+                $userInProject = Query::from('cmspf_User_projet')
+                    ->where("user_key = :user_key")
+                    ->where("projet_key = :projet_key")
+                    ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $this->project->getId()])
+                    ->execute("User_Projet");
 
-                $title = $_POST['title'];
-                $description = $_POST['description'];
-                $projectId = isset($_POST['id']) ? $_POST['id'] : null;
-                $userId = $_SESSION['Auth']->id;
+                if (!isset($userInProject[0])) {
+                    http_response_code(422);
+                    return;
+                }
+            }
 
-                if (isset($title) && !empty($title)) {
-                    $this->project->setTitle($title);
+            $this->project->setTitle($_POST['title']);
+            $this->project->setDescription($_POST['description']);
+
+            $config = Validator::run($this->project->getFormProject($this->project->usersNotInProject(), $this->project->usersInProject(), 'Update'), $_POST);
+
+            if (empty($config)) {
+                $users[] = explode(",", $_POST['users']);
+                if ($this->project->checkUserExist($this->user, $users) === false) {
+                    http_response_code(422);
+                    return;
                 }
 
-                if (isset($description) && !empty($description)) {
-                    $this->project->setDescription($description);
-                }
+                $this->project->save();
 
-                if (isset($projectId) && !empty($projectId)) {
-                    $this->project->setId($projectId);
-                    $this->user_project->setProjectKey($projectId);
+                $this->user_project->addUsersToProject($users, $this->project->getLastId());
 
-                    $userInProject = Query::from('cmspf_User_projet')
-                        ->where("user_key = :user_key")
-                        ->where("projet_key = :projet_key")
-                        ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $this->project->getId()])
-                        ->execute("User_Projet");
+                $view = new View("project-list");
+                $user = new User();
+                $user = $user->find($_SESSION['Auth']->id);
+                $view->assign("projects", $user->projects());
 
-                    if (!empty($userInProject[0])) {
-                        $this->project->setUserKey($userId);
-
-                        $config = Validator::run($this->project->getFormProject($this->project->usersNotInProject(), $this->project->usersInProject(), 'Update'), $_POST);
-
-                        if (empty($config)) {
-
-                            $this->project->save();
-                            $this->user_project->addUsersToProject($users, $this->project->getLastId());
-
-                            $view = new View("project-list");
-                            $user = new User();
-                            $user = $user->find($_SESSION['Auth']->id);
-                            $view->assign("projects", $user->projects());
-
-                            $view->assign(
-                                "usersProject",
-                                Query::from('cmspf_Users')
-                                    ->where("deleted IS NULL")
-                                    ->where("id != " . $_SESSION['Auth']->id)
-                                    ->where("confirm = 1")
-                                    ->execute("User")
-                            );
-
-                            $projectEmpty = $this->project;
-                            $view->assign("projectEmpty", $projectEmpty);
-                        } else {
-                            return include "View/Partial/form.partial.php";
-                            http_response_code(422);
-                        }
-                    }
-                } else {
-                    $this->project->setUserKey($userId);
-
-                    $usersProject = Query::from('cmspf_Users')
+                $view->assign(
+                    "usersProject",
+                    Query::from('cmspf_Users')
                         ->where("deleted IS NULL")
                         ->where("id != " . $_SESSION['Auth']->id)
                         ->where("confirm = 1")
-                        ->execute("User");
+                        ->execute("User")
+                );
 
-                    $config = Validator::run($this->project->getFormProject($usersProject), $_POST);
-
-                    if (empty($config)) {
-                        $this->project->save();
-                        $this->user_project->addUsersToProject($users, $this->project->getLastId());
-
-                        $view = new View("project-list");
-                        $user = new User();
-                        $user = $user->find($_SESSION['Auth']->id);
-                        $view->assign("projects", $user->projects());
-
-                        $view->assign(
-                            "usersProject",
-                            Query::from('cmspf_Users')
-                                ->where("deleted IS NULL")
-                                ->where("id != " . $_SESSION['Auth']->id)
-                                ->where("confirm = 1")
-                                ->execute("User")
-                        );
-
-                        $projectEmpty = $this->project;
-                        $view->assign("projectEmpty", $projectEmpty);
-                    } else {
-                        return include "View/Partial/form.partial.php";
-                        http_response_code(422);
-                    }
-                }
-
+                $projectEmpty = $this->project;
+                $view->assign("projectEmpty", $projectEmpty);
             } else {
+                return include "View/Partial/form.partial.php";
                 http_response_code(422);
             }
         } else {
-            http_response_code(400);
+            http_response_code(422);
         }
     }
 

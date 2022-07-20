@@ -26,7 +26,7 @@
                     </div>
                 </article>
                 <article id="conversations-elements" >
-                    <?php if(isset($conversations)): ?>
+                    <?php if(isset($conversations[0])): ?>
                         <?php foreach (array_reverse($conversations)  as $conversation):?>
                             <header class="main-nav-choice mb-3">
                                 <div>
@@ -60,7 +60,11 @@
                                 <span class="material-icons-round">more_horiz</span>
                             </header>
                         <?php endforeach;?>
+
+                    <?php else: ?>
+                        <p class="title title--small">No project</p>
                     <?php endif; ?>
+
                 </article>
                 <article id="conversation-founded" >
                 </article>

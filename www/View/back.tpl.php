@@ -14,7 +14,6 @@
         <link rel="stylesheet" type="text/css" href="/style/dist/css/main.css" />
         <script type="text/javascript" src="/style/js/utilsMenu.js"></script>
         <script type="text/javascript" src="/style/js/addUser.js"></script>
-
         <script type="text/javascript" src="/style/js/animations.js"></script>
         <?php if(isset($metaData['src'][0])): ?>
             <?php foreach ($metaData['src'] as $src):?>

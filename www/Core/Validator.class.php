@@ -14,7 +14,6 @@ class Validator
     public static function run($config, $data, $unicity = null,$loginAuth = null,$unicpwd = null)
     {
 
-
         if( count($data) != count($config["inputs"]) ){
             $config["inputs"]['error']="Form modified by a user";
         }
@@ -43,16 +42,14 @@ class Validator
             $config['inputs']['currentPassword']['error'] = "Passwords does not exist";
         }
 
-      
-
-
-
-        
-
         
         foreach ($config["inputs"] as $name => $input){
 
-            if($input["type"] != "password" && $data[$name] != strip_tags($data[$name])){
+            if (isset($input["name"]) == 'user' && isset($input["searchBox"]) && $input["searchBox"] == true){
+                continue;
+            }
+
+            if( isset($data[$name]) && $input["type"] != "password" && !empty($data[$name]) && $data[$name] != strip_tags($data[$name])){
                 $config['inputs'][$name]['error'] = "Inccorect value";
             }
 
