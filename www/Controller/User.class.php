@@ -132,7 +132,8 @@ class User{
             }
 
             $unic_email = Query::from('cmspf_Users')
-                            ->where("mail = '" . $_POST['email'] . "' AND (deleted IS NULL OR deleted = 0)")
+                            ->where("mail = :mail AND (deleted IS NULL OR deleted = 0)")
+                            ->params(['mail'=> $_POST['email']])
                             ->execute("User");
 
             if(!count($unic_email) > 0)
@@ -243,9 +244,7 @@ class User{
 
             $user = Query::from('cmspf_Users')
                 ->where("mail = :mail AND (deleted IS NULL OR deleted = 0)")
-                ->params([
-                    'mail' => $_POST['email']
-                ])
+                ->params(['mail' => $_POST['email']])
                 ->execute("User");
 
             if(!empty($user)){
@@ -331,9 +330,10 @@ class User{
     {
         if (!empty($_GET)) {
             $users = Query::from('cmspf_Users')
-                ->or("firstname LIKE '%" . $_GET['str'] . "%'")
-                ->or("lastname LIKE '%" . $_GET['str'] . "%'")
-                ->or("mail LIKE '%" . $_GET['str'] . "%'")
+                ->or("firstname LIKE '% :str %'")
+                ->or("lastname LIKE '% :strSecond %'")
+                ->or("mail LIKE '% :strThird %'")
+                ->params(['str' => $_GET['str'], 'strSecond' => $_GET['str'], 'strThird' => $_GET['str']])
                 ->execute("User");
             if(!empty($users)){
                 echo "<ul>";

@@ -55,7 +55,10 @@ class Pageengine
             $page = $this->page->find($_POST['id']);
             if ($page->getId() != null) {
 
-                $pageCategories = Query::from('cmspf_Page_categorie')->where("page_key = " . $_POST['id'] . "")->execute('Page_categorie');
+                $pageCategories = Query::from('cmspf_Page_categorie')
+                    ->where("page_key = :page_key")
+                    ->params(['page_key' => $_POST['id']])
+                    ->execute('Page_categorie');
                 foreach ($pageCategories as $pageCategorie)
                 {
                     $pageCategorie->delete($pageCategorie->getId());
@@ -180,8 +183,12 @@ class Pageengine
                 }
                 $this->page->setId($_POST['id']);
                 $unic_page = Query::from('cmspf_Pages')
-                    ->where("slug = '" . $_POST['slug'] . "'")
-                    ->where("id != " . $_POST['id'] . "")
+                    ->where("slug = :slug")
+                    ->where("id != :id")
+                    ->params([
+                        'slug' => $_POST['slug'],
+                        'id' => $_POST['id']
+                    ])
                     ->execute('Page');
                 if (!isset($unic_page[0])){
                     $unic_page = false;
@@ -201,14 +208,16 @@ class Pageengine
                 if ($lastId
                     && isset($_POST['categorie'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = :id")->params(['id'=>$_POST['categorie']])
+                        ->where("id = :id")
+                        ->params(['id'=>$_POST['categorie']])
                         ->execute('Categorie')){
 
                     //use categorie template;
                     if ($this->page->getContent() == null){
 
                         $categories = Query::from('cmspf_Categories')
-                            ->where("id = :id")->params(['id'=>$_POST['categorie']])
+                            ->where("id = :id")
+                            ->params(['id'=>$_POST['categorie']])
                             ->execute('Categorie');
 
                         $page_of_categorie = $categories[0]->page();

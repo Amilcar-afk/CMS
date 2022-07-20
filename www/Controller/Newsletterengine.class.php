@@ -163,7 +163,10 @@ class Newsletterengine
     public function unsubscribe($request)
     {
         if(isset($request['email'])) {
-            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")->where(" email = :email")->params(['email' => $request['email']])->execute("Newsletter_subscriber");
+            $newsletterSubscribe = Query::from("cmspf_Newsletter_subscribers")
+                ->where(" email = :email")
+                ->params(['email' => $request['email']])
+                ->execute("Newsletter_subscriber");
             if (isset($newsletterSubscribe[0])) {
                 $newsletterSubscribe[0]->delete($newsletterSubscribe[0]->getId());
                 //Query::deleteAll('')->from('cmspf_Newsletter_subscribers')->where("email = :email")->params(['email' => $request['email']])->execute();
