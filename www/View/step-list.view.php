@@ -19,13 +19,15 @@
                     <p><?= $project->getDescription() ?></p>
                 </header>
 
-                <article>
-                    <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-step">
-                        New steps
-                    </button>
-                    <div id="new-steps-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="step-manager-container">
-                    </div>
-                </article>
+                <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
+                    <article>
+                        <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-step">
+                            New steps
+                        </button>
+                        <div id="new-steps-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="step-manager-container">
+                        </div>
+                    </article>
+                <?php endif; ?>
 
                 <?php foreach ($project->getSteps() as $key => $singleStep):?>
                     <article>
