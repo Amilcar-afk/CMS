@@ -17,7 +17,7 @@
                 <header>
                     <h1 class="title title--black">PROJECTS</h1>
                 </header>
-
+                <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
                 <!--Add project-->
                 <article>
                     <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
@@ -26,7 +26,7 @@
                     <div id="new-projects-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="project-manager-container">
                     </div>
                 </article>
-
+                <?php endif; ?>
                 <article>
                     <div id="projects-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="project-manager-container" style="opacity: 1">
                         <table class="table">
