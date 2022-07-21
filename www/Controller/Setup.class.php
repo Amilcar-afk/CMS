@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Controller;
+use App\Core\BaseSQL;
 use App\Core\View;
 use App\Core\Validator;
 use App\Core\Query;
 use App\Model\Configuration;
 use App\Model\User;
 
-class Setup{
+class Setup extends BaseSQL{
 
     public function loadDatabase()
     {
@@ -19,13 +20,15 @@ class Setup{
             && !empty($data_base_env['env'][0]['DBPWD'])
             && !empty($data_base_env['env'][0]['DBPORT'])
             && !empty($data_base_env['env'][0]['DBNAME'])
-            && !empty($data_base_env['env'][0]['DBUSER'])){
+            && !empty($data_base_env['env'][0]['SITENAME'])
+            && !empty($data_base_env['env'][0]['DBUSER']) && parent::getDStatus() != false){
             header("Location: /setup/register");
         }
 
         $config->setHost_name($data_base_env['env'][0]['DBHOST']);
         $config->setPassword($data_base_env['env'][0]['DBPWD']);
         $config->setPort($data_base_env['env'][0]['DBPORT']);
+        $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
         $config->setDb_name($data_base_env['env'][0]['DBNAME']);
         $config->setDb_user($data_base_env['env'][0]['DBUSER']);
 

@@ -304,20 +304,6 @@ class Configuration extends BaseSQL
             ],
             "inputs"=>[
 
-                "DBHOST"=>[
-                    "type"=>"text",
-                    "placeholder"=>"Host Name ...",
-                    "name"=>"DBHOST",
-                    "id"=>"host_name",
-                    "class"=>"input",
-                    "question"=>"Host Name",
-                    "value"=> $this->getHost_name(),
-                    "required"=>true,
-                    "min"=>2,
-                    "max"=>50,
-                    "error"=>""
-                    ],
-                    
                 "SITENAME"=>[
                     "type"=>"text",
                     "placeholder"=>"Site Name ...",
@@ -326,6 +312,20 @@ class Configuration extends BaseSQL
                     "class"=>"input",
                     "question"=>"Site Name",
                     "value"=> $this->getSite_name(),
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
+                ],
+
+                "DBHOST"=>[
+                    "type"=>"text",
+                    "placeholder"=>"DB Host Name ...",
+                    "name"=>"DBHOST",
+                    "id"=>"host_name",
+                    "class"=>"input",
+                    "question"=>"DB Host Name",
+                    "value"=> $this->getHost_name(),
                     "required"=>true,
                     "min"=>2,
                     "max"=>50,
@@ -348,9 +348,9 @@ class Configuration extends BaseSQL
 
                 "DBUSER"=>[
                     "type"=>"text",
-                    "placeholder"=>"User...",
+                    "placeholder"=>"DB User...",
                     "name"=>"DBUSER",
-                    "question"=>"User",
+                    "question"=>"DB User",
                     "id"=>"db_user",
                     "class"=>"input",
                     "value"=> $this->getDb_user(),
@@ -362,9 +362,9 @@ class Configuration extends BaseSQL
 
                 "DBPWD"=>[
                     "type"=>"password",
-                    "placeholder"=>"Password ...",
+                    "placeholder"=>"DB Password ...",
                     "name"=>"DBPWD",
-                    "question"=>"Password",
+                    "question"=>"DB Password",
                     "id"=>"password",
                     "class"=>"input",
                     "required"=>true,
@@ -376,9 +376,9 @@ class Configuration extends BaseSQL
 
                 "DBPORT"=>[
                     "type"=>"text",
-                    "placeholder"=>"Port ...",
+                    "placeholder"=>"DB Port ...",
                     "name"=>"DBPORT",
-                    "question"=>"Port",
+                    "question"=>"DB Port",
                     "id"=>"port",
                     "class"=>"input",
                     "value"=> $this->getPort(),
