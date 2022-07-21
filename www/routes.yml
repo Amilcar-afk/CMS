@@ -51,7 +51,6 @@
 /pages:
   controller: pageengine
   action: listPage
-  params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
 /build:
