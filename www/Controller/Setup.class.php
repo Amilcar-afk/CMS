@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Controller;
+use App\Core\BaseSQL;
 use App\Core\View;
 use App\Core\Validator;
 use App\Core\Query;
 use App\Model\Configuration;
 use App\Model\User;
 
-class Setup{
+class Setup extends BaseSQL{
 
     public function loadDatabase()
     {
@@ -19,13 +20,15 @@ class Setup{
             && !empty($data_base_env['env'][0]['DBPWD'])
             && !empty($data_base_env['env'][0]['DBPORT'])
             && !empty($data_base_env['env'][0]['DBNAME'])
-            && !empty($data_base_env['env'][0]['DBUSER'])){
+            && !empty($data_base_env['env'][0]['SITENAME'])
+            && !empty($data_base_env['env'][0]['DBUSER']) && parent::getDStatus() != false){
             header("Location: /setup/register");
         }
 
         $config->setHost_name($data_base_env['env'][0]['DBHOST']);
         $config->setPassword($data_base_env['env'][0]['DBPWD']);
         $config->setPort($data_base_env['env'][0]['DBPORT']);
+        $config->setSite_name($data_base_env['env'][0]['SITENAME']);
         $config->setDb_name($data_base_env['env'][0]['DBNAME']);
         $config->setDb_user($data_base_env['env'][0]['DBUSER']);
 
@@ -46,20 +49,33 @@ class Setup{
         $env_file = 'env.json';
         $data_base_env = yaml_parse_file($env_file);
 
-        if (!empty($data_base_env['env'][1]['SMTP_HOST'])
+        if (isset($data_base_env['env'][1]['SMTP_HOST'])
+            && isset($data_base_env['env'][1]['SMTP_PORT'])
+            && isset($data_base_env['env'][1]['SMTP_SECURE'])
+            && isset($data_base_env['env'][1]['SMTP_USERNAME'])
+            && isset($data_base_env['env'][1]['SMTP_PASSWORD'])
+            && !empty($data_base_env['env'][1]['SMTP_HOST'])
             && !empty($data_base_env['env'][1]['SMTP_PORT'])
             && !empty($data_base_env['env'][1]['SMTP_SECURE'])
             && !empty($data_base_env['env'][1]['SMTP_USERNAME'])
             && !empty($data_base_env['env'][1]['SMTP_PASSWORD'])){
             header("Location: /setup/main-images");
         }
-
-        $config->setSmtp_host($data_base_env['env'][1]['SMTP_HOST']);
-        $config->setSmtp_port($data_base_env['env'][1]['SMTP_PORT']);
-
-        $config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
-        $config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
-        $config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
+        if (isset($data_base_env['env'][1]['SMTP_HOST'])) {
+            $config->setSmtp_host($data_base_env['env'][1]['SMTP_HOST']);
+        }
+        if (isset($data_base_env['env'][1]['SMTP_PORT'])) {
+            $config->setSmtp_port($data_base_env['env'][1]['SMTP_PORT']);
+        }
+        if (isset($data_base_env['env'][1]['SMTP_SECURE'])) {
+            $config->setSmtp_secure($data_base_env['env'][1]['SMTP_SECURE']);
+        }
+        if (isset($data_base_env['env'][1]['SMTP_USERNAME'])) {
+            $config->setSmtp_username($data_base_env['env'][1]['SMTP_USERNAME']);
+        }
+        if (isset($data_base_env['env'][1]['SMTP_PASSWORD'])) {
+            $config->setSmtp_password($data_base_env['env'][1]['SMTP_PASSWORD']);
+        }
 
         $view = new View("setup/smtp", "back-sandbox");
         $view->assign("configuration", $config);

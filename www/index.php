@@ -21,7 +21,8 @@ function myAutoloader($class){
 
 spl_autoload_register("App\myAutoloader");
 
-$uri = $_SERVER["REQUEST_URI"];
+
+$uri = $_SERVER["REQUEST_URI"]; // => " / "
 
 $routeFile = "routes.yml";
 
@@ -35,21 +36,25 @@ $routes = yaml_parse_file($routeFile);
 $currentParams = [];
 
 if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes[$uri]["action"])  ){
-
     $parseUrl = explode("/", parse_url($uri, PHP_URL_PATH));
+
     for($i=0;$i<=sizeof($parseUrl);$i++){
+
         array_pop($parseUrl);
+
         $uri = implode('/',$parseUrl);
         if(!isset($routes[$uri]) ){
             $uri = "/pageloader";
         }
-
+    
         $url = $_SERVER["REQUEST_URI"];
+    
         $replace = str_replace($uri,'',$url);
+    
         $param = explode('/',$replace);
         array_shift($param);
-
-        if(isset($routes[$uri]['params']))
+        
+        if(isset($routes[$uri]['params']) )
         {
             if(sizeof($routes[$uri]['params']) === sizeof($param)){
                 foreach($routes[$uri]['params'] as $key => $itemParam){
@@ -58,20 +63,20 @@ if( empty($routes[$uri]) || empty($routes[$uri]["controller"])  || empty($routes
                     ];
                 }
             }else{
+
                 http_response_code(404);
-                $view = new View("error", 'back-sandbox');
-                $view->assign("metaData", $metaData = [
-                    "title" => 'Error',
-                    "description" => 'Error',
-                ]);
-                die();
+                break;
             }
+
+            
+            break;
         }
-        break;
+       
     }
 }
 
 session_start();
+
 
 if(isset($routes[$uri]["middleware"]) ){
     $authFile = 'Controller/Middleware.class.php';
@@ -114,10 +119,12 @@ if( !method_exists($objectController, $action) ){
     die("La methode ".$action." n'existe pas");
 }
 
-if(sizeof($currentParams)!=0){
+if(sizeof($currentParams)!= 0){
     $objectController->$action($currentParams);
-}else{
+}else if(http_response_code() != 404){
+
     $objectController->$action();
+
 }
 
 if(http_response_code()

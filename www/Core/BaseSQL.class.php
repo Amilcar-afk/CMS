@@ -48,10 +48,9 @@ abstract class BaseSQL
             if(self::$bdd === null){
                 
                 try{
-                    self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][0]['DBUSER'] ,$config['env'][0]['DBPWD'] );
+                    self::$bdd = new \PDO("mysql:host=".$config['env'][0]['DBHOST'].";port=".$config['env'][0]['DBPORT'].";dbname=".$config['env'][0]['DBNAME'] ,$config['env'][0]['DBUSER'] ,$config['env'][0]['DBPWD'], [\PDO::ATTR_TIMEOUT => 7] );
                     self::$bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-                    self::$bdd->setAttribute(\PDO::ATTR_TIMEOUT, 1);
-                }catch(\Exception $e){
+                }catch(\PDOException $e){
                     self::setDbStatus(false);
                 }
             }
@@ -61,6 +60,8 @@ abstract class BaseSQL
             return self::$bdd;
         }elseif ($_SERVER['REQUEST_URI'] != '/setup/database') {
             header('location:/setup/database');
+        }elseif ($_SERVER['REQUEST_URI'] == '/setup/database'){
+            return false;
         }
     }       
 

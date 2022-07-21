@@ -111,12 +111,18 @@ class User{
 
     public function register()
     {
-
+        if ($_SERVER['REQUEST_URI'] == '/setup/register') {
+            $user = Query::from('cmspf_Users')->execute('User');
+            if (isset($user[0])) {
+                header('location:/');
+            }
+        }
 
         if( !empty($_POST)){
             $date = date("Y-m-d");
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
+            echo $_POST['password'];
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');
@@ -181,11 +187,11 @@ class User{
         }
     }
 
-    public function deleteUser()
+    public function deleteUser($request)
     {
-        if(!empty($_GET['id'])){
+        if(!empty($request['id'])){
             $this->user->setDeleted(1);
-            $this->user->setId($_GET['id']);
+            $this->user->setId($request['id']);
             $this->user->save();
             echo "User deleted successfully";
             http_response_code(202);
@@ -215,11 +221,11 @@ class User{
         }
     }
 
-    public function confirmMail()
+    public function confirmMail($request)
     {
-        $userExist = $this->user->find($_GET['token'], "confirmKey");
+        $userExist = $this->user->find($request['token'], "confirmKey");
 
-        if((!empty($userExist) || $userExist != false) && $userExist->getConfirm() != "1"){
+        if($userExist){
 
             $this->user->setId($userExist->getId());
             $this->user->setConfirm(1);
@@ -232,7 +238,7 @@ class User{
             $view->assign("message", "Your account has been verified. You can now connect.");
 
         }else{
-            http_response_code(400);
+            http_response_code(404);
         }
 
     }
@@ -278,74 +284,57 @@ class User{
 
     }
 
-    public function newPwd()
+    public function newPwd($request)
     {
-        $user = $this->user->find($_GET['token'], "token");
+        if($request['token']) {
 
-        if((!empty($user) || $user != false) && $user->getConfirm() == "1") {
+            $user = $this->user->find($request['token'], "token");
 
-            if (!empty($_POST)) {
-                $this->user->setPassword($_POST['password']);
+            if ($user) {
 
-                $result = Validator::run($this->user->getFormNewPwd(), $_POST);
-
-                if (empty($result)) {
-
-                    $pwd1 = $user->getPwd1();
-                    $pwd = $user->getPwd();
-                    $userId = $user->getId();
-                    $this->user->generateToken();
-
+                if (!empty($_POST)) {
                     $this->user->setPassword($_POST['password']);
-                    $this->user->setPwd1($pwd);
-                    $this->user->setPwd2($pwd1);
-                    $this->user->setId($userId);
-                    $this->user->save();
-                    $view = new View("message", 'back-sandbox');
+
+                    $result = Validator::run($this->user->getFormNewPwd(), $_POST);
+
+                    if (empty($result)) {
+
+                        $pwd1 = $user->getPwd1();
+                        $pwd = $user->getPwd();
+                        $userId = $user->getId();
+                        $this->user->generateToken();
+
+                        $this->user->setPassword($_POST['password']);
+                        $this->user->setPwd1($pwd);
+                        $this->user->setPwd2($pwd1);
+                        $this->user->setId($userId);
+                        $this->user->save();
+                        $view = new View("message", 'back-sandbox');
+                        $view->assign("metaData", $metaData = [
+                            "title" => 'Changed password',
+                            "description" => 'Your password has been changed.',
+                        ]);
+                        $view->assign("message", "Your password has been changed. You can now connect.");
+
+                    } else {
+                        http_response_code(422);
+                    }
+                } else {
+                    $view = new View("form-forgot-pwd", "back-sandbox");
                     $view->assign("metaData", $metaData = [
-                        "title" => 'Changed password',
-                        "description" => 'Your password has been changed.',
+                        "title" => 'Change password',
+                        "description" => 'Change password page'
                     ]);
-                    $view->assign("message", "Your password has been changed. You can now connect.");
-
-                }else{
-                    http_response_code(422);
+                    $view->assign("user", $this->user);
+                    $view->assign("resetPwd", $this->user);
                 }
-            }else{
-                $view = new View("form-forgot-pwd", "back-sandbox");
-                $view->assign("metaData", $metaData = [
-                    "title" => 'Change password',
-                    "description" => 'Change password page'
-                ]);
-                $view->assign("user", $this->user);
-                $view->assign("resetPwd", $this->user);
+
+            } else {
+                http_response_code(400);
             }
-
-        } else {
-            http_response_code(400);
+        }else{
+            http_response_code(422);
         }
-    }
-
-    public function findUsers()
-    {
-        if (!empty($_GET)) {
-            $users = Query::from('cmspf_Users')
-                ->or("firstname LIKE '% :str %'")
-                ->or("lastname LIKE '% :strSecond %'")
-                ->or("mail LIKE '% :strThird %'")
-                ->params(['str' => $_GET['str'], 'strSecond' => $_GET['str'], 'strThird' => $_GET['str']])
-                ->execute("User");
-            if(!empty($users)){
-                echo "<ul>";
-                foreach ($users as $user){
-                    echo "<li>" . $user->getLastname() . " " . $user->getFirstname() . "</li>";
-                }
-                echo "</ul>";
-            }else{
-                echo '<i><p class="title title--small">No step</p></i>';
-            }
-        }
-
     }
 
 }
