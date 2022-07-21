@@ -344,11 +344,6 @@
   action: newPwd
   params: [token]
 
-/searchUser:
-  controller: User
-  action: findUsers
-  params: [str]
-
 
 /setup/database:
   controller: Setup

@@ -3,11 +3,11 @@ let htmlParent = null;
 function deleteUser(parent) {
     let uri = url + "userdelete/";
     let id = parent.getAttribute("data-id-user");
-    let data = '?id='+id;
+    let data = id;
 
     htmlParent = parent.parentNode.parentNode; //get the <tr> of the user
 
-    ajaxRequest(uri, "DELETE", data, deleteUserAnswer, true);
+    ajaxRequest(uri, "GET", data, deleteUserAnswer, true);
 }
 
 function updateRank(parent) {

@@ -26,7 +26,7 @@ class Mail{
             $protocol = 'http://';
         }
 
-        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/mailconfirmation/?token=" . $token;
+        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/mailconfirmation/".$token;
 
         if ($token){
             $subject = "Registration confirmation";
@@ -62,7 +62,7 @@ class Mail{
         }
 
 
-        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/resetpassword/?token=" . $token;
+        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/resetpassword/" . $token;
         if ($token){
             $message = [
                 [
