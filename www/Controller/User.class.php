@@ -111,7 +111,12 @@ class User{
 
     public function register()
     {
-
+        if ($_SERVER['REQUEST_URI'] == '/setup/register') {
+            $user = Query::from('cmspf_Users')->execute('User');
+            if (isset($user[0])) {
+                header('location:/');
+            }
+        }
 
         if( !empty($_POST)){
             $date = date("Y-m-d");
