@@ -186,11 +186,11 @@ class User{
         }
     }
 
-    public function deleteUser($request)
+    public function deleteUser()
     {
-        if(!empty($request['id'])){
+        if(!empty($_POST['id'])){
             $this->user->setDeleted(1);
-            $this->user->setId($request['id']);
+            $this->user->setId($_POST['id']);
             $this->user->save();
             echo "User deleted successfully";
             http_response_code(202);

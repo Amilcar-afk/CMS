@@ -16,17 +16,17 @@ class Middleware extends BaseSQL {
                     ->where("id = '" . $_SESSION['Auth']->id . "'")
                     ->where("confirm = '1'")
                     ->where("deleted IS NULL")
-                    ->execute("User")[0];
+                    ->execute("User");
 
-                if ($user->getId() == null) {
-                    header('location:/login');
-                }
+                    if (!isset($user[0])) {
+                        header('location:/login');
+                    }
 
-                if ($user->getToken() != $_SESSION['Auth']->token) {
-                    header('location:/login');
-                }
+                    if ($user->getToken() != $_SESSION['Auth']->token) {
+                        header('location:/login');
+                    }
 
-                $_SESSION['Auth']->rank = $user->getRank();
+                    $_SESSION['Auth']->rank = $user->getRank();
             }
 
             if (!isset($_SESSION['Auth']->rank)) {
