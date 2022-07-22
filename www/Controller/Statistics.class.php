@@ -272,7 +272,7 @@ class Statistics
                 $toPerDevice = date("Y-m-d");
                 $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
 
-                if(!empty($_POST['sincePerPage']) && empty($_POST['toPerPage'])){
+                if(!empty($_POST['sincePerPage']) && !empty($_POST['toPerPage'])){
                     $sincePerPage = $_POST['sincePerPage'];
                     $toPerPage = $_POST['toPerPage'];
                 }
@@ -426,12 +426,10 @@ class Statistics
                     ->execute();
                 $numberOfUsers = $newUsers[0]['number'];
 
-                // ASSIGN VIEWS
-                $tmpl = "back";
-                if (isset($_POST['range'])) {
-                    $tmpl= "";
-                }
-                $view = new View("dashboard", $tmpl);
+
+
+                $view = new View("dashboard");
+
                 $view->assign("chartWeekData", $chartWeekData);
 
                 $view->assign("perWeekDate", $perWeekDate);
