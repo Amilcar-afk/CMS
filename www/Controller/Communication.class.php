@@ -567,29 +567,29 @@ class Communication
 
     public function deleteStep()
     {
-        if (isset($_POST['id']) && $_SESSION['Auth']->rank === "admin") {
+        if (!empty($_POST['id']) && $_SESSION['Auth']->rank === "admin") {
 
             $stepExist = Query::from('cmspf_Steps')
                 ->where("id = :id")
                 ->params(['id' => $_POST['id']])
-                ->execute("Step");
+                ->execute("Step")[0];
 
-            if(isset($stepExist[0])) {
+            if(!empty($stepExist)) {
 
                 $userInProject = Query::from('cmspf_User_projet')
                     ->where("user_key = :user_key")
                     ->where("projet_key = :projet_key")
-                    ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $stepExist[0]->getProjectKey()])
-                    ->execute("User_projet");
+                    ->params(['user_key' => $_SESSION['Auth']->id, 'projet_key' => $stepExist->getProjectKey()])
+                    ->execute("User_projet")[0];
 
-                if (isset($userInProject[0])) {
+                if (!empty($userInProject)) {
 
                     $projectExist = Query::from('cmspf_projets')
                         ->where("id = :projet_key")
-                        ->params(['projet_key' => $stepExist[0]->getProjectKey()])
-                        ->execute("Projet");
+                        ->params(['projet_key' => $stepExist->getProjectKey()])
+                        ->execute("Projet")[0];
 
-                    if (isset($projectExist[0])) {
+                    if (!empty($projectExist)) {
 
                         $this->step->setId($_POST['id']);
                         $this->step->delete($_POST['id']);
