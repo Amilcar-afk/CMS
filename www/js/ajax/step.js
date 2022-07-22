@@ -3,7 +3,7 @@ $(document).ready(function(){
 
         let formContainer = $(this).parent();
         $.ajax({
-            url:"/step/compose/",
+            url:"/step/compose",
             type:"POST",
             data:
                 {
