@@ -1,17 +1,17 @@
 let htmlParent = null;
 
 function deleteUser(parent) {
-    let uri = url + "userdelete/";
+    let uri = url + "userdelete";
     let id = parent.getAttribute("data-id-user");
-    let data = id;
+    let data = `id=`+id;
 
     htmlParent = parent.parentNode.parentNode; //get the <tr> of the user
 
-    ajaxRequest(uri, "GET", data, deleteUserAnswer, true);
+    ajaxRequest(uri, "POST", data, deleteUserAnswer, true);
 }
 
 function updateRank(parent) {
-    let uri = url + "updaterank/";
+    let uri = url + "updaterank";
     let id = parent.getAttribute("data-id-user");
     let data = `id=` + encodeURIComponent(id) + '&rank=' + parent.value;
 

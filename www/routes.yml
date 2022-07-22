@@ -40,7 +40,6 @@
 /updaterank:
   controller: user
   action: updateRank
-  params: [id]
   middleware: [ 'auth', 'admin' ]
 
 /pageloader:
@@ -216,7 +215,6 @@
   controller: communication
   action: composeProject
   middleware : ['auth', 'admin']
-  params: [title]
 
 /project/delete:
   controller: communication
@@ -248,11 +246,6 @@
   controller: meeting
   action: listRdv
   middleware : ['auth']
-
-
-/bobo:
-  controller: meeting
-  action: test
 
 /load/slots:
   controller: meeting

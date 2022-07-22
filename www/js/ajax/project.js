@@ -83,7 +83,7 @@ $(document).ready(function(){
 
         let formContainer = $(this).parent();
         $.ajax({
-            url:"/project/compose/",
+            url:"/project/compose",
             type:"POST",
             data:
                 {
