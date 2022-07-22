@@ -13,20 +13,21 @@ class Middleware extends BaseSQL {
             if (!empty($_SESSION['Auth']->token) && !empty($_SESSION['Auth']->id)) {
 
                 $user = Query::from('cmspf_Users')
-                    ->where("id = '" . $_SESSION['Auth']->id . "'")
+                    ->where("id = :id")
                     ->where("confirm = '1'")
                     ->where("deleted IS NULL")
+                    ->params(["id" => $_SESSION['Auth']->id])
                     ->execute("User");
 
-                    if (!isset($user[0])) {
-                        header('location:/login');
-                    }
+                if (!isset($user[0])) {
+                    header('location:/login');
+                }
 
-                    if ($user->getToken() != $_SESSION['Auth']->token) {
-                        header('location:/login');
-                    }
+                if ($user[0]->getToken() != $_SESSION['Auth']->token) {
+                    header('location:/login');
+                }
 
-                    $_SESSION['Auth']->rank = $user->getRank();
+                $_SESSION['Auth']->rank = $user[0]->getRank();
             }
 
             if (!isset($_SESSION['Auth']->rank)) {
