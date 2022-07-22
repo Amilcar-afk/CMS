@@ -122,7 +122,6 @@ class User{
             $date = date("Y-m-d");
             $this->user->setFirstname($_POST['firstname']);
             $this->user->setLastname($_POST['lastname']);
-            echo $_POST['password'];
             $this->user->setPassword($_POST['password']);
             $this->user->setMail($_POST['email']);
             $this->user->setRank('user');

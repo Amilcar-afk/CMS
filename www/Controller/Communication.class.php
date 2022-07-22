@@ -438,7 +438,6 @@ class Communication
             $view->assign("projectEmpty", $projectEmpty);
         } else {
             return include "View/Partial/form.partial.php";
-            echo "402 1";
             http_response_code(422);
         }
     }
@@ -596,15 +595,13 @@ class Communication
                         $this->step->delete($_POST['id']);
 
                     } else {
-                        echo "projet existe pas";
                         http_response_code(422);
                     }
                 } else {
-                    echo "user pas dans projet";
+
                     http_response_code(422);
                 }
             }else{
-                echo "step existe pas";
                 http_response_code(422);
             }
         }else{
