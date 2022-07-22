@@ -6,13 +6,14 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Configuration;
 use App\Model\User;
-use App\Model\Option;
 use App\Core\Query;
+
 
 
 class Settings
 {
     public $user;
+    public $isUserInstantiated = false;
 
     public function __construct()
     {
@@ -23,10 +24,22 @@ class Settings
 
     public function listUser()
     {
+
+        $user = $this->user->find($_SESSION['Auth']->id);
+        $this->user->setId($user->getId());
+        $this->user->setFirstname($user->getFirstname());
+        $this->user->setLastname($user->getLastname());
+        $this->user->setMail($user->getMail());
+        $this->user->setPassword($user->getPassword());
+      
+
+        $view = new View("user-manager", "back");
         $users = Query::from('cmspf_Users')->or("deleted IS NULL" , "deleted = 0")->execute("User");
         //$users = $this->user->find();
-        $view = new View("user-manager", "back");
+        $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
         $view->assign("users", $users);
+        $view->assign("newuser", $this->user);
+
         $view->assign("metaData", $metaData = [
             "title" => 'User manager',
             "description" => 'Manage your users here',
@@ -38,6 +51,46 @@ class Settings
             ],
         ]);
     }
+
+    public function userCompose()
+    {
+        if( !empty($_POST)){
+
+            $date = date("Y-m-d");
+            $this->user->setFirstname($_POST['firstname']);
+            $this->user->setLastname($_POST['lastname']);
+            $this->user->setPassword($_POST['password']);
+            $this->user->setMail($_POST['email']);
+            $this->user->setRank('user');
+            // $this->user->setConfirm(1);
+            $this->user->setDateCreation($date);
+            $this->user->generateToken();
+
+            $unic_email = Query::from('cmspf_Users')
+                            ->where("mail = :mail AND (deleted IS NULL OR deleted = 0)")
+                            ->params(["mail" => $_POST['email']])
+                            ->execute("User");
+
+            if(!count($unic_email) > 0){
+                $config = Validator::run($this->user->userCompose(), $_POST,false);
+            }else{
+                $config = Validator::run($this->user->userCompose(), $_POST,$unic_email);
+            }
+            
+            if(empty($config)){
+                $this->user->generateConfirmKey($_POST['email']);
+                $this->user->save();
+                echo 1;
+
+            }else{
+                return include "View/Partial/form.partial.php";
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
+        }
+    }
+
 
     public function composeDatabase()
     {
@@ -56,8 +109,6 @@ class Settings
                     $env_file = 'env.json';
                     $data_base_env = yaml_parse_file($env_file);
 
-                    echo "total".count($_POST);
-                    print_r($_POST);
 
                     foreach($_POST as $key => $data){
                         if(isset($_POST['DBHOST'])){
@@ -77,7 +128,10 @@ class Settings
                 $env_file = 'env.json';
                 $data_base_env = yaml_parse_file($env_file);
                 
+                
+                $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
                 $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
+
                 $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
                 $this->config->setPort($data_base_env['env'][0]['DBPORT']);
                 $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
@@ -92,13 +146,40 @@ class Settings
 
                 $view = new View("configuration");
                 $view->assign("configuration", $this->config);
+
+
             }else{
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
+        }else{
+            http_response_code(422);
         }
     }
 
+    public function updateProfile()
+    {
+        $user = $this->user->find($_SESSION['Auth']->id);
+        
+        if(password_verify($_POST['currentPassword'], $user->getPwd()) ){
+            $config =  Validator::run($this->user->updateUser(),$_POST,false);
+        }else{
+            $config =  Validator::run($this->user->updateUser(),$_POST,false,null,true);
+        }
+        
+        if(empty($config)){
+            $this->user->setId($_SESSION['Auth']->id);
+            $this->user->setFirstname($_POST['firstname']);
+            $this->user->setLastname($_POST['lastname']);
+            $this->user->setPassword($_POST['newPassword']);
+            $this->user->save();
+            echo '1';
+        }else{
+            return include "View/Partial/form.partial.php";
+            http_response_code(422);
+        }
 
+    }
 
 
     public function loadDatabase()
@@ -108,6 +189,7 @@ class Settings
         $data_base_env = yaml_parse_file($env_file);
         $this->config->setHost_name($data_base_env['env'][0]['DBHOST']);
         $this->config->setPassword($data_base_env['env'][0]['DBPWD']);
+        $this->config->setSite_name($data_base_env['env'][0]['SITENAME']);
         $this->config->setPort($data_base_env['env'][0]['DBPORT']);
         $this->config->setDb_name($data_base_env['env'][0]['DBNAME']);
         $this->config->setDb_user($data_base_env['env'][0]['DBUSER']);

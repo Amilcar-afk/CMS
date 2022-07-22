@@ -11,6 +11,10 @@ $gutter: 24px;
             margin-left: 100% / $columnNb * $i;
         }
     }
+
+	.col-12{
+		flex: 0 0 100%;
+	}
 	@mixin generate($prefix, $property) {
 		$sizes: (0, .25, .5, 1, 1.5, 3);
 		$spacing: 1rem;
@@ -32,7 +36,7 @@ $gutter: 24px;
 	@include generate(pr-sm, padding-right);
 	@include generate(pt-sm, padding-top);
 	@include generate(pb-sm, padding-bottom);
-  
+
 	@function pxToRem($pxSize) {
 	  @return $pxSize+px;
 	}

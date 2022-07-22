@@ -9,7 +9,6 @@ $(document).ready(function() {
 
   function NewSlotClick(){
     $('.cta-button.cta-button-a.cta-button--submit.cta-button--submit--add').on('click',function(e){
-      console.log(1)
       activeAvailableMeetings = true
       $('.calendar_article2').show()
       $( ".calendar_article1" ).hide();

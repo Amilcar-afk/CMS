@@ -8,7 +8,7 @@
             <div class="col-4 col-md-4 col-sm-4">
                 <section class="card card--bottom  card--background-main-color">
                     <header>
-                        <h4><?php echo $numberOfUsers ?></h4>
+                        <h4><?= $numberOfUsers ?></h4>
                         <h3>New users of the month</h3>
                     </header>
                 </section>
@@ -19,21 +19,21 @@
                     <button class="main-nav-choice" data-wc-target="range-per-country">
                         <span class="material-icons-round">more_vert</span>
                     </button>
-                    
+
                     <div id="range-per-country" class="collapse" data-group-collapse="per-country-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerCountry">Since</label>
-                            <input id="SincePerCountry" name="SincePerCountry" type="date" class="input">
+                            <input id="SincePerCountry" name="SincePerCountry" type="date" class="input" value="<?= $sincePerCountry ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerCountry">To</label>
-                            <input id="toPerCountry" name="toPerCountry" type="date" class="input">
+                            <input id="toPerCountry" name="toPerCountry" type="date" class="input" value="<?= $toPerCountry ?>">
                         </div>
 
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-country">Submit</button>
                     </div>
 
-                    <div id="chart-per-country"></div>
+                    <div id="chart-per-country" data-group-collapse="per-country-container"></div>
 
                     <header>
                         <h3>Per country</h3>
@@ -43,21 +43,25 @@
             </div>
 
             <div class="col-2 col-md-4 col-sm-4">
-                <section class="card card--bottom card--background-main-color">
-                    <header>
-                        <h4>2</h4>
-                        <h3>Messages</h3>
-                    </header>
-                </section>
+                <a href="/conversations">
+                    <section class="card card--bottom card--background-main-color">
+                        <header>
+                            <h4><?= $conversations ?></h4>
+                            <h3>Messages</h3>
+                        </header>
+                    </section>
+                </a>
             </div>
 
             <div class="col-2 col-md-4 col-sm-4">
-                <section class="card card--bottom card--background-main-color">
-                    <header>
-                        <span class="material-icons-round">edit</span>
-                        <h3>Newsletter</h3>
-                    </header>
-                </section>
+                <a href="/newsletters">
+                    <section class="card card--bottom card--background-main-color">
+                        <header>
+                            <span class="material-icons-round">edit</span>
+                            <h3>Newsletter</h3>
+                        </header>
+                    </section>
+                </a>
             </div>
 
             <div class="col-4 col-md-12 col-sm-12">
@@ -72,30 +76,28 @@
                     <div id="range-per-page" class="collapse" data-group-collapse="per-page-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerPage">Since</label>
-                            <input id="SincePerPage" name="SincePerPage" type="date" class="input">
+                            <input id="SincePerPage" name="SincePerPage" type="date" class="input" value="<?= $sincePerPage ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerPage">To</label>
-                            <input id="toPerPage" name="toPerPage" type="date" class="input">
+                            <input id="toPerPage" name="toPerPage" type="date" class="input" value="<?= $toPerPage ?>">
                         </div>
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-page">Submit</button>
                     </div>
                     
-                    <div id="chart-per-page" data-group-collapse="per-page-container" style="width: 100%;opacity: 1; height: 85%; display: flex; flex-direction: column;justify-content: space-between;align-items: center;">
+                    <div id="chart-per-page" data-group-collapse="per-page-container">
                         <table class="table table--lite">
                             <tbody>
-                            <?php foreach ($viewPerPages as $view): ?>
-                                <tr>
-                                    <td><?php print_r($view['title']) ?></td>
-                                    <td>vue : <?php print_r($view['number']) ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            
+                            <?php if(is_array($viewPerPages) || is_object($viewPerPages)): ?>
+                                <?php foreach ($viewPerPages as $view): ?>
+                                    <tr>
+                                        <td><?php print_r($view['title']) ?></td>
+                                        <td>vue : <?php print_r($view['number']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                             </tbody>
                         </table>
-                        <button class="cta-button--text-no-background">
-                            Show More
-                        </button>
                     </div>
 
                     
@@ -115,11 +117,11 @@
                     <div id="range-per-device" class="collapse" data-group-collapse="per-device-container" style="width: 100%;">
                         <div class="input-container">
                             <label for="SincePerDevice">Since</label>
-                            <input id="SincePerDevice" name="SincePerDevice" type="date" class="input">
+                            <input id="SincePerDevice" name="SincePerDevice" type="date" class="input" value="<?= $sincePerDevice ?>">
                         </div>
                         <div class="input-container">
                             <label for="toPerDevice">To</label>
-                            <input id="toPerDevice" name="toPerDevice" type="date" class="input">
+                            <input id="toPerDevice" name="toPerDevice" type="date" class="input" value="<?= $toPerDevice ?>">
                         </div>
 
                         <button class="cta-button cta-button-a cta-button--submit cta-button--range selected" data-wc-target="chart-per-device">Submit</button>
@@ -135,14 +137,14 @@
                 <section class="card card--bigcard card--sessionweek-only card--background-color">
                     <header>
                         <h3>Per week</h3>
-                        <div class="navigation-container">
-                            <button class="main-nav-choice cta-button--range" data-before="<?php $date ?>">
+                        <div id="navigation-container" class="navigation-container">
+                            <button id="SincePerWeek" class="main-nav-choice cta-button--range" data-before="<?= date('Y-m-d', strtotime($perWeekDate. ' - 7 days')) ?>">
                                 <span class="material-icons-round">navigate_before</span>
                             </button>
 
-                            <p><?php echo $monthName; ?></p>
+                            <p id="currentPerWeek" data-current="<?= $perWeekDate ?>"><?= $monthName; ?></p>
 
-                            <button class="main-nav-choice cta-button--range" data-next="<?php $date ?>">
+                            <button id="toPerWeek" class="main-nav-choice cta-button--range" data-next="<?= date('Y-m-d', strtotime($perWeekDate. ' + 7 days')) ?>">
                                 <span class="material-icons-round">navigate_next</span>
                             </button>
                         </div>
@@ -159,7 +161,7 @@
                     <?php foreach ($reseauxSocs as $reseauxSoc):?>
                         <div id="container-rs-<?= $reseauxSoc->getId() ?>" class="edge-container cta-button-a" data-a-target="container-settings-rs-<?= $reseauxSoc->getId() ?>">
                             <div class="edge"><img src='../style/images/<?= $reseauxSoc->getType() ?>.png' /></div>
-                            <p>1</p>
+                            <p><?= $reseauxSoc->getStats() ?></p>
                         </div>
                     <?php endforeach;?>
                 </section>
@@ -233,7 +235,7 @@ google.charts.load('current', {
 
         var options = {
             colorAxis: {
-                colors: ["green", "red"]
+                colors: [secondColor, thirdColor]
             },
             legend: 'none',
             
@@ -315,10 +317,6 @@ google.charts.load('current', {'packages':['bar']});
         var chart = new google.charts.Bar(document.getElementById('chart-per-week'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
-
-
-
-		
 </script>
 
 

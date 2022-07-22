@@ -11,10 +11,25 @@
   controller: user
   action: register
 
+/user/compose:
+  controller: Settings
+  action: userCompose
+  middleware: [ 'auth', 'admin' ]
+
+/user/user-instance:
+  controller: Settings
+  action: userInstance
+  middleware: ['auth']
+
+/user/profile-update:
+  controller: Settings
+  action: updateProfile
+  middleware: ['auth' ]
+
 /dashboard:
   controller: statistics
   action: loadDashboard
-  middleware: [ 'auth', 'admin' ]
+  middleware: [ 'auth', 'admin']
 
 /userdelete:
   controller: user
@@ -25,7 +40,6 @@
 /updaterank:
   controller: user
   action: updateRank
-  params: [id]
   middleware: [ 'auth', 'admin' ]
 
 /pageloader:
@@ -36,7 +50,6 @@
 /pages:
   controller: pageengine
   action: listPage
-  params: [ id ]
   middleware: [ 'auth', 'admin' ]
 
 /build:
@@ -125,7 +138,7 @@
 /settings/user-manager:
   controller: settings
   action: listUser
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
 
 /settings/configuration:
   controller: settings
@@ -146,21 +159,52 @@
   controller: pageengine
   action: siteMap
 
-
 /conversations:
   controller: communication
   action: listConversation
   middleware : ['auth']
 
+/conversations/search-conversations:
+  controller: communication
+  action: searchData
+  middleware : ['auth']
+
+/conversations/user-conversations:
+  controller: communication
+  action: userConversation
+  params: [id_conv]
+  middleware: [ 'auth']
+
+/conversations/get-all-messages:
+  controller: communication
+  action: messages
+  params: [ id ]
+  middleware: [ 'auth']
+
 /conversation/compose:
   controller: communication
   action: composeConversation
-  middleware : ['auth', 'admin']
+  middleware : ['auth']
+
+/conversation/compose-newconversation:
+  controller: communication
+  action: newConversation
+  middleware : ['auth']
+
+/conversations/updateseen:
+  controller: communication
+  action: updateSeenStatus
+  middleware : ['auth']
+
+/conversations/newmessage:
+  controller: communication
+  action: newMessage
+  middleware : ['auth']
 
 /conversation/delete:
   controller: communication
-  action: deleteConversation
-  middleware: [ 'auth', 'admin' ]
+  action: newMessage
+  middleware: [ 'auth', 'admin']
 
 /projects:
   controller: communication
@@ -171,7 +215,6 @@
   controller: communication
   action: composeProject
   middleware : ['auth', 'admin']
-  params: [title]
 
 /project/delete:
   controller: communication
@@ -182,6 +225,12 @@
   controller: communication
   action: loadProject
   middleware: [ 'auth' ]
+
+/steps:
+  controller: communication
+  action: listSteps
+  middleware : ['auth']
+  params: [id]
 
 /step/compose:
   controller: communication
@@ -243,14 +292,29 @@
   action: composeOption
   middleware: ['auth', 'admin']
 
+/option/delete:
+  controller: option
+  action: deleteOption
+  middleware: ['auth', 'admin']
+
 /img/compose:
   controller: option
   action: composeImg
   middleware: ['auth', 'admin']
 
+/img/delete:
+  controller: option
+  action: deleteOption
+  middleware: ['auth', 'admin']
+
 /social-media/compose:
   controller: statistics
   action: composereseauxsoc
+  middleware : ['auth', 'admin']
+
+/social-media/stat/compose:
+  controller: statistics
+  action: composestatreseauxsoc
   middleware : ['auth', 'admin']
 
 /social-media/delete:
@@ -272,11 +336,6 @@
   action: newPwd
   params: [token]
 
-/searchUser:
-  controller: User
-  action: findUsers
-  params: [str]
-
 
 /setup/database:
   controller: Setup
@@ -285,26 +344,72 @@
 /setup/smtp:
   controller: Setup
   action: loadSmtp
+  middleware: [ 'auth', 'admin' ]
 
 /setup/login:
-  controller: Setup
-  action: loadLogin
+  controller: user
+  action: login
+
+/setup/register:
+  controller: user
+  action: register
 
 /setup/main-images:
   controller: Setup
   action: loadMainImages
+  middleware: [ 'auth', 'admin' ]
 
 /setup/main-colors:
   controller: Setup
   action: loadMainColors
+  middleware: [ 'auth', 'admin' ]
 
 /setup/design/1:
   controller: Setup
   action: loadDesignFirst
+  middleware: [ 'auth', 'admin' ]
 
 /setup/design/2:
   controller: Setup
   action: loadDesignSecond
+  middleware: [ 'auth', 'admin' ]
+
+/newsletters:
+  controller: newsletterengine
+  action: listnewsletter
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/newsletter/build:
+  controller: newsletterengine
+  action: buildnewsletter
+  params: [ id ]
+  middleware: [ 'auth', 'admin' ]
+
+/newsletter/build/save:
+  controller: newsletterengine
+  action: saveContentnewsletter
+  middleware : ['auth', 'admin']
+
+/newsletter/compose:
+  controller: newsletterengine
+  action: composenewsletter
+  params: [id]
+  middleware : ['auth', 'admin']
+
+/newsletter/delete:
+  controller: newsletterengine
+  action: deletenewsletter
+  middleware: [ 'auth', 'admin' ]
+
+/newsletter/subscribe:
+  controller: newsletterengine
+  action: subscribe
+
+/newsletter/unsubscribe:
+  controller: newsletterengine
+  action: unsubscribe
+  params: [ email ]
 
 
 

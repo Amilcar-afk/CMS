@@ -11,7 +11,7 @@ class Validator
 
 
 
-    public static function run($config, $data, $unicity = null,$loginAuth = null)
+    public static function run($config, $data, $unicity = null,$loginAuth = null,$unicpwd = null)
     {
 
         if( count($data) != count($config["inputs"]) ){
@@ -30,7 +30,39 @@ class Validator
             $config['inputs']['password']['error'] = "Passwords does not match";
         }
 
+        if(isset($config['inputs']['newPassword'])
+            && isset($config['inputs']['passwordConfirm'])
+            && self::valueEquality($data['newPassword'], $data['newpasswordConfirm'])){
+
+            $config['inputs']['newpasswordConfirm']['error'] = "Passwords does not match";
+        }
+
+        if(isset($config['inputs']['currentPassword']) && $unicpwd == true){
+
+            $config['inputs']['currentPassword']['error'] = "Passwords does not exist";
+        }
+
+        
         foreach ($config["inputs"] as $name => $input){
+
+            if (isset($input["name"]) == 'user' && isset($input["searchBox"]) && $input["searchBox"] == true){
+                continue;
+            }
+
+            if( isset($data[$name]) && $input["type"] != "password" && !empty($data[$name]) && $data[$name] != strip_tags($data[$name])){
+                $config['inputs'][$name]['error'] = "Inccorect value";
+            }
+
+            if(isset($config['inputs']['newPassword']) && isset($config['inputs']['currentPassword']) ){
+
+                if(empty($data['newPassword']) && empty($data['currentPassword'])){
+                    continue;
+                }
+
+                if(!empty($data['newPassword']) && empty($data['currentPassword'])){
+                    $config['inputs']['currentPassword']['error'] = "Insert your current passord";
+                }
+            }
 
             if(isset($input["name"]) &&  $input["name"] == "id"){
                 continue;
@@ -41,8 +73,12 @@ class Validator
                 continue;
             }
 
+            if(isset($input["name"]) &&  $input["name"] == "slug" && isset($data['id']) && $data['id'] == 1){
+                continue;
+            }
 
             if(!isset($data[$name])){
+
                 $config['inputs'][$name]['error'] = "Fields are missing";
             }
 
@@ -57,17 +93,17 @@ class Validator
 
             if(isset($loginAuth)){
                 if($loginAuth['email'] == false){
-                    $config['inputs']['email']['error'] = "email incorrect";
+                    $config['inputs']['email']['error'] = "Bad email";
                 }
                 if($loginAuth['pass'] == false){
-                    $config['inputs']['password']['error'] = "password incorrect";
+                    $config['inputs']['password']['error'] = "Bad password";
                 }
             }
 
             if($input["type"]=="email" ){
                 if(!self::checkEmail($data[$name])){
                     $config['inputs']['email']['error'] = "Bad Email";
-                }elseif($unicity !== false){
+                }elseif($unicity != false && $config['inputs']['email']["unicity"] == true){
                     $config['inputs']['email']['error']="This email alreay exist";
                 }
             }
@@ -94,13 +130,13 @@ class Validator
                 unset($errors[$error]);
             }
         }
+        
         if(empty($errors)){
-            return ;
+            return;
         }else{
+            //http_response_code(422);
             return $config;
         }
-     
-
     }
 
 

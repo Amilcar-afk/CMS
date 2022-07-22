@@ -11,7 +11,7 @@ class Query extends BaseSQL
     private static $from;
     private static $where = [];
     private static $or = [];
-    private static $order;
+    private static $order = [];
     private static $limit = '';
     private static $params = [];
     private static $class;
@@ -59,6 +59,18 @@ class Query extends BaseSQL
         return (new Query);
     }
 
+    public function orderby(string $key, string $direction)
+    {
+        $direction = strtoupper($direction);
+        if(!in_array($direction, ['ASC', 'DESC'])){
+            self::$order[] = $key;
+        }else{
+            self::$order[] = "$key $direction";
+        }
+        return (new Query);
+
+
+    }
     public function groupBy(string $group): self
     {
         self::$groupBy = "GROUP BY ". $group;
@@ -73,6 +85,7 @@ class Query extends BaseSQL
 
     public function limit(string $from, string $to = null): self
     {
+
         if(!empty($to)){
             if(DBDRIVER === "mysql"){
                 self::$limit = " LIMIT " . $from . ", " . $to;
@@ -175,6 +188,12 @@ class Query extends BaseSQL
             $parts[] = '(' . join(') AND (', self::$where) . ')';
         }
 
+        if(!empty(self::$order)){
+            $parts[] = "ORDER BY ".self::$order[0];
+        }
+
+
+
         if (!empty(self::$or)){
             if(array_search("WHERE", $parts) === false){
                 $parts[] = "WHERE";
@@ -185,7 +204,7 @@ class Query extends BaseSQL
             else
                 $parts[] = ' (' . join(' OR ', self::$or) . ')';
 
-        }     
+        }
 
         if (!empty(self::$groupBy))
             $parts[] = self::$groupBy;
@@ -212,12 +231,16 @@ class Query extends BaseSQL
     public function execute($model = null)
     {
         $query = $this->__toString();
+
         $statement = $this->pdo->prepare($query);
-        $statement->execute();
+        if (self::$params) {
+            $statement->execute(self::$params);
+        }else{
+            $statement->execute();
+        }
 
         self::$params = [];
         self::$select = [];
-        self::$delete = [];
         self::$from = [];
         self::$where = [];
         self::$or = [];
@@ -227,7 +250,12 @@ class Query extends BaseSQL
         if ($model != null) {
             return $statement->fetchAll(\PDO::FETCH_CLASS, "App\Model\\" . $model);
         }
-        return $statement->fetchAll();
+        if (!isset(self::$delete) || empty(self::$delete)) {
+            self::$delete = [];
+            return $statement->fetchAll();
+        }else{
+            self::$delete = [];
+        }
     }
 
 }

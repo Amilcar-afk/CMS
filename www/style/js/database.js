@@ -8,6 +8,7 @@ $(document).ready(function(){
                 {
                     DBHOST:$(this).parent().find('[name=DBHOST]').val(),
                     DBPWD:$(this).parent().find('[name=DBPWD]').val(),
+                    SITENAME:$(this).parent().find('[name=SITENAME]').val(),
                     DBPORT:$(this).parent().find('[name=DBPORT]').val(),
                     DBNAME:$(this).parent().find('[name=DBNAME]').val(),
                     DBUSER:$(this).parent().find('[name=DBUSER]').val(),
@@ -17,7 +18,7 @@ $(document).ready(function(){
                 alertMessage('Data updated!');
                 let pathname = window.location.pathname;
                 if (pathname == "/setup/database"){
-                    window.location.href = "/setup/smtp";
+                    window.location.href = "/setup/register";
                 }
               
             },

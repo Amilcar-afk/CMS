@@ -5,6 +5,7 @@ namespace App\Model;
 
 use App\Core\BaseSQL;
 use App\Core\Query;
+use App\Model\Step;
 
 
 class Projet extends BaseSQL
@@ -106,12 +107,34 @@ class Projet extends BaseSQL
 
     public function usersNotInProject()
     {
-        return parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        $users = parent::belongsToMany(User::class, 'cmspf_User_projet', "id", "id", null, null, 'NOT');
+        foreach ($users as $key => $user){
+            if($user->getDeleted() === "1"){
+                unset($users[$key]);
+            }
+        }
+        return $users;
     }
 
     public function usersInproject()
     {
-        return parent::belongsToMany(User::class, 'cmspf_User_projet');
+        $users =  parent::belongsToMany(User::class, 'cmspf_User_projet');
+        foreach ($users as $key => $user){
+            if($user->getId() == $_SESSION['Auth']->id){
+                unset($users[$key]);
+            }
+        }
+        return $users;
+    }
+
+    public function checkUserExist($usersFind, $usersId)
+    {
+        foreach ($usersId as $id){
+            if($usersFind->find($id) === false){
+                return false;
+            }
+        }
+        return true;
     }
 
     public function isAdmin()
@@ -127,7 +150,12 @@ class Projet extends BaseSQL
         return false;
     }
 
-    public function getFormProject($users, $name = ''): array
+    public function getSteps()
+    {
+        return array_reverse(parent::hasMany(Step::class, 'projet_key'));
+    }
+
+    public function getFormProject($users,$usersOfProject = null, $name = ''): array
     {
 
         foreach($users as $user){
@@ -136,6 +164,18 @@ class Projet extends BaseSQL
                 "label" => $user->getLastname() . ' ' . $user->getFirstname(),
                 "class"=>"input"
             ];
+        }
+
+        if($usersOfProject !== null){
+            foreach($usersOfProject as $user) {
+                $usersProjectList['choices'][] = [
+                    "value" => $user->getId(),
+                    "label" => $user->getLastname() . ' ' . $user->getFirstname(),
+                    "class" => "input"
+                ];
+            }
+        }else{
+            $usersProjectList = null;
         }
         
         return [
@@ -179,9 +219,10 @@ class Projet extends BaseSQL
                     "value"=>$this->usersInproject(),
                     "class"=>"input inputSelect",
                     "error"=>"",
-                    "idToVerif"=>true,
                     "div"=>"divUserSearch",
-                    "choices"=>$usersList['choices']
+                    "choices"=>isset($usersList['choices']) ? $usersList['choices'] : null,
+                    "searchBox"=>true,
+                    "usersInProject"=>isset($usersProjectList['choices']) ? $usersProjectList['choices'] : null
                 ],
 
                 "description"=>[
@@ -189,9 +230,11 @@ class Projet extends BaseSQL
                     "placeholder"=>"description",
                     "type"=>"textarea",
                     "name"=>"description",
+                    "value"=>$this->getDescription(),
                     "class"=>"input",
                     "rows"=>16,
-                    "cols"=>"",
+                    "min"=>3,
+                    "max"=>100,
                     "error"=>""
                 ],
             ],

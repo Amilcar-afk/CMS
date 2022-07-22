@@ -7,6 +7,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Model\Stat;
 use App\Model\Reseaux_soc;
+use App\Model\User_conversation;
+
 use function MongoDB\BSON\fromJSON;
 
 class Statistics
@@ -19,6 +21,7 @@ class Statistics
     public function __construct()
     {
         $this->stats = new Stat;
+        $this->conversation_user = new User_conversation();
     }
 
 
@@ -28,8 +31,12 @@ class Statistics
         $reseauxSoc = new Reseaux_soc();
         $emptyReseauxSoc = $reseauxSoc;
         $reseauxSocs = $reseauxSoc->find();
-        $stats = $this->stats->find();
 
+        $conversation = Query::from("cmspf_Conversations")
+        ->innerJoin(" cmspf_User_conversation ON cmspf_User_conversation.conversation_key = cmspf_Conversations.id")
+        ->where("cmspf_User_conversation.seen = 1")
+        ->where("cmspf_User_conversation.user_key = ".$_SESSION['Auth']->id)
+        ->execute();
 
         // RANGE
         $toPerPage = date("Y-m-d");
@@ -38,71 +45,35 @@ class Statistics
         $sincePerCountry = date('Y-m-d', strtotime($toPerCountry. ' - 1 month'));
         $toPerDevice = date("Y-m-d");
         $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
-        
-        if(isset($_POST['sincePerPage'])){
 
+        if(!empty($_POST['sincePerPage']) && !empty($_POST['toPerPage'])){
             $sincePerPage = $_POST['sincePerPage'];
             $toPerPage = $_POST['toPerPage'];
-            $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
-
         }
-        if(isset($_POST['sincePerCountry'])) {
-
+        if(!empty($_POST['sincePerCountry']) && !empty($_POST['toPerCountry'])) {
             $sincePerCountry = $_POST['sincePerCountry'];
             $toPerCountry = $_POST['toPerCountry'];
-            $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
-
         }
-        if(isset($_POST['sincePerDevice'])) {
-
+        if(!empty($_POST['sincePerDevice']) && !empty($_POST['toPerDevice'])) {
             $sincePerDevice = $_POST['sincePerDevice'];
             $toPerDevice = $_POST['toPerDevice'];
-            $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
-
         }
-
 
         // GET VIEW PER DAY FOR A WEEK
-        // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
-        
 
-        $currentDate = date("Y-m-d");
-        
-        if(isset($_POST['before'])){
-            
-            $date = date('Y-m-d', strtotime($currentDate. ' - 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-            
+        $perWeekDate = date("Y-m-d");
+        if(isset($_POST['perWeekDate'])){
+            $perWeekDate = $_POST['perWeekDate'];
         }
+        $currentMonth = date('m',strtotime($perWeekDate));
+        $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+        $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")
+            ->from("cmspf_Stats")
+            ->where("YEAR(date) = YEAR(:perWeekDate) AND WEEK(date) = WEEK(:perWeekDateSecond)")
+            ->groupBy("day")
+            ->params(["perWeekDate" => $perWeekDate, "perWeekDateSecond" => $perWeekDate])
+            ->execute();
 
-        if(isset($_POST['next'])){
-
-            $date = date('Y-m-d', strtotime($currentDate. ' + 7 days'));
-            $currentDate = $date;
-
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-            echo $date;
-
-        }
-
-        if(!isset($_POST['next']) && !isset($_POST['before'])) {
-            
-            $date = date("Y-m-d");
-            $currentMonth = date('m',strtotime($date));
-            $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
-            $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")->from("cmspf_Stats")->where("YEAR(date) = YEAR('".$date."') AND WEEK(date) = WEEK('".$date."')")->groupBy("day")->execute();
-        
-        }
-        
         $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
         $chartWeekData[] = ['Mon', 0, 0];
         $chartWeekData[] = ['Tue', 0, 0];
@@ -111,102 +82,121 @@ class Statistics
         $chartWeekData[] = ['Fri', 0, 0];
         $chartWeekData[] = ['Sat', 0, 0];
         $chartWeekData[] = ['Sun', 0, 0];
-        
-        foreach($viewPerWeek as $key => $data) {
 
-            if ($data['day'] == "2"){
-                $data['day'] = "Mon";
-                $chartWeekData[1] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "3"){
-                $data['day'] = "Tue";
-                $chartWeekData[2] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "4"){
-                $data['day'] = "Wed";
-                $chartWeekData[3] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "5"){
-                $data['day'] = "Thu";
-                $chartWeekData[4] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "6"){
-                $data['day'] = "Fri";
-                $chartWeekData[5] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "7"){
-                $data['day'] = "Sat";
-                $chartWeekData[6] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
-            }
-            if ($data['day'] == "1"){
-                $data['day'] = "Sun";
-                $chartWeekData[7] = [
-                    $data['day'],
-                    $toInt = (int)$data['number'],
-                    $toInt = (int)$data['number']
-                ];
+        if (is_array($viewPerWeek) || is_object($viewPerWeek)) {
+            foreach($viewPerWeek as $key => $data) {
+
+                if ($data['day'] == "2"){
+                    $data['day'] = "Mon";
+                    $chartWeekData[1] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "3"){
+                    $data['day'] = "Tue";
+                    $chartWeekData[2] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "4"){
+                    $data['day'] = "Wed";
+                    $chartWeekData[3] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "5"){
+                    $data['day'] = "Thu";
+                    $chartWeekData[4] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "6"){
+                    $data['day'] = "Fri";
+                    $chartWeekData[5] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "7"){
+                    $data['day'] = "Sat";
+                    $chartWeekData[6] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
+                if ($data['day'] == "1"){
+                    $data['day'] = "Sun";
+                    $chartWeekData[7] = [
+                        $data['day'],
+                        $toInt = (int)$data['number'],
+                        $toInt = (int)$data['number']
+                    ];
+                }
             }
         }
-
 
         // GET VIEW PER PAGES
-        $viewPerPages = Query::select("COUNT(page_key) AS number, title")->from("cmspf_Stats")->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")->where(" date BETWEEN '".$sincePerPage."' AND '".$toPerPage."'")->groupBy("title")->execute();
+        $viewPerPages = Query::select("COUNT(page_key) AS number, title")
+            ->from("cmspf_Stats")
+            ->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")
+            ->where(" date BETWEEN :sincePerPage AND :toPerPage")
+            ->groupBy("title")
+            ->params(["sincePerPage" => $sincePerPage, "toPerPage" => $toPerPage])
+            ->execute();
         arsort($viewPerPages);
 
-        
         // GET COUNTRY STATS
-        $country = Query::select("COUNT(country) AS number, country")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerCountry."' AND '".$toPerCountry."'")->groupBy("country")->execute();
+        $country = Query::select("COUNT(country) AS number, country")
+            ->from("cmspf_Stats")
+            ->where(" date BETWEEN :sincePerCountry AND :toPerCountry")
+            ->groupBy("country")
+            ->params(["sincePerCountry" => $sincePerCountry, "toPerCountry" => $toPerCountry])
+            ->execute();
 
         $chartMapData[] = ['Country',["role"=> 'annotation']];
-
-        foreach($country as $key => $data) {
-            $chartMapData[] = [
-                $data['country'],
-                $toInt = (int)$data['number']
-            ];
+        if (is_array($country) || is_object($country)) {
+            foreach($country as $data) {
+                $chartMapData[] = [
+                    $data['country'],
+                    $toInt = (int)$data['number']
+                ];
+            }
         }
-        
-
 
         // GET DEVICE STATS
-        $devices = Query::select("COUNT(device) AS number, device")->from("cmspf_Stats")->where(" date BETWEEN '".$sincePerDevice."' AND '".$toPerDevice."'")->groupBy("device")->execute();
+        $devices = Query::select("COUNT(device) AS number, device")
+            ->from("cmspf_Stats")
+            ->where(" date BETWEEN :sincePerDevice AND :toPerDevice")
+            ->groupBy("device")
+            ->params(["sincePerDevice" => $sincePerDevice, "toPerDevice" => $toPerDevice])
+            ->execute();
 
         $chartDeviceData[] = ['Device',["role"=> 'annotation']];
-        foreach($devices as $device) {
-            $chartDeviceData[] = [
-                $device['device'],
-                $toInt = (int)$device['number']
-            ];
+        if (is_array($devices) || is_object($devices)) {
+            foreach($devices as $device) {
+                $chartDeviceData[] = [
+                    $device['device'],
+                    $toInt = (int)$device['number']
+                ];
+            }
         }
-        
 
         // GET NEW USERS STATS
         $currentMonth = date("m");
-        $newUsers = Query::select("COUNT(*) AS number")->from("cmspf_Users")->where("MONTH (date_creation) = ".$currentMonth)->execute();
+        $newUsers = Query::select("COUNT(*) AS number")
+            ->from("cmspf_Users")
+            ->where("MONTH (date_creation) = ".$currentMonth)
+            ->execute();
         $numberOfUsers = $newUsers[0]['number'];
 
         // ASSIGN VIEWS
@@ -217,20 +207,27 @@ class Statistics
         $view = new View("dashboard", $tmpl);
         $view->assign("chartWeekData", $chartWeekData);
 
-        $view->assign("date", $date);
+        $view->assign("perWeekDate", $perWeekDate);
+
+        $view->assign("sincePerPage", $sincePerPage);
+        $view->assign("toPerPage", $toPerPage);
+        $view->assign("sincePerCountry", $sincePerCountry);
+        $view->assign("toPerCountry", $toPerCountry);
+        $view->assign("sincePerDevice", $sincePerDevice);
+        $view->assign("toPerDevice", $toPerDevice);
 
         $view->assign("monthName", $monthName);
         $view->assign("viewPerPages", $viewPerPages);
         $view->assign("chartDeviceData", $chartDeviceData);
         $view->assign("numberOfUsers", $numberOfUsers);
         $view->assign("chartMapData", $chartMapData);
-        $view->assign("data", $stats);
         $view->assign("reseauxSocs", $reseauxSocs);
         $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
+        $view->assign("conversations", count($conversation));
 
         $view->assign("metaData", $metaData = [
-            "title" => 'Style',
-            "description" => 'Change your webstite style',
+            "title" => 'Dashboard',
+            "description" => 'This is the dashboard website',
             "src" => [
                 ["type" => "js", "path" => "../style/js/getRange.js"],
                 ["type" => "js", "path" => "https://www.gstatic.com/charts/loader.js"],
@@ -247,7 +244,8 @@ class Statistics
             $reseauxSoc->setType($_POST['type']);
             $reseauxSoc->setUserKey($_SESSION['Auth']->id);
             $reseauxSocOfThisType = Query::from('cmspf_Reseaux_soc')
-                ->where("type = '" . $_POST['type'] . "'")
+                ->where("type = :type")
+                ->params(["type" => $_POST['type']])
                 ->execute('Reseaux_soc');
             if (isset($reseauxSocOfThisType[0])){
                 $reseauxSoc->setId($reseauxSocOfThisType[0]->getId());
@@ -260,18 +258,205 @@ class Statistics
                 $emptyReseauxSoc = $reseauxSoc;
                 $reseauxSocs = $reseauxSoc->find();
 
-                $stats = $this->stats->find();
+                $conversation = Query::from("cmspf_Conversations")
+                    ->innerJoin(" cmspf_User_conversation ON cmspf_User_conversation.conversation_key = cmspf_Conversations.id")
+                    ->where("cmspf_User_conversation.seen = 1")
+                    ->where("cmspf_User_conversation.user_key = ".$_SESSION['Auth']->id)
+                    ->execute();
+
+                // RANGE
+                $toPerPage = date("Y-m-d");
+                $sincePerPage = date('Y-m-d', strtotime($toPerPage. ' - 1 month'));
+                $toPerCountry = date("Y-m-d");
+                $sincePerCountry = date('Y-m-d', strtotime($toPerCountry. ' - 1 month'));
+                $toPerDevice = date("Y-m-d");
+                $sincePerDevice = date('Y-m-d', strtotime($toPerDevice. ' - 1 month'));
+
+                if(!empty($_POST['sincePerPage']) && !empty($_POST['toPerPage'])){
+                    $sincePerPage = $_POST['sincePerPage'];
+                    $toPerPage = $_POST['toPerPage'];
+                }
+                if(!empty($_POST['sincePerCountry']) && !empty($_POST['toPerCountry'])) {
+                    $sincePerCountry = $_POST['sincePerCountry'];
+                    $toPerCountry = $_POST['toPerCountry'];
+                }
+                if(!empty($_POST['sincePerDevice']) && !empty($_POST['toPerDevice'])) {
+                    $sincePerDevice = $_POST['sincePerDevice'];
+                    $toPerDevice = $_POST['toPerDevice'];
+                }
+
+                // GET VIEW PER DAY FOR A WEEK
+                // SELECT COUNT(page_key) as number, DAYOFWEEK(date) as day FROM cmspf_Stats WHERE YEAR( date ) = YEAR ( CURDATE() ) AND WEEK( date ) = WEEK ( CURDATE() ) GROUP BY day;
+
+                $perWeekDate = date("Y-m-d");
+                if(isset($_POST['perWeekDate'])){
+                    $perWeekDate = $_POST['perWeekDate'];
+                }
+                $currentMonth = date('m',strtotime($perWeekDate));
+                $monthName = date('F', mktime(0, 0, 0, $currentMonth, 10));
+                $viewPerWeek = Query::select("COUNT(page_key) AS number, DAYOFWEEK(date) as day")
+                    ->from("cmspf_Stats")
+                    ->where("YEAR(date) = YEAR(:perWeekDate) AND WEEK(date) = WEEK(:perWeekDateSecond)")
+                    ->groupBy("day")
+                    ->params(["perWeekDate" => $perWeekDate, "perWeekDateSecond" => $perWeekDate])
+                    ->execute();
+
+                $chartWeekData[] = ['Day','',["role" => 'annotation' ]];
+                $chartWeekData[] = ['Mon', 0, 0];
+                $chartWeekData[] = ['Tue', 0, 0];
+                $chartWeekData[] = ['Wed', 0, 0];
+                $chartWeekData[] = ['Thu', 0, 0];
+                $chartWeekData[] = ['Fri', 0, 0];
+                $chartWeekData[] = ['Sat', 0, 0];
+                $chartWeekData[] = ['Sun', 0, 0];
+
+                if (is_array($viewPerWeek) || is_object($viewPerWeek)) {
+                    foreach($viewPerWeek as $key => $data) {
+
+                        if ($data['day'] == "2"){
+                            $data['day'] = "Mon";
+                            $chartWeekData[1] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "3"){
+                            $data['day'] = "Tue";
+                            $chartWeekData[2] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "4"){
+                            $data['day'] = "Wed";
+                            $chartWeekData[3] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "5"){
+                            $data['day'] = "Thu";
+                            $chartWeekData[4] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "6"){
+                            $data['day'] = "Fri";
+                            $chartWeekData[5] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "7"){
+                            $data['day'] = "Sat";
+                            $chartWeekData[6] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                        if ($data['day'] == "1"){
+                            $data['day'] = "Sun";
+                            $chartWeekData[7] = [
+                                $data['day'],
+                                $toInt = (int)$data['number'],
+                                $toInt = (int)$data['number']
+                            ];
+                        }
+                    }
+                }
+
+                // GET VIEW PER PAGES
+                $viewPerPages = Query::select("COUNT(page_key) AS number, title")
+                    ->from("cmspf_Stats")
+                    ->innerJoin(" cmspf_Pages ON cmspf_Stats.page_key = cmspf_Pages.id")
+                    ->where(" date BETWEEN :sincePerPage AND :toPerPage")
+                    ->groupBy("title")
+                    ->params(["sincePerPage" => $sincePerPage, "toPerPage" => $toPerPage])
+                    ->execute();
+                arsort($viewPerPages);
+
+                // GET COUNTRY STATS
+                $country = Query::select("COUNT(country) AS number, country")
+                    ->from("cmspf_Stats")
+                    ->where(" date BETWEEN :sincePerCountry AND :toPerCountry")
+                    ->groupBy("country")
+                    ->params(["sincePerCountry" => $sincePerCountry, "toPerCountry" => $toPerCountry])
+                    ->execute();
+
+                $chartMapData[] = ['Country',["role"=> 'annotation']];
+                if (is_array($country) || is_object($country)) {
+                    foreach($country as $data) {
+                        $chartMapData[] = [
+                            $data['country'],
+                            $toInt = (int)$data['number']
+                        ];
+                    }
+                }
+
+                // GET DEVICE STATS
+                $devices = Query::select("COUNT(device) AS number, device")
+                    ->from("cmspf_Stats")
+                    ->where(" date BETWEEN :sincePerDevice AND :toPerDevice")
+                    ->groupBy("device")
+                    ->params(["sincePerDevice" => $sincePerDevice, "toPerDevice" => $toPerDevice])
+                    ->execute();
+
+                $chartDeviceData[] = ['Device',["role"=> 'annotation']];
+                if (is_array($devices) || is_object($devices)) {
+                    foreach($devices as $device) {
+                        $chartDeviceData[] = [
+                            $device['device'],
+                            $toInt = (int)$device['number']
+                        ];
+                    }
+                }
+
+                // GET NEW USERS STATS
+                $currentMonth = date("m");
+                $newUsers = Query::select("COUNT(*) AS number")
+                    ->from("cmspf_Users")
+                    ->where("MONTH (date_creation) = ".$currentMonth)
+                    ->execute();
+                $numberOfUsers = $newUsers[0]['number'];
+
+
 
                 $view = new View("dashboard");
-                $view->assign("data", $stats);
+
+                $view->assign("chartWeekData", $chartWeekData);
+
+                $view->assign("perWeekDate", $perWeekDate);
+
+                $view->assign("sincePerPage", $sincePerPage);
+                $view->assign("toPerPage", $toPerPage);
+                $view->assign("sincePerCountry", $sincePerCountry);
+                $view->assign("toPerCountry", $toPerCountry);
+                $view->assign("sincePerDevice", $sincePerDevice);
+                $view->assign("toPerDevice", $toPerDevice);
+
+                $view->assign("monthName", $monthName);
+                $view->assign("viewPerPages", $viewPerPages);
+                $view->assign("chartDeviceData", $chartDeviceData);
+                $view->assign("numberOfUsers", $numberOfUsers);
+                $view->assign("chartMapData", $chartMapData);
                 $view->assign("reseauxSocs", $reseauxSocs);
                 $view->assign("emptyReseauxSoc", $emptyReseauxSoc);
+                $view->assign("conversations", count($conversation));
+
 
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -282,15 +467,34 @@ class Statistics
             $reseauxSoc = $reseauxSoc->find($_POST['id']);
             if ($reseauxSoc->getId() != null) {
 
-                Query::deleteAll('')->from('cmspf_Stats')->where("reseau_soc_key = " . $_POST['id'] . "")->execute();
+                Query::deleteAll('')
+                    ->from('cmspf_Stats')
+                    ->where("reseau_soc_key = " . $_POST['id'] . "")
+                    ->execute();
                 $reseauxSoc->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
+
+    function composestatreseauxsoc()
+    {
+        if( isset($_POST['id']) ) {
+            $reseauxSoc = new Reseaux_soc();
+            $reseauxSoc = $reseauxSoc->find($_POST['id']);
+            if ($reseauxSoc->getId() != null) {
+                $reseauxSoc->composeStats($_POST['id'], "reseaux_soc");
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
+        }
+    }
+
 
     public function composeStats(int $elementId, string $type) {
 
@@ -346,13 +550,17 @@ class Statistics
             $attributType = "page_key";
         }elseif ($type == "reseaux_soc") {
             $this->stats->setReseauSocKey($elementId); // OK
-            $attributType = "reseaux_soc_key";
+            $attributType = "reseau_soc_key";
         }
 
 
 
         // 1 STAT PER PAGE PER DAY
-        $getLastDate = Query::select("MAX(date) AS date")->from("cmspf_Stats")->where("ip = '". $externalIp . "' AND ". $attributType ." = ". $elementId)->execute('Stat');
+        $getLastDate = Query::select("MAX(date) AS date")
+            ->from("cmspf_Stats")
+            ->where("ip = :ip AND ". $attributType ." = :elementId")
+            ->params(["ip" => $externalIp, "elementId" => $elementId])
+            ->execute('Stat');
 
         $date1 = date("Y-m-d");
         $date2 = $getLastDate[0]->getDate();
@@ -371,8 +579,6 @@ class Statistics
             $this->stats->setDevice($device); 
             $this->stats->save();
 
-        } else {
-            
         }
     }
     

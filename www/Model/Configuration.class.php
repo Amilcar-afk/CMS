@@ -11,6 +11,8 @@ class Configuration extends BaseSQL
     protected $port = null;
     protected $db_name = null;
     protected $db_user = null;
+    protected $site_name = null;
+
 
     protected $smtp_host;
     protected $smtp_auth;
@@ -45,6 +47,27 @@ class Configuration extends BaseSQL
 
         return $this;
     }
+
+     /**
+     * Get the value of site_name
+     */ 
+    public function getSite_name()
+    {
+        return $this->site_name;
+    }
+
+    /**
+     * Set the value of site_name
+     *
+     * @return  self
+     */ 
+    public function setSite_name($site_name)
+    {
+        $this->site_name = $site_name;
+
+        return $this;
+    }
+
 
     /**
      * Get the value of host_name
@@ -266,6 +289,11 @@ class Configuration extends BaseSQL
         return $this;
     }
 
+    public function insertDatabase()
+    {
+        parent::insertDatabase();
+    }
+
     public function dataBaseForm(): array
     {
         return [
@@ -275,19 +303,33 @@ class Configuration extends BaseSQL
                 "submit"=>"Save",
             ],
             "inputs"=>[
+
+                "SITENAME"=>[
+                    "type"=>"text",
+                    "placeholder"=>"Site Name ...",
+                    "name"=>"SITENAME",
+                    "id"=>"site_name",
+                    "class"=>"input",
+                    "question"=>"Site Name",
+                    "value"=> $this->getSite_name(),
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>50,
+                    "error"=>""
+                ],
+
                 "DBHOST"=>[
                     "type"=>"text",
-                    "placeholder"=>"Host Name ...",
+                    "placeholder"=>"DB Host Name ...",
                     "name"=>"DBHOST",
                     "id"=>"host_name",
                     "class"=>"input",
-                    "question"=>"Host Name",
+                    "question"=>"DB Host Name",
                     "value"=> $this->getHost_name(),
                     "required"=>true,
                     "min"=>2,
                     "max"=>50,
                     "error"=>""
-
                     ],
 
                 "DBNAME"=>[
@@ -306,9 +348,9 @@ class Configuration extends BaseSQL
 
                 "DBUSER"=>[
                     "type"=>"text",
-                    "placeholder"=>"User...",
+                    "placeholder"=>"DB User...",
                     "name"=>"DBUSER",
-                    "question"=>"User",
+                    "question"=>"DB User",
                     "id"=>"db_user",
                     "class"=>"input",
                     "value"=> $this->getDb_user(),
@@ -320,9 +362,9 @@ class Configuration extends BaseSQL
 
                 "DBPWD"=>[
                     "type"=>"password",
-                    "placeholder"=>"Password ...",
+                    "placeholder"=>"DB Password ...",
                     "name"=>"DBPWD",
-                    "question"=>"Password",
+                    "question"=>"DB Password",
                     "id"=>"password",
                     "class"=>"input",
                     "required"=>true,
@@ -334,9 +376,9 @@ class Configuration extends BaseSQL
 
                 "DBPORT"=>[
                     "type"=>"text",
-                    "placeholder"=>"Port ...",
+                    "placeholder"=>"DB Port ...",
                     "name"=>"DBPORT",
-                    "question"=>"Port",
+                    "question"=>"DB Port",
                     "id"=>"port",
                     "class"=>"input",
                     "value"=> $this->getPort(),

@@ -1,8 +1,9 @@
-
-<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?> method="<?= $config["config"]["method"]??"POST" ?>"
-    <?= (isset($config["action"]))?'action="'.$config["config"]["action"].'"':'' ?>
+<!-- bonne version-->
+<form <?= (isset($config["config"]["id"]))?'id="'.$config["config"]["id"].'"':'' ?>
+        method="<?= $config["config"]["method"]??"POST" ?>"
     <?= (isset($config["config"]["class"]))?'class="'.$config["config"]["class"].'"':'' ?>
     <?= (isset($config["enctype"]))?'enctype="'.$config["enctype"].'"':'' ?>>
+
     <?php foreach ($config["inputs"] as $name=>$input):?>
 
         <div  <?= (isset($input["type"]) && $input["type"] == "hidden")?'':'class="input-container"' ?>>
@@ -22,30 +23,45 @@
 
             <?php elseif ($input["type"] == "select"):?>
                 <label><?=$input["question"]?></label>
-                <select id="<?= $input["id"] ?>" name="<?= $name ?>" class="<?=$input["class"]?>">
-                    <?= (isset($input["question"]) && !isset($input["value"]))?'<option hidden>'.$input["question"].'</option>':'' ?>
+                <?php if (isset($input["searchBox"]) && $input["searchBox"] === true):?>
+                    <input placeholder="search user..." class="input" type="search" class="searchBox" onkeyup="findDataInSelect(this, this.nextElementSibling)">
+                <?php endif;?>
+                <select <?= (isset($input["id"]))?'id="'.$input["id"].'"':'' ?> name="<?= $name ?>" class="<?=$input["class"]?>">
+                    <?= (isset($input["question"]) && (!isset($input["value"]) || empty($input["value"])))?'<option hidden>'.$input["question"].'</option>':'' ?>
                     <?= (isset($choice["required"]))?'required="required"':'' ?>
                     <?php foreach ($input["choices"] as $choice):?>
                         <option  value="<?= $choice['value'] ?>"
                                  class="<?= $choice['class'] ?>"
-                                <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
+                            <?= (isset($input["value"]) && $input["value"] == $choice['value'])?'checked="checked"':'' ?>>
                             <?= $choice['label'] ?>
                         </option>
                     <?php endforeach;?>
                 </select>
-                <?= (isset($input["div"]))?'<div id="' . $input["div"] .'"></div>':'' ?>
+                <?php if (isset($input["div"])){
+                    echo '<div id="' . $input["div"] .'">';
+                    if (isset($input["usersInProject"]) && !empty($input["usersInProject"])){
+                        echo '<ul class="center-left elements-in" id="listSelectedUsers">';
+                        foreach ($input["usersInProject"] as $users){
+                            echo '<li  value="' . $users['value'] . '"class="sticker sticker--cta sticker--cta--selected li-user-selected">'. $users['label'] .
+                                '<input type="checkbox" checked name="check-'. $users['value'] .'" value="'. $users['value'] .'" class="user-check" onchange="onClickCheckboxUserOfProject(this, this.parentElement.parentElement.parentElement.previousElementSibling)"></li>';
+                        }
+                        echo '</ul>';
+                    }
+                    echo '</div>';
+                }
+                ?>
 
             <?php elseif ($input["type"] == "textarea"):?>
                 <label for="<?=$name?>"><?=$input["question"]?></label>
                 <textarea name="<?= $name ?>"
                           rows="<?= $input["rows"] ?>"
-                          cols="<?= $input["cols"] ?>"
+                        <?= (isset($input["cols"]))?'cols="'.$input['cols'].'"':'' ?>
                           id="<?= $name ?>"
                           class="<?= $input["class"] ?>"
                           <?= (isset($input["placeholder"]))?'placeholder="'.$input["placeholder"].'"':'' ?>
-                          <?= (isset($input["min"]))?'minlenght="'. $input["min"] .'"':'' ?>
-                          <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
-                          <?= (isset($input["required"]))?'required="required"':'' ?>
+                    <?= (isset($input["min"]))?'minlenght="'. $input["min"] .'"':'' ?>
+                    <?= (isset($input["max"]))?'maxlenght="'. $input["max"] .'"':'' ?>
+                    <?= (isset($input["required"]))?'required="required"':'' ?>
                 ><?= (isset($input["value"]))? $input["value"] :'' ?></textarea>
             <?php else:?>
                 <?php if (isset($input["question"])):?>

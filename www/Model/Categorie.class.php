@@ -184,15 +184,8 @@ class Categorie extends BaseSQL
         return parent::find($id, $attribut);
     }
 
-    public function getFormNewCategorie($navigations): array
+    public function getFormNewCategorie(): array
     {
-        foreach($navigations as $navigation){
-            $navigationsList['choices'][] = [
-                "value" => $navigation->getId(),
-                "label" => $navigation->getTitle(),
-                "class"=>"input"
-            ];
-        }
 
         return [
             "config"=>[
@@ -219,16 +212,6 @@ class Categorie extends BaseSQL
                     "max"=>30,
                     "value"=>$this->getTitle(),
                     "error"=>""
-                ],
-                "navigation"=>[
-                    "question"=>"Navigation",
-                    "type"=>"select",
-                    "name"=>"navigation",
-                    "class"=>"input",
-                    "required"=>true,
-                    "error"=>"",
-                    "idToVerif"=>true,
-                    "choices"=>$navigationsList['choices']
                 ],
             ],
             

@@ -155,7 +155,6 @@
     <div></div>
     <div></div>
 </div>
-<div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;"> Pre-header Text </div>
 <div class="body-content">
     <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:500px;" width="500" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     <div style="margin:0px auto;max-width:500px;">
@@ -190,7 +189,7 @@
                                                                                     <tbody>
                                                                                     <tr>
                                                                                         <td style="width:100px;">
-                                                                                            <img alt height="auto" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/crofts-white.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="100">
+                                                                                            <img style="width: 80px;border-radius: 50px;object-fit: cover;height: 80px;" src="<?= $protocol . $logo ?>" alt="logo">
                                                                                         </td>
                                                                                     </tr>
                                                                                     </tbody>
@@ -199,7 +198,13 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td align="center" style="font-size:0px;padding:10px 25px;padding-top:30px;word-break:break-word;">
-                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;text-transform:uppercase;color:#ffffff;">Austin, TX</div>
+                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;letter-spacing:1px;line-height:24px;text-align:center;color:var(--main-color, #396075);">
+                                                                                <?php
+                                                                                $env_file = 'env.json';
+                                                                                $data_base_env = yaml_parse_file($env_file);
+                                                                                echo $data_base_env['env'][0]['SITENAME'];
+                                                                                ?>
+                                                                            </div>
                                                                             </td>
                                                                         </tr>
                                                                         </tbody>
@@ -236,13 +241,13 @@
                                                                     <?php elseif ($element["type"] == "text"):?>
                                                                         <tr>
                                                                             <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#637381;"><?= $element['content'] ?></div>
+                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;font-weight:400;line-height:24px;text-align:left;"><?= $element['content'] ?></div>
                                                                             </td>
                                                                         </tr>
                                                                     <?php elseif ($element["type"] == "button"):?>
                                                                         <tr>
                                                                             <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;width:300px;line-height:100%;">
+                                                                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;width:100%;line-height:100%;">
                                                                                     <tr>
                                                                                         <td align="center" bgcolor="var(--main-color, #396075)" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:var(--main-color, #396075);" valign="middle">
                                                                                             <a href="<?= $element['link'] ?>" style="display:inline-block;width:250px;background:var(--main-color, #396075);color:var(--background-color, #ffffff);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"> <?= $element['content'] ?> </a>
@@ -333,9 +338,13 @@
                                                                                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style width="100%">
                                                                                         <tbody>
                                                                                         <tr>
-                                                                                            <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                                                                                <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:11px;font-weight:bold;line-height:16px;text-align:center;color:#445566;"><a class="footer-link" href="https://www.google.com" style="color: #888888;">Unsubscribe</a></div>
-                                                                                            </td>
+                                                                                            <?php foreach ($message as $element): ?>
+                                                                                                <?php if($element['type'] == 'newsletter'): ?>
+                                                                                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                                                                        <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:11px;font-weight:bold;line-height:16px;text-align:center;color:#445566;"><a class="footer-link" href="<?= $protocol . $element['content'] ?>" style="color: #888888;">Unsubscribe</a></div>
+                                                                                                    </td>
+                                                                                                <?php endif; ?>
+                                                                                            <?php endforeach; ?>
                                                                                         </tr>
                                                                                         </tbody>
                                                                                     </table>

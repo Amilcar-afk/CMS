@@ -309,29 +309,23 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="module-list module-list--quote-basic">
-                            <figure class="color-main-color">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="module-list section-module module-list--quote-basic">
+                            <p class="module col-12 color-main-color bold fs-22">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="module col-12 color-main-color fs-13">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="center background-main-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-background-color">
-                            <figure class="color-white">
+                        <article class="section-module center background-main-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-background-color">
+                            <figure class="color-white section-module">
                                 <blockquote cite="">
-                                    <p class="highlight background-second-color color-white">Lorem ipsum ibra tv gango sphere</p>
+                                    <p class="module highlight background-second-color bold color-white fs-16">Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
                             </figure>
                         </article>
 
                         <article class="module-list module-list--quote-wrap">
-                            <figure class="color-main-color left-border">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-main-color">, Author, <time class="color-main-color" datetime="12-12-2000">12/12/2000</time></figcaption>
+                            <figure class="section-module color-main-color section-module left-border">
+                                <p class="module color-main-color col-12 fs-20">Lorem ipsum ibra tv gango sphere</p>
+                                <p class="module color-main-color col-12 fs-12">, Author, 12/12/2000</p>
                             </figure>
                         </article>
 
@@ -339,31 +333,23 @@
 
                     <div class="col-6 col-md-12 col-sm-12">
 
-                        <article class="background-second-color module-list module-list--quote-wrap">
-                            <figure class="color-white text-center">
-                                <blockquote cite="">
-                                    <p>Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="section-module background-second-color module-list module-list--quote-wrap">
+                            <p class="col-12 module fs-20 center bold">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="col-12 center fs-12 module">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="center background-second-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-main-color">
-                            <figure class="color-white">
+                        <article class="section-module background-second-color module-list module-list--quote-wrap module-list--quote-mark module-list--quote-mark-main-color">
+                            <figure class="color-second-color center col-12 section-module">
                                 <blockquote cite="">
-                                    <p class="highlight background-background-color color-second-color">Lorem ipsum ibra tv gango sphere</p>
+                                    <p class="module highlight background-background-color color-second-color bold fs-20">Lorem ipsum ibra tv gango sphere</p>
                                 </blockquote>
-                                <figcaption>, Author, <time datetime="12-12-2000">12/12/2000</time></figcaption>
                             </figure>
+                            <p class="module center color-background-color fs-14 col-12">, Author, 12/12/2000</p>
                         </article>
 
-                        <article class="background-main-color module-list module-list--quote-basic">
-                            <figure class="color-white">
-                                <blockquote cite="">
-                                    <p class="background-background-color highlight color-main-color">Lorem ipsum ibra tv gango sphere</p>
-                                </blockquote>
-                                <figcaption class="color-background-color">, Author, <time class="color-background-color" datetime="12-12-2000">12/12/2000</time></figcaption>
-                            </figure>
+                        <article class="section-module background-main-color module-list module-list--quote-basic">
+                            <p class="background-background-color highlight color-main-color module">Lorem ipsum ibra tv gango sphere</p>
+                            <p class="module fs-10 color-background-color">, Author, 12/12/2000</p>
                         </article>
 
                     </div>
@@ -450,10 +436,12 @@
                         <article class="section-module background-second-color module-list">
                             <h3 class="module col-12 color-background-color text-center fs-18 bold">Lorem ipsum dolor sit amet consectetur.</h3>
                             <h4 class="module col-12 color-background-color text-center fs-14 medium">tv gango sphere</h4>
-                            <div class="module col-12 container-16-9" data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9" data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 
@@ -464,18 +452,22 @@
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
-                            <div class="module col-12 container-16-9" data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9" data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 
                         <article class="module-list">
-                            <div class="module container-16-9 col-6"  data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-6">
+                                <div class="module container-16-9"  data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -492,10 +484,12 @@
                                         tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                                     </p>
                                 </div>
-                                <div class="module col-8 container-16-9" data-media-type="youtube">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
+                                <div class="section-module col-8">
+                                    <div class="module container-16-9" data-media-type="youtube">
+                                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -507,11 +501,12 @@
                                 Lorem ipsum ibra
                                 tv gango sphere tv gango sphere Lorem jkd oljk  gango sphdsere Losc rem jkd oljk
                             </p>
-
-                            <div class="col-12 module container-16-9 col-12"  data-media-type="youtube">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
-                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                </iframe>
+                            <div class="section-module col-12">
+                                <div class="module container-16-9"  data-media-type="youtube">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/mdcBqqWj3kY" title="YouTube video player"
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
                             </div>
                         </article>
 
@@ -579,6 +574,21 @@
                 </div>
             </article>
 
+            <article>
+                <header class="main-nav-choice" data-wc-target="btn-empty-list-elements">
+                    <h2>Empty</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="btn-empty-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="btn-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+                        <article class="module-list">
+                            <ahref class="module cta-button fs-14 cta-button--submit" data-media-type="link" href="https://google.fr">Button</ahref>
+                        </article>
+                    </div>
+                </div>
+            </article>
+
         </div>
 
         <div id="other-elements-container" class="collapse" data-group-collapse="add-elements-conatiner">
@@ -604,6 +614,28 @@
                             </div>
                         </article>
 
+                    </div>
+
+                </div>
+            </article>
+
+            <article>
+                <header class="main-nav-choice" data-wc-target="newsletter-list-elements">
+                    <h2>Newsletter</h2>
+                    <span class="material-icons-round">more_horiz</span>
+                </header>
+                <div id="newsletter-list-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="media-elements-container">
+
+                    <div class="col-6 col-md-12 col-sm-12">
+
+                        <article class="section-module background-second-color module-list">
+                            <h3 class="module col-12 color-background-color text-left fs-26 bold">Newsletter.</h3>
+                            <h4 class="module col-12 color-background-color text-left fs-14 medium">Subscribe to my newsltter to stay informed of my news.</h4>
+                            <div class="module col-12 input-container compose-subscibe-container">
+                                <input class="input" name="subscriberEmail" type="text" placeholder="Your email">
+                                <button class="cta-button cta-button--icon cta-button-compose-subscriber"><span class="material-icons-round">send</span></button>
+                            </div>
+                        </article>
                     </div>
 
                 </div>

@@ -1,19 +1,19 @@
 let htmlParent = null;
 
 function deleteUser(parent) {
-    let uri = url + "userdelete/";
+    let uri = url + "userdelete";
     let id = parent.getAttribute("data-id-user");
-    let data = '?id='+id;
+    let data = `id=`+id;
 
     htmlParent = parent.parentNode.parentNode; //get the <tr> of the user
 
-    ajaxRequest(uri, "DELETE", data, deleteUserAnswer, true);
+    ajaxRequest(uri, "POST", data, deleteUserAnswer, true);
 }
 
 function updateRank(parent) {
-    let uri = url + "updaterank/";
+    let uri = url + "updaterank";
     let id = parent.getAttribute("data-id-user");
-    let data = `id=` + encodeURIComponent(id);
+    let data = `id=` + encodeURIComponent(id) + '&rank=' + parent.value;
 
     htmlParent = parent.parentNode.parentNode; //get the <tr> line of the user
 
@@ -40,3 +40,4 @@ function updateRankAnswer(req) {
             rankLine[0].innerHTML = "user";
     }
 }
+

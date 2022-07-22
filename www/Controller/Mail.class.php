@@ -16,7 +16,17 @@ class Mail{
 
     public function confirmMail($mailAddress, $name, $token)
     {
-        $uri = $_SERVER["HTTP_HOST"] . "/mailconfirmation/?token=" . $token;
+        if (isset($_SERVER['HTTPS']) &&
+            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $protocol = 'https://';
+        }
+        else {
+            $protocol = 'http://';
+        }
+
+        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/mailconfirmation/".$token;
 
         if ($token){
             $subject = "Registration confirmation";
@@ -41,7 +51,18 @@ class Mail{
 
     public function resetPwdMail($mailAddress, $name, $token)
     {
-        $uri = $_SERVER["HTTP_HOST"] . "/resetpassword/?token=" . $token;
+        if (isset($_SERVER['HTTPS']) &&
+            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $protocol = 'https://';
+        }
+        else {
+            $protocol = 'http://';
+        }
+
+
+        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/resetpassword/" . $token;
         if ($token){
             $message = [
                 [
@@ -124,5 +145,42 @@ class Mail{
             
             
     }
+
+    public function confirmUserInProject($mailAddress, $name, $id)
+    {
+        if (isset($_SERVER['HTTPS']) &&
+            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $protocol = 'https://';
+        }
+        else {
+            $protocol = 'http://';
+        }
+
+        $uri = $protocol . $_SERVER["HTTP_HOST"] . "/steps/" . $id;
+
+        if ($id){
+            $subject = "Registration confirmation";
+            $message = [
+                [
+                    "type"=>'title',
+                    "content"=>'You have been added to a project'
+                ],
+                [
+                    "type"=>'text',
+                    "content"=>"hey " . $name . ". you are part of a new project "
+                ],
+                [
+                    "type"=>'button',
+                    "link"=>$uri,
+                    "content"=>'See project'
+                ]
+            ];
+            $this->mail->sendEmail($mailAddress, $name, $subject, $message);
+        }
+    }
+
+
 
 }

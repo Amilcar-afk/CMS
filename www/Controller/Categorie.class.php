@@ -23,10 +23,8 @@ class Categorie{
     {
         $categorieEmpty = $this->categorie;
         $categories = Query::from('cmspf_Categories')->where("type = 'tag'")->execute('Categorie');
-        $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
         $view = new View("categorie-list", "back");
         $view->assign("categories",$categories);
-        $view->assign("navigations", $navigations);
         $view->assign("categorieEmpty", $categorieEmpty);
         $view->assign("metaData", $metaData = [
             "title" => 'Categories',
@@ -64,11 +62,11 @@ class Categorie{
             if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->categorie->find($_POST['id'])){
                     return include "View/Partial/form.partial.php";
+                    http_response_code(422);
                 }
                 $this->categorie->setId($_POST['id']);
             }
-            $navigations = Query::from('cmspf_Categories')->where("type = 'nav'")->execute('Categorie');
-            $config = Validator::run($this->categorie->getFormNewCategorie($navigations), $_POST);
+            $config = Validator::run($this->categorie->getFormNewCategorie(), $_POST);
 
             if (empty($config)) {
                 $this->categorie->save();
@@ -86,8 +84,9 @@ class Categorie{
                         $page = new Page();
                         $page->setCategorieKey($lastId);
                     }
+
                     $page->setStatus('tag');
-                    $page->setSlug($_POST['title']);
+                    $page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['title'])))));
                     $page->setTitle($_POST['title']);
                     $page->setUserKey($_SESSION['Auth']->id);
                     $page->setDateUpdate(date('d-m-y h:i:s'));
@@ -97,7 +96,10 @@ class Categorie{
                 if ($lastId
                     && isset($_POST['navigation'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = " . $_POST['navigation'] . "")
+                        ->where("id = :id")
+                        ->params([
+                            'id' => $_POST['navigation'],
+                        ])
                         ->execute('Categorie')) {
 
                     $categorie_categorie = Query::from('cmspf_Categorie_categorie')
@@ -123,9 +125,10 @@ class Categorie{
                 $view->assign("categorieEmpty", $categorieEmpty);
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -133,19 +136,23 @@ class Categorie{
     {
         if( isset($_POST['id']) ) {
             $categorie = $this->categorie->find($_POST['id']);
-            if ($categorie->getId() != null && $categorie->getType() == 'tag') {
+            if (isset($categorie) && $categorie->getId() != null && $categorie->getType() == 'tag') {
 
-                $categorieCategories = Query::from('cmspf_Categorie_categorie')->where("categorie_child_key = " . $_POST['id'] . "")->execute('Categorie_categorie');
+                $categorieCategories = Query::from('cmspf_Categorie_categorie')
+                    ->where("categorie_child_key = :categorie_child_key")
+                    ->params(['categorie_child_key' => $_POST['id']])
+                    ->execute('Categorie_categorie');
                 foreach ($categorieCategories as $categorieCategorie)
                 {
                     $categorieCategorie->delete($categorieCategorie->getId());
                 }
+                Query::deleteAll('')->from('cmspf_Page_categorie')->where("categorie_key = " . $_POST['id'] . "")->execute();
                 $categorie->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -160,8 +167,9 @@ class Categorie{
 
             if ($navigation->getId() != null && $page->getId() != null){
                 $page_categorie = Query::from('cmspf_Page_categorie')
-                    ->where("page_key = " . $_POST['page'] . "")
-                    ->where("categorie_key = " . $_POST['navigation'] . "")
+                    ->where("page_key = :page_key")
+                    ->where("categorie_key = :categorie_key")
+                    ->params(['page_key' => $_POST['page'], 'categorie_key' => $_POST['navigation']])
                     ->execute('Page_categorie');
 
                 if (!isset($page_categorie[0])){
@@ -171,10 +179,10 @@ class Categorie{
                     $page_categorie->save();
                 }
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -183,7 +191,7 @@ class Categorie{
         if( isset($_POST['type']) && isset($_POST['value']) && isset($_POST['navigation']) ) {
 
             if (!$this->categorie->find($_POST['navigation'])){
-                return http_response_code(500);
+                return http_response_code(422);
             }
 
             if ($_POST['type'] == 'backgroundColor'){
@@ -200,7 +208,7 @@ class Categorie{
             $this->categorie->save();
 
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -208,15 +216,16 @@ class Categorie{
     {
         if( isset($_POST['page']) && isset($_POST['navigation']) ) {
             $page_categorie = Query::from('cmspf_Page_categorie')
-                ->where("page_key = " . $_POST['page'] . "")
-                ->where("categorie_key = " . $_POST['navigation'] . "")
+                ->where("page_key = :page_key")
+                ->where("categorie_key = :categorie_key")
+                ->params(['page_key' => $_POST['page'], 'categorie_key' => $_POST['navigation']])
                 ->execute('Page_categorie');
 
             if (isset($page_categorie[0])){
                 $page_categorie[0]->delete($page_categorie[0]->getId());
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -231,8 +240,9 @@ class Categorie{
 
             if ($navigation->getId() != null && $categorie->getId() != null){
                 $categorie_categorie = Query::from('cmspf_Categorie_categorie')
-                    ->where("categorie_child_key = " . $_POST['categorie'] . "")
-                    ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                    ->where("categorie_child_key = :categorie_child_key")
+                    ->where("categorie_parent_key = :categorie_parent_key")
+                    ->params(['categorie_child_key' => $_POST['categorie'], 'categorie_parent_key' => $_POST['navigation']])
                     ->execute('Categorie_categorie');
 
                 if (!isset($categorie_categorie[0])){
@@ -242,10 +252,10 @@ class Categorie{
                     $categorie_categorie->save();
                 }
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -253,15 +263,18 @@ class Categorie{
     {
         if( isset($_POST['categorie']) && isset($_POST['navigation']) ) {
             $categorie_categorie = Query::from('cmspf_Categorie_categorie')
-                ->where("categorie_child_key = " . $_POST['categorie'] . "")
-                ->where("categorie_parent_key = " . $_POST['navigation'] . "")
+                ->where("categorie_child_key = :categorie_child_key")
+                ->where("categorie_parent_key = :categorie_parent_key")
+                ->params(array('categorie_child_key' => $_POST['categorie'], 'categorie_parent_key' => $_POST['navigation']))
                 ->execute('Categorie_categorie');
 
             if (isset($categorie_categorie[0])){
                 $categorie_categorie[0]->delete($categorie_categorie[0]->getId());
+            }else{
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 }

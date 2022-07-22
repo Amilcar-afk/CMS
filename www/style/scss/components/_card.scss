@@ -99,7 +99,7 @@
     & .edge-container {
         width: 75px;
         height: 97px;
-        background: rgba(57, 96, 117, 0.5);
+        background: rgba(248, 248, 248, 0.18);
         border-radius: 20px;
         & p {
             margin: 0;
@@ -113,7 +113,7 @@
     & .edge {
         width: 75px;
         height: 75px;
-        background-color: var(--main-color, #396075);
+        background-color: rgba(248, 248, 248, 0.37);
         border-radius: 20px;
         display: flex;
         align-items: center;
@@ -160,7 +160,7 @@
     }
     &--smallcard {
         //height: 152px !important;
-        background: rgba(57, 96, 117, 0.5) !important;
+        background: var(--main-color)!important;
         flex-direction: row;
         //align-items: flex-start;
     }
@@ -194,6 +194,25 @@
             fill: none;
         }
     }
+    & #chart-per-page {
+        width: 100%;
+        opacity: 1;
+        height: 90%;
+        max-height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow-y: scroll !important;
+        &::-webkit-scrollbar-thumb {
+            width: 0px;
+            background: $light-grey-second;
+        }
+
+        &::-webkit-scrollbar-track {
+            width: 0px;
+        }
+    }
     
     
 
@@ -214,6 +233,32 @@
         border-radius: var(--radius, 15px);
         min-height: 120px;
 
+        .edge-container {
+            width: 50px;
+        }
+
+        .edge{
+            width: 50px;
+            img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        & #chart-per-page {
+            max-height: unset;
+            height: unset;
+            overflow-y: unset!important;
+            &::-webkit-scrollbar-thumb {
+                width: 0px;
+                background: $light-grey-second;
+            }
+
+            &::-webkit-scrollbar-track {
+                width: 0px;
+            }
+        }
+
         & .material-icons-round {
             color: #FFFFFF;
             font-size: rem(20);
@@ -225,14 +270,29 @@
             align-self: flex-start;
             &  h4, .material-icons-round {
                 margin: 0;
-                font-size: rem(20);
-                line-height: rem(21);
+                font-size: 2rem;
+                line-height: rem(28);
             }
             & h3, .material-icons-round {
                 margin: 0;
-                font-size: rem(20);
-                line-height: rem(21);
+                font-size: 0.85rem;
+                line-height: rem(20);
+                word-break: break-word;
             }
+        }
+
+        &--bottom{
+            header{
+                .material-icons-round {
+                    margin: 0;
+                    font-size: 2rem!important;
+                    line-height: rem(28)!important;
+                }
+            }
+        }
+
+        &--smallcard {
+            margin-top: 20px;
         }
     }
 }

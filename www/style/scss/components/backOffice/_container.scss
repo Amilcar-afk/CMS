@@ -239,6 +239,38 @@
     left: 0;
     display: flex;
     height: 100%;
+
+    &--conversation{
+      & > section{
+        overflow-y: unset;
+        height: 100%;
+
+        & > div{
+          height: 100%;
+          & > div{
+            height: 100%;
+            padding-top: 20px;
+          }
+        }
+
+        & > div > header{
+          position:  absolute;
+          z-index: 3;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          margin: -30px -50px;
+          padding: 30px 50px;
+          backdrop-filter: blur(60px);
+          background-color: var(--background-color)4C;
+          border-radius: 0px var(--radius, 20px) 0px 0px;
+        }
+      }
+      & > section{
+        overflow-y: unset!important;
+      }
+    }
+
     & .menu-container{
       backdrop-filter: blur(60px);
       background-color: rgba(129, 129, 129, 0.3);
@@ -310,6 +342,10 @@
     flex-direction: column;
     align-items: center;
 
+    .editable-module--footer-nav {
+      left: calc(50% - 70px);
+    }
+
     & > .container-main-content--menu-content {
       max-width: 100%;
       width: 580px;
@@ -318,6 +354,10 @@
     .section-config-blocks {
       display: flex;
       margin-bottom: 30px;
+    }
+
+    .module button{
+      z-index: 0;
     }
 
     & > header{
@@ -383,6 +423,7 @@
     top: 10px;
     overflow: hidden;
     padding: 10px;
+    z-index: -0;
   }
 }
 
@@ -394,11 +435,16 @@
 
 //reponsive tablet & mobile
 @media (max-width: 992px){
+
+  .container-main-content.container-main-content--menu.a-zoom-in{
+    position: fixed;
+  }
+
   .container-main-content {
     border-radius: 0px;
 
     &--padding{
-      padding: 5px;
+      padding: 0px;
       height: unset;
       min-height: calc(100% - 73px - 1.25rem);
       padding-bottom: calc(1.875rem + 90px);
@@ -411,11 +457,20 @@
       display: flex;
       flex-direction: column;
 
+      &--conversation{
+        & > section{
+
+          & > div > header{
+            margin: -30px -20px;
+            border-radius: 0px;
+          }
+        }
+        }
 
       & .menu-container {
         backdrop-filter: blur(60px);
         background-color: rgba(129, 129, 129, 0.3);
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         min-width: unset;
 
@@ -426,6 +481,11 @@
 
           & a{
             margin-right: 20px;
+            font-size: rem(13);
+          }
+
+          & .material-icons-round{
+            font-size: rem(14);
           }
 
           &:last-child {
@@ -449,7 +509,7 @@
       }
 
       & > section {
-        padding: 27px 40px;
+        padding: 25px 25px;
         border-radius: 0px;
         padding-bottom: calc(1.875rem + 90px);
       }
@@ -561,6 +621,7 @@
   position: relative;
   padding-bottom: 56.25%;
   margin-top: 10px;
+  margin: -20px;
   & > iframe{
     position: absolute;
     top: 0;
@@ -573,6 +634,26 @@
 
 
 @media (max-width: 768px) {
+
+  #container-editor, #background-list-elements{
+    .background-container-back-office {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: unset;
+      top: 0px;
+      overflow: hidden;
+      padding: 10px;
+      height: 100vh;
+    }
+  }
+
+  #back-office-container{
+    > .content-header{
+      align-items: center;
+    }
+  }
+
   & .menu-container {
     & nav {
       & a:nth-child(even) {
@@ -581,7 +662,47 @@
     }
   }
 
+  .container-main-content {
+    &--menu {
+      & > section {
+        overflow-y: unset;
+        padding: 25px 20px;
+        padding-bottom: 100px!important;
+      }
+
+      &--conversation {
+        & > section {
+          & > div {
+            & > header {
+              padding: 25px 25px;
+            }
+          }
+        }
+      }
+
+      & .menu-container {
+        padding: 25px 20px;
+      }
+    }
+  }
+
   .body-setup {
     align-items: unset;
+
+    main{
+      width: 100%;
+
+      > section > div{
+        width: 100%;
+      }
+
+      > section > section{
+        width: 100%;
+      }
+
+      > section > form{
+        width: 100%;
+      }
+    }
   }
 }

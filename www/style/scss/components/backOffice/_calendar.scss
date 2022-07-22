@@ -1,4 +1,8 @@
 .fullCalendar{
+	a:not([href]) {
+		pointer-events: initial;
+	}
+
 	.fc th, .fc td {
 		border-style: unset!important;
 		border-width: unset!important;

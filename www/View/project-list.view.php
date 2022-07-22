@@ -3,9 +3,11 @@
         <div class="menu-container">
             <h1 class="title title--main-color place-menu">COMMUNICATION</h1>
             <nav>
-                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>My conversations</a>
+                <a href="/conversations" class="cta-button cta-button--menu main-nav-choice" data-wc-target="conversations-container"><span class="material-icons-round">forum</span>Conversations</a>
                 <a href="/meetings" class="cta-button cta-button--menu main-nav-choice" data-wc-target="navigations-container"><span class="material-icons-round">today</span>Meetings</a>
-                <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="projects-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
+                <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
+                    <a href="/slots" class="cta-button cta-button--menu main-nav-choice" data-wc-target="categories-container"><span class="material-icons-round">edit_calendar</span>Slots</a>
+                <?php endif; ?>
                 <a href="/projects" class="cta-button cta-button--menu main-nav-choice selected" data-wc-target="add-code-container"><span class="material-icons-round">inventory_2</span>Projects</a>
             </nav>
         </div>
@@ -15,7 +17,7 @@
                 <header>
                     <h1 class="title title--black">PROJECTS</h1>
                 </header>
-
+                <?php if(isset($_SESSION['Auth']) && $_SESSION['Auth']->rank == 'admin'): ?>
                 <!--Add project-->
                 <article>
                     <button class="cta-button cta-button-a cta-button--submit cta-button--submit--add" data-a-target="container-new-project">
@@ -24,7 +26,7 @@
                     <div id="new-projects-elements" class="container-main-content container-main-content--list collapse row" data-group-collapse="project-manager-container">
                     </div>
                 </article>
-
+                <?php endif; ?>
                 <article>
                     <div id="projects-elements" class="container-main-content container-main-content--list collapse--open row" data-group-collapse="project-manager-container" style="opacity: 1">
                         <table class="table">
@@ -32,12 +34,12 @@
                             <?php foreach ($projects as $project):?>
                                 <tr class="table-line">
                                     <td>
-                                        <h4><?= ucfirst($project->getTitle()) ?></h4>
-                                        <label class="sticker"><span class="material-icons-round">dynamic_feed</span><?= $project->getDescription()?></label>
+                                        <h4> <?= ucfirst($project->getTitle()) ?></h4>
                                     </td>
                                     <td>
-                                        <button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
-                                        <button class="cta-button cta-button-a cta-button-delete-project" data-project-id="<?= $project->getId() ?>"><span class="material-icons-round">delete</span></button>
+                                        <a href="/steps/<?=$project->getId()?>" class="cta-button"><span class="material-icons-round">mode</span></a>
+                                        <?php if($_SESSION['Auth']->rank === "admin") :?><button class="cta-button cta-button-a" data-a-target="container-setting-project-<?=$project->getId() ?>"><span class="material-icons-round">build</span></button>
+                                        <button class="cta-button cta-button-a cta-button-delete-project" data-project-id="<?= $project->getId() ?>"><span class="material-icons-round">delete</span></button><?php endif;?>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
@@ -68,7 +70,7 @@
                     </header>
 
                     <article>
-                        <?php  $this->includePartial("form", $project->getFormProject($project->usersNotInProject(), 'Update')) ?>
+                        <?php  $this->includePartial("form", $project->getFormProject($project->usersNotInProject(),$project->usersInProject() , 'Update')) ?>
                     </article>
 
                 </div>

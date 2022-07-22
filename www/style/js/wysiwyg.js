@@ -520,17 +520,27 @@ $(document).ready(function(){
 
         let iframeType = $(module).attr('data-media-type');
         if (iframeType == "spotify"){
+
+            if (src.match(/track\//)) {
+                $($(module).find('iframe')[0]).attr('style', "height:80px!important");
+            } else {
+                $($(module).find('iframe')[0]).attr('style', "height:200px!important");
+            }
+
             src = src.replace("album/", "embed/album/");
             src = src.replace("track/", "embed/track/");
 
             let toBeReplace = src.substr(src.indexOf("?si=") + 4)
 
             src = src.replace("?si="+toBeReplace, "?utm_source=generator");
-        }else {
+        }else if (iframeType == "youtube"){
             src = src.replace("watch?v=", "embed/");
         }
-
-        $($(module).find('iframe')[0]).attr('src', src);
+        if (iframeType == "link"){
+            $(module).attr('href', src);
+        }else {
+            $($(module).find('iframe')[0]).attr('src', src);
+        }
     })
 
     $(document).on( "click", ".cta-button-select-image", function () {
@@ -580,7 +590,7 @@ $(document).ready(function(){
         }
 
         if($newComponent.hasClass('background-container-back-office')){
-            $('#container-editor').prepend($newComponent);
+            $('#container-editor-content').prepend($newComponent);
         }else {
             $newComponent.removeClass('module-list');
             $newComponent.addClass('col-6');
@@ -590,7 +600,7 @@ $(document).ready(function(){
         $("#cta-button-close-list-component").click();
     })
 
-    $(".cta-button-save").click(function () {
+    $(document).on( "click", ".cta-button-save", function () {
         if ($(this).attr('data-page-id') == null || $("#container-editor") == undefined){
             return;
         }
@@ -617,7 +627,8 @@ $(document).ready(function(){
             data:
                 {
                     id:$(this).attr('data-page-id'),
-                    content:$("#container-editor").html(),
+                    content:$("#container-editor-content").html(),
+                    status:$(this).attr('data-page-status'),
                 },
             success:function()
             {
@@ -821,7 +832,10 @@ function getModuleAlign(btn){
 function getModuleSrc(btn){
     var module = $(btn).parent().parent().parent();
 
-    if ($($(module).find('iframe')[0])){
+    if ($(btn).parent().parent().parent().attr('data-media-type') == 'link'){
+        let actuelSrc = $(btn).parent().parent().parent().attr('href');
+        return actuelSrc;
+    }else if ($($(module).find('iframe')[0])){
         let iframe = $(module).find('iframe')[0];
         let actuelSrc = $(iframe).attr('src');
         return actuelSrc;

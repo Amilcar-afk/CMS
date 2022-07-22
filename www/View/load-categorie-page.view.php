@@ -11,9 +11,13 @@
     <h1><?= $categorie->getTitle() ?></h1>
     <section class="row col-12">
         <?php foreach ($categorie->pages() as $page):?>
-            <article class="col-4">
+            <article class="col-4 item">
                 <a href="/<?= $page->getSlug() ?>">
                     <?= $page->getTitle() ?>
+                    <p>
+                        <?= $page->getDescription() ?>
+                    </p>
+                    <label>See more</label>
                 </a>
             </article>
         <?php endforeach;?>

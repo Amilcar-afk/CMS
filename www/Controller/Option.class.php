@@ -88,7 +88,8 @@ class Option{
 
             if ($_POST['type'] != 'font') {
                 $option = Query::from('cmspf_Options')
-                    ->where("type = '" . $_POST['type'] . "'")
+                    ->where("type = :type")
+                    ->params(["type" => $_POST['type']])
                     ->execute('Option');
             }
             if(isset($_FILES) && in_array($_POST['type'], ['logo', 'favicon', 'font']) ){
@@ -177,10 +178,10 @@ class Option{
                     ->execute('Option');
                 return include "View/Partial/design-variables.partial.php";
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
 
     }
@@ -235,6 +236,25 @@ class Option{
         $view->assign("metaData", $metaData = [
             "title" => 'Media Library',
             "description" => 'List of all webstie images',
+            "src" => [
+                ["type" => "js", "path" => "../style/js/mediaLibrary.js"],
+            ]
         ]);
+    }
+
+    public function deleteOption()
+    {
+        if (isset($_POST['id'])) {
+            $option = $this->option->find($_POST['id']);
+
+            if ($option) {
+                unlink(__DIR__."/..".$option->getPath());
+                $option->delete($_POST['id']);
+            } else {
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
+        }
     }
 }

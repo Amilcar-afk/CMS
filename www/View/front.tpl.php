@@ -25,9 +25,11 @@
         <?= (isset($headCode) && $headCode != ' ')? $headCode :''; ?>
     </head>
     <body class="body background-background-color">
+        <main>
         <?php
             include $this->view.".view.php";
         ?>
+        </main>
     </body>
     <?= (isset($footerCode) && $footerCode != ' ')? $footerCode :''; ?>
 </html>

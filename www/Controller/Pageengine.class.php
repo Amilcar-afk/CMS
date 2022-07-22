@@ -24,7 +24,6 @@ class Pageengine
 
     public function siteMap()
     {
-
         if (isset($_SERVER['HTTPS']) &&
             ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
             isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
@@ -38,7 +37,7 @@ class Pageengine
         $xml = new SimpleXMLElement("<?xml version='1.0' encoding='UTF-8' ?>\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />');
         foreach($pages as $page){
             $url = $xml->addChild('url'); 
-            $url->addChild('loc',$protocol.$_SERVER['SERVER_NAME'].'/'.$page->getSlug() );  
+            $url->addChild('loc',$protocol.$_SERVER['SERVER_NAME'].'/'.$page->getSlug() );
             $url->addChild('lastmod',$page->getDateUpdate() );  
         }
         header("Content-type: application/xml; charset=utf-8");
@@ -52,11 +51,14 @@ class Pageengine
 
 
     public function deletePage(){
-        if( isset($_POST['id']) ) {
+        if( isset($_POST['id']) && $_POST['id'] != 1 ) {
             $page = $this->page->find($_POST['id']);
             if ($page->getId() != null) {
 
-                $pageCategories = Query::from('cmspf_Page_categorie')->where("page_key = " . $_POST['id'] . "")->execute('Page_categorie');
+                $pageCategories = Query::from('cmspf_Page_categorie')
+                    ->where("page_key = :page_key")
+                    ->params(['page_key' => $_POST['id']])
+                    ->execute('Page_categorie');
                 foreach ($pageCategories as $pageCategorie)
                 {
                     $pageCategorie->delete($pageCategorie->getId());
@@ -64,10 +66,10 @@ class Pageengine
                 Query::deleteAll('')->from('cmspf_Stats')->where("page_key = " . $_POST['id'] . "")->execute();
                 $page->delete($_POST['id']);
             }else{
-                http_response_code(500);
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -75,7 +77,7 @@ class Pageengine
 
         $page = $this->page->find($request['slug'], 'slug');
 
-        if ($page){
+        if ($page && ($page->getStatus() == 'Public' || $page->getStatus() == 'Tag')) {
 
             $page->composeStats($page->getId(), "view");
 
@@ -97,15 +99,24 @@ class Pageengine
                 ->execute('Option');
 
             $view->assign("page", $page );
-            $view->assign("headCode", $headCode[0]->getValue());
-            $view->assign("footerCode", $footerCode[0]->getValue());
+            $view->assign("headCode", (isset($headCode[0]) && $headCode[0]->getValue() != null)?$headCode[0]->getValue():"");
+            $view->assign("footerCode", (isset($footerCode[0]) && $footerCode[0]->getValue() != null)?$footerCode[0]->getValue():"");
             $view->assign("bessels", $bessels);
             $view->assign("metaData", $metaData = [
                 "title" => $page->getTitle(),
-                "description" => $page->getDescription()
+                "description" => $page->getDescription(),
+                "src" => [
+                    ["type" => "js", "path" => "/style/js/subscribe.js"],
+                ],
             ]);
         }else{
             http_response_code(404);
+            $view = new View("error", 'back-sandbox');
+            $view->assign("metaData", $metaData = [
+                "title" => 'Error',
+                "description" => 'Error',
+            ]);
+            die();
         }
 
     }
@@ -150,7 +161,7 @@ class Pageengine
                 ],
             ]);
         }else {
-            http_response_code(404);
+            http_response_code(422);
         }
     }
 
@@ -158,21 +169,28 @@ class Pageengine
     {
         if( isset($_POST) ) {
             $this->page->setTitle($_POST['title']);
-            $this->page->setSlug(str_replace(' ', '-', strtolower(trim($_POST['slug']))));
+            $this->page->setSlug(urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug'])))));
             $this->page->setStatus($_POST['status']);
             $this->page->setDescription($_POST['description']);
             $this->page->setUserKey($_SESSION['Auth']->id);
             
             $this->page->setDateUpdate(date('d-m-y h:i:s'));
 
-            if (isset($_POST['id']) && $_POST['id'] != null) {  
+            if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->page->find($_POST['id'])){
-                    return include "View/Partial/form.partial.php";
+                    return http_response_code(422);
                 }
                 $this->page->setId($_POST['id']);
+
+                if($_POST['id'] == 1){
+                    $this->page->setStatus('');
+                }
+
                 $unic_page = Query::from('cmspf_Pages')
-                    ->where("slug = '" . $_POST['slug'] . "'")
-                    ->where("id != " . $_POST['id'] . "")
+                    ->where("slug = :slug")
+                    ->params([
+                        'slug' => urlencode(str_replace(' ', '-', strtolower(trim($_POST['slug']))))
+                    ])
                     ->execute('Page');
                 if (!isset($unic_page[0])){
                     $unic_page = false;
@@ -189,19 +207,19 @@ class Pageengine
                 $this->page->save();
 
                 $lastId = $this->page->getLastId();
-
                 if ($lastId
                     && isset($_POST['categorie'])
-                    && is_int($_POST['categorie'])
                     && Query::from('cmspf_Categories')
-                        ->where("id = " . $_POST['categorie'] . "")
-                        ->execute('Categorie')) {
+                        ->where("id = :id")
+                        ->params(['id'=>$_POST['categorie']])
+                        ->execute('Categorie')[0]){
 
                     //use categorie template;
                     if ($this->page->getContent() == null){
 
                         $categories = Query::from('cmspf_Categories')
-                            ->where("id = " . $_POST['categorie'] . "")
+                            ->where("id = :id")
+                            ->params(['id'=>$_POST['categorie']])
                             ->execute('Categorie');
 
                         $page_of_categorie = $categories[0]->page();
@@ -234,9 +252,10 @@ class Pageengine
                 $view->assign("pageEmpty", $pageEmpty);
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }else{
-            http_response_code(500);
+            http_response_code(422);
         }
     }
 
@@ -244,11 +263,24 @@ class Pageengine
     {
         if( isset($_POST)
             && isset($_POST['id'])
-            && isset($_POST['content']) )
+            && isset($_POST['content']) ){
 
-            $this->page->setId($_POST['id']);
-            $this->page->setContent($_POST['content']);
-            $this->page->save();
+            if ($this->page->find($_POST['id'])){
+
+                if(isset($_POST['status']) && $_POST['status'] == 'Public'){
+                    $this->page->setStatus($_POST['status']);
+                }
+
+                $this->page->setId($_POST['id']);
+                $this->page->setContent($_POST['content']);
+                $this->page->save();
+            }else{
+                http_response_code(422);
+            }
+        }else{
+            http_response_code(422);
+        }
+
     }
 
     public function listAddCode(){

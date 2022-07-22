@@ -22,14 +22,16 @@ class Meeting
     {
         $this->rdv = new Rdv();
         $this->user_rdv = new User_rdv();
-        $this->mail = new Mail();
     }
 
 
     public function loadslot ()
     {
+
         $statusOfUser = $_SESSION['Auth']->rank;
-        $rdvs = $this->rdv->find();
+        $rdvs = Query::from('cmspf_Rdvs')
+            ->where('status = "slot"')
+            ->execute('rdv');
         
         foreach ($rdvs as $row) {
             $users = $row->users();
@@ -102,7 +104,6 @@ class Meeting
             if($row != false){
                 if($row->getStatus() == 'slot'){
                     continue;
-                    
                 }
                 $users = $row->users();
                 foreach($users as $user){
@@ -196,7 +197,7 @@ class Meeting
 
         
         if (isset($_POST)) {
-            var_dump($_POST);
+            //var_dump($_POST);
             //insert pour la table Rdvs
             $this->rdv->setStartDate($_POST['start']);
             $this->rdv->setEndDate($_POST['end']);
@@ -208,6 +209,7 @@ class Meeting
 
             if (isset($_POST['id']) && $_POST['id'] != null) {
                 if (!$this->rdv->find($_POST['id'])) {
+                    http_response_code(422);
                     return include "View/Partial/form.partial.php";
                 }
                 $this->rdv->setId($_POST['id']);
@@ -225,6 +227,8 @@ class Meeting
                     $this->user_rdv->setRdv_key($lastId);
                     $this->user_rdv->save();
                 }
+            }else{
+                http_response_code(422);
             }
         }
     }
@@ -256,6 +260,7 @@ class Meeting
 
 
             if (!$this->rdv->find($_POST['id'])) {
+                http_response_code(422);
                 return include "View/Partial/form.partial.php";
             }
             //insert pour la table Rdvs
@@ -269,7 +274,6 @@ class Meeting
                 $this->rdv->save();
 
                 $dataOfMail= [
-
                     "owner_firstname"=>$owner_firstname,
                     "owner_lastname"=>$owner_lastname,
                     "owner_email"=>$owner_email,
@@ -283,7 +287,9 @@ class Meeting
                     "description"=>$_POST['description'],
                 ];
 
-                $this->mail->userMailconfirmReservation($dataOfMail);
+                $mailuser = new Mail();
+                $mailuser->userMailconfirmReservation($dataOfMail);
+
                 $mailOwner = new Mail();
                 $mailOwner->ownerMailConfirmReservation($dataOfMail);
 
@@ -298,9 +304,12 @@ class Meeting
                     $view->assign("rdv", $this->rdv);
                     $rdvEmpty = new Rdv();
                     $view->assign("rdvEmpty", $rdvEmpty);
+                }else{
+                    http_response_code(422);
                 }
             } else {
                 return include "View/Partial/form.partial.php";
+                http_response_code(422);
             }
         }
     }

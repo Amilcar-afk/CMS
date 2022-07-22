@@ -82,6 +82,16 @@ class Page extends BaseSQL
         return parent::belongsToMany(Categorie::class, 'cmspf_Page_categorie');
     }
 
+    public function categorie()
+    {
+        $categories = parent::belongsToMany(Categorie::class, 'cmspf_Page_categorie');
+        foreach ($categories as $categorie){
+            if ($categorie->getType() == 'Tag'){
+                return $categorie;
+            }
+        }
+    }
+
     /**
      * @return mixed
      */
@@ -374,6 +384,7 @@ class Page extends BaseSQL
                     "class"=>"input",
                     "error"=>"",
                     "idToVerif"=>true,
+                    "value"=>($this->categorie() != null )? $this->categorie()->getId() :'',
                     "choices"=>$categoriesList['choices']
                 ],
                 "description"=>[

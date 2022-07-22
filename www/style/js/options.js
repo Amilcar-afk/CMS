@@ -107,7 +107,7 @@ $(document).ready(function(){
             success: function (answer) {
                 alertMessage('Font added!');
                 $($('style')[0]).replaceWith(answer);
-                let $newFont = '<article class="cta-button-a" data-a-target="container-setting-font-' + newFontId +'">\n' +
+                let $newFont = '<article id="container-font-'+newFontId+'" class="cta-button-a" data-a-target="container-setting-font-' + newFontId +'">\n' +
                     '                                    <span class="input-block" style="font-family: '+fileName+'">\n' +
                     '                                        aA\n' +
                     '                                    </span>\n' +
@@ -134,7 +134,8 @@ $(document).ready(function(){
                     '                        <br>\n' +
                     '                        <p class="input-block fs-36" style="font-family: '+fileName+'">\n' +
                     '                            $ € £ ! " \' # % & ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~\n' +
-                    '                        </p>\n' +
+                    '                        </p>' +
+                    '                       <button class="mt-5 cta-button cta-button--delete delete-font" data-file-id="'+newFontId+'">Delete</button>\n' +
                     '                    </article>\n' +
                     '                </div>\n' +
                     '            </section>\n' +
@@ -142,6 +143,28 @@ $(document).ready(function(){
 
                 $('#container-list-fonts').append($newFont);
                 $('#back-office-container').append($newFontUpdate);
+            },
+            error: function (data, textStatus, errorThrown) {
+                alertMessage('Error', 'warning');
+            }
+        });
+    })
+
+    //fonts delete
+    $(document).on("click", ".delete-font", function () {
+        var fileContainer = $(this);
+        $.ajax({
+            url:"/img/delete",
+            type:"POST",
+            data:
+                {
+                    id:$(this).attr('data-file-id')
+                },
+            success:function()
+            {
+                $('#container-font-'+$(fileContainer).attr('data-file-id')).remove();
+                $('#container-setting-font-'+$(fileContainer).attr('data-file-id')).remove();
+                alertMessage('Font deleted!');
             },
             error: function (data, textStatus, errorThrown) {
                 alertMessage('Error', 'warning');
